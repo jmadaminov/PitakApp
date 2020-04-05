@@ -27,7 +27,7 @@ buildscript {
         supportLibraryVersion = '1.1.0-rc01'
         supportCompatVersion = '1.2.0'
         retrofitVersion = '2.3.0'
-
+        okHttpVersion = '3.8.1'
 
 
         javaxInjectVersion = '1'

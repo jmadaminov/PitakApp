@@ -1,23 +1,25 @@
 package com.badcompany.data
 
+import com.badcompany.core.ResultWrapper
+import com.badcompany.data.mapper.UserCredentialsMapper
 import com.badcompany.data.mapper.UserMapper
 import com.badcompany.data.source.UserDataStoreFactory
-import com.badcompany.domain.ResultWrapper
 import com.badcompany.domain.domainmodel.Car
 import com.badcompany.domain.domainmodel.User
 import com.badcompany.domain.domainmodel.UserCredentials
-import com.badcompany.domain.repository.IUserRepository
+import com.badcompany.domain.repository.UserRepository
 import javax.inject.Inject
 
 /**
  * Provides an implementation of the [BufferooRepository] interface for communicating to and from
  * data sources
  */
-class UserDataRepository @Inject constructor(private val factory: UserDataStoreFactory,
-                                             private val userMapper: UserMapper) :
-    IUserRepository {
+class UserRepositoryImpl @Inject constructor(private val factory: UserDataStoreFactory,
+                                             private val userMapper: UserMapper,
+                                             private val userCredentialsMapper: UserCredentialsMapper) :
+    UserRepository {
     override fun loginUser(userCredentials: UserCredentials): ResultWrapper<Exception, String> {
-        return factory.retrieveDataStore(false).userLogin()
+        return factory.retrieveDataStore(false).userLogin(userCredentialsMapper.mapToEntity(userCredentials) )
     }
 
     override fun updateUserDetails(user: User): ResultWrapper<Exception, Unit> {

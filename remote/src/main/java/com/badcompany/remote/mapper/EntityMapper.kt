@@ -7,8 +7,7 @@ package com.badcompany.remote.mapper
  * @param <M> the remote model input type
  * @param <E> the entity model output type
  */
-interface EntityMapper<in M, out E> {
-
-    fun mapFromRemote(type: M): E
-
+interface EntityMapper< M,  E> {
+    fun mapToEntity(type: M): E
+    fun mapFromEntity(type: E): M
 }

@@ -1,11 +1,9 @@
 package com.badcompany.remote
 
 import com.badcompany.core.ResultWrapper
-import com.badcompany.data.model.UserEntity
+import com.badcompany.data.model.UserCredentialsEntity
 import com.badcompany.data.repository.UserRemote
-import io.reactivex.Flowable
-import org.buffer.android.boilerplate.remote.BufferooService
-import com.badcompany.remote.mapper.UserEntityMapper
+import com.badcompany.remote.mapper.UserCredentialsMapper
 import javax.inject.Inject
 
 /**
@@ -14,24 +12,25 @@ import javax.inject.Inject
  * operations in which data store implementation layers can carry out.
  */
 class UserRemoteImpl @Inject constructor(private val bufferooService: BufferooService,
-                                         private val entityMapper: UserEntityMapper):
-        UserRemote {
+                                         private val userCredMapper: UserCredentialsMapper) :
+    UserRemote {
 
-    /**
-     * Retrieve a list of [BufferooEntity] instances from the [BufferooService].
-     */
-    override fun getBufferoos(): Flowable<List<UserEntity>> {
-        return bufferooService.getBufferoos()
-                .map { it.team }
-                .map {
-                    val entities = mutableListOf<UserEntity>()
-                    it.forEach { entities.add(entityMapper.mapFromRemote(it)) }
-                    entities
-                }
-    }
+//    /**
+//     * Retrieve a list of [BufferooEntity] instances from the [BufferooService].
+//     */
+//    override fun getBufferoos(): Flowable<List<UserEntity>> {
+//        return bufferooService.getBufferoos()
+//                .map { it.team }
+//                .map {
+//                    val entities = mutableListOf<UserEntity>()
+//                    it.forEach { entities.add(entityMapper.mapFromRemote(it)) }
+//                    entities
+//                }
+//    }
 
-    override fun loginUser(): ResultWrapper<Exception, String> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun loginUser(userCredentials: UserCredentialsEntity): ResultWrapper<Exception, String> {
+        return bufferooService.userLogin(userCredMapper.mapFromEntity(userCredentials))
+
     }
 
 }

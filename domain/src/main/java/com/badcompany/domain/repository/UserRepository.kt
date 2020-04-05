@@ -5,7 +5,7 @@ import com.badcompany.domain.domainmodel.Car
 import com.badcompany.domain.domainmodel.User
 import com.badcompany.domain.domainmodel.UserCredentials
 
-interface IUserRepository {
+interface UserRepository {
 
     fun loginUser(userCredentials : UserCredentials): ResultWrapper<Exception, String>
 

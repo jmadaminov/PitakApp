@@ -2,7 +2,6 @@ package com.badcompany.core
 
 sealed class ResultWrapper<out E, out V> {
 
-
     data class Success<out V>(val value: V) : ResultWrapper<Nothing, V>()
     data class Error<out E>(val error: E) : ResultWrapper<E, Nothing>()
 

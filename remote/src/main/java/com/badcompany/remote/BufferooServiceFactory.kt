@@ -1,4 +1,4 @@
-package org.buffer.android.boilerplate.remote
+package com.badcompany.remote
 
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
@@ -24,7 +24,7 @@ object BufferooServiceFactory {
 
     private fun makeBufferooService(okHttpClient: OkHttpClient, gson: Gson): BufferooService {
         val retrofit = Retrofit.Builder()
-                .baseUrl("https://joe-birch-dsdb.squarespace.com/s/")
+                .baseUrl("https://codeuz.uz:9091/")
                 .client(okHttpClient)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))

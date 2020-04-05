@@ -1,8 +1,9 @@
 package com.badcompany.domain
 
 
+import com.badcompany.core.ResultWrapper
 import com.badcompany.domain.exception.UserRepositoryException
-import com.badcompany.domain.repository.IUserRepository
+import com.badcompany.domain.repository.UserRepository
 import com.badcompany.domain.usecases.LogUserIn
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -14,7 +15,7 @@ import testUserCredentials
 
 class LogUserInTest {
 
-    val repo: IUserRepository = mockk()
+    val repo: UserRepository = mockk()
 
     val useCase = LogUserIn(repo)
 

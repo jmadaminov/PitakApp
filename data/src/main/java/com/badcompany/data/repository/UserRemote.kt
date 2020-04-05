@@ -1,6 +1,7 @@
 package com.badcompany.data.repository
 
-import com.badcompany.domain.ResultWrapper
+import com.badcompany.core.ResultWrapper
+import com.badcompany.data.model.UserCredentialsEntity
 
 
 /**
@@ -12,6 +13,6 @@ interface UserRemote {
     /**
      * Retrieve a list of Bufferoos, from the cache
      */
-    fun loginUser(): ResultWrapper<Exception, String>
+    fun loginUser(userCredentials: UserCredentialsEntity): ResultWrapper<Exception, String>
 
 }
