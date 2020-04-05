@@ -1,0 +1,22 @@
+apply plugin: 'java-library'
+apply plugin: 'kotlin'
+
+dependencies {
+    implementation project(":domain")
+    implementation project(":core")
+
+    implementation "androidx.core:core:$rootProject.supportCompatVersion"
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$rootProject.kotlinVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.coroutinesVersion"
+
+    implementation "javax.inject:javax.inject:$javaxInjectVersion"
+
+    implementation "com.squareup.moshi:moshi-kotlin:1.8.0"
+
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$rootProject.junitVersion"
+    testImplementation "org.junit.jupiter:junit-jupiter-engine:$rootProject.junitVersion"
+}
+
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"

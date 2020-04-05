@@ -46,7 +46,7 @@ android {
 }
 
 dependencies {
-    implementation project(":androiddata")
+    implementation project(":data")
     implementation project(":domain")
 
     implementation 'com.google.android.gms:play-services-maps:16.1.0'

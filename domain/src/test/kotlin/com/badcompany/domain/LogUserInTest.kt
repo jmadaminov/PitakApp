@@ -1,8 +1,7 @@
 package com.badcompany.domain
 
 
-import com.badcompany.domain.ResultWrapper
-import com.badcompany.domain.domainmodel.UserCredentials
+import com.badcompany.domain.exception.UserRepositoryException
 import com.badcompany.domain.repository.IUserRepository
 import com.badcompany.domain.usecases.LogUserIn
 import io.mockk.coEvery
@@ -29,11 +28,25 @@ class LogUserInTest {
 
         useCase.execute(userCredentials)
 
-        coVerify(exactly = 1) {  repo.loginUser(userCredentials) }
-
-
-
+        coVerify(exactly = 1) { repo.loginUser(userCredentials) }
     }
+
+
+    @Test
+    fun `User Log In Error`() = runBlockingTest {
+        val testUserLogin = "token"
+
+        val userCredentials = testUserCredentials()
+
+        coEvery { repo.loginUser(userCredentials) } returns ResultWrapper.build { throw UserRepositoryException }
+
+        val result = useCase.execute(userCredentials)
+
+        assert(result is ResultWrapper.Error)
+
+        coVerify(exactly = 1) { repo.loginUser(userCredentials) }
+    }
+
 
 
 }

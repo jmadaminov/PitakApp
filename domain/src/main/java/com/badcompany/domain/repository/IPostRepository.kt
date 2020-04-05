@@ -1,6 +1,6 @@
 package com.badcompany.domain.repository
 
-import com.badcompany.domain.ResultWrapper
+import com.badcompany.core.ResultWrapper
 import com.badcompany.domain.domainmodel.PassengerPost
 
 interface IPostRepository {

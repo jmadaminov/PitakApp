@@ -1,2 +1,2 @@
-include ':app', ':domain', ':androiddata'
-rootProject.name='Pitak'
+include ':app', ':domain', ':data', ':core', ':remote'
+rootProject.name = 'Pitak'
