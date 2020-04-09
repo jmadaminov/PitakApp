@@ -1,15 +1,17 @@
 package com.badcompany.pitak.ui.register
 
+import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import android.util.Patterns
-import com.badcompany.core.ResultWrapper
-import com.badcompany.pitak.data.LoginRepository
-
+import com.badcompany.domain.domainmodel.User
+import com.badcompany.domain.repository.UserRepository
+import com.badcompany.domain.usecases.RegisterUser
 import com.badcompany.pitak.R
+import javax.inject.Inject
 
-class RegisterViewModel(private val registerRepository: LoginRepository) : ViewModel() {
+class RegisterViewModel @Inject constructor(private val registerUser: RegisterUser) :
+    ViewModel() {
 
     private val _registerForm = MutableLiveData<RegisterFormState>()
     val registerFormState: LiveData<RegisterFormState> = _registerForm
@@ -17,16 +19,18 @@ class RegisterViewModel(private val registerRepository: LoginRepository) : ViewM
     private val _registerResult = MutableLiveData<RegisterResult>()
     val registerResult: LiveData<RegisterResult> = _registerResult
 
-    fun register(username: String, password: String) {
+    fun register(user:User) {
         // can be launched in a separate asynchronous job
-        val result = registerRepository.login(username, password)
+        /*   val result = registerRepository.login(username, password)
 
-        if (result is ResultWrapper.Success) {
-            _registerResult.value =
-                RegisterResult(success = RegisterUserView(displayName = result.value.displayName))
-        } else {
-            _registerResult.value = RegisterResult(error = R.string.login_failed)
-        }
+           if (result is ResultWrapper.Success) {
+               _registerResult.value =
+                   RegisterResult(success = RegisterUserView(displayName = result.value.displayName))
+           } else {
+               _registerResult.value = RegisterResult(error = R.string.login_failed)
+           }*/
+
+        registerUser.repository.registerUser(user)
     }
 
     fun loginDataChanged(username: String, password: String) {

@@ -5,7 +5,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.annotation.StringRes
-import androidx.appcompat.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
@@ -14,24 +13,41 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.badcompany.pitak.App
 
 import com.badcompany.pitak.R
+import com.badcompany.pitak.di.viewmodels.LoginViewModelFactory
+import com.badcompany.pitak.ui.BaseActivity
+import javax.inject.Inject
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : BaseActivity() {
+
+    override fun inject() {
+        (application as App).loginComponent()
+            .inject(this)
+    }
+
 
     private lateinit var loginViewModel: LoginViewModel
 
+    @Inject
+    lateinit var loginViewModelFactory: LoginViewModelFactory
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        inject()
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_login)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeButtonEnabled(true)
 
         val username = findViewById<EditText>(R.id.username)
         val password = findViewById<EditText>(R.id.password)
         val login = findViewById<Button>(R.id.login)
         val loading = findViewById<ProgressBar>(R.id.loading)
-
-        loginViewModel = ViewModelProviders.of(this, LoginViewModelFactory())
+//
+        loginViewModel = ViewModelProviders.of(this, loginViewModelFactory)
             .get(LoginViewModel::class.java)
 
         loginViewModel.loginFormState.observe(this@LoginActivity, Observer {

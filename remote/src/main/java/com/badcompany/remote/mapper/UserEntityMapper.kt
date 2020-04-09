@@ -19,5 +19,9 @@ open class UserEntityMapper @Inject constructor(): EntityMapper<UserModel, UserE
         return UserEntity(type.phone, type.name, type.surname, type.isDriver)
     }
 
+    override fun mapFromEntity(type: UserEntity): UserModel {
+        TODO("Not yet implemented")
+    }
+
 
 }

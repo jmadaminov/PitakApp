@@ -5,4 +5,5 @@
     <color name="colorAccent">#D81B60</color>
     <color name="splashGradientEnd">#4F2A93</color>
     <color name="splashGradientStart">#CBB5FF</color>
+    <color name="button_grey">#B6B6B6</color>
 </resources>

@@ -8,8 +8,10 @@ import com.badcompany.core.ResultWrapper
 import com.badcompany.pitak.data.LoginRepository
 
 import com.badcompany.pitak.R
+import com.badcompany.pitak.ui.BaseViewModel
+import javax.inject.Inject
 
-class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel() {
+class LoginViewModel @Inject constructor(/*private val loginRepository: LoginRepository*/) : ViewModel() {
 
     private val _loginForm = MutableLiveData<LoginFormState>()
     val loginFormState: LiveData<LoginFormState> = _loginForm
@@ -19,14 +21,14 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
 
     fun login(username: String, password: String) {
         // can be launched in a separate asynchronous job
-        val result = loginRepository.login(username, password)
+       /* val result = loginRepository.login(username, password)
 
         if (result is ResultWrapper.Success) {
             _loginResult.value =
                 LoginResult(success = LoggedInUserView(displayName = result.value.displayName))
         } else {
             _loginResult.value = LoginResult(error = R.string.login_failed)
-        }
+        }*/
     }
 
     fun loginDataChanged(username: String, password: String) {

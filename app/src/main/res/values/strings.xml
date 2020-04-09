@@ -17,4 +17,11 @@
     <string name="prompt_phone_number">Phone</string>
     <string name="prompt_username">Username</string>
     <string name="action_username">Username</string>
+    <string name="register">Register</string>
+    <string name="name">Name</string>
+    <string name="surname">Surname</string>
+    <string name="code">Code</string>
+    <string name="sms_containing_code_has_been_sent">"We've just sent you an SMS with verification code. Enter it to verify your phone."</string>
+    <string name="passenger">Passenger</string>
+    <string name="driver">Driver</string>
 </resources>

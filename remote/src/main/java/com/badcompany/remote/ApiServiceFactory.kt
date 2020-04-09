@@ -11,25 +11,25 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 /**
- * Provide "make" methods to create instances of [BufferooService]
+ * Provide "make" methods to create instances of [ApiService]
  * and its related dependencies, such as OkHttpClient, Gson, etc.
  */
-object BufferooServiceFactory {
+object ApiServiceFactory {
 
-    fun makeBuffeoorService(isDebug: Boolean): BufferooService {
+    fun makeApiService(isDebug: Boolean): ApiService {
         val okHttpClient = makeOkHttpClient(
                 makeLoggingInterceptor(isDebug))
-        return makeBufferooService(okHttpClient, makeGson())
+        return makeApiService(okHttpClient, makeGson())
     }
 
-    private fun makeBufferooService(okHttpClient: OkHttpClient, gson: Gson): BufferooService {
+    private fun makeApiService(okHttpClient: OkHttpClient, gson: Gson): ApiService {
         val retrofit = Retrofit.Builder()
                 .baseUrl("https://codeuz.uz:9091/")
                 .client(okHttpClient)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build()
-        return retrofit.create(BufferooService::class.java)
+        return retrofit.create(ApiService::class.java)
     }
 
     private fun makeOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient {

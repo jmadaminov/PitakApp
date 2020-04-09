@@ -11,7 +11,7 @@ import java.lang.Exception
 /**
  * Defines the abstract methods used for interacting with the Bufferoo API
  */
-interface BufferooService {
+interface ApiService {
 
     @GET("team.json")
     fun getBufferoos(): Flowable<BufferooResponse>

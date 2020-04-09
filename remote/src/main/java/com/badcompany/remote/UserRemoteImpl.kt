@@ -11,7 +11,7 @@ import javax.inject.Inject
  * [BufferooRemote] from the Data layer as it is that layers responsibility for defining the
  * operations in which data store implementation layers can carry out.
  */
-class UserRemoteImpl @Inject constructor(private val bufferooService: BufferooService,
+class UserRemoteImpl @Inject constructor(private val apiService: ApiService,
                                          private val userCredMapper: UserCredentialsMapper) :
     UserRemote {
 
@@ -29,8 +29,7 @@ class UserRemoteImpl @Inject constructor(private val bufferooService: BufferooSe
 //    }
 
     override fun loginUser(userCredentials: UserCredentialsEntity): ResultWrapper<Exception, String> {
-        return bufferooService.userLogin(userCredMapper.mapFromEntity(userCredentials))
-
+        return apiService.userLogin(userCredMapper.mapFromEntity(userCredentials))
     }
 
 }
