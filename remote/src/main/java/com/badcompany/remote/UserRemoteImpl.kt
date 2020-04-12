@@ -1,9 +1,12 @@
 package com.badcompany.remote
 
+import com.badcompany.core.ErrorWrapper
 import com.badcompany.core.ResultWrapper
 import com.badcompany.data.model.UserCredentialsEntity
+import com.badcompany.data.model.UserEntity
 import com.badcompany.data.repository.UserRemote
 import com.badcompany.remote.mapper.UserCredentialsMapper
+import com.badcompany.remote.mapper.UserMapper
 import javax.inject.Inject
 
 /**
@@ -12,7 +15,8 @@ import javax.inject.Inject
  * operations in which data store implementation layers can carry out.
  */
 class UserRemoteImpl @Inject constructor(private val apiService: ApiService,
-                                         private val userCredMapper: UserCredentialsMapper) :
+                                         private val userCredMapper: UserCredentialsMapper,
+                                         private val userMapper: UserMapper) :
     UserRemote {
 
 //    /**
@@ -28,8 +32,20 @@ class UserRemoteImpl @Inject constructor(private val apiService: ApiService,
 //                }
 //    }
 
-    override fun loginUser(userCredentials: UserCredentialsEntity): ResultWrapper<Exception, String> {
+    override suspend fun loginUser(userCredentials: UserCredentialsEntity): ResultWrapper<ErrorWrapper, String> {
+
+
         return apiService.userLogin(userCredMapper.mapFromEntity(userCredentials))
+    }
+
+    override suspend fun registerUser(user: UserEntity): ResultWrapper<ErrorWrapper, String> {
+        return try {
+            val response = apiService.userRegister(userMapper.mapFromEntity(user))
+            if (response.code == 0) ResultWrapper.Success(response.data!!.password!!)
+            else ErrorWrapper.ResponseError(response.code, response.message)
+        } catch (e: Exception) {
+            ErrorWrapper.SystemError(e)
+        }
     }
 
 }

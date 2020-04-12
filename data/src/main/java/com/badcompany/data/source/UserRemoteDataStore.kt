@@ -1,7 +1,9 @@
 package com.badcompany.data.source
 
+import com.badcompany.core.ErrorWrapper
 import com.badcompany.core.ResultWrapper
 import com.badcompany.data.model.UserCredentialsEntity
+import com.badcompany.data.model.UserEntity
 import com.badcompany.data.repository.UserDataStore
 import com.badcompany.data.repository.UserRemote
 import javax.inject.Inject
@@ -24,8 +26,12 @@ open class UserRemoteDataStore @Inject constructor(private val userRemote: UserR
 //    /**
 //     * Retrieve a list of [BufferooEntity] instances from the API
 //     */
-    override fun userLogin(credentials: UserCredentialsEntity): ResultWrapper<Exception, String> {
+    override suspend fun userLogin(credentials: UserCredentialsEntity): ResultWrapper<ErrorWrapper, String> {
         return userRemote.loginUser(credentials)
+    }
+
+    override suspend fun userRegister(user: UserEntity): ResultWrapper<ErrorWrapper, String>  {
+        return userRemote.registerUser(user)
     }
 //
 //    override fun isCached(): Single<Boolean> {

@@ -10,7 +10,7 @@ import javax.inject.Inject
  * Map a [UserModel] to and from a [UserEntity] instance when data is moving between
  * this later and the Data layer
  */
-open class UserEntityMapper @Inject constructor(): EntityMapper<UserModel, UserEntity> {
+open class UserMapper @Inject constructor(): EntityMapper<UserModel, UserEntity> {
 
     /**
      * Map an instance of a [UserModel] to a [UserEntity] model
@@ -20,7 +20,7 @@ open class UserEntityMapper @Inject constructor(): EntityMapper<UserModel, UserE
     }
 
     override fun mapFromEntity(type: UserEntity): UserModel {
-        TODO("Not yet implemented")
+        return UserModel(type.phone, type.name, type.surname, type.isDriver)
     }
 
 

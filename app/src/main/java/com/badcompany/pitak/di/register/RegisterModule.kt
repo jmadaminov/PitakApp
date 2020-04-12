@@ -14,7 +14,6 @@ import com.badcompany.remote.ApiServiceFactory
 import com.badcompany.remote.UserRemoteImpl
 import dagger.Module
 import dagger.Provides
-import javax.inject.Singleton
 
 @Module
 object RegisterModule {
@@ -28,14 +27,16 @@ object RegisterModule {
 //            .error(R.drawable.white_background)
 //    }
 
-    @Singleton
+//    @Singleton
+    @RegisterScope
     @Provides
     @JvmStatic
     fun provideRegisterUserUseCase(userRepository: UserRepository): RegisterUser {
         return RegisterUser(userRepository)
     }
 
-    @Singleton
+//    @Singleton
+    @RegisterScope
     @Provides
     @JvmStatic
     fun provideUserRepository(factory: UserDataStoreFactory,
@@ -44,52 +45,67 @@ object RegisterModule {
         return UserRepositoryImpl(factory, userMapper, userCredentialsMapper)
     }
 
-    @Singleton
+//    @Singleton
     @Provides
+    @RegisterScope
     @JvmStatic
     fun provideUserMapper(): UserMapper {
         return UserMapper()
     }
 
-    @Singleton
+//    @Singleton
     @Provides
+    @RegisterScope
     @JvmStatic
     fun provideUserCredentialsMapper(): UserCredentialsMapper {
         return UserCredentialsMapper()
     }
 
-    @Singleton
+//    @Singleton
     @Provides
+    @RegisterScope
     @JvmStatic
     fun provideUserDataStoreFactory(userRemoteDataStore: UserRemoteDataStore): UserDataStoreFactory {
         return UserDataStoreFactory(userRemoteDataStore)
     }
 
-    @Singleton
+//    @Singleton
     @Provides
+    @RegisterScope
     @JvmStatic
     fun provideUserRemoteDataStore(userRemote: UserRemote): UserRemoteDataStore {
         return UserRemoteDataStore(userRemote)
     }
 
 
-    @Singleton
+//    @Singleton
     @Provides
+    @RegisterScope
     @JvmStatic
     fun provideUserRemote(apiService: ApiService,
-                          userCredMapper: com.badcompany.remote.mapper.UserCredentialsMapper): UserRemote {
-        return UserRemoteImpl(apiService, userCredMapper)
+                          userCredMapper: com.badcompany.remote.mapper.UserCredentialsMapper,
+                          userMapper: com.badcompany.remote.mapper.UserMapper): UserRemote {
+        return UserRemoteImpl(apiService, userCredMapper, userMapper)
     }
 
-    @Singleton
+//    @Singleton
+    @RegisterScope
     @Provides
     @JvmStatic
     fun provideRemoteUserCredentialsMapper(): com.badcompany.remote.mapper.UserCredentialsMapper {
         return com.badcompany.remote.mapper.UserCredentialsMapper()
     }
 
-    @Singleton
+    @RegisterScope
     @Provides
+    @JvmStatic
+    fun provideRemoteUserMapper(): com.badcompany.remote.mapper.UserMapper {
+        return com.badcompany.remote.mapper.UserMapper()
+    }
+
+//    @Singleton
+    @Provides
+    @RegisterScope
     @JvmStatic
     fun provideApiService(): ApiService {
         return ApiServiceFactory.makeApiService(BuildConfig.DEBUG)

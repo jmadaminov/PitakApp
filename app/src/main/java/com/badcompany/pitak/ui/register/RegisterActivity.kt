@@ -44,48 +44,48 @@ class RegisterActivity : BaseActivity() {
 
         setupObservers()
 
-        username.afterTextChanged {
-            registerViewModel.loginDataChanged(
-                username.text.toString(),
-                password.text.toString()
-            )
-        }
+//        username.afterTextChanged {
+//            registerViewModel.loginDataChanged(
+//                username.text.toString(),
+//                password.text.toString()
+//            )
+//        }
 
-        password.apply {
-            afterTextChanged {
-                registerViewModel.loginDataChanged(
-                    username.text.toString(),
-                    password.text.toString()
-                )
-            }
-
-            setOnEditorActionListener { _, actionId, _ ->
-                when (actionId) {
-                    EditorInfo.IME_ACTION_DONE ->
-                        registerViewModel.register(User(
-                            phone.text.toString(),
-                            name.text.toString(),
-                            surname.text.toString(),
-                            username.text.toString(),
-                            password.text.toString(),
-                            false)
-                        )
-                }
-                false
-            }
+//        password.apply {
+//            afterTextChanged {
+//                registerViewModel.loginDataChanged(
+//                    username.text.toString(),
+//                    password.text.toString()
+//                )
+//            }
+//
+//            setOnEditorActionListener { _, actionId, _ ->
+//                when (actionId) {
+//                    EditorInfo.IME_ACTION_DONE ->
+//                        registerViewModel.register(User(
+//                            phone.text.toString(),
+//                            name.text.toString(),
+//                            surname.text.toString(),
+//                            username.text.toString(),
+//                            password.text.toString(),
+//                            false)
+//                        )
+//                }
+//                false
+//            }
+//        }
 
             register.setOnClickListener {
                 register.startAnimation()
                 registerViewModel.register(User(
                     phone.text.toString(),
                     name.text.toString(),
-                    surname.text.toString(),
+                    surname.text.toString(),/*
                     username.text.toString(),
-                    password.text.toString(),
+                    password.text.toString(),*/
                     false)
                 )
             }
-        }
     }
 
     private fun setupObservers() {
@@ -96,12 +96,12 @@ class RegisterActivity : BaseActivity() {
             // disable login button unless both username / password is valid
             register.isEnabled = loginState.isDataValid
 
-            if (loginState.usernameError != null) {
-                username.error = getString(loginState.usernameError)
-            }
-            if (loginState.passwordError != null) {
-                password.error = getString(loginState.passwordError)
-            }
+//            if (loginState.usernameError != null) {
+//                username.error = getString(loginState.usernameError)
+//            }
+//            if (loginState.passwordError != null) {
+//                password.error = getString(loginState.passwordError)
+//            }
         })
 
         registerViewModel.registerResult.observe(this, Observer {

@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import android.util.Patterns
 import com.badcompany.core.ResultWrapper
-import com.badcompany.pitak.data.LoginRepository
 
 import com.badcompany.pitak.R
 import com.badcompany.pitak.ui.BaseViewModel

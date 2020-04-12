@@ -1,5 +1,6 @@
 package com.badcompany.data
 
+import com.badcompany.core.ErrorWrapper
 import com.badcompany.core.ResultWrapper
 import com.badcompany.data.mapper.UserCredentialsMapper
 import com.badcompany.data.mapper.UserMapper
@@ -18,9 +19,14 @@ class UserRepositoryImpl @Inject constructor(private val factory: UserDataStoreF
                                              private val userMapper: UserMapper,
                                              private val userCredentialsMapper: UserCredentialsMapper) :
     UserRepository {
-    override fun loginUser(userCredentials: UserCredentials): ResultWrapper<Exception, String> {
+    override suspend fun loginUser(userCredentials: UserCredentials): ResultWrapper<ErrorWrapper, String> {
         return factory.retrieveDataStore(false).userLogin(userCredentialsMapper.mapToEntity(userCredentials) )
     }
+
+    override suspend fun registerUser(user: User): ResultWrapper<ErrorWrapper, String> {
+        return factory.retrieveDataStore(false).userRegister(userMapper.mapToEntity(user) )
+    }
+
 
     override fun updateUserDetails(user: User): ResultWrapper<Exception, Unit> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
@@ -38,9 +44,6 @@ class UserRepositoryImpl @Inject constructor(private val factory: UserDataStoreF
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun registerUser(user: User): ResultWrapper<Exception, String> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 
 
 //    override fun clearBufferoos(): Completable {

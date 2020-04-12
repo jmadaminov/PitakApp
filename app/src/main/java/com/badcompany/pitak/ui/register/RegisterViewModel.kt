@@ -1,13 +1,18 @@
 package com.badcompany.pitak.ui.register
 
+import android.util.Log
 import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.badcompany.core.ErrorWrapper
+import com.badcompany.core.ResultWrapper
+import com.badcompany.core.exhaustive
 import com.badcompany.domain.domainmodel.User
-import com.badcompany.domain.repository.UserRepository
 import com.badcompany.domain.usecases.RegisterUser
 import com.badcompany.pitak.R
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class RegisterViewModel @Inject constructor(private val registerUser: RegisterUser) :
@@ -19,7 +24,7 @@ class RegisterViewModel @Inject constructor(private val registerUser: RegisterUs
     private val _registerResult = MutableLiveData<RegisterResult>()
     val registerResult: LiveData<RegisterResult> = _registerResult
 
-    fun register(user:User) {
+    fun register(user: User) {
         // can be launched in a separate asynchronous job
         /*   val result = registerRepository.login(username, password)
 
@@ -30,7 +35,25 @@ class RegisterViewModel @Inject constructor(private val registerUser: RegisterUs
                _registerResult.value = RegisterResult(error = R.string.login_failed)
            }*/
 
-        registerUser.repository.registerUser(user)
+        viewModelScope.launch() {
+
+            val response = registerUser.repository.registerUser(user)
+
+            when (response) {
+                is ErrorWrapper.ResponseError -> {
+                    Log.d("DEBUG REGISTER", "ResponseError"+ response.toString())
+                }
+                is ErrorWrapper.SystemError -> {
+                    Log.d("DEBUG REGISTER", "SystemError" + response.toString())
+                }
+                is ResultWrapper.Success -> {
+                    Log.d("DEBUG REGISTER", "Success"+ response.toString())
+                }
+            }.exhaustive
+
+        }
+
+
     }
 
     fun loginDataChanged(username: String, password: String) {

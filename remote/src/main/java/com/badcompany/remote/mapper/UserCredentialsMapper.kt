@@ -20,6 +20,6 @@ open class UserCredentialsMapper @Inject constructor(): EntityMapper<UserCredent
     }
 
     override fun mapFromEntity(type: UserCredentialsEntity): UserCredentialsModel {
-        TODO("Not yet implemented")
+        return UserCredentialsModel(type.phone, type.password)
     }
 }
