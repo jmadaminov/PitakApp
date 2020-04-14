@@ -10,7 +10,7 @@
 // */
 //class LoginDataSource {
 //
-//    fun login(username: String, password: String): ResultWrapper<Exception, LoggedInUser> {
+//    fun login(username: String, password: String): ResultWrapper< LoggedInUser> {
 //        try {
 //            // TODO: handle loggedInUser authentication
 //            val fakeUser = LoggedInUser(java.util.UUID.randomUUID().toString(), "Jane Doe")

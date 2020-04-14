@@ -7,7 +7,7 @@
 //    data class Error<out E>(val error: E) : ResultWrapper<E, Nothing>()
 //
 //    companion object Factory {
-//        inline fun <V> build(function: () -> V): ResultWrapper<Exception, V> = try {
+//        inline fun <V> build(function: () -> V): ResultWrapper< V> = try {
 //            Success(function.invoke())
 //        } catch (e: java.lang.Exception) {
 //            Error(e)

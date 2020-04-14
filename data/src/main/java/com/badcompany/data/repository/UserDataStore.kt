@@ -17,8 +17,8 @@ interface UserDataStore {
 
 //    fun saveBufferoos(bufferoos: List<BufferooEntity>): Completable
 
-    suspend   fun userLogin(credentials:UserCredentialsEntity): ResultWrapper<ErrorWrapper, String>
-    suspend  fun userRegister(user:UserEntity): ResultWrapper<ErrorWrapper, String>
+    suspend   fun userLogin(credentials:UserCredentialsEntity): ResultWrapper<String>
+    suspend  fun userRegister(user:UserEntity): ResultWrapper<String>
 
 //    fun isCached(): Single<Boolean>
 

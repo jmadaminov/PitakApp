@@ -9,9 +9,9 @@ import com.badcompany.domain.repository.UserRepository
 /** User Login Use Case
  *
  */
-class LogUserIn(val repository: UserRepository) : UseCaseWithParams<UserCredentials, ResultWrapper<ErrorWrapper, String>>() {
+class LogUserIn(val repository: UserRepository) : UseCaseWithParams<UserCredentials, ResultWrapper<String>>() {
 
-    override suspend fun buildUseCase(params: UserCredentials): ResultWrapper<ErrorWrapper, String> {
+    override suspend fun buildUseCase(params: UserCredentials): ResultWrapper<String> {
         return repository.loginUser(params)
     }
 

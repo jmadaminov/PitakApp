@@ -28,7 +28,7 @@
 //        dataSource.logout()
 //    }
 //
-//    fun login(username: String, password: String): ResultWrapper<Exception, LoggedInUser> {
+//    fun login(username: String, password: String): ResultWrapper< LoggedInUser> {
 //        // handle login
 //        val result = dataSource.login(username, password)
 //

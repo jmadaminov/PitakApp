@@ -10,9 +10,9 @@ import com.badcompany.domain.repository.UserRepository
  *
  */
 class RegisterUser(val repository: UserRepository) :
-    UseCaseWithParams<User, ResultWrapper<ErrorWrapper, String>>() {
+    UseCaseWithParams<User, ResultWrapper<String>>() {
 
-    override suspend fun buildUseCase(params: User): ResultWrapper<ErrorWrapper, String> {
+    override suspend fun buildUseCase(params: User): ResultWrapper<String> {
         return repository.registerUser(params)
     }
 

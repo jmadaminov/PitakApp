@@ -8,12 +8,12 @@ import com.badcompany.core.ErrorWrapper
 
 interface UserRepository {
 
-    suspend fun loginUser(userCredentials: UserCredentials): ResultWrapper<ErrorWrapper, String>
-    suspend fun registerUser(user: User): ResultWrapper<ErrorWrapper, String>
+    suspend fun loginUser(userCredentials: UserCredentials): ResultWrapper<String>
+    suspend fun registerUser(user: User): ResultWrapper<String>
 
-    fun updateUserDetails(user: User): ResultWrapper<Exception, Unit>
-    fun addOrUpdateUserCar(car: Car): ResultWrapper<Exception, Unit>
-    fun getUserCars(userId: String): ResultWrapper<Exception, List<Car>>
-    fun deleteUserCar(carId: String): ResultWrapper<Exception, List<Car>>
+    fun updateUserDetails(user: User): ResultWrapper<Unit>
+    fun addOrUpdateUserCar(car: Car): ResultWrapper< Unit>
+    fun getUserCars(userId: String): ResultWrapper< List<Car>>
+    fun deleteUserCar(carId: String): ResultWrapper< List<Car>>
 
 }

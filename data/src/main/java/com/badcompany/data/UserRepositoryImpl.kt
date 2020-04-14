@@ -12,60 +12,60 @@ import com.badcompany.domain.repository.UserRepository
 import javax.inject.Inject
 
 /**
- * Provides an implementation of the [BufferooRepository] interface for communicating to and from
+ * Provides an implementation of the [UserRepository] interface for communicating to and from
  * data sources
  */
 class UserRepositoryImpl @Inject constructor(private val factory: UserDataStoreFactory,
                                              private val userMapper: UserMapper,
                                              private val userCredentialsMapper: UserCredentialsMapper) :
     UserRepository {
-    override suspend fun loginUser(userCredentials: UserCredentials): ResultWrapper<ErrorWrapper, String> {
+    override suspend fun loginUser(userCredentials: UserCredentials): ResultWrapper<String> {
         return factory.retrieveDataStore(false).userLogin(userCredentialsMapper.mapToEntity(userCredentials) )
     }
 
-    override suspend fun registerUser(user: User): ResultWrapper<ErrorWrapper, String> {
+    override suspend fun registerUser(user: User): ResultWrapper<String> {
         return factory.retrieveDataStore(false).userRegister(userMapper.mapToEntity(user) )
     }
 
 
-    override fun updateUserDetails(user: User): ResultWrapper<Exception, Unit> {
+    override fun updateUserDetails(user: User): ResultWrapper< Unit> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun addOrUpdateUserCar(car: Car): ResultWrapper<Exception, Unit> {
+    override fun addOrUpdateUserCar(car: Car): ResultWrapper< Unit> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun getUserCars(userId: String): ResultWrapper<Exception, List<Car>> {
+    override fun getUserCars(userId: String): ResultWrapper< List<Car>> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun deleteUserCar(carId: String): ResultWrapper<Exception, List<Car>> {
+    override fun deleteUserCar(carId: String): ResultWrapper< List<Car>> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
 
 
-//    override fun clearBufferoos(): Completable {
-//        return factory.retrieveCacheDataStore().clearBufferoos()
+//    override fun clearUsers(): Completable {
+//        return factory.retrieveCacheDataStore().clearUsers()
 //    }
 //
-//    override fun saveBufferoos(bufferoos: List<Bufferoo>): Completable {
-//        val bufferooEntities = mutableListOf<BufferooEntity>()
+//    override fun saveUsers(bufferoos: List<User>): Completable {
+//        val bufferooEntities = mutableListOf<UserEntity>()
 //        bufferoos.map { bufferooEntities.add(bufferooMapper.mapToEntity(it)) }
-//        return factory.retrieveCacheDataStore().saveBufferoos(bufferooEntities)
+//        return factory.retrieveCacheDataStore().saveUsers(bufferooEntities)
 //    }
 //
-//    override fun getBufferoos(): Flowable<List<Bufferoo>> {
+//    override fun getUsers(): Flowable<List<User>> {
 //        return factory.retrieveCacheDataStore().isCached()
 //            .flatMapPublisher {
-//                factory.retrieveDataStore(it).getBufferoos()
+//                factory.retrieveDataStore(it).getUsers()
 //            }
 //            .flatMap {
 //                Flowable.just(it.map { bufferooMapper.mapFromEntity(it) })
 //            }
 //            .flatMap {
-//                saveBufferoos(it).toSingle { it }.toFlowable()
+//                saveUsers(it).toSingle { it }.toFlowable()
 //            }
 //    }
 

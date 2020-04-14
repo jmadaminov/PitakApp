@@ -1,6 +1,5 @@
 package com.badcompany.pitak.di
 
-import android.R
 import com.bumptech.glide.request.RequestOptions
 import dagger.Module
 import dagger.Provides

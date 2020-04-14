@@ -2,7 +2,6 @@ package com.badcompany.pitak.di.login
 
 import com.badcompany.pitak.ui.login.LoginActivity
 import dagger.Subcomponent
-import javax.inject.Singleton
 
 @LoginScope
 @Subcomponent(modules = [LoginModule::class, LoginViewModelModule::class])

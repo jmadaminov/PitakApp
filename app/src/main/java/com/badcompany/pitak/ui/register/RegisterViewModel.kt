@@ -36,9 +36,7 @@ class RegisterViewModel @Inject constructor(private val registerUser: RegisterUs
            }*/
 
         viewModelScope.launch() {
-
-            val response = registerUser.repository.registerUser(user)
-
+            val response = registerUser.execute(user)
             when (response) {
                 is ErrorWrapper.ResponseError -> {
                     Log.d("DEBUG REGISTER", "ResponseError"+ response.toString())
@@ -50,10 +48,7 @@ class RegisterViewModel @Inject constructor(private val registerUser: RegisterUs
                     Log.d("DEBUG REGISTER", "Success"+ response.toString())
                 }
             }.exhaustive
-
         }
-
-
     }
 
     fun loginDataChanged(username: String, password: String) {

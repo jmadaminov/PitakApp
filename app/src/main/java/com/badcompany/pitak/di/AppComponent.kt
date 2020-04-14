@@ -1,8 +1,9 @@
 package com.badcompany.pitak.di
 
 import android.app.Application
-import com.badcompany.pitak.App
+import com.badcompany.pitak.ui.BaseFragment
 import com.badcompany.pitak.di.login.LoginComponent
+import com.badcompany.pitak.di.main.MainComponent
 import com.badcompany.pitak.di.register.RegisterComponent
 import com.badcompany.pitak.ui.BaseActivity
 import dagger.BindsInstance
@@ -24,5 +25,6 @@ interface AppComponent {
     fun inject(activity: BaseActivity)
     fun loginComponent(): LoginComponent.Factory
     fun registerComponent(): RegisterComponent.Factory
+    fun mainComponent(): MainComponent.Factory
 
 }

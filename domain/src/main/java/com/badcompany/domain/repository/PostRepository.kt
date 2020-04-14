@@ -5,12 +5,8 @@ import com.badcompany.domain.domainmodel.PassengerPost
 
 interface PostRepository {
 
-    fun getPassengerPosts(from: String, to: String): ResultWrapper<Exception, List<PassengerPost>>
-    fun getDriverPosts(from: String, to: String): ResultWrapper<Exception, List<PassengerPost>>
-
-
-
-
+    fun getPassengerPosts(from: String, to: String): ResultWrapper<List<PassengerPost>>
+    fun getDriverPosts(from: String, to: String): ResultWrapper<List<PassengerPost>>
 
 
 }

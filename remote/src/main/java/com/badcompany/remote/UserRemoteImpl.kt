@@ -32,13 +32,13 @@ class UserRemoteImpl @Inject constructor(private val apiService: ApiService,
 //                }
 //    }
 
-    override suspend fun loginUser(userCredentials: UserCredentialsEntity): ResultWrapper<ErrorWrapper, String> {
+    override suspend fun loginUser(userCredentials: UserCredentialsEntity): ResultWrapper<String> {
 
 
         return apiService.userLogin(userCredMapper.mapFromEntity(userCredentials))
     }
 
-    override suspend fun registerUser(user: UserEntity): ResultWrapper<ErrorWrapper, String> {
+    override suspend fun registerUser(user: UserEntity): ResultWrapper<String> {
         return try {
             val response = apiService.userRegister(userMapper.mapFromEntity(user))
             if (response.code == 0) ResultWrapper.Success(response.data!!.password!!)

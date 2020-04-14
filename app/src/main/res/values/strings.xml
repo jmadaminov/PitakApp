@@ -24,4 +24,5 @@
     <string name="sms_containing_code_has_been_sent">"We've just sent you an SMS with verification code. Enter it to verify your phone."</string>
     <string name="passenger">Passenger</string>
     <string name="driver">Driver</string>
+    <string name="title_profile">Profile</string>
 </resources>
