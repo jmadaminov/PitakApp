@@ -1,13 +1,11 @@
 package com.badcompany.data
 
-import com.badcompany.core.ErrorWrapper
 import com.badcompany.core.ResultWrapper
 import com.badcompany.data.mapper.UserCredentialsMapper
 import com.badcompany.data.mapper.UserMapper
 import com.badcompany.data.source.UserDataStoreFactory
 import com.badcompany.domain.domainmodel.Car
 import com.badcompany.domain.domainmodel.User
-import com.badcompany.domain.domainmodel.UserCredentials
 import com.badcompany.domain.repository.UserRepository
 import javax.inject.Inject
 
@@ -19,31 +17,31 @@ class UserRepositoryImpl @Inject constructor(private val factory: UserDataStoreF
                                              private val userMapper: UserMapper,
                                              private val userCredentialsMapper: UserCredentialsMapper) :
     UserRepository {
-    override suspend fun loginUser(userCredentials: UserCredentials): ResultWrapper<String> {
-        return factory.retrieveDataStore(false).userLogin(userCredentialsMapper.mapToEntity(userCredentials) )
+
+    override suspend fun loginUser(phoneNum: String): ResultWrapper<String> {
+        return factory.retrieveDataStore(false).userLogin(phoneNum)
     }
 
     override suspend fun registerUser(user: User): ResultWrapper<String> {
-        return factory.retrieveDataStore(false).userRegister(userMapper.mapToEntity(user) )
+        return factory.retrieveDataStore(false).userRegister(userMapper.mapToEntity(user))
     }
 
 
-    override fun updateUserDetails(user: User): ResultWrapper< Unit> {
+    override fun updateUserDetails(user: User): ResultWrapper<Unit> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun addOrUpdateUserCar(car: Car): ResultWrapper< Unit> {
+    override fun addOrUpdateUserCar(car: Car): ResultWrapper<Unit> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun getUserCars(userId: String): ResultWrapper< List<Car>> {
+    override fun getUserCars(userId: String): ResultWrapper<List<Car>> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun deleteUserCar(carId: String): ResultWrapper< List<Car>> {
+    override fun deleteUserCar(carId: String): ResultWrapper<List<Car>> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
-
 
 
 //    override fun clearUsers(): Completable {

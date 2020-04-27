@@ -1,16 +1,13 @@
 package com.badcompany.domain
 
 
-import com.badcompany.core.ResultWrapper
-import com.badcompany.domain.exception.UserRepositoryException
 import com.badcompany.domain.repository.UserRepository
 import com.badcompany.domain.usecases.LogUserIn
-import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.jupiter.api.Test
-import testUserCredentials
+import testPhoneNum
 
 
 class LogUserInTest {
@@ -23,13 +20,13 @@ class LogUserInTest {
     fun `User Log In`() = runBlockingTest {
         val testUserLogin = "token"
 
-        val userCredentials = testUserCredentials()
+        val phoneNum = testPhoneNum()
 
 //        coEvery { repo.loginUser(userCredentials) } returns ResultWrapper.build { testUserLogin }
 
-        useCase.execute(userCredentials)
+        useCase.execute(phoneNum)
 
-        coVerify(exactly = 1) { repo.loginUser(userCredentials) }
+        coVerify(exactly = 1) { repo.loginUser(phoneNum) }
     }
 
 
@@ -37,15 +34,15 @@ class LogUserInTest {
     fun `User Log In Error`() = runBlockingTest {
         val testUserLogin = "token"
 
-        val userCredentials = testUserCredentials()
+        val phoneNum = testPhoneNum()
 
 //        coEvery { repo.loginUser(userCredentials) } returns ResultWrapper.build { throw UserRepositoryException }
 
-        val result = useCase.execute(userCredentials)
+        val result = useCase.execute(phoneNum)
 
 //        assert(result is ResultWrapper.Error)
 
-        coVerify(exactly = 1) { repo.loginUser(userCredentials) }
+        coVerify(exactly = 1) { repo.loginUser(phoneNum) }
     }
 
 

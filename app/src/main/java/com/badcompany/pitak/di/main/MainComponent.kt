@@ -1,7 +1,6 @@
 package com.badcompany.pitak.di.main
 
-import com.badcompany.pitak.MainActivity
-import com.badcompany.pitak.ui.BaseFragment
+import com.badcompany.pitak.ui.main.MainActivity
 import dagger.Subcomponent
 
 @MainScope

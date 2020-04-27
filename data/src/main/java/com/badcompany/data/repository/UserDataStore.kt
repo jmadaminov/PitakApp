@@ -1,8 +1,6 @@
 package com.badcompany.data.repository
 
-import com.badcompany.core.ErrorWrapper
 import com.badcompany.core.ResultWrapper
-import com.badcompany.data.model.UserCredentialsEntity
 import com.badcompany.data.model.UserEntity
 
 
@@ -13,13 +11,7 @@ import com.badcompany.data.model.UserEntity
  */
 interface UserDataStore {
 
-//    fun clearBufferoos(): Completable
-
-//    fun saveBufferoos(bufferoos: List<BufferooEntity>): Completable
-
-    suspend   fun userLogin(credentials:UserCredentialsEntity): ResultWrapper<String>
-    suspend  fun userRegister(user:UserEntity): ResultWrapper<String>
-
-//    fun isCached(): Single<Boolean>
+    suspend fun userLogin(phoneNum: String): ResultWrapper<String>
+    suspend fun userRegister(user: UserEntity): ResultWrapper<String>
 
 }

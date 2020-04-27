@@ -2,11 +2,11 @@ package com.badcompany.pitak.di.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.badcompany.pitak.MainViewModel
-import com.badcompany.pitak.di.viewmodels.LoginViewModelFactory
+import com.badcompany.pitak.ui.main.MainViewModel
 import com.badcompany.pitak.di.viewmodels.MainViewModelFactory
-import com.badcompany.pitak.ui.login.LoginViewModel
-import com.badcompany.pitak.ui.profile.ProfileViewModel
+import com.badcompany.pitak.ui.main.mytrips.MyTripsViewModel
+import com.badcompany.pitak.ui.main.profile.ProfileViewModel
+import com.badcompany.pitak.ui.main.searchtrip.SearchTripViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -26,5 +26,15 @@ abstract class MainViewModelModule {
     @IntoMap
     @MainViewModelKey(ProfileViewModel::class)
     abstract fun bindProfileViewModel(viewModel: ProfileViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @MainViewModelKey(SearchTripViewModel::class)
+    abstract fun bindSearchTripViewModel(viewModel: SearchTripViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @MainViewModelKey(MyTripsViewModel::class)
+    abstract fun bindMyTripsViewModel(viewModel: MyTripsViewModel): ViewModel
 
 }

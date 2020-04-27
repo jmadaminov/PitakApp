@@ -20,7 +20,7 @@ interface ApiService {
 
 
     @POST("prof/auth")
-    suspend fun userLogin(credentialsModel: UserCredentialsModel):  ResultWrapper<String>
+    suspend fun userLogin(phoneNum: String):  ResultWrapper<String>
 
 
     @POST("prof/reg")

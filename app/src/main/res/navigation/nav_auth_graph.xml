@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_profile_graph.xml"
+    app:startDestination="@id/navLoginFragment">
+
+
+    <fragment
+        android:id="@+id/navLoginFragment"
+        android:name="com.badcompany.pitak.ui.auth.login.LoginFragment"
+        android:label="@string/title_login"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_navLoginFragment_to_navRegisterFragment"
+            app:destination="@id/navRegisterFragment" />
+        <action
+            android:id="@+id/action_navLoginFragment_to_navPhoneConfirmFragment"
+            app:destination="@id/navPhoneConfirmFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navRegisterFragment"
+        android:name="com.badcompany.pitak.ui.auth.register.RegisterFragment"
+        android:label="@string/title_register"
+        tools:layout="@layout/fragment_register">
+        <action
+            android:id="@+id/action_navRegisterFragment_to_navPhoneConfirmFragment"
+            app:destination="@id/navPhoneConfirmFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navPhoneConfirmFragment"
+        android:name="com.badcompany.pitak.ui.auth.confirm.PhoneConfirmFragment"
+        android:label="@string/phone_confirmation"
+        tools:layout="@layout/fragment_phone_confirm">
+
+    </fragment>
+
+</navigation>

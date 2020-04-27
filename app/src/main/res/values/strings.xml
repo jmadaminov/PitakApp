@@ -4,7 +4,7 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_activity_maps">Map</string>
-    <string name="title_activity_login">Sign in</string>
+    <string name="title_login">Sign in</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
@@ -13,7 +13,7 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
-    <string name="title_activity_register">Sign in</string>
+    <string name="title_register">Sign in</string>
     <string name="prompt_phone_number">Phone</string>
     <string name="prompt_username">Username</string>
     <string name="action_username">Username</string>
@@ -21,8 +21,15 @@
     <string name="name">Name</string>
     <string name="surname">Surname</string>
     <string name="code">Code</string>
-    <string name="sms_containing_code_has_been_sent">"We've just sent you an SMS with verification code. Enter it to verify your phone."</string>
+    <string name="sms_containing_code_has_been_sent">"We've just sent you an SMS with verification code. Please enter it to verify your phone."</string>
     <string name="passenger">Passenger</string>
     <string name="driver">Driver</string>
     <string name="title_profile">Profile</string>
+    <string name="MainNavHost">MainNavHost</string>
+    <string name="AuthNavHost">AuthNavHost</string>
+    <string name="my_trips">My Trips</string>
+    <string name="search_trip">Search Trip</string>
+    <string name="authorize">Authorize</string>
+    <string name="confirm">Confirm</string>
+    <string name="phone_confirmation">Confirmation</string>
 </resources>

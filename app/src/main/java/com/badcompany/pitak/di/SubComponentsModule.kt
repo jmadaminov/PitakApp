@@ -1,13 +1,12 @@
 package com.badcompany.pitak.di
 
-import com.badcompany.pitak.di.login.LoginComponent
+import com.badcompany.pitak.di.auth.AuthComponent
 import com.badcompany.pitak.di.main.MainComponent
-import com.badcompany.pitak.di.register.RegisterComponent
 import dagger.Module
 
 /**
  * Created by jahon on 09-Apr-20
  */
 
-@Module(subcomponents = [LoginComponent::class, RegisterComponent::class, MainComponent::class])
+@Module(subcomponents = [AuthComponent::class, MainComponent::class])
 class SubComponentsModule

@@ -95,6 +95,18 @@ dependencies {
     implementation 'br.com.simplepass:loading-button-android:2.2.0'
 
 
+    //Splitties
+    implementation("com.louiscad.splitties:splitties-preferences:$rootProject.splitties_version")
+    implementation("com.louiscad.splitties:splitties-activities:$rootProject.splitties_version")
+    implementation("com.louiscad.splitties:splitties-fragments:$rootProject.splitties_version")
+
+
+    //KTX
+    implementation "androidx.core:core-ktx:1.2.0"
+
+    //masked edittext
+    implementation 'com.github.pinball83:masked-edittext:1.0.4'
+
 }
 
 sourceCompatibility = "1.8"

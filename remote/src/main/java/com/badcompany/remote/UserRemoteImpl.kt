@@ -2,7 +2,6 @@ package com.badcompany.remote
 
 import com.badcompany.core.ErrorWrapper
 import com.badcompany.core.ResultWrapper
-import com.badcompany.data.model.UserCredentialsEntity
 import com.badcompany.data.model.UserEntity
 import com.badcompany.data.repository.UserRemote
 import com.badcompany.remote.mapper.UserCredentialsMapper
@@ -32,10 +31,8 @@ class UserRemoteImpl @Inject constructor(private val apiService: ApiService,
 //                }
 //    }
 
-    override suspend fun loginUser(userCredentials: UserCredentialsEntity): ResultWrapper<String> {
-
-
-        return apiService.userLogin(userCredMapper.mapFromEntity(userCredentials))
+    override suspend fun loginUser(phoneNum: String): ResultWrapper<String> {
+        return apiService.userLogin(phoneNum)
     }
 
     override suspend fun registerUser(user: UserEntity): ResultWrapper<String> {

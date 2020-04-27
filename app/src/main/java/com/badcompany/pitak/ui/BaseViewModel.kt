@@ -9,12 +9,18 @@ import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
 
 
-@FlowPreview
-@ExperimentalCoroutinesApi
-abstract class BaseViewModel<ViewState> : ViewModel() {
+//@FlowPreview
+//@ExperimentalCoroutinesApi
+abstract class BaseViewModel : ViewModel() {
+
+
+    fun cancelActiveJobs() {
+//        TODO("Not yet implemented")
+    }
+
     val TAG: String = "AppDebug"
 
-    private val _viewState: MutableLiveData<ViewState> = MutableLiveData()
+//    private val _viewState: MutableLiveData<ViewState> = MutableLiveData()
 
 //    val dataChannelManager: DataChannelManager<ViewState> =
 //        object : DataChannelManager<ViewState>() {

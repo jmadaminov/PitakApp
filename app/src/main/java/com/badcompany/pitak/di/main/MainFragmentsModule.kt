@@ -2,7 +2,7 @@ package com.badcompany.pitak.di.main
 
 import androidx.fragment.app.FragmentFactory
 import androidx.lifecycle.ViewModelProvider
-import com.badcompany.pitak.di.fragments.ProfileFragmentFactory
+import com.badcompany.pitak.fragments.MainFragmentFactory
 import dagger.Module
 import dagger.Provides
 import javax.inject.Named
@@ -13,39 +13,11 @@ object MainFragmentsModule {
     @JvmStatic
     @MainScope
     @Provides
-    @Named("ProfileFragmentFactory")
-    fun provideProfileFragmentFactory(viewModelFactory: ViewModelProvider.Factory): FragmentFactory {
-        return ProfileFragmentFactory(viewModelFactory)
+    @Named("MainFragmentFactory")
+    fun provideMainFragmentFactory(viewModelFactory: ViewModelProvider.Factory): FragmentFactory {
+        return MainFragmentFactory(
+            viewModelFactory)
     }
 
-//    @JvmStatic
-//    @MainScope
-//    @Provides
-//    @Named("BlogFragmentFactory")
-//    fun provideBlogFragmentFactory(
-//        viewModelFactory: ViewModelProvider.Factory,
-//        requestOptions: RequestOptions,
-//        requestManager: RequestManager
-//    ): FragmentFactory {
-//        return BlogFragmentFactory(
-//            viewModelFactory,
-//            requestOptions,
-//            requestManager
-//        )
-//    }
-//
-//    @JvmStatic
-//    @MainScope
-//    @Provides
-//    @Named("CreateBlogFragmentFactory")
-//    fun provideCreateBlogFragmentFactory(
-//        viewModelFactory: ViewModelProvider.Factory,
-//        requestManager: RequestManager
-//    ): FragmentFactory {
-//        return CreateBlogFragmentFactory(
-//            viewModelFactory,
-//            requestManager
-//        )
-//    }
 
 }

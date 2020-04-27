@@ -4,9 +4,8 @@ package com.badcompany.pitak
 import android.app.Application
 import com.badcompany.pitak.di.AppComponent
 import com.badcompany.pitak.di.DaggerAppComponent
-import com.badcompany.pitak.di.login.LoginComponent
+import com.badcompany.pitak.di.auth.AuthComponent
 import com.badcompany.pitak.di.main.MainComponent
-import com.badcompany.pitak.di.register.RegisterComponent
 
 /**
  * Created by jahon on 13-Mar-18.
@@ -15,10 +14,7 @@ import com.badcompany.pitak.di.register.RegisterComponent
 open class App : Application() {
 
     lateinit var appComponent: AppComponent
-
-    private var registerComponent: RegisterComponent? = null
-
-    private var loginComponent: LoginComponent? = null
+    private var authComponent: AuthComponent? = null
     private var mainComponent: MainComponent? = null
 
     override fun onCreate() {
@@ -26,27 +22,17 @@ open class App : Application() {
         initAppComponent()
     }
 
-    fun releaseLoginComponent() {
-        loginComponent = null
+    fun releaseAuthComponent() {
+        authComponent = null
     }
 
-    fun loginComponent(): LoginComponent {
-        if (loginComponent == null) {
-            loginComponent = appComponent.loginComponent().create()
+    fun authComponent(): AuthComponent {
+        if (authComponent == null) {
+            authComponent = appComponent.authComponent().create()
         }
-        return loginComponent as LoginComponent
+        return authComponent as AuthComponent
     }
 
-    fun releaseRegisterComponent() {
-        registerComponent = null
-    }
-
-    fun registerComponent(): RegisterComponent {
-        if (registerComponent == null) {
-            registerComponent = appComponent.registerComponent().create()
-        }
-        return registerComponent as RegisterComponent
-    }
 
     fun mainComponent(): MainComponent {
         if (mainComponent == null) {

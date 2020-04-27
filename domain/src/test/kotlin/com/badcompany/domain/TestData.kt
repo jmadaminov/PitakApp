@@ -4,6 +4,7 @@ import com.badcompany.domain.domainmodel.UserCredentials
 fun userLogin() = "token"
 
 fun testUserCredentials() = UserCredentials(999999999999, "test")
+fun testPhoneNum() = "998906666633"
 
 //fun getExercise(
 //    name: String = "Barbell Bench Press",

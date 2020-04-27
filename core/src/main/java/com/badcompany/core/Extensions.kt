@@ -6,3 +6,8 @@ package com.badcompany.core
 
 val <T> T.exhaustive: T
     get() = this
+
+
+fun String.numericOnly() : String {
+    return  this.replace("[^0-9.]", "")
+}

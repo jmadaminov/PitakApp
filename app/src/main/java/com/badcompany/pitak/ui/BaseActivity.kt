@@ -1,19 +1,11 @@
 package com.badcompany.pitak.ui
-import android.Manifest
-import android.content.Context
-import android.content.pm.PackageManager
-import android.os.Bundle
-import android.util.Log
-import android.view.inputmethod.InputMethodManager
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import com.badcompany.pitak.App
-import javax.inject.Inject
 
-abstract class BaseActivity: AppCompatActivity()/*,
-    UICommunicationListener*/
-{
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.badcompany.pitak.App
+
+abstract class BaseActivity : AppCompatActivity()/*,
+    UICommunicationListener*/ {
 
     val TAG: String = "AppDebug"
 //

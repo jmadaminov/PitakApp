@@ -28,6 +28,7 @@ buildscript {
         supportCompatVersion = '1.2.0'
         retrofitVersion = '2.7.0'
         okHttpVersion = '3.8.1'
+        splitties_version = '3.0.0-alpha06'
 
 
         javaxInjectVersion = '1'
