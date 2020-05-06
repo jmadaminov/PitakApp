@@ -11,7 +11,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
+import com.badcompany.core.*
+import com.badcompany.domain.domainmodel.User
 import com.badcompany.pitak.R
 import com.badcompany.pitak.ui.auth.AuthActivity
 import kotlinx.android.synthetic.main.fragment_register.*
@@ -19,6 +23,10 @@ import javax.inject.Inject
 
 class RegisterFragment @Inject constructor(private val viewModelFactory: ViewModelProvider.Factory) :
     Fragment(R.layout.fragment_register) {
+
+    val args: RegisterFragmentArgs by navArgs()
+
+    lateinit var navController: NavController
 
     private val viewModel: RegisterViewModel by viewModels {
         viewModelFactory
@@ -33,7 +41,7 @@ class RegisterFragment @Inject constructor(private val viewModelFactory: ViewMod
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
         setupObservers()
-
+        phone.setMaskedText(args.phone.numericOnly().substring(3, args.phone.numericOnly().length))
 
 //        username.afterTextChanged {
 //            viewModel.loginDataChanged(
@@ -67,10 +75,14 @@ class RegisterFragment @Inject constructor(private val viewModelFactory: ViewMod
 //        }
         register.isEnabled = true
 
-        val navController = findNavController()
+        navController = findNavController()
 
         register.setOnClickListener {
-            navController.navigate(R.id.action_navRegisterFragment_to_navPhoneConfirmFragment)
+            viewModel.register(User(phone.text.toString().numericOnly(),
+                name.text.toString(),
+                surname.text.toString(),
+                "DRIVER"))
+//            navController.navigate(R.id.action_navRegisterFragment_to_navPhoneConfirmFragment)
         }
 
 //        register.setOnClickListener {
@@ -85,6 +97,7 @@ class RegisterFragment @Inject constructor(private val viewModelFactory: ViewMod
 //            )
 //        }
     }
+
     override fun onResume() {
         super.onResume()
         (activity as AuthActivity).showActionBar()
@@ -106,15 +119,53 @@ class RegisterFragment @Inject constructor(private val viewModelFactory: ViewMod
 //            }
         })
 
-        viewModel.registerResult.observe(viewLifecycleOwner, Observer {
-            val registerResult = it ?: return@Observer
+        viewModel.response.observe(viewLifecycleOwner, Observer {
+            val response = it ?: return@Observer
+//
+////            loading.visibility = View.GONE
+//            if (loginResult.error != null) {
+//                showLoginFailed(loginResult.error)
+//            }
+//            if (loginResult.success != null) {
+//                updateUiWithUser(loginResult.success)
+//            }
 
-            if (registerResult.error != null) {
-                showLoginFailed(registerResult.error)
-            }
-            if (registerResult.success != null) {
-                updateUiWithUser(registerResult.success)
-            }
+            when (response) {
+                is ErrorWrapper.ResponseError -> {
+                    register.revertAnimation()
+                    /*  if (response.code == -1) {
+                          val action =
+                              RegisterFragmentDirections.actionNavRegisterFragmentToNavPhoneConfirmFragment(
+                                  response., viewModel.phoneNum )
+                          findNavController().navigate(action)
+                      } else */if (response.code == Constants.errPhoneFormat) {
+                        phone.error = getString(R.string.incorrect_phone_number_format)
+//                        errorMessage.visibility = View.VISIBLE
+//                        errorMessage.text = response.message
+                    } else {
+                        errorMessage.visibility = View.VISIBLE
+                        errorMessage.text = response.message
+                    }
+                }
+                is ErrorWrapper.SystemError -> {
+                    errorMessage.visibility = View.VISIBLE
+                    errorMessage.text = "SYSTEM ERROR"
+                    register.revertAnimation()
+                }
+                is ResultWrapper.Success -> {
+                    register.revertAnimation()
+                    val action =
+                        RegisterFragmentDirections.actionNavRegisterFragmentToNavPhoneConfirmFragment(
+                            response.value,
+                            args.phone)
+                    findNavController().navigate(action)
+                }
+                ResultWrapper.InProgress -> {
+                    errorMessage.visibility = View.INVISIBLE
+                    register.startAnimation()
+                }
+            }.exhaustive
+
 
         })
     }
@@ -133,6 +184,8 @@ class RegisterFragment @Inject constructor(private val viewModelFactory: ViewMod
     private fun showLoginFailed(@StringRes errorString: Int) {
         Toast.makeText(context!!, errorString, Toast.LENGTH_SHORT).show()
     }
+
+
 }
 
 /**

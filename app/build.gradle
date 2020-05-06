@@ -51,7 +51,7 @@ dependencies {
     implementation project(":core")
     implementation project(":remote")
 
-    implementation 'com.google.android.gms:play-services-maps:16.1.0'
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'com.google.android.material:material:1.1.0'
     implementation 'androidx.annotation:annotation:1.1.0'
@@ -75,9 +75,11 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.coroutinesVersion"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.coroutinesVersion"
 
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0-alpha01" //For Coroutine ViewModelScope
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.3.0-alpha01" // For Coroutine LifecycleScope
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.3.0-alpha01"  // for Coroutine LiveData
+    //For Coroutine ViewModelScope
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$rootProject.lifecycleVersion"
+    // For Coroutine LifecycleScope
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$rootProject.lifecycleVersion"
+    // for Coroutine LiveData
 
 
     implementation 'com.github.bumptech.glide:glide:4.10.0'

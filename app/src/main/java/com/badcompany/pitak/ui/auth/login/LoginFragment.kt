@@ -1,7 +1,6 @@
 package com.badcompany.pitak.ui.auth.login
 
 import android.os.Bundle
-import android.telephony.PhoneNumberFormattingTextWatcher
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
@@ -12,7 +11,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import com.badcompany.core.Constants
+import com.badcompany.core.ErrorWrapper
+import com.badcompany.core.ResultWrapper
+import com.badcompany.core.exhaustive
 import com.badcompany.pitak.R
 import com.badcompany.pitak.ui.auth.AuthActivity
 import kotlinx.android.synthetic.main.fragment_login.*
@@ -28,6 +32,9 @@ class LoginFragment @Inject constructor(private val viewModelFactory: ViewModelP
         viewModelFactory
     }
 
+
+    lateinit var navController: NavController
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel.cancelActiveJobs()
@@ -39,47 +46,47 @@ class LoginFragment @Inject constructor(private val viewModelFactory: ViewModelP
 
         setupObservers()
 
+        /*    phone.addTextChangedListener(PhoneNumberFormattingTextWatcher())
 
+            phone.afterTextChanged {
+                viewModel.loginDataChanged(
+                    phone.text.toString()
+    //                password.text.toString()
+                )
+            }
 
-        phone.addTextChangedListener(PhoneNumberFormattingTextWatcher())
+            password.apply {
+                afterTextChanged {
+                    viewModel.loginDataChanged(
+                        phone.text.toString(),
+                        password.text.toString()
+                    )
+                }
 
-        phone.afterTextChanged {
-            viewModel.loginDataChanged(
-                phone.text.toString()
-//                password.text.toString()
-            )
-        }
+                setOnEditorActionListener { _, actionId, _ ->
+                    when (actionId) {
+                        EditorInfo.IME_ACTION_DONE ->
+                            viewModel.login(
+                                phone.text.toString(),
+                                password.text.toString()
+                            )
+                    }
+                    false
+                }
 
-//        password.apply {
-//            afterTextChanged {
-//                viewModel.loginDataChanged(
-//                    phone.text.toString(),
-//                    password.text.toString()
-//                )
-//            }
-//
-//            setOnEditorActionListener { _, actionId, _ ->
-//                when (actionId) {
-//                    EditorInfo.IME_ACTION_DONE ->
-//                        viewModel.login(
-//                            phone.text.toString(),
-//                            password.text.toString()
-//                        )
-//                }
-//                false
-//            }
-//
-//            login.setOnClickListener {
-//                viewModel.login(phone.text.toString(), password.text.toString())
-//            }
-//        }
+                login.setOnClickListener {
+                    viewModel.login(phone.text.toString(), password.text.toString())
+                }
+            }
+    */
 
-
-        val navController = findNavController()
+        navController = findNavController()
 
         login.isEnabled = true
         login.setOnClickListener {
-            navController.navigate(R.id.action_navLoginFragment_to_navRegisterFragment)
+            viewModel.login(phone.text.toString())
+
+//            navController.navigate(R.id.action_navLoginFragment_to_navRegisterFragment)
         }
     }
 
@@ -89,30 +96,61 @@ class LoginFragment @Inject constructor(private val viewModelFactory: ViewModelP
     }
 
     private fun setupObservers() {
-        viewModel.loginFormState.observe(viewLifecycleOwner, Observer {
-            val loginState = it ?: return@Observer
-
-            // disable login button unless both username / password is valid
-            login.isEnabled = loginState.isDataValid
-
-//            if (loginState.usernameError != null) {
-//                phone.error = getString(loginState.usernameError)
+//        viewModel.loginFormState.observe(viewLifecycleOwner, Observer {
+//            val loginState = it ?: return@Observer
+//            if (loginState.phoneError != null) {
+//                phone.error = getString(loginState.phoneError)
 //            }
-//            if (loginState.passwordError != null) {
-//                password.error = getString(loginState.passwordError)
+//
+//        })
+
+        viewModel.response.observe(viewLifecycleOwner, Observer {
+            val response = it ?: return@Observer
+//
+////            loading.visibility = View.GONE
+//            if (loginResult.error != null) {
+//                showLoginFailed(loginResult.error)
 //            }
-        })
+//            if (loginResult.success != null) {
+//                updateUiWithUser(loginResult.success)
+//            }
 
-        viewModel.loginResult.observe(viewLifecycleOwner, Observer {
-            val loginResult = it ?: return@Observer
+            when (response) {
+                is ErrorWrapper.ResponseError -> {
+                    login.revertAnimation()
+                    if (response.code == -1) {
+                        val action =
+                            LoginFragmentDirections.actionNavLoginFragmentToNavRegisterFragment(
+                                viewModel.phoneNum)
+                        findNavController().navigate(action)
+                    } else if (response.code == Constants.errPhoneFormat) {
+                        phone.error = getString(R.string.incorrect_phone_number_format)
+//                        errorMessage.visibility = View.VISIBLE
+//                        errorMessage.text = response.message
+                    } else {
+                        errorMessage.visibility = View.VISIBLE
+                        errorMessage.text = response.message
+                    }
+                }
+                is ErrorWrapper.SystemError -> {
+                    errorMessage.visibility = View.VISIBLE
+                    errorMessage.text = "SYSTEM ERROR"
+                    login.revertAnimation()
+                }
+                is ResultWrapper.Success -> {
+                    login.revertAnimation()
+                    val action =
+                        LoginFragmentDirections.actionNavLoginFragmentToNavPhoneConfirmFragment(
+                            response.value,
+                            viewModel.phoneNum)
+                    findNavController().navigate(action)
+                }
+                ResultWrapper.InProgress -> {
+                    errorMessage.visibility = View.INVISIBLE
+                    login.startAnimation()
+                }
+            }.exhaustive
 
-//            loading.visibility = View.GONE
-            if (loginResult.error != null) {
-                showLoginFailed(loginResult.error)
-            }
-            if (loginResult.success != null) {
-                updateUiWithUser(loginResult.success)
-            }
         })
     }
 
@@ -121,15 +159,18 @@ class LoginFragment @Inject constructor(private val viewModelFactory: ViewModelP
         val displayName = model.displayName
         // TODO : initiate successful logged in experience
         Toast.makeText(
-            context!!,
+            requireContext(),
             "$welcome $displayName",
             Toast.LENGTH_LONG
         ).show()
     }
 
     private fun showLoginFailed(@StringRes errorString: Int) {
-        Toast.makeText(context!!, errorString, Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), errorString, Toast.LENGTH_SHORT).show()
     }
+
+
+
 }
 
 /**

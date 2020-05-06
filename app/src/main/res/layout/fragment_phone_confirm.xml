@@ -16,7 +16,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/phone"
+        app:layout_constraintBottom_toTopOf="@id/code"
         android:layout_marginBottom="24dp"
         android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp"
@@ -26,7 +26,7 @@
 
 
     <EditText
-        android:id="@+id/phone"
+        android:id="@+id/code"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent="0.5"
         android:layout_height="wrap_content"
@@ -61,13 +61,29 @@
     -->
 
 
+    <TextView
+        android:id="@+id/errorMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:layout_marginTop="12dp"
+        android:text="server error"
+        android:textColor="@color/error_red"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@id/confirm"
+        app:layout_constraintTop_toBottomOf="@id/code"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+
     <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
         android:id="@+id/confirm"
         android:layout_width="match_parent"
         android:layout_height="?android:actionBarSize"
         android:layout_gravity="start"
         android:layout_marginStart="48dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="48dp"
         android:background="@drawable/button_shape_default_rounded"
         android:elevation="3dp"
@@ -76,6 +92,6 @@
         android:textColor="#fff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/phone" />
+        app:layout_constraintTop_toBottomOf="@id/errorMessage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

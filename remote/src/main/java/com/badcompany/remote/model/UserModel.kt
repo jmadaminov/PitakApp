@@ -1,9 +1,11 @@
 package com.badcompany.remote.model
 
+import com.google.gson.annotations.SerializedName
+
 /**
  * Representation for a [UserModel] fetched from the API
  */
-class UserModel( val phone:String,
-                 val name:String,
-                 val surname:String,
-                 val isDriver : Boolean)
+data class UserModel(@SerializedName("phoneNum") val phoneNum:String,
+                val name:String,
+                val surname:String,
+                val role : String)

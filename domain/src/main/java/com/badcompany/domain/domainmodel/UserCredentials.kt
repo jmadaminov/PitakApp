@@ -1,5 +1,5 @@
 package com.badcompany.domain.domainmodel
 
-data class UserCredentials(var phone: Long,
+data class UserCredentials(var phoneNum: String,
                            var password: String)
 

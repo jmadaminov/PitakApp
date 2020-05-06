@@ -13,10 +13,22 @@
         tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_navLoginFragment_to_navRegisterFragment"
-            app:destination="@id/navRegisterFragment" />
+            app:destination="@id/navRegisterFragment" >
+            <argument
+                android:name="phone"
+                app:argType="string"/>
+        </action>
         <action
             android:id="@+id/action_navLoginFragment_to_navPhoneConfirmFragment"
-            app:destination="@id/navPhoneConfirmFragment" />
+            app:destination="@id/navPhoneConfirmFragment" >
+            <argument
+                android:name="password"
+                app:argType="string"/>
+
+            <argument
+                android:name="phone"
+                app:argType="string"/>
+        </action>
     </fragment>
 
     <fragment
@@ -26,7 +38,14 @@
         tools:layout="@layout/fragment_register">
         <action
             android:id="@+id/action_navRegisterFragment_to_navPhoneConfirmFragment"
-            app:destination="@id/navPhoneConfirmFragment" />
+            app:destination="@id/navPhoneConfirmFragment" >
+
+
+        </action>
+        <argument
+            android:name="phone"
+            app:argType="string"/>
+
     </fragment>
 
     <fragment
@@ -34,7 +53,13 @@
         android:name="com.badcompany.pitak.ui.auth.confirm.PhoneConfirmFragment"
         android:label="@string/phone_confirmation"
         tools:layout="@layout/fragment_phone_confirm">
+        <argument
+            android:name="password"
+            app:argType="string"/>
 
+        <argument
+            android:name="phone"
+            app:argType="string"/>
     </fragment>
 
 </navigation>

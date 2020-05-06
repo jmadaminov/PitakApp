@@ -2,6 +2,7 @@ package com.badcompany.data.repository
 
 import com.badcompany.core.ErrorWrapper
 import com.badcompany.core.ResultWrapper
+import com.badcompany.data.model.AuthEntity
 import com.badcompany.data.model.UserCredentialsEntity
 import com.badcompany.data.model.UserEntity
 
@@ -18,5 +19,6 @@ interface UserRemote {
    suspend fun loginUser(phoneNum: String): ResultWrapper<String>
 
     suspend  fun registerUser(user: UserEntity): ResultWrapper<String>
+    suspend  fun confirmUser(user: UserCredentialsEntity): ResultWrapper<AuthEntity>
 
 }

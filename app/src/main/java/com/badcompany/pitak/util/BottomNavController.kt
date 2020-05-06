@@ -1,4 +1,5 @@
 package com.badcompany.pitak.util
+
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
@@ -25,7 +26,8 @@ import kotlinx.android.parcel.Parcelize
  * @property navigationBackStack: Backstack for the bottom navigation
  */
 
-const val BOTTOM_NAV_BACKSTACK_KEY = "com.badcompany.pitak.util.BottomNavController.bottom_nav_backstack"
+const val BOTTOM_NAV_BACKSTACK_KEY =
+    "com.badcompany.pitak.util.BottomNavController.bottom_nav_backstack"
 
 class BottomNavController(
     val context: Context,
@@ -46,10 +48,10 @@ class BottomNavController(
         }
     }
 
-    fun setupBottomNavigationBackStack(previousBackStack: BackStack?){
-        navigationBackStack = previousBackStack?.let{
+    fun setupBottomNavigationBackStack(previousBackStack: BackStack?) {
+        navigationBackStack = previousBackStack?.let {
             it
-        }?: BackStack.of(appStartDestinationId)
+        } ?: BackStack.of(appStartDestinationId)
     }
 
     fun onNavigationItemSelected(menuItemId: Int = navigationBackStack.last()): Boolean {
@@ -81,8 +83,8 @@ class BottomNavController(
         return true
     }
 
-    private fun createNavHost(menuItemId: Int): Fragment{
-        return when(menuItemId){
+    private fun createNavHost(menuItemId: Int): Fragment {
+        return when (menuItemId) {
             R.id.navSearchTripFragment -> {
                 SearchTripNavHostFragment.create(R.navigation.nav_search_trip_graph)
             }
@@ -100,11 +102,10 @@ class BottomNavController(
 
     @SuppressLint("RestrictedApi")
     fun onBackPressed() {
-        val navController = fragmentManager.findFragmentById(containerId)!!
-            .findNavController()
+        val navController = fragmentManager.findFragmentById(containerId)!!.findNavController()
 
         when {
-            navController.backStack.size > 2 ->{
+            navController.backStack.size > 2 -> {
                 navController.popBackStack()
             }
 
@@ -162,11 +163,11 @@ class BottomNavController(
     }
 
     // Execute when Navigation Graph changes.
-    interface OnNavigationGraphChanged{
+    interface OnNavigationGraphChanged {
         fun onGraphChange()
     }
 
-    interface OnNavigationReselectedListener{
+    interface OnNavigationReselectedListener {
 
         fun onReselectNavItem(navController: NavController, fragment: Fragment)
     }

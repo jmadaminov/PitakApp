@@ -7,4 +7,5 @@
     <color name="splashGradientStart">#CBB5FF</color>
     <color name="button_grey">#B6B6B6</color>
     <color name="dark_grey">#FF393939</color>
+    <color name="error_red">#F44336</color>
 </resources>

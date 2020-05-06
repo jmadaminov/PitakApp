@@ -32,4 +32,10 @@
     <string name="authorize">Authorize</string>
     <string name="confirm">Confirm</string>
     <string name="phone_confirmation">Confirmation</string>
+    <string name="title_add_car">Add Car</string>
+    <string name="add">Add</string>
+    <string name="car_plate_number">Plate number</string>
+    <string name="air_conditioner">Air conditioner</string>
+    <string name="car_year">Car year</string>
+    <string name="incorrect_phone_number_format">Number format is incorrect!</string>
 </resources>

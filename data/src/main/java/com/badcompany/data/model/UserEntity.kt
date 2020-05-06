@@ -3,7 +3,7 @@ package com.badcompany.data.model
 /**
  * Representation for a [UserEntity] fetched from an external layer data source
  */
-data class UserEntity( val phone:String,
+data class UserEntity( val phoneNum:String,
                        val name:String,
                        val surname:String,
-                       val isDriver : Boolean)
+                       val role : String)

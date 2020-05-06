@@ -4,12 +4,17 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
+import androidx.navigation.fragment.findNavController
 import com.badcompany.pitak.App
 import com.badcompany.pitak.R
 import com.badcompany.pitak.di.viewmodels.AuthViewModelFactory
 import com.badcompany.pitak.fragments.AuthNavHostFragment
 import com.badcompany.pitak.ui.BaseActivity
+import com.badcompany.pitak.ui.auth.confirm.PhoneConfirmFragment
+import com.badcompany.pitak.ui.auth.login.LoginFragment
+import com.badcompany.pitak.ui.auth.register.RegisterFragment
 import kotlinx.android.synthetic.main.activity_auth.*
 import javax.inject.Inject
 import javax.inject.Named
@@ -28,6 +33,8 @@ class AuthActivity : BaseActivity() {
         viewModelFactory
     }
 
+//    lateinit var navController: NavController
+
     override fun inject() {
         (application as App).authComponent()
             .inject(this)
@@ -38,7 +45,7 @@ class AuthActivity : BaseActivity() {
         inject()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
-
+//        navController = findNavController(R.id.auth_fragments_container)
 
         subscribeObservers()
         onRestoreInstanceState()
@@ -53,16 +60,18 @@ class AuthActivity : BaseActivity() {
 
     }
 
+    var host: Fragment? = null
+    lateinit var navHost: Fragment
 
     private fun onRestoreInstanceState() {
-        val host = supportFragmentManager.findFragmentById(R.id.auth_fragments_container)
+        host = supportFragmentManager.findFragmentById(R.id.auth_fragments_container)
         host?.let {
             // do nothing
         } ?: createNavHost()
     }
 
     private fun createNavHost() {
-        val navHost = AuthNavHostFragment.create(
+        navHost = AuthNavHostFragment.create(
             R.navigation.nav_auth_graph
         )
         supportFragmentManager.beginTransaction()
@@ -92,5 +101,7 @@ class AuthActivity : BaseActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
+
+
 }
 

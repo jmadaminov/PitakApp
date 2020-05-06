@@ -1,5 +1,7 @@
 package com.badcompany.remote.model
 
-data class UserCredentialsModel(var phone: Long,
+import com.google.gson.annotations.SerializedName
+
+data class UserCredentialsModel(@SerializedName("phoneNum") var phoneNum: String,
                                 var password: String)
 

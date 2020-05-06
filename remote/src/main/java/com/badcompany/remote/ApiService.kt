@@ -1,13 +1,10 @@
 package com.badcompany.remote
 
-import com.badcompany.core.ErrorWrapper
-import com.badcompany.core.ResultWrapper
-import com.badcompany.remote.model.UserCredentialsModel
-import com.badcompany.remote.model.UserModel
-import com.badcompany.remote.model.UserRegisterResponse
+import com.badcompany.remote.model.*
 import io.reactivex.Flowable
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Headers
 import retrofit2.http.POST
 
 /**
@@ -19,12 +16,18 @@ interface ApiService {
     suspend fun getBufferoos(): Flowable<BufferooResponse>
 
 
-    @POST("prof/auth")
-    suspend fun userLogin(phoneNum: String):  ResultWrapper<String>
+    @Headers("Content-Type:application/json", "Accept: application/json")
+    @POST("prof/mb/auth")
+    suspend fun userLogin(@Body loginReq: LoginRequest): AuthResponse
 
 
-    @POST("prof/reg")
-    suspend fun userRegister(@Body user: UserModel): UserRegisterResponse
+    @Headers("Content-Type:application/json", "Accept: application/json")
+    @POST("prof/mb/reg")
+    suspend fun userRegister(@Body user: UserModel): AuthResponse
+
+    @Headers("Content-Type:application/json", "Accept: application/json")
+    @POST("prof/mb/confirm")
+    suspend fun smsConfirm(@Body user: UserCredentialsModel): AuthSuccessResponse
 
     class BufferooResponse {
         lateinit var team: List<UserModel>

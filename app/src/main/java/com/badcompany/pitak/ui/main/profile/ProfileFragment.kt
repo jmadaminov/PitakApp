@@ -6,6 +6,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.badcompany.pitak.R
+import com.badcompany.pitak.ui.addcar.AddCarActivity
+import kotlinx.android.synthetic.main.fragment_profile.*
+import splitties.fragments.start
 import javax.inject.Inject
 
 //@FlowPreview
@@ -19,7 +22,7 @@ class ProfileFragment @Inject constructor(private val viewModelFactory: ViewMode
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-    viewModel.cancelActiveJobs()
+        viewModel.cancelActiveJobs()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -35,8 +38,12 @@ class ProfileFragment @Inject constructor(private val viewModelFactory: ViewMode
 //        }
 //
 //        subscribeObservers()
-    }
 
+        carNameAndNumber.setOnClickListener {
+            start<AddCarActivity>()
+        }
+
+    }
 
 
 }

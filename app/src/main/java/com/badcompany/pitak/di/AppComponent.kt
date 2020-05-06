@@ -1,6 +1,7 @@
 package com.badcompany.pitak.di
 
 import android.app.Application
+import com.badcompany.pitak.di.addcar.AddCarComponent
 import com.badcompany.pitak.di.auth.AuthComponent
 import com.badcompany.pitak.di.main.MainComponent
 import com.badcompany.pitak.ui.BaseActivity
@@ -23,5 +24,6 @@ interface AppComponent {
     fun inject(activity: BaseActivity)
     fun authComponent(): AuthComponent.Factory
     fun mainComponent(): MainComponent.Factory
+    fun addCarComponent(): AddCarComponent.Factory
 
 }

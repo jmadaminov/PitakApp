@@ -52,7 +52,7 @@ class MainActivity : BaseActivity(), BottomNavController.OnNavigationGraphChange
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-//        checkUserLogin()
+        checkUserLogin()
         inject()
         setTheme(R.style.NoActionBar)
         super.onCreate(savedInstanceState)

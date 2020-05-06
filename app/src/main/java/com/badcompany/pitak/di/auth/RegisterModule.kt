@@ -68,8 +68,9 @@ object RegisterModule {
     @JvmStatic
     fun provideUserRemote(apiService: ApiService,
                           userCredMapper: com.badcompany.remote.mapper.UserCredentialsMapper,
-                          userMapper: com.badcompany.remote.mapper.UserMapper): UserRemote {
-        return UserRemoteImpl(apiService, userCredMapper, userMapper)
+                          userMapper: com.badcompany.remote.mapper.UserMapper,
+                          authMapper: com.badcompany.remote.mapper.AuthMapper): UserRemote {
+        return UserRemoteImpl(apiService, userCredMapper, userMapper, authMapper)
     }
 
     @AuthScope
@@ -84,6 +85,14 @@ object RegisterModule {
     @JvmStatic
     fun provideRemoteUserMapper(): com.badcompany.remote.mapper.UserMapper {
         return com.badcompany.remote.mapper.UserMapper()
+    }
+
+
+    @AuthScope
+    @Provides
+    @JvmStatic
+    fun provideRemoteAuthMapper(): com.badcompany.remote.mapper.AuthMapper {
+        return com.badcompany.remote.mapper.AuthMapper()
     }
 
     @Provides

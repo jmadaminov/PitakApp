@@ -18,7 +18,6 @@ abstract class AuthViewModelModule {
     @Binds
     abstract fun bindViewModelFactory(factory: AuthViewModelFactory) : ViewModelProvider.Factory
 
-
     @AuthScope
     @Binds
     @IntoMap
