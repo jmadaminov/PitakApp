@@ -29,29 +29,45 @@
             android:layout_height="wrap_content"
             android:padding="24dp">
 
-            <ImageView
-                android:id="@+id/carImage"
+            <RelativeLayout
+                android:id="@+id/imageContainer"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:background="@drawable/shape_round"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?android:selectableItemBackground"
-                android:src="@android:drawable/ic_menu_camera"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/carImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:selectableItemBackground"
+                    android:src="@android:drawable/ic_menu_camera" />
+
+                <ProgressBar
+                    android:id="@+id/progressImageAdding"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="invisible"
+                    android:layout_centerInParent="true" />
+
+            </RelativeLayout>
+
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/labelcarPlateNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toTopOf="@id/carModelSpinner"
-                app:layout_constraintTop_toBottomOf="@id/carImage">
+                app:layout_constraintTop_toBottomOf="@id/imageContainer">
 
                 <EditText
                     android:id="@+id/carPlateNumberInput"
                     android:layout_width="match_parent"
+                    android:maxLines="1"
                     android:layout_height="?android:actionBarSize"
                     android:hint="@string/car_plate_number" />
 
@@ -93,7 +109,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="?android:actionBarSize"
                     android:clickable="true"
-                    android:focusable="false"
+                    android:focusable="true"
                     android:foreground="?android:selectableItemBackground"
                     android:hint="@string/car_year"
                     android:inputType="number" />

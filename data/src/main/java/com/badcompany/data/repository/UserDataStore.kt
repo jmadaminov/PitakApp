@@ -1,6 +1,8 @@
 package com.badcompany.data.repository
 
 import com.badcompany.core.ResultWrapper
+import com.badcompany.data.model.AuthEntity
+import com.badcompany.data.model.UserCredentialsEntity
 import com.badcompany.data.model.UserEntity
 
 
@@ -13,5 +15,6 @@ interface UserDataStore {
 
     suspend fun userLogin(phoneNum: String): ResultWrapper<String>
     suspend fun userRegister(user: UserEntity): ResultWrapper<String>
+    suspend fun confirmSms(userCredentialsEntity: UserCredentialsEntity): ResultWrapper<AuthEntity>
 
 }

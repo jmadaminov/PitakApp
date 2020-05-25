@@ -5,6 +5,7 @@ import com.badcompany.core.ResultWrapper
 import com.badcompany.data.model.AuthEntity
 import com.badcompany.data.model.UserCredentialsEntity
 import com.badcompany.data.model.UserEntity
+import com.badcompany.domain.domainmodel.AuthBody
 
 
 /**

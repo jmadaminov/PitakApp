@@ -7,8 +7,11 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.badcompany.pitak.R
 import com.badcompany.pitak.ui.addcar.AddCarActivity
+import com.badcompany.pitak.ui.auth.AuthActivity
+import com.badcompany.pitak.util.AppPreferences
 import kotlinx.android.synthetic.main.fragment_profile.*
 import splitties.fragments.start
+import splitties.preferences.edit
 import javax.inject.Inject
 
 //@FlowPreview
@@ -43,6 +46,15 @@ class ProfileFragment @Inject constructor(private val viewModelFactory: ViewMode
             start<AddCarActivity>()
         }
 
+        signOut.setOnClickListener {
+            requireActivity().finish()
+            AppPreferences.edit {
+                token = ""
+                name = ""
+                surname = ""
+            }
+            start<AuthActivity> {}
+        }
     }
 
 

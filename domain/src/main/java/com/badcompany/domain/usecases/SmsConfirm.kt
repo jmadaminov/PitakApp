@@ -15,9 +15,6 @@ class SmsConfirm(val repository: UserRepository) :
     UseCaseWithParams<UserCredentials, ResultWrapper<AuthBody>>() {
 
     override suspend fun buildUseCase(params: UserCredentials): ResultWrapper<AuthBody> {
-//        if (params.length != 12) {
-//            return ErrorWrapper.ResponseError(Constants.errPhoneFormat)
-//        }
         return repository.smsConfirm(params)
     }
 

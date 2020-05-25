@@ -85,7 +85,6 @@ class LoginFragment @Inject constructor(private val viewModelFactory: ViewModelP
         login.isEnabled = true
         login.setOnClickListener {
             viewModel.login(phone.text.toString())
-
 //            navController.navigate(R.id.action_navLoginFragment_to_navRegisterFragment)
         }
     }
@@ -106,14 +105,6 @@ class LoginFragment @Inject constructor(private val viewModelFactory: ViewModelP
 
         viewModel.response.observe(viewLifecycleOwner, Observer {
             val response = it ?: return@Observer
-//
-////            loading.visibility = View.GONE
-//            if (loginResult.error != null) {
-//                showLoginFailed(loginResult.error)
-//            }
-//            if (loginResult.success != null) {
-//                updateUiWithUser(loginResult.success)
-//            }
 
             when (response) {
                 is ErrorWrapper.ResponseError -> {
@@ -134,7 +125,7 @@ class LoginFragment @Inject constructor(private val viewModelFactory: ViewModelP
                 }
                 is ErrorWrapper.SystemError -> {
                     errorMessage.visibility = View.VISIBLE
-                    errorMessage.text = "SYSTEM ERROR"
+                    errorMessage.text = response.err.localizedMessage
                     login.revertAnimation()
                 }
                 is ResultWrapper.Success -> {

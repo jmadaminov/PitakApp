@@ -9,7 +9,6 @@ import com.badcompany.data.repository.UserRemote
 import com.badcompany.remote.mapper.AuthMapper
 import com.badcompany.remote.mapper.UserCredentialsMapper
 import com.badcompany.remote.mapper.UserMapper
-import com.badcompany.remote.model.UserInfoModel
 import com.badcompany.remote.model.LoginRequest
 import javax.inject.Inject
 
@@ -21,8 +20,7 @@ import javax.inject.Inject
 class UserRemoteImpl @Inject constructor(private val apiService: ApiService,
                                          private val userCredMapper: UserCredentialsMapper,
                                          private val userMapper: UserMapper,
-                                         private val authMapper: AuthMapper) :
-    UserRemote {
+                                         private val authMapper: AuthMapper) : UserRemote {
 
 //    /**
 //     * Retrieve a list of [BufferooEntity] instances from the [BufferooService].
@@ -60,7 +58,7 @@ class UserRemoteImpl @Inject constructor(private val apiService: ApiService,
     override suspend fun confirmUser(user: UserCredentialsEntity): ResultWrapper<AuthEntity> {
         return try {
             val response = apiService.smsConfirm(userCredMapper.mapFromEntity(user))
-            if (response.code == 1) ResultWrapper.Success(authMapper.mapToEntity( response.data!!))
+            if (response.code == 1) ResultWrapper.Success(authMapper.mapToEntity(response.data!!))
             else ErrorWrapper.ResponseError(response.code, response.message)
         } catch (e: Exception) {
             ErrorWrapper.SystemError(e)

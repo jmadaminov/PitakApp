@@ -1,6 +1,7 @@
 package com.badcompany.pitak.di.auth
 
 import com.badcompany.data.UserRepositoryImpl
+import com.badcompany.data.mapper.AuthMapper
 import com.badcompany.data.mapper.UserCredentialsMapper
 import com.badcompany.data.mapper.UserMapper
 import com.badcompany.data.repository.UserRemote
@@ -30,8 +31,8 @@ object RegisterModule {
     @JvmStatic
     fun provideUserRepository(factory: UserDataStoreFactory,
                               userMapper: UserMapper,
-                              userCredentialsMapper: UserCredentialsMapper): UserRepository {
-        return UserRepositoryImpl(factory, userMapper, userCredentialsMapper)
+                              userCredentialsMapper: UserCredentialsMapper, authMapper:AuthMapper): UserRepository {
+        return UserRepositoryImpl(factory, userMapper, userCredentialsMapper, authMapper)
     }
 
     @Provides
@@ -39,6 +40,12 @@ object RegisterModule {
     @JvmStatic
     fun provideUserMapper(): UserMapper {
         return UserMapper()
+    }
+    @Provides
+    @AuthScope
+    @JvmStatic
+    fun provideAuthMapper(): AuthMapper {
+        return AuthMapper()
     }
 
     @Provides
@@ -95,11 +102,11 @@ object RegisterModule {
         return com.badcompany.remote.mapper.AuthMapper()
     }
 
-    @Provides
-    @AuthScope
-    @JvmStatic
-    fun provideApiService(): ApiService {
-        return ApiServiceFactory.makeApiService(BuildConfig.DEBUG)
-    }
+//    @Provides
+//    @AuthScope
+//    @JvmStatic
+//    fun provideApiService(): ApiService {
+//        return ApiServiceFactory.makeApiService(BuildConfig.DEBUG)
+//    }
 
 }

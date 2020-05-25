@@ -21,6 +21,7 @@ import com.badcompany.pitak.util.BottomNavController
 import com.badcompany.pitak.util.setUpNavigation
 import kotlinx.android.synthetic.main.activity_main.*
 import splitties.activities.start
+import splitties.experimental.ExperimentalSplittiesApi
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -64,8 +65,9 @@ class MainActivity : BaseActivity(), BottomNavController.OnNavigationGraphChange
 
     }
 
+    @ExperimentalSplittiesApi
     private fun checkUserLogin() {
-        if (!AppPreferences.isUserLoggedIn) {
+        if (AppPreferences.token.isBlank()) {
             start<AuthActivity> { }
         }
     }

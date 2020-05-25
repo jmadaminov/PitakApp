@@ -1,9 +1,12 @@
 package com.badcompany.data.source
 
 import com.badcompany.core.ResultWrapper
+import com.badcompany.data.model.AuthEntity
+import com.badcompany.data.model.UserCredentialsEntity
 import com.badcompany.data.model.UserEntity
 import com.badcompany.data.repository.UserDataStore
 import com.badcompany.data.repository.UserRemote
+import com.badcompany.domain.domainmodel.AuthBody
 import javax.inject.Inject
 
 /**
@@ -30,6 +33,9 @@ open class UserRemoteDataStore @Inject constructor(private val userRemote: UserR
 
     override suspend fun userRegister(user: UserEntity): ResultWrapper<String>  {
         return userRemote.registerUser(user)
+    }
+    override suspend fun confirmSms(userCredentialsEntity: UserCredentialsEntity): ResultWrapper<AuthEntity> {
+        return userRemote.confirmUser(userCredentialsEntity)
     }
 //
 //    override fun isCached(): Single<Boolean> {

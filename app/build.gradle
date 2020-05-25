@@ -109,6 +109,9 @@ dependencies {
     //masked edittext
     implementation 'com.github.pinball83:masked-edittext:1.0.4'
 
+    //BottomSheet Image Picker
+    implementation 'com.asksira.android:bsimagepicker:1.0.1'
+
 }
 
 sourceCompatibility = "1.8"

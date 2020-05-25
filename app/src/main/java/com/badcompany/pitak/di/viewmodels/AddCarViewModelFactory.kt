@@ -3,7 +3,6 @@ package com.badcompany.pitak.di.viewmodels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.badcompany.pitak.di.addcar.AddCarScope
-import com.badcompany.pitak.di.auth.AuthScope
 import javax.inject.Inject
 import javax.inject.Provider
 

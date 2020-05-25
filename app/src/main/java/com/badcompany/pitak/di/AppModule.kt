@@ -1,5 +1,9 @@
 package com.badcompany.pitak.di
 
+import com.badcompany.pitak.BuildConfig
+import com.badcompany.pitak.di.main.MainScope
+import com.badcompany.remote.ApiService
+import com.badcompany.remote.ApiServiceFactory
 import com.bumptech.glide.request.RequestOptions
 import dagger.Module
 import dagger.Provides
@@ -7,6 +11,13 @@ import javax.inject.Singleton
 
 @Module
 object AppModule {
+
+
+    @Provides
+    @JvmStatic
+    fun provideApiService(): ApiService {
+        return ApiServiceFactory.makeApiService(BuildConfig.DEBUG)
+    }
 
 //    @Singleton
 //    @Provides

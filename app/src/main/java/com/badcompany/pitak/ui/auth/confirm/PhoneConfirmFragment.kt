@@ -13,10 +13,17 @@ import com.badcompany.core.Constants
 import com.badcompany.core.ErrorWrapper
 import com.badcompany.core.ResultWrapper
 import com.badcompany.core.exhaustive
+import com.badcompany.domain.domainmodel.AuthBody
+import com.badcompany.pitak.App
 import com.badcompany.pitak.R
 import com.badcompany.pitak.ui.auth.AuthActivity
-import com.badcompany.pitak.ui.auth.register.RegisterFragmentArgs
+import com.badcompany.pitak.ui.main.MainActivity
+import com.badcompany.pitak.util.AppPreferences
 import kotlinx.android.synthetic.main.fragment_phone_confirm.*
+import splitties.activities.start
+import splitties.experimental.ExperimentalSplittiesApi
+import splitties.init.appCtx
+import splitties.preferences.edit
 import javax.inject.Inject
 
 
@@ -42,13 +49,18 @@ class PhoneConfirmFragment @Inject constructor(private val viewModelFactory: Vie
         setupObservers()
 
 
-         navController = findNavController()
+        navController = findNavController()
         confirm.isEnabled = true
 
         code.setText(args.password)
 
+        confirm.setOnClickListener {
+            viewModel.confirm(args.phone, code.text.toString())
+        }
+
     }
 
+    @ExperimentalSplittiesApi
     private fun setupObservers() {
         viewModel.response.observe(viewLifecycleOwner, Observer {
             val response = it ?: return@Observer
@@ -56,7 +68,7 @@ class PhoneConfirmFragment @Inject constructor(private val viewModelFactory: Vie
             when (response) {
                 is ErrorWrapper.ResponseError -> {
                     confirm.revertAnimation()
-                   if (response.code == Constants.errPhoneFormat) {
+                    if (response.code == Constants.errPhoneFormat) {
                         code.error = getString(R.string.incorrect_phone_number_format)
 //                        errorMessage.visibility = View.VISIBLE
 //                        errorMessage.text = response.message
@@ -67,12 +79,15 @@ class PhoneConfirmFragment @Inject constructor(private val viewModelFactory: Vie
                 }
                 is ErrorWrapper.SystemError -> {
                     errorMessage.visibility = View.VISIBLE
-                    errorMessage.text = "SYSTEM ERROR"
+                    errorMessage.text = response.err.message
                     confirm.revertAnimation()
                 }
                 is ResultWrapper.Success -> {
                     confirm.revertAnimation()
+                    saveCredentials(response)
+                    context?.start<MainActivity> { }
 
+                    (appCtx as App).releaseAuthComponent()
                 }
                 ResultWrapper.InProgress -> {
                     errorMessage.visibility = View.INVISIBLE
@@ -83,14 +98,20 @@ class PhoneConfirmFragment @Inject constructor(private val viewModelFactory: Vie
         })
     }
 
-
+    @ExperimentalSplittiesApi
+    private fun saveCredentials(response: ResultWrapper.Success<AuthBody>) {
+        AppPreferences.edit {
+            token = response.value.jwt!!
+            name = response.value.name!!
+            surname = response.value.surname!!
+        }
+    }
 
 
     override fun onResume() {
         super.onResume()
         (activity as AuthActivity).showActionBar()
     }
-
 
 
 }
