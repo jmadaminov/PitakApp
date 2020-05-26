@@ -49,6 +49,7 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
         viewmodel.getCarColorsAndModels(AppPreferences.token)
     }
 
+    @ExperimentalSplittiesApi
     private fun setupOnClickListeners() {
         carImage.setOnClickListener {
             val singleSelectionPicker: BSImagePicker =
@@ -65,8 +66,13 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
                     .build()
 
 
-            singleSelectionPicker.show(supportFragmentManager, "picker");
+            singleSelectionPicker.show(supportFragmentManager, "picker")
         }
+
+        retry.setOnClickListener{
+            viewmodel.getCarColorsAndModels(AppPreferences.token)
+        }
+
     }
 
     private fun setupActionBar() {
@@ -96,6 +102,33 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
                 ResultWrapper.InProgress -> {
                     progressImageAdding.visibility = View.VISIBLE
                     carImage.visibility = View.GONE
+                }
+            }.exhaustive
+
+        })
+        viewmodel.carColorModelsResponse.observe(this, Observer {
+            val response = it ?: return@Observer
+
+            when (response) {
+                is ErrorWrapper.ResponseError -> {
+                    progress.visibility = View.INVISIBLE
+                    scrollView.visibility = View.INVISIBLE
+                    infoLayout.visibility = View.VISIBLE
+                }
+                is ErrorWrapper.SystemError -> {
+                    progress.visibility = View.INVISIBLE
+                    scrollView.visibility = View.INVISIBLE
+                    infoLayout.visibility = View.VISIBLE
+                }
+                is ResultWrapper.Success -> {
+                    progress.visibility = View.INVISIBLE
+                    scrollView.visibility = View.VISIBLE
+                    infoLayout.visibility = View.INVISIBLE
+                }
+                ResultWrapper.InProgress -> {
+                    progress.visibility = View.VISIBLE
+                    scrollView.visibility = View.INVISIBLE
+                    infoLayout.visibility = View.INVISIBLE
                 }
             }.exhaustive
 

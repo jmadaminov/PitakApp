@@ -38,4 +38,5 @@
     <string name="air_conditioner">Air conditioner</string>
     <string name="car_year">Car year</string>
     <string name="incorrect_phone_number_format">Number format is incorrect!</string>
+    <string name="retry">Retry</string>
 </resources>

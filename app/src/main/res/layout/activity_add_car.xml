@@ -12,9 +12,36 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
+    <LinearLayout
+        android:id="@+id/infoLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/errorMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal" />
+
+        <Button
+            android:id="@+id/retry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="@string/retry" />
+
+
+    </LinearLayout>
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -51,8 +78,8 @@
                     android:id="@+id/progressImageAdding"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:visibility="invisible"
-                    android:layout_centerInParent="true" />
+                    android:layout_centerInParent="true"
+                    android:visibility="invisible" />
 
             </RelativeLayout>
 
@@ -67,9 +94,9 @@
                 <EditText
                     android:id="@+id/carPlateNumberInput"
                     android:layout_width="match_parent"
-                    android:maxLines="1"
                     android:layout_height="?android:actionBarSize"
-                    android:hint="@string/car_plate_number" />
+                    android:hint="@string/car_plate_number"
+                    android:maxLines="1" />
 
             </com.google.android.material.textfield.TextInputLayout>
 

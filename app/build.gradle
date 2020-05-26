@@ -96,6 +96,8 @@ dependencies {
 //otherLibs
     implementation 'br.com.simplepass:loading-button-android:2.2.0'
 
+//SwipeRefreshLayout
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 
     //Splitties
     implementation("com.louiscad.splitties:splitties-preferences:$rootProject.splitties_version")
