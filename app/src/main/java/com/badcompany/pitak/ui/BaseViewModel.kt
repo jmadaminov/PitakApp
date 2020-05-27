@@ -22,13 +22,13 @@ abstract class BaseViewModel : ViewModel() {
 
 //    private val _viewState: MutableLiveData<ViewState> = MutableLiveData()
 
-//    val dataChannelManager: DataChannelManager<ViewState> =
-//        object : DataChannelManager<ViewState>() {
-//
-//            override fun handleNewData(data: ViewState) {
-//                this@BaseViewModel.handleNewData(data)
-//            }
-//        }
+    val dataChannelManager: DataChannelManager<ViewState> =
+        object : DataChannelManager<ViewState>() {
+
+            override fun handleNewData(data: ViewState) {
+                this@BaseViewModel.handleNewData(data)
+            }
+        }
 //
 //    val viewState: LiveData<ViewState>
 //        get() = _viewState
@@ -56,11 +56,11 @@ abstract class BaseViewModel : ViewModel() {
 //        dataChannelManager.launchJob(stateEvent, jobFunction)
 //    }
 //
-//    fun areAnyJobsActive(): Boolean {
-//        return dataChannelManager.numActiveJobs.value?.let {
-//            it > 0
-//        } ?: false
-//    }
+    fun areAnyJobsActive(): Boolean {
+        return dataChannelManager.numActiveJobs.value?.let {
+            it > 0
+        } ?: false
+    }
 //
 //    fun isJobAlreadyActive(stateEvent: StateEvent): Boolean {
 //        Log.d(TAG, "isJobAlreadyActive?: ${dataChannelManager.isJobAlreadyActive(stateEvent)} ")
@@ -82,12 +82,12 @@ abstract class BaseViewModel : ViewModel() {
 //        dataChannelManager.clearStateMessage(index)
 //    }
 //
-//    open fun cancelActiveJobs() {
-//        if (areAnyJobsActive()) {
-//            Log.d(TAG, "cancel active jobs: ${dataChannelManager.numActiveJobs.value ?: 0}")
-//            dataChannelManager.cancelJobs()
-//        }
-//    }
+    open fun cancelActiveJobs() {
+        if (areAnyJobsActive()) {
+            Log.d(TAG, "cancel active jobs: ${dataChannelManager.numActiveJobs.value ?: 0}")
+            dataChannelManager.cancelJobs()
+        }
+    }
 //
 //    abstract fun initNewViewState(): ViewState
 
