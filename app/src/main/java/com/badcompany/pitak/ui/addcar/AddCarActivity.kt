@@ -17,6 +17,8 @@ import com.badcompany.pitak.ui.BaseActivity
 import com.badcompany.pitak.util.AppPreferences
 import com.badcompany.pitak.util.loadCircleImageUrl
 import kotlinx.android.synthetic.main.activity_add_car.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.InternalCoroutinesApi
 import splitties.experimental.ExperimentalSplittiesApi
 import java.io.File
 import javax.inject.Inject
@@ -38,6 +40,8 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
             .inject(this)
     }
 
+    @InternalCoroutinesApi
+    @ExperimentalCoroutinesApi
     @ExperimentalSplittiesApi
     override fun onCreate(savedInstanceState: Bundle?) {
         inject()
@@ -49,6 +53,7 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
         viewmodel.getCarColorsAndModels(AppPreferences.token)
     }
 
+    @InternalCoroutinesApi
     @ExperimentalSplittiesApi
     private fun setupOnClickListeners() {
         carImage.setOnClickListener {
@@ -69,7 +74,7 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
             singleSelectionPicker.show(supportFragmentManager, "picker")
         }
 
-        retry.setOnClickListener{
+        retry.setOnClickListener {
             viewmodel.getCarColorsAndModels(AppPreferences.token)
         }
 
@@ -106,7 +111,7 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
             }.exhaustive
 
         })
-        viewmodel.carColorModelsResponse.observe(this, Observer {
+        viewmodel.colorsAndModels.observe(this, Observer {
             val response = it ?: return@Observer
 
             when (response) {
@@ -114,11 +119,13 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
                     progress.visibility = View.INVISIBLE
                     scrollView.visibility = View.INVISIBLE
                     infoLayout.visibility = View.VISIBLE
+                    errorMessage.text = response.message
                 }
                 is ErrorWrapper.SystemError -> {
                     progress.visibility = View.INVISIBLE
                     scrollView.visibility = View.INVISIBLE
                     infoLayout.visibility = View.VISIBLE
+                    errorMessage.text = response.err.localizedMessage
                 }
                 is ResultWrapper.Success -> {
                     progress.visibility = View.INVISIBLE
