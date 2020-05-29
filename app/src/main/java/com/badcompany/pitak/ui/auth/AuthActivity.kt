@@ -6,15 +6,11 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
-import androidx.navigation.fragment.findNavController
 import com.badcompany.pitak.App
 import com.badcompany.pitak.R
 import com.badcompany.pitak.di.viewmodels.AuthViewModelFactory
 import com.badcompany.pitak.fragments.AuthNavHostFragment
 import com.badcompany.pitak.ui.BaseActivity
-import com.badcompany.pitak.ui.auth.confirm.PhoneConfirmFragment
-import com.badcompany.pitak.ui.auth.login.LoginFragment
-import com.badcompany.pitak.ui.auth.register.RegisterFragment
 import kotlinx.android.synthetic.main.activity_auth.*
 import javax.inject.Inject
 import javax.inject.Named
@@ -65,21 +61,14 @@ class AuthActivity : BaseActivity() {
 
     private fun onRestoreInstanceState() {
         host = supportFragmentManager.findFragmentById(R.id.auth_fragments_container)
-        host?.let {
-            // do nothing
-        } ?: createNavHost()
+        host?.let { /*do nothing*/ } ?: createNavHost()
     }
 
     private fun createNavHost() {
-        navHost = AuthNavHostFragment.create(
-            R.navigation.nav_auth_graph
-        )
-        supportFragmentManager.beginTransaction()
-            .replace(
-                R.id.auth_fragments_container,
-                navHost,
-                getString(R.string.AuthNavHost)
-            )
+        navHost = AuthNavHostFragment.create(R.navigation.nav_auth_graph)
+        supportFragmentManager.beginTransaction().replace(R.id.auth_fragments_container,
+                                                          navHost,
+                                                          getString(R.string.AuthNavHost))
             .setPrimaryNavigationFragment(navHost)
             .commit()
     }

@@ -24,19 +24,19 @@ abstract class AuthViewModelModule {
     @AuthViewModelKey(AuthViewModel::class)
     abstract fun bindAuthViewModel(viewModel: AuthViewModel): ViewModel
 
-    @AuthScope
+//    @AuthScope
     @Binds
     @IntoMap
     @AuthViewModelKey(RegisterViewModel::class)
     abstract fun bindRegisterViewModel(viewModel: RegisterViewModel): ViewModel
 
-    @AuthScope
+//    @AuthScope
     @Binds
     @IntoMap
     @AuthViewModelKey(LoginViewModel::class)
     abstract fun bindLoginViewModel(viewModel: LoginViewModel): ViewModel
 
-    @AuthScope
+//    @AuthScope
     @Binds
     @IntoMap
     @AuthViewModelKey(PhoneConfirmViewModel::class)
