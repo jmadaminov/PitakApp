@@ -6,9 +6,9 @@ buildscript {
         versionCode = 1
         versionName = "1.0"
 
-        compileSdkVersion = 28
+        compileSdkVersion = 29
         minSdkVersion = 21
-        targetSdkVersion = 28
+        targetSdkVersion = 29
 
         mockkVersion = '1.9'
         constraintLayoutVersion = '2.0.0-beta4'
@@ -29,6 +29,7 @@ buildscript {
         retrofitVersion = '2.7.0'
         okHttpVersion = '3.8.1'
         splitties_version = '3.0.0-alpha06'
+        groupie_version = '2.8.0'
 
 
         javaxInjectVersion = '1'

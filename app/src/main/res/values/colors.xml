@@ -8,4 +8,6 @@
     <color name="button_grey">#B6B6B6</color>
     <color name="dark_grey">#FF393939</color>
     <color name="error_red">#F44336</color>
+    <color name="line_textColorGrey">#e7e9ed</color>
+    <color name="textColorGreyDark">#6e6e70</color>
 </resources>

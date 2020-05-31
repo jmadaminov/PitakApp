@@ -4,8 +4,11 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.widget.ImageView
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.asksira.bsimagepicker.BSImagePicker
 import com.badcompany.core.ErrorWrapper
 import com.badcompany.core.ResultWrapper
@@ -14,8 +17,14 @@ import com.badcompany.pitak.App
 import com.badcompany.pitak.R
 import com.badcompany.pitak.di.viewmodels.AddCarViewModelFactory
 import com.badcompany.pitak.ui.BaseActivity
+import com.badcompany.pitak.ui.viewgroups.ItemAddPhoto
 import com.badcompany.pitak.util.AppPreferences
 import com.badcompany.pitak.util.loadCircleImageUrl
+import com.bumptech.glide.Glide
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.GroupieViewHolder
+import com.xwray.groupie.Item
+import com.xwray.groupie.OnItemClickListener
 import kotlinx.android.synthetic.main.activity_add_car.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.InternalCoroutinesApi
@@ -24,7 +33,9 @@ import java.io.File
 import javax.inject.Inject
 
 
-class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListener {
+class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListener,
+    BSImagePicker.ImageLoaderDelegate,
+    OnItemClickListener {
 
 
     @Inject
@@ -51,6 +62,18 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
         setupActionBar()
         setupOnClickListeners()
         viewmodel.getCarColorsAndModels(AppPreferences.token)
+        setupCarPhotoGrid()
+    }
+
+
+    val adapter = GroupAdapter<GroupieViewHolder>()
+    private fun setupCarPhotoGrid() {
+        rv_photo_grid.isNestedScrollingEnabled = false
+        rv_photo_grid.layoutManager = GridLayoutManager(this, 3, RecyclerView.VERTICAL, false)
+        rv_photo_grid.setHasFixedSize(true)
+        rv_photo_grid.adapter = adapter
+        adapter.add(ItemAddPhoto(this))
+        adapter.notifyDataSetChanged()
     }
 
     @InternalCoroutinesApi
@@ -65,7 +88,7 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
 //                    .setPeekHeight(Utils.dp2px(360)) //Default: 360dp. This is the initial height of the dialog.
                     .hideCameraTile() //Default: show. Set this if you don't want user to take photo.
                     .hideGalleryTile() //Default: show. Set this if you don't want to further let user select from a gallery app. In such case, I suggest you to set maximum displaying images to Integer.MAX_VALUE.
-//                    .setTag("A request ID") //Default: null. Set this if you need to identify which picker is calling back your fragment / activity.
+                    .setTag("IS_AVATAR") //Default: null. Set this if you need to identify which picker is calling back your fragment / activity.
 //                    .dismissOnSelect(true) //Default: true. Set this if you do not want the picker to dismiss right after selection. But then you will have to dismiss by yourself.
 //                    .useFrontCamera(true) //Default: false. Launching camera by intent has no reliable way to open front camera so this does not always work.
                     .build()
@@ -150,8 +173,31 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onSingleImageSelected(uri: Uri) {
-        viewmodel.uploadCarPhoto(File(uri.path))
+    override fun onSingleImageSelected(uri: Uri, tag: String) {
+        if (tag.equals("IS_AVATAR")) {
+            viewmodel.uploadCarPhoto(File(uri.path), true)
+        } else {
+            viewmodel.uploadCarPhoto(File(uri.path))
+        }
+
+    }
+
+
+    override fun onItemClick(item: Item<*>, view: View) {
+        val singleSelectionPicker: BSImagePicker =
+            BSImagePicker.Builder("com.badcompany.fileprovider")
+                .setSpanCount(3) //Default: 3. This is the number of columns
+                .hideCameraTile() //Default: show. Set this if you don't want user to take photo.
+                .hideGalleryTile() //Default: show. Set this if you don't want to further let user select from a gallery app. In such case, I suggest you to set maximum displaying images to Integer.MAX_VALUE.
+                .setTag(item.getPosition(item).toString())
+                //Default: null. Set this if you need to identify which picker is calling back your fragment / activity.
+                .build()
+
+        singleSelectionPicker.show(supportFragmentManager, "picker")
+    }
+
+    override fun loadImage(imageUri: Uri?, ivImage: ImageView?) {
+        Glide.with(this).load(File(imageUri!!.path)).into(ivImage!!);
     }
 
 
