@@ -9,7 +9,7 @@ data class CarColorsResponse(val code: Int? = null,
 )
 
 data class CarColorModel(val id: Int,
-                         val hex: Int,
+                         val hex: String,
                          val nameEn: String,
                          val nameUz: String,
                          val nameRu: String)
