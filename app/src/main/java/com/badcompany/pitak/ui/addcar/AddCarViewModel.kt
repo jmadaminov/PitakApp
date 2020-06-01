@@ -90,9 +90,11 @@ class AddCarViewModel @Inject constructor(private val uploadCarPhoto: UploadCarP
 //        }
 
     val carAvatarResponse = SingleLiveEvent<ResultWrapper<PhotoBody>>()
+    val carImgResponse = SingleLiveEvent<ResultWrapper<PhotoBody>>()
     fun uploadCarPhoto(file: File, isAvatar: Boolean = false) {
-        if (isAvatar) carAvatarResponse.value = ResultWrapper.InProgress
-        viewModelScope.launch { carAvatarResponse.value = uploadCarPhoto.execute(file) }
+        val liveData = if (isAvatar) carAvatarResponse else carImgResponse
+        liveData.value = ResultWrapper.InProgress
+        viewModelScope.launch { liveData.value = uploadCarPhoto.execute(file) }
     }
 
     @ExperimentalCoroutinesApi

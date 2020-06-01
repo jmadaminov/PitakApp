@@ -4,11 +4,9 @@
     android:id="@+id/card_photo_grid"
     android:layout_width="match_parent"
     android:layout_height="80dp"
-    android:layout_margin="5dp"
     android:clickable="true"
     android:focusable="true"
     android:orientation="vertical"
-    app:cardBackgroundColor="@color/line_textColorGrey"
     app:cardCornerRadius="5dp"
     app:cardUseCompatPadding="true">
 
@@ -16,8 +14,7 @@
         android:id="@+id/iv_car_photo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:visibility="gone" />
+        android:scaleType="centerCrop" />
 
 
     <ImageView
@@ -29,16 +26,7 @@
         android:layout_centerInParent="true"
         android:layout_gravity="end|top"
         android:padding="5dp"
-        android:src="@drawable/close_icon"
-        android:visibility="gone"
-        />
-
-    <RelativeLayout
-        android:id="@+id/rl_loading"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:visibility="gone" />
+        android:src="@drawable/close_icon" />
 
 
 </androidx.cardview.widget.CardView>

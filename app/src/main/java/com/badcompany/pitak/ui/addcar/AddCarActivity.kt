@@ -13,14 +13,19 @@ import com.asksira.bsimagepicker.BSImagePicker
 import com.badcompany.core.ErrorWrapper
 import com.badcompany.core.ResultWrapper
 import com.badcompany.core.exhaustive
+import com.badcompany.domain.domainmodel.ColorsAndModels
+import com.badcompany.domain.domainmodel.PhotoBody
 import com.badcompany.pitak.App
 import com.badcompany.pitak.R
 import com.badcompany.pitak.di.viewmodels.AddCarViewModelFactory
 import com.badcompany.pitak.ui.BaseActivity
 import com.badcompany.pitak.ui.viewgroups.ItemAddPhoto
+import com.badcompany.pitak.ui.viewgroups.ItemCarPhoto
 import com.badcompany.pitak.util.AppPreferences
-import com.badcompany.pitak.util.loadCircleImageUrl
+import com.badcompany.pitak.util.getFileName
+import com.badcompany.pitak.util.loadImageUrl
 import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.Snackbar
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
@@ -30,6 +35,8 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.InternalCoroutinesApi
 import splitties.experimental.ExperimentalSplittiesApi
 import java.io.File
+import java.io.FileInputStream
+import java.io.FileOutputStream
 import javax.inject.Inject
 
 
@@ -74,6 +81,7 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
         rv_photo_grid.adapter = adapter
         adapter.add(ItemAddPhoto(this))
         adapter.notifyDataSetChanged()
+
     }
 
     @InternalCoroutinesApi
@@ -112,74 +120,157 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
     private fun subscribeObservers() {
         viewmodel.carAvatarResponse.observe(this, Observer {
             val response = it ?: return@Observer
-
             when (response) {
                 is ErrorWrapper.ResponseError -> {
-                    progressImageAdding.visibility = View.INVISIBLE
-                    carImage.visibility = View.VISIBLE
+                    stopLoadingAvatar()
+                    Snackbar.make(parentLayout, response.message.toString(), Snackbar.LENGTH_SHORT)
+                        .show()
                 }
                 is ErrorWrapper.SystemError -> {
-                    progressImageAdding.visibility = View.INVISIBLE
-                    carImage.visibility = View.VISIBLE
+                    stopLoadingAvatar()
+                    Snackbar.make(parentLayout,
+                                  getString(R.string.system_error),
+                                  Snackbar.LENGTH_SHORT)
+                        .show()
                 }
                 is ResultWrapper.Success -> {
-                    progressImageAdding.visibility = View.INVISIBLE
-                    carImage.visibility = View.VISIBLE
-                    carImage.loadCircleImageUrl(response.value.link!!)
+                    stopLoadingAvatar()
+                    carImage.loadImageUrl(response.value.link!!)
                 }
                 ResultWrapper.InProgress -> {
-                    progressImageAdding.visibility = View.VISIBLE
-                    carImage.visibility = View.GONE
+                    startLoadingAvatar()
                 }
             }.exhaustive
 
         })
+        viewmodel.carImgResponse.observe(this, Observer {
+            val response = it ?: return@Observer
+            when (response) {
+                is ErrorWrapper.ResponseError -> {
+                    showCarImageUploadError(response.message.toString())
+                }
+                is ErrorWrapper.SystemError -> {
+                    showCarImageUploadError(response.err.toString())
+                }
+                is ResultWrapper.Success -> {
+                    stopCarImageItemLoading()
+                    if (adapter.itemCount < 3) {
+                        adapter.add(0, makeCarItem(response.value))
+                        adapter.notifyItemChanged(0)
+                    } else {
+                        adapter.remove(adapter.getItem(adapter.itemCount - 1))
+                        adapter.add(makeCarItem(response.value))
+                    }
+                }
+                ResultWrapper.InProgress -> {
+                    startCarImageItemLoading()
+                }
+            }.exhaustive
+        })
+
         viewmodel.colorsAndModels.observe(this, Observer {
             val response = it ?: return@Observer
 
             when (response) {
                 is ErrorWrapper.ResponseError -> {
-                    progress.visibility = View.INVISIBLE
-                    scrollView.visibility = View.INVISIBLE
-                    infoLayout.visibility = View.VISIBLE
-                    errorMessage.text = response.message
+                    showColorsModelsGetError(response.message)
                 }
                 is ErrorWrapper.SystemError -> {
-                    progress.visibility = View.INVISIBLE
-                    scrollView.visibility = View.INVISIBLE
-                    infoLayout.visibility = View.VISIBLE
-                    errorMessage.text = response.err.localizedMessage
+                    showColorsModelsGetError(response.err.localizedMessage)
                 }
                 is ResultWrapper.Success -> {
-                    progress.visibility = View.INVISIBLE
-                    scrollView.visibility = View.VISIBLE
-                    infoLayout.visibility = View.INVISIBLE
+                    hideColorsModelsLoading()
+                    setupColorsModelsSpinners(response.value)
+
                 }
                 ResultWrapper.InProgress -> {
-                    progress.visibility = View.VISIBLE
-                    scrollView.visibility = View.INVISIBLE
-                    infoLayout.visibility = View.INVISIBLE
+                    showColorsModelsLoading()
                 }
             }.exhaustive
 
         })
     }
 
+    private fun setupColorsModelsSpinners(value: ColorsAndModels) {
+        carColorSpinner.adapter = ColorsArrayAdapter(this, value.colors)
+        carModelSpinner.adapter = ModelsArrayAdapter(this, value.models)
+    }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item?.itemId) {
+    private fun showColorsModelsLoading() {
+        progress.visibility = View.VISIBLE
+        scrollView.visibility = View.INVISIBLE
+        infoLayout.visibility = View.INVISIBLE
+    }
+
+    private fun hideColorsModelsLoading() {
+        progress.visibility = View.INVISIBLE
+        scrollView.visibility = View.VISIBLE
+        infoLayout.visibility = View.INVISIBLE
+    }
+
+    private fun showColorsModelsGetError(message: String?) {
+        progress.visibility = View.INVISIBLE
+        scrollView.visibility = View.INVISIBLE
+        infoLayout.visibility = View.VISIBLE
+        errorMessage.text = message
+    }
+
+    private fun startLoadingAvatar() {
+        progressImageAdding.visibility = View.VISIBLE
+        carImage.visibility = View.INVISIBLE
+        labelAddCarAvatar.visibility = View.INVISIBLE
+        carPlaceholderImage.visibility = View.INVISIBLE
+    }
+
+    private fun stopLoadingAvatar() {
+        progressImageAdding.visibility = View.INVISIBLE
+        labelAddCarAvatar.visibility = View.VISIBLE
+        carPlaceholderImage.visibility = View.VISIBLE
+        carImage.visibility = View.VISIBLE
+    }
+
+    private fun stopCarImageItemLoading() {
+        (adapter.getItem(adapter.itemCount - 1) as ItemAddPhoto).isLoading = false
+        adapter.notifyItemChanged(adapter.itemCount - 1)
+    }
+
+    private fun startCarImageItemLoading() {
+        (adapter.getItem(adapter.itemCount - 1) as ItemAddPhoto).isLoading = true
+        adapter.notifyItemChanged(adapter.itemCount - 1)
+    }
+
+    private fun showCarImageUploadError(message: String) {
+        Snackbar.make(parentLayout, message, Snackbar.LENGTH_SHORT).show()
+        (adapter.getItem(adapter.itemCount - 1) as ItemAddPhoto).isLoading = false
+        adapter.notifyItemChanged(adapter.itemCount - 1)
+    }
+
+    private fun makeCarItem(photoBody: PhotoBody) =
+        ItemCarPhoto(photoBody, OnItemClickListener { item, view ->
+            if (adapter.itemCount == 3 && adapter.getItem(adapter.itemCount - 1) !is ItemAddPhoto) {
+                adapter.add(ItemAddPhoto(this))
+            }
+            adapter.remove(item)
+            adapter.notifyItemChanged(item.getPosition(item))
+        })
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
             android.R.id.home -> onBackPressed()
         }
         return super.onOptionsItemSelected(item)
     }
 
     override fun onSingleImageSelected(uri: Uri, tag: String) {
-        if (tag.equals("IS_AVATAR")) {
-            viewmodel.uploadCarPhoto(File(uri.path), true)
-        } else {
-            viewmodel.uploadCarPhoto(File(uri.path))
-        }
+        val parcelFileDescriptor =
+            contentResolver.openFileDescriptor(uri, "r", null) ?: return
 
+        val inputStream = FileInputStream(parcelFileDescriptor.fileDescriptor)
+        val file = File(cacheDir, contentResolver.getFileName(uri))
+        val outputStream = FileOutputStream(file)
+        inputStream.copyTo(outputStream)
+        viewmodel.uploadCarPhoto(file, tag == "IS_AVATAR")
     }
 
 
@@ -196,8 +287,9 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
         singleSelectionPicker.show(supportFragmentManager, "picker")
     }
 
-    override fun loadImage(imageUri: Uri?, ivImage: ImageView?) {
-        Glide.with(this).load(File(imageUri!!.path)).into(ivImage!!);
+    override fun loadImage(imageUri: Uri, ivImage: ImageView) {
+        Glide.with(this).load(imageUri).into(ivImage)
+
     }
 
 

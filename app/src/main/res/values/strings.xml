@@ -40,4 +40,6 @@
     <string name="incorrect_phone_number_format">Number format is incorrect!</string>
     <string name="retry">Retry</string>
     <string name="add_photo">Add photo</string>
+    <string name="add_avatar_photo">Add car avatar</string>
+    <string name="system_error">System error occured!</string>
 </resources>

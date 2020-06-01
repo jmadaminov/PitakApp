@@ -8,6 +8,7 @@
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".App"
@@ -23,7 +24,7 @@
             android:name=".ui.addcar.AddCarActivity"
             android:label="@string/title_add_car"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="adjustNothing" />
+            android:windowSoftInputMode="adjustPan" />
 
         <!--        <activity android:name=".SmsConfirmationActivity" />-->
 
