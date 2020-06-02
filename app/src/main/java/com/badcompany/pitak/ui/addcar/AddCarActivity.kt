@@ -44,10 +44,8 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
     BSImagePicker.ImageLoaderDelegate,
     OnItemClickListener {
 
-
     @Inject
     lateinit var viewModelFactory: AddCarViewModelFactory
-
 
     private val viewmodel: AddCarViewModel by viewModels {
         viewModelFactory
@@ -72,7 +70,6 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
         setupCarPhotoGrid()
     }
 
-
     val adapter = GroupAdapter<GroupieViewHolder>()
     private fun setupCarPhotoGrid() {
         rv_photo_grid.isNestedScrollingEnabled = false
@@ -81,7 +78,6 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
         rv_photo_grid.adapter = adapter
         adapter.add(ItemAddPhoto(this))
         adapter.notifyDataSetChanged()
-
     }
 
     @InternalCoroutinesApi
@@ -100,22 +96,18 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
 //                    .dismissOnSelect(true) //Default: true. Set this if you do not want the picker to dismiss right after selection. But then you will have to dismiss by yourself.
 //                    .useFrontCamera(true) //Default: false. Launching camera by intent has no reliable way to open front camera so this does not always work.
                     .build()
-
-
             singleSelectionPicker.show(supportFragmentManager, "picker")
         }
 
         retry.setOnClickListener {
             viewmodel.getCarColorsAndModels(AppPreferences.token)
         }
-
     }
 
     private fun setupActionBar() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeButtonEnabled(true)
     }
-
 
     private fun subscribeObservers() {
         viewmodel.carAvatarResponse.observe(this, Observer {
@@ -181,7 +173,6 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
                 is ResultWrapper.Success -> {
                     hideColorsModelsLoading()
                     setupColorsModelsSpinners(response.value)
-
                 }
                 ResultWrapper.InProgress -> {
                     showColorsModelsLoading()
@@ -253,7 +244,6 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
             adapter.remove(item)
             adapter.notifyItemChanged(item.getPosition(item))
         })
-
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
