@@ -3,11 +3,13 @@ package com.badcompany.data
 import com.badcompany.core.ErrorWrapper
 import com.badcompany.core.ResultWrapper
 import com.badcompany.data.mapper.CarColorMapper
+import com.badcompany.data.mapper.CarDetailsMapper
 import com.badcompany.data.mapper.CarMapper
 import com.badcompany.data.mapper.CarModelMapper
 import com.badcompany.data.source.CarDataStoreFactory
 import com.badcompany.domain.domainmodel.Car
 import com.badcompany.domain.domainmodel.CarColorBody
+import com.badcompany.domain.domainmodel.CarDetails
 import com.badcompany.domain.domainmodel.CarModelBody
 import com.badcompany.domain.repository.CarRepository
 import com.badcompany.domain.repository.UserRepository
@@ -20,8 +22,26 @@ import javax.inject.Inject
 class CarRepositoryImpl @Inject constructor(private val factory: CarDataStoreFactory,
                                             private val colorMapper: CarColorMapper,
                                             private val modelMapper: CarModelMapper,
-                                            private val carMapper: CarMapper
+                                            private val carMapper: CarMapper,
+                                            private val carDetailsMapper: CarDetailsMapper
 ) : CarRepository {
+
+    override suspend fun getCars(token: String): ResultWrapper<List<CarDetails>> {
+        val response = factory.retrieveDataStore(false)
+            .getCars(token)
+        return when (response) {
+            is ErrorWrapper.ResponseError -> response
+            is ErrorWrapper.SystemError -> response
+            is ResultWrapper.Success -> {
+                val newCars = ArrayList<CarDetails>()
+                response.value.forEach {
+                    newCars.add(carDetailsMapper.mapFromEntity(it))
+                }
+                ResultWrapper.Success(newCars)
+            }
+            ResultWrapper.InProgress -> ResultWrapper.InProgress
+        }
+    }
 
 
     override suspend fun getCarModels(token: String): ResultWrapper<List<CarModelBody>> {

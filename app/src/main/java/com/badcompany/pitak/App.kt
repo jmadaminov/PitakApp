@@ -42,6 +42,10 @@ open class App : Application() {
         return mainComponent as MainComponent
     }
 
+    fun releaseMainComponent() {
+        mainComponent == null
+    }
+
     fun initAppComponent() {
         appComponent = DaggerAppComponent.builder()
             .application(this)

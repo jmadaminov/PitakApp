@@ -74,14 +74,18 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
         car = if (intent.getSerializableExtra(Constants.TXT_CAR) == null) Car()
         else intent.getSerializableExtra(Constants.TXT_CAR) as Car
 
+        if (car.fuelType == null) {
+            car.fuelType = Constants.FUEL_TYPE_PETROL
+        }
+
         inject()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_car)
         subscribeObservers()
         setupActionBar()
         setupListeners()
-        viewmodel.getCarColorsAndModels(AppPreferences.token)
         setupCarPhotoGrid()
+        viewmodel.getCarColorsAndModels(AppPreferences.token)
     }
 
     val adapter = GroupAdapter<GroupieViewHolder>()
@@ -223,6 +227,7 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
                     saveCar.stopAnimation()
                     setResult(Activity.RESULT_OK)
                     finish()
+                    (application as App).releaseAddCarComponent()
                 }
                 ResultWrapper.InProgress -> {
                     saveCar.startAnimation()
@@ -310,7 +315,6 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
 //            carImgs.add((adapter.getItem(i) as ItemAddPhoto).photoBody)
 //        }
 
-        if (car.imageList == null) car.imageList = arrayListOf()
         (car.imageList as ArrayList).add(photoBody)
         updateSaveButtonState()
     }

@@ -2,6 +2,7 @@ package com.badcompany.data.source
 
 import com.badcompany.core.ResultWrapper
 import com.badcompany.data.model.CarColorEntity
+import com.badcompany.data.model.CarDetailsEntity
 import com.badcompany.data.model.CarEntity
 import com.badcompany.data.model.CarModelEntity
 import com.badcompany.data.repository.CarDataStore
@@ -15,6 +16,9 @@ import javax.inject.Inject
  */
 open class CarRemoteDataStore @Inject constructor(private val carRemote: CarRemote) :
     CarDataStore {
+    override suspend fun getCars(token: String): ResultWrapper<List<CarDetailsEntity>> {
+        return carRemote.getCars(token)
+    }
 
     override suspend fun getCarModels(token: String): ResultWrapper<List<CarModelEntity>> {
         return carRemote.getCarModels(token)

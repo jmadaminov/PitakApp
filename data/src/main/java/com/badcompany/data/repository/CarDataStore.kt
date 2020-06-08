@@ -1,10 +1,7 @@
 package com.badcompany.data.repository
 
 import com.badcompany.core.ResultWrapper
-import com.badcompany.data.model.CarColorEntity
-import com.badcompany.data.model.CarEntity
-import com.badcompany.data.model.CarModelEntity
-import com.badcompany.data.model.PhotoEntity
+import com.badcompany.data.model.*
 import java.io.File
 
 
@@ -14,7 +11,7 @@ import java.io.File
  * operations that need to be implemented
  */
 interface CarDataStore {
-
+    suspend fun getCars(token: String): ResultWrapper<List<CarDetailsEntity>>
     suspend fun getCarModels(token: String): ResultWrapper<List<CarModelEntity>>
     suspend fun getCarColors(token: String): ResultWrapper<List<CarColorEntity>>
     suspend fun createCar(token: String, car: CarEntity): ResultWrapper<String>

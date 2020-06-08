@@ -6,7 +6,10 @@ import com.badcompany.core.Constants.TXT_TOKEN
 import com.badcompany.core.ErrorWrapper
 import com.badcompany.core.ResultWrapper
 import com.badcompany.domain.domainmodel.*
-import com.badcompany.domain.usecases.*
+import com.badcompany.domain.usecases.GetCarColors
+import com.badcompany.domain.usecases.GetCarModels
+import com.badcompany.domain.usecases.SaveCar
+import com.badcompany.domain.usecases.UploadPhoto
 import com.badcompany.pitak.App
 import com.badcompany.pitak.ui.BaseViewModel
 import com.badcompany.pitak.util.SingleLiveEvent
@@ -31,6 +34,12 @@ class AddCarViewModel @Inject constructor(private val uploadPhoto: UploadPhoto,
     val colorsAndModels = SingleLiveEvent<ResultWrapper<ColorsAndModels>>()
     val carAvatarResponse = SingleLiveEvent<ResultWrapper<PhotoBody>>()
     val carImgResponse = SingleLiveEvent<ResultWrapper<PhotoBody>>()
+
+//    fun getCarSaveReponse(): SingleLiveEvent<ResultWrapper<String>> = carSaveReponse
+//    fun getColorsAndModels(): SingleLiveEvent<ResultWrapper<ColorsAndModels>> = colorsAndModels
+//    fun getCarAvatarResponse(): SingleLiveEvent<ResultWrapper<PhotoBody>> = carAvatarResponse
+//    fun getCarImgResponse(): SingleLiveEvent<ResultWrapper<PhotoBody>> = carImgResponse
+
 
     @InternalCoroutinesApi
     fun getCarColorsAndModels(token: String) {

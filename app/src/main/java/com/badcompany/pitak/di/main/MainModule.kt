@@ -1,14 +1,16 @@
 package com.badcompany.pitak.di.main
 
-import com.badcompany.data.FileUploadRepositoryImpl
-import com.badcompany.data.mapper.PhotoMapper
-import com.badcompany.data.repository.FileUploadRemote
-import com.badcompany.data.source.FileUploadDataStoreFactory
-import com.badcompany.data.source.FileUploadRemoteDataStore
-import com.badcompany.domain.repository.FileUploadRepository
-import com.badcompany.domain.usecases.UploadPhoto
+import com.badcompany.data.CarRepositoryImpl
+import com.badcompany.data.mapper.CarColorMapper
+import com.badcompany.data.mapper.CarMapper
+import com.badcompany.data.mapper.CarModelMapper
+import com.badcompany.data.repository.CarRemote
+import com.badcompany.data.source.CarDataStoreFactory
+import com.badcompany.data.source.CarRemoteDataStore
+import com.badcompany.domain.repository.CarRepository
+import com.badcompany.domain.usecases.*
 import com.badcompany.remote.ApiService
-import com.badcompany.remote.FileUploadRemoteImpl
+import com.badcompany.remote.CarRemoteImpl
 import dagger.Module
 import dagger.Provides
 
@@ -16,7 +18,7 @@ import dagger.Provides
 object MainModule {
 
 //    @Singleton
-//    @Provides
+//    @Provides @MainScope
 //    @JvmStatic
 //    fun provideRequestOptions(): RequestOptions {
 //        return RequestOptions

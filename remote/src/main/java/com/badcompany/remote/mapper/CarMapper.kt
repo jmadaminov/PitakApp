@@ -1,8 +1,10 @@
 package com.badcompany.remote.mapper
 
+import com.badcompany.data.model.CarDetailsEntity
 import com.badcompany.data.model.CarEntity
 import com.badcompany.data.model.PhotoEntity
 import com.badcompany.data.model.UserEntity
+import com.badcompany.remote.model.CarDetails
 import com.badcompany.remote.model.CarModel
 import com.badcompany.remote.model.PhotoUploadModel
 import com.badcompany.remote.model.UserModel
