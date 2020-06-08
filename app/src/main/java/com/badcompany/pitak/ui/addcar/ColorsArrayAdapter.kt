@@ -12,7 +12,9 @@ import com.badcompany.pitak.R
 import kotlinx.android.synthetic.main.item_car_color.view.*
 
 
-class ColorsArrayAdapter(val context: Context, val colors: List<CarColorBody>) : BaseAdapter() {
+class ColorsArrayAdapter(val context: Context,
+                         val colors: List<CarColorBody>/*,
+                         val clickListener: MyItemClickListener*/) : BaseAdapter() {
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view: View
@@ -21,6 +23,9 @@ class ColorsArrayAdapter(val context: Context, val colors: List<CarColorBody>) :
             view.textColor.text = colors[position].nameEn
             view.imgColor.backgroundTintList =
                 ColorStateList.valueOf(Color.parseColor(colors[position].hex))
+         /*   view.itemParentView.setOnClickListener {
+                clickListener.onClick(position)
+            }*/
         } else {
             view = convertView
         }
@@ -32,4 +37,8 @@ class ColorsArrayAdapter(val context: Context, val colors: List<CarColorBody>) :
     override fun getItemId(position: Int) = 0L
     override fun getCount() = colors.size
 
+}
+
+interface MyItemClickListener {
+    fun onClick(pos: Int)
 }

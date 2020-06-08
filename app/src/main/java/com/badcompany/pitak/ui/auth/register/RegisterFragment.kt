@@ -175,30 +175,17 @@ class RegisterFragment @Inject constructor(private val viewModelFactory: ViewMod
         val displayName = model.displayName
         // TODO : initiate successful logged in experience
         Toast.makeText(
-            context!!,
+            requireContext(),
             "$welcome $displayName",
             Toast.LENGTH_LONG
         ).show()
     }
 
     private fun showLoginFailed(@StringRes errorString: Int) {
-        Toast.makeText(context!!, errorString, Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), errorString, Toast.LENGTH_SHORT).show()
     }
 
 
 }
 
-/**
- * Extension function to simplify setting an afterTextChanged action to EditText components.
- */
-fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
-    this.addTextChangedListener(object : TextWatcher {
-        override fun afterTextChanged(editable: Editable?) {
-            afterTextChanged.invoke(editable.toString())
-        }
 
-        override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-
-        override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
-    })
-}

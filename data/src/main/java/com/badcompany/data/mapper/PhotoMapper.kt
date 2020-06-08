@@ -11,7 +11,7 @@ import javax.inject.Inject
  * Map a [UserEntity] to and from a [User] instance when data is moving between
  * this later and the Domain layer
  */
-open class CarPhotoMapper @Inject constructor(): Mapper<PhotoEntity, PhotoBody> {
+open class PhotoMapper @Inject constructor(): Mapper<PhotoEntity, PhotoBody> {
 
     /**
      * Map a [UserEntity] instance to a [User] instance

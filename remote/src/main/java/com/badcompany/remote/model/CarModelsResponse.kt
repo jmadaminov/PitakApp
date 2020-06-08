@@ -8,5 +8,5 @@ data class CarModelsResponse(val code: Int? = null,
                              val data: List<CarModelModel>? = null
 )
 
-data class CarModelModel(val id: Int,
+data class CarModelModel(val id: Long,
                          val name: String)

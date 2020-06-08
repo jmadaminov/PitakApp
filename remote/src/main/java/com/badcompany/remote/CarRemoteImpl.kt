@@ -3,16 +3,12 @@ package com.badcompany.remote
 import com.badcompany.core.ErrorWrapper
 import com.badcompany.core.ResultWrapper
 import com.badcompany.data.model.CarColorEntity
+import com.badcompany.data.model.CarEntity
 import com.badcompany.data.model.CarModelEntity
-import com.badcompany.data.model.PhotoEntity
 import com.badcompany.data.repository.CarRemote
 import com.badcompany.remote.mapper.CarColorMapper
+import com.badcompany.remote.mapper.CarMapper
 import com.badcompany.remote.mapper.CarModelMapper
-import com.badcompany.remote.mapper.CarPhotoMapper
-import okhttp3.MediaType
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
-import java.io.File
 import javax.inject.Inject
 
 
@@ -22,25 +18,13 @@ import javax.inject.Inject
  * operations in which data store implementation layers can carry out.
  */
 class CarRemoteImpl @Inject constructor(private val apiService: ApiService,
-                                        private val photoMapper: CarPhotoMapper,
                                         private val carModelMapper: CarModelMapper,
-                                        private val carColorMapper: CarColorMapper
+                                        private val carColorMapper: CarColorMapper,
+                                        private val carMapper: CarMapper
 ) : CarRemote {
 
 
-    override suspend fun uploadPhoto(file: File): ResultWrapper<PhotoEntity> {
-        return try {
-            val requestFile = RequestBody.create(MediaType.parse("image/jpg"), file)
-            val body = MultipartBody.Part.createFormData("file", file.name, requestFile)
-            val response = apiService.uploadPhoto(body)
-            if (response.code == 1) ResultWrapper.Success(photoMapper.mapToEntity(response.data!!))
-            else ErrorWrapper.ResponseError(response.code, response.message)
-        } catch (e: Exception) {
-            ErrorWrapper.SystemError(e)
-        }
-    }
-
-    override suspend fun getCarModels(token : String): ResultWrapper<List<CarModelEntity>> {
+    override suspend fun getCarModels(token: String): ResultWrapper<List<CarModelEntity>> {
         return try {
             val response = apiService.getCarModels(token)
             if (response.code == 1) {
@@ -64,6 +48,39 @@ class CarRemoteImpl @Inject constructor(private val apiService: ApiService,
                     newCarColors.add(carColorMapper.mapToEntity(it))
                 }
                 ResultWrapper.Success(newCarColors)
+            } else ErrorWrapper.ResponseError(response.code, response.message)
+        } catch (e: Exception) {
+            ErrorWrapper.SystemError(e)
+        }
+    }
+
+    override suspend fun createCar(token: String, car: CarEntity): ResultWrapper<String> {
+        return try {
+            val response = apiService.createCar(token, carMapper.mapFromEntity(car))
+            if (response.code == 1) {
+                ResultWrapper.Success("SUCCESS")
+            } else ErrorWrapper.ResponseError(response.code, response.message)
+        } catch (e: Exception) {
+            ErrorWrapper.SystemError(e)
+        }
+    }
+
+    override suspend fun updateCar(token: String, car: CarEntity): ResultWrapper<String> {
+        return try {
+            val response = apiService.updateCar(token, car.id!!.toString(), carMapper.mapFromEntity(car))
+            if (response.code == 1) {
+                ResultWrapper.Success("SUCCESS")
+            } else ErrorWrapper.ResponseError(response.code, response.message)
+        } catch (e: Exception) {
+            ErrorWrapper.SystemError(e)
+        }
+    }
+
+    override suspend fun setDefaultCar(token: String, id: String): ResultWrapper<String> {
+        return try {
+            val response = apiService.setDefaultCar(token, id)
+            if (response.code == 1) {
+                ResultWrapper.Success("SUCCESS")
             } else ErrorWrapper.ResponseError(response.code, response.message)
         } catch (e: Exception) {
             ErrorWrapper.SystemError(e)

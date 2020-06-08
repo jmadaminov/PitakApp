@@ -4,9 +4,7 @@
     android:id="@+id/itemParentView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:clickable="true"
-    android:focusable="true"
-    android:foreground="?android:selectableItemBackground">
+    >
 
     <ImageView
         android:id="@+id/imgColor"
@@ -14,6 +12,7 @@
         android:layout_height="30dp"
         android:layout_margin="10dp"
         android:background="@drawable/shape_round"
+        android:backgroundTintMode="multiply"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/textColor"
         app:layout_constraintStart_toStartOf="parent"

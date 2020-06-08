@@ -3,6 +3,9 @@ package com.badcompany.pitak.util
 import android.content.ContentResolver
 import android.net.Uri
 import android.provider.OpenableColumns
+import android.text.Editable
+import android.text.TextWatcher
+import android.widget.EditText
 import android.widget.ImageView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.badcompany.pitak.R
@@ -38,3 +41,19 @@ fun ContentResolver.getFileName(fileUri: Uri): String {
     }
     return name
 }
+
+///**
+// * Extension function to simplify setting an afterTextChanged action to EditText components.
+// */
+//fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
+//    this.addTextChangedListener(object : TextWatcher {
+//        override fun afterTextChanged(editable: Editable?) {
+//            afterTextChanged.invoke(editable.toString())
+//        }
+//
+//        override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+//
+//        override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+//    })
+//}
+

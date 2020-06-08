@@ -1,10 +1,14 @@
 package com.badcompany.domain.domainmodel
 
-data class Car(var id: String,
-               var model: String,
-               var photoUrl: String,
-               var fuelType: String,
-               var color: String,
-               var productionYear: String,
-               var hasAirConditioning: Boolean? = null)
+import java.io.Serializable
+
+data class Car(var id: Long? = null,
+               var modelId: Long? = null,
+               var imageId: Long? = null,
+               var fuelType: String? = null,
+               var colorId: Long? = null,
+               var carNumber: String? = null,
+               var carYear: Int? = null,
+               var airConditioner: Boolean? = null,
+               var imageList: List<PhotoBody> = arrayListOf()) : Serializable
 

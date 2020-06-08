@@ -3,15 +3,14 @@ package com.badcompany.data
 import com.badcompany.core.ErrorWrapper
 import com.badcompany.core.ResultWrapper
 import com.badcompany.data.mapper.CarColorMapper
+import com.badcompany.data.mapper.CarMapper
 import com.badcompany.data.mapper.CarModelMapper
-import com.badcompany.data.mapper.CarPhotoMapper
 import com.badcompany.data.source.CarDataStoreFactory
+import com.badcompany.domain.domainmodel.Car
 import com.badcompany.domain.domainmodel.CarColorBody
 import com.badcompany.domain.domainmodel.CarModelBody
-import com.badcompany.domain.domainmodel.PhotoBody
 import com.badcompany.domain.repository.CarRepository
 import com.badcompany.domain.repository.UserRepository
-import java.io.File
 import javax.inject.Inject
 
 /**
@@ -19,21 +18,11 @@ import javax.inject.Inject
  * data sources
  */
 class CarRepositoryImpl @Inject constructor(private val factory: CarDataStoreFactory,
-                                            private val photoMapper: CarPhotoMapper,
                                             private val colorMapper: CarColorMapper,
-                                            private val modelMapper: CarModelMapper
+                                            private val modelMapper: CarModelMapper,
+                                            private val carMapper: CarMapper
 ) : CarRepository {
 
-    override suspend fun uploadPhoto(file: File): ResultWrapper<PhotoBody> {
-        val response = factory.retrieveDataStore(false)
-            .uploadPhoto(file)
-        return when (response) {
-            is ErrorWrapper.ResponseError -> response
-            is ErrorWrapper.SystemError -> response
-            is ResultWrapper.Success -> ResultWrapper.Success(photoMapper.mapFromEntity(response.value))
-            ResultWrapper.InProgress -> ResultWrapper.InProgress
-        }
-    }
 
     override suspend fun getCarModels(token: String): ResultWrapper<List<CarModelBody>> {
         val response = factory.retrieveDataStore(false)
@@ -64,6 +53,45 @@ class CarRepositoryImpl @Inject constructor(private val factory: CarDataStoreFac
                     newCarColors.add(colorMapper.mapFromEntity(it))
                 }
                 ResultWrapper.Success(newCarColors)
+            }
+            ResultWrapper.InProgress -> ResultWrapper.InProgress
+        }
+    }
+
+    override suspend fun createCar(token: String, car: Car): ResultWrapper<String> {
+        val response = factory.retrieveDataStore(false)
+            .createCar(token, carMapper.mapToEntity(car))
+        return when (response) {
+            is ErrorWrapper.ResponseError -> response
+            is ErrorWrapper.SystemError -> response
+            is ResultWrapper.Success -> {
+                ResultWrapper.Success("SUCCESS")
+            }
+            ResultWrapper.InProgress -> ResultWrapper.InProgress
+        }
+    }
+
+    override suspend fun updateCar(token: String, car: Car): ResultWrapper<String> {
+        val response = factory.retrieveDataStore(false)
+            .updateCar(token, carMapper.mapToEntity(car))
+        return when (response) {
+            is ErrorWrapper.ResponseError -> response
+            is ErrorWrapper.SystemError -> response
+            is ResultWrapper.Success -> {
+                ResultWrapper.Success("SUCCESS")
+            }
+            ResultWrapper.InProgress -> ResultWrapper.InProgress
+        }
+    }
+
+    override suspend fun setDefaultCar(token: String, id: String): ResultWrapper<String> {
+        val response = factory.retrieveDataStore(false)
+            .setDefaultCar(token, id)
+        return when (response) {
+            is ErrorWrapper.ResponseError -> response
+            is ErrorWrapper.SystemError -> response
+            is ResultWrapper.Success -> {
+                ResultWrapper.Success("SUCCESS")
             }
             ResultWrapper.InProgress -> ResultWrapper.InProgress
         }

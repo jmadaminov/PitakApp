@@ -2,15 +2,16 @@ package com.badcompany.pitak.di.addcar
 
 import com.badcompany.data.CarRepositoryImpl
 import com.badcompany.data.mapper.CarColorMapper
+import com.badcompany.data.mapper.CarMapper
 import com.badcompany.data.mapper.CarModelMapper
-import com.badcompany.data.mapper.CarPhotoMapper
 import com.badcompany.data.repository.CarRemote
 import com.badcompany.data.source.CarDataStoreFactory
 import com.badcompany.data.source.CarRemoteDataStore
 import com.badcompany.domain.repository.CarRepository
 import com.badcompany.domain.usecases.GetCarColors
 import com.badcompany.domain.usecases.GetCarModels
-import com.badcompany.domain.usecases.UploadCarPhoto
+import com.badcompany.domain.usecases.SaveCar
+import com.badcompany.domain.usecases.SetDefaultCar
 import com.badcompany.remote.ApiService
 import com.badcompany.remote.CarRemoteImpl
 import dagger.Module
@@ -23,9 +24,18 @@ object AddCarModule {
     @AddCarScope
     @Provides
     @JvmStatic
-    fun provideUploadCarPhotoUseCase(carRepository: CarRepository): UploadCarPhoto {
-        return UploadCarPhoto(carRepository)
+    fun provideSaveCar(carRepository: CarRepository): SaveCar {
+        return SaveCar(carRepository)
     }
+
+
+    @AddCarScope
+    @Provides
+    @JvmStatic
+    fun provideSetDefaultCar(carRepository: CarRepository): SetDefaultCar {
+        return SetDefaultCar(carRepository)
+    }
+
 
     @AddCarScope
     @Provides
@@ -45,24 +55,25 @@ object AddCarModule {
     @Provides
     @JvmStatic
     fun provideCarRepository(carDataStoreFactory: CarDataStoreFactory,
-                             photoMapper: CarPhotoMapper,
                              modelMapper: CarModelMapper,
-                             colorMapper: CarColorMapper): CarRepository {
-        return CarRepositoryImpl(carDataStoreFactory, photoMapper, colorMapper, modelMapper)
+                             colorMapper: CarColorMapper,
+                             carMapper: CarMapper): CarRepository {
+        return CarRepositoryImpl(carDataStoreFactory, colorMapper, modelMapper, carMapper)
     }
 
-    @AddCarScope
-    @Provides
-    @JvmStatic
-    fun provideCarPhotoMapper(): CarPhotoMapper {
-        return CarPhotoMapper()
-    }
 
     @AddCarScope
     @Provides
     @JvmStatic
     fun provideCarColorMapper(): CarColorMapper {
         return CarColorMapper()
+    }
+
+    @AddCarScope
+    @Provides
+    @JvmStatic
+    fun provideCarMapper(): CarMapper {
+        return CarMapper()
     }
 
     @AddCarScope
@@ -90,18 +101,12 @@ object AddCarModule {
     @Provides
     @JvmStatic
     fun provideCarRemote(apiService: ApiService,
-                         carPhotoMapper: com.badcompany.remote.mapper.CarPhotoMapper,
                          carModelMapper: com.badcompany.remote.mapper.CarModelMapper,
-                         carColorMapper: com.badcompany.remote.mapper.CarColorMapper): CarRemote {
-        return CarRemoteImpl(apiService, carPhotoMapper, carModelMapper, carColorMapper)
+                         carColorMapper: com.badcompany.remote.mapper.CarColorMapper,
+                         carMapper: com.badcompany.remote.mapper.CarMapper): CarRemote {
+        return CarRemoteImpl(apiService, carModelMapper, carColorMapper, carMapper)
     }
 
-    @AddCarScope
-    @Provides
-    @JvmStatic
-    fun provideRemoteCarPhotoMapper(): com.badcompany.remote.mapper.CarPhotoMapper {
-        return com.badcompany.remote.mapper.CarPhotoMapper()
-    }
 
     @AddCarScope
     @Provides
@@ -115,6 +120,13 @@ object AddCarModule {
     @JvmStatic
     fun provideRemoteCarColorMapper(): com.badcompany.remote.mapper.CarColorMapper {
         return com.badcompany.remote.mapper.CarColorMapper()
+    }
+
+    @AddCarScope
+    @Provides
+    @JvmStatic
+    fun provideRemoteCarMapper(): com.badcompany.remote.mapper.CarMapper {
+        return com.badcompany.remote.mapper.CarMapper()
     }
 
 }

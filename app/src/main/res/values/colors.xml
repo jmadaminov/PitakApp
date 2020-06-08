@@ -10,4 +10,7 @@
     <color name="error_red">#F44336</color>
     <color name="line_textColorGrey">#e7e9ed</color>
     <color name="textColorGreyDark">#6e6e70</color>
+    <color name="orange">#FFA000</color>
+    <color name="ic_grey" >#a1a9c3</color>
+
 </resources>

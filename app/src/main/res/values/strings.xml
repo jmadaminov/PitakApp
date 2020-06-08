@@ -41,5 +41,9 @@
     <string name="retry">Retry</string>
     <string name="add_photo">Add photo</string>
     <string name="add_avatar_photo">Add car avatar</string>
-    <string name="system_error">System error occured!</string>
+    <string name="system_error">System error occurred!</string>
+    <string name="petrol">Petrol</string>
+    <string name="methane">Methane</string>
+    <string name="propane">Propane</string>
+    <string name="myCars">My Cars</string>
 </resources>

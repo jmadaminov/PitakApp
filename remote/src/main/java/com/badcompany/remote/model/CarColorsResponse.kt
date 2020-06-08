@@ -10,7 +10,7 @@ data class CarColorsResponse(val code: Int? = null,
                              val data: List<CarColorModel>? = null
 )
 
-data class CarColorModel(val id: Int,
+data class CarColorModel(val id: Long,
                          val hex: String,
                          @SerializedName("nameEn") val nameEn: String,
                          @SerializedName("nameUz") val nameUz: String,

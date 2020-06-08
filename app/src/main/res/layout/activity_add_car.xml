@@ -64,7 +64,7 @@
                 android:id="@+id/imageContainer"
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
-                app:cardBackgroundColor="@color/line_textColorGrey"
+                app:cardBackgroundColor="@color/button_grey"
                 app:cardCornerRadius="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -109,10 +109,10 @@
                         android:id="@+id/carImage"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:minHeight="150dp"
                         android:clickable="true"
                         android:focusable="true"
                         android:foreground="?android:selectableItemBackground"
+                        android:minHeight="150dp"
                         android:scaleType="centerCrop" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -133,7 +133,6 @@
                 android:id="@+id/labelcarPlateNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toTopOf="@id/carModelSpinner"
                 app:layout_constraintTop_toBottomOf="@id/rv_photo_grid">
 
                 <EditText
@@ -141,40 +140,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="?android:actionBarSize"
                     android:hint="@string/car_plate_number"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
                     android:maxLines="1" />
 
             </com.google.android.material.textfield.TextInputLayout>
-
-            <Spinner
-                android:id="@+id/carModelSpinner"
-                android:layout_width="match_parent"
-                android:layout_height="?android:actionBarSize"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/labelcarPlateNumber" />
-
-            <Spinner
-                android:id="@+id/carColorSpinner"
-                android:layout_width="match_parent"
-                android:layout_height="?android:actionBarSize"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/carModelSpinner" />
-
-            <Spinner
-                android:id="@+id/fuelTypeSpinner"
-                android:layout_width="match_parent"
-                android:layout_height="?android:actionBarSize"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/carColorSpinner" />
 
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/labelcarYear"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/fuelTypeSpinner">
+                app:layout_constraintTop_toBottomOf="@id/labelcarPlateNumber">
 
                 <EditText
                     android:id="@+id/carYearInput"
@@ -184,8 +161,62 @@
                     android:focusable="true"
                     android:foreground="?android:selectableItemBackground"
                     android:hint="@string/car_year"
-                    android:inputType="number" />
+                    android:imeOptions="actionDone"
+                    android:inputType="number"
+                    android:maxLength="4"
+                    android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
+
+
+            <Spinner
+                android:id="@+id/carModelSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="?android:actionBarSize"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/labelcarYear" />
+
+            <Spinner
+                android:id="@+id/carColorSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="?android:actionBarSize"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/carModelSpinner" />
+
+            <RadioGroup
+                android:id="@+id/fuelTypeRadioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/carColorSpinner">
+
+
+                <RadioButton
+                    android:id="@+id/radioPetrol"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:text="@string/petrol" />
+
+                <RadioButton
+                    android:id="@+id/radioMethane"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/methane" />
+
+                <RadioButton
+                    android:id="@+id/radioPropane"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/propane" />
+
+
+            </RadioGroup>
 
 
             <CheckBox
@@ -193,7 +224,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?android:actionBarSize"
                 android:text="@string/air_conditioner"
-                app:layout_constraintTop_toBottomOf="@id/labelcarYear" />
+                app:layout_constraintTop_toBottomOf="@id/fuelTypeRadioGroup" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -209,7 +240,7 @@
         app:layout_constraintTop_toBottomOf="@id/scrollView">
 
         <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
-            android:id="@+id/confirm"
+            android:id="@+id/saveCar"
             android:layout_width="match_parent"
             android:layout_height="?android:actionBarSize"
             android:layout_gravity="center"
@@ -217,7 +248,7 @@
             android:layout_marginTop="24dp"
             android:layout_marginEnd="48dp"
             android:layout_marginBottom="24dp"
-            android:background="@drawable/button_shape_default_rounded"
+            android:background="@drawable/selector_round_regular"
             android:elevation="3dp"
             android:enabled="false"
             android:gravity="center"

@@ -1,15 +1,12 @@
 package com.badcompany.pitak.ui.addcar
 
 import androidx.lifecycle.viewModelScope
+import com.badcompany.core.Constants.TXT_CAR
+import com.badcompany.core.Constants.TXT_TOKEN
 import com.badcompany.core.ErrorWrapper
 import com.badcompany.core.ResultWrapper
-import com.badcompany.domain.domainmodel.CarColorBody
-import com.badcompany.domain.domainmodel.CarModelBody
-import com.badcompany.domain.domainmodel.ColorsAndModels
-import com.badcompany.domain.domainmodel.PhotoBody
-import com.badcompany.domain.usecases.GetCarColors
-import com.badcompany.domain.usecases.GetCarModels
-import com.badcompany.domain.usecases.UploadCarPhoto
+import com.badcompany.domain.domainmodel.*
+import com.badcompany.domain.usecases.*
 import com.badcompany.pitak.App
 import com.badcompany.pitak.ui.BaseViewModel
 import com.badcompany.pitak.util.SingleLiveEvent
@@ -24,12 +21,16 @@ import javax.inject.Inject
 /**
  * Created by jahon on 28-Apr-20
  */
-class AddCarViewModel @Inject constructor(private val uploadCarPhoto: UploadCarPhoto,
+class AddCarViewModel @Inject constructor(private val uploadPhoto: UploadPhoto,
+                                          private val saveCar: SaveCar,
                                           private val getCarColors: GetCarColors,
                                           private val getCarModels: GetCarModels) :
     BaseViewModel() {
 
+    val carSaveReponse = SingleLiveEvent<ResultWrapper<String>>()
     val colorsAndModels = SingleLiveEvent<ResultWrapper<ColorsAndModels>>()
+    val carAvatarResponse = SingleLiveEvent<ResultWrapper<PhotoBody>>()
+    val carImgResponse = SingleLiveEvent<ResultWrapper<PhotoBody>>()
 
     @InternalCoroutinesApi
     fun getCarColorsAndModels(token: String) {
@@ -57,45 +58,21 @@ class AddCarViewModel @Inject constructor(private val uploadCarPhoto: UploadCarP
     }
 
 
-    //        getColorsAndModelsJob = viewModelScope.launch {
-//            carColorModelsResponse.value = ResultWrapper.InProgress
-//            val colors: Deferred<ResultWrapper<List<CarColorBody>>> = async {
-//                carColorsResponse.value = getCarColors.execute(token)
-//                carColorsResponse.value!!
-//            }
-//            yield()
-//            val models: Deferred<ResultWrapper<List<CarModelBody>>> = async {
-//                carModelsResponse.value = getCarModels.execute(token)
-//                carModelsResponse.value!!
-//            }
-//
-//            colors.await()
-//            models.await()
-//        }
-//        getColorsAndModelsJob.invokeOnCompletion {
-//            if (it == null) {
-//                if (carColorsResponse.value is ResultWrapper.Success && carModelsResponse.value is ResultWrapper.Success) {
-//                    Log.d("SUUUUUUUCCSSSSSEEEESSSS", " WORRKED")
-//                    carColorModelsResponse.value = ResultWrapper.Success(CarColorAndModel(
-//                        (carColorsResponse.value as ResultWrapper.Success).value,
-//                        (carModelsResponse.value as ResultWrapper.Success).value))
-//                } else {
-//                    carColorModelsResponse.value = ErrorWrapper.ResponseError(-1)
-//                    Log.d("NOT SUUcceess", " not WORRKED")
-//                }
-//            } else {
-//                carColorModelsResponse.value = ErrorWrapper.SystemError(it)
-//                Log.d("FAIL ", "cause " + it.localizedMessage)
-//            }
-//        }
-
-    val carAvatarResponse = SingleLiveEvent<ResultWrapper<PhotoBody>>()
-    val carImgResponse = SingleLiveEvent<ResultWrapper<PhotoBody>>()
     fun uploadCarPhoto(file: File, isAvatar: Boolean = false) {
         val liveData = if (isAvatar) carAvatarResponse else carImgResponse
         liveData.value = ResultWrapper.InProgress
-        viewModelScope.launch { liveData.value = uploadCarPhoto.execute(file) }
+        viewModelScope.launch { liveData.value = uploadPhoto.execute(file) }
     }
+
+
+    fun saveCar(token: String, car: Car) {
+        carSaveReponse.value = ResultWrapper.InProgress
+        viewModelScope.launch {
+            carSaveReponse.value =
+                saveCar.execute(hashMapOf(Pair(TXT_TOKEN, token), Pair(TXT_CAR, car)))
+        }
+    }
+
 
     @ExperimentalCoroutinesApi
     override fun onCleared() {

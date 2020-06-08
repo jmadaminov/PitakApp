@@ -10,13 +10,17 @@ import com.badcompany.pitak.R
 import kotlinx.android.synthetic.main.item_car_model.view.*
 
 
-class ModelsArrayAdapter(val context: Context, val models: List<CarModelBody>) : BaseAdapter() {
+class ModelsArrayAdapter(val context: Context,
+                         val models: List<CarModelBody>) : BaseAdapter() {
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view: View
         if (convertView == null) {
             view = LayoutInflater.from(context).inflate(R.layout.item_car_model, parent, false)
             view.textModel.text = models[position].name
+//            view.itemParentView.setOnClickListener {
+//                listnener.onClick(position)
+//            }
         } else {
             view = convertView
         }
