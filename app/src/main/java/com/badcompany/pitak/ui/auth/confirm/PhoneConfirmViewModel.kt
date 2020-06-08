@@ -11,6 +11,7 @@ import com.badcompany.domain.domainmodel.UserCredentials
 import com.badcompany.domain.usecases.SmsConfirm
 import com.badcompany.pitak.ui.BaseViewModel
 import com.badcompany.pitak.util.SingleLiveEvent
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -21,10 +22,10 @@ class PhoneConfirmViewModel @Inject constructor(private val smsConfirm: SmsConfi
 
     fun confirm(phone: String, code: String) {
         response.value = ResultWrapper.InProgress
-        viewModelScope.launch {
-            viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO)  {
+
                 response.value = smsConfirm.execute(UserCredentials(phone.numericOnly(), code))
-            }
+
         }
 
     }

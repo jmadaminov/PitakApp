@@ -9,6 +9,7 @@ import com.badcompany.domain.usecases.LogUserIn
 import com.badcompany.pitak.R
 import com.badcompany.pitak.ui.BaseViewModel
 import com.badcompany.pitak.util.SingleLiveEvent
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -26,7 +27,7 @@ class LoginViewModel @Inject constructor(private val logUserIn: LogUserIn) : Bas
     fun login(phoneNum: String) {
             this.phoneNum = phoneNum
             response.value = ResultWrapper.InProgress
-            viewModelScope.launch {
+            viewModelScope.launch(Dispatchers.IO)  {
                 response.value = logUserIn.execute(phoneNum.numericOnly())
             }
     }

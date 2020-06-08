@@ -13,10 +13,7 @@ import com.badcompany.domain.usecases.UploadPhoto
 import com.badcompany.pitak.App
 import com.badcompany.pitak.ui.BaseViewModel
 import com.badcompany.pitak.util.SingleLiveEvent
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.InternalCoroutinesApi
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import splitties.init.appCtx
 import java.io.File
 import javax.inject.Inject
@@ -43,7 +40,7 @@ class AddCarViewModel @Inject constructor(private val uploadPhoto: UploadPhoto,
 
     @InternalCoroutinesApi
     fun getCarColorsAndModels(token: String) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO)  {
             colorsAndModels.value = ResultWrapper.InProgress
             try {
                 val colors = async { getCarColors.execute(token) }
@@ -70,13 +67,13 @@ class AddCarViewModel @Inject constructor(private val uploadPhoto: UploadPhoto,
     fun uploadCarPhoto(file: File, isAvatar: Boolean = false) {
         val liveData = if (isAvatar) carAvatarResponse else carImgResponse
         liveData.value = ResultWrapper.InProgress
-        viewModelScope.launch { liveData.value = uploadPhoto.execute(file) }
+        viewModelScope.launch(Dispatchers.IO) { liveData.value = uploadPhoto.execute(file) }
     }
 
 
     fun saveCar(token: String, car: Car) {
         carSaveReponse.value = ResultWrapper.InProgress
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO)  {
             carSaveReponse.value =
                 saveCar.execute(hashMapOf(Pair(TXT_TOKEN, token), Pair(TXT_CAR, car)))
         }

@@ -14,6 +14,7 @@ import com.badcompany.domain.usecases.RegisterUser
 import com.badcompany.pitak.R
 import com.badcompany.pitak.ui.BaseViewModel
 import com.badcompany.pitak.util.SingleLiveEvent
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -27,7 +28,7 @@ class RegisterViewModel @Inject constructor(private val registerUser: RegisterUs
 
     fun register(user: User) {
             response.value = ResultWrapper.InProgress
-            viewModelScope.launch {
+            viewModelScope.launch(Dispatchers.IO)  {
                 response.value = registerUser.execute(user)
             }
     }
