@@ -37,7 +37,11 @@ open class CarRemoteDataStore @Inject constructor(private val carRemote: CarRemo
         return carRemote.updateCar(token, car)
     }
 
-    override suspend fun setDefaultCar(token: String, id: String): ResultWrapper<String> {
+    override suspend fun deleteCar(token: String, id: Long): ResultWrapper<String> {
+        return carRemote.deleteCar(token, id)
+    }
+
+    override suspend fun setDefaultCar(token: String, id: Long): ResultWrapper<String> {
         return carRemote.setDefaultCar(token, id)
     }
 

@@ -23,9 +23,9 @@ class ColorsArrayAdapter(val context: Context,
             view.textColor.text = colors[position].nameEn
             view.imgColor.backgroundTintList =
                 ColorStateList.valueOf(Color.parseColor(colors[position].hex))
-         /*   view.itemParentView.setOnClickListener {
-                clickListener.onClick(position)
-            }*/
+            /*   view.itemParentView.setOnClickListener {
+                   clickListener.onClick(position)
+               }*/
         } else {
             view = convertView
         }
@@ -40,5 +40,6 @@ class ColorsArrayAdapter(val context: Context,
 }
 
 interface MyItemClickListener {
-    fun onClick(pos: Int)
+    fun onClick(pos: Int) {}
+    fun onClick(pos: Int, view: View) {}
 }

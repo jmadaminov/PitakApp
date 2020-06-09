@@ -16,5 +16,6 @@ interface CarDataStore {
     suspend fun getCarColors(token: String): ResultWrapper<List<CarColorEntity>>
     suspend fun createCar(token: String, car: CarEntity): ResultWrapper<String>
     suspend fun updateCar(token: String, car: CarEntity): ResultWrapper<String>
-    suspend fun setDefaultCar(token: String, id: String): ResultWrapper<String>
+    suspend fun deleteCar(token: String, id: Long): ResultWrapper<String>
+    suspend fun setDefaultCar(token: String, id: Long): ResultWrapper<String>
 }

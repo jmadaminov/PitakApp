@@ -1,5 +1,7 @@
 package com.badcompany.domain.domainmodel
 
+import java.io.Serializable
+
 data class CarDetails(var id: Long? = null,
                       var carModel: IdName? = null,
                       var image: Image? = null,

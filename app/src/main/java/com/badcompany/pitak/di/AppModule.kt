@@ -30,6 +30,12 @@ object AppModule {
         return GetCars(carRepository)
     }
 
+    @Provides
+    @JvmStatic
+    fun provideDeleteCar(carRepository: CarRepository): DeleteCar {
+        return DeleteCar(carRepository)
+    }
+
 
     @Provides
     @JvmStatic
@@ -38,7 +44,11 @@ object AppModule {
                              colorMapper: CarColorMapper,
                              carMapper: CarMapper,
                              carDetailsMapper: CarDetailsMapper): CarRepository {
-        return CarRepositoryImpl(carDataStoreFactory, colorMapper, modelMapper, carMapper, carDetailsMapper)
+        return CarRepositoryImpl(carDataStoreFactory,
+                                 colorMapper,
+                                 modelMapper,
+                                 carMapper,
+                                 carDetailsMapper)
     }
 
 
@@ -92,7 +102,11 @@ object AppModule {
                          carColorMapper: com.badcompany.remote.mapper.CarColorMapper,
                          carMapper: com.badcompany.remote.mapper.CarMapper,
                          carDetailsMapper: com.badcompany.remote.mapper.CarDetailsMapper): CarRemote {
-        return CarRemoteImpl(apiService, carModelMapper, carColorMapper, carMapper, carDetailsMapper)
+        return CarRemoteImpl(apiService,
+                             carModelMapper,
+                             carColorMapper,
+                             carMapper,
+                             carDetailsMapper)
     }
 
 

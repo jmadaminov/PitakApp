@@ -104,7 +104,20 @@ class CarRepositoryImpl @Inject constructor(private val factory: CarDataStoreFac
         }
     }
 
-    override suspend fun setDefaultCar(token: String, id: String): ResultWrapper<String> {
+    override suspend fun deleteCar(token: String, id: Long): ResultWrapper<String> {
+        val response = factory.retrieveDataStore(false)
+            .deleteCar(token, id)
+        return when (response) {
+            is ErrorWrapper.ResponseError -> response
+            is ErrorWrapper.SystemError -> response
+            is ResultWrapper.Success -> {
+                ResultWrapper.Success("SUCCESS")
+            }
+            ResultWrapper.InProgress -> ResultWrapper.InProgress
+        }
+    }
+
+    override suspend fun setDefaultCar(token: String, id: Long): ResultWrapper<String> {
         val response = factory.retrieveDataStore(false)
             .setDefaultCar(token, id)
         return when (response) {

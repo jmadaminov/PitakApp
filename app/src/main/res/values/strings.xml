@@ -46,4 +46,7 @@
     <string name="methane">Methane</string>
     <string name="propane">Propane</string>
     <string name="myCars">My Cars</string>
+    <string name="delete">Delete</string>
+    <string name="set_default">Set default</string>
+    <string name="edit">Edit</string>
 </resources>

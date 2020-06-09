@@ -62,7 +62,7 @@ class PhoneConfirmFragment @Inject constructor(private val viewModelFactory: Vie
 
     @ExperimentalSplittiesApi
     private fun setupObservers() {
-        viewModel.response.observe(viewLifecycleOwner, Observer {
+        viewModel.confirmResponse.observe(viewLifecycleOwner, Observer {
             val response = it ?: return@Observer
 
             when (response) {

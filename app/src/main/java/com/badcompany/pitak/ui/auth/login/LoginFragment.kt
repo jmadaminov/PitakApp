@@ -1,10 +1,7 @@
 package com.badcompany.pitak.ui.auth.login
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.View
-import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
@@ -103,7 +100,7 @@ class LoginFragment @Inject constructor(private val viewModelFactory: ViewModelP
 //
 //        })
 
-        viewModel.response.observe(viewLifecycleOwner, Observer {
+        viewModel.loginResponse.observe(viewLifecycleOwner, Observer {
             val response = it ?: return@Observer
 
             when (response) {

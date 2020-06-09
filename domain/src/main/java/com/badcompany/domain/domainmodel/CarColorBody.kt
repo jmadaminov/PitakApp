@@ -1,7 +1,7 @@
 package com.badcompany.domain.domainmodel
 
-data class CarColorBody (val id: Long,
-                         val hex: String,
-                         val nameEn: String,
-                         val nameUz: String,
-                         val nameRu: String)
+data class CarColorBody(val id: Long? = null,
+                        val hex: String? = null,
+                        val nameEn: String? = null,
+                        val nameUz: String? = null,
+                        val nameRu: String? = null)

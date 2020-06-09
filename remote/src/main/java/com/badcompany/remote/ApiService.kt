@@ -41,17 +41,23 @@ interface ApiService {
         @Body car: CarModel): PlainResponse
 
     @Headers("Content-Type:application/json", "Accept: application/json")
-    @PUT("car/action/{identifier")
+    @PUT("car/action/{identifier}")
     suspend fun updateCar(/*@Header("Content-Language") lang: String,*/
-        @Path(value = "identifier", encoded = true) identifier: String,
         @Header("Authorization") token: String,
+        @Path(value = "identifier", encoded = true) identifier: Long,
         @Body car: CarModel): PlainResponse
+
+    @Headers("Content-Type:application/json", "Accept: application/json")
+    @DELETE("car/action/{identifier}")
+    suspend fun deleteCar(/*@Header("Content-Language") lang: String,*/
+        @Header("Authorization") token: String,
+        @Path(value = "identifier", encoded = true) identifier: Long): PlainResponse
 
     @Headers("Content-Type:application/json", "Accept: application/json")
     @PUT("car/action/{identifier}/def")
     suspend fun setDefaultCar(/*@Header("Content-Language") lang: String,*/
         @Header("Authorization") token: String,
-        @Path(value = "identifier", encoded = true) identifier: String,
+        @Path(value = "identifier", encoded = true) identifier: Long,
         @Body carDefault: CarDefaultBody = CarDefaultBody()): PlainResponse
 
     @Headers("Content-Type:application/json", "Accept: application/json")

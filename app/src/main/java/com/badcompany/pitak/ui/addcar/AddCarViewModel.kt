@@ -14,6 +14,8 @@ import com.badcompany.pitak.App
 import com.badcompany.pitak.ui.BaseViewModel
 import com.badcompany.pitak.util.SingleLiveEvent
 import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
 import splitties.init.appCtx
 import java.io.File
 import javax.inject.Inject
@@ -40,26 +42,34 @@ class AddCarViewModel @Inject constructor(private val uploadPhoto: UploadPhoto,
 
     @InternalCoroutinesApi
     fun getCarColorsAndModels(token: String) {
-        viewModelScope.launch(Dispatchers.IO)  {
-            colorsAndModels.value = ResultWrapper.InProgress
-            try {
-                val colors = async { getCarColors.execute(token) }
-                val models = async { getCarModels.execute(token) }
-                processResponses(colors.await(), models.await())
-            } catch (e: Exception) {
-                colorsAndModels.value = ErrorWrapper.SystemError(e)
+        viewModelScope.launch(IO) {
+            withContext(Main) {
+                colorsAndModels.value = ResultWrapper.InProgress
+            }
+            withContext(IO) {
+                try {
+                    val colors = async { getCarColors.execute(token) }
+                    val models = async { getCarModels.execute(token) }
+                    processResponses(colors.await(), models.await())
+                } catch (e: Exception) {
+                    withContext(Main) {
+                        colorsAndModels.value = ErrorWrapper.SystemError(e)
+                    }
+                }
             }
         }
     }
 
     private fun processResponses(colorsResp: ResultWrapper<List<CarColorBody>>,
                                  modelsResp: ResultWrapper<List<CarModelBody>>) {
-        if (colorsResp is ResultWrapper.Success && modelsResp is ResultWrapper.Success) {
-            colorsAndModels.value =
-                ResultWrapper.Success(ColorsAndModels(colorsResp.value, modelsResp.value))
-        } else {
-            colorsAndModels.value =
-                if (colorsResp is ErrorWrapper) colorsResp else modelsResp as ErrorWrapper
+        viewModelScope.launch(Main) {
+            if (colorsResp is ResultWrapper.Success && modelsResp is ResultWrapper.Success) {
+                colorsAndModels.value =
+                    ResultWrapper.Success(ColorsAndModels(colorsResp.value, modelsResp.value))
+            } else {
+                colorsAndModels.value =
+                    if (colorsResp is ErrorWrapper) colorsResp else modelsResp as ErrorWrapper
+            }
         }
     }
 
@@ -67,15 +77,26 @@ class AddCarViewModel @Inject constructor(private val uploadPhoto: UploadPhoto,
     fun uploadCarPhoto(file: File, isAvatar: Boolean = false) {
         val liveData = if (isAvatar) carAvatarResponse else carImgResponse
         liveData.value = ResultWrapper.InProgress
-        viewModelScope.launch(Dispatchers.IO) { liveData.value = uploadPhoto.execute(file) }
+        viewModelScope.launch(IO) {
+            val response = uploadPhoto.execute(file)
+            withContext(Main) {
+                liveData.value = response
+            }
+        }
+
+
     }
 
 
     fun saveCar(token: String, car: Car) {
         carSaveReponse.value = ResultWrapper.InProgress
-        viewModelScope.launch(Dispatchers.IO)  {
-            carSaveReponse.value =
+        viewModelScope.launch(IO) {
+            val response =
                 saveCar.execute(hashMapOf(Pair(TXT_TOKEN, token), Pair(TXT_CAR, car)))
+            withContext(Main) {
+                carSaveReponse.value = response
+            }
+
         }
     }
 
