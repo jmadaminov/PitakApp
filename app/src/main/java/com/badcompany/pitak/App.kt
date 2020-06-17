@@ -4,6 +4,7 @@ package com.badcompany.pitak
 import android.app.Application
 import com.badcompany.pitak.di.AppComponent
 import com.badcompany.pitak.di.DaggerAppComponent
+import com.badcompany.pitak.di.addPost.AddPostComponent
 import com.badcompany.pitak.di.addcar.AddCarComponent
 import com.badcompany.pitak.di.auth.AuthComponent
 import com.badcompany.pitak.di.main.MainComponent
@@ -17,6 +18,7 @@ open class App : Application() {
     lateinit var appComponent: AppComponent
     private var authComponent: AuthComponent? = null
     private var addCarComponent: AddCarComponent? = null
+    private var addPostComponent: AddPostComponent? = null
     private var mainComponent: MainComponent? = null
 
     override fun onCreate() {
@@ -56,11 +58,23 @@ open class App : Application() {
         addCarComponent = null
     }
 
+    fun releaseAddPostComponent() {
+        addPostComponent = null
+    }
+
     fun addCarComponent(): AddCarComponent {
         if (addCarComponent == null) {
             addCarComponent = appComponent.addCarComponent().create()
         }
         return addCarComponent as AddCarComponent
+    }
+
+
+    fun addPostComponent(): AddPostComponent {
+        if (addPostComponent == null) {
+            addPostComponent = appComponent.addPostComponent().create()
+        }
+        return addPostComponent as AddPostComponent
     }
 
 

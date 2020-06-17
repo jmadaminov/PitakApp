@@ -11,6 +11,7 @@ import com.badcompany.pitak.R
 import com.badcompany.pitak.di.viewmodels.MainViewModelFactory
 import com.badcompany.pitak.fragments.MainNavHostFragment
 import com.badcompany.pitak.ui.BaseActivity
+import com.badcompany.pitak.ui.addpost.AddPostActivity
 import com.badcompany.pitak.ui.auth.AuthActivity
 import com.badcompany.pitak.ui.main.mytrips.MyTripsFragment
 import com.badcompany.pitak.ui.main.profile.ProfileFragment
@@ -52,6 +53,7 @@ class MainActivity : BaseActivity(), BottomNavController.OnNavigationGraphChange
             this)
     }
 
+    @ExperimentalSplittiesApi
     override fun onCreate(savedInstanceState: Bundle?) {
         checkUserLogin()
         inject()
@@ -59,10 +61,17 @@ class MainActivity : BaseActivity(), BottomNavController.OnNavigationGraphChange
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setupActionBar()
+        setupListeners()
         subscribeObservers()
         onRestoreInstanceState()
         setupBottomNavigationView(savedInstanceState)
 
+    }
+
+    private fun setupListeners() {
+        addPost.setOnClickListener {
+            start<AddPostActivity>()
+        }
     }
 
     @ExperimentalSplittiesApi

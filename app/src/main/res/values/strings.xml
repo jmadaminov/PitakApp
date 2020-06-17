@@ -27,6 +27,7 @@
     <string name="title_profile">Profile</string>
     <string name="MainNavHost">MainNavHost</string>
     <string name="AuthNavHost">AuthNavHost</string>
+    <string name="AddPostNavHost">AddPostNavHost</string>
     <string name="my_trips">My Trips</string>
     <string name="search_trip">Search Trip</string>
     <string name="authorize">Authorize</string>
@@ -49,4 +50,8 @@
     <string name="delete">Delete</string>
     <string name="set_default">Set default</string>
     <string name="edit">Edit</string>
+    <string name="add_post">Add post</string>
+    <string name="title_add_post">Add post</string>
+    <string name="destinations">Destinations</string>
+    <string name="from">From</string>
 </resources>

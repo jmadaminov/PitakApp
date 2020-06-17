@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/add_car_nav_graph"
+    app:startDestination="@id/chooseDestinationsFragment">
+
+
+    <fragment
+        android:id="@+id/chooseDestinationsFragment"
+        android:name="com.badcompany.pitak.ui.addpost.choosedestinations.ChooseDestinationsFragment"
+        android:label="@string/destinations"
+        tools:layout="@layout/fragment_choose_destinations" />
+
+</navigation>
