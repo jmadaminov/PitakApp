@@ -17,10 +17,11 @@ class PlaceRepositoryImpl @Inject constructor(private val factory: PlaceDataStor
     PlaceRepository {
 
 
-    override suspend fun getPlacesAutocomplete(token: String,
+    override suspend fun getPlacesAutocomplete(token: String, lang: String,
                                                queryString: String): ResultWrapper<List<Place>> {
 
-        val response = factory.retrieveDataStore(false).getPlacesAutocomplete(token, queryString)
+        val response =
+            factory.retrieveDataStore(false).getPlacesAutocomplete(token, lang, queryString)
         return when (response) {
             is ErrorWrapper.ResponseError -> response
             is ErrorWrapper.SystemError -> response

@@ -5,6 +5,6 @@ import com.badcompany.data.model.PlaceEntity
 
 
 interface PlaceDataStore {
-    suspend fun getPlacesAutocomplete(token: String, queryString:String): ResultWrapper<List<PlaceEntity>>
+    suspend fun getPlacesAutocomplete(token: String,lang: String, queryString:String): ResultWrapper<List<PlaceEntity>>
 
 }

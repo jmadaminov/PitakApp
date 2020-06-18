@@ -16,9 +16,10 @@ class PlaceRemoteImpl @Inject constructor(private val apiService: ApiService,
                                           private val placeMapper: PlaceMapper) : PlaceRemote {
 
     override suspend fun getPlacesAutocomplete(token: String,
+                                               lang: String,
                                                queryString: String): ResultWrapper<List<PlaceEntity>> {
         return try {
-            val response = apiService.getPlacesAutocomplete(token, queryString)
+            val response = apiService.getPlacesFeed(token, lang, queryString)
             if (response.code == 1) {
                 val places = arrayListOf<PlaceEntity>()
                 response.data!!.forEach {

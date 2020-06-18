@@ -13,6 +13,10 @@ object Constants {
     const val TXT_TOKEN = "TOKEN"
     const val TXT_ID = "ID"
     const val TXT_PLACE = "PLACE"
+    const val TXT_LANG = "LANGUAGE"
+    const val RU = "ru"
+    const val EN = "en"
+    const val UZ = "uz"
     const val CODE_ADD_CAR = 99
 
 }

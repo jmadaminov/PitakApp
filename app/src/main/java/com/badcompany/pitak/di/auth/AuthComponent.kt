@@ -1,5 +1,6 @@
 package com.badcompany.pitak.di.auth
 
+import com.badcompany.pitak.di.addPost.AddPostFragmentsModule
 import com.badcompany.pitak.ui.auth.AuthActivity
 import dagger.Subcomponent
 

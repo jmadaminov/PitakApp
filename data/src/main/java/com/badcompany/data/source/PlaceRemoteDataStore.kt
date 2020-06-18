@@ -12,10 +12,10 @@ import javax.inject.Inject
  */
 open class PlaceRemoteDataStore @Inject constructor(private val placeRemote: PlaceRemote) :
     PlaceDataStore {
-    override suspend fun getPlacesAutocomplete(token: String,
+    override suspend fun getPlacesAutocomplete(token: String,lang: String,
                                                queryString: String): ResultWrapper<List<PlaceEntity>> {
 
-        return placeRemote.getPlacesAutocomplete(token, queryString)
+        return placeRemote.getPlacesAutocomplete(token, lang,queryString)
     }
 
 

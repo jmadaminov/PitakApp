@@ -14,6 +14,7 @@ class GetPlacesFeed(val repository: PlaceRepository) :
 
     override suspend fun buildUseCase(params: HashMap<String, String>): ResultWrapper<List<Place>> {
         return repository.getPlacesAutocomplete(params[Constants.TXT_TOKEN]!!,
+                                                params[Constants.TXT_LANG]!!,
                                                 params[Constants.TXT_PLACE]!!)
     }
 }

@@ -14,6 +14,8 @@ import splitties.preferences.Preferences
     @ExperimentalSplittiesApi
     var token by stringPref("")
     @ExperimentalSplittiesApi
+    var language by stringPref("uz")
+    @ExperimentalSplittiesApi
     var name by stringPref("")
     @ExperimentalSplittiesApi
     var surname by stringPref("")

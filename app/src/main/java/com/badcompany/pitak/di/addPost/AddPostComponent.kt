@@ -1,12 +1,11 @@
 package com.badcompany.pitak.di.addPost
 
-import com.badcompany.pitak.ui.addcar.AddCarActivity
 import com.badcompany.pitak.ui.addpost.AddPostActivity
 import dagger.Subcomponent
 
 
 @AddPostScope
-@Subcomponent(modules = [AddPostModule::class, AddPostViewModelModule::class])
+@Subcomponent(modules = [AddPostModule::class, AddPostViewModelModule::class, AddPostFragmentsModule::class])
 interface AddPostComponent {
 
     @Subcomponent.Factory

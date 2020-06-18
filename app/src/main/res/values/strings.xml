@@ -54,4 +54,5 @@
     <string name="title_add_post">Add post</string>
     <string name="destinations">Destinations</string>
     <string name="from">From</string>
+    <string name="to">To</string>
 </resources>

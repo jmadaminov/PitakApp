@@ -10,6 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="24dp"
+        android:clipChildren="false"
+        android:clipToPadding="false"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -17,9 +19,41 @@
             android:id="@+id/fromInput"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="@string/from" />
+            android:hint="@string/from"
+            android:imeOptions="actionNone"
+            android:maxLines="1" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/toInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="24dp"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fromInputLayout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/toInput"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/to"
+            android:imeOptions="actionNone"
+            android:maxLines="1" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <Button
+        android:id="@+id/map"
+        android:layout_width="wrap_content"
+        android:layout_margin="24dp"
+        android:layout_height="wrap_content"
+        android:text="map"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toInputLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

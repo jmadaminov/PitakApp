@@ -2,13 +2,15 @@
 <resources>
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
+    <color name="windowBackground">#fff</color>
     <color name="colorAccent">#D81B60</color>
     <color name="splashGradientEnd">#4F2A93</color>
     <color name="splashGradientStart">#CBB5FF</color>
     <color name="button_grey">#B6B6B6</color>
     <color name="dark_grey">#FF393939</color>
     <color name="error_red">#F44336</color>
-    <color name="line_textColorGrey">#e7e9ed</color>
+    <color name="line_textColorGrey">#b9b9bc</color>
+    <color name="greyBackground">@android:color/background_light</color>
     <color name="textColorGreyDark">#6e6e70</color>
     <color name="orange">#FFA000</color>
     <color name="ic_grey" >#a1a9c3</color>

@@ -11,5 +11,6 @@ data class PlaceListResponse(val code: Int? = null,
 
 data class PlaceModel(@SerializedName("districtId") val districtId: Int,
                       @SerializedName("regionId") val regionId: Int,
-                      @SerializedName("nameRu") val nameRu: String,
-                      @SerializedName("nameUz") val nameUz: String)
+                      @SerializedName("nameRu") val nameRu: String? = null,
+                      @SerializedName("nameUz") val nameUz: String? = null,
+                      @SerializedName("nameEn") val nameEn: String? = null)
