@@ -197,13 +197,13 @@ class ChooseDestinationsFragment @Inject constructor(private val viewModelFactor
                     fromAutocompletePresenter.getAdr().notifyDataSetChanged()
                 }
                 ResultWrapper.InProgress -> {
-                    if (fromAutocompletePresenter.getAdr().itemCount == 0 || fromAutocompletePresenter.getAdr().getItem(
-                            fromAutocompletePresenter.getAdr().itemCount - 1) !is LoadingItemSmall) {
-                        fromAutocompletePresenter.getAdr().add(LoadingItemSmall())
-                        fromAutocompletePresenter.getAdr().notifyDataSetChanged()
-                    } else {
-
-                    }
+//                    if (fromAutocompletePresenter.getAdr().itemCount == 0 || fromAutocompletePresenter.getAdr().getItem(
+//                            fromAutocompletePresenter.getAdr().itemCount - 1) !is LoadingItemSmall) {
+//                        fromAutocompletePresenter.getAdr().add(LoadingItemSmall())
+//                        fromAutocompletePresenter.getAdr().notifyDataSetChanged()
+//                    } else {
+//
+//                    }
                 }
             }.exhaustive
 
@@ -228,13 +228,13 @@ class ChooseDestinationsFragment @Inject constructor(private val viewModelFactor
                     toAutocompletePresenter.getAdr().notifyDataSetChanged()
                 }
                 ResultWrapper.InProgress -> {
-                    if (toAutocompletePresenter.getAdr().itemCount == 0 || toAutocompletePresenter.getAdr().getItem(
-                            toAutocompletePresenter.getAdr().itemCount - 1) !is LoadingItemSmall) {
-                        toAutocompletePresenter.getAdr().add(LoadingItemSmall())
-                        toAutocompletePresenter.getAdr().notifyDataSetChanged()
-                    } else {
-
-                    }
+//                    if (toAutocompletePresenter.getAdr().itemCount == 0 || toAutocompletePresenter.getAdr().getItem(
+//                            toAutocompletePresenter.getAdr().itemCount - 1) !is LoadingItemSmall) {
+//                        toAutocompletePresenter.getAdr().add(LoadingItemSmall())
+//                        toAutocompletePresenter.getAdr().notifyDataSetChanged()
+//                    } else {
+//
+//                    }
                 }
             }.exhaustive
 
