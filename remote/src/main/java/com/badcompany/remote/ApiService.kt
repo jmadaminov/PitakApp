@@ -12,6 +12,18 @@ interface ApiService {
 //    @GET("team.json")
 //    suspend fun getBufferoos(): Flowable<BufferooResponse>
 
+    //POST API
+
+    @Headers("Content-Type:application/json", "Accept: application/json")
+    @GET("region/action/{text}")
+    suspend fun getPlacesAutocomplete(/*@Header("Content-Language") lang: String,*/
+        @Header("Authorization") token: String,
+        @Path(value = "text", encoded = true) text: String): PlaceListResponse
+
+
+    //
+
+
     //AUTH API
     @Headers("Content-Type:application/json", "Accept: application/json")
     @POST("prof/mb/auth")

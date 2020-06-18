@@ -97,8 +97,7 @@ class ChooseDestinationsFragment @Inject constructor(private val viewModelFactor
 
     private val fromQueryListener = object : IOnPlaceSearchQueryListener {
         override fun onQuery(query: CharSequence?) {
-            if (query!!.length % 3 == 0) viewModel.makeFromSearch(fromInput.text.toString())
-
+            if (query!!.length % 3 == 0) viewModel.getPlacesFeed(fromInput.text.toString())
         }
     }
 

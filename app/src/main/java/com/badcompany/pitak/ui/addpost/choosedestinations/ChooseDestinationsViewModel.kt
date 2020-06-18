@@ -1,26 +1,38 @@
 package com.badcompany.pitak.ui.addpost.choosedestinations
 
 import android.util.Log
+import androidx.lifecycle.viewModelScope
+import com.badcompany.core.Constants
 import com.badcompany.core.ResultWrapper
-import com.badcompany.domain.domainmodel.AuthBody
+import com.badcompany.domain.domainmodel.Place
+import com.badcompany.domain.usecases.GetPlacesFeed
 import com.badcompany.pitak.ui.BaseViewModel
+import com.badcompany.pitak.util.AppPreferences
 import com.badcompany.pitak.util.SingleLiveEvent
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import splitties.experimental.ExperimentalSplittiesApi
 import javax.inject.Inject
 
 
-class ChooseDestinationsViewModel @Inject constructor(/*private val smsConfirm: SmsConfirm*/) :
+class ChooseDestinationsViewModel @Inject constructor(private val getPlacesFeed: GetPlacesFeed) :
     BaseViewModel() {
 
-    val confirmResponse = SingleLiveEvent<ResultWrapper<AuthBody>>()
+    val fromPlacesResponse = SingleLiveEvent<ResultWrapper<List<Place>>>()
 
-    fun confirm(phone: String, code: String) {
-//        confirmResponse.value = ResultWrapper.InProgress
-//        viewModelScope.launch(Dispatchers.IO) {
-//            val response = smsConfirm.execute(UserCredentials(phone.numericOnly(), code))
-//            withContext(Main) {
-//                confirmResponse.value = response
-//            }
-//        }
+    @ExperimentalSplittiesApi
+    fun getPlacesFeed(queryString: String, isFrom: Boolean = true) {
+        fromPlacesResponse.value = ResultWrapper.InProgress
+        viewModelScope.launch(Dispatchers.IO) {
+            val response =
+                getPlacesFeed.execute(hashMapOf(Pair(Constants.TXT_TOKEN, AppPreferences.token),
+                                                Pair(Constants.TXT_PLACE, queryString)))
+            withContext(Main) {
+                fromPlacesResponse.value = response
+            }
+        }
 
     }
 
@@ -34,8 +46,5 @@ class ChooseDestinationsViewModel @Inject constructor(/*private val smsConfirm: 
         return password.length > 5
     }
 
-    fun makeFromSearch(text: String) {
-        Log.wtf(TAG, "makeFromSearch: $text")
 
-    }
 }
