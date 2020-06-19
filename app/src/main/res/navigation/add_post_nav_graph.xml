@@ -3,13 +3,124 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/add_car_nav_graph"
-    app:startDestination="@id/chooseDestinationsFragment">
+    app:startDestination="@id/destinationsFragment">
 
 
     <fragment
-        android:id="@+id/chooseDestinationsFragment"
-        android:name="com.badcompany.pitak.ui.addpost.choosedestinations.ChooseDestinationsFragment"
+        android:id="@+id/destinationsFragment"
+        android:name="com.badcompany.pitak.ui.addpost.destinations.DestinationsFragment"
         android:label="@string/destinations"
-        tools:layout="@layout/fragment_choose_destinations" />
+        tools:layout="@layout/fragment_destinations">
+        <action
+            android:id="@+id/action_destinationsFragment_to_dateTimeFragment"
+            app:destination="@id/dateTimeFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_destinationsFragment_to_previewFragment"
+            app:destination="@id/previewFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/dateTimeFragment"
+        android:name="com.badcompany.pitak.ui.addpost.datetime.DateAndTimeFragment"
+        android:label="@string/dateTime"
+        tools:layout="@layout/fragment_date_and_time">
+        <action
+            android:id="@+id/action_dateTimeFragment_to_priceAndNoteFragment"
+            app:destination="@id/priceAndNoteFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_dateTimeFragment_to_previewFragment"
+            app:destination="@id/previewFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/carAndSeatFragment"
+        android:name="com.badcompany.pitak.ui.addpost.carandseat.CarAndSeatsFragment"
+        android:label="@string/car_and_seats"
+        tools:layout="@layout/fragment_car_and_seats">
+        <action
+            android:id="@+id/action_carAndSeatFragment_to_previewFragment"
+            app:destination="@id/previewFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/previewFragment"
+        android:name="com.badcompany.pitak.ui.addpost.preview.PreviewFragment"
+        android:label="@string/preview_post"
+        tools:layout="@layout/fragment_preview">
+        <action
+            android:id="@+id/action_previewFragment_to_destinationsFragment"
+            app:destination="@id/destinationsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_previewFragment_to_dateTimeFragment"
+            app:destination="@id/dateTimeFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_previewFragment_to_priceAndNoteFragment"
+            app:destination="@id/priceAndNoteFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_previewFragment_to_carAndSeatFragment"
+            app:destination="@id/carAndSeatFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/priceAndNoteFragment"
+        android:name="com.badcompany.pitak.ui.addpost.priceandtext.PriceAndNoteFragment"
+        android:label="@string/price_and_note"
+        tools:layout="@layout/fragment_price_and_note">
+        <action
+            android:id="@+id/action_priceAndNoteFragment_to_carAndSeatFragment"
+            app:destination="@id/carAndSeatFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_priceAndNoteFragment_to_previewFragment"
+            app:destination="@id/previewFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
 
 </navigation>

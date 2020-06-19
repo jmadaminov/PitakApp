@@ -7,7 +7,11 @@ package com.badcompany.pitak.fragments
 import androidx.fragment.app.FragmentFactory
 import androidx.lifecycle.ViewModelProvider
 import com.badcompany.pitak.di.addPost.AddPostScope
-import com.badcompany.pitak.ui.addpost.choosedestinations.ChooseDestinationsFragment
+import com.badcompany.pitak.ui.addpost.carandseat.CarAndSeatsFragment
+import com.badcompany.pitak.ui.addpost.datetime.DateAndTimeFragment
+import com.badcompany.pitak.ui.addpost.destinations.DestinationsFragment
+import com.badcompany.pitak.ui.addpost.preview.PreviewFragment
+import com.badcompany.pitak.ui.addpost.priceandtext.PriceAndNoteFragment
 import javax.inject.Inject
 
 @AddPostScope
@@ -15,17 +19,23 @@ class AddPostFragmentFactory @Inject constructor(private val viewModelFactory: V
     FragmentFactory() {
     override fun instantiate(classLoader: ClassLoader, className: String) =
         when (className) {
-            ChooseDestinationsFragment::class.java.name -> {
-                ChooseDestinationsFragment(viewModelFactory)
+            DestinationsFragment::class.java.name -> {
+                DestinationsFragment(viewModelFactory)
             }
-//            PhoneConfirmFragment::class.java.name -> {
-//                PhoneConfirmFragment(viewModelFactory)
-//            }
-//            RegisterFragment::class.java.name -> {
-//                RegisterFragment(viewModelFactory)
-//            }
+            PriceAndNoteFragment::class.java.name -> {
+                PriceAndNoteFragment(viewModelFactory)
+            }
+            PreviewFragment::class.java.name -> {
+                PreviewFragment(viewModelFactory)
+            }
+            DateAndTimeFragment::class.java.name -> {
+                DateAndTimeFragment(viewModelFactory)
+            }
+            CarAndSeatsFragment::class.java.name -> {
+                CarAndSeatsFragment(viewModelFactory)
+            }
             else -> {
-                ChooseDestinationsFragment(viewModelFactory)
+                DestinationsFragment(viewModelFactory)
             }
         }
 

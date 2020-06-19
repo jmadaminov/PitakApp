@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryOpacityEighty">#CC008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="windowBackground">#fff</color>
     <color name="colorAccent">#D81B60</color>
@@ -14,5 +15,9 @@
     <color name="textColorGreyDark">#6e6e70</color>
     <color name="orange">#FFA000</color>
     <color name="ic_grey" >#a1a9c3</color>
+
+    <color name="neutralColor">#FF393939</color>
+    <color name="neutralColorOpacityEighty">#CC393939</color>
+
 
 </resources>

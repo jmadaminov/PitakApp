@@ -44,7 +44,7 @@
             app:layout_constraintStart_toEndOf="@id/carAvatar"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/plateNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

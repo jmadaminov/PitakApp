@@ -120,6 +120,10 @@ dependencies {
     //AutoCompleteEditText
     implementation("com.otaliastudios:autocomplete:1.1.0")
 
+    //CALENDAR MATERIAL
+    implementation 'com.github.prolificinteractive:material-calendarview:2.0.1'
+    implementation 'joda-time:joda-time:2.9.9'
+
 }
 
 sourceCompatibility = "1.8"

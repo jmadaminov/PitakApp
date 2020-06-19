@@ -2,7 +2,7 @@ package com.badcompany.pitak.ui.viewgroups
 
 import com.badcompany.domain.domainmodel.Place
 import com.badcompany.pitak.R
-import com.badcompany.pitak.ui.addpost.choosedestinations.DestinationAutocompletePresenter
+import com.badcompany.pitak.ui.addpost.destinations.DestinationAutocompletePresenter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item
 import kotlinx.android.synthetic.main.item_place_autocomplete.view.*

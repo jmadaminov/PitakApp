@@ -86,7 +86,9 @@ class AddPostActivity : BaseActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            android.R.id.home -> onBackPressed()
+            android.R.id.home -> {
+                finish()
+            }
         }
         return super.onOptionsItemSelected(item)
     }

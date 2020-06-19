@@ -15,8 +15,14 @@ class CarItemView(val car: CarDetails, val onItemClickListener: MyItemClickListe
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         viewHolder.itemView.carAvatar.loadImageUrl(car.image!!.link!!)
         viewHolder.itemView.plateNumber.text = car.carNumber
+//        viewHolder.itemView.plateNumber.setTextFuture(
+//            PrecomputedTextCompat.getTextFuture(car.carNumber!!,
+//                                                viewHolder.itemView.plateNumber.textMetricsParamsCompat,
+//                                                null)
+//        )
+//        viewHolder.itemView.plateNumber.text = car.carNumber
         viewHolder.itemView.carYear.text = car.carYear.toString()
-        viewHolder.itemView.carModel.text = car.carNumber
+        viewHolder.itemView.carModel.text = car.carModel.toString()
         viewHolder.itemView.carAction.setOnClickListener {
             onItemClickListener.onClick(position, it)
         }

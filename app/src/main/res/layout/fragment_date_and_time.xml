@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/clParent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/day"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"/>
+
+    <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+        android:id="@+id/calendar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingTop="24dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/time"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp">
+
+        <CheckBox
+            android:id="@+id/checkFirstPartDay"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="6dp"
+            android:text="@string/first_part_of_day"
+            android:gravity="right|center_vertical"
+            app:layout_constraintEnd_toStartOf="@id/checkFirstPartNight"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <CheckBox
+            android:id="@+id/checkSecondPartDay"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="6dp"
+            android:text="@string/second_part_of_day"
+            app:layout_constraintEnd_toStartOf="@id/checkSecondPartNight"
+            android:gravity="right|center_vertical"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/checkFirstPartDay" />
+
+        <CheckBox
+            android:id="@+id/checkFirstPartNight"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="left|center_vertical"
+            android:layoutDirection="rtl"
+            android:layout_marginStart="6dp"
+            android:text="@string/first_part_of_night"
+            android:textAlignment="gravity"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@id/checkFirstPartDay"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <CheckBox
+            android:id="@+id/checkSecondPartNight"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="left|center_vertical"
+            android:layoutDirection="rtl"
+            android:layout_marginStart="6dp"
+            android:text="@string/second_part_of_night"
+            android:textAlignment="gravity"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@id/checkSecondPartDay"
+            app:layout_constraintTop_toBottomOf="@id/checkFirstPartNight" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/line_dash" />
+
+    <TextView
+        android:id="@+id/txtAsap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="12dp"
+        android:text="@string/departure_asap"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18dp" />
+
+    <CheckBox
+        android:id="@+id/asapCheck"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/selector_asap_checkbox"
+        android:backgroundTint="@color/colorPrimary"
+        android:button="@null"
+        android:checked="false" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/navBack"
+            android:layout_width="0dp"
+            android:layout_height="?android:actionBarSize"
+            android:layout_weight="1"
+            android:background="@drawable/fade_right_neutral"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:selectableItemBackground"
+            android:gravity="center_vertical|start"
+            android:paddingStart="48dp"
+            android:text="@string/back"
+            android:textColor="#fff"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/navNext"
+            android:layout_width="0dp"
+            android:layout_height="?android:actionBarSize"
+            android:layout_weight="1"
+            android:background="@drawable/fade_left_primary"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:selectableItemBackground"
+            android:gravity="center_vertical|end"
+            android:paddingEnd="48dp"
+            android:text="@string/next"
+            android:textColor="#fff"
+            android:textSize="20dp" />
+
+    </LinearLayout>
+</LinearLayout>

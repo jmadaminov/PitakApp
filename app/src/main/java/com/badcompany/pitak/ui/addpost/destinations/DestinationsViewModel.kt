@@ -1,4 +1,4 @@
-package com.badcompany.pitak.ui.addpost.choosedestinations
+package com.badcompany.pitak.ui.addpost.destinations
 
 import androidx.lifecycle.viewModelScope
 import com.badcompany.core.Constants
@@ -17,7 +17,7 @@ import splitties.experimental.ExperimentalSplittiesApi
 import javax.inject.Inject
 
 
-class ChooseDestinationsViewModel @Inject constructor(private val getPlacesFeed: GetPlacesFeed) :
+class DestinationsViewModel @Inject constructor(private val getPlacesFeed: GetPlacesFeed) :
     BaseViewModel() {
 
     private var fromFeedJob: Job? = null

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+
+
+    <TextView
+        android:id="@+id/navBack"
+        android:layout_width="0dp"
+        android:layout_height="?android:actionBarSize"
+        android:background="@drawable/fade_right_neutral"
+        android:gravity="center_vertical|start"
+        android:paddingStart="48dp"
+        android:text="@string/back"
+        android:textColor="#fff"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:selectableItemBackground"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/next"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/next"
+        android:layout_width="0dp"
+        android:layout_height="?android:actionBarSize"
+        android:background="@drawable/fade_left_primary"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:selectableItemBackground"
+        android:gravity="center_vertical|end"
+        android:paddingEnd="48dp"
+        android:text="@string/next"
+        android:textColor="#fff"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@id/navBack" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

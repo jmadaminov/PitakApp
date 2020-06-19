@@ -1,4 +1,4 @@
-package com.badcompany.pitak.ui.addpost.choosedestinations
+package com.badcompany.pitak.ui.addpost.destinations
 
 import android.content.Context
 import android.util.Log
