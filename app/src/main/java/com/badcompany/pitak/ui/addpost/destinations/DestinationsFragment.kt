@@ -1,10 +1,12 @@
 package com.badcompany.pitak.ui.addpost.destinations
 
+import android.graphics.PorterDuff
 import android.os.Bundle
 import android.text.Editable
 import android.text.Spannable
 import android.view.Gravity
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -14,11 +16,9 @@ import androidx.navigation.fragment.findNavController
 import com.badcompany.core.ErrorWrapper
 import com.badcompany.core.ResultWrapper
 import com.badcompany.core.exhaustive
-import com.badcompany.domain.domainmodel.Place
 import com.badcompany.pitak.MapsActivity
 import com.badcompany.pitak.R
 import com.badcompany.pitak.ui.`interface`.IOnPlaceSearchQueryListener
-import com.badcompany.pitak.ui.viewgroups.LoadingItemSmall
 import com.badcompany.pitak.ui.viewgroups.PlaceAutocompleteItemView
 import com.otaliastudios.autocomplete.Autocomplete
 import com.otaliastudios.autocomplete.AutocompleteCallback
@@ -35,8 +35,6 @@ class DestinationsFragment @Inject constructor(private val viewModelFactory: Vie
     Fragment(R.layout.fragment_destinations) {
 
 
-    private var placeFrom: Place? = null
-    private var placeTo: Place? = null
     private var fromAutocomplete: Autocomplete<PlaceAutocompleteItemView>? = null
     private var toAutocomplete: Autocomplete<PlaceAutocompleteItemView>? = null
     private val viewModel: DestinationsViewModel by viewModels {
@@ -214,7 +212,7 @@ class DestinationsFragment @Inject constructor(private val viewModelFactory: Vie
                 editable.clear()
                 editable.insert(0, item.place.nameUz)
                 fromInput.clearFocus()
-                placeFrom = item.place
+                viewModel.placeFrom = item.place
                 return true
             }
 
@@ -228,13 +226,28 @@ class DestinationsFragment @Inject constructor(private val viewModelFactory: Vie
                 editable.clear()
                 editable.insert(0, item.place.nameUz)
                 toInput.clearFocus()
-                placeTo = item.place
+                viewModel.placeTo = item.place
+                updateNextButtonState()
                 return true
             }
 
             override fun onPopupVisibilityChanged(shown: Boolean) {
             }
         }
+
+    private fun updateNextButtonState() {
+        next.isEnabled = viewModel.placeFrom != null && viewModel.placeTo != null
+
+        if (next.isEnabled) {
+            val bg = next.background
+            bg.setColorFilter(ContextCompat.getColor(requireContext(), R.color.colorAccent), PorterDuff.Mode.SRC_ATOP)
+            next.background = bg
+        } else {
+            val bg = next.background
+            bg.setColorFilter(ContextCompat.getColor(requireContext(), R.color.ic_grey), PorterDuff.Mode.SRC_ATOP)
+            next.background = bg
+        }
+    }
 
     @ExperimentalSplittiesApi
     private lateinit var fromAutocompletePresenter: DestinationAutocompletePresenter

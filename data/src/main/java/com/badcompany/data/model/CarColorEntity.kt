@@ -5,6 +5,6 @@ package com.badcompany.data.model
  */
 data class CarColorEntity(val id: Long,
                           val hex: String,
-                          val nameEn: String,
-                          val nameUz: String,
-                          val nameRu: String)
+                          val nameEn: String?=null,
+                          val nameUz: String?=null,
+                          val nameRu: String?=null)

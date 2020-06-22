@@ -42,9 +42,9 @@ class CarRemoteImpl @Inject constructor(private val apiService: ApiService,
         }
     }
 
-    override suspend fun getCarModels(token: String): ResultWrapper<List<CarModelEntity>> {
+    override suspend fun getCarModels(token: String, lang:String): ResultWrapper<List<CarModelEntity>> {
         return try {
-            val response = apiService.getCarModels(token)
+            val response = apiService.getCarModels(token,lang)
             if (response.code == 1) {
                 val newCarModels = ArrayList<CarModelEntity>()
                 response.data!!.forEach {
@@ -57,9 +57,9 @@ class CarRemoteImpl @Inject constructor(private val apiService: ApiService,
         }
     }
 
-    override suspend fun getCarColors(token: String): ResultWrapper<List<CarColorEntity>> {
+    override suspend fun getCarColors(token: String, lang:String): ResultWrapper<List<CarColorEntity>> {
         return try {
-            val response = apiService.getCarColors(token)
+            val response = apiService.getCarColors(token,lang)
             if (response.code == 1) {
                 val newCarColors = ArrayList<CarColorEntity>()
                 response.data!!.forEach {

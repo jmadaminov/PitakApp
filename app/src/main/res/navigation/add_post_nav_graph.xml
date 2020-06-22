@@ -34,8 +34,8 @@
         android:label="@string/dateTime"
         tools:layout="@layout/fragment_date_and_time">
         <action
-            android:id="@+id/action_dateTimeFragment_to_priceAndNoteFragment"
-            app:destination="@id/priceAndNoteFragment"
+            android:id="@+id/action_dateTimeFragment_to_priceAndSeatFragment"
+            app:destination="@id/priceAndSeatFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -51,12 +51,12 @@
 
 
     <fragment
-        android:id="@+id/carAndSeatFragment"
-        android:name="com.badcompany.pitak.ui.addpost.carandseat.CarAndSeatsFragment"
-        android:label="@string/car_and_seats"
-        tools:layout="@layout/fragment_car_and_seats">
+        android:id="@+id/carAndTextFragment"
+        android:name="com.badcompany.pitak.ui.addpost.carandtext.CarAndTextFragment"
+        android:label="@string/car_and_text"
+        tools:layout="@layout/fragment_car_and_note">
         <action
-            android:id="@+id/action_carAndSeatFragment_to_previewFragment"
+            android:id="@+id/action_carAndTextFragment_to_previewFragment"
             app:destination="@id/previewFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
@@ -85,15 +85,15 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
         <action
-            android:id="@+id/action_previewFragment_to_priceAndNoteFragment"
-            app:destination="@id/priceAndNoteFragment"
+            android:id="@+id/action_previewFragment_to_priceAndSeatFragment"
+            app:destination="@id/priceAndSeatFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
         <action
-            android:id="@+id/action_previewFragment_to_carAndSeatFragment"
-            app:destination="@id/carAndSeatFragment"
+            android:id="@+id/action_previewFragment_to_carAndTextFragment"
+            app:destination="@id/carAndTextFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -102,19 +102,19 @@
 
 
     <fragment
-        android:id="@+id/priceAndNoteFragment"
-        android:name="com.badcompany.pitak.ui.addpost.priceandtext.PriceAndNoteFragment"
-        android:label="@string/price_and_note"
-        tools:layout="@layout/fragment_price_and_note">
+        android:id="@+id/priceAndSeatFragment"
+        android:name="com.badcompany.pitak.ui.addpost.priceandseat.PriceAndSeatFragment"
+        android:label="@string/price_and_seats"
+        tools:layout="@layout/fragment_price_and_seat">
         <action
-            android:id="@+id/action_priceAndNoteFragment_to_carAndSeatFragment"
-            app:destination="@id/carAndSeatFragment"
+            android:id="@+id/action_priceAndSeatFragment_to_carAndTextFragment"
+            app:destination="@id/carAndTextFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
         <action
-            android:id="@+id/action_priceAndNoteFragment_to_previewFragment"
+            android:id="@+id/action_priceAndSeatFragment_to_previewFragment"
             app:destination="@id/previewFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"

@@ -12,6 +12,6 @@ data class CarColorsResponse(val code: Int? = null,
 
 data class CarColorModel(val id: Long,
                          val hex: String,
-                         @SerializedName("nameEn") val nameEn: String,
-                         @SerializedName("nameUz") val nameUz: String,
-                         @SerializedName("nameRu") val nameRu: String)
+                         @SerializedName("nameEn") val nameEn: String?=null,
+                         @SerializedName("nameUz") val nameUz: String?=null,
+                         @SerializedName("nameRu") val nameRu: String?=null)

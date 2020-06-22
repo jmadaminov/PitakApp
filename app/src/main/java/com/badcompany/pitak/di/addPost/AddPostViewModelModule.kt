@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.badcompany.pitak.di.viewmodels.AddPostViewModelFactory
 import com.badcompany.pitak.ui.addpost.AddPostViewModel
+import com.badcompany.pitak.ui.addpost.carandtext.CarAndTextViewModel
 import com.badcompany.pitak.ui.addpost.destinations.DestinationsViewModel
 import dagger.Binds
 import dagger.Module
@@ -22,11 +23,15 @@ abstract class AddPostViewModelModule {
     @AddPostViewModelKey(AddPostViewModel::class)
     abstract fun bindAddPostViewModel(viewModel: AddPostViewModel): ViewModel
 
-    @AddPostScope
     @Binds
     @IntoMap
     @AddPostViewModelKey(DestinationsViewModel::class)
     abstract fun bindChooseDestinationsViewModel(viewModel: DestinationsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @AddPostViewModelKey(CarAndTextViewModel::class)
+    abstract fun bindChooseCarAndTextViewModel(viewModel: CarAndTextViewModel): ViewModel
 
 
 }

@@ -44,9 +44,9 @@ class CarRepositoryImpl @Inject constructor(private val factory: CarDataStoreFac
     }
 
 
-    override suspend fun getCarModels(token: String): ResultWrapper<List<CarModelBody>> {
+    override suspend fun getCarModels(token: String, lang:String): ResultWrapper<List<CarModelBody>> {
         val response = factory.retrieveDataStore(false)
-            .getCarModels(token)
+            .getCarModels(token,lang)
         return when (response) {
             is ErrorWrapper.ResponseError -> response
             is ErrorWrapper.SystemError -> response
@@ -61,9 +61,9 @@ class CarRepositoryImpl @Inject constructor(private val factory: CarDataStoreFac
         }
     }
 
-    override suspend fun getCarColors(token: String): ResultWrapper<List<CarColorBody>> {
+    override suspend fun getCarColors(token: String, lang:String): ResultWrapper<List<CarColorBody>> {
         val response = factory.retrieveDataStore(false)
-            .getCarColors(token)
+            .getCarColors(token,lang)
         return when (response) {
             is ErrorWrapper.ResponseError -> response
             is ErrorWrapper.SystemError -> response

@@ -80,7 +80,7 @@ class DateAndTimeFragment @Inject constructor(private val viewModelFactory: View
 
 
         navNext.setOnClickListener {
-            navController.navigate(R.id.action_dateTimeFragment_to_priceAndNoteFragment)
+            navController.navigate(R.id.action_dateTimeFragment_to_priceAndSeatFragment)
         }
 
         navBack.setOnClickListener {

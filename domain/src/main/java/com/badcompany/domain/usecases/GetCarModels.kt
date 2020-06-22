@@ -1,5 +1,6 @@
 package com.badcompany.domain.usecases
 
+import com.badcompany.core.Constants
 import com.badcompany.core.ResultWrapper
 import com.badcompany.domain.domainmodel.CarModelBody
 import com.badcompany.domain.repository.CarRepository
@@ -9,9 +10,9 @@ import com.badcompany.domain.repository.CarRepository
  *
  */
 class GetCarModels(val repository: CarRepository) :
-    UseCaseWithParams<String, ResultWrapper<List< CarModelBody>>>() {
+    UseCaseWithParams<HashMap<String, String>, ResultWrapper<List<CarModelBody>>>() {
 
-    override suspend fun buildUseCase(params: String): ResultWrapper<List< CarModelBody>> {
-        return repository.getCarModels(params)
+    override suspend fun buildUseCase(params: HashMap<String, String>): ResultWrapper<List<CarModelBody>> {
+        return repository.getCarModels(params[Constants.TXT_TOKEN]!!, params[Constants.TXT_LANG]!!)
     }
 }

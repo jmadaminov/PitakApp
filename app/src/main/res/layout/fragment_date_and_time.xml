@@ -11,6 +11,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:text="@string/day"
+        android:textSize="18dp"
+        android:layout_marginTop="12dp"
         android:textColor="@color/colorPrimary"
         android:textStyle="bold"/>
 
@@ -25,6 +27,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:textSize="18dp"
+        android:layout_marginBottom="12dp"
         android:text="@string/time"
         android:textColor="@color/colorPrimary"
         android:textStyle="bold"/>

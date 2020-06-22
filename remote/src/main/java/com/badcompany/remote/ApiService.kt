@@ -74,11 +74,13 @@ interface ApiService {
 
     @Headers("Content-Type:application/json", "Accept: application/json")
     @GET("car_model/action")
-    suspend fun getCarModels(/*@Header("Content-Language") lang: String,*/ @Header("Authorization") token: String): CarModelsResponse
+    suspend fun getCarModels(@Header("Authorization") token: String,
+                             @Header("Accept-Language") lang: String): CarModelsResponse
 
     @Headers("Content-Type:application/json", "Accept: application/json")
     @GET("car_color/action")
-    suspend fun getCarColors(/*@Header("Content-Language") lang: String,*/ @Header("Authorization") token: String): CarColorsResponse
+    suspend fun getCarColors(@Header("Authorization") token: String,
+                             @Header("Accept-Language") lang: String): CarColorsResponse
 
     //END CAR API
 

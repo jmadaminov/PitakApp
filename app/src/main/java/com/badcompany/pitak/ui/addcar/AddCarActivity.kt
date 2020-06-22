@@ -88,7 +88,7 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
         setupActionBar()
         setupListeners()
         setupCarPhotoGrid()
-        viewmodel.getCarColorsAndModels(AppPreferences.token)
+        viewmodel.getCarColorsAndModels()
     }
 
     private fun setupCarPhotoGrid() {
@@ -119,7 +119,7 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
         }
 
         retry.setOnClickListener {
-            viewmodel.getCarColorsAndModels(AppPreferences.token)
+            viewmodel.getCarColorsAndModels()
         }
 
         saveCar.setOnClickListener {

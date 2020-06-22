@@ -1,7 +1,9 @@
 package com.badcompany.pitak.ui.addcar
 
 import androidx.lifecycle.viewModelScope
+import com.badcompany.core.Constants
 import com.badcompany.core.Constants.TXT_CAR
+import com.badcompany.core.Constants.TXT_LANG
 import com.badcompany.core.Constants.TXT_TOKEN
 import com.badcompany.core.ErrorWrapper
 import com.badcompany.core.ResultWrapper
@@ -12,10 +14,12 @@ import com.badcompany.domain.usecases.SaveCar
 import com.badcompany.domain.usecases.UploadPhoto
 import com.badcompany.pitak.App
 import com.badcompany.pitak.ui.BaseViewModel
+import com.badcompany.pitak.util.AppPreferences
 import com.badcompany.pitak.util.SingleLiveEvent
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
+import splitties.experimental.ExperimentalSplittiesApi
 import splitties.init.appCtx
 import java.io.File
 import javax.inject.Inject
@@ -40,16 +44,19 @@ class AddCarViewModel @Inject constructor(private val uploadPhoto: UploadPhoto,
 //    fun getCarImgResponse(): SingleLiveEvent<ResultWrapper<PhotoBody>> = carImgResponse
 
 
+    @ExperimentalSplittiesApi
     @InternalCoroutinesApi
-    fun getCarColorsAndModels(token: String) {
+    fun getCarColorsAndModels() {
         viewModelScope.launch(IO) {
             withContext(Main) {
                 colorsAndModels.value = ResultWrapper.InProgress
             }
             withContext(IO) {
                 try {
-                    val colors = async { getCarColors.execute(token) }
-                    val models = async { getCarModels.execute(token) }
+                    val colors = async { getCarColors.execute(hashMapOf(Pair(TXT_TOKEN, AppPreferences.token), Pair(
+                        TXT_LANG, AppPreferences.language))) }
+                    val models = async { getCarModels.execute(hashMapOf(Pair(TXT_TOKEN, AppPreferences.token), Pair(
+                        TXT_LANG, AppPreferences.language) ))}
                     processResponses(colors.await(), models.await())
                 } catch (e: Exception) {
                     withContext(Main) {

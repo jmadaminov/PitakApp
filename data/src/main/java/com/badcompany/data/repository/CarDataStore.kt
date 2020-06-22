@@ -12,8 +12,8 @@ import java.io.File
  */
 interface CarDataStore {
     suspend fun getCars(token: String): ResultWrapper<List<CarDetailsEntity>>
-    suspend fun getCarModels(token: String): ResultWrapper<List<CarModelEntity>>
-    suspend fun getCarColors(token: String): ResultWrapper<List<CarColorEntity>>
+    suspend fun getCarModels(token: String, lang:String): ResultWrapper<List<CarModelEntity>>
+    suspend fun getCarColors(token: String, lang:String): ResultWrapper<List<CarColorEntity>>
     suspend fun createCar(token: String, car: CarEntity): ResultWrapper<String>
     suspend fun updateCar(token: String, car: CarEntity): ResultWrapper<String>
     suspend fun deleteCar(token: String, id: Long): ResultWrapper<String>

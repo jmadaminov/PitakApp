@@ -56,9 +56,9 @@
     <string name="from">From</string>
     <string name="to">To</string>
     <string name="dateTime">Date and time</string>
-    <string name="car_and_seats">Car and seats</string>
+    <string name="car_and_text">Car and note</string>
     <string name="preview_post">Preview post</string>
-    <string name="price_and_note">Price and note</string>
+    <string name="price_and_seats">Price and seats</string>
     <string name="next">Next</string>
     <string name="back">Back</string>
     <string name="create">Create</string>
@@ -69,4 +69,8 @@
     <string name="second_part_of_night">Second part of the night (24:00–6:00)</string>
     <string name="time">Time</string>
     <string name="day">Day</string>
+    <string name="price_for_one_passenger">Price for one passenger</string>
+    <string name="number_of_seats">Number of seats</string>
+    <string name="please_add_notes_if_needed">Please add notes if needed…</string>
+    <string name="your_car_for_this_ride">Your car for this ride</string>
 </resources>

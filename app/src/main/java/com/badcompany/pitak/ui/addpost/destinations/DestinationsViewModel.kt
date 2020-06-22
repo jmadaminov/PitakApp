@@ -20,6 +20,9 @@ import javax.inject.Inject
 class DestinationsViewModel @Inject constructor(private val getPlacesFeed: GetPlacesFeed) :
     BaseViewModel() {
 
+    var placeFrom: Place? = null
+    var placeTo: Place? = null
+
     private var fromFeedJob: Job? = null
     private var toFeedJob: Job? = null
     val fromPlacesResponse = SingleLiveEvent<ResultWrapper<List<Place>>>()
@@ -71,6 +74,8 @@ class DestinationsViewModel @Inject constructor(private val getPlacesFeed: GetPl
         fromFeedJob?.cancel()
         toFeedJob?.cancel()
     }
+
+
 
 
 }

@@ -7,11 +7,11 @@ package com.badcompany.pitak.fragments
 import androidx.fragment.app.FragmentFactory
 import androidx.lifecycle.ViewModelProvider
 import com.badcompany.pitak.di.addPost.AddPostScope
-import com.badcompany.pitak.ui.addpost.carandseat.CarAndSeatsFragment
+import com.badcompany.pitak.ui.addpost.carandtext.CarAndTextFragment
 import com.badcompany.pitak.ui.addpost.datetime.DateAndTimeFragment
 import com.badcompany.pitak.ui.addpost.destinations.DestinationsFragment
 import com.badcompany.pitak.ui.addpost.preview.PreviewFragment
-import com.badcompany.pitak.ui.addpost.priceandtext.PriceAndNoteFragment
+import com.badcompany.pitak.ui.addpost.priceandseat.PriceAndSeatFragment
 import javax.inject.Inject
 
 @AddPostScope
@@ -22,8 +22,8 @@ class AddPostFragmentFactory @Inject constructor(private val viewModelFactory: V
             DestinationsFragment::class.java.name -> {
                 DestinationsFragment(viewModelFactory)
             }
-            PriceAndNoteFragment::class.java.name -> {
-                PriceAndNoteFragment(viewModelFactory)
+            PriceAndSeatFragment::class.java.name -> {
+                PriceAndSeatFragment(viewModelFactory)
             }
             PreviewFragment::class.java.name -> {
                 PreviewFragment(viewModelFactory)
@@ -31,8 +31,8 @@ class AddPostFragmentFactory @Inject constructor(private val viewModelFactory: V
             DateAndTimeFragment::class.java.name -> {
                 DateAndTimeFragment(viewModelFactory)
             }
-            CarAndSeatsFragment::class.java.name -> {
-                CarAndSeatsFragment(viewModelFactory)
+            CarAndTextFragment::class.java.name -> {
+                CarAndTextFragment(viewModelFactory)
             }
             else -> {
                 DestinationsFragment(viewModelFactory)
