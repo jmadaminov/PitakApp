@@ -1,16 +1,16 @@
 package com.badcompany.pitak.util
 
 import android.content.ContentResolver
+import android.content.Context
 import android.net.Uri
 import android.provider.OpenableColumns
-import android.text.Editable
-import android.text.TextWatcher
-import android.widget.EditText
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
-import com.badcompany.pitak.R
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+
 
 /**
  * Created by jahon on 22-May-20
@@ -23,11 +23,17 @@ fun ImageView.loadImageUrl(url: String) {
     circularProgressDrawable.centerRadius = 30f
     circularProgressDrawable.start()
 
-    Glide.with(this.context).load(url).placeholder(circularProgressDrawable).apply(RequestOptions().centerInside()).into(this)
+    Glide.with(this.context).load(url).placeholder(circularProgressDrawable)
+        .apply(RequestOptions().centerInside()).into(this)
 }
 
 fun ImageView.loadCircleImageUrl(url: String) {
     Glide.with(this.context).load(url).apply(RequestOptions().circleCrop()).into(this)
+}
+
+fun View.hideKeyboard() {
+    val imm = this.context!!.getSystemService(Context.INPUT_METHOD_SERVICE)!! as InputMethodManager
+    imm.hideSoftInputFromWindow(this.windowToken, 0)
 }
 
 fun ContentResolver.getFileName(fileUri: Uri): String {

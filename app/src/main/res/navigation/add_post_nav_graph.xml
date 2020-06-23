@@ -18,6 +18,7 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+
         <action
             android:id="@+id/action_destinationsFragment_to_previewFragment"
             app:destination="@id/previewFragment"
@@ -25,6 +26,13 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+
+        <argument
+            android:name="IS_FROM_POST_PREVIEW"
+            android:defaultValue="false"
+            app:argType="boolean" />
+
+
     </fragment>
 
 
@@ -47,6 +55,12 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+
+        <argument
+            android:name="IS_FROM_POST_PREVIEW"
+            android:defaultValue="false"
+            app:argType="boolean" />
+
     </fragment>
 
 
@@ -62,6 +76,12 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+
+        <argument
+            android:name="IS_FROM_POST_PREVIEW"
+            android:defaultValue="false"
+            app:argType="boolean" />
+
     </fragment>
 
 
@@ -73,31 +93,57 @@
         <action
             android:id="@+id/action_previewFragment_to_destinationsFragment"
             app:destination="@id/destinationsFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left">
+            <argument
+                android:name="IS_FROM_POST_PREVIEW"
+                android:defaultValue="false"
+                app:argType="boolean" />
+
+        </action>
         <action
             android:id="@+id/action_previewFragment_to_dateTimeFragment"
             app:destination="@id/dateTimeFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left">
+            <argument
+                android:name="IS_FROM_POST_PREVIEW"
+                android:defaultValue="false"
+                app:argType="boolean" />
+
+        </action>
         <action
             android:id="@+id/action_previewFragment_to_priceAndSeatFragment"
             app:destination="@id/priceAndSeatFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left">
+            <argument
+                android:name="IS_FROM_POST_PREVIEW"
+                android:defaultValue="false"
+                app:argType="boolean" />
+
+        </action>
         <action
             android:id="@+id/action_previewFragment_to_carAndTextFragment"
             app:destination="@id/carAndTextFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left">
+            <argument
+                android:name="IS_FROM_POST_PREVIEW"
+                android:defaultValue="false"
+                app:argType="boolean" />
+
+        </action>
+
+
     </fragment>
 
 
@@ -120,6 +166,12 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+
+        <argument
+            android:name="IS_FROM_POST_PREVIEW"
+            android:defaultValue="false"
+            app:argType="boolean" />
+
     </fragment>
 
 

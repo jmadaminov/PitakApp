@@ -1,7 +1,9 @@
 package com.badcompany.pitak.ui.addpost.carandtext
 
+import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -9,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.badcompany.core.ErrorWrapper
@@ -33,7 +36,10 @@ import javax.inject.Inject
 class CarAndTextFragment @Inject constructor(private val viewModelFactory: ViewModelProvider.Factory) :
     Fragment(R.layout.fragment_car_and_note) {
 
+    val args: CarAndTextFragmentArgs by navArgs()
 
+
+    private var selectedCar: CarDetails? = null
     private val adapter = GroupAdapter<GroupieViewHolder>()
 
     private val activityViewModel: AddPostViewModel by activityViewModels {
@@ -55,6 +61,11 @@ class CarAndTextFragment @Inject constructor(private val viewModelFactory: ViewM
     @ExperimentalSplittiesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        if (args.ISFROMPOSTPREVIEW) {
+            noteInput.setText(activityViewModel.note)
+        }
+
         setupListeners()
         setupCarList()
         setupObservers()
@@ -69,6 +80,7 @@ class CarAndTextFragment @Inject constructor(private val viewModelFactory: ViewM
 //        }
 
         viewModel.getCars()
+        updateNextButtonState()
     }
 
     private fun setupCarList() {
@@ -83,8 +95,13 @@ class CarAndTextFragment @Inject constructor(private val viewModelFactory: ViewM
     @ExperimentalSplittiesApi
     private fun setupListeners() {
 
-        next.setOnClickListener {
-            navController.navigate(R.id.action_carAndTextFragment_to_previewFragment)
+        navNext.setOnClickListener {
+            activityViewModel.car = selectedCar
+            activityViewModel.note =
+                if (!noteInput.text.isNullOrBlank()) noteInput.text.toString() else ""
+
+
+            navController.navigate(if (args.ISFROMPOSTPREVIEW) R.id.action_carAndTextFragment_to_previewFragment else R.id.action_carAndTextFragment_to_previewFragment)
         }
 
         navBack.setOnClickListener {
@@ -129,6 +146,9 @@ class CarAndTextFragment @Inject constructor(private val viewModelFactory: ViewM
     private fun populateCarsList(cars: List<CarDetails>) {
         adapter.clear()
         cars.forEach { car ->
+            if (car.def!!) {
+                selectedCar = car
+            }
             adapter.add(CarItemSelectionView(car, object : MyItemClickListener {
                 override fun onClick(pos: Int) {
                     super.onClick(pos)
@@ -140,8 +160,24 @@ class CarAndTextFragment @Inject constructor(private val viewModelFactory: ViewM
                 }
             }))
         }
+        updateNextButtonState()
     }
 
+    private fun updateNextButtonState() {
+        navNext.isEnabled = selectedCar != null
+
+        if (navNext.isEnabled) {
+            val bg = navNext.background
+            bg.setColorFilter(ContextCompat.getColor(requireContext(), R.color.colorPrimary),
+                              PorterDuff.Mode.SRC_ATOP)
+            navNext.background = bg
+        } else {
+            val bg = navNext.background
+            bg.setColorFilter(ContextCompat.getColor(requireContext(), R.color.ic_grey),
+                              PorterDuff.Mode.SRC_ATOP)
+            navNext.background = bg
+        }
+    }
 
     override fun onPause() {
         super.onPause()

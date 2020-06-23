@@ -8,18 +8,22 @@ import android.view.Gravity
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.badcompany.core.ErrorWrapper
 import com.badcompany.core.ResultWrapper
 import com.badcompany.core.exhaustive
 import com.badcompany.pitak.MapsActivity
 import com.badcompany.pitak.R
 import com.badcompany.pitak.ui.`interface`.IOnPlaceSearchQueryListener
+import com.badcompany.pitak.ui.addpost.AddPostViewModel
 import com.badcompany.pitak.ui.viewgroups.PlaceAutocompleteItemView
+import com.badcompany.pitak.util.hideKeyboard
 import com.otaliastudios.autocomplete.Autocomplete
 import com.otaliastudios.autocomplete.AutocompleteCallback
 import com.otaliastudios.autocomplete.AutocompletePolicy
@@ -34,10 +38,14 @@ import javax.inject.Inject
 class DestinationsFragment @Inject constructor(private val viewModelFactory: ViewModelProvider.Factory) :
     Fragment(R.layout.fragment_destinations) {
 
+    val args: DestinationsFragmentArgs by navArgs()
 
     private var fromAutocomplete: Autocomplete<PlaceAutocompleteItemView>? = null
     private var toAutocomplete: Autocomplete<PlaceAutocompleteItemView>? = null
     private val viewModel: DestinationsViewModel by viewModels {
+        viewModelFactory
+    }
+    private val activityViewModel: AddPostViewModel by activityViewModels {
         viewModelFactory
     }
 
@@ -53,10 +61,19 @@ class DestinationsFragment @Inject constructor(private val viewModelFactory: Vie
     @ExperimentalSplittiesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        if (args.ISFROMPOSTPREVIEW) {
+            viewModel.placeTo = activityViewModel.placeTo
+            viewModel.placeFrom = activityViewModel.placeFrom
+            fromInput.setText(viewModel.placeFrom!!.nameUz)
+            toInput.setText(viewModel.placeTo!!.nameUz)
+        }
+
         setupObservers()
         setupFromInputAutocomplete()
         setupToInputAutocomplete()
         setupListeners()
+        updateNextButtonState()
+
 
         navController = findNavController()
 //        confirm.isEnabled = true
@@ -75,7 +92,11 @@ class DestinationsFragment @Inject constructor(private val viewModelFactory: Vie
     private fun setupListeners() {
 
         next.setOnClickListener {
-            navController.navigate(R.id.action_destinationsFragment_to_dateTimeFragment)
+            activityViewModel.placeFrom = viewModel.placeFrom
+            activityViewModel.placeTo = viewModel.placeTo
+
+            navController.navigate(if (args.ISFROMPOSTPREVIEW) R.id.action_destinationsFragment_to_previewFragment else R.id.action_destinationsFragment_to_dateTimeFragment)
+
         }
 
         fromInput.onFocusChangeListener =
@@ -212,6 +233,7 @@ class DestinationsFragment @Inject constructor(private val viewModelFactory: Vie
                 editable.clear()
                 editable.insert(0, item.place.nameUz)
                 fromInput.clearFocus()
+                fromInput.hideKeyboard()
                 viewModel.placeFrom = item.place
                 return true
             }
@@ -219,6 +241,7 @@ class DestinationsFragment @Inject constructor(private val viewModelFactory: Vie
             override fun onPopupVisibilityChanged(shown: Boolean) {
             }
         }
+
     private val toAutocompleteCallback =
         object : AutocompleteCallback<PlaceAutocompleteItemView> {
             override fun onPopupItemClicked(editable: Editable,
@@ -226,6 +249,7 @@ class DestinationsFragment @Inject constructor(private val viewModelFactory: Vie
                 editable.clear()
                 editable.insert(0, item.place.nameUz)
                 toInput.clearFocus()
+                toInput.hideKeyboard()
                 viewModel.placeTo = item.place
                 updateNextButtonState()
                 return true
@@ -240,11 +264,13 @@ class DestinationsFragment @Inject constructor(private val viewModelFactory: Vie
 
         if (next.isEnabled) {
             val bg = next.background
-            bg.setColorFilter(ContextCompat.getColor(requireContext(), R.color.colorAccent), PorterDuff.Mode.SRC_ATOP)
+            bg.setColorFilter(ContextCompat.getColor(requireContext(), R.color.colorPrimary),
+                              PorterDuff.Mode.SRC_ATOP)
             next.background = bg
         } else {
             val bg = next.background
-            bg.setColorFilter(ContextCompat.getColor(requireContext(), R.color.ic_grey), PorterDuff.Mode.SRC_ATOP)
+            bg.setColorFilter(ContextCompat.getColor(requireContext(), R.color.ic_grey),
+                              PorterDuff.Mode.SRC_ATOP)
             next.background = bg
         }
     }

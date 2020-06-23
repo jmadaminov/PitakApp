@@ -111,6 +111,7 @@ class LoginFragment @Inject constructor(private val viewModelFactory: ViewModelP
                             LoginFragmentDirections.actionNavLoginFragmentToNavRegisterFragment(
                                 viewModel.phoneNum)
                         findNavController().navigate(action)
+                        phone.error = "SUCCESS "
                     } else if (response.code == Constants.errPhoneFormat) {
                         phone.error = getString(R.string.incorrect_phone_number_format)
 //                        errorMessage.visibility = View.VISIBLE
@@ -132,6 +133,7 @@ class LoginFragment @Inject constructor(private val viewModelFactory: ViewModelP
                             response.value,
                             viewModel.phoneNum)
                     findNavController().navigate(action)
+                    phone.error = "SUCCESS "
                 }
                 ResultWrapper.InProgress -> {
                     errorMessage.visibility = View.INVISIBLE

@@ -63,14 +63,19 @@
     <string name="back">Back</string>
     <string name="create">Create</string>
     <string name="departure_asap">Departing as soon as full</string>
-    <string name="first_part_of_day">First part of the day (6:00–12:00)</string>
-    <string name="second_part_of_day">Second part of the day (12:00–18:00)</string>
-    <string name="first_part_of_night">First part of the night (18:00–24:00)</string>
-    <string name="second_part_of_night">Second part of the night (24:00–6:00)</string>
+    <string name="first_part_of_day">Dawn \n(00:00–6:00)</string>
+    <string name="second_part_of_day">Forenoon \n(6:00–12:00)</string>
+    <string name="third_part_of_day">Afternoon \n(18:00–12:00)</string>
+    <string name="fourth_part_of_day">Evening \n(00:00–18:00)</string>
     <string name="time">Time</string>
     <string name="day">Day</string>
     <string name="price_for_one_passenger">Price for one passenger</string>
     <string name="number_of_seats">Number of seats</string>
     <string name="please_add_notes_if_needed">Please add notes if needed…</string>
     <string name="your_car_for_this_ride">Your car for this ride</string>
+    <string name="asap">ASAP</string>
+    <string name="departure_date_and_time">Date: %1$s Time: %2$s</string>
+    <string name="price_and_seats_format">Price: %1$s * Seats: %2$s</string>
+    <string name="anytime">Any time</string>
+
 </resources>

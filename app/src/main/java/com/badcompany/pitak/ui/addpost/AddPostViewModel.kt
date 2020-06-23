@@ -1,32 +1,31 @@
 package com.badcompany.pitak.ui.addpost
 
-import androidx.lifecycle.viewModelScope
-import com.badcompany.core.Constants.TXT_CAR
-import com.badcompany.core.Constants.TXT_TOKEN
-import com.badcompany.core.ErrorWrapper
-import com.badcompany.core.ResultWrapper
-import com.badcompany.domain.domainmodel.*
-import com.badcompany.domain.usecases.GetCarColors
-import com.badcompany.domain.usecases.GetCarModels
-import com.badcompany.domain.usecases.SaveCar
-import com.badcompany.domain.usecases.UploadPhoto
+import com.badcompany.domain.domainmodel.CarDetails
+import com.badcompany.domain.domainmodel.Place
 import com.badcompany.pitak.App
 import com.badcompany.pitak.ui.BaseViewModel
-import com.badcompany.pitak.util.SingleLiveEvent
-import kotlinx.coroutines.*
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import splitties.init.appCtx
-import java.io.File
 import javax.inject.Inject
 
 /**
  * Created by jahon on 28-Apr-20
  */
-class AddPostViewModel @Inject constructor(
-                                           /*private val saveCar: SaveCar,*/
-                                           ) :
+class AddPostViewModel @Inject constructor(    /*private val saveCar: SaveCar,*/) :
     BaseViewModel() {
+
+
+    var placeFrom: Place? = null
+    var placeTo: Place? = null
+    var departureDate: String? = null
+    var timeFirstPart = false
+    var timeSecondPart = false
+    var timeThirdPart = false
+    var timeFourthPart = false
+    var car: CarDetails? = null
+    var price: Int? = null
+    var seat: Int? = null
+    var note: String? = null
 
 //    val carImgResponse = SingleLiveEvent<ResultWrapper<PhotoBody>>()
 
@@ -49,7 +48,6 @@ class AddPostViewModel @Inject constructor(
 //            }
 //        }
 //    }
-
 
 
     @ExperimentalCoroutinesApi

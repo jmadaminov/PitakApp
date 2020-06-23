@@ -21,6 +21,12 @@ interface ApiService {
                               @Path(value = "text", encoded = true) text: String): PlaceListResponse
 
 
+    @Headers("Content-Type:application/json", "Accept: application/json")
+    @POST("driver_post/action")
+    suspend fun createPost(@Header("Authorization") token: String,
+                           @Body driverPostBody: DriverPostModel): PlainResponse
+
+
     //
 
 

@@ -6,6 +6,7 @@ import com.badcompany.pitak.di.viewmodels.AddPostViewModelFactory
 import com.badcompany.pitak.ui.addpost.AddPostViewModel
 import com.badcompany.pitak.ui.addpost.carandtext.CarAndTextViewModel
 import com.badcompany.pitak.ui.addpost.destinations.DestinationsViewModel
+import com.badcompany.pitak.ui.addpost.preview.PreviewViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -32,6 +33,11 @@ abstract class AddPostViewModelModule {
     @IntoMap
     @AddPostViewModelKey(CarAndTextViewModel::class)
     abstract fun bindChooseCarAndTextViewModel(viewModel: CarAndTextViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @AddPostViewModelKey(PreviewViewModel::class)
+    abstract fun bindChoosePreviewViewModel(viewModel: PreviewViewModel): ViewModel
 
 
 }

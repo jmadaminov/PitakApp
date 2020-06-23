@@ -13,4 +13,7 @@ data class PlaceModel(@SerializedName("districtId") val districtId: Int,
                       @SerializedName("regionId") val regionId: Int,
                       @SerializedName("nameRu") val nameRu: String? = null,
                       @SerializedName("nameUz") val nameUz: String? = null,
-                      @SerializedName("nameEn") val nameEn: String? = null)
+                      @SerializedName("nameEn") val nameEn: String? = null,
+                      @SerializedName("lat") val lat: Double? = null,
+                      @SerializedName("lon") val lon: Double? = null
+)
