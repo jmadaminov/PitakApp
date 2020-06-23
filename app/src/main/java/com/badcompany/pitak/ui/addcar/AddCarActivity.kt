@@ -225,7 +225,7 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
                 }
                 is ResultWrapper.Success -> {
                     stopLoadingAvatar()
-                    car.image!!.id = response.value.id!!
+                    car.image.id = response.value.id!!
                     carImage.loadImageUrl(response.value.link!!)
                 }
                 ResultWrapper.InProgress -> {
@@ -423,7 +423,7 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
         if (car.fuelType == null) {
             car.fuelType = Constants.FUEL_TYPE_PETROL
         }
-        if (car.image != null && car.image!!.link != null) {
+        if ( car.image.link != null) {
             carImage.loadImageUrl(car.image!!.link!!)
         }
         if (!car.imageList.isNullOrEmpty()) {
@@ -461,8 +461,7 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
             }
         }
         if (adapter.itemCount < 3) {
-            adapter.add(if (adapter.itemCount == 0) 0 else adapter.itemCount,
-                        ItemAddPhoto(this))
+            adapter.add(adapter.itemCount,                        ItemAddPhoto(this))
             adapter.notifyDataSetChanged()
         }
     }

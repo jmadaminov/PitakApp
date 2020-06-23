@@ -30,7 +30,7 @@
             android:gravity="start|top"
             android:hint="@string/please_add_notes_if_needed"
             android:imeOptions="actionDone"
-            android:maxLength="60"
+            android:maxLength="120"
             android:maxLines="6" />
 
     </com.google.android.material.textfield.TextInputLayout>
