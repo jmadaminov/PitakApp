@@ -1,6 +1,7 @@
 package com.badcompany.pitak.ui.main.profile
 
 import android.app.Activity.RESULT_OK
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -23,6 +24,7 @@ import com.badcompany.pitak.R
 import com.badcompany.pitak.ui.addcar.AddCarActivity
 import com.badcompany.pitak.ui.addcar.MyItemClickListener
 import com.badcompany.pitak.ui.auth.AuthActivity
+import com.badcompany.pitak.ui.main.MainActivity
 import com.badcompany.pitak.ui.viewgroups.CarItemView
 import com.badcompany.pitak.ui.viewgroups.ItemAddCar
 import com.badcompany.pitak.ui.viewgroups.LoadingItem
@@ -51,6 +53,12 @@ class ProfileFragment @Inject constructor(private val viewModelFactory: ViewMode
 
     private val viewModel: ProfileViewModel by viewModels {
         viewModelFactory
+    }
+
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (activity as MainActivity).hideTabLayout()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

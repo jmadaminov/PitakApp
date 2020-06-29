@@ -4,7 +4,7 @@ import android.content.Context
 import android.util.Log
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.badcompany.pitak.ui.`interface`.IOnPlaceSearchQueryListener
+import com.badcompany.pitak.ui.interfaces.IOnPlaceSearchQueryListener
 import com.badcompany.pitak.ui.viewgroups.PlaceAutocompleteItemView
 import com.otaliastudios.autocomplete.RecyclerViewPresenter
 import com.xwray.groupie.GroupAdapter

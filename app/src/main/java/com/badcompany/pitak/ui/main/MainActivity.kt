@@ -1,7 +1,9 @@
 package com.badcompany.pitak.ui.main
 
+import android.animation.LayoutTransition
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
@@ -60,6 +62,7 @@ class MainActivity : BaseActivity(), BottomNavController.OnNavigationGraphChange
         setTheme(R.style.NoActionBar)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        app_bar.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
         setupActionBar()
         setupListeners()
         subscribeObservers()
@@ -146,6 +149,14 @@ class MainActivity : BaseActivity(), BottomNavController.OnNavigationGraphChange
 
     private fun setupActionBar() {
         setSupportActionBar(tool_bar)
+    }
+
+    fun showTabLayout() {
+        tab_layout.visibility = View.VISIBLE
+    }
+
+    fun hideTabLayout() {
+        tab_layout.visibility = View.GONE
     }
 
 

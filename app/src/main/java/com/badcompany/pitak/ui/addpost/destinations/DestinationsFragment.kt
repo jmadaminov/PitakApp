@@ -20,7 +20,7 @@ import com.badcompany.core.ResultWrapper
 import com.badcompany.core.exhaustive
 import com.badcompany.pitak.MapsActivity
 import com.badcompany.pitak.R
-import com.badcompany.pitak.ui.`interface`.IOnPlaceSearchQueryListener
+import com.badcompany.pitak.ui.interfaces.IOnPlaceSearchQueryListener
 import com.badcompany.pitak.ui.addpost.AddPostViewModel
 import com.badcompany.pitak.ui.viewgroups.PlaceAutocompleteItemView
 import com.badcompany.pitak.util.hideKeyboard
