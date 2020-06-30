@@ -19,7 +19,6 @@ class SearchTripFragment @Inject constructor(private val viewModelFactory: ViewM
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (activity as MainActivity).hideTabLayout()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,6 +29,7 @@ class SearchTripFragment @Inject constructor(private val viewModelFactory: ViewM
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
+        (activity as MainActivity).hideTabLayout()
 
 //        change_password.setOnClickListener {
 //            findNavController().navigate(R.id.action_accountFragment_to_changePasswordFragment)

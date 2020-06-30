@@ -6,9 +6,9 @@
     android:orientation="vertical">
 
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:id="@+id/scrollView"
         android:layout_weight="1">
 
         <LinearLayout
@@ -50,7 +50,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_gravity="center_horizontal"
-                    android:background="@drawable/line_dash_short"
+                    android:background="@drawable/line_vertical"
                     android:paddingTop="24dp"
                     android:rotation="90"
                     app:layout_constraintBottom_toTopOf="@id/circleTo"
@@ -84,7 +84,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="?android:actionBarSize"
                 android:layout_marginStart="24dp"
-                android:textColor="@color/dark_grey"
                 android:layout_marginEnd="24dp"
                 android:background="@drawable/shape_grey_border"
                 android:clickable="true"
@@ -93,7 +92,8 @@
                 android:gravity="center_vertical"
                 android:paddingStart="12dp"
                 android:paddingEnd="12dp"
-                android:text="02/02/2020" />
+                android:text="02/02/2020"
+                android:textColor="@color/dark_grey" />
 
             <TextView
                 android:id="@+id/priceAndSeat"
@@ -101,7 +101,6 @@
                 android:layout_height="?android:actionBarSize"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
-                android:textColor="@color/dark_grey"
                 android:layout_marginEnd="24dp"
                 android:background="@drawable/shape_grey_border"
                 android:clickable="true"
@@ -110,7 +109,8 @@
                 android:gravity="center_vertical"
                 android:paddingStart="12dp"
                 android:paddingEnd="12dp"
-                android:text="80,000 sums * 4 Seats" />
+                android:text="80,000 sums * 4 Seats"
+                android:textColor="@color/dark_grey" />
 
 
             <TextView
@@ -119,14 +119,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
-                android:textColor="@color/dark_grey"
                 android:layout_marginEnd="24dp"
                 android:background="@drawable/shape_grey_border"
                 android:clickable="true"
                 android:focusable="true"
                 android:foreground="?android:selectableItemBackground"
                 android:gravity="start|top"
-                android:padding="12dp" />
+                android:padding="12dp"
+                android:textColor="@color/dark_grey" />
 
 
             <androidx.recyclerview.widget.RecyclerView
@@ -146,8 +146,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:paddingTop="12dp">
+        android:paddingTop="12dp"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <TextView
             android:id="@+id/navBack"
@@ -177,14 +177,14 @@
             android:background="@drawable/selector_primary"
             android:clickable="true"
             android:focusable="true"
-            app:finalCornerAngle="50dp"
-            app:initialCornerAngle="8dp"
             android:foreground="?android:selectableItemBackground"
             android:gravity="center"
             android:text="@string/create"
             android:textAllCaps="false"
             android:textColor="#fff"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            app:finalCornerAngle="50dp"
+            app:initialCornerAngle="8dp" />
 
     </LinearLayout>
 

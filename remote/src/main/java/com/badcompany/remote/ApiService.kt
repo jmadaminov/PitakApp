@@ -14,12 +14,6 @@ interface ApiService {
 
     //POST API
 
-    @Headers("Content-Type:application/json", "Accept: application/json")
-    @GET("region/action/{text}")
-    suspend fun getPlacesFeed(@Header("Authorization") token: String,
-                              @Header("Accept-Language") lang: String,
-                              @Path(value = "text", encoded = true) text: String): PlaceListResponse
-
 
     @Headers("Content-Type:application/json", "Accept: application/json")
     @POST("driver_post/action")
@@ -27,7 +21,29 @@ interface ApiService {
                            @Body driverPostBody: DriverPostModel): PlainResponse
 
 
+    @Headers("Content-Type:application/json", "Accept: application/json")
+    @GET("driver_post/action/active")
+    suspend fun getActivePosts(@Header("Authorization") token: String,
+                               @Header("Accept-Language") lang: String): DriverPostsResponse
+
+    @Headers("Content-Type:application/json", "Accept: application/json")
+    @GET("driver_post/action/history")
+    suspend fun getHistoryPosts(@Header("Authorization") token: String,
+                                @Header("Accept-Language") lang: String): DriverPostsResponse
+
+
+
     //
+
+
+    //Places Feed
+
+    @Headers("Content-Type:application/json", "Accept: application/json")
+    @GET("region/action/{text}")
+    suspend fun getPlacesFeed(@Header("Authorization") token: String,
+                              @Header("Accept-Language") lang: String,
+                              @Path(value = "text", encoded = true) text: String): PlaceListResponse
+    //PLACES END
 
 
     //AUTH API

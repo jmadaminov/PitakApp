@@ -5,11 +5,16 @@ import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
+import androidx.navigation.NavOptions
+import androidx.navigation.findNavController
+import com.badcompany.core.Constants
+import com.badcompany.domain.domainmodel.Place
 import com.badcompany.pitak.App
 import com.badcompany.pitak.R
 import com.badcompany.pitak.di.viewmodels.AddPostViewModelFactory
 import com.badcompany.pitak.fragments.AddPostNavHostFragment
 import com.badcompany.pitak.ui.BaseActivity
+import com.badcompany.pitak.viewobjects.DriverPostViewObj
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.InternalCoroutinesApi
 import splitties.experimental.ExperimentalSplittiesApi
@@ -37,17 +42,62 @@ class AddPostActivity : BaseActivity() {
             .inject(this)
     }
 
+
     @InternalCoroutinesApi
     @ExperimentalCoroutinesApi
     @ExperimentalSplittiesApi
     override fun onCreate(savedInstanceState: Bundle?) {
         inject()
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_add_post)
         setupActionBar()
         onRestoreInstanceState()
+
+        checkIfEditing(intent.getParcelableExtra(Constants.TXT_DRIVER_POST))
+
         subscribeObservers()
         setupListeners()
+    }
+
+    private fun checkIfEditing(driverPostViewObj: DriverPostViewObj?) {
+        if (driverPostViewObj != null) {
+
+            viewmodel.price = driverPostViewObj.price
+            viewmodel.price = driverPostViewObj.seat
+            viewmodel.placeFrom = Place(driverPostViewObj.from.districtId,
+                                        driverPostViewObj.from.regionId,
+                                        driverPostViewObj.from.nameRu,
+                                        driverPostViewObj.from.nameUz,
+                                        driverPostViewObj.from.nameEn,
+                                        driverPostViewObj.from.lat,
+                                        driverPostViewObj.from.lon)
+
+
+            viewmodel.placeTo = Place(driverPostViewObj.to.districtId,
+                                      driverPostViewObj.to.regionId,
+                                      driverPostViewObj.to.nameRu,
+                                      driverPostViewObj.to.nameUz,
+                                      driverPostViewObj.to.nameEn,
+                                      driverPostViewObj.to.lat,
+                                      driverPostViewObj.to.lon)
+
+            viewmodel.timeFirstPart = driverPostViewObj.timeFirstPart
+            viewmodel.timeSecondPart = driverPostViewObj.timeSecondPart
+            viewmodel.timeThirdPart = driverPostViewObj.timeThirdPart
+            viewmodel.timeFourthPart = driverPostViewObj.timeFourthPart
+            viewmodel.departureDate = driverPostViewObj.departureDate
+            viewmodel.note = driverPostViewObj.remark
+//            viewmodel.car =  driverPostViewObj.carId
+
+            val navOptions = NavOptions.Builder()
+                .setPopUpTo(R.id.previewFragment, true)
+                .build()
+            findNavController(R.id.add_post_fragments_container).navigate(R.id.action_destinationsFragment_to_previewFragment,
+                                                                          null,
+                                                                          navOptions)
+        }
+
     }
 
 

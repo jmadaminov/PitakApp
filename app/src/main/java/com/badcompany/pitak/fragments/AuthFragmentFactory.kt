@@ -1,19 +1,15 @@
 package com.badcompany.pitak.fragments
 
-import androidx.fragment.app.FragmentFactory
-import androidx.lifecycle.ViewModelProvider
-import com.badcompany.pitak.di.auth.AuthScope
-import com.badcompany.pitak.di.main.MainScope
-import com.badcompany.pitak.ui.auth.confirm.PhoneConfirmFragment
-import com.badcompany.pitak.ui.auth.login.LoginFragment
-import com.badcompany.pitak.ui.auth.register.RegisterFragment
-import com.badcompany.pitak.ui.main.mytrips.MyTripsFragment
-import com.badcompany.pitak.ui.main.profile.ProfileFragment
-import com.badcompany.pitak.ui.main.searchtrip.SearchTripFragment
 //import com.codingwithmitch.openapi.di.main.MainScope
 //import com.codingwithmitch.openapi.ui.main.account.AccountFragment
 //import com.codingwithmitch.openapi.ui.main.account.ChangePasswordFragment
 //import com.codingwithmitch.openapi.ui.main.account.UpdateAccountFragment
+import androidx.fragment.app.FragmentFactory
+import androidx.lifecycle.ViewModelProvider
+import com.badcompany.pitak.di.auth.AuthScope
+import com.badcompany.pitak.ui.auth.confirm.PhoneConfirmFragment
+import com.badcompany.pitak.ui.auth.login.LoginFragment
+import com.badcompany.pitak.ui.auth.register.RegisterFragment
 import javax.inject.Inject
 
 @AuthScope

@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.badcompany.pitak.R
 import com.badcompany.pitak.ui.main.MainActivity
+import com.badcompany.pitak.ui.main.mytrips.activetrips.ActiveTripsFragment
 import com.badcompany.pitak.ui.main.mytrips.historytrips.HistoryTripsFragment
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.fragment_my_trips.*
@@ -24,19 +25,18 @@ class MyTripsFragment @Inject constructor(private val viewModelFactory: ViewMode
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (activity as MainActivity).showTabLayout()
     }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel.cancelActiveJobs()
-        setupViewPager()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
+        (activity as MainActivity).showTabLayout()
 
 //        change_password.setOnClickListener {
 //            findNavController().navigate(R.id.action_accountFragment_to_changePasswordFragment)
@@ -47,6 +47,7 @@ class MyTripsFragment @Inject constructor(private val viewModelFactory: ViewMode
 //        }
 //
 //        subscribeObservers()
+        setupViewPager()
     }
 
     private fun setupViewPager() {
@@ -64,7 +65,7 @@ class MyTripsFragment @Inject constructor(private val viewModelFactory: ViewMode
         FragmentStateAdapter(this) {
 
         lateinit var currentFrag: Fragment
-        var activeOrdersFrag = HistoryTripsFragment(viewModelFactory)
+        var activeOrdersFrag = ActiveTripsFragment(viewModelFactory)
         var historyOrdersFrag = HistoryTripsFragment(viewModelFactory)
 
         override fun getItemCount() = 2

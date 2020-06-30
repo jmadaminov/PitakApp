@@ -17,11 +17,11 @@ import com.badcompany.domain.domainmodel.DriverPost
 import com.badcompany.pitak.R
 import com.badcompany.pitak.ui.interfaces.IOnPostActionListener
 import com.badcompany.pitak.ui.main.MainViewModel
-import com.badcompany.pitak.ui.viewgroups.ActivePostItem
+import com.badcompany.pitak.ui.viewgroups.HistoryPostItem
 import com.google.android.material.snackbar.Snackbar
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
-import kotlinx.android.synthetic.main.fragment_active_trips.*
+import kotlinx.android.synthetic.main.fragment_history_trips.*
 import splitties.experimental.ExperimentalSplittiesApi
 import javax.inject.Inject
 
@@ -33,7 +33,6 @@ class HistoryTripsFragment @Inject constructor(private val viewModelFactory: Vie
     val viewmodel: HistoryTripsViewModel by viewModels {
         viewModelFactory
     }
-
 
 
     private val activityViewModel: MainViewModel by activityViewModels()
@@ -54,16 +53,16 @@ class HistoryTripsFragment @Inject constructor(private val viewModelFactory: Vie
         setupRecyclerView()
         setupListeners()
         subscribeObservers()
-//        viewmodel.getActiveOrders()
+        viewmodel.getHistoryPosts()
     }
 
     override fun onStart() {
         super.onStart()
-        if (viewmodel.activeOrdersResponse.value != ResultWrapper.InProgress) {
+        if (viewmodel.historyPostsResponse.value != ResultWrapper.InProgress) {
             swipeRefreshLayout.isRefreshing = true
         } else {
             swipeRefreshLayout.isRefreshing =
-                viewmodel.activeOrdersResponse.value == ResultWrapper.InProgress
+                viewmodel.historyPostsResponse.value == ResultWrapper.InProgress
         }
     }
 
@@ -75,19 +74,19 @@ class HistoryTripsFragment @Inject constructor(private val viewModelFactory: Vie
     }
 
     private fun setupRecyclerView() {
-        activeOrdersList.layoutManager =
+        historyPostsList.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
-        activeOrdersList.setHasFixedSize(true)
-        activeOrdersList.adapter = adapter
+        historyPostsList.setHasFixedSize(true)
+        historyPostsList.adapter = adapter
 
     }
 
     @ExperimentalSplittiesApi
     private fun setupListeners() {
         swipeRefreshLayout.setOnRefreshListener {
-            noActiveOrdersTxt.visibility = View.GONE
-            viewmodel.getActiveOrders()
+            noHistoryPostsTxt.visibility = View.GONE
+            viewmodel.getHistoryPosts()
         }
     }
 
@@ -109,7 +108,7 @@ class HistoryTripsFragment @Inject constructor(private val viewModelFactory: Vie
 //            adapter.notifyItemChanged(order.adapterPosition!!)
 //        })
 
-        viewmodel.activeOrdersResponse.observe(viewLifecycleOwner, Observer {
+        viewmodel.historyPostsResponse.observe(viewLifecycleOwner, Observer {
             val response = it ?: return@Observer
             when (response) {
                 is ErrorWrapper.ResponseError -> {
@@ -182,11 +181,11 @@ class HistoryTripsFragment @Inject constructor(private val viewModelFactory: Vie
     @ExperimentalSplittiesApi
     private fun loadData(orders: List<DriverPost>) {
         adapter.clear()
-        if (orders.isEmpty()) noActiveOrdersTxt.visibility = View.VISIBLE
-        else noActiveOrdersTxt.visibility = View.GONE
+        if (orders.isEmpty()) noHistoryPostsTxt.visibility = View.VISIBLE
+        else noHistoryPostsTxt.visibility = View.GONE
 
         orders.forEach {
-            adapter.add(ActivePostItem(it, onOrderActionListener))
+            adapter.add(HistoryPostItem(it, onOrderActionListener))
         }
         adapter.notifyDataSetChanged()
 
@@ -194,10 +193,14 @@ class HistoryTripsFragment @Inject constructor(private val viewModelFactory: Vie
 
 
     private val onOrderActionListener = object : IOnPostActionListener {
-        override fun onModifyClick(post: DriverPost) {
+        override fun onEditClick(post: DriverPost) {
         }
 
         override fun onCancelClick(post: DriverPost) {
+        }
+
+        override fun onDoneClick(post: DriverPost) {
+
         }
     }
 

@@ -13,7 +13,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-
         <TextView
             android:id="@+id/noHistoryPostsTxt"
             android:layout_width="match_parent"
@@ -26,6 +25,6 @@
             android:textColor="@color/ic_grey"
             android:textSize="20dp" />
 
-
     </RelativeLayout>
+
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

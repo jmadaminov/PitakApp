@@ -13,7 +13,9 @@ import javax.inject.Inject
  * operations in which data store implementation layers can carry out.
  */
 class DriverPostRemoteImpl @Inject constructor(private val apiService: ApiService,
-                                               private val postMapper: DriverPostMapper) : DriverPostRemote {
+                                               private val postMapper: DriverPostMapper) :
+    DriverPostRemote {
+
     override suspend fun createDriverPost(token: String,
                                           post: DriverPostEntity): ResultWrapper<String> {
 
@@ -21,6 +23,36 @@ class DriverPostRemoteImpl @Inject constructor(private val apiService: ApiServic
             val response = apiService.createPost(token, postMapper.mapFromEntity(post))
             if (response.code == 1) {
                 ResultWrapper.Success("SUCCESS")
+            } else ErrorWrapper.ResponseError(response.code, response.message)
+        } catch (e: Exception) {
+            ErrorWrapper.SystemError(e)
+        }
+    }
+
+    override suspend fun getActiveDriverPosts(token: String,
+                                              lang: String): ResultWrapper<List<DriverPostEntity>> {
+
+        return try {
+            val response = apiService.getActivePosts(token, lang)
+            if (response.code == 1) {
+                val posts = arrayListOf<DriverPostEntity>()
+                response.data?.forEach { posts.add(postMapper.mapToEntity(it)) }
+                ResultWrapper.Success(posts)
+            } else ErrorWrapper.ResponseError(response.code, response.message)
+        } catch (e: Exception) {
+            ErrorWrapper.SystemError(e)
+        }
+    }
+
+    override suspend fun getHistoryDriverPosts(token: String,
+                                               lang: String): ResultWrapper<List<DriverPostEntity>> {
+
+        return try {
+            val response = apiService.getHistoryPosts(token, lang)
+            if (response.code == 1) {
+                val posts = arrayListOf<DriverPostEntity>()
+                response.data?.forEach { posts.add(postMapper.mapToEntity(it)) }
+                ResultWrapper.Success(posts)
             } else ErrorWrapper.ResponseError(response.code, response.message)
         } catch (e: Exception) {
             ErrorWrapper.SystemError(e)

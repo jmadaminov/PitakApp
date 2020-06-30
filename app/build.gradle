@@ -94,7 +94,7 @@ dependencies {
     implementation 'br.com.simplepass:loading-button-android:2.2.0'
 
 //SwipeRefreshLayout
-    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
     //Splitties
     implementation("com.louiscad.splitties:splitties-preferences:$rootProject.splitties_version")
@@ -117,6 +117,10 @@ dependencies {
 
     //AutoCompleteEditText
     implementation("com.otaliastudios:autocomplete:1.1.0")
+
+
+//VIEW PAGER2
+    implementation "androidx.viewpager2:viewpager2:1.0.0"
 
     //CALENDAR MATERIAL
 //    implementation 'com.github.prolificinteractive:material-calendarview:2.0.1'

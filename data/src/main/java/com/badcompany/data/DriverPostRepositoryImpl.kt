@@ -5,8 +5,8 @@ import com.badcompany.core.ResultWrapper
 import com.badcompany.data.mapper.DriverPostMapper
 import com.badcompany.data.source.DriverPostDataStoreFactory
 import com.badcompany.domain.domainmodel.DriverPost
-import com.badcompany.domain.repository.PlaceRepository
 import com.badcompany.domain.repository.DriverPostRepository
+import com.badcompany.domain.repository.PlaceRepository
 import javax.inject.Inject
 
 /**
@@ -21,13 +21,49 @@ class DriverPostRepositoryImpl @Inject constructor(private val factoryDriver: Dr
     override suspend fun createDriverPost(token: String, post: DriverPost): ResultWrapper<String> {
 
         val response =
-            factoryDriver.retrieveDataStore(false).createDriverPost(token, driverPostMapper.mapToEntity(post))
+            factoryDriver.retrieveDataStore(false)
+                .createDriverPost(token, driverPostMapper.mapToEntity(post))
 
         return when (response) {
             is ErrorWrapper.ResponseError -> response
             is ErrorWrapper.SystemError -> response
             is ResultWrapper.Success -> {
                 ResultWrapper.Success(response.value)
+            }
+            ResultWrapper.InProgress -> ResultWrapper.InProgress
+        }
+    }
+
+    override suspend fun getActiveDriverPosts(token: String,
+                                              lang: String): ResultWrapper<List<DriverPost>> {
+        val response =
+            factoryDriver.retrieveDataStore(false).getActiveDriverPosts(token, lang)
+
+        return when (response) {
+            is ErrorWrapper.ResponseError -> response
+            is ErrorWrapper.SystemError -> response
+            is ResultWrapper.Success -> {
+
+                val posts = arrayListOf<DriverPost>()
+                response.value.forEach { posts.add(driverPostMapper.mapFromEntity(it)) }
+                ResultWrapper.Success(posts)
+            }
+            ResultWrapper.InProgress -> ResultWrapper.InProgress
+        }
+    }
+
+    override suspend fun getHistoryDriverPosts(token: String,
+                                               lang: String): ResultWrapper<List<DriverPost>> {
+        val response =
+            factoryDriver.retrieveDataStore(false).getHistoryDriverPosts(token, lang)
+
+        return when (response) {
+            is ErrorWrapper.ResponseError -> response
+            is ErrorWrapper.SystemError -> response
+            is ResultWrapper.Success -> {
+                val posts = arrayListOf<DriverPost>()
+                response.value.forEach { posts.add(driverPostMapper.mapFromEntity(it)) }
+                ResultWrapper.Success(posts)
             }
             ResultWrapper.InProgress -> ResultWrapper.InProgress
         }

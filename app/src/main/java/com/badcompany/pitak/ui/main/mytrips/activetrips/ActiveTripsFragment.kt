@@ -10,20 +10,25 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.badcompany.core.Constants
 import com.badcompany.core.ErrorWrapper
 import com.badcompany.core.ResultWrapper
 import com.badcompany.core.exhaustive
 import com.badcompany.domain.domainmodel.DriverPost
 import com.badcompany.pitak.R
+import com.badcompany.pitak.ui.addpost.AddPostActivity
 import com.badcompany.pitak.ui.interfaces.IOnPostActionListener
 import com.badcompany.pitak.ui.main.MainViewModel
-import com.badcompany.pitak.ui.main.mytrips.historytrips.HistoryTripsViewModel
 import com.badcompany.pitak.ui.viewgroups.ActivePostItem
+import com.badcompany.pitak.viewobjects.DriverPostViewObj
+import com.badcompany.pitak.viewobjects.PlaceViewObj
+import com.badcompany.pitak.viewobjects.post
 import com.google.android.material.snackbar.Snackbar
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import kotlinx.android.synthetic.main.fragment_active_trips.*
 import splitties.experimental.ExperimentalSplittiesApi
+import splitties.fragments.start
 import javax.inject.Inject
 
 class ActiveTripsFragment @Inject constructor(private val viewModelFactory: ViewModelProvider.Factory) :
@@ -31,10 +36,9 @@ class ActiveTripsFragment @Inject constructor(private val viewModelFactory: View
 
 
     private val adapter = GroupAdapter<GroupieViewHolder>()
-    val viewmodel: HistoryTripsViewModel by viewModels {
+    val viewmodel: ActiveTripsViewModel by viewModels {
         viewModelFactory
     }
-
 
 
     private val activityViewModel: MainViewModel by activityViewModels()
@@ -55,16 +59,16 @@ class ActiveTripsFragment @Inject constructor(private val viewModelFactory: View
         setupRecyclerView()
         setupListeners()
         subscribeObservers()
-//        viewmodel.getActiveOrders()
+        viewmodel.getActivePosts()
     }
 
     override fun onStart() {
         super.onStart()
-        if (viewmodel.activeOrdersResponse.value != ResultWrapper.InProgress) {
+        if (viewmodel.activePostsResponse.value != ResultWrapper.InProgress) {
             swipeRefreshLayout.isRefreshing = true
         } else {
             swipeRefreshLayout.isRefreshing =
-                viewmodel.activeOrdersResponse.value == ResultWrapper.InProgress
+                viewmodel.activePostsResponse.value == ResultWrapper.InProgress
         }
     }
 
@@ -88,7 +92,7 @@ class ActiveTripsFragment @Inject constructor(private val viewModelFactory: View
     private fun setupListeners() {
         swipeRefreshLayout.setOnRefreshListener {
             noActiveOrdersTxt.visibility = View.GONE
-            viewmodel.getActiveOrders()
+            viewmodel.getActivePosts()
         }
     }
 
@@ -110,7 +114,7 @@ class ActiveTripsFragment @Inject constructor(private val viewModelFactory: View
 //            adapter.notifyItemChanged(order.adapterPosition!!)
 //        })
 
-        viewmodel.activeOrdersResponse.observe(viewLifecycleOwner, Observer {
+        viewmodel.activePostsResponse.observe(viewLifecycleOwner, Observer {
             val response = it ?: return@Observer
             when (response) {
                 is ErrorWrapper.ResponseError -> {
@@ -195,10 +199,48 @@ class ActiveTripsFragment @Inject constructor(private val viewModelFactory: View
 
 
     private val onOrderActionListener = object : IOnPostActionListener {
-        override fun onModifyClick(post: DriverPost) {
+        override fun onEditClick(post: DriverPost) {
+
+            val from = PlaceViewObj(post.from.districtId,
+                                    post.from.regionId,
+                                    post.from.nameRu,
+                                    post.from.nameUz,
+                                    post.from.nameEn,
+                                    post.from.lat,
+                                    post.from.lon)
+
+            val to = PlaceViewObj(post.to.districtId,
+                                  post.to.regionId,
+                                  post.to.nameRu,
+                                  post.to.nameUz,
+                                  post.to.nameEn,
+                                  post.to.lat,
+                                  post.to.lon)
+
+            start<AddPostActivity> {
+
+                putExtra(Constants.TXT_DRIVER_POST,
+                         DriverPostViewObj(from,
+                                           to,
+                                           post.price,
+                                           post.departureDate,
+                                           post.timeFirstPart,
+                                           post.timeSecondPart,
+                                           post.timeThirdPart,
+                                           post.timeFourthPart,
+                                           post.carId,
+                                           post.remark,
+                                           post.seat,
+                                           post.postType))
+            }
+
         }
 
         override fun onCancelClick(post: DriverPost) {
+        }
+
+        override fun onDoneClick(post: DriverPost) {
+
         }
     }
 

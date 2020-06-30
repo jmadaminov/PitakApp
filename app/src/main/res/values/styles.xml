@@ -9,6 +9,8 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="bottomNavigationStyle">@style/AppBottomNavigation</item>
         <item name="textInputStyle">@style/AppTextField</item>
+        <item name="android:textColorPrimary">#fff</item>
+        <item name="android:textColor">#fff</item>
         <item name="android:windowBackground">@color/windowBackground</item>
     </style>
     <!-- Base application theme. -->
@@ -19,6 +21,9 @@
         <item name="colorAccent">@color/colorAccent</item>
 <!--        <item name="android:windowBackground">@color/colorPrimary</item>-->
         <item name="bottomNavigationStyle">@style/AppBottomNavigation</item>
+
+        <item name="android:textColorPrimary">#fff</item>
+        <item name="android:textColor">#fff</item>
         <item name="textInputStyle">@style/AppTextField</item>
         <item name="android:windowBackground">@color/windowBackground</item>
     </style>

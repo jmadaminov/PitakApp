@@ -58,7 +58,6 @@ class ProfileFragment @Inject constructor(private val viewModelFactory: ViewMode
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (activity as MainActivity).hideTabLayout()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -74,6 +73,7 @@ class ProfileFragment @Inject constructor(private val viewModelFactory: ViewMode
         setupListeners()
         subscribeObservers()
         viewModel.getCarList(AppPreferences.token)
+        (activity as MainActivity).hideTabLayout()
 
     }
 
