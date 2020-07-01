@@ -74,6 +74,7 @@ class PreviewFragment @Inject constructor(private val viewModelFactory: ViewMode
     }
 
     private fun setupViews() {
+        if (activityViewModel.isEditing) navBack.visibility = View.INVISIBLE
         labelFrom.text = activityViewModel.placeFrom!!.nameUz
         labelTo.text = activityViewModel.placeTo!!.nameUz
 
@@ -152,7 +153,8 @@ class PreviewFragment @Inject constructor(private val viewModelFactory: ViewMode
         }
 
         postCreate.setOnClickListener {
-            viewModel.createDriverPost(DriverPost(activityViewModel.placeFrom!!,
+            viewModel.createDriverPost(DriverPost(null,
+                                                  activityViewModel.placeFrom!!,
                                                   activityViewModel.placeTo!!,
                                                   activityViewModel.price!!,
                                                   activityViewModel.departureDate!!,
@@ -196,7 +198,9 @@ class PreviewFragment @Inject constructor(private val viewModelFactory: ViewMode
                 }
                 is ErrorWrapper.SystemError -> {
                     postCreate.revertAnimation()
-                    Snackbar.make(scrollView, response.err.localizedMessage!!, Snackbar.LENGTH_SHORT)
+                    Snackbar.make(scrollView,
+                                  response.err.localizedMessage!!,
+                                  Snackbar.LENGTH_SHORT)
                         .show()
                 }
                 is ResultWrapper.Success -> {

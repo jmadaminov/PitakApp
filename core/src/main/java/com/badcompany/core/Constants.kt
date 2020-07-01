@@ -15,6 +15,7 @@ object Constants {
     const val FUEL_TYPE_PETROL = "PETROL"
     const val TXT_TOKEN = "TOKEN"
     const val TXT_ID = "ID"
+    const val TXT_POSITION = "POSITION"
     const val TXT_PLACE = "PLACE"
     const val TXT_LANG = "LANGUAGE"
     const val RU = "ru"

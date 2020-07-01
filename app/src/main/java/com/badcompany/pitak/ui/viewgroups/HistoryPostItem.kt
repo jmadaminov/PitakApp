@@ -27,5 +27,5 @@ class HistoryPostItem(var post: DriverPost, var onPostActionListener: IOnPostAct
 
     }
 
-    override fun getLayout() = R.layout.item_active_post
+    override fun getLayout() = R.layout.item_history_post
 }

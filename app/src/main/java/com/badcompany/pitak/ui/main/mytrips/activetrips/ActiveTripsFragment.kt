@@ -22,7 +22,6 @@ import com.badcompany.pitak.ui.main.MainViewModel
 import com.badcompany.pitak.ui.viewgroups.ActivePostItem
 import com.badcompany.pitak.viewobjects.DriverPostViewObj
 import com.badcompany.pitak.viewobjects.PlaceViewObj
-import com.badcompany.pitak.viewobjects.post
 import com.google.android.material.snackbar.Snackbar
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
@@ -45,7 +44,6 @@ class ActiveTripsFragment @Inject constructor(private val viewModelFactory: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onAttach(context: Context) {
@@ -64,12 +62,12 @@ class ActiveTripsFragment @Inject constructor(private val viewModelFactory: View
 
     override fun onStart() {
         super.onStart()
-        if (viewmodel.activePostsResponse.value != ResultWrapper.InProgress) {
-            swipeRefreshLayout.isRefreshing = true
-        } else {
-            swipeRefreshLayout.isRefreshing =
-                viewmodel.activePostsResponse.value == ResultWrapper.InProgress
-        }
+//        if (viewmodel.activePostsResponse.value != ResultWrapper.InProgress) {
+//            swipeRefreshLayout.isRefreshing = true
+//        } else {
+//            swipeRefreshLayout.isRefreshing =
+//                viewmodel.activePostsResponse.value == ResultWrapper.InProgress
+//        }
     }
 
 
@@ -140,7 +138,7 @@ class ActiveTripsFragment @Inject constructor(private val viewModelFactory: View
             }.exhaustive
         })
 
-        viewmodel.cancelOrderReponse.observe(viewLifecycleOwner, Observer {
+        viewmodel.deletePostReponse.observe(viewLifecycleOwner, Observer {
             val response = it ?: return@Observer
             when (response) {
                 is ErrorWrapper.ResponseError -> {
@@ -155,7 +153,31 @@ class ActiveTripsFragment @Inject constructor(private val viewModelFactory: View
                                   Snackbar.LENGTH_SHORT).show()
                 }
                 is ResultWrapper.Success -> {
+                    adapter.remove(adapter.getItem(response.value))
+                    adapter.notifyItemRemoved(response.value)
+                }
+                ResultWrapper.InProgress -> {
+                }
+            }.exhaustive
+        })
 
+        viewmodel.finishPostResponse.observe(viewLifecycleOwner, Observer {
+            val response = it ?: return@Observer
+            when (response) {
+                is ErrorWrapper.ResponseError -> {
+                    Snackbar.make(swipeRefreshLayout,
+                                  response.message!!,
+                                  Snackbar.LENGTH_SHORT).show()
+
+                }
+                is ErrorWrapper.SystemError -> {
+                    Snackbar.make(swipeRefreshLayout,
+                                  response.err.localizedMessage.toString(),
+                                  Snackbar.LENGTH_SHORT).show()
+                }
+                is ResultWrapper.Success -> {
+                    adapter.remove(adapter.getItem(response.value))
+                    adapter.notifyItemRemoved(response.value)
                 }
                 ResultWrapper.InProgress -> {
                 }
@@ -198,6 +220,7 @@ class ActiveTripsFragment @Inject constructor(private val viewModelFactory: View
     }
 
 
+    @ExperimentalSplittiesApi
     private val onOrderActionListener = object : IOnPostActionListener {
         override fun onEditClick(post: DriverPost) {
 
@@ -236,12 +259,15 @@ class ActiveTripsFragment @Inject constructor(private val viewModelFactory: View
 
         }
 
-        override fun onCancelClick(post: DriverPost) {
-        }
-
-        override fun onDoneClick(post: DriverPost) {
+        override fun onCancelClick(position: Int, post: DriverPost, parentView: View) {
+            viewmodel.deletePost(post.id.toString(), position)
 
         }
+
+        override fun onDoneClick(position: Int, post: DriverPost, parentView: View) {
+            viewmodel.finishPost(post.id.toString(), position)
+        }
+
     }
 
 

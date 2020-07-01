@@ -11,10 +11,11 @@ import javax.inject.Inject
 /**
  * Created by jahon on 28-Apr-20
  */
-class AddPostViewModel @Inject constructor(    /*private val saveCar: SaveCar,*/) :
+class AddPostViewModel @Inject constructor() :
     BaseViewModel() {
 
-
+    var isEditing: Boolean = false
+    var id: Long? = null
     var placeFrom: Place? = null
     var placeTo: Place? = null
     var departureDate: String? = null

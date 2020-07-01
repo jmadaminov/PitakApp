@@ -2,6 +2,7 @@
 <resources>
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryOpacityEighty">#CC008577</color>
+    <color name="colorPrimaryOpacityTwenty">#33008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="windowBackground">#fff</color>
     <color name="colorAccent">#D81B60</color>

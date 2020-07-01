@@ -81,5 +81,6 @@
     <string name="history">History</string>
     <string name="no_active_orders">You have no active trips…</string>
     <string name="no_history_posts">You have no history posts…</string>
+    <string name="action_sign_out">Sign out</string>
 
 </resources>

@@ -29,6 +29,30 @@ class DriverPostRemoteImpl @Inject constructor(private val apiService: ApiServic
         }
     }
 
+    override suspend fun deleteDriverPost(token: String,
+                                          identifier: String): ResultWrapper<String> {
+        return try {
+            val response = apiService.deletePost(token, identifier)
+            if (response.code == 1) {
+                ResultWrapper.Success("SUCCESS")
+            } else ErrorWrapper.ResponseError(response.code, response.message)
+        } catch (e: Exception) {
+            ErrorWrapper.SystemError(e)
+        }
+    }
+
+    override suspend fun finishDriverPost(token: String,
+                                          identifier: String): ResultWrapper<String> {
+        return try {
+            val response = apiService.finishPost(token, identifier)
+            if (response.code == 1) {
+                ResultWrapper.Success("SUCCESS")
+            } else ErrorWrapper.ResponseError(response.code, response.message)
+        } catch (e: Exception) {
+            ErrorWrapper.SystemError(e)
+        }
+    }
+
     override suspend fun getActiveDriverPosts(token: String,
                                               lang: String): ResultWrapper<List<DriverPostEntity>> {
 

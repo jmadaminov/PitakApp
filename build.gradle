@@ -12,10 +12,10 @@ buildscript {
 
         mockkVersion = '1.9'
         coreTestingVersion = '2.0.0'
-        coroutinesVersion = "1.3.7"
+        coroutinesVersion = "1.3.5"
         junitVersion = '5.3.1'
         mockkVersion = '1.9'
-        kotlinVersion = '1.3.72'
+        kotlinVersion = '1.3.71'
         ktlintVersion = '0.30.0'
         lifecycleVersion = '2.2.0'
         materialVersion = '1.1.0'

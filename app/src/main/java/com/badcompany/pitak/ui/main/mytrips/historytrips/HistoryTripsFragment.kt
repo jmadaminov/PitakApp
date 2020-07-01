@@ -58,12 +58,12 @@ class HistoryTripsFragment @Inject constructor(private val viewModelFactory: Vie
 
     override fun onStart() {
         super.onStart()
-        if (viewmodel.historyPostsResponse.value != ResultWrapper.InProgress) {
-            swipeRefreshLayout.isRefreshing = true
-        } else {
-            swipeRefreshLayout.isRefreshing =
-                viewmodel.historyPostsResponse.value == ResultWrapper.InProgress
-        }
+//        if (viewmodel.historyPostsResponse.value != ResultWrapper.InProgress) {
+//            swipeRefreshLayout.isRefreshing = true
+//        } else {
+//            swipeRefreshLayout.isRefreshing =
+//                viewmodel.historyPostsResponse.value == ResultWrapper.InProgress
+//        }
     }
 
 
@@ -196,10 +196,10 @@ class HistoryTripsFragment @Inject constructor(private val viewModelFactory: Vie
         override fun onEditClick(post: DriverPost) {
         }
 
-        override fun onCancelClick(post: DriverPost) {
+        override fun onCancelClick(position:Int,post: DriverPost, parentView: View) {
         }
 
-        override fun onDoneClick(post: DriverPost) {
+        override fun onDoneClick(position:Int,post: DriverPost, parentView: View) {
 
         }
     }

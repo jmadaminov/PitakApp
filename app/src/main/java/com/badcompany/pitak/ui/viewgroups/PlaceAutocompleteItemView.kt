@@ -13,6 +13,8 @@ class PlaceAutocompleteItemView(val place: Place,
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         viewHolder.itemView.placeName.text = place.nameUz
+        viewHolder.itemView.regionName.text = place.regionName
+        viewHolder.itemView.autocompleteItemparent.background(viewHolder.itemView.context.getColor(R.color.colorPrimaryOpacityTwenty))
 
         viewHolder.itemView.autocompleteItemparent.setOnClickListener {
             presenter.dispatchItemClick(this)

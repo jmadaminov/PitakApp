@@ -20,6 +20,18 @@ interface ApiService {
     suspend fun createPost(@Header("Authorization") token: String,
                            @Body driverPostBody: DriverPostModel): PlainResponse
 
+    @Headers("Content-Type:application/json", "Accept: application/json")
+    @PUT("driver_post/action/cancel/{identifier}")
+    suspend fun deletePost(@Header("Authorization") token: String,
+                           @Path(value = "identifier",
+                                 encoded = true) identifier: String): PlainResponse
+
+    @Headers("Content-Type:application/json", "Accept: application/json")
+    @PUT("driver_post/action/finish/{identifier}")
+    suspend fun finishPost(@Header("Authorization") token: String,
+                           @Path(value = "identifier",
+                                 encoded = true) identifier: String): PlainResponse
+
 
     @Headers("Content-Type:application/json", "Accept: application/json")
     @GET("driver_post/action/active")
@@ -30,7 +42,6 @@ interface ApiService {
     @GET("driver_post/action/history")
     suspend fun getHistoryPosts(@Header("Authorization") token: String,
                                 @Header("Accept-Language") lang: String): DriverPostsResponse
-
 
 
     //

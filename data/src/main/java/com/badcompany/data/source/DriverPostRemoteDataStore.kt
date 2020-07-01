@@ -20,6 +20,18 @@ open class DriverPostRemoteDataStore @Inject constructor(private val driverPostR
         return driverPostRemote.createDriverPost(token, post)
     }
 
+    override suspend fun deleteDriverPost(token: String,
+                                          identifier: String): ResultWrapper<String> {
+        return driverPostRemote.deleteDriverPost(token, identifier)
+
+    }
+
+    override suspend fun finishDriverPost(token: String,
+                                          identifier: String): ResultWrapper<String> {
+        return driverPostRemote.finishDriverPost(token, identifier)
+
+    }
+
     override suspend fun getActiveDriverPosts(token: String,
                                               lang: String): ResultWrapper<List<DriverPostEntity>> {
 

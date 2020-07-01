@@ -35,7 +35,8 @@ open class DriverPostMapper @Inject constructor() : Mapper<DriverPostEntity, Dri
                                  type.to.lat,
                                  type.to.lon)
 
-        return DriverPostModel(placeFrom,
+        return DriverPostModel(type.id,
+                               placeFrom,
                                placeTo,
                                type.price,
                                type.departureDate,
@@ -55,33 +56,34 @@ open class DriverPostMapper @Inject constructor() : Mapper<DriverPostEntity, Dri
     override fun mapToEntity(type: DriverPostModel): DriverPostEntity {
 
         val placeFrom = PlaceEntity(type.from.districtId,
-                                   type.from.regionId,
-                                   type.from.nameRu,
-                                   type.from.nameUz,
-                                   type.from.nameEn,
-                                   type.from.lat,
-                                   type.from.lon)
+                                    type.from.regionId,
+                                    type.from.nameRu,
+                                    type.from.nameUz,
+                                    type.from.nameEn,
+                                    type.from.lat,
+                                    type.from.lon)
 
         val placeTo = PlaceEntity(type.to.districtId,
-                                       type.to.regionId,
-                                       type.to.nameRu,
-                                       type.to.nameUz,
-                                       type.to.nameEn,
-                                       type.to.lat,
-                                       type.to.lon)
+                                  type.to.regionId,
+                                  type.to.nameRu,
+                                  type.to.nameUz,
+                                  type.to.nameEn,
+                                  type.to.lat,
+                                  type.to.lon)
 
-        return DriverPostEntity(placeFrom,
-                               placeTo,
-                               type.price,
-                               type.departureDate,
-                               type.timeFirstPart,
-                               type.timeSecondPart,
-                               type.timeThirdPart,
-                               type.timeFourthPart,
-                               type.carId,
-                               type.remark,
-                               type.seat,
-                               type.postType)
+        return DriverPostEntity(type.id,
+                                placeFrom,
+                                placeTo,
+                                type.price,
+                                type.departureDate,
+                                type.timeFirstPart,
+                                type.timeSecondPart,
+                                type.timeThirdPart,
+                                type.timeFourthPart,
+                                type.carId,
+                                type.remark,
+                                type.seat,
+                                type.postType)
     }
 
 

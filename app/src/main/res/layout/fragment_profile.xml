@@ -4,6 +4,7 @@
     android:id="@+id/clParent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center_horizontal"
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
@@ -111,6 +112,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:text="@string/myCars"
+        android:textColor="@color/dark_grey"
         android:textStyle="bold" />
 
 
@@ -123,11 +125,18 @@
         android:paddingEnd="14dp" />
 
 
-    <Button
+    <TextView
         android:id="@+id/signOut"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="?android:actionBarSize"
         android:layout_marginTop="15dp"
-        android:text="SIGN OUT" />
+        android:background="@drawable/selector_neutral_alert"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:selectableItemBackground"
+        android:gravity="center"
+        android:text="@string/action_sign_out"
+        android:textColor="@color/dark_grey"
+        android:textSize="20dp" />
 
 </LinearLayout>

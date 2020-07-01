@@ -9,4 +9,5 @@ data class PlaceEntity(val districtId: Int,
                        val nameUz: String? = null,
                        val nameEn: String? = null,
                        val lat: Double? = null,
-                       val lon: Double? = null)
+                       val lon: Double? = null,
+                       val regionName: String? = null)

@@ -27,6 +27,7 @@
             android:id="@+id/noteInput"
             android:layout_width="match_parent"
             android:layout_height="200dp"
+            android:textColor="@color/dark_grey"
             android:gravity="start|top"
             android:hint="@string/please_add_notes_if_needed"
             android:imeOptions="actionDone"

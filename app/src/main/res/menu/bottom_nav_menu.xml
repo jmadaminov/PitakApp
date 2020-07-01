@@ -3,17 +3,17 @@
 
     <item
         android:id="@+id/navSearchTripFragment"
-        android:icon="@drawable/ic_home_black_24dp"
+        android:icon="@drawable/baseline_search_white_24dp"
         android:title="@string/search_trip" />
 
     <item
         android:id="@+id/nav_menu_my_trips"
-        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:icon="@drawable/baseline_directions_car_white_24dp"
         android:title="@string/my_trips" />
 
     <item
         android:id="@+id/nav_menu_profile"
-        android:icon="@drawable/ic_notifications_black_24dp"
+        android:icon="@drawable/baseline_person_outline_white_24dp"
         android:title="@string/title_profile" />
 
 </menu>

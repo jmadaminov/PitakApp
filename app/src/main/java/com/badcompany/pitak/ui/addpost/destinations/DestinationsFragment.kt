@@ -6,6 +6,7 @@ import android.text.Editable
 import android.text.Spannable
 import android.view.Gravity
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -20,8 +21,8 @@ import com.badcompany.core.ResultWrapper
 import com.badcompany.core.exhaustive
 import com.badcompany.pitak.MapsActivity
 import com.badcompany.pitak.R
-import com.badcompany.pitak.ui.interfaces.IOnPlaceSearchQueryListener
 import com.badcompany.pitak.ui.addpost.AddPostViewModel
+import com.badcompany.pitak.ui.interfaces.IOnPlaceSearchQueryListener
 import com.badcompany.pitak.ui.viewgroups.PlaceAutocompleteItemView
 import com.badcompany.pitak.util.hideKeyboard
 import com.otaliastudios.autocomplete.Autocomplete
@@ -66,13 +67,17 @@ class DestinationsFragment @Inject constructor(private val viewModelFactory: Vie
             viewModel.placeFrom = activityViewModel.placeFrom
             fromInput.setText(viewModel.placeFrom!!.nameUz)
             toInput.setText(viewModel.placeTo!!.nameUz)
+            navBack.visibility = View.VISIBLE
+        } else {
+            navBack.visibility = View.INVISIBLE
         }
 
-        setupObservers()
+
         setupFromInputAutocomplete()
         setupToInputAutocomplete()
         setupListeners()
         updateNextButtonState()
+        setupObservers()
 
 
         navController = findNavController()
@@ -91,12 +96,38 @@ class DestinationsFragment @Inject constructor(private val viewModelFactory: Vie
     @ExperimentalSplittiesApi
     private fun setupListeners() {
 
+        navBack.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
+
+        fromInput.setOnEditorActionListener { _, actionId, _ ->
+            when (actionId) {
+                EditorInfo.IME_ACTION_DONE -> {
+                    fromAutocompleteCallback.onPopupItemClicked(fromInput.editableText,
+                                                                fromAutocompletePresenter.getAdr()!!
+                                                                    .getItem(0) as PlaceAutocompleteItemView)
+                    toInput.requestFocus()
+                }
+            }
+            false
+        }
+        toInput.setOnEditorActionListener { _, actionId, _ ->
+            when (actionId) {
+                EditorInfo.IME_ACTION_DONE -> {
+                    toAutocompleteCallback.onPopupItemClicked(toInput.editableText,
+                                                              toAutocompletePresenter.getAdr()!!
+                                                                  .getItem(0) as PlaceAutocompleteItemView)
+
+                }
+            }
+            false
+        }
+
         next.setOnClickListener {
             activityViewModel.placeFrom = viewModel.placeFrom
             activityViewModel.placeTo = viewModel.placeTo
 
             navController.navigate(if (args.ISFROMPOSTPREVIEW) R.id.action_destinationsFragment_to_previewFragment else R.id.action_destinationsFragment_to_dateTimeFragment)
-
         }
 
         fromInput.onFocusChangeListener =
@@ -153,13 +184,13 @@ class DestinationsFragment @Inject constructor(private val viewModelFactory: Vie
 
                 }
                 is ResultWrapper.Success -> {
-                    fromAutocompletePresenter.getAdr().clear()
+                    fromAutocompletePresenter.getAdr()!!.clear()
                     response.value.forEach { place ->
-                        fromAutocompletePresenter.getAdr().add(PlaceAutocompleteItemView(place,
-                                                                                         fromAutocompletePresenter))
+                        fromAutocompletePresenter.getAdr()!!.add(PlaceAutocompleteItemView(place,
+                                                                                           fromAutocompletePresenter))
 
                     }
-                    fromAutocompletePresenter.getAdr().notifyDataSetChanged()
+                    fromAutocompletePresenter.getAdr()!!.notifyDataSetChanged()
                 }
                 ResultWrapper.InProgress -> {
 //                    if (fromAutocompletePresenter.getAdr().itemCount == 0 || fromAutocompletePresenter.getAdr().getItem(
@@ -184,13 +215,13 @@ class DestinationsFragment @Inject constructor(private val viewModelFactory: Vie
 
                 }
                 is ResultWrapper.Success -> {
-                    toAutocompletePresenter.getAdr().clear()
+                    toAutocompletePresenter.getAdr()!!.clear()
                     response.value.forEach { place ->
-                        toAutocompletePresenter.getAdr().add(PlaceAutocompleteItemView(place,
-                                                                                       toAutocompletePresenter))
+                        toAutocompletePresenter.getAdr()!!.add(PlaceAutocompleteItemView(place,
+                                                                                         toAutocompletePresenter))
 
                     }
-                    toAutocompletePresenter.getAdr().notifyDataSetChanged()
+                    toAutocompletePresenter.getAdr()!!.notifyDataSetChanged()
                 }
                 ResultWrapper.InProgress -> {
 //                    if (toAutocompletePresenter.getAdr().itemCount == 0 || toAutocompletePresenter.getAdr().getItem(
@@ -221,8 +252,9 @@ class DestinationsFragment @Inject constructor(private val viewModelFactory: Vie
 
     @ExperimentalSplittiesApi
     private val autoCompleteQueryListener = object : IOnPlaceSearchQueryListener {
-        override fun onQuery(query: CharSequence?, isFrom: Boolean) {
-            if (query!!.length % 3 == 0) viewModel.getPlacesFeed(query.toString(), isFrom)
+        override fun onQuery(query: CharSequence?, isFrom: Boolean, isSelectedFromFeed: Boolean) {
+            if (query!!.length % 3 == 0 && !isSelectedFromFeed) viewModel.getPlacesFeed(query.toString(),
+                                                                                        isFrom)
         }
     }
 

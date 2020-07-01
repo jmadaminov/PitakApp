@@ -19,19 +19,20 @@ class DriverPostRepositoryImpl @Inject constructor(private val factoryDriver: Dr
 
 
     override suspend fun createDriverPost(token: String, post: DriverPost): ResultWrapper<String> {
+        return factoryDriver.retrieveDataStore(false)
+            .createDriverPost(token, driverPostMapper.mapToEntity(post))
+    }
 
-        val response =
-            factoryDriver.retrieveDataStore(false)
-                .createDriverPost(token, driverPostMapper.mapToEntity(post))
+    override suspend fun deleteDriverPost(token: String,
+                                          identifier: String): ResultWrapper<String> {
 
-        return when (response) {
-            is ErrorWrapper.ResponseError -> response
-            is ErrorWrapper.SystemError -> response
-            is ResultWrapper.Success -> {
-                ResultWrapper.Success(response.value)
-            }
-            ResultWrapper.InProgress -> ResultWrapper.InProgress
-        }
+        return factoryDriver.retrieveDataStore(false).deleteDriverPost(token, identifier)
+    }
+
+    override suspend fun finishDriverPost(token: String,
+                                          identifier: String): ResultWrapper<String> {
+        return factoryDriver.retrieveDataStore(false).finishDriverPost(token, identifier)
+
     }
 
     override suspend fun getActiveDriverPosts(token: String,

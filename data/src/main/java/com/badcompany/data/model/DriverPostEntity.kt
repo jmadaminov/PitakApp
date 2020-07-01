@@ -2,7 +2,8 @@ package com.badcompany.data.model
 
 import com.badcompany.core.Constants
 
-data class DriverPostEntity(val from: PlaceEntity,
+data class DriverPostEntity(val id: Long? = null,
+                            val from: PlaceEntity,
                             val to: PlaceEntity,
                             val price: Int,
                             val departureDate: String,

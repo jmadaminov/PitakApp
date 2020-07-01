@@ -23,7 +23,8 @@ open class DriverPostMapper @Inject constructor() : Mapper<DriverPostEntity, Dri
                               type.from.nameUz,
                               type.from.nameEn,
                               type.from.lat,
-                              type.from.lon)
+                              type.from.lon,
+                              type.from.regionName)
 
         val placeTo = Place(type.to.districtId,
                             type.to.regionId,
@@ -31,9 +32,12 @@ open class DriverPostMapper @Inject constructor() : Mapper<DriverPostEntity, Dri
                             type.to.nameUz,
                             type.to.nameEn,
                             type.to.lat,
-                            type.to.lon)
+                            type.to.lon,
+                            type.to.regionName)
 
-        return DriverPost(placeFrom,
+
+        return DriverPost(type.id,
+                          placeFrom,
                           placeTo,
                           type.price,
                           type.departureDate,
@@ -57,7 +61,8 @@ open class DriverPostMapper @Inject constructor() : Mapper<DriverPostEntity, Dri
                                     type.from.nameUz,
                                     type.from.nameEn,
                                     type.from.lat,
-                                    type.from.lon)
+                                    type.from.lon,
+                                    type.from.regionName)
 
         val placeTo = PlaceEntity(type.to.districtId,
                                   type.to.regionId,
@@ -65,9 +70,11 @@ open class DriverPostMapper @Inject constructor() : Mapper<DriverPostEntity, Dri
                                   type.to.nameUz,
                                   type.to.nameEn,
                                   type.to.lat,
-                                  type.to.lon)
+                                  type.to.lon,
+                                  type.to.regionName)
 
-        return DriverPostEntity(placeFrom,
+        return DriverPostEntity(type.id,
+                                placeFrom,
                                 placeTo,
                                 type.price,
                                 type.departureDate,

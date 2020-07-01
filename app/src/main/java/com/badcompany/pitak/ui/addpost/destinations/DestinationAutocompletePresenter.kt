@@ -20,12 +20,20 @@ class DestinationAutocompletePresenter(val ctx: Context,
         return GroupAdapter<GroupieViewHolder>()
     }
 
-    fun getAdr(): GroupAdapter<GroupieViewHolder> {
+    fun getAdr(): GroupAdapter<GroupieViewHolder>? {
         return recyclerView!!.adapter as GroupAdapter<GroupieViewHolder>
     }
 
     override fun onQuery(query: CharSequence?) {
-        onQueryListener.onQuery(query, isFrom)
+
+        var selectedFromFeed = false
+        for (i in 0 until recyclerView!!.adapter!!.itemCount) {
+            if (((recyclerView!!.adapter!! as GroupAdapter).getItem(i) as PlaceAutocompleteItemView).place.nameUz!! == query) {
+                selectedFromFeed = true
+            }
+        }
+
+        onQueryListener.onQuery(query, isFrom, selectedFromFeed)
         Log.wtf("WTF ", "onQuery: .")
     }
 

@@ -10,6 +10,8 @@ import com.badcompany.data.source.DriverPostRemoteDataStore
 import com.badcompany.data.source.PlaceDataStoreFactory
 import com.badcompany.data.source.PlaceRemoteDataStore
 import com.badcompany.domain.repository.DriverPostRepository
+import com.badcompany.domain.usecases.DeleteDriverPost
+import com.badcompany.domain.usecases.FinishDriverPost
 import com.badcompany.domain.usecases.GetActiveDriverPost
 import com.badcompany.domain.usecases.GetHistoryDriverPost
 import com.badcompany.remote.ApiService
@@ -26,6 +28,20 @@ object MainModule {
     @JvmStatic
     fun provideGetActiveDriverPost(driverPostRepository: DriverPostRepository): GetActiveDriverPost {
         return GetActiveDriverPost(driverPostRepository)
+    }
+
+    @MainScope
+    @Provides
+    @JvmStatic
+    fun provideDeleteDriverPost(driverPostRepository: DriverPostRepository): DeleteDriverPost {
+        return DeleteDriverPost(driverPostRepository)
+    }
+
+    @MainScope
+    @Provides
+    @JvmStatic
+    fun provideFinishDriverPost(driverPostRepository: DriverPostRepository): FinishDriverPost {
+        return FinishDriverPost(driverPostRepository)
     }
 
     @MainScope

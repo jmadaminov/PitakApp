@@ -1,12 +1,14 @@
 package com.badcompany.pitak.ui.viewgroups
 
 import android.view.View
+import android.widget.ProgressBar
 import com.badcompany.domain.domainmodel.DriverPost
 import com.badcompany.pitak.R
 import com.badcompany.pitak.ui.interfaces.IOnPostActionListener
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item
 import kotlinx.android.synthetic.main.item_active_post.view.*
+
 
 class ActivePostItem(var post: DriverPost, var onPostActionListener: IOnPostActionListener) :
     Item() {
@@ -25,13 +27,29 @@ class ActivePostItem(var post: DriverPost, var onPostActionListener: IOnPostActi
         }
 
         viewHolder.itemView.done.setOnClickListener {
-            onPostActionListener.onDoneClick(post)
+            val progressBar = ProgressBar(viewHolder.itemView.context)
+            progressBar.layoutParams = viewHolder.itemView.done.layoutParams
+            progressBar.setPadding(20, 20, 20, 20)
+            viewHolder.itemView.cl_parent.addView(progressBar)
+            viewHolder.itemView.done.visibility = View.INVISIBLE
+            viewHolder.itemView.cancel.visibility = View.INVISIBLE
+            viewHolder.itemView.edit.visibility = View.INVISIBLE
+
+
+            onPostActionListener.onDoneClick(position, post, viewHolder.itemView.cl_parent)
         }
         viewHolder.itemView.edit.setOnClickListener {
             onPostActionListener.onEditClick(post)
         }
         viewHolder.itemView.cancel.setOnClickListener {
-            onPostActionListener.onCancelClick(post)
+            val progressBar = ProgressBar(viewHolder.itemView.context)
+            progressBar.layoutParams = viewHolder.itemView.cancel.layoutParams
+            progressBar.setPadding(20, 20, 20, 20)
+            viewHolder.itemView.cl_parent.addView(progressBar)
+            viewHolder.itemView.done.visibility = View.INVISIBLE
+            viewHolder.itemView.cancel.visibility = View.INVISIBLE
+            viewHolder.itemView.edit.visibility = View.INVISIBLE
+            onPostActionListener.onCancelClick(position,post, viewHolder.itemView.cl_parent)
         }
 
     }

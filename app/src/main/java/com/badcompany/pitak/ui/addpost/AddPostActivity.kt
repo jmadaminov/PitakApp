@@ -6,9 +6,9 @@ import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
 import androidx.navigation.NavOptions
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.badcompany.core.Constants
-import com.badcompany.domain.domainmodel.Place
+import com.badcompany.domain.domainmodel.*
 import com.badcompany.pitak.App
 import com.badcompany.pitak.R
 import com.badcompany.pitak.di.viewmodels.AddPostViewModelFactory
@@ -54,17 +54,22 @@ class AddPostActivity : BaseActivity() {
         setupActionBar()
         onRestoreInstanceState()
 
-        checkIfEditing(intent.getParcelableExtra(Constants.TXT_DRIVER_POST))
 
         subscribeObservers()
         setupListeners()
     }
 
+    override fun onResume() {
+        super.onResume()
+        checkIfEditing(intent.getParcelableExtra(Constants.TXT_DRIVER_POST))
+
+    }
+
     private fun checkIfEditing(driverPostViewObj: DriverPostViewObj?) {
         if (driverPostViewObj != null) {
-
+            viewmodel.isEditing = true
             viewmodel.price = driverPostViewObj.price
-            viewmodel.price = driverPostViewObj.seat
+            viewmodel.seat = driverPostViewObj.seat
             viewmodel.placeFrom = Place(driverPostViewObj.from.districtId,
                                         driverPostViewObj.from.regionId,
                                         driverPostViewObj.from.nameRu,
@@ -72,7 +77,6 @@ class AddPostActivity : BaseActivity() {
                                         driverPostViewObj.from.nameEn,
                                         driverPostViewObj.from.lat,
                                         driverPostViewObj.from.lon)
-
 
             viewmodel.placeTo = Place(driverPostViewObj.to.districtId,
                                       driverPostViewObj.to.regionId,
@@ -88,14 +92,24 @@ class AddPostActivity : BaseActivity() {
             viewmodel.timeFourthPart = driverPostViewObj.timeFourthPart
             viewmodel.departureDate = driverPostViewObj.departureDate
             viewmodel.note = driverPostViewObj.remark
-//            viewmodel.car =  driverPostViewObj.carId
+            viewmodel.car = CarDetails(driverPostViewObj.carId,
+                                       IdName(2L, "MODEL 1"),
+                                       Image(2L,
+                                             "http://codeuz.uz:9091/attach/image/eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyMDIwLTA2LTIzLTIxLTA5LTA4LTgxMi5qcGciLCJpc3MiOiJwaXRha2oxMmJpaG1hbiIsImlhdCI6MTU5MzU5NDIxOH0.dpoNfy19v9pvFaFB9O3oZ-b0PTR78ukxGemaS_Jgzng"),
+                                       Constants.FUEL_TYPE_METHANE,
+                                       CarColorBody(3L, "#eb4034", "RED", "qizil", "KRASNIY"),
+                                       "01XU239A", 2013, true, true, listOf(Image(2L,
+                                                                                  "http://codeuz.uz:9091/attach/image/eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyMDIwLTA2LTIzLTIxLTA5LTA4LTgxMi5qcGciLCJpc3MiOiJwaXRha2oxMmJpaG1hbiIsImlhdCI6MTU5MzU5NDIxOH0.dpoNfy19v9pvFaFB9O3oZ-b0PTR78ukxGemaS_Jgzng")
+                ))
 
             val navOptions = NavOptions.Builder()
                 .setPopUpTo(R.id.previewFragment, true)
                 .build()
-            findNavController(R.id.add_post_fragments_container).navigate(R.id.action_destinationsFragment_to_previewFragment,
-                                                                          null,
-                                                                          navOptions)
+
+            navHost.findNavController()
+                .navigate(R.id.action_destinationsFragment_to_previewFragment,
+                          null,
+                          navOptions)
         }
 
     }
