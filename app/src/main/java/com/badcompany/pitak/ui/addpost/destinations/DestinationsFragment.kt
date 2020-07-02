@@ -114,6 +114,7 @@ class DestinationsFragment @Inject constructor(private val viewModelFactory: Vie
         toInput.setOnEditorActionListener { _, actionId, _ ->
             when (actionId) {
                 EditorInfo.IME_ACTION_DONE -> {
+
                     toAutocompleteCallback.onPopupItemClicked(toInput.editableText,
                                                               toAutocompletePresenter.getAdr()!!
                                                                   .getItem(0) as PlaceAutocompleteItemView)
@@ -144,7 +145,7 @@ class DestinationsFragment @Inject constructor(private val viewModelFactory: Vie
     @ExperimentalSplittiesApi
     private fun setupFromInputAutocomplete() {
         fromAutocompletePresenter =
-            DestinationAutocompletePresenter(requireContext(), autoCompleteQueryListener)
+            DestinationAutocompletePresenter(requireContext(), viewModel, autoCompleteQueryListener)
         fromAutocomplete = Autocomplete.on<PlaceAutocompleteItemView>(fromInput)
             .with(autoCompletePolicy)
             .with(fromAutocompleteCallback)
@@ -158,7 +159,10 @@ class DestinationsFragment @Inject constructor(private val viewModelFactory: Vie
     @ExperimentalSplittiesApi
     private fun setupToInputAutocomplete() {
         toAutocompletePresenter =
-            DestinationAutocompletePresenter(requireContext(), autoCompleteQueryListener, false)
+            DestinationAutocompletePresenter(requireContext(),
+                                             viewModel,
+                                             autoCompleteQueryListener,
+                                             false)
 
         toAutocomplete = Autocomplete.on<PlaceAutocompleteItemView>(toInput)
             .with(autoCompletePolicy)

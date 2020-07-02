@@ -1,5 +1,6 @@
 package com.badcompany.pitak.ui.viewgroups
 
+import android.graphics.Color
 import com.badcompany.domain.domainmodel.Place
 import com.badcompany.pitak.R
 import com.badcompany.pitak.ui.addpost.destinations.DestinationAutocompletePresenter
@@ -14,7 +15,8 @@ class PlaceAutocompleteItemView(val place: Place,
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         viewHolder.itemView.placeName.text = place.nameUz
         viewHolder.itemView.regionName.text = place.regionName
-        viewHolder.itemView.autocompleteItemparent.background(viewHolder.itemView.context.getColor(R.color.colorPrimaryOpacityTwenty))
+
+        if (position == 0) viewHolder.itemView.autocompleteItemparent.setBackgroundColor(Color.parseColor("#33008577"))
 
         viewHolder.itemView.autocompleteItemparent.setOnClickListener {
             presenter.dispatchItemClick(this)

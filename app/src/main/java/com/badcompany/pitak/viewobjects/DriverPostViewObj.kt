@@ -19,8 +19,8 @@ data class DriverPostViewObj(val from: PlaceViewObj,
                              val postType: String = Constants.DRIVER_POST_SIMPLE) : Parcelable
 
 @Parcelize
-data class PlaceViewObj(val districtId: Int,
-                        val regionId: Int,
+data class PlaceViewObj(val districtId: Int? = null,
+                        val regionId: Int? = null,
                         val nameRu: String? = null,
                         val nameUz: String? = null,
                         val nameEn: String? = null,

@@ -9,8 +9,8 @@ data class PlaceListResponse(val code: Int? = null,
                              val message: String? = null,
                              val data: List<PlaceModel>? = null)
 
-data class PlaceModel(@SerializedName("districtId") val districtId: Int,
-                      @SerializedName("regionId") val regionId: Int,
+data class PlaceModel(@SerializedName("districtId") val districtId: Int?=null,
+                      @SerializedName("regionId") val regionId: Int?=null,
                       @SerializedName("nameRu") val nameRu: String? = null,
                       @SerializedName("nameUz") val nameUz: String? = null,
                       @SerializedName("nameEn") val nameEn: String? = null,

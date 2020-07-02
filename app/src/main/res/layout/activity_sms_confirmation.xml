@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.badcompany.pitak.SmsConfirmationActivity">
+    android:layout_height="match_parent">
 
 
     <TextView
@@ -29,6 +28,7 @@
         android:layout_marginEnd="24dp"
         android:gravity="center_horizontal"
         android:hint="@string/code"
+        android:textColor="#fff"
         android:imeActionLabel="@string/action_sign_in_short"
         android:imeOptions="actionDone"
         android:inputType="textPassword"

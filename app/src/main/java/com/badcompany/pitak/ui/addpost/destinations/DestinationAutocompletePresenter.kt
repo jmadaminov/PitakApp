@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.badcompany.core.ResultWrapper
 import com.badcompany.pitak.ui.interfaces.IOnPlaceSearchQueryListener
 import com.badcompany.pitak.ui.viewgroups.PlaceAutocompleteItemView
 import com.otaliastudios.autocomplete.RecyclerViewPresenter
@@ -11,7 +12,7 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 
 
-class DestinationAutocompletePresenter(val ctx: Context,
+class DestinationAutocompletePresenter(val ctx: Context, val viewModel: DestinationsViewModel,
                                        private val onQueryListener: IOnPlaceSearchQueryListener,
                                        val isFrom: Boolean = true) :
     RecyclerViewPresenter<PlaceAutocompleteItemView>(ctx) {
@@ -26,14 +27,22 @@ class DestinationAutocompletePresenter(val ctx: Context,
 
     override fun onQuery(query: CharSequence?) {
 
-        var selectedFromFeed = false
-        for (i in 0 until recyclerView!!.adapter!!.itemCount) {
-            if (((recyclerView!!.adapter!! as GroupAdapter).getItem(i) as PlaceAutocompleteItemView).place.nameUz!! == query) {
-                selectedFromFeed = true
-            }
+//        var selectedFromFeed = false
+//        for (i in 0 until recyclerView!!.adapter!!.itemCount) {
+//            if () {
+//                selectedFromFeed = true
+//            }
+//        }
+
+        var isFromFeed = false
+
+
+        if (viewModel.fromPlacesResponse.value != null && viewModel.fromPlacesResponse.value is ResultWrapper.Success && (viewModel.fromPlacesResponse.value as ResultWrapper.Success).value.isNotEmpty()) {
+            isFromFeed =
+                (viewModel.fromPlacesResponse.value as ResultWrapper.Success).value[0].nameUz!! == query.toString()
         }
 
-        onQueryListener.onQuery(query, isFrom, selectedFromFeed)
+        onQueryListener.onQuery(query, isFrom, isFromFeed)
         Log.wtf("WTF ", "onQuery: .")
     }
 
