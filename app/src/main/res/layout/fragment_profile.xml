@@ -4,115 +4,143 @@
     android:id="@+id/clParent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal"
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardDriver"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardBackgroundColor="#fff"
+        android:layout_height="100dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="12dp"
         app:cardElevation="3dp">
 
-        <!--                <androidx.constraintlayout.widget.ConstraintLayout-->
-        <!--                    android:layout_width="match_parent"-->
-        <!--                    android:layout_height="match_parent">-->
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
 
-        <!--                    <ImageView-->
-        <!--                        android:id="@+id/profilePhoto"-->
-        <!--                        android:layout_width="80dp"-->
-        <!--                        android:layout_height="80dp"-->
-        <!--                        android:layout_margin="15dp"-->
-        <!--                        android:background="@drawable/shape_round"-->
-        <!--                        app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--                        app:layout_constraintStart_toStartOf="parent"-->
-        <!--                        app:layout_constraintTop_toTopOf="parent" />-->
+            <ImageView
+                android:id="@+id/profilePhoto"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="15dp"
+                android:background="@drawable/shape_round"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <!--                    <TextView-->
-        <!--                        android:id="@+id/carNameAndNumber"-->
-        <!--                        android:layout_width="wrap_content"-->
-        <!--                        android:layout_height="wrap_content"-->
-        <!--                        android:layout_marginLeft="15dp"-->
-        <!--                        android:layout_marginTop="15dp"-->
-        <!--                        android:clickable="true"-->
-        <!--                        android:focusable="true"-->
-        <!--                        android:foreground="?android:selectableItemBackground"-->
-        <!--                        android:text="Lacetti 01|XU941A"-->
-        <!--                        android:textColor="@color/dark_grey"-->
-        <!--                        app:layout_constraintStart_toEndOf="@id/profilePhoto"-->
-        <!--                        app:layout_constraintTop_toTopOf="parent" />-->
+            <!--                    <TextView-->
+            <!--                        android:id="@+id/carNameAndNumber"-->
+            <!--                        android:layout_width="wrap_content"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:layout_marginLeft="15dp"-->
+            <!--                        android:layout_marginTop="15dp"-->
+            <!--                        android:clickable="true"-->
+            <!--                        android:focusable="true"-->
+            <!--                        android:foreground="?android:selectableItemBackground"-->
+            <!--                        android:text="Lacetti 01|XU941A"-->
+            <!--                        android:textColor="@color/dark_grey"-->
+            <!--                        app:layout_constraintStart_toEndOf="@id/profilePhoto"-->
+            <!--                        app:layout_constraintTop_toTopOf="parent" />-->
 
-        <!--                    <TextView-->
-        <!--                        android:id="@+id/direction"-->
-        <!--                        android:layout_width="0dp"-->
-        <!--                        android:layout_height="wrap_content"-->
-        <!--                        android:text="Tash. &ndash;&gt; Xiva"-->
-        <!--                        android:textColor="@color/dark_grey"-->
-        <!--                        app:layout_constraintBottom_toTopOf="@id/ridesCount"-->
-        <!--                        app:layout_constraintEnd_toEndOf="@id/carNameAndNumber"-->
-        <!--                        app:layout_constraintHorizontal_weight="1"-->
-        <!--                        app:layout_constraintStart_toStartOf="@id/carNameAndNumber"-->
-        <!--                        app:layout_constraintTop_toBottomOf="@id/carNameAndNumber" />-->
+            <!--                    <TextView-->
+            <!--                        android:id="@+id/direction"-->
+            <!--                        android:layout_width="0dp"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:text="Tash. &ndash;&gt; Xiva"-->
+            <!--                        android:textColor="@color/dark_grey"-->
+            <!--                        app:layout_constraintBottom_toTopOf="@id/ridesCount"-->
+            <!--                        app:layout_constraintEnd_toEndOf="@id/carNameAndNumber"-->
+            <!--                        app:layout_constraintHorizontal_weight="1"-->
+            <!--                        app:layout_constraintStart_toStartOf="@id/carNameAndNumber"-->
+            <!--                        app:layout_constraintTop_toBottomOf="@id/carNameAndNumber" />-->
 
-        <!--                    <RatingBar-->
-        <!--                        android:id="@+id/rating"-->
-        <!--                        style="@style/Widget.AppCompat.RatingBar.Small"-->
-        <!--                        android:layout_width="0dp"-->
-        <!--                        android:layout_height="wrap_content"-->
-        <!--                        android:layout_marginLeft="15dp"-->
-        <!--                        android:layout_marginTop="15dp"-->
-        <!--                        android:layout_marginRight="15dp"-->
-        <!--                        android:numStars="5"-->
-        <!--                        android:textColor="@color/dark_grey"-->
-        <!--                        app:layout_constraintEnd_toEndOf="parent"-->
-        <!--                        app:layout_constraintHorizontal_weight="1"-->
-        <!--                        app:layout_constraintStart_toEndOf="@id/carNameAndNumber"-->
-        <!--                        app:layout_constraintTop_toTopOf="parent" />-->
+            <!--                    <RatingBar-->
+            <!--                        android:id="@+id/rating"-->
+            <!--                        style="@style/Widget.AppCompat.RatingBar.Small"-->
+            <!--                        android:layout_width="0dp"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:layout_marginLeft="15dp"-->
+            <!--                        android:layout_marginTop="15dp"-->
+            <!--                        android:layout_marginRight="15dp"-->
+            <!--                        android:numStars="5"-->
+            <!--                        android:textColor="@color/dark_grey"-->
+            <!--                        app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                        app:layout_constraintHorizontal_weight="1"-->
+            <!--                        app:layout_constraintStart_toEndOf="@id/carNameAndNumber"-->
+            <!--                        app:layout_constraintTop_toTopOf="parent" />-->
 
-        <!--                    <TextView-->
-        <!--                        android:id="@+id/price"-->
-        <!--                        android:layout_width="0dp"-->
-        <!--                        android:layout_height="wrap_content"-->
-        <!--                        android:layout_marginLeft="15dp"-->
-        <!--                        android:layout_marginRight="15dp"-->
-        <!--                        android:text="Price: 50,000 Sum"-->
-        <!--                        android:textColor="@color/dark_grey"-->
-        <!--                        app:layout_constraintEnd_toEndOf="parent"-->
-        <!--                        app:layout_constraintHorizontal_weight="1"-->
-        <!--                        app:layout_constraintStart_toEndOf="@id/carNameAndNumber"-->
-        <!--                        app:layout_constraintTop_toTopOf="@id/direction" />-->
+            <!--                    <TextView-->
+            <!--                        android:id="@+id/price"-->
+            <!--                        android:layout_width="0dp"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:layout_marginLeft="15dp"-->
+            <!--                        android:layout_marginRight="15dp"-->
+            <!--                        android:text="Price: 50,000 Sum"-->
+            <!--                        android:textColor="@color/dark_grey"-->
+            <!--                        app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                        app:layout_constraintHorizontal_weight="1"-->
+            <!--                        app:layout_constraintStart_toEndOf="@id/carNameAndNumber"-->
+            <!--                        app:layout_constraintTop_toTopOf="@id/direction" />-->
 
-        <!--                    <TextView-->
-        <!--                        android:id="@+id/ridesCount"-->
-        <!--                        android:layout_width="wrap_content"-->
-        <!--                        android:layout_height="wrap_content"-->
-        <!--                        android:text="Rides completed: 88"-->
-        <!--                        android:textColor="@color/dark_grey"-->
-        <!--                        app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--                        app:layout_constraintEnd_toEndOf="@id/price"-->
-        <!--                        app:layout_constraintStart_toStartOf="@id/direction"-->
-        <!--                        app:layout_constraintTop_toBottomOf="@id/direction" />-->
+            <TextView
+                android:id="@+id/ridesCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="12dp"
+                android:gravity="center"
+                android:text="Trips: 88"
+                android:textColor="@color/dark_grey"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/nameSurname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="12dp"
+                android:gravity="center"
+                android:text="Polonchiev Polonchi"
+                android:textColor="@color/dark_grey"
+                app:layout_constraintStart_toEndOf="@id/profilePhoto"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:gravity="center"
+                android:text="+998909998877"
+                android:textColor="@color/dark_grey"
+                app:layout_constraintStart_toEndOf="@id/profilePhoto"
+                app:layout_constraintTop_toBottomOf="@id/nameSurname" />
 
 
-        <!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/line_textColorGrey" />
 
 
     <TextView
         android:id="@+id/labelMyAutos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="6dp"
+        android:background="@drawable/selector_rounded_right_corners"
+        android:paddingStart="12dp"
+        android:paddingTop="6dp"
+        android:paddingEnd="12dp"
+        android:paddingBottom="6dp"
         android:text="@string/myCars"
-        android:textColor="@color/dark_grey"
+        android:textColor="#fff"
         android:textStyle="bold" />
 
 
@@ -120,15 +148,14 @@
         android:id="@+id/carsList"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_gravity="center_vertical"
-        android:paddingStart="14dp"
-        android:paddingEnd="14dp" />
+        android:layout_gravity="center_vertical" />
 
 
     <TextView
         android:id="@+id/signOut"
         android:layout_width="200dp"
         android:layout_height="?android:actionBarSize"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="15dp"
         android:background="@drawable/selector_neutral_alert"
         android:clickable="true"

@@ -22,14 +22,13 @@ class CarItemView(val car: CarDetails, val onItemClickListener: MyItemClickListe
 //        )
 //        viewHolder.itemView.plateNumber.text = car.carNumber
         viewHolder.itemView.carYear.text = car.carYear.toString()
-        viewHolder.itemView.carModel.text = car.carModel.toString()
+        viewHolder.itemView.carModel.text = car.carModel!!.name.toString()
         viewHolder.itemView.carAction.setOnClickListener {
             onItemClickListener.onClick(position, it)
         }
 
         if (car.def != null && car.def!!) {
-            viewHolder.itemView.cardParent.setCardBackgroundColor(ContextCompat.getColor(viewHolder.itemView.context,
-                                                                                         R.color.orange))
+            viewHolder.itemView.cardParent.setBackgroundResource(R.drawable.stroke_primary)
         }
 
     }

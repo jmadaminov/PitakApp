@@ -16,6 +16,7 @@
     <color name="textColorGreyDark">#6e6e70</color>
     <color name="orange">#FFA000</color>
     <color name="ic_grey" >#a1a9c3</color>
+    <color name="light_grey" >#ebebee</color>
 
     <color name="neutralColor">#FF393939</color>
     <color name="neutralColorOpacityEighty">#CC393939</color>

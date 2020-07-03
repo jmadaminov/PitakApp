@@ -1,6 +1,7 @@
 package com.badcompany.pitak.ui.main
 
 import android.animation.LayoutTransition
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -145,7 +146,6 @@ class MainActivity : BaseActivity(), BottomNavController.OnNavigationGraphChange
     }
 
     override fun onBackPressed() = bottomNavController.onBackPressed()
-
 
     private fun setupActionBar() {
         setSupportActionBar(tool_bar)

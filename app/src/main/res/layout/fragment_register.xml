@@ -132,6 +132,7 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="48dp"
         android:background="@drawable/button_shape_default_rounded"
+        app:spinning_bar_color="#fff"
         android:enabled="false"
         android:text="@string/register"
         android:textColor="#fff"

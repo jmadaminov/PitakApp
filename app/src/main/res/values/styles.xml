@@ -1,17 +1,18 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-<!--        <item name="android:windowBackground">@color/colorPrimary</item>-->
+        <!--        <item name="android:windowBackground">@color/colorPrimary</item>-->
         <item name="colorAccent">@color/colorAccent</item>
         <item name="bottomNavigationStyle">@style/AppBottomNavigation</item>
         <item name="textInputStyle">@style/AppTextField</item>
-        <item name="android:textColorPrimary">@color/dark_grey</item>
-        <item name="android:textColor">#fff</item>
         <item name="android:windowBackground">@color/windowBackground</item>
+        <item name="fontFamily">@font/valera_round_regular</item>
+        <!--        <item name="android:homeAsUpIndicator">@drawable/baseline_arrow_back_white_24dp</item>-->
+        <item name="actionBarTheme">@style/ToolBarStyle</item>
     </style>
     <!-- Base application theme. -->
     <style name="NoActionBar" parent="Theme.MaterialComponents.Light.NoActionBar">
@@ -19,22 +20,31 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-<!--        <item name="android:windowBackground">@color/colorPrimary</item>-->
+        <!--        <item name="android:windowBackground">@color/colorPrimary</item>-->
         <item name="bottomNavigationStyle">@style/AppBottomNavigation</item>
 
-        <item name="android:textColorPrimary">@color/dark_grey</item>
-        <item name="android:textColor">#fff</item>
         <item name="textInputStyle">@style/AppTextField</item>
         <item name="android:windowBackground">@color/windowBackground</item>
+        <item name="fontFamily">@font/valera_round_regular</item>
+        <item name="actionBarTheme">@style/ToolBarStyle</item>
+    </style>
+
+    <!-- ToolBar -->
+    <style name="ToolBarStyle" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <item name="android:homeAsUpIndicator">@drawable/baseline_arrow_back_white_24dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="android:textColorPrimary">#fff</item>
+
     </style>
 
 
-    <style name="AppTextField" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-    </style>
+    <style name="AppTextField" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox"></style>
 
     <style name="SplashTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:windowBackground">@drawable/splash</item>
     </style>
+
     <style name="AppBottomNavigation" parent="Widget.MaterialComponents.BottomNavigationView.Colored" />
 
     <style name="BottomSheetDialogTheme" parent="BaseBottomSheetDialog">

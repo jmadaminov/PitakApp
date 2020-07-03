@@ -117,22 +117,34 @@ class ActiveTripsFragment @Inject constructor(private val viewModelFactory: View
             when (response) {
                 is ErrorWrapper.ResponseError -> {
                     swipeRefreshLayout.isRefreshing = false
-                    Snackbar.make(swipeRefreshLayout,
-                                  response.message!!,
-                                  Snackbar.LENGTH_SHORT).show()
+//                    Snackbar.make(rl_parent,
+//                                  response.message!!,
+//                                  Snackbar.LENGTH_SHORT).show()
+
+                    noActiveOrdersTxt.visibility = View.VISIBLE
+                    noActiveOrdersTxt.text = response.message
+                    activeOrdersList.visibility = View.INVISIBLE
 
                 }
                 is ErrorWrapper.SystemError -> {
+//                    Snackbar.make(rl_parent,
+//                                  response.err.localizedMessage.toString(),
+//                                  Snackbar.LENGTH_SHORT).show()
+                    noActiveOrdersTxt.visibility = View.VISIBLE
+                    noActiveOrdersTxt.text = response.err.localizedMessage
+                    activeOrdersList.visibility = View.INVISIBLE
                     swipeRefreshLayout.isRefreshing = false
-                    Snackbar.make(swipeRefreshLayout,
-                                  response.err.localizedMessage.toString(),
-                                  Snackbar.LENGTH_SHORT).show()
+
                 }
                 is ResultWrapper.Success -> {
+                    noActiveOrdersTxt.visibility = View.INVISIBLE
+                    activeOrdersList.visibility = View.VISIBLE
                     swipeRefreshLayout.isRefreshing = false
                     loadData(response.value)
                 }
                 ResultWrapper.InProgress -> {
+                    noActiveOrdersTxt.visibility = View.INVISIBLE
+                    activeOrdersList.visibility = View.INVISIBLE
                     swipeRefreshLayout.isRefreshing = true
                 }
             }.exhaustive
@@ -209,8 +221,10 @@ class ActiveTripsFragment @Inject constructor(private val viewModelFactory: View
     @ExperimentalSplittiesApi
     private fun loadData(orders: List<DriverPost>) {
         adapter.clear()
-        if (orders.isEmpty()) noActiveOrdersTxt.visibility = View.VISIBLE
-        else noActiveOrdersTxt.visibility = View.GONE
+        if (orders.isEmpty()) {
+            noActiveOrdersTxt.visibility = View.VISIBLE
+            noActiveOrdersTxt.text = getString(R.string.no_active_orders)
+        } else noActiveOrdersTxt.visibility = View.GONE
 
         orders.forEach {
             adapter.add(ActivePostItem(it, onOrderActionListener))

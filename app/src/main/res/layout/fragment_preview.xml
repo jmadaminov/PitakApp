@@ -176,6 +176,7 @@
             android:layout_weight="1"
             android:background="@drawable/selector_primary"
             android:clickable="true"
+            app:spinning_bar_color="#fff"
             android:focusable="true"
             android:foreground="?android:selectableItemBackground"
             android:gravity="center"

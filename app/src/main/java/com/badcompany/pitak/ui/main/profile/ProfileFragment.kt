@@ -73,7 +73,15 @@ class ProfileFragment @Inject constructor(private val viewModelFactory: ViewMode
         setupListeners()
         subscribeObservers()
         viewModel.getCarList(AppPreferences.token)
+        setupViews()
+    }
+
+    @ExperimentalSplittiesApi
+    private fun setupViews() {
         (activity as MainActivity).hideTabLayout()
+        cardDriver.setBackgroundResource(R.drawable.stroke_rounded_bottom_corners)
+        nameSurname.text = "${AppPreferences.name} ${AppPreferences.surname}"
+        phone.text = "+${AppPreferences.phone}"
 
     }
 
@@ -249,6 +257,7 @@ class ProfileFragment @Inject constructor(private val viewModelFactory: ViewMode
                 token = ""
                 name = ""
                 surname = ""
+                phone = ""
             }
             start<AuthActivity> {}
             (requireActivity().applicationContext as App).releaseMainComponent()

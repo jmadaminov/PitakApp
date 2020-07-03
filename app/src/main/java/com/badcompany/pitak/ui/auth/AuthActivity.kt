@@ -1,5 +1,6 @@
 package com.badcompany.pitak.ui.auth
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View

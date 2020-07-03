@@ -19,4 +19,6 @@ import splitties.preferences.Preferences
     var name by stringPref("")
     @ExperimentalSplittiesApi
     var surname by stringPref("")
+    @ExperimentalSplittiesApi
+    var phone by stringPref("")
 }

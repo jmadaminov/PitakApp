@@ -2,18 +2,17 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card_photo_grid"
-    android:layout_width="200dp"
-    android:layout_height="80dp"
-    android:clickable="true"
-    android:focusable="true"
-    app:cardElevation="3dp"
-    android:elevation="3dp"
+    android:layout_width="250dp"
+    android:layout_height="150dp"
     android:layout_gravity="center_vertical"
-    app:elevation="3dp"
+    android:clickable="true"
+    android:elevation="3dp"
+    android:focusable="true"
     android:orientation="vertical"
-    app:cardBackgroundColor="@color/line_textColorGrey"
     app:cardCornerRadius="5dp"
-    app:cardUseCompatPadding="true">
+    app:cardElevation="3dp"
+    app:cardUseCompatPadding="true"
+    app:elevation="3dp">
 
     <RelativeLayout
         android:id="@+id/layoutAdd"
@@ -30,8 +29,9 @@
 
         <TextView
             android:layout_width="wrap_content"
+            android:layout_below="@id/iv_icon"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="5dp"
             android:fontFamily="sans-serif"

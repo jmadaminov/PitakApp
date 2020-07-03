@@ -10,6 +10,7 @@ import kotlinx.android.synthetic.main.item_add_photo.view.*
 class ItemAddCar(val clickListener: OnItemClickListener, var isLoading: Boolean = false) :
     Item() {
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
+        viewHolder.itemView.card_photo_grid.setBackgroundResource(R.drawable.shade_grey_bottom)
         viewHolder.itemView.card_photo_grid.setOnClickListener {
             if (isLoading) return@setOnClickListener
             clickListener.onItemClick(this, it)

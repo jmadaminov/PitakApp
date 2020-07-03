@@ -104,6 +104,7 @@ class PhoneConfirmFragment @Inject constructor(private val viewModelFactory: Vie
             token = response.value.jwt!!
             name = response.value.name!!
             surname = response.value.surname!!
+            phone = response.value.phoneNum!!
         }
     }
 
