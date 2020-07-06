@@ -36,6 +36,11 @@ fun View.hideKeyboard() {
     imm.hideSoftInputFromWindow(this.windowToken, 0)
 }
 
+fun View.showKeyboard() {
+    val imm = this.context!!.getSystemService(Context.INPUT_METHOD_SERVICE)!! as InputMethodManager
+    imm.toggleSoftInputFromWindow(this.applicationWindowToken, InputMethodManager.SHOW_FORCED, 0)
+}
+
 fun ContentResolver.getFileName(fileUri: Uri): String {
     var name = ""
     val returnCursor = this.query(fileUri, null, null, null, null)

@@ -25,6 +25,7 @@ import com.badcompany.pitak.ui.addpost.AddPostViewModel
 import com.badcompany.pitak.ui.interfaces.IOnPlaceSearchQueryListener
 import com.badcompany.pitak.ui.viewgroups.PlaceAutocompleteItemView
 import com.badcompany.pitak.util.hideKeyboard
+import com.badcompany.pitak.util.showKeyboard
 import com.otaliastudios.autocomplete.Autocomplete
 import com.otaliastudios.autocomplete.AutocompleteCallback
 import com.otaliastudios.autocomplete.AutocompletePolicy
@@ -107,6 +108,7 @@ class DestinationsFragment @Inject constructor(private val viewModelFactory: Vie
                                                                 fromAutocompletePresenter.getAdr()!!
                                                                     .getItem(0) as PlaceAutocompleteItemView)
                     toInput.requestFocus()
+                    toInput.showKeyboard()
                 }
             }
             false

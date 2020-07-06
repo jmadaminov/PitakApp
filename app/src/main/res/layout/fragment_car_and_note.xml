@@ -27,12 +27,13 @@
             android:id="@+id/noteInput"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:textColor="@color/dark_grey"
             android:gravity="start|top"
             android:hint="@string/please_add_notes_if_needed"
             android:imeOptions="actionDone"
+            android:inputType="text"
             android:maxLength="120"
-            android:maxLines="6" />
+            android:maxLines="6"
+            android:textColor="@color/dark_grey" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
