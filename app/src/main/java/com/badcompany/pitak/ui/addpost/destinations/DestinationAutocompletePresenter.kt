@@ -39,7 +39,7 @@ class DestinationAutocompletePresenter(val ctx: Context, val viewModel: Destinat
 
         if (viewModel.fromPlacesResponse.value != null && viewModel.fromPlacesResponse.value is ResultWrapper.Success && (viewModel.fromPlacesResponse.value as ResultWrapper.Success).value.isNotEmpty()) {
             isFromFeed =
-                (viewModel.fromPlacesResponse.value as ResultWrapper.Success).value[0].nameUz!! == query.toString()
+                (viewModel.fromPlacesResponse.value as ResultWrapper.Success).value[0].regionName!! == query.toString()
         }
 
         onQueryListener.onQuery(query, isFrom, isFromFeed)

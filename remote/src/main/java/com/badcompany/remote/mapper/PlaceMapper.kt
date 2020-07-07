@@ -21,14 +21,14 @@ open class PlaceMapper @Inject constructor() : Mapper<PlaceEntity, PlaceModel> {
      * Map a [PlaceEntity] instance to a [PlaceModel] instance
      */
     override fun mapFromEntity(type: PlaceEntity): PlaceModel {
-        return PlaceModel(type.districtId, type.regionId, type.nameRu, type.nameUz, type.nameEn, type.lat, type.lon, type.regionName)
+        return PlaceModel(type.districtId, type.regionId, type.lat, type.lon, type.regionName, type.districtName)
     }
 
     /**
      * Map a [PlaceModel] instance to a [PlaceEntity] instance
      */
     override fun mapToEntity(type: PlaceModel): PlaceEntity {
-        return PlaceEntity(type.districtId, type.regionId, type.nameRu, type.nameUz, type.nameEn, type.lat, type.lon, type.regionName)
+        return PlaceEntity(type.districtId, type.regionId, type.lat, type.lon, type.regionName, type.districtName)
     }
 
 

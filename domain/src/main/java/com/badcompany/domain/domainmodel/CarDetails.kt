@@ -16,7 +16,5 @@ data class CarDetails(var id: Long? = null,
 data class IdName(var id: Long? = null,
                         var name: String? = null)
 
-data class Image(var id: Long? = null,
-                       var link: String? = null)
 
 

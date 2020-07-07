@@ -13,7 +13,7 @@ class PlaceAutocompleteItemView(val place: Place,
 
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
-        viewHolder.itemView.placeName.text = place.nameUz
+        viewHolder.itemView.placeName.text = place.districtName
         viewHolder.itemView.regionName.text = place.regionName
 
         if (position == 0) viewHolder.itemView.autocompleteItemparent.setBackgroundColor(Color.parseColor("#33008577"))

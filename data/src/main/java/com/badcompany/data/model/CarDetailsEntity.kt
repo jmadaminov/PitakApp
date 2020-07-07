@@ -16,6 +16,3 @@ data class CarDetailsEntity(var id: Long? = null,
 
 data class IdNameEntity(var id: Long? = null,
                         var name: String? = null)
-
-data class ImageEntity(var id: Long? = null,
-                       var link: String? = null)

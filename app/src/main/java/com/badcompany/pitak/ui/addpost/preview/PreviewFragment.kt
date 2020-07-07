@@ -75,8 +75,8 @@ class PreviewFragment @Inject constructor(private val viewModelFactory: ViewMode
 
     private fun setupViews() {
         if (activityViewModel.isEditing) navBack.visibility = View.INVISIBLE
-        labelFrom.text = activityViewModel.placeFrom!!.nameUz
-        labelTo.text = activityViewModel.placeTo!!.nameUz
+        labelFrom.text = activityViewModel.placeFrom!!.regionName
+        labelTo.text = activityViewModel.placeTo!!.regionName
 
 
         var time = ""
@@ -158,11 +158,13 @@ class PreviewFragment @Inject constructor(private val viewModelFactory: ViewMode
                                                   activityViewModel.placeTo!!,
                                                   activityViewModel.price!!,
                                                   activityViewModel.departureDate!!,
+                                                  null,
                                                   activityViewModel.timeFirstPart,
                                                   activityViewModel.timeSecondPart,
                                                   activityViewModel.timeThirdPart,
                                                   activityViewModel.timeFourthPart,
                                                   activityViewModel.car!!.id!!,
+                                                  null,
                                                   activityViewModel.note!!,
                                                   activityViewModel.seat!!,
                                                   Constants.DRIVER_POST_SIMPLE))

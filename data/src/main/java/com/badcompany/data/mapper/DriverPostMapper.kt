@@ -1,9 +1,7 @@
 package com.badcompany.data.mapper
 
-import com.badcompany.data.model.DriverPostEntity
-import com.badcompany.data.model.PlaceEntity
-import com.badcompany.domain.domainmodel.DriverPost
-import com.badcompany.domain.domainmodel.Place
+import com.badcompany.data.model.*
+import com.badcompany.domain.domainmodel.*
 import javax.inject.Inject
 
 
@@ -19,33 +17,40 @@ open class DriverPostMapper @Inject constructor() : Mapper<DriverPostEntity, Dri
     override fun mapFromEntity(type: DriverPostEntity): DriverPost {
         val placeFrom = Place(type.from.districtId,
                               type.from.regionId,
-                              type.from.nameRu,
-                              type.from.nameUz,
-                              type.from.nameEn,
                               type.from.lat,
                               type.from.lon,
-                              type.from.regionName)
+                              type.from.regionName,
+                              type.from.districtName)
 
-        val placeTo = Place(type.to.districtId,
-                            type.to.regionId,
-                            type.to.nameRu,
-                            type.to.nameUz,
-                            type.to.nameEn,
-                            type.to.lat,
-                            type.to.lon,
-                            type.to.regionName)
+        val placeTo = Place(type.from.districtId,
+                            type.from.regionId,
+                            type.from.lat,
+                            type.from.lon,
+                            type.from.regionName,
+                            type.from.districtName)
 
+
+        val car = CarInPost(type.car.id,
+                            type.car.modelId,
+                            Image(type.car.image!!.id, type.car.image!!.link),
+                            CarModelBody(type.car.carModel!!.id, type.car.carModel!!.name),
+                            type.car.fuelType,
+                            type.car.colorId,
+                            type.car.carNumber,
+                            type.car.carYear,
+                            type.car.airConditioner)
 
         return DriverPost(type.id,
                           placeFrom,
                           placeTo,
                           type.price,
                           type.departureDate,
+                          type.finishedDate,
                           type.timeFirstPart,
                           type.timeSecondPart,
                           type.timeThirdPart,
                           type.timeFourthPart,
-                          type.carId,
+                          car,
                           type.remark,
                           type.seat,
                           type.postType)
@@ -57,36 +62,42 @@ open class DriverPostMapper @Inject constructor() : Mapper<DriverPostEntity, Dri
     override fun mapToEntity(type: DriverPost): DriverPostEntity {
         val placeFrom = PlaceEntity(type.from.districtId,
                                     type.from.regionId,
-                                    type.from.nameRu,
-                                    type.from.nameUz,
-                                    type.from.nameEn,
                                     type.from.lat,
                                     type.from.lon,
-                                    type.from.regionName)
+                                    type.from.regionName,
+                                    type.from.districtName)
 
-        val placeTo = PlaceEntity(type.to.districtId,
-                                  type.to.regionId,
-                                  type.to.nameRu,
-                                  type.to.nameUz,
-                                  type.to.nameEn,
-                                  type.to.lat,
-                                  type.to.lon,
-                                  type.to.regionName)
+        val placeTo = PlaceEntity(type.from.districtId,
+                                  type.from.regionId,
+                                  type.from.lat,
+                                  type.from.lon,
+                                  type.from.regionName,
+                                  type.from.districtName)
+
+        val car = CarInPostEntity(type.car.id,
+                                  type.car.modelId,
+                                  ImageEntity(type.car.image!!.id, type.car.image!!.link),
+                                  CarModelEntity(type.car.carModel!!.id, type.car.carModel!!.name),
+                                  type.car.fuelType,
+                                  type.car.colorId,
+                                  type.car.carNumber,
+                                  type.car.carYear,
+                                  type.car.airConditioner)
 
         return DriverPostEntity(type.id,
                                 placeFrom,
                                 placeTo,
                                 type.price,
                                 type.departureDate,
+                                type.departureDate,
                                 type.timeFirstPart,
                                 type.timeSecondPart,
                                 type.timeThirdPart,
                                 type.timeFourthPart,
-                                type.carId,
+                                car,
                                 type.remark,
                                 type.seat,
                                 type.postType)
     }
-
 
 }

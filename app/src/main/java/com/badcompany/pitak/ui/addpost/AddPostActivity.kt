@@ -72,19 +72,17 @@ class AddPostActivity : BaseActivity() {
             viewmodel.seat = driverPostViewObj.seat
             viewmodel.placeFrom = Place(driverPostViewObj.from.districtId,
                                         driverPostViewObj.from.regionId,
-                                        driverPostViewObj.from.nameRu,
-                                        driverPostViewObj.from.nameUz,
-                                        driverPostViewObj.from.nameEn,
                                         driverPostViewObj.from.lat,
-                                        driverPostViewObj.from.lon)
+                                        driverPostViewObj.from.lon,
+                                        driverPostViewObj.from.regionName,
+                                        driverPostViewObj.from.districtName)
 
             viewmodel.placeTo = Place(driverPostViewObj.to.districtId,
                                       driverPostViewObj.to.regionId,
-                                      driverPostViewObj.to.nameRu,
-                                      driverPostViewObj.to.nameUz,
-                                      driverPostViewObj.to.nameEn,
                                       driverPostViewObj.to.lat,
-                                      driverPostViewObj.to.lon)
+                                      driverPostViewObj.to.lon,
+                                      driverPostViewObj.from.regionName,
+                                      driverPostViewObj.from.districtName)
 
             viewmodel.timeFirstPart = driverPostViewObj.timeFirstPart
             viewmodel.timeSecondPart = driverPostViewObj.timeSecondPart

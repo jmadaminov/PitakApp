@@ -1,10 +1,8 @@
 package com.badcompany.remote.mapper
 
 import com.badcompany.data.mapper.Mapper
-import com.badcompany.data.model.DriverPostEntity
-import com.badcompany.data.model.PlaceEntity
-import com.badcompany.remote.model.DriverPostModel
-import com.badcompany.remote.model.PlaceModel
+import com.badcompany.data.model.*
+import com.badcompany.remote.model.*
 import javax.inject.Inject
 
 
@@ -21,30 +19,40 @@ open class DriverPostMapper @Inject constructor() : Mapper<DriverPostEntity, Dri
 
         val placeFrom = PlaceModel(type.from.districtId,
                                    type.from.regionId,
-                                   type.from.nameRu,
-                                   type.from.nameUz,
-                                   type.from.nameEn,
                                    type.from.lat,
-                                   type.from.lon)
+                                   type.from.lon,
+                                   type.from.regionName,
+                                   type.from.districtName)
 
-        val placeTo = PlaceModel(type.to.districtId,
-                                 type.to.regionId,
-                                 type.to.nameRu,
-                                 type.to.nameUz,
-                                 type.to.nameEn,
-                                 type.to.lat,
-                                 type.to.lon)
+        val placeTo = PlaceModel(type.from.districtId,
+                                 type.from.regionId,
+                                 type.from.lat,
+                                 type.from.lon,
+                                 type.from.regionName,
+                                 type.from.districtName)
+
+
+        val car = CarInPostModel(type.car.id,
+                                 type.car.modelId,
+                                 ImageModel(type.car.image!!.id, type.car.image!!.link),
+                                 CarModelModel(type.car.carModel!!.id, type.car.carModel!!.name),
+                                 type.car.fuelType,
+                                 type.car.colorId,
+                                 type.car.carNumber,
+                                 type.car.carYear,
+                                 type.car.airConditioner)
 
         return DriverPostModel(type.id,
                                placeFrom,
                                placeTo,
                                type.price,
                                type.departureDate,
+                               type.departureDate,
                                type.timeFirstPart,
                                type.timeSecondPart,
                                type.timeThirdPart,
                                type.timeFourthPart,
-                               type.carId,
+                               car,
                                type.remark,
                                type.seat,
                                type.postType)
@@ -57,34 +65,42 @@ open class DriverPostMapper @Inject constructor() : Mapper<DriverPostEntity, Dri
 
         val placeFrom = PlaceEntity(type.from.districtId,
                                     type.from.regionId,
-                                    type.from.nameRu,
-                                    type.from.nameUz,
-                                    type.from.nameEn,
                                     type.from.lat,
-                                    type.from.lon)
+                                    type.from.lon,
+                                    type.from.regionName,
+                                    type.from.districtName)
 
-        val placeTo = PlaceEntity(type.to.districtId,
-                                  type.to.regionId,
-                                  type.to.nameRu,
-                                  type.to.nameUz,
-                                  type.to.nameEn,
-                                  type.to.lat,
-                                  type.to.lon)
+        val placeTo = PlaceEntity(type.from.districtId,
+                                  type.from.regionId,
+                                  type.from.lat,
+                                  type.from.lon,
+                                  type.from.regionName,
+                                  type.from.districtName)
+
+        val car = CarInPostEntity(type.car.id,
+                                  type.car.modelId,
+                                  ImageEntity(type.car.image!!.id, type.car.image!!.link),
+                                  CarModelEntity(type.car.carModel!!.id, type.car.carModel!!.name),
+                                  type.car.fuelType,
+                                  type.car.colorId,
+                                  type.car.carNumber,
+                                  type.car.carYear,
+                                  type.car.airConditioner)
 
         return DriverPostEntity(type.id,
-                                placeFrom,
-                                placeTo,
-                                type.price,
-                                type.departureDate,
-                                type.timeFirstPart,
-                                type.timeSecondPart,
-                                type.timeThirdPart,
-                                type.timeFourthPart,
-                                type.carId,
-                                type.remark,
-                                type.seat,
-                                type.postType)
+                               placeFrom,
+                               placeTo,
+                               type.price,
+                               type.departureDate,
+                               type.departureDate,
+                               type.timeFirstPart,
+                               type.timeSecondPart,
+                               type.timeThirdPart,
+                               type.timeFourthPart,
+                               car,
+                               type.remark,
+                               type.seat,
+                               type.postType)
     }
-
 
 }

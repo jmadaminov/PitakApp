@@ -66,8 +66,8 @@ class DestinationsFragment @Inject constructor(private val viewModelFactory: Vie
         if (args.ISFROMPOSTPREVIEW) {
             viewModel.placeTo = activityViewModel.placeTo
             viewModel.placeFrom = activityViewModel.placeFrom
-            fromInput.setText(viewModel.placeFrom!!.nameUz)
-            toInput.setText(viewModel.placeTo!!.nameUz)
+            fromInput.setText(viewModel.placeFrom!!.regionName)
+            toInput.setText(viewModel.placeTo!!.regionName)
             navBack.visibility = View.VISIBLE
         } else {
             navBack.visibility = View.INVISIBLE
@@ -269,7 +269,7 @@ class DestinationsFragment @Inject constructor(private val viewModelFactory: Vie
             override fun onPopupItemClicked(editable: Editable,
                                             item: PlaceAutocompleteItemView): Boolean {
                 editable.clear()
-                editable.insert(0, item.place.nameUz)
+                editable.insert(0, item.place.regionName)
                 fromInput.clearFocus()
                 fromInput.hideKeyboard()
                 viewModel.placeFrom = item.place
@@ -285,7 +285,7 @@ class DestinationsFragment @Inject constructor(private val viewModelFactory: Vie
             override fun onPopupItemClicked(editable: Editable,
                                             item: PlaceAutocompleteItemView): Boolean {
                 editable.clear()
-                editable.insert(0, item.place.nameUz)
+                editable.insert(0, item.place.regionName)
                 toInput.clearFocus()
                 toInput.hideKeyboard()
                 viewModel.placeTo = item.place

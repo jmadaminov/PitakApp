@@ -240,19 +240,17 @@ class ActiveTripsFragment @Inject constructor(private val viewModelFactory: View
 
             val from = PlaceViewObj(post.from.districtId,
                                     post.from.regionId,
-                                    post.from.nameRu,
-                                    post.from.nameUz,
-                                    post.from.nameEn,
                                     post.from.lat,
-                                    post.from.lon)
+                                    post.from.lon,
+                                    post.from.regionName,
+                                    post.from.districtName)
 
             val to = PlaceViewObj(post.to.districtId,
                                   post.to.regionId,
-                                  post.to.nameRu,
-                                  post.to.nameUz,
-                                  post.to.nameEn,
                                   post.to.lat,
-                                  post.to.lon)
+                                  post.to.lon,
+                                  post.from.regionName,
+                                  post.from.districtName)
 
             start<AddPostActivity> {
 

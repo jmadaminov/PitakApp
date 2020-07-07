@@ -14,8 +14,8 @@ class ActivePostItem(var post: DriverPost, var onPostActionListener: IOnPostActi
     Item() {
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         viewHolder.itemView.date.text = post.departureDate
-        viewHolder.itemView.from.text = post.from.nameUz
-        viewHolder.itemView.to.text = post.to.nameUz
+        viewHolder.itemView.from.text = post.from.regionName
+        viewHolder.itemView.to.text = post.to.regionName
         viewHolder.itemView.price.text = post.price.toString()
         viewHolder.itemView.seats.text = post.seat.toString()
 
