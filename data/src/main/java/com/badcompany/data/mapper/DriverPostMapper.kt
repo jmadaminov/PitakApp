@@ -30,15 +30,17 @@ open class DriverPostMapper @Inject constructor() : Mapper<DriverPostEntity, Dri
                             type.from.districtName)
 
 
-        val car = CarInPost(type.car.id,
-                            type.car.modelId,
-                            Image(type.car.image!!.id, type.car.image!!.link),
-                            CarModelBody(type.car.carModel!!.id, type.car.carModel!!.name),
-                            type.car.fuelType,
-                            type.car.colorId,
-                            type.car.carNumber,
-                            type.car.carYear,
-                            type.car.airConditioner)
+        val car = if (type.car == null) null else CarInPost(type.car.id,
+                                                            type.car.modelId,
+                                                            Image(type.car.image!!.id,
+                                                                  type.car.image!!.link),
+                                                            CarModelBody(type.car.carModel!!.id,
+                                                                         type.car.carModel!!.name),
+                                                            type.car.fuelType,
+                                                            type.car.colorId,
+                                                            type.car.carNumber,
+                                                            type.car.carYear,
+                                                            type.car.airConditioner)
 
         return DriverPost(type.id,
                           placeFrom,
@@ -50,6 +52,7 @@ open class DriverPostMapper @Inject constructor() : Mapper<DriverPostEntity, Dri
                           type.timeSecondPart,
                           type.timeThirdPart,
                           type.timeFourthPart,
+                          type.carId,
                           car,
                           type.remark,
                           type.seat,
@@ -74,15 +77,17 @@ open class DriverPostMapper @Inject constructor() : Mapper<DriverPostEntity, Dri
                                   type.from.regionName,
                                   type.from.districtName)
 
-        val car = CarInPostEntity(type.car.id,
-                                  type.car.modelId,
-                                  ImageEntity(type.car.image!!.id, type.car.image!!.link),
-                                  CarModelEntity(type.car.carModel!!.id, type.car.carModel!!.name),
-                                  type.car.fuelType,
-                                  type.car.colorId,
-                                  type.car.carNumber,
-                                  type.car.carYear,
-                                  type.car.airConditioner)
+        val car = if (type.car == null) null else CarInPostEntity(type.car!!.id,
+                                                                  type.car!!.modelId,
+                                                                  ImageEntity(type.car!!.image!!.id,
+                                                                                  type.car!!.image!!.link),
+                                                                  CarModelEntity(type.car!!.carModel!!.id,
+                                                                                     type.car!!.carModel!!.name),
+                                                                  type.car!!.fuelType,
+                                                                  type.car!!.colorId,
+                                                                  type.car!!.carNumber,
+                                                                  type.car!!.carYear,
+                                                                  type.car!!.airConditioner)
 
         return DriverPostEntity(type.id,
                                 placeFrom,
@@ -94,6 +99,7 @@ open class DriverPostMapper @Inject constructor() : Mapper<DriverPostEntity, Dri
                                 type.timeSecondPart,
                                 type.timeThirdPart,
                                 type.timeFourthPart,
+                                type.carId,
                                 car,
                                 type.remark,
                                 type.seat,

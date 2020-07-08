@@ -60,7 +60,7 @@ class DriverPostRemoteImpl @Inject constructor(private val apiService: ApiServic
             val response = apiService.getActivePosts(token, lang)
             if (response.code == 1) {
                 val posts = arrayListOf<DriverPostEntity>()
-                response.data?.data?.forEach { posts.add(postMapper.mapToEntity(it)) }
+                response.data?.forEach { posts.add(postMapper.mapToEntity(it)) }
                 ResultWrapper.Success(posts)
             } else ErrorWrapper.ResponseError(response.code, response.message)
         } catch (e: Exception) {

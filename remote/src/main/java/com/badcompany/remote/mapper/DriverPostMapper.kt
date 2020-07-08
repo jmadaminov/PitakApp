@@ -32,15 +32,15 @@ open class DriverPostMapper @Inject constructor() : Mapper<DriverPostEntity, Dri
                                  type.from.districtName)
 
 
-        val car = CarInPostModel(type.car.id,
-                                 type.car.modelId,
-                                 ImageModel(type.car.image!!.id, type.car.image!!.link),
-                                 CarModelModel(type.car.carModel!!.id, type.car.carModel!!.name),
-                                 type.car.fuelType,
-                                 type.car.colorId,
-                                 type.car.carNumber,
-                                 type.car.carYear,
-                                 type.car.airConditioner)
+        val car =  if (type.car == null) null else CarInPostModel(type.car!!.id,
+                                 type.car!!.modelId,
+                                 ImageModel(type.car!!.image!!.id, type.car!!.image!!.link),
+                                 CarModelModel(type.car!!.carModel!!.id, type.car!!.carModel!!.name),
+                                 type.car!!.fuelType,
+                                 type.car!!.colorId,
+                                 type.car!!.carNumber,
+                                 type.car!!.carYear,
+                                 type.car!!.airConditioner)
 
         return DriverPostModel(type.id,
                                placeFrom,
@@ -52,6 +52,7 @@ open class DriverPostMapper @Inject constructor() : Mapper<DriverPostEntity, Dri
                                type.timeSecondPart,
                                type.timeThirdPart,
                                type.timeFourthPart,
+                               type.carId,
                                car,
                                type.remark,
                                type.seat,
@@ -77,7 +78,7 @@ open class DriverPostMapper @Inject constructor() : Mapper<DriverPostEntity, Dri
                                   type.from.regionName,
                                   type.from.districtName)
 
-        val car = CarInPostEntity(type.car.id,
+        val car = if (type.car == null) null else  CarInPostEntity(type.car.id,
                                   type.car.modelId,
                                   ImageEntity(type.car.image!!.id, type.car.image!!.link),
                                   CarModelEntity(type.car.carModel!!.id, type.car.carModel!!.name),
@@ -97,6 +98,7 @@ open class DriverPostMapper @Inject constructor() : Mapper<DriverPostEntity, Dri
                                type.timeSecondPart,
                                type.timeThirdPart,
                                type.timeFourthPart,
+                               type.carId,
                                car,
                                type.remark,
                                type.seat,

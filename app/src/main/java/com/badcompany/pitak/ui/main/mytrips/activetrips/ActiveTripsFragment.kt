@@ -20,8 +20,7 @@ import com.badcompany.pitak.ui.addpost.AddPostActivity
 import com.badcompany.pitak.ui.interfaces.IOnPostActionListener
 import com.badcompany.pitak.ui.main.MainViewModel
 import com.badcompany.pitak.ui.viewgroups.ActivePostItem
-import com.badcompany.pitak.viewobjects.DriverPostViewObj
-import com.badcompany.pitak.viewobjects.PlaceViewObj
+import com.badcompany.pitak.viewobjects.*
 import com.google.android.material.snackbar.Snackbar
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
@@ -264,6 +263,7 @@ class ActiveTripsFragment @Inject constructor(private val viewModelFactory: View
                                            post.timeThirdPart,
                                            post.timeFourthPart,
                                            post.carId,
+                                           null,
                                            post.remark,
                                            post.seat,
                                            post.postType))

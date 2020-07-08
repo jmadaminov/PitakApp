@@ -36,12 +36,12 @@ interface ApiService {
     @Headers("Content-Type:application/json", "Accept: application/json")
     @GET("driver_post/action/active")
     suspend fun getActivePosts(@Header("Authorization") token: String,
-                               @Header("Accept-Language") lang: String): DriverPostsResponse
+                               @Header("Accept-Language") lang: String): DriverActivePostsResponse
 
     @Headers("Content-Type:application/json", "Accept: application/json")
     @GET("driver_post/action/history")
     suspend fun getHistoryPosts(@Header("Authorization") token: String,
-                                @Header("Accept-Language") lang: String): DriverPostsResponse
+                                @Header("Accept-Language") lang: String): DriverHistoryPostsResponse
 
 
     //
