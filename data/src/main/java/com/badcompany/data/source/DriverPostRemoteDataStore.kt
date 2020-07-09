@@ -40,8 +40,9 @@ open class DriverPostRemoteDataStore @Inject constructor(private val driverPostR
     }
 
     override suspend fun getHistoryDriverPosts(token: String,
-                                               lang: String): ResultWrapper<List<DriverPostEntity>> {
-        return driverPostRemote.getHistoryDriverPosts(token, lang)
+                                               lang: String,
+                                               page: Int): ResultWrapper<List<DriverPostEntity>> {
+        return driverPostRemote.getHistoryDriverPosts(token, lang,page)
     }
 
 

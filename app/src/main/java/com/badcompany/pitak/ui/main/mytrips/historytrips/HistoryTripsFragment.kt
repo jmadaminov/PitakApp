@@ -2,6 +2,7 @@ package com.badcompany.pitak.ui.main.mytrips.historytrips
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log.wtf
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
@@ -10,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.badcompany.core.ErrorWrapper
 import com.badcompany.core.ResultWrapper
 import com.badcompany.core.exhaustive
@@ -24,6 +26,7 @@ import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import kotlinx.android.synthetic.main.fragment_history_trips.*
 import splitties.experimental.ExperimentalSplittiesApi
 import javax.inject.Inject
+
 
 class HistoryTripsFragment @Inject constructor(private val viewModelFactory: ViewModelProvider.Factory) :
     Fragment(R.layout.fragment_history_trips) {
@@ -53,7 +56,7 @@ class HistoryTripsFragment @Inject constructor(private val viewModelFactory: Vie
         setupRecyclerView()
         setupListeners()
         subscribeObservers()
-        viewmodel.getHistoryPosts()
+        viewmodel.getHistoryPosts(0)
     }
 
     override fun onStart() {
@@ -78,7 +81,19 @@ class HistoryTripsFragment @Inject constructor(private val viewModelFactory: Vie
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
         historyPostsList.setHasFixedSize(true)
+        adapter.clear()
         historyPostsList.adapter = adapter
+
+        historyPostsList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (!recyclerView.canScrollVertically(1) && newState == RecyclerView.SCROLL_STATE_IDLE) {
+
+
+                    wtf("-----", "end")
+                }
+            }
+        })
 
     }
 
@@ -86,7 +101,7 @@ class HistoryTripsFragment @Inject constructor(private val viewModelFactory: Vie
     private fun setupListeners() {
         swipeRefreshLayout.setOnRefreshListener {
             noHistoryPostsTxt.visibility = View.GONE
-            viewmodel.getHistoryPosts()
+            viewmodel.getHistoryPosts(0)
         }
     }
 
@@ -196,10 +211,10 @@ class HistoryTripsFragment @Inject constructor(private val viewModelFactory: Vie
         override fun onEditClick(post: DriverPost) {
         }
 
-        override fun onCancelClick(position:Int,post: DriverPost, parentView: View) {
+        override fun onCancelClick(position: Int, post: DriverPost, parentView: View) {
         }
 
-        override fun onDoneClick(position:Int,post: DriverPost, parentView: View) {
+        override fun onDoneClick(position: Int, post: DriverPost, parentView: View) {
 
         }
     }

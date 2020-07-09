@@ -22,12 +22,13 @@ class HistoryTripsViewModel @Inject constructor(val getHistoryDriverPost: GetHis
     val updateOrderReponse = SingleLiveEvent<ResultWrapper<String>>()
 
     @ExperimentalSplittiesApi
-    fun getHistoryPosts() {
+    fun getHistoryPosts(page: Int) {
         historyPostsResponse.value = ResultWrapper.InProgress
         viewModelScope.launch(Dispatchers.IO) {
             val response = getHistoryDriverPost.execute(hashMapOf(
                 Pair(Constants.TXT_TOKEN, AppPreferences.token),
-                Pair(Constants.TXT_LANG, AppPreferences.language)))
+                Pair(Constants.TXT_LANG, AppPreferences.language),
+                Pair(Constants.TXT_PAGE, page)))
 
             withContext(Dispatchers.Main) {
                 historyPostsResponse.value = response

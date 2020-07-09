@@ -75,8 +75,8 @@ class PreviewFragment @Inject constructor(private val viewModelFactory: ViewMode
 
     private fun setupViews() {
         if (activityViewModel.isEditing) navBack.visibility = View.INVISIBLE
-        labelFrom.text = activityViewModel.placeFrom!!.regionName
-        labelTo.text = activityViewModel.placeTo!!.regionName
+        labelFrom.text = activityViewModel.placeFrom!!.name
+        labelTo.text = activityViewModel.placeTo!!.name
 
 
         var time = ""

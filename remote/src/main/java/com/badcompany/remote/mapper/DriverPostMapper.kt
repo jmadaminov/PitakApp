@@ -22,14 +22,14 @@ open class DriverPostMapper @Inject constructor() : Mapper<DriverPostEntity, Dri
                                    type.from.lat,
                                    type.from.lon,
                                    type.from.regionName,
-                                   type.from.districtName)
+                                   type.from.name)
 
-        val placeTo = PlaceModel(type.from.districtId,
-                                 type.from.regionId,
-                                 type.from.lat,
-                                 type.from.lon,
-                                 type.from.regionName,
-                                 type.from.districtName)
+        val placeTo = PlaceModel(type.to.districtId,
+                                 type.to.regionId,
+                                 type.to.lat,
+                                 type.to.lon,
+                                 type.to.regionName,
+                                 type.to.name)
 
 
         val car =  if (type.car == null) null else CarInPostModel(type.car!!.id,
@@ -47,7 +47,7 @@ open class DriverPostMapper @Inject constructor() : Mapper<DriverPostEntity, Dri
                                placeTo,
                                type.price,
                                type.departureDate,
-                               type.departureDate,
+                               type.finishedDate,
                                type.timeFirstPart,
                                type.timeSecondPart,
                                type.timeThirdPart,
@@ -69,14 +69,14 @@ open class DriverPostMapper @Inject constructor() : Mapper<DriverPostEntity, Dri
                                     type.from.lat,
                                     type.from.lon,
                                     type.from.regionName,
-                                    type.from.districtName)
+                                    type.from.name)
 
-        val placeTo = PlaceEntity(type.from.districtId,
-                                  type.from.regionId,
-                                  type.from.lat,
-                                  type.from.lon,
-                                  type.from.regionName,
-                                  type.from.districtName)
+        val placeTo = PlaceEntity(type.to.districtId,
+                                  type.to.regionId,
+                                  type.to.lat,
+                                  type.to.lon,
+                                  type.to.regionName,
+                                  type.to.name)
 
         val car = if (type.car == null) null else  CarInPostEntity(type.car.id,
                                   type.car.modelId,
@@ -93,7 +93,7 @@ open class DriverPostMapper @Inject constructor() : Mapper<DriverPostEntity, Dri
                                placeTo,
                                type.price,
                                type.departureDate,
-                               type.departureDate,
+                               type.finishedDate,
                                type.timeFirstPart,
                                type.timeSecondPart,
                                type.timeThirdPart,

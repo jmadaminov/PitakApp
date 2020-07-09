@@ -54,9 +54,10 @@ class DriverPostRepositoryImpl @Inject constructor(private val factoryDriver: Dr
     }
 
     override suspend fun getHistoryDriverPosts(token: String,
-                                               lang: String): ResultWrapper<List<DriverPost>> {
+                                               lang: String,
+                                               page: Int): ResultWrapper<List<DriverPost>> {
         val response =
-            factoryDriver.retrieveDataStore(false).getHistoryDriverPosts(token, lang)
+            factoryDriver.retrieveDataStore(false).getHistoryDriverPosts(token, lang,page)
 
         return when (response) {
             is ErrorWrapper.ResponseError -> response

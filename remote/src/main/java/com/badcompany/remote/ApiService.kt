@@ -41,8 +41,9 @@ interface ApiService {
     @Headers("Content-Type:application/json", "Accept: application/json")
     @GET("driver_post/action/history")
     suspend fun getHistoryPosts(@Header("Authorization") token: String,
-                                @Header("Accept-Language") lang: String): DriverHistoryPostsResponse
-
+                                @Header("Accept-Language") lang: String,
+                                @Query("page") page: Int = 0,
+                                @Query("size") size: Int = 10): DriverHistoryPostsResponse
 
     //
 
@@ -50,10 +51,10 @@ interface ApiService {
     //Places Feed
 
     @Headers("Content-Type:application/json", "Accept: application/json")
-    @GET("region/action/{text}")
+    @GET("region/action")
     suspend fun getPlacesFeed(@Header("Authorization") token: String,
                               @Header("Accept-Language") lang: String,
-                              @Path(value = "text", encoded = true) text: String): PlaceListResponse
+                              @Query("query") query: String): PlaceListResponse
     //PLACES END
 
 

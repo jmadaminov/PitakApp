@@ -18,6 +18,7 @@ object Constants {
     const val TXT_POSITION = "POSITION"
     const val TXT_PLACE = "PLACE"
     const val TXT_LANG = "LANGUAGE"
+    const val TXT_PAGE = "PAGE"
     const val RU = "ru"
     const val EN = "en"
     const val UZ = "uz"

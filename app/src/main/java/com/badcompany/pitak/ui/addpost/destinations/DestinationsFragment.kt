@@ -23,7 +23,7 @@ import com.badcompany.pitak.MapsActivity
 import com.badcompany.pitak.R
 import com.badcompany.pitak.ui.addpost.AddPostViewModel
 import com.badcompany.pitak.ui.interfaces.IOnPlaceSearchQueryListener
-import com.badcompany.pitak.ui.viewgroups.PlaceAutocompleteItemView
+import com.badcompany.pitak.ui.viewgroups.PlaceFeedItemView
 import com.badcompany.pitak.util.hideKeyboard
 import com.badcompany.pitak.util.showKeyboard
 import com.otaliastudios.autocomplete.Autocomplete
@@ -42,8 +42,8 @@ class DestinationsFragment @Inject constructor(private val viewModelFactory: Vie
 
     val args: DestinationsFragmentArgs by navArgs()
 
-    private var fromAutocomplete: Autocomplete<PlaceAutocompleteItemView>? = null
-    private var toAutocomplete: Autocomplete<PlaceAutocompleteItemView>? = null
+    private var fromFeed: Autocomplete<PlaceFeedItemView>? = null
+    private var toFeed: Autocomplete<PlaceFeedItemView>? = null
     private val viewModel: DestinationsViewModel by viewModels {
         viewModelFactory
     }
@@ -106,7 +106,7 @@ class DestinationsFragment @Inject constructor(private val viewModelFactory: Vie
                 EditorInfo.IME_ACTION_DONE -> {
                     fromAutocompleteCallback.onPopupItemClicked(fromInput.editableText,
                                                                 fromAutocompletePresenter.getAdr()!!
-                                                                    .getItem(0) as PlaceAutocompleteItemView)
+                                                                    .getItem(0) as PlaceFeedItemView)
                     toInput.requestFocus()
                     toInput.showKeyboard()
                 }
@@ -119,7 +119,7 @@ class DestinationsFragment @Inject constructor(private val viewModelFactory: Vie
 
                     toAutocompleteCallback.onPopupItemClicked(toInput.editableText,
                                                               toAutocompletePresenter.getAdr()!!
-                                                                  .getItem(0) as PlaceAutocompleteItemView)
+                                                                  .getItem(0) as PlaceFeedItemView)
 
                 }
             }
@@ -134,9 +134,9 @@ class DestinationsFragment @Inject constructor(private val viewModelFactory: Vie
         }
 
         fromInput.onFocusChangeListener =
-            View.OnFocusChangeListener { v, hasFocus -> if (!hasFocus) fromAutocomplete?.dismissPopup() }
+            View.OnFocusChangeListener { v, hasFocus -> if (!hasFocus) fromFeed?.dismissPopup() }
         toInput.onFocusChangeListener =
-            View.OnFocusChangeListener { v, hasFocus -> if (!hasFocus) toAutocomplete?.dismissPopup() }
+            View.OnFocusChangeListener { v, hasFocus -> if (!hasFocus) toFeed?.dismissPopup() }
 
         map.setOnClickListener {
             start<MapsActivity>()
@@ -148,14 +148,14 @@ class DestinationsFragment @Inject constructor(private val viewModelFactory: Vie
     private fun setupFromInputAutocomplete() {
         fromAutocompletePresenter =
             DestinationAutocompletePresenter(requireContext(), viewModel, autoCompleteQueryListener)
-        fromAutocomplete = Autocomplete.on<PlaceAutocompleteItemView>(fromInput)
+        fromFeed = Autocomplete.on<PlaceFeedItemView>(fromInput)
             .with(autoCompletePolicy)
             .with(fromAutocompleteCallback)
             .with(fromAutocompletePresenter)
             .with(requireContext().getDrawable(R.drawable.selector_rounded_corners))
             .with(3f)
             .build()
-        fromAutocomplete!!.setGravity(Gravity.BOTTOM)
+        fromFeed!!.setGravity(Gravity.BOTTOM)
     }
 
     @ExperimentalSplittiesApi
@@ -166,14 +166,14 @@ class DestinationsFragment @Inject constructor(private val viewModelFactory: Vie
                                              autoCompleteQueryListener,
                                              false)
 
-        toAutocomplete = Autocomplete.on<PlaceAutocompleteItemView>(toInput)
+        toFeed = Autocomplete.on<PlaceFeedItemView>(toInput)
             .with(autoCompletePolicy)
             .with(toAutocompleteCallback)
             .with(toAutocompletePresenter)
             .with(requireContext().getDrawable(R.drawable.selector_rounded_corners))
             .with(3f)
             .build()
-        toAutocomplete!!.setGravity(Gravity.END)
+        toFeed!!.setGravity(Gravity.END)
     }
 
 
@@ -192,8 +192,8 @@ class DestinationsFragment @Inject constructor(private val viewModelFactory: Vie
                 is ResultWrapper.Success -> {
                     fromAutocompletePresenter.getAdr()!!.clear()
                     response.value.forEach { place ->
-                        fromAutocompletePresenter.getAdr()!!.add(PlaceAutocompleteItemView(place,
-                                                                                           fromAutocompletePresenter))
+                        fromAutocompletePresenter.getAdr()!!.add(PlaceFeedItemView(place,
+                                                                                   fromAutocompletePresenter))
 
                     }
                     fromAutocompletePresenter.getAdr()!!.notifyDataSetChanged()
@@ -221,13 +221,16 @@ class DestinationsFragment @Inject constructor(private val viewModelFactory: Vie
 
                 }
                 is ResultWrapper.Success -> {
-                    toAutocompletePresenter.getAdr()!!.clear()
-                    response.value.forEach { place ->
-                        toAutocompletePresenter.getAdr()!!.add(PlaceAutocompleteItemView(place,
-                                                                                         toAutocompletePresenter))
+                    if (toAutocompletePresenter.getAdr() != null) {
+                        toAutocompletePresenter.getAdr()!!.clear()
+                        response.value.forEach { place ->
+                            toAutocompletePresenter.getAdr()!!.add(PlaceFeedItemView(place,
+                                                                                     toAutocompletePresenter))
+                        }
+                        toAutocompletePresenter.getAdr()!!.notifyDataSetChanged()
+                    } else {
 
                     }
-                    toAutocompletePresenter.getAdr()!!.notifyDataSetChanged()
                 }
                 ResultWrapper.InProgress -> {
 //                    if (toAutocompletePresenter.getAdr().itemCount == 0 || toAutocompletePresenter.getAdr().getItem(
@@ -246,8 +249,8 @@ class DestinationsFragment @Inject constructor(private val viewModelFactory: Vie
 
     override fun onPause() {
         super.onPause()
-        fromAutocomplete?.dismissPopup()
-        toAutocomplete?.dismissPopup()
+        fromFeed?.dismissPopup()
+        toFeed?.dismissPopup()
     }
 
     override fun onResume() {
@@ -265,11 +268,11 @@ class DestinationsFragment @Inject constructor(private val viewModelFactory: Vie
     }
 
     private val fromAutocompleteCallback =
-        object : AutocompleteCallback<PlaceAutocompleteItemView> {
+        object : AutocompleteCallback<PlaceFeedItemView> {
             override fun onPopupItemClicked(editable: Editable,
-                                            item: PlaceAutocompleteItemView): Boolean {
+                                            item: PlaceFeedItemView): Boolean {
                 editable.clear()
-                editable.insert(0, item.place.regionName)
+                editable.insert(0, item.place.name)
                 fromInput.clearFocus()
                 fromInput.hideKeyboard()
                 viewModel.placeFrom = item.place
@@ -281,11 +284,11 @@ class DestinationsFragment @Inject constructor(private val viewModelFactory: Vie
         }
 
     private val toAutocompleteCallback =
-        object : AutocompleteCallback<PlaceAutocompleteItemView> {
+        object : AutocompleteCallback<PlaceFeedItemView> {
             override fun onPopupItemClicked(editable: Editable,
-                                            item: PlaceAutocompleteItemView): Boolean {
+                                            item: PlaceFeedItemView): Boolean {
                 editable.clear()
-                editable.insert(0, item.place.regionName)
+                editable.insert(0, item.place.name)
                 toInput.clearFocus()
                 toInput.hideKeyboard()
                 viewModel.placeTo = item.place

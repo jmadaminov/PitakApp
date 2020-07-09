@@ -25,4 +25,4 @@ data class PlaceViewObj(val districtId: Int? = null,
                         val lat: Double? = null,
                         val lon: Double? = null,
                         val regionName: String? = null,
-                        val districtName: String? = null) : Parcelable
+                        val name: String? = null) : Parcelable
