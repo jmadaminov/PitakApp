@@ -12,8 +12,18 @@ interface ApiService {
 //    @GET("team.json")
 //    suspend fun getBufferoos(): Flowable<BufferooResponse>
 
-    //POST API
+    //Passenger POST API
 
+    @Headers("Content-Type:application/json", "Accept: application/json")
+    @POST("passenger_post/action/filter")
+    suspend fun filterPassengerPost(@Header("Authorization") token: String,
+                                    @Header("Accept-Language") lang: String,
+                                    @Body filter: FilterModel): PassengerPostsResponse
+
+    //END PASSENGER POST API
+
+
+    //DRIVER POST API
 
     @Headers("Content-Type:application/json", "Accept: application/json")
     @POST("driver_post/action")

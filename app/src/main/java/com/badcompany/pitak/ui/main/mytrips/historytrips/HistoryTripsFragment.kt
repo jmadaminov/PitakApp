@@ -20,6 +20,7 @@ import com.badcompany.pitak.R
 import com.badcompany.pitak.ui.interfaces.IOnPostActionListener
 import com.badcompany.pitak.ui.main.MainViewModel
 import com.badcompany.pitak.ui.viewgroups.HistoryPostItem
+import com.badcompany.pitak.ui.viewgroups.LoadingItemSmall
 import com.google.android.material.snackbar.Snackbar
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
@@ -76,6 +77,7 @@ class HistoryTripsFragment @Inject constructor(private val viewModelFactory: Vie
 
     }
 
+    @ExperimentalSplittiesApi
     private fun setupRecyclerView() {
         historyPostsList.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
@@ -88,8 +90,7 @@ class HistoryTripsFragment @Inject constructor(private val viewModelFactory: Vie
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 if (!recyclerView.canScrollVertically(1) && newState == RecyclerView.SCROLL_STATE_IDLE) {
-
-
+                    if (adapter.itemCount % 10 == 0) viewmodel.getHistoryPosts(adapter.itemCount / 10)
                     wtf("-----", "end")
                 }
             }
@@ -127,24 +128,23 @@ class HistoryTripsFragment @Inject constructor(private val viewModelFactory: Vie
             val response = it ?: return@Observer
             when (response) {
                 is ErrorWrapper.ResponseError -> {
-                    swipeRefreshLayout.isRefreshing = false
                     Snackbar.make(swipeRefreshLayout,
                                   response.message!!,
                                   Snackbar.LENGTH_SHORT).show()
-
+                    removeLoadingMore()
                 }
                 is ErrorWrapper.SystemError -> {
-                    swipeRefreshLayout.isRefreshing = false
                     Snackbar.make(swipeRefreshLayout,
                                   response.err.localizedMessage.toString(),
                                   Snackbar.LENGTH_SHORT).show()
+                    removeLoadingMore()
                 }
                 is ResultWrapper.Success -> {
-                    swipeRefreshLayout.isRefreshing = false
+                    removeLoadingMore()
                     loadData(response.value)
                 }
                 ResultWrapper.InProgress -> {
-                    swipeRefreshLayout.isRefreshing = true
+                    addLoading()
                 }
             }.exhaustive
         })
@@ -174,6 +174,25 @@ class HistoryTripsFragment @Inject constructor(private val viewModelFactory: Vie
 
     }
 
+    private fun addLoading() {
+        if (viewmodel.currentPage == 0) {
+            swipeRefreshLayout.isRefreshing = true
+        } else {
+            adapter.add(LoadingItemSmall())
+            adapter.notifyItemInserted(adapter.itemCount - 1)
+        }
+
+    }
+
+    private fun removeLoadingMore() {
+        if (viewmodel.currentPage == 0) {
+            swipeRefreshLayout.isRefreshing = false
+        } else {
+            adapter.remove(adapter.getItem(adapter.itemCount - 1))
+            adapter.notifyItemRemoved(adapter.itemCount - 1)
+        }
+    }
+
 
     var dialog: AlertDialog? = null
 
@@ -195,9 +214,11 @@ class HistoryTripsFragment @Inject constructor(private val viewModelFactory: Vie
 
     @ExperimentalSplittiesApi
     private fun loadData(orders: List<DriverPost>) {
-        adapter.clear()
-        if (orders.isEmpty()) noHistoryPostsTxt.visibility = View.VISIBLE
-        else noHistoryPostsTxt.visibility = View.GONE
+        if (viewmodel.currentPage == 0) {
+            adapter.clear()
+            if (orders.isEmpty()) noHistoryPostsTxt.visibility = View.VISIBLE
+            else noHistoryPostsTxt.visibility = View.GONE
+        }
 
         orders.forEach {
             adapter.add(HistoryPostItem(it, onOrderActionListener))

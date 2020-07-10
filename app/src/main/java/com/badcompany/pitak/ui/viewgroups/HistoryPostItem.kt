@@ -14,8 +14,10 @@ class HistoryPostItem(var post: DriverPost, var onPostActionListener: IOnPostAct
         viewHolder.itemView.date.text = post.departureDate
         viewHolder.itemView.from.text = post.from.regionName
         viewHolder.itemView.to.text = post.to.regionName
-        viewHolder.itemView.price.text = post.price.toString()
-        viewHolder.itemView.seats.text = post.seat.toString()
+        viewHolder.itemView.price.text =
+            viewHolder.itemView.context.getString(R.string.price_and_seats_format,
+                                                  post.price.toString(), post.seat.toString())
+//        viewHolder.itemView.seats.text = post.seat.toString()
 
         if (!post.remark.isBlank()) {
             viewHolder.itemView.note.visibility = View.VISIBLE
