@@ -1,12 +1,7 @@
-package com.badcompany.remote.mapper
+package com.badcompany.data.mapper
 
-import com.badcompany.data.mapper.Mapper
-import com.badcompany.data.model.DriverPostEntity
-import com.badcompany.data.model.PassengerPostEntity
-import com.badcompany.data.model.PlaceEntity
-import com.badcompany.remote.model.DriverPostModel
-import com.badcompany.remote.model.PassengerPostModel
-import com.badcompany.remote.model.PlaceModel
+import com.badcompany.data.model.*
+import com.badcompany.domain.domainmodel.*
 import javax.inject.Inject
 
 
@@ -15,28 +10,28 @@ import javax.inject.Inject
  * this later and the Domain layer
  */
 open class PassengerPostMapper @Inject constructor() :
-    Mapper<PassengerPostEntity, PassengerPostModel> {
+    Mapper<PassengerPostEntity, PassengerPost> {
 
     /**
-     * Map a [PassengerPostEntity] instance to a [PassengerPostModel] instance
+     * Map a [PassengerPostEntity] instance to a [PassengerPost] instance
      */
-    override fun mapFromEntity(type: PassengerPostEntity): PassengerPostModel {
+    override fun mapFromEntity(type: PassengerPostEntity): PassengerPost {
 
-        val placeFrom = PlaceModel(type.from.districtId,
+        val placeFrom = Place(type.from.districtId,
                                    type.from.regionId,
                                    type.from.lat,
                                    type.from.lon,
                                    type.from.regionName,
                                    type.from.name)
 
-        val placeTo = PlaceModel(type.to.districtId,
+        val placeTo = Place(type.to.districtId,
                                  type.to.regionId,
                                  type.to.lat,
                                  type.to.lon,
                                  type.to.regionName,
                                  type.to.name)
 
-        return PassengerPostModel(type.id,
+        return PassengerPost(type.id,
                                   placeFrom,
                                   placeTo,
                                   type.price,
@@ -56,9 +51,9 @@ open class PassengerPostMapper @Inject constructor() :
     }
 
     /**
-     * Map a [PassengerPostModel] instance to a [PassengerPostEntity] instance
+     * Map a [PassengerPost] instance to a [PassengerPostEntity] instance
      */
-    override fun mapToEntity(type: PassengerPostModel): PassengerPostEntity {
+    override fun mapToEntity(type: PassengerPost): PassengerPostEntity {
 
         val placeFrom = PlaceEntity(type.from.districtId,
                                     type.from.regionId,

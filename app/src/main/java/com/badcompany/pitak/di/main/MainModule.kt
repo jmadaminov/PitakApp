@@ -1,27 +1,83 @@
 package com.badcompany.pitak.di.main
 
 import com.badcompany.data.DriverPostRepositoryImpl
+import com.badcompany.data.PassengerPostRepositoryImpl
 import com.badcompany.data.mapper.DriverPostMapper
+import com.badcompany.data.mapper.FilterMapper
+import com.badcompany.data.mapper.PassengerPostMapper
 import com.badcompany.data.mapper.PlaceMapper
 import com.badcompany.data.repository.DriverPostRemote
+import com.badcompany.data.repository.PassengerPostDataStore
+import com.badcompany.data.repository.PassengerPostRemote
 import com.badcompany.data.repository.PlaceRemote
-import com.badcompany.data.source.DriverPostDataStoreFactory
-import com.badcompany.data.source.DriverPostRemoteDataStore
-import com.badcompany.data.source.PlaceDataStoreFactory
-import com.badcompany.data.source.PlaceRemoteDataStore
+import com.badcompany.data.source.*
 import com.badcompany.domain.repository.DriverPostRepository
-import com.badcompany.domain.usecases.DeleteDriverPost
-import com.badcompany.domain.usecases.FinishDriverPost
-import com.badcompany.domain.usecases.GetActiveDriverPost
-import com.badcompany.domain.usecases.GetHistoryDriverPost
+import com.badcompany.domain.repository.PassengerPostRepository
+import com.badcompany.domain.usecases.*
 import com.badcompany.remote.ApiService
 import com.badcompany.remote.DriverPostRemoteImpl
+import com.badcompany.remote.PassengerPostRemoteImpl
 import com.badcompany.remote.PlaceRemoteImpl
 import dagger.Module
 import dagger.Provides
 
 @Module
 object MainModule {
+
+
+    @MainScope
+    @Provides
+    @JvmStatic
+    fun provideGetPassengerPostWithFilter(passengerPostRepository: PassengerPostRepository): GetPassengerPostWithFilter {
+        return GetPassengerPostWithFilter(passengerPostRepository)
+    }
+
+    @MainScope
+    @Provides
+    @JvmStatic
+    fun providePassengerPostRepository(factory: PassengerPostDataStoreFactory,
+                                       driverPostMapper: PassengerPostMapper,
+                                       filterMapper: FilterMapper): PassengerPostRepository {
+        return PassengerPostRepositoryImpl(factory, driverPostMapper, filterMapper)
+    }
+
+    @Provides
+    @MainScope
+    @JvmStatic
+    fun providePassengerPostDataStoreFactory(postDataStore: PassengerPostDataStore): PassengerPostDataStoreFactory {
+        return PassengerPostDataStoreFactory(postDataStore)
+    }
+
+    @Provides
+    @MainScope
+    @JvmStatic
+    fun providePassengerPostDataStore(passengerPostRemote: PassengerPostRemote): PassengerPostDataStore {
+        return PassengerPostRemoteDataStore(passengerPostRemote)
+    }
+
+    @Provides
+    @MainScope
+    @JvmStatic
+    fun providePassengerPostRemote(apiService: ApiService,
+                                   postMapper: com.badcompany.remote.mapper.PassengerPostMapper,
+                                   filterMapper: com.badcompany.remote.mapper.FilterMapper): PassengerPostRemote {
+        return PassengerPostRemoteImpl(apiService, postMapper, filterMapper)
+    }
+
+    @MainScope
+    @Provides
+    @JvmStatic
+    fun provideRemotePassengerPostMapper(): com.badcompany.remote.mapper.PassengerPostMapper {
+        return com.badcompany.remote.mapper.PassengerPostMapper()
+    }
+
+    @MainScope
+    @Provides
+    @JvmStatic
+    fun provideRemoteFilterMapper(): com.badcompany.remote.mapper.FilterMapper {
+        return com.badcompany.remote.mapper.FilterMapper()
+    }
+
 
     @MainScope
     @Provides

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="3dp"
+    app:cardUseCompatPadding="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="12dp">
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="3dp"
+            android:layout_height="0dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/ic_grey"
+            app:layout_constraintBottom_toTopOf="@id/circleTo"
+            app:layout_constraintEnd_toEndOf="@id/circleFrom"
+            app:layout_constraintStart_toStartOf="@id/circleFrom"
+            app:layout_constraintTop_toBottomOf="@id/circleFrom" />
+
+        <ImageView
+            android:id="@+id/circleFrom"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/shape_round_disabled"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <ImageView
+            android:id="@+id/circleTo"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginBottom="12dp"
+            android:src="@drawable/shape_circle_disabled"
+            app:layout_constraintBottom_toTopOf="@id/note"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <TextView
+            android:id="@+id/from"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="12dp"
+            android:text="TASHKENT"
+            android:textColor="@color/dark_grey"
+            app:layout_constraintBottom_toBottomOf="@id/circleFrom"
+            app:layout_constraintStart_toEndOf="@id/circleFrom"
+            app:layout_constraintTop_toTopOf="@id/circleFrom" />
+
+        <TextView
+            android:id="@+id/to"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="12dp"
+            android:text="ANDIJAN"
+            android:textColor="@color/dark_grey"
+            app:layout_constraintBottom_toBottomOf="@id/circleTo"
+            app:layout_constraintStart_toEndOf="@id/circleTo"
+            app:layout_constraintTop_toTopOf="@id/circleTo" />
+
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="14dp"
+            android:text="02.05.2200"
+            android:textColor="@color/dark_grey"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/from"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/seats"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="4/3"
+            android:textColor="@color/dark_grey"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="@id/date"
+            app:layout_constraintTop_toBottomOf="@id/date" />
+
+
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="50,000 sum"
+            android:textColor="@color/dark_grey"
+            app:layout_constraintBottom_toTopOf="@id/note"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="@id/date"
+            app:layout_constraintTop_toBottomOf="@id/seats" />
+
+
+        <TextView
+            android:id="@+id/note"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="12dp"
+            android:text="note note sohisdf asdfasdf sadfas fsd fsadf asdfsd"
+            android:textColor="@color/dark_grey"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/price" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>
