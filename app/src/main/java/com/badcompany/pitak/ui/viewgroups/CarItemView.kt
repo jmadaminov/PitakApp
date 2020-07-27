@@ -1,6 +1,6 @@
 package com.badcompany.pitak.ui.viewgroups
 
-import androidx.core.content.ContextCompat
+import android.view.View
 import com.badcompany.domain.domainmodel.CarDetails
 import com.badcompany.pitak.R
 import com.badcompany.pitak.ui.addcar.MyItemClickListener
@@ -29,6 +29,13 @@ class CarItemView(val car: CarDetails, val onItemClickListener: MyItemClickListe
 
         if (car.def != null && car.def!!) {
             viewHolder.itemView.cardParent.setBackgroundResource(R.drawable.stroke_primary)
+        }
+
+        if (car.airConditioner != null && car.airConditioner!!) {
+            viewHolder.itemView.checkboxAC.visibility = View.VISIBLE
+            viewHolder.itemView.checkboxAC.isChecked = car.airConditioner!!
+        } else {
+            viewHolder.itemView.checkboxAC.visibility = View.INVISIBLE
         }
 
     }

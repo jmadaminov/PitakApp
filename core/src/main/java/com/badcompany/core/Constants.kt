@@ -5,6 +5,7 @@ package com.badcompany.core
  */
 object Constants {
 
+    const val ROLE_DRIVER = "DRIVER"
     const val TXT_IS_FROM_POST_PREVIEW = "IS_FROM_POST_PREVIEW"
     const val DRIVER_POST_SIMPLE = "DRIVER_SM"
     const val PASSENGER_POST_SIMPLE = "PASSANGER_SM"

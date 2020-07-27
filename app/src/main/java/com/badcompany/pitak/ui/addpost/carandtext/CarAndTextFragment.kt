@@ -150,8 +150,8 @@ class CarAndTextFragment @Inject constructor(private val viewModelFactory: ViewM
                 selectedCar = car
             }
             adapter.add(CarItemSelectionView(car, object : MyItemClickListener {
-                override fun onClick(pos: Int) {
-                    super.onClick(pos)
+                override fun onClick(pos: Int, view: View) {
+                    super.onClick(pos, view)
                     for (i in 0 until adapter.itemCount) {
                         (adapter.getItem(i) as CarItemSelectionView).car.def = false
                     }

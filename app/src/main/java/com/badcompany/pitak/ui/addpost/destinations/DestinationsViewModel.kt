@@ -57,18 +57,6 @@ class DestinationsViewModel @Inject constructor(private val getPlacesFeed: GetPl
 
     }
 
-    // A placeholder username validation check
-    private fun isCodeValid(code: String): Boolean {
-        return code.length == 5
-    }
-
-
-    // A placeholder password validation check
-    private fun isPasswordValid(password: String): Boolean {
-        return password.length > 5
-    }
-
-
     override fun onCleared() {
         super.onCleared()
         fromFeedJob?.cancel()

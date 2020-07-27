@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="10dp"
+    app:cardCornerRadius="5dp"
     app:cardElevation="3dp"
     app:cardUseCompatPadding="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
         android:id="@+id/cl_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <View
@@ -25,8 +25,8 @@
 
         <ImageView
             android:id="@+id/circleFrom"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
             android:layout_marginStart="12dp"
             android:layout_marginTop="12dp"
             android:src="@drawable/shape_round_primary"
@@ -36,12 +36,11 @@
 
         <ImageView
             android:id="@+id/circleTo"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
             android:layout_marginStart="12dp"
-            android:layout_marginBottom="12dp"
             android:src="@drawable/shape_circle_primary"
-            app:layout_constraintBottom_toTopOf="@id/note"
+            app:layout_constraintBottom_toBottomOf="@id/to"
             app:layout_constraintStart_toStartOf="parent" />
 
 
@@ -52,6 +51,7 @@
             android:layout_marginStart="12dp"
             android:text="TASHKENT"
             android:textColor="@color/dark_grey"
+            android:textSize="14dp"
             app:layout_constraintBottom_toBottomOf="@id/circleFrom"
             app:layout_constraintStart_toEndOf="@id/circleFrom"
             app:layout_constraintTop_toTopOf="@id/circleFrom" />
@@ -63,21 +63,24 @@
             android:layout_marginStart="12dp"
             android:text="ANDIJAN"
             android:textColor="@color/dark_grey"
-            app:layout_constraintBottom_toBottomOf="@id/circleTo"
+            android:textSize="14dp"
             app:layout_constraintStart_toEndOf="@id/circleTo"
-            app:layout_constraintTop_toTopOf="@id/circleTo" />
+            app:layout_constraintTop_toBottomOf="@id/from" />
 
 
         <TextView
             android:id="@+id/status"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="25dp"
             android:layout_marginStart="8dp"
             android:background="@drawable/round_top_right_primary"
+            android:gravity="center"
             android:paddingStart="12dp"
             android:paddingTop="4dp"
             android:paddingEnd="12dp"
+            android:textSize="12dp"
             android:paddingBottom="4dp"
+            android:drawableLeft="@drawable/ic_baseline_airline_seat_recline_extra_24"
             android:text="ACTIVE"
             android:textColor="#fff"
             app:layout_constraintEnd_toEndOf="parent"
@@ -91,20 +94,12 @@
             android:layout_marginTop="14dp"
             android:text="02.05.2200"
             android:textColor="@color/dark_grey"
+            android:textSize="12dp"
             app:layout_constraintEnd_toStartOf="@id/status"
             app:layout_constraintStart_toEndOf="@id/from"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/seats"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="4/3"
-            android:textColor="@color/dark_grey"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintStart_toStartOf="@id/date"
-            app:layout_constraintTop_toBottomOf="@id/date" />
+
 
 
         <TextView
@@ -113,11 +108,12 @@
             android:layout_height="match_parent"
             android:text="50,000 sum"
             android:textColor="@color/dark_grey"
+            android:textSize="12dp"
             app:layout_constraintBottom_toTopOf="@id/note"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toStartOf="@id/date"
-            app:layout_constraintTop_toBottomOf="@id/seats" />
+            app:layout_constraintTop_toBottomOf="@id/date" />
 
 
         <TextView
@@ -127,7 +123,7 @@
             android:layout_margin="12dp"
             android:text="note note sohisdf asdfasdf sadfas fsd fsadf asdfsd"
             android:textColor="@color/dark_grey"
-            android:visibility="gone"
+            android:textSize="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

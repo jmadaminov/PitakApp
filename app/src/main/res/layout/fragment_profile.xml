@@ -157,7 +157,7 @@
         android:layout_height="?android:actionBarSize"
         android:layout_marginStart="24dp"
         android:layout_marginTop="15dp"
-        android:background="@drawable/selector_neutral_alert"
+        android:background="@drawable/selector_alert_border"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?android:selectableItemBackground"

@@ -1,7 +1,6 @@
 package com.badcompany.pitak.ui.main
 
 import android.animation.LayoutTransition
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -19,18 +18,16 @@ import com.badcompany.pitak.ui.auth.AuthActivity
 import com.badcompany.pitak.ui.main.mytrips.MyTripsFragment
 import com.badcompany.pitak.ui.main.profile.ProfileFragment
 import com.badcompany.pitak.ui.main.searchtrip.SearchTripFragment
-import com.badcompany.pitak.util.AppPreferences
-import com.badcompany.pitak.util.BOTTOM_NAV_BACKSTACK_KEY
-import com.badcompany.pitak.util.BottomNavController
-import com.badcompany.pitak.util.setUpNavigation
+import com.badcompany.pitak.util.*
 import kotlinx.android.synthetic.main.activity_main.*
 import splitties.activities.start
 import splitties.experimental.ExperimentalSplittiesApi
 import javax.inject.Inject
 import javax.inject.Named
 
-class MainActivity : BaseActivity(), BottomNavController.OnNavigationGraphChanged,
-    BottomNavController.OnNavigationReselectedListener {
+
+class MainActivity : BaseActivity(), BottomNavControllerFix.OnNavigationGraphChanged,
+    BottomNavControllerFix.OnNavigationReselectedListener {
 
     @Inject
     lateinit var viewModelFactory: MainViewModelFactory
@@ -49,10 +46,10 @@ class MainActivity : BaseActivity(), BottomNavController.OnNavigationGraphChange
     }
 
     private val bottomNavController by lazy(LazyThreadSafetyMode.NONE) {
-        BottomNavController(
+        BottomNavControllerFix(
             this,
             R.id.main_fragments_container,
-            R.id.navSearchTripFragment,
+            R.id.nav_menu_search,
             this)
     }
 
@@ -63,12 +60,31 @@ class MainActivity : BaseActivity(), BottomNavController.OnNavigationGraphChange
         setTheme(R.style.NoActionBar)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        app_bar.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
+//        app_bar.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
         setupActionBar()
         setupListeners()
         subscribeObservers()
-        onRestoreInstanceState()
+//        onRestoreInstanceState()
         setupBottomNavigationView(savedInstanceState)
+
+//        val mConfig = SlidrConfig.Builder()
+//            .primaryColor(primary)
+//            .position(SlidrPosition.HORIZONTAL)
+//            .velocityThreshold(2400f) //                .distanceThreshold(.25f)
+//            //                .edge(true)
+//            .touchSize(SizeUtils.dpToPx(this, 32))
+//            .sensitivity(1f)
+//            .scrimColor(Color.BLACK)
+//            .scrimStartAlpha(0.8f)
+//            .scrimEndAlpha(0f)
+//            .velocityThreshold(2400F)
+//            .distanceThreshold(0.25f)
+//            .edge(true).edgeSize(0.18f)
+//            .build()
+//
+//        // Attach the Slidr Mechanism to this activity
+//        val slidr = Slidr.attach(this, mConfig)
+//        slidr.unlock()
 
     }
 
@@ -92,7 +108,7 @@ class MainActivity : BaseActivity(), BottomNavController.OnNavigationGraphChange
             bottomNavController.onNavigationItemSelected()
         } else {
             (savedInstanceState[BOTTOM_NAV_BACKSTACK_KEY] as IntArray?)?.let { items ->
-                val backstack = BottomNavController.BackStack()
+                val backstack = BottomNavControllerFix.BackStack()
                 backstack.addAll(items.toTypedArray())
                 bottomNavController.setupBottomNavigationBackStack(backstack)
             }
@@ -148,7 +164,7 @@ class MainActivity : BaseActivity(), BottomNavController.OnNavigationGraphChange
     override fun onBackPressed() = bottomNavController.onBackPressed()
 
     private fun setupActionBar() {
-        setSupportActionBar(tool_bar)
+//        setSupportActionBar(tool_bar)
     }
 
     fun showTabLayout() {

@@ -2,6 +2,7 @@ package com.badcompany.pitak.di.main
 
 import com.badcompany.data.DriverPostRepositoryImpl
 import com.badcompany.data.PassengerPostRepositoryImpl
+import com.badcompany.data.PlaceRepositoryImpl
 import com.badcompany.data.mapper.DriverPostMapper
 import com.badcompany.data.mapper.FilterMapper
 import com.badcompany.data.mapper.PassengerPostMapper
@@ -13,7 +14,9 @@ import com.badcompany.data.repository.PlaceRemote
 import com.badcompany.data.source.*
 import com.badcompany.domain.repository.DriverPostRepository
 import com.badcompany.domain.repository.PassengerPostRepository
+import com.badcompany.domain.repository.PlaceRepository
 import com.badcompany.domain.usecases.*
+import com.badcompany.pitak.di.addPost.AddPostScope
 import com.badcompany.remote.ApiService
 import com.badcompany.remote.DriverPostRemoteImpl
 import com.badcompany.remote.PassengerPostRemoteImpl
@@ -23,6 +26,23 @@ import dagger.Provides
 
 @Module
 object MainModule {
+
+
+    @MainScope
+    @Provides
+    @JvmStatic
+    fun provideGetPlacesFeed(placeRepository: PlaceRepository): GetPlacesFeed {
+        return GetPlacesFeed(placeRepository)
+    }
+
+    @MainScope
+    @Provides
+    @JvmStatic
+    fun providePlaceRepository(factory: PlaceDataStoreFactory,
+                               placeMapper: PlaceMapper): PlaceRepository {
+        return PlaceRepositoryImpl(factory, placeMapper)
+    }
+
 
 
     @MainScope

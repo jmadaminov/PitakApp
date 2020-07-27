@@ -12,7 +12,7 @@ data class FilterModel(@SerializedName("airConditioner") var airConditioner: Boo
                        @SerializedName("toDistrictId") var toDistrictId: Int? = null,
                        @SerializedName("toRegionId") var toRegionId: Int? = null,
                        @SerializedName("maxPrice") var maxPrice: Int? = null,
-                       @SerializedName("minPrice") var minPrice: Long? = null,
+                       @SerializedName("minPrice") var minPrice: Int? = null,
                        @SerializedName("priceOrder") var priceOrder: String? = null,
                        @SerializedName("seat") var seat: Int? = null,
                        @SerializedName("timeFirstPart") var timeFirstPart: Boolean? = null,

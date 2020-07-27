@@ -56,6 +56,7 @@ open class DriverPostMapper @Inject constructor() : Mapper<DriverPostEntity, Dri
                                car,
                                type.remark,
                                type.seat,
+                               type.availableSeats,
                                type.postType)
     }
 
@@ -102,7 +103,8 @@ open class DriverPostMapper @Inject constructor() : Mapper<DriverPostEntity, Dri
                                car,
                                type.remark,
                                type.seat,
-                               type.postType)
+                                type.availableSeats,
+                                type.postType)
     }
 
 }

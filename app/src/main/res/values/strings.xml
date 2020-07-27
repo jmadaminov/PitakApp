@@ -67,6 +67,10 @@
     <string name="second_part_of_day">Forenoon \n(6:00–12:00)</string>
     <string name="third_part_of_day">Afternoon \n(18:00–12:00)</string>
     <string name="fourth_part_of_day">Evening \n(00:00–18:00)</string>
+    <string name="first_part_of_day_one_line">Dawn (00:00–6:00)</string>
+    <string name="second_part_of_day_one_line">Forenoon (6:00–12:00)</string>
+    <string name="third_part_of_day_one_line">Afternoon (18:00–12:00)</string>
+    <string name="fourth_part_of_day_one_line">Evening (00:00–18:00)</string>
     <string name="time">Time</string>
     <string name="day">Day</string>
     <string name="price_for_one_passenger">Price for one passenger</string>
@@ -82,5 +86,11 @@
     <string name="no_active_orders">You have no active trips…</string>
     <string name="no_history_posts">You have no history posts…</string>
     <string name="action_sign_out">Sign out</string>
+    <string name="price_range">Price range</string>
+    <string name="apply">Apply</string>
+    <string name="today">Today</string>
+    <string name="no_posts_found">No posts found…</string>
+    <string name="reset">Reset</string>
+    <string name="tomorrow">Tomorrow</string>
 
 </resources>

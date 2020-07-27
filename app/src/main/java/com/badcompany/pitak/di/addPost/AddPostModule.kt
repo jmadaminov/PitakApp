@@ -33,6 +33,22 @@ object AddPostModule {
     @AddPostScope
     @Provides
     @JvmStatic
+    fun provideDriverPostRepository(factory: DriverPostDataStoreFactory,
+                                    driverPostMapper: DriverPostMapper): DriverPostRepository {
+        return DriverPostRepositoryImpl(factory, driverPostMapper)
+    }
+
+
+    @Provides
+    @AddPostScope
+    @JvmStatic
+    fun provideDriverPostMapper(): DriverPostMapper {
+        return DriverPostMapper()
+    }
+
+    @AddPostScope
+    @Provides
+    @JvmStatic
     fun provideGetPlacesFeed(placeRepository: PlaceRepository): GetPlacesFeed {
         return GetPlacesFeed(placeRepository)
     }
@@ -45,13 +61,6 @@ object AddPostModule {
         return PlaceRepositoryImpl(factory, placeMapper)
     }
 
-    @AddPostScope
-    @Provides
-    @JvmStatic
-    fun provideDriverPostRepository(factory: DriverPostDataStoreFactory,
-                                    driverPostMapper: DriverPostMapper): DriverPostRepository {
-        return DriverPostRepositoryImpl(factory, driverPostMapper)
-    }
 
     @Provides
     @AddPostScope
@@ -60,12 +69,6 @@ object AddPostModule {
         return PlaceMapper()
     }
 
-    @Provides
-    @AddPostScope
-    @JvmStatic
-    fun provideDriverPostMapper(): DriverPostMapper {
-        return DriverPostMapper()
-    }
 
     @Provides
     @AddPostScope

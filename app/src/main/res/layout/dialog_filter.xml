@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/windowBackground"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/filter_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/windowBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/price_range" />
+
+        <io.apptik.widget.MultiSlider
+            android:id="@+id/range_slider5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            app:drawThumbsApart="true"
+            app:stepsThumbsApart="10000"
+            app:thumbNumber="2" />
+
+        <CheckBox
+            android:id="@+id/aCCheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:text="@string/air_conditioner" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/time" />
+
+        <CheckBox
+            android:id="@+id/timeFirstPart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="@string/first_part_of_day_one_line" />
+
+        <CheckBox
+            android:id="@+id/timeSecondPart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="@string/second_part_of_day_one_line" />
+
+        <CheckBox
+            android:id="@+id/timeThirdPart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="@string/third_part_of_day_one_line" />
+
+        <CheckBox
+            android:id="@+id/timeFourthPart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="@string/fourth_part_of_day_one_line" />
+
+<!--        <com.shawnlin.numberpicker.NumberPicker-->
+<!--            android:id="@+id/number_picker"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="50dp"-->
+<!--            app:np_dividerColor="@color/colorPrimary"-->
+<!--            app:np_height="180dp"-->
+<!--            app:np_max="8"-->
+<!--            app:np_min="1"-->
+<!--            app:np_selectedTextColor="@color/colorPrimary"-->
+<!--            app:np_textColor="@color/colorPrimary"-->
+<!--            app:np_value="1"-->
+<!--            app:np_width="64dp" />-->
+
+        <com.badcompany.pitak.util.HorizontalNumberPicker
+            android:layout_width="match_parent"
+            android:layout_height="?android:actionBarSize"
+            android:id="@+id/number_picker"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            />
+
+
+    </LinearLayout>
+</ScrollView>

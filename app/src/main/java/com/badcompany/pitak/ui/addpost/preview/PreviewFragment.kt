@@ -167,6 +167,7 @@ class PreviewFragment @Inject constructor(private val viewModelFactory: ViewMode
                                                   null,
                                                   activityViewModel.note!!,
                                                   activityViewModel.seat!!,
+                                                  null,
                                                   Constants.DRIVER_POST_SIMPLE))
         }
 

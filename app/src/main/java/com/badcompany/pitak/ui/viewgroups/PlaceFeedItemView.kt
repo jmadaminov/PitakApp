@@ -3,13 +3,13 @@ package com.badcompany.pitak.ui.viewgroups
 import android.graphics.Color
 import com.badcompany.domain.domainmodel.Place
 import com.badcompany.pitak.R
-import com.badcompany.pitak.ui.addpost.destinations.DestinationAutocompletePresenter
+import com.badcompany.pitak.ui.addpost.destinations.DestFeedPresenter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item
 import kotlinx.android.synthetic.main.item_place_autocomplete.view.*
 
 class PlaceFeedItemView(val place: Place,
-                        val presenter: DestinationAutocompletePresenter) : Item() {
+                        val presenter: DestFeedPresenter) : Item() {
 
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {

@@ -17,7 +17,13 @@ class ActivePostItem(var post: DriverPost, var onPostActionListener: IOnPostActi
         viewHolder.itemView.from.text = post.from.regionName
         viewHolder.itemView.to.text = post.to.regionName
         viewHolder.itemView.price.text = post.price.toString()
-        viewHolder.itemView.seats.text = post.seat.toString()
+        viewHolder.itemView.status.text =
+            (post.seat - post.availableSeats!!).toString() + "/" + post.seat.toString() + "   " + viewHolder.itemView.context.getString(
+                R.string.active)
+
+
+
+
 
         if (!post.remark.isBlank()) {
             viewHolder.itemView.note.visibility = View.VISIBLE

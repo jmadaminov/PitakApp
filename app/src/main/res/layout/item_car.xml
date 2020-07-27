@@ -42,6 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
             android:text="Nexia"
+            android:textSize="10dp"
             android:textColor="@color/dark_grey"
             app:layout_constraintStart_toEndOf="@id/carAvatar"
             app:layout_constraintTop_toTopOf="parent" />
@@ -50,6 +51,7 @@
             android:id="@+id/plateNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="10dp"
             android:layout_marginStart="12dp"
             android:layout_marginEnd="12dp"
             android:text="01CAX046ss"
@@ -61,6 +63,7 @@
             android:id="@+id/carYear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="10dp"
             android:layout_marginStart="12dp"
             android:layout_marginEnd="12dp"
             android:text="1922"
@@ -72,6 +75,7 @@
         <TextView
             android:id="@+id/fuelType"
             android:layout_width="wrap_content"
+            android:textSize="10dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginEnd="12dp"

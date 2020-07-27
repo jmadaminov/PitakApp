@@ -27,6 +27,7 @@
         <item name="android:windowBackground">@color/windowBackground</item>
         <item name="fontFamily">@font/valera_round_regular</item>
         <item name="actionBarTheme">@style/ToolBarStyle</item>
+        <item name="android:windowIsTranslucent">true</item>
     </style>
 
     <!-- ToolBar -->
