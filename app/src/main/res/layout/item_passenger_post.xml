@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/parent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:selectableItemBackground"
     app:cardCornerRadius="5dp"
     app:cardElevation="3dp"
     app:cardUseCompatPadding="true">
@@ -70,12 +74,16 @@
 
         <TextView
             android:id="@+id/date"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginTop="14dp"
+            android:drawableRight="@drawable/ic_baseline_calendar_today_24"
+            android:drawablePadding="10dp"
+            android:gravity="center_vertical|end"
             android:text="02.05.2200"
             android:textColor="@color/dark_grey"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toEndOf="@id/from"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -83,6 +91,9 @@
             android:id="@+id/seats"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:drawableRight="@drawable/ic_baseline_calendar_today_24"
+            android:drawablePadding="10dp"
+            android:gravity="center_vertical|end"
             android:text="4/3"
             android:textColor="@color/dark_grey"
             app:layout_constraintEnd_toEndOf="parent"
@@ -95,6 +106,9 @@
             android:id="@+id/price"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:drawableRight="@drawable/ic_baseline_calendar_today_24"
+            android:drawablePadding="10dp"
+            android:gravity="center_vertical|end"
             android:text="50,000 sum"
             android:textColor="@color/dark_grey"
             app:layout_constraintBottom_toTopOf="@id/note"
