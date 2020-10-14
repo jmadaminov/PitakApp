@@ -1,5 +1,6 @@
 package com.badcompany.pitak.ui.auth.login
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.viewModelScope
 import com.badcompany.core.ResultWrapper
 import com.badcompany.core.numericOnly
@@ -13,11 +14,11 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 
-class LoginViewModel @Inject constructor(private val logUserIn: LogUserIn) : BaseViewModel() {
+class LoginViewModel  @ViewModelInject constructor(private val logUserIn: LogUserIn) : BaseViewModel() {
 
     val loginResponse = SingleLiveEvent<ResultWrapper<String>>()
-    private val _loginForm = SingleLiveEvent<LoginFormState>()
-    val loginFormState: SingleLiveEvent<LoginFormState> = _loginForm
+//    private val _loginForm = SingleLiveEvent<LoginFormState>()
+//    val loginFormState: SingleLiveEvent<LoginFormState> = _loginForm
 //
 //    private val _loginResult = MutableLiveData<LoginResult>()
 //    val loginResult: LiveData<LoginResult> = _loginResult

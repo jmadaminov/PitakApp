@@ -1,19 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/nav_menu_search"
+        android:contentDescription="@string/search_trip"
         android:icon="@drawable/baseline_search_white_24dp"
-        android:title="@string/search_trip" />
+        android:title="@string/search_trip"
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/nav_menu_my_trips"
+        android:contentDescription="@string/my_trips"
         android:icon="@drawable/baseline_directions_car_white_24dp"
-        android:title="@string/my_trips" />
+        android:title="@string/my_trips"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/nav_menu_notifications"
+        android:contentDescription="@string/title_notifications"
+        android:icon="@drawable/ic_baseline_notifications_none_24"
+        android:title="@string/title_notifications"
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/nav_menu_profile"
+        android:contentDescription="@string/title_profile"
         android:icon="@drawable/baseline_person_outline_white_24dp"
-        android:title="@string/title_profile" />
+        android:title="@string/title_profile"
+        app:showAsAction="always" />
 
 </menu>

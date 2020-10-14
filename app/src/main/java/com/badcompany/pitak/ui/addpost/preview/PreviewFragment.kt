@@ -24,6 +24,7 @@ import com.badcompany.pitak.ui.viewgroups.CarItemSelectionView
 import com.google.android.material.snackbar.Snackbar
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_preview.*
 import splitties.experimental.ExperimentalSplittiesApi
 import javax.inject.Inject
@@ -31,7 +32,8 @@ import javax.inject.Inject
 
 //@FlowPreview
 //@ExperimentalCoroutinesApi
-class PreviewFragment @Inject constructor(private val viewModelFactory: ViewModelProvider.Factory) :
+@AndroidEntryPoint
+class PreviewFragment @Inject constructor(/*private val viewModelFactory: ViewModelProvider.Factory*/) :
     Fragment(R.layout.fragment_preview) {
 
 
@@ -39,13 +41,13 @@ class PreviewFragment @Inject constructor(private val viewModelFactory: ViewMode
     private var placeFrom: Place? = null
     private var placeTo: Place? = null
 
-    private val activityViewModel: AddPostViewModel by activityViewModels {
+    private val activityViewModel: AddPostViewModel by activityViewModels() /*{
         viewModelFactory
-    }
+    }*/
 
-    private val viewModel: PreviewViewModel by viewModels {
+    private val viewModel: PreviewViewModel by viewModels() /*{
         viewModelFactory
-    }
+    }*/
 
     //    val args: PhoneConfirmFragmentArgs by navArgs()
     lateinit var navController: NavController

@@ -92,5 +92,7 @@
     <string name="no_posts_found">No posts found…</string>
     <string name="reset">Reset</string>
     <string name="tomorrow">Tomorrow</string>
+    <string name="feedback">Feedback</string>
+    <string name="send">Send</string>
 
 </resources>

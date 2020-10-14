@@ -24,7 +24,6 @@ interface ApiService {
 
 
     //DRIVER POST API
-
     @Headers("Content-Type:application/json", "Accept: application/json")
     @POST("driver_post/action")
     suspend fun createPost(@Header("Authorization") token: String,
@@ -42,7 +41,6 @@ interface ApiService {
                            @Path(value = "identifier",
                                  encoded = true) identifier: String): PlainResponse
 
-
     @Headers("Content-Type:application/json", "Accept: application/json")
     @GET("driver_post/action/active")
     suspend fun getActivePosts(@Header("Authorization") token: String,
@@ -56,7 +54,6 @@ interface ApiService {
                                 @Query("size") size: Int = 10): DriverHistoryPostsResponse
 
     //
-
 
     //Places Feed
 
@@ -137,7 +134,6 @@ interface ApiService {
     suspend fun uploadPhoto(@Part file: MultipartBody.Part): PhotoUploadResponse
 
     //END FILE UPLOAD API
-
 
 //    class BufferooResponse {
 //        lateinit var team: List<UserModel>

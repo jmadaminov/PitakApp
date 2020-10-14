@@ -18,19 +18,21 @@ import com.badcompany.core.*
 import com.badcompany.domain.domainmodel.User
 import com.badcompany.pitak.R
 import com.badcompany.pitak.ui.auth.AuthActivity
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_register.*
 import javax.inject.Inject
 
-class RegisterFragment @Inject constructor(private val viewModelFactory: ViewModelProvider.Factory) :
+@AndroidEntryPoint
+class RegisterFragment @Inject constructor(/*private val viewModelFactory: ViewModelProvider.Factory*/) :
     Fragment(R.layout.fragment_register) {
 
     val args: RegisterFragmentArgs by navArgs()
 
     lateinit var navController: NavController
 
-    private val viewModel: RegisterViewModel by viewModels {
+    private val viewModel: RegisterViewModel by viewModels() /*{
         viewModelFactory
-    }
+    }*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -170,20 +172,20 @@ class RegisterFragment @Inject constructor(private val viewModelFactory: ViewMod
         })
     }
 
-    private fun updateUiWithUser(model: RegisterUserView) {
-        val welcome = getString(R.string.welcome)
-        val displayName = model.displayName
-        // TODO : initiate successful logged in experience
-        Toast.makeText(
-            requireContext(),
-            "$welcome $displayName",
-            Toast.LENGTH_LONG
-        ).show()
-    }
-
-    private fun showLoginFailed(@StringRes errorString: Int) {
-        Toast.makeText(requireContext(), errorString, Toast.LENGTH_SHORT).show()
-    }
+//    private fun updateUiWithUser(model: RegisterUserView) {
+//        val welcome = getString(R.string.welcome)
+//        val displayName = model.displayName
+//        // TODO : initiate successful logged in experience
+//        Toast.makeText(
+//            requireContext(),
+//            "$welcome $displayName",
+//            Toast.LENGTH_LONG
+//        ).show()
+//    }
+//
+//    private fun showLoginFailed(@StringRes errorString: Int) {
+//        Toast.makeText(requireContext(), errorString, Toast.LENGTH_SHORT).show()
+//    }
 
 
 }

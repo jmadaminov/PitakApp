@@ -13,15 +13,18 @@ import com.badcompany.pitak.ui.main.MainActivity
 import com.badcompany.pitak.ui.main.mytrips.activetrips.ActiveTripsFragment
 import com.badcompany.pitak.ui.main.mytrips.historytrips.HistoryTripsFragment
 import com.google.android.material.tabs.TabLayoutMediator
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_my_trips.*
 import javax.inject.Inject
 
-class MyTripsFragment @Inject constructor(private val viewModelFactory: ViewModelProvider.Factory) :
+
+@AndroidEntryPoint
+class MyTripsFragment @Inject constructor(/*private val viewModelFactory: ViewModelProvider.Factory*/) :
     Fragment(R.layout.fragment_my_trips) {
 
-    private val viewModel: MyTripsViewModel by viewModels {
+    private val viewModel: MyTripsViewModel by viewModels() /*{
         viewModelFactory
-    }
+    }*/
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -65,8 +68,8 @@ class MyTripsFragment @Inject constructor(private val viewModelFactory: ViewMode
         FragmentStateAdapter(this) {
 
         lateinit var currentFrag: Fragment
-        var activeOrdersFrag = ActiveTripsFragment(viewModelFactory)
-        var historyOrdersFrag = HistoryTripsFragment(viewModelFactory)
+        var activeOrdersFrag = ActiveTripsFragment(/*viewModelFactory*/)
+        var historyOrdersFrag = HistoryTripsFragment(/*viewModelFactory*/)
 
         override fun getItemCount() = 2
 

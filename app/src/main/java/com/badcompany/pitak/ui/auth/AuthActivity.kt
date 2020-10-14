@@ -9,8 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
 import com.badcompany.pitak.App
 import com.badcompany.pitak.R
-import com.badcompany.pitak.di.viewmodels.AuthViewModelFactory
-import com.badcompany.pitak.fragments.AuthNavHostFragment
+//import com.badcompany.pitak.di.viewmodels.AuthViewModelFactory
+//import com.badcompany.pitak.fragments.AuthNavHostFragment
 import com.badcompany.pitak.ui.BaseActivity
 import kotlinx.android.synthetic.main.activity_auth.*
 import javax.inject.Inject
@@ -19,33 +19,33 @@ import javax.inject.Named
 class AuthActivity : BaseActivity() {
 
 
-    @Inject
-    lateinit var viewModelFactory: AuthViewModelFactory
+//    @Inject
+//    lateinit var viewModelFactory: AuthViewModelFactory
 
-    @Inject
-    @Named("AuthFragmentFactory")
-    lateinit var fragmentFactory: FragmentFactory
+//    @Inject
+//    @Named("AuthFragmentFactory")
+//    lateinit var fragmentFactory: FragmentFactory
 
-    private val viewModel: AuthViewModel by viewModels {
+    private val viewModel: AuthViewModel by viewModels() /*{
         viewModelFactory
-    }
+    }*/
 
 //    lateinit var navController: NavController
 
-    override fun inject() {
-        (application as App).authComponent()
-            .inject(this)
-    }
+//    override fun inject() {
+//        (application as App).authComponent()
+//            .inject(this)
+//    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        inject()
+//        inject()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
 //        navController = findNavController(R.id.auth_fragments_container)
 
         subscribeObservers()
-        onRestoreInstanceState()
+//        onRestoreInstanceState()
         setSupportActionBar(tool_bar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeButtonEnabled(true)
@@ -57,22 +57,22 @@ class AuthActivity : BaseActivity() {
 
     }
 
-    var host: Fragment? = null
-    lateinit var navHost: Fragment
+//    var host: Fragment? = null
+//    lateinit var navHost: Fragment
+//
+//    private fun onRestoreInstanceState() {
+//        host = supportFragmentManager.findFragmentById(R.id.auth_fragments_container)
+//        host?.let { /*do nothing*/ } ?: createNavHost()
+//    }
 
-    private fun onRestoreInstanceState() {
-        host = supportFragmentManager.findFragmentById(R.id.auth_fragments_container)
-        host?.let { /*do nothing*/ } ?: createNavHost()
-    }
-
-    private fun createNavHost() {
-        navHost = AuthNavHostFragment.create(R.navigation.nav_auth_graph)
-        supportFragmentManager.beginTransaction().replace(R.id.auth_fragments_container,
-                                                          navHost,
-                                                          getString(R.string.AuthNavHost))
-            .setPrimaryNavigationFragment(navHost)
-            .commit()
-    }
+//    private fun createNavHost() {
+//        navHost = AuthNavHostFragment.create(R.navigation.nav_auth_graph)
+//        supportFragmentManager.beginTransaction().replace(R.id.auth_fragments_container,
+//                                                          navHost,
+//                                                          getString(R.string.AuthNavHost))
+//            .setPrimaryNavigationFragment(navHost)
+//            .commit()
+//    }
 
 
     fun showActionBar() {

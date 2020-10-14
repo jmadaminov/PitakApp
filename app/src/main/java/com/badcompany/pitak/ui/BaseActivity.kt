@@ -3,7 +3,10 @@ package com.badcompany.pitak.ui
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.badcompany.pitak.App
+import dagger.hilt.android.AndroidEntryPoint
 
+
+@AndroidEntryPoint
 abstract class BaseActivity : AppCompatActivity()/*,
     UICommunicationListener*/ {
 
@@ -14,11 +17,11 @@ abstract class BaseActivity : AppCompatActivity()/*,
 //    @Inject
 //    lateinit var sessionManager: SessionManager
 
-    abstract fun inject()
+//    abstract fun inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        (application as App).appComponent
-            .inject(this)
+//        (application as App).appComponent
+//            .inject(this)
         super.onCreate(savedInstanceState)
     }
 

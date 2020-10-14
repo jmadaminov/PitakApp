@@ -3,62 +3,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/navSearchTripFragment">
+    app:startDestination="@id/nav_menu_search">
 
     <fragment
-        android:id="@+id/navSearchTripFragment"
+        android:id="@+id/nav_menu_search"
         android:name="com.badcompany.pitak.ui.main.searchtrip.SearchTripFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_search_trip">
+        tools:layout="@layout/fragment_search_trip"/>
 
-        <action
-            android:id="@+id/action_navSearchTripFragment_to_nav_menu_my_trips"
-            app:destination="@id/nav_menu_my_trips" />
-        <action
-            android:id="@+id/action_navSearchTripFragment_to_nav_menu_profile"
-            app:destination="@id/nav_menu_profile" />
-        <action
-            android:id="@+id/action_navSearchTripFragment_self"
-            app:popUpToInclusive="true"
-            app:destination="@id/navSearchTripFragment" />
-
-
-    </fragment>
 
     <fragment
         android:id="@+id/nav_menu_my_trips"
         android:name="com.badcompany.pitak.ui.main.mytrips.MyTripsFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_my_trips" >
+        tools:layout="@layout/fragment_my_trips" />
 
-
-        <action
-            android:id="@+id/action_nav_menu_my_trips_to_nav_menu_profile"
-            app:destination="@id/nav_menu_profile" />
-        <action
-            android:id="@+id/action_nav_menu_my_trips_to_navSearchTripFragment"
-            app:destination="@id/navSearchTripFragment" />
-        <action
-            android:id="@+id/action_nav_menu_my_trips_self"
-            app:popUpToInclusive="true"
-            app:destination="@id/nav_menu_my_trips" />
-    </fragment>
 
     <fragment
         android:id="@+id/nav_menu_profile"
         android:name="com.badcompany.pitak.ui.main.profile.ProfileFragment"
         android:label="@string/title_profile"
-        tools:layout="@layout/fragment_profile" >
+        tools:layout="@layout/fragment_profile" />
 
-        <action
-            android:id="@+id/action_nav_menu_profile_to_nav_menu_my_trips"
-            app:destination="@id/nav_menu_my_trips" />
-        <action
-            android:id="@+id/action_nav_menu_profile_to_navSearchTripFragment"
-            app:destination="@id/navSearchTripFragment" />
-        <action
-            android:id="@+id/action_nav_menu_profile_self"
-            app:popUpToInclusive="true"
-            app:destination="@id/nav_menu_profile" />
-    </fragment>
+
+
 </navigation>

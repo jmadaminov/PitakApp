@@ -1,5 +1,6 @@
 package com.badcompany.pitak.ui.main.mytrips.activetrips
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.viewModelScope
 import com.badcompany.core.Constants
 import com.badcompany.core.ResultWrapper
@@ -16,9 +17,9 @@ import kotlinx.coroutines.withContext
 import splitties.experimental.ExperimentalSplittiesApi
 import javax.inject.Inject
 
-class ActiveTripsViewModel @Inject constructor(val getActiveDriverPost: GetActiveDriverPost,
-                                               val deletePost: DeleteDriverPost,
-                                               val finishPost: FinishDriverPost) : BaseViewModel() {
+class ActiveTripsViewModel  @ViewModelInject constructor(val getActiveDriverPost: GetActiveDriverPost,
+                                                         val deletePost: DeleteDriverPost,
+                                                         val finishPost: FinishDriverPost) : BaseViewModel() {
 
     val activePostsResponse = SingleLiveEvent<ResultWrapper<List<DriverPost>>>()
     val deletePostReponse = SingleLiveEvent<ResultWrapper<Int>>()

@@ -1,5 +1,6 @@
 package com.badcompany.pitak.ui.addpost.destinations
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.viewModelScope
 import com.badcompany.core.Constants
 import com.badcompany.core.ResultWrapper
@@ -17,7 +18,7 @@ import splitties.experimental.ExperimentalSplittiesApi
 import javax.inject.Inject
 
 
-class DestinationsViewModel @Inject constructor(private val getPlacesFeed: GetPlacesFeed) :
+class DestinationsViewModel  @ViewModelInject constructor(private val getPlacesFeed: GetPlacesFeed) :
     BaseViewModel() {
 
     var placeFrom: Place? = null

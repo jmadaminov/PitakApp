@@ -19,6 +19,7 @@ import com.badcompany.pitak.R
 import com.badcompany.pitak.ui.auth.AuthActivity
 import com.badcompany.pitak.ui.main.MainActivity
 import com.badcompany.pitak.util.AppPreferences
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_phone_confirm.*
 import splitties.activities.start
 import splitties.experimental.ExperimentalSplittiesApi
@@ -29,12 +30,13 @@ import javax.inject.Inject
 
 //@FlowPreview
 //@ExperimentalCoroutinesApi
-class PhoneConfirmFragment @Inject constructor(private val viewModelFactory: ViewModelProvider.Factory) :
+@AndroidEntryPoint
+class PhoneConfirmFragment @Inject constructor(/*private val viewModelFactory: ViewModelProvider.Factory*/) :
     Fragment(R.layout.fragment_phone_confirm) {
 
-    private val viewModel: PhoneConfirmViewModel by viewModels {
+    private val viewModel: PhoneConfirmViewModel by viewModels() /*{
         viewModelFactory
-    }
+    }*/
 
     val args: PhoneConfirmFragmentArgs by navArgs()
     lateinit var navController: NavController
@@ -87,7 +89,7 @@ class PhoneConfirmFragment @Inject constructor(private val viewModelFactory: Vie
                     saveCredentials(response)
                     context?.start<MainActivity> { }
 
-                    (appCtx as App).releaseAuthComponent()
+//                    (appCtx as App).releaseAuthComponent()
                 }
                 ResultWrapper.InProgress -> {
                     errorMessage.visibility = View.INVISIBLE

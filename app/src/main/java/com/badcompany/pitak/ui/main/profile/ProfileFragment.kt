@@ -33,10 +33,12 @@ import com.badcompany.pitak.viewobjects.CarColorViewObj
 import com.badcompany.pitak.viewobjects.CarViewObj
 import com.badcompany.pitak.viewobjects.IdNameViewObj
 import com.badcompany.pitak.viewobjects.ImageViewObj
+import com.badcompany.pitak.ui.feedback.FeedbackActivity
 import com.google.android.material.snackbar.Snackbar
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.OnItemClickListener
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.item_car.view.*
 import splitties.experimental.ExperimentalSplittiesApi
@@ -46,14 +48,15 @@ import javax.inject.Inject
 
 //@FlowPreview
 //@ExperimentalCoroutinesApi
-class ProfileFragment @Inject constructor(private val viewModelFactory: ViewModelProvider.Factory) :
+@AndroidEntryPoint
+class ProfileFragment @Inject constructor(/*private val viewModelFactory: ViewModelProvider.Factory*/) :
     Fragment(R.layout.fragment_profile) {
 
     private val adapter = GroupAdapter<GroupieViewHolder>()
 
-    private val viewModel: ProfileViewModel by viewModels {
+    private val viewModel: ProfileViewModel by viewModels() /*{
         viewModelFactory
-    }
+    }*/
 
 
     override fun onAttach(context: Context) {
@@ -251,6 +254,12 @@ class ProfileFragment @Inject constructor(private val viewModelFactory: ViewMode
 //            startActivityForResult(intent, CODE_ADD_CAR)
 //        }
 
+
+        btnFeedback.setOnClickListener {
+            start<FeedbackActivity>{}
+        }
+
+
         signOut.setOnClickListener {
             requireActivity().finish()
             AppPreferences.edit {
@@ -260,7 +269,7 @@ class ProfileFragment @Inject constructor(private val viewModelFactory: ViewMode
                 phone = ""
             }
             start<AuthActivity> {}
-            (requireActivity().applicationContext as App).releaseMainComponent()
+//            (requireActivity().applicationContext as App).releaseMainComponent()
         }
 
 

@@ -1,5 +1,6 @@
 package com.badcompany.pitak.ui.addcar
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.viewModelScope
 import com.badcompany.core.Constants
 import com.badcompany.core.Constants.TXT_CAR
@@ -27,10 +28,10 @@ import javax.inject.Inject
 /**
  * Created by jahon on 28-Apr-20
  */
-class AddCarViewModel @Inject constructor(private val uploadPhoto: UploadPhoto,
-                                          private val saveCar: SaveCar,
-                                          private val getCarColors: GetCarColors,
-                                          private val getCarModels: GetCarModels) :
+class AddCarViewModel @ViewModelInject constructor(private val uploadPhoto: UploadPhoto,
+                                                   private val saveCar: SaveCar,
+                                                   private val getCarColors: GetCarColors,
+                                                   private val getCarModels: GetCarModels) :
     BaseViewModel() {
 
     val carSaveReponse = SingleLiveEvent<ResultWrapper<String>>()
@@ -108,9 +109,9 @@ class AddCarViewModel @Inject constructor(private val uploadPhoto: UploadPhoto,
     }
 
 
-    @ExperimentalCoroutinesApi
-    override fun onCleared() {
-        super.onCleared()
-        (appCtx as App).releaseAddCarComponent()
-    }
+//    @ExperimentalCoroutinesApi
+//    override fun onCleared() {
+//        super.onCleared()
+//        (appCtx as App).releaseAddCarComponent()
+//    }
 }

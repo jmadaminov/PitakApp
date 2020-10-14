@@ -11,8 +11,8 @@ import com.badcompany.core.Constants
 import com.badcompany.domain.domainmodel.*
 import com.badcompany.pitak.App
 import com.badcompany.pitak.R
-import com.badcompany.pitak.di.viewmodels.AddPostViewModelFactory
-import com.badcompany.pitak.fragments.AddPostNavHostFragment
+//import com.badcompany.pitak.di.viewmodels.AddPostViewModelFactory
+//import com.badcompany.pitak.fragments.AddPostNavHostFragment
 import com.badcompany.pitak.ui.BaseActivity
 import com.badcompany.pitak.viewobjects.DriverPostViewObj
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -24,35 +24,35 @@ import javax.inject.Named
 
 class AddPostActivity : BaseActivity() {
 
-    @Inject
-    lateinit var viewModelFactory: AddPostViewModelFactory
+//    @Inject
+//    lateinit var viewModelFactory: AddPostViewModelFactory
 
 
-    private val viewmodel: AddPostViewModel by viewModels {
+    private val viewmodel: AddPostViewModel by viewModels() /*{
         viewModelFactory
-    }
+    }*/
 
-    @Inject
+  /*  @Inject
     @Named("AddPostFragmentFactory")
     lateinit var fragmentFactory: FragmentFactory
+*/
 
-
-    override fun inject() {
+    /*override fun inject() {
         (application as App).addPostComponent()
             .inject(this)
-    }
+    }*/
 
 
     @InternalCoroutinesApi
     @ExperimentalCoroutinesApi
     @ExperimentalSplittiesApi
     override fun onCreate(savedInstanceState: Bundle?) {
-        inject()
+//        inject()
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_add_post)
         setupActionBar()
-        onRestoreInstanceState()
+//        onRestoreInstanceState()
 
 
         subscribeObservers()
@@ -100,14 +100,14 @@ class AddPostActivity : BaseActivity() {
                                                                                   "http://codeuz.uz:9091/attach/image/eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyMDIwLTA2LTIzLTIxLTA5LTA4LTgxMi5qcGciLCJpc3MiOiJwaXRha2oxMmJpaG1hbiIsImlhdCI6MTU5MzU5NDIxOH0.dpoNfy19v9pvFaFB9O3oZ-b0PTR78ukxGemaS_Jgzng")
                 ))
 
-            val navOptions = NavOptions.Builder()
-                .setPopUpTo(R.id.previewFragment, true)
-                .build()
+//            val navOptions = NavOptions.Builder()
+//                .setPopUpTo(R.id.previewFragment, true)
+//                .build()
 
-            navHost.findNavController()
-                .navigate(R.id.action_destinationsFragment_to_previewFragment,
-                          null,
-                          navOptions)
+//            navHost.findNavController()
+//                .navigate(R.id.action_destinationsFragment_to_previewFragment,
+//                          null,
+//                          navOptions)
         }
 
     }
@@ -124,21 +124,21 @@ class AddPostActivity : BaseActivity() {
     }
 
 
-    var host: Fragment? = null
-    lateinit var navHost: Fragment
+//    var host: Fragment? = null
+//    lateinit var navHost: Fragment
 
-    private fun onRestoreInstanceState() {
-        host = supportFragmentManager.findFragmentById(R.id.add_post_fragments_container)
-        host?.let { /*do nothing*/ } ?: createNavHost()
-    }
+//    private fun onRestoreInstanceState() {
+//        host = supportFragmentManager.findFragmentById(R.id.add_post_fragments_container)
+//        host?.let { /*do nothing*/ } ?: createNavHost()
+//    }
 
-    private fun createNavHost() {
-        navHost = AddPostNavHostFragment.create(R.navigation.add_post_nav_graph)
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.add_post_fragments_container, navHost, getString(R.string.AuthNavHost))
-            .setPrimaryNavigationFragment(navHost)
-            .commit()
-    }
+//    private fun createNavHost() {
+//        navHost = AddPostNavHostFragment.create(R.navigation.add_post_nav_graph)
+//        supportFragmentManager.beginTransaction()
+//            .replace(R.id.add_post_fragments_container, navHost, getString(R.string.AuthNavHost))
+//            .setPrimaryNavigationFragment(navHost)
+//            .commit()
+//    }
 
 
     private fun setupActionBar() {

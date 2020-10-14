@@ -1,5 +1,6 @@
 package com.badcompany.pitak.ui.addpost
 
+import androidx.hilt.lifecycle.ViewModelInject
 import com.badcompany.domain.domainmodel.CarDetails
 import com.badcompany.domain.domainmodel.Place
 import com.badcompany.pitak.App
@@ -11,7 +12,7 @@ import javax.inject.Inject
 /**
  * Created by jahon on 28-Apr-20
  */
-class AddPostViewModel @Inject constructor() :
+class AddPostViewModel @ViewModelInject constructor() :
     BaseViewModel() {
 
     var isEditing: Boolean = false
@@ -51,9 +52,9 @@ class AddPostViewModel @Inject constructor() :
 //    }
 
 
-    @ExperimentalCoroutinesApi
-    override fun onCleared() {
-        super.onCleared()
-        (appCtx as App).releaseAddCarComponent()
-    }
+//    @ExperimentalCoroutinesApi
+//    override fun onCleared() {
+//        super.onCleared()
+//        (appCtx as App).releaseAddCarComponent()
+//    }
 }

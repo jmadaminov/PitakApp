@@ -26,7 +26,7 @@ import com.badcompany.domain.domainmodel.ColorsAndModels
 import com.badcompany.domain.domainmodel.PhotoBody
 import com.badcompany.pitak.App
 import com.badcompany.pitak.R
-import com.badcompany.pitak.di.viewmodels.AddCarViewModelFactory
+//import com.badcompany.pitak.di.viewmodels.AddCarViewModelFactory
 import com.badcompany.pitak.ui.BaseActivity
 import com.badcompany.pitak.ui.viewgroups.ItemAddPhoto
 import com.badcompany.pitak.ui.viewgroups.ItemCarPhoto
@@ -64,17 +64,15 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
     private lateinit var car: CarViewObj
     val adapter = GroupAdapter<GroupieViewHolder>()
 
-    @Inject
-    lateinit var viewModelFactory: AddCarViewModelFactory
+//    @Inject
+//    lateinit var viewModelFactory: AddCarViewModelFactory
 
-    private val viewmodel: AddCarViewModel by viewModels {
-        viewModelFactory
-    }
+    private val viewmodel: AddCarViewModel by viewModels()
 
-    override fun inject() {
-        (application as App).addCarComponent()
-            .inject(this)
-    }
+//    override fun inject() {
+//        (application as App).addCarComponent()
+//            .inject(this)
+//    }
 
     @InternalCoroutinesApi
     @ExperimentalCoroutinesApi
@@ -83,7 +81,7 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
         car = if (intent.extras == null) CarViewObj()
         else intent.getParcelableExtra(Constants.TXT_CAR) as CarViewObj
 
-        inject()
+//        inject()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_car)
         subscribeObservers()
@@ -203,7 +201,7 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
                     saveCar.stopAnimation()
                     setResult(Activity.RESULT_OK)
                     finish()
-                    (application as App).releaseAddCarComponent()
+//                    (application as App).releaseAddCarComponent()
                 }
                 ResultWrapper.InProgress -> {
                     saveCar.startAnimation()

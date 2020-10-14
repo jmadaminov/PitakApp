@@ -1,5 +1,6 @@
 package com.badcompany.pitak.ui.main.profile
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.viewModelScope
 import com.badcompany.core.Constants.TXT_ID
 import com.badcompany.core.Constants.TXT_TOKEN
@@ -19,7 +20,7 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 
-class ProfileViewModel @Inject constructor(val getCarList: GetCars, val deleteCar: DeleteCar, val setDefaultCar: SetDefaultCar) :
+class ProfileViewModel  @ViewModelInject constructor(val getCarList: GetCars, val deleteCar: DeleteCar, val setDefaultCar: SetDefaultCar) :
     BaseViewModel() {
 
 

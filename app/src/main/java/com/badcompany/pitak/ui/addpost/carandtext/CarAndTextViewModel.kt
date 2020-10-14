@@ -1,5 +1,6 @@
 package com.badcompany.pitak.ui.addpost.carandtext
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.viewModelScope
 import com.badcompany.core.ResultWrapper
 import com.badcompany.domain.domainmodel.CarDetails
@@ -16,7 +17,7 @@ import splitties.experimental.ExperimentalSplittiesApi
 import javax.inject.Inject
 
 
-class CarAndTextViewModel @Inject constructor(private val getCars: GetCars) :
+class CarAndTextViewModel @ViewModelInject constructor(private val getCars: GetCars) :
     BaseViewModel() {
 
     val carsResponse = SingleLiveEvent<ResultWrapper<List<CarDetails>>>()

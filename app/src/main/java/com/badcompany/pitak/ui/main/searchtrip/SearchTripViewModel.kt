@@ -1,5 +1,6 @@
 package com.badcompany.pitak.ui.main.searchtrip
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.viewModelScope
 import com.badcompany.core.Constants
 import com.badcompany.core.ResultWrapper
@@ -18,8 +19,8 @@ import kotlinx.coroutines.withContext
 import splitties.experimental.ExperimentalSplittiesApi
 import javax.inject.Inject
 
-class SearchTripViewModel @Inject constructor(private val getPassengerPostWithFilter: GetPassengerPostWithFilter,
-                                              private val getPlacesFeed: GetPlacesFeed) :
+class SearchTripViewModel  @ViewModelInject constructor(private val getPassengerPostWithFilter: GetPassengerPostWithFilter,
+                                                        private val getPlacesFeed: GetPlacesFeed) :
     BaseViewModel() {
 
 
