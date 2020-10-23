@@ -125,8 +125,8 @@ dependencies {
     testImplementation "io.mockk:mockk:$rootProject.mockkVersion"
 
     //dagger2
-    implementation "com.google.dagger:dagger:${daggerVersion}"
-    kapt "com.google.dagger:dagger-compiler:${daggerVersion}"
+//    implementation "com.google.dagger:dagger:${daggerVersion}"
+//    kapt "com.google.dagger:dagger-compiler:${daggerVersion}"
 
 //otherLibs
     implementation 'br.com.simplepass:loading-button-android:2.2.0'
