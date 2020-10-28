@@ -10,16 +10,17 @@ import javax.inject.Inject
  * Map a [UserModel] to and from a [UserEntity] instance when data is moving between
  * this later and the Data layer
  */
-open class UserCredentialsMapper @Inject constructor(): EntityMapper<UserCredentialsModel, UserCredentialsEntity> {
+open class UserCredentialsMapper @Inject constructor() :
+    EntityMapper<UserCredentialsModel, UserCredentialsEntity> {
 
     /**
      * Map an instance of a [UserModel] to a [UserEntity] model
      */
     override fun mapToEntity(type: UserCredentialsModel): UserCredentialsEntity {
-        return UserCredentialsEntity(type.phoneNum, type.password)
+        return UserCredentialsEntity(type.phoneNum, type.password, type.deviceId)
     }
 
     override fun mapFromEntity(type: UserCredentialsEntity): UserCredentialsModel {
-        return UserCredentialsModel(type.phoneNum, type.password)
+        return UserCredentialsModel(type.phoneNum, type.password, type.deviceId)
     }
 }
