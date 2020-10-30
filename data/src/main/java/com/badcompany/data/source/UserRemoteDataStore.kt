@@ -27,8 +27,8 @@ open class UserRemoteDataStore @Inject constructor(private val userRemote: UserR
 //    /**
 //     * Retrieve a list of [BufferooEntity] instances from the API
 //     */
-    override suspend fun userLogin(phoneNum: String): ResultWrapper<String> {
-        return userRemote.loginUser(phoneNum)
+    override suspend fun userLogin(phoneNum: String, deviceId: String): ResultWrapper<String> {
+        return userRemote.loginUser(phoneNum, deviceId)
     }
 
     override suspend fun userRegister(user: UserEntity): ResultWrapper<String>  {

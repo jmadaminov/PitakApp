@@ -9,7 +9,7 @@ import com.badcompany.domain.domainmodel.AuthBody
 
 interface UserRepository {
 
-    suspend fun loginUser(phoneNum: String): ResultWrapper<String>
+    suspend fun loginUser(phoneNum: String, deviceId: String): ResultWrapper<String>
     suspend fun registerUser(user: User): ResultWrapper<String>
     suspend fun smsConfirm(userCredentials: UserCredentials): ResultWrapper<AuthBody>
 

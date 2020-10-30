@@ -21,9 +21,16 @@ open class App : Application() {
     private var addPostComponent: AddPostComponent? = null
     private var mainComponent: MainComponent? = null
 
+    companion object {
+         var udid = ""
+    }
+
+
     override fun onCreate() {
         super.onCreate()
         initAppComponent()
+
+
     }
 
     fun releaseAuthComponent() {

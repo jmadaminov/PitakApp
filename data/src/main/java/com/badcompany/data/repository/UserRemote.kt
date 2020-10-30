@@ -17,7 +17,7 @@ interface UserRemote {
     /**
      * Retrieve a list of Bufferoos, from the cache
      */
-   suspend fun loginUser(phoneNum: String): ResultWrapper<String>
+   suspend fun loginUser(phoneNum: String, deviceId: String): ResultWrapper<String>
 
     suspend  fun registerUser(user: UserEntity): ResultWrapper<String>
     suspend  fun confirmUser(user: UserCredentialsEntity): ResultWrapper<AuthEntity>

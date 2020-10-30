@@ -16,10 +16,10 @@ open class UserCredentialsMapper @Inject constructor(): EntityMapper<UserCredent
      * Map an instance of a [UserModel] to a [UserEntity] model
      */
     override fun mapToEntity(type: UserCredentialsModel): UserCredentialsEntity {
-        return UserCredentialsEntity(type.phoneNum, type.password)
+        return UserCredentialsEntity(type.phoneNum, type.password, type.deviceId)
     }
 
     override fun mapFromEntity(type: UserCredentialsEntity): UserCredentialsModel {
-        return UserCredentialsModel(type.phoneNum, type.password)
+        return UserCredentialsModel(type.phoneNum, type.password, type.deviceId)
     }
 }
