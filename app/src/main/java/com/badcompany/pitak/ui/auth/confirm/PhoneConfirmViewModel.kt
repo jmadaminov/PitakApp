@@ -6,6 +6,7 @@ import com.badcompany.core.numericOnly
 import com.badcompany.domain.domainmodel.AuthBody
 import com.badcompany.domain.domainmodel.UserCredentials
 import com.badcompany.domain.usecases.SmsConfirm
+import com.badcompany.pitak.App
 import com.badcompany.pitak.ui.BaseViewModel
 import com.badcompany.pitak.util.SingleLiveEvent
 import kotlinx.coroutines.Dispatchers
@@ -22,12 +23,11 @@ class PhoneConfirmViewModel @Inject constructor(private val smsConfirm: SmsConfi
     fun confirm(phone: String, code: String) {
         confirmResponse.value = ResultWrapper.InProgress
         viewModelScope.launch(Dispatchers.IO) {
-            val response = smsConfirm.execute(UserCredentials(phone.numericOnly(), code))
+            val response = smsConfirm.execute(UserCredentials(phone.numericOnly(), code, App.udid))
             withContext(Main) {
                 confirmResponse.value = response
             }
         }
-
     }
 
     // A placeholder username validation check

@@ -1,10 +1,7 @@
 package com.badcompany.pitak.ui.auth.register
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.View
-import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
@@ -119,7 +116,7 @@ class RegisterFragment @Inject constructor(private val viewModelFactory: ViewMod
 //            }
         })
 
-        viewModel.response.observe(viewLifecycleOwner, Observer {
+        viewModel.regResp.observe(viewLifecycleOwner, Observer {
             val response = it ?: return@Observer
 //
 ////            loading.visibility = View.GONE
