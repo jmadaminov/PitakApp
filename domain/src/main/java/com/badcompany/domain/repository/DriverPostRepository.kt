@@ -14,7 +14,7 @@ interface DriverPostRepository {
     suspend fun getHistoryDriverPosts(page: Int): ResultWrapper<List<DriverPost>>
 
 
-    suspend fun getDriverPostById(id: Long): ResponseWrapper<PassengerPost>
+    suspend fun getDriverPostById(id: Long): ResponseWrapper<DriverPost>
 
     suspend fun acceptOffer(id: Long): ResponseWrapper<String?>
     suspend fun rejectOffer(id: Long): ResponseWrapper<String?>

@@ -1,9 +1,9 @@
 package com.badcompany.remote
 
-import com.badcompany.core.ErrorWrapper
-import com.badcompany.core.ResultWrapper
+import com.badcompany.core.*
 import com.badcompany.data.model.DriverPostEntity
 import com.badcompany.data.repository.DriverPostRemote
+import com.badcompany.remote.ResponseFormatter.getFormattedResponse
 import com.badcompany.remote.mapper.DriverPostMapper
 import javax.inject.Inject
 
@@ -12,7 +12,7 @@ import javax.inject.Inject
  * [BufferooRemote] from the Data layer as it is that layers responsibility for defining the
  * operations in which data store implementation layers can carry out.
  */
-class DriverPostRemoteImpl @Inject constructor(                                               private val authorizedApiService: AuthorizedApiService,
+class DriverPostRemoteImpl @Inject constructor(private val authorizedApiService: AuthorizedApiService,
                                                private val postMapper: DriverPostMapper) :
     DriverPostRemote {
 
@@ -53,7 +53,7 @@ class DriverPostRemoteImpl @Inject constructor(                                 
     }
 
     override suspend fun getActiveDriverPosts(
-        ): ResultWrapper<List<DriverPostEntity>> {
+    ): ResultWrapper<List<DriverPostEntity>> {
 
         return try {
             val response = authorizedApiService.getActivePosts()
@@ -80,6 +80,22 @@ class DriverPostRemoteImpl @Inject constructor(                                 
             ErrorWrapper.SystemError(e)
         }
     }
+
+    override suspend fun getDriverPostById(id: Long): ResponseWrapper<DriverPostEntity> {
+        val response = getFormattedResponse { authorizedApiService.getDriverPostById(id) }
+        return if (response is ResponseSuccess)
+            ResponseSuccess(postMapper.mapToEntity(response.value))
+        else response as ResponseError
+    }
+
+    override suspend fun acceptOffer(id: Long) =
+        getFormattedResponse { authorizedApiService.acceptOffer(id) }
+
+    override suspend fun rejectOffer(id: Long) =
+        getFormattedResponse { authorizedApiService.rejectOffer(id) }
+
+    override suspend fun cancelMyOffer(id: Long) =
+        getFormattedResponse { authorizedApiService.cancelMyOffer(id) }
 
 
 }

@@ -24,13 +24,11 @@
         <activity
             android:name=".ui.feedback.FeedbackActivity"
             android:label="@string/feedback"
-            android:theme="@style/AppTheme"></activity>
-
+            android:theme="@style/AppTheme"/>
 
         <activity
             android:name=".ui.driver_post.DriverPostActivity"
-            android:theme="@style/AppTheme"></activity>
-
+            android:theme="@style/AppTheme"/>
 
         <activity
             android:name=".ui.addcar.AddCarActivity"
@@ -38,6 +36,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustPan" />
+
         <activity
             android:name=".ui.addpost.AddPostActivity"
             android:label="@string/title_add_post"

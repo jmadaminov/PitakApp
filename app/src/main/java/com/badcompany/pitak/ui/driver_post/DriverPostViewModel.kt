@@ -37,16 +37,16 @@ class DriverPostViewModel @ViewModelInject constructor(val postRepository: Drive
     fun getPostById(id: Long) {
         isLoading.value = true
         viewModelScope.launch(Dispatchers.IO) {
-//            val response = postRepository.getDriverPostById(id)
+            val response = postRepository.getDriverPostById(id)
             withContext(Dispatchers.Main) {
                 isLoading.value = false
-//                when (response) {
-//                    is ErrorWrapper.ResponseError -> errorMessage.value = response.message
-//                    is ResponseSuccess -> {
-//                        errorMessage.value = null
-//                        postData.value = response.value
-//                    }
-//                }.exhaustive
+                when (response) {
+                    is ResponseError -> errorMessage.value = response.message
+                    is ResponseSuccess -> {
+                        errorMessage.value = null
+                        postData.value = response.value
+                    }
+                }.exhaustive
             }
         }
     }

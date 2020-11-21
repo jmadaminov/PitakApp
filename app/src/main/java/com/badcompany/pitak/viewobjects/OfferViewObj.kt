@@ -18,7 +18,7 @@ data class OfferViewObj(val id: Long,
  companion object{
 
     fun offerToViewObj(offerDTO: OfferDTO) :OfferViewObj{
-        return OfferViewObj(offerDTO.profileId,
+        return OfferViewObj(offerDTO.id,
                             offerDTO.postId,
                             offerDTO.postType,
                             offerDTO.profileId,
@@ -26,6 +26,17 @@ data class OfferViewObj(val id: Long,
                             offerDTO.visible,
                             offerDTO.submitDate,
                             offerDTO.message)
+    }
+
+    fun offerToDTO(offerViewObj: OfferViewObj) :OfferDTO{
+        return OfferDTO(offerViewObj.id,
+                            offerViewObj.postId,
+                            offerViewObj.postType,
+                            offerViewObj.profileId,
+                            offerViewObj.status,
+                            offerViewObj.visible,
+                            offerViewObj.submitDate,
+                            offerViewObj.message)
     }
  }
 }

@@ -166,7 +166,6 @@ import splitties.experimental.ExperimentalSplittiesApi
         price.text =
             getString(R.string.price_and_seats_format,
                       post.price.toString(), post.seat.toString())
-//        seats.text = post.seat.toString()
 
         if (!post.remark.isBlank()) {
             note.visibility = View.VISIBLE
@@ -174,8 +173,6 @@ import splitties.experimental.ExperimentalSplittiesApi
         } else {
             note.visibility = View.GONE
         }
-
-
     }
 
     private fun attachListeners() {

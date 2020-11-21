@@ -7,14 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.badcompany.pitak.R
-import com.badcompany.remote.model.OfferDTO
+import com.badcompany.pitak.viewobjects.OfferViewObj
 import kotlinx.android.synthetic.main.dialog_cancel_offer.*
 
 
 class DialogCancelOffer : DialogFragment() {
 
 
-    private lateinit var offer: OfferDTO
+    private lateinit var offer: OfferViewObj
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -36,7 +36,7 @@ class DialogCancelOffer : DialogFragment() {
         }
 
         btnYes.setOnClickListener {
-            (requireActivity() as DriverPostActivity).cancelOffer(offer)
+            (requireActivity() as DriverPostActivity).cancelOffer(OfferViewObj.offerToDTO(offer))
             dismiss()
         }
 

@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.badcompany.pitak.R
+import com.badcompany.pitak.viewobjects.OfferViewObj
+import com.badcompany.pitak.viewobjects.OfferViewObj.Companion.offerToDTO
 import com.badcompany.remote.model.OfferDTO
 import kotlinx.android.synthetic.main.dialog_accept_offer.*
 
@@ -15,7 +17,7 @@ const val ARG_OFFER = "OFFER"
 class DialogAcceptOffer : DialogFragment() {
 
 
-    private lateinit var offer: OfferDTO
+    private lateinit var offer: OfferViewObj
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -37,7 +39,7 @@ class DialogAcceptOffer : DialogFragment() {
         }
 
         btnYes.setOnClickListener {
-            (requireActivity() as DriverPostActivity).acceptOffer(offer)
+            (requireActivity() as DriverPostActivity).acceptOffer(offerToDTO( offer))
             dismiss()
         }
 

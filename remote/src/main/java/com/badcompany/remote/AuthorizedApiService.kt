@@ -24,7 +24,7 @@ interface AuthorizedApiService {
     @Headers("Content-Type:application/json", "Accept: application/json")
     @PUT("driver_post/action/cancel/{identifier}")
     suspend fun deletePost(
-        @Path(value = "identifier",              encoded = true) identifier: String): PlainResponse
+        @Path(value = "identifier", encoded = true) identifier: String): PlainResponse
 
     @Headers("Content-Type:application/json", "Accept: application/json")
     @PUT("driver_post/action/finish/{identifier}")
@@ -96,6 +96,25 @@ interface AuthorizedApiService {
                                  @Query("page") page: Int = 0,
                                  @Query("size") size: Int = 10
     ): RespFormatter<List<OfferDTO>>
+
+
+    @Headers("Content-Type:application/json", "Accept: application/json")
+    @GET("driver_post/action/{id}")
+    suspend fun getDriverPostById(@Path(value = "id",
+                                        encoded = true) id: Long): RespFormatter<DriverPostModel>
+
+    @Headers("Content-Type:application/json", "Accept: application/json")
+    @GET("offer/post/accept/{id}")
+    suspend fun acceptOffer(@Path(value = "id", encoded = true) id: Long): RespFormatter<String?>
+
+    @Headers("Content-Type:application/json", "Accept: application/json")
+    @GET("offer/post/reject/{id}")
+    suspend fun rejectOffer(@Path(value = "id", encoded = true) id: Long): RespFormatter<String?>
+
+    @Headers("Content-Type:application/json", "Accept: application/json")
+    @GET("offer/post/cancel/{id}")
+    suspend fun cancelMyOffer(@Path(value = "id", encoded = true) id: Long): RespFormatter<String?>
+
 
 }
 
