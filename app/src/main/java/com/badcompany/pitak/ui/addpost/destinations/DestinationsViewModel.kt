@@ -2,12 +2,10 @@ package com.badcompany.pitak.ui.addpost.destinations
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.viewModelScope
-import com.badcompany.core.Constants
 import com.badcompany.core.ResultWrapper
 import com.badcompany.domain.domainmodel.Place
 import com.badcompany.domain.usecases.GetPlacesFeed
 import com.badcompany.pitak.ui.BaseViewModel
-import com.badcompany.pitak.util.AppPreferences
 import com.badcompany.pitak.util.SingleLiveEvent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.Main
@@ -15,10 +13,9 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import splitties.experimental.ExperimentalSplittiesApi
-import javax.inject.Inject
 
 
-class DestinationsViewModel  @ViewModelInject constructor(private val getPlacesFeed: GetPlacesFeed) :
+class DestinationsViewModel @ViewModelInject constructor(private val getPlacesFeed: GetPlacesFeed) :
     BaseViewModel() {
 
     var placeFrom: Place? = null
@@ -37,11 +34,7 @@ class DestinationsViewModel  @ViewModelInject constructor(private val getPlacesF
         resetFromFeedJob(isFrom)
         viewModelScope.launch(Dispatchers.IO + if (isFrom) fromFeedJob!! else toFeedJob!!) {
             val response =
-                getPlacesFeed.execute(hashMapOf(Pair(Constants.TXT_TOKEN,
-                                                     AppPreferences.token),
-                                                Pair(Constants.TXT_LANG,
-                                                     AppPreferences.language),
-                                                Pair(Constants.TXT_PLACE, queryString)))
+                getPlacesFeed.execute(queryString)
 
             withContext(Main) {
                 if (isFrom) fromPlacesResponse.value = response
@@ -63,8 +56,6 @@ class DestinationsViewModel  @ViewModelInject constructor(private val getPlacesF
         fromFeedJob?.cancel()
         toFeedJob?.cancel()
     }
-
-
 
 
 }

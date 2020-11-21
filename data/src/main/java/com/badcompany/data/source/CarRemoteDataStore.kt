@@ -16,35 +16,32 @@ import javax.inject.Inject
  */
 open class CarRemoteDataStore @Inject constructor(private val carRemote: CarRemote) :
     CarDataStore {
-    override suspend fun getCars(token: String): ResultWrapper<List<CarDetailsEntity>> {
-        return carRemote.getCars(token)
+    override suspend fun getCars(): ResultWrapper<List<CarDetailsEntity>> {
+        return carRemote.getCars()
     }
 
-    override suspend fun getCarModels(token: String,
-                                      lang: String): ResultWrapper<List<CarModelEntity>> {
-        return carRemote.getCarModels(token, lang)
+    override suspend fun getCarModels(): ResultWrapper<List<CarModelEntity>> {
+        return carRemote.getCarModels()
     }
 
-    override suspend fun getCarColors(token: String,
-                                      lang: String): ResultWrapper<List<CarColorEntity>> {
-        return carRemote.getCarColors(token, lang)
-
+    override suspend fun getCarColors(): ResultWrapper<List<CarColorEntity>> {
+        return carRemote.getCarColors()
     }
 
-    override suspend fun createCar(token: String, car: CarEntity): ResultWrapper<String> {
-        return carRemote.createCar(token, car)
+    override suspend fun createCar(car: CarEntity): ResultWrapper<String> {
+        return carRemote.createCar(car)
     }
 
-    override suspend fun updateCar(token: String, car: CarEntity): ResultWrapper<String> {
-        return carRemote.updateCar(token, car)
+    override suspend fun updateCar(car: CarEntity): ResultWrapper<String> {
+        return carRemote.updateCar(car)
     }
 
-    override suspend fun deleteCar(token: String, id: Long): ResultWrapper<String> {
-        return carRemote.deleteCar(token, id)
+    override suspend fun deleteCar(id: Long): ResultWrapper<String> {
+        return carRemote.deleteCar(id)
     }
 
-    override suspend fun setDefaultCar(token: String, id: Long): ResultWrapper<String> {
-        return carRemote.setDefaultCar(token, id)
+    override suspend fun setDefaultCar(id: Long): ResultWrapper<String> {
+        return carRemote.setDefaultCar(id)
     }
 
 }

@@ -10,10 +10,9 @@ import com.badcompany.domain.repository.DriverPostRepository
  *
  */
 class GetActiveDriverPost(val repositoryDriver: DriverPostRepository) :
-    UseCaseWithParams<HashMap<String, String>, ResultWrapper<List<DriverPost>>>() {
+    UseCase<ResultWrapper<List<DriverPost>>>() {
 
-    override suspend fun buildUseCase(params: HashMap<String, String>): ResultWrapper<List<DriverPost>> {
-        return repositoryDriver.getActiveDriverPosts(params[Constants.TXT_TOKEN] as String,
-                                                     params[Constants.TXT_LANG] as String)
+    override suspend fun buildUseCase(): ResultWrapper<List<DriverPost>> {
+        return repositoryDriver.getActiveDriverPosts()
     }
 }

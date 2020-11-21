@@ -10,11 +10,10 @@ import com.badcompany.domain.repository.DriverPostRepository
  *
  */
 class CreateDriverPost(val repositoryDriver: DriverPostRepository) :
-    UseCaseWithParams<HashMap<String, Any>, ResultWrapper<String>>() {
+    UseCaseWithParams<DriverPost, ResultWrapper<String>>() {
 
-    override suspend fun buildUseCase(params: HashMap<String, Any>): ResultWrapper<String> {
-        return repositoryDriver.createDriverPost(params[Constants.TXT_TOKEN] as String,
-                                                 params[Constants.TXT_DRIVER_POST] as DriverPost)
+    override suspend fun buildUseCase(params: DriverPost): ResultWrapper<String> {
+        return repositoryDriver.createDriverPost(params)
 
     }
 }

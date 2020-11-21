@@ -6,8 +6,8 @@ import com.badcompany.data.model.PassengerPostEntity
 
 interface PassengerPostRemote {
 
-    suspend fun filterPassengerPost(token: String,
-                                    lang: String,
+    suspend fun filterPassengerPost(
+
                                     filter: FilterEntity): ResultWrapper<List<PassengerPostEntity>>
 
 }

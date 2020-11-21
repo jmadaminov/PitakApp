@@ -22,16 +22,14 @@ class ActiveTripsViewModel  @ViewModelInject constructor(val getActiveDriverPost
                                                          val finishPost: FinishDriverPost) : BaseViewModel() {
 
     val activePostsResponse = SingleLiveEvent<ResultWrapper<List<DriverPost>>>()
-    val deletePostReponse = SingleLiveEvent<ResultWrapper<Int>>()
-    val finishPostResponse = SingleLiveEvent<ResultWrapper<Int>>()
+    val deletePostReponse = SingleLiveEvent<ResultWrapper<String>>()
+    val finishPostResponse = SingleLiveEvent<ResultWrapper<String>>()
 
     @ExperimentalSplittiesApi
     fun getActivePosts() {
         activePostsResponse.value = ResultWrapper.InProgress
         viewModelScope.launch(Dispatchers.IO) {
-            val response = getActiveDriverPost.execute(hashMapOf(
-                Pair(Constants.TXT_TOKEN, AppPreferences.token),
-                Pair(Constants.TXT_LANG, AppPreferences.language)))
+            val response = getActiveDriverPost.execute()
 
             withContext(Dispatchers.Main) {
                 activePostsResponse.value = response
@@ -43,10 +41,7 @@ class ActiveTripsViewModel  @ViewModelInject constructor(val getActiveDriverPost
     fun deletePost(identifier: String, pos: Int) {
         deletePostReponse.value = ResultWrapper.InProgress
         viewModelScope.launch(Dispatchers.IO) {
-            val response = deletePost.execute(hashMapOf(
-                Pair(Constants.TXT_TOKEN, AppPreferences.token),
-                Pair(Constants.TXT_ID, identifier),
-                Pair(Constants.TXT_POSITION, pos)))
+            val response = deletePost.execute(                identifier)
 
             withContext(Dispatchers.Main) {
                 deletePostReponse.value = response
@@ -58,10 +53,7 @@ class ActiveTripsViewModel  @ViewModelInject constructor(val getActiveDriverPost
     fun finishPost(identifier: String, pos: Int) {
         finishPostResponse.value = ResultWrapper.InProgress
         viewModelScope.launch(Dispatchers.IO) {
-            val response = finishPost.execute(hashMapOf(
-                Pair(Constants.TXT_TOKEN, AppPreferences.token),
-                Pair(Constants.TXT_ID, identifier),
-                Pair(Constants.TXT_POSITION, pos)))
+            val response = finishPost.execute(                identifier)
 
             withContext(Dispatchers.Main) {
                 finishPostResponse.value = response

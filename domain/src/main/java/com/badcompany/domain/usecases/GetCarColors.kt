@@ -10,9 +10,9 @@ import com.badcompany.domain.repository.CarRepository
  *
  */
 class GetCarColors(val repository: CarRepository) :
-    UseCaseWithParams<HashMap<String, String>, ResultWrapper<List<CarColorBody>>>() {
+    UseCase< ResultWrapper<List<CarColorBody>>>() {
 
-    override suspend fun buildUseCase(params: HashMap<String, String>): ResultWrapper<List<CarColorBody>> {
-        return repository.getCarColors(params[Constants.TXT_TOKEN]!!, params[Constants.TXT_LANG]!!)
+    override suspend fun buildUseCase(): ResultWrapper<List<CarColorBody>> {
+        return repository.getCarColors()
     }
 }

@@ -7,8 +7,8 @@ import com.badcompany.data.model.PassengerPostEntity
 
 interface PassengerPostDataStore {
 
-    suspend fun filterPassengerPost(token: String,
-                                    lang: String,
+    suspend fun filterPassengerPost(
+
                                     filter: FilterEntity): ResultWrapper<List<PassengerPostEntity>>
 
 }

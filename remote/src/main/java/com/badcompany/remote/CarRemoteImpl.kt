@@ -19,17 +19,17 @@ import javax.inject.Inject
  * [BufferooRemote] from the Data layer as it is that layers responsibility for defining the
  * operations in which data store implementation layers can carry out.
  */
-class CarRemoteImpl @Inject constructor(private val apiService: ApiService,
+class CarRemoteImpl @Inject constructor(private val authorizedApiService: AuthorizedApiService,
                                         private val carModelMapper: CarModelMapper,
                                         private val carColorMapper: CarColorMapper,
                                         private val carMapper: CarMapper,
                                         private val carDetailsMapper: CarDetailsMapper
 ) : CarRemote {
 
-    override suspend fun getCars(token: String): ResultWrapper<List<CarDetailsEntity>> {
+    override suspend fun getCars(): ResultWrapper<List<CarDetailsEntity>> {
 
         return try {
-            val response = apiService.getCars(token)
+            val response = authorizedApiService.getCars()
             if (response.code == 1) {
                 val newCars = ArrayList<CarDetailsEntity>()
                 response.data!!.forEach {
@@ -42,9 +42,9 @@ class CarRemoteImpl @Inject constructor(private val apiService: ApiService,
         }
     }
 
-    override suspend fun getCarModels(token: String, lang:String): ResultWrapper<List<CarModelEntity>> {
+    override suspend fun getCarModels(): ResultWrapper<List<CarModelEntity>> {
         return try {
-            val response = apiService.getCarModels(token,lang)
+            val response = authorizedApiService.getCarModels()
             if (response.code == 1) {
                 val newCarModels = ArrayList<CarModelEntity>()
                 response.data!!.forEach {
@@ -57,9 +57,9 @@ class CarRemoteImpl @Inject constructor(private val apiService: ApiService,
         }
     }
 
-    override suspend fun getCarColors(token: String, lang:String): ResultWrapper<List<CarColorEntity>> {
+    override suspend fun getCarColors(): ResultWrapper<List<CarColorEntity>> {
         return try {
-            val response = apiService.getCarColors(token,lang)
+            val response = authorizedApiService.getCarColors()
             if (response.code == 1) {
                 val newCarColors = ArrayList<CarColorEntity>()
                 response.data!!.forEach {
@@ -72,9 +72,9 @@ class CarRemoteImpl @Inject constructor(private val apiService: ApiService,
         }
     }
 
-    override suspend fun createCar(token: String, car: CarEntity): ResultWrapper<String> {
+    override suspend fun createCar(car: CarEntity): ResultWrapper<String> {
         return try {
-            val response = apiService.createCar(token, carMapper.mapFromEntity(car))
+            val response = authorizedApiService.createCar(carMapper.mapFromEntity(car))
             if (response.code == 1) {
                 ResultWrapper.Success("SUCCESS")
             } else ErrorWrapper.ResponseError(response.code, response.message)
@@ -83,10 +83,10 @@ class CarRemoteImpl @Inject constructor(private val apiService: ApiService,
         }
     }
 
-    override suspend fun deleteCar(token: String, id:Long): ResultWrapper<String> {
+    override suspend fun deleteCar(id: Long): ResultWrapper<String> {
         return try {
             val response =
-                apiService.deleteCar(token, id)
+                authorizedApiService.deleteCar(id)
             if (response.code == 1) {
                 ResultWrapper.Success("SUCCESS")
             } else ErrorWrapper.ResponseError(response.code, response.message)
@@ -95,10 +95,10 @@ class CarRemoteImpl @Inject constructor(private val apiService: ApiService,
         }
     }
 
-    override suspend fun updateCar(token: String, car: CarEntity): ResultWrapper<String> {
+    override suspend fun updateCar(car: CarEntity): ResultWrapper<String> {
         return try {
             val response =
-                apiService.updateCar(token, car.id!!, carMapper.mapFromEntity(car))
+                authorizedApiService.updateCar(car.id!!, carMapper.mapFromEntity(car))
             if (response.code == 1) {
                 ResultWrapper.Success("SUCCESS")
             } else ErrorWrapper.ResponseError(response.code, response.message)
@@ -108,10 +108,9 @@ class CarRemoteImpl @Inject constructor(private val apiService: ApiService,
     }
 
 
-
-    override suspend fun setDefaultCar(token: String, id: Long): ResultWrapper<String> {
+    override suspend fun setDefaultCar(id: Long): ResultWrapper<String> {
         return try {
-            val response = apiService.setDefaultCar(token, id)
+            val response = authorizedApiService.setDefaultCar(id)
             if (response.code == 1) {
                 ResultWrapper.Success("SUCCESS")
             } else ErrorWrapper.ResponseError(response.code, response.message)

@@ -28,7 +28,7 @@ class CarAndTextViewModel @ViewModelInject constructor(private val getCars: GetC
         carsResponse.value = ResultWrapper.InProgress
 
         viewModelScope.launch(Dispatchers.IO) {
-            val response = getCars.execute(AppPreferences.token)
+            val response = getCars.execute()
             withContext(Main) {
                carsResponse.value = response
             }

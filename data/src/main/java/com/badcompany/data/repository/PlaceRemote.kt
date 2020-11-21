@@ -5,6 +5,6 @@ import com.badcompany.data.model.PlaceEntity
 
 interface PlaceRemote {
 
-   suspend fun getPlacesAutocomplete(token: String,lang: String, queryString:String): ResultWrapper<List<PlaceEntity>>
+   suspend fun getPlacesAutocomplete( queryString:String): ResultWrapper<List<PlaceEntity>>
 
 }

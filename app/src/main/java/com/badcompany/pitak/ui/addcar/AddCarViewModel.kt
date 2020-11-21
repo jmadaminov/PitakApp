@@ -54,10 +54,8 @@ class AddCarViewModel @ViewModelInject constructor(private val uploadPhoto: Uplo
             }
             withContext(IO) {
                 try {
-                    val colors = async { getCarColors.execute(hashMapOf(Pair(TXT_TOKEN, AppPreferences.token), Pair(
-                        TXT_LANG, AppPreferences.language))) }
-                    val models = async { getCarModels.execute(hashMapOf(Pair(TXT_TOKEN, AppPreferences.token), Pair(
-                        TXT_LANG, AppPreferences.language) ))}
+                    val colors = async { getCarColors.execute() }
+                    val models = async { getCarModels.execute()}
                     processResponses(colors.await(), models.await())
                 } catch (e: Exception) {
                     withContext(Main) {
@@ -96,11 +94,11 @@ class AddCarViewModel @ViewModelInject constructor(private val uploadPhoto: Uplo
     }
 
 
-    fun saveCar(token: String, car: Car) {
+    fun saveCar( car: Car) {
         carSaveReponse.value = ResultWrapper.InProgress
         viewModelScope.launch(IO) {
             val response =
-                saveCar.execute(hashMapOf(Pair(TXT_TOKEN, token), Pair(TXT_CAR, car)))
+                saveCar.execute( car)
             withContext(Main) {
                 carSaveReponse.value = response
             }

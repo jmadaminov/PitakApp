@@ -7,12 +7,12 @@ import com.badcompany.pitak.App
 import com.badcompany.pitak.R
 //import com.badcompany.pitak.di.viewmodels.MainViewModelFactory
 import com.badcompany.pitak.ui.BaseActivity
-//import com.badcompany.pitakpass.App
-//import com.badcompany.pitakpass.R
-//import com.badcompany.pitakpass.di.viewmodels.AddPostViewModelFactory
-//import com.badcompany.pitakpass.di.viewmodels.MainViewModelFactory
-//import com.badcompany.pitakpass.ui.BaseActivity
-//import com.badcompany.pitakpass.ui.addpost.AddPostViewModel
+//import com.badcompany.pitak.App
+//import com.badcompany.pitak.R
+//import com.badcompany.pitak.di.viewmodels.AddPostViewModelFactory
+//import com.badcompany.pitak.di.viewmodels.MainViewModelFactory
+//import com.badcompany.pitak.ui.BaseActivity
+//import com.badcompany.pitak.ui.addpost.AddPostViewModel
 import javax.inject.Inject
 
 class FeedbackActivity : BaseActivity() {

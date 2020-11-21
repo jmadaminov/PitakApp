@@ -28,10 +28,7 @@ class HistoryTripsViewModel  @ViewModelInject constructor(val getHistoryDriverPo
         currentPage = page
         historyPostsResponse.value = ResultWrapper.InProgress
         viewModelScope.launch(Dispatchers.IO) {
-            val response = getHistoryDriverPost.execute(hashMapOf(
-                Pair(Constants.TXT_TOKEN, AppPreferences.token),
-                Pair(Constants.TXT_LANG, AppPreferences.language),
-                Pair(Constants.TXT_PAGE, page)))
+            val response = getHistoryDriverPost.execute(                page)
 
             withContext(Dispatchers.Main) {
                 historyPostsResponse.value = response

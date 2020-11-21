@@ -27,9 +27,7 @@ class PreviewViewModel  @ViewModelInject constructor(private val createDriverPos
     fun createDriverPost(driverPost: DriverPost) {
         createResponse.value = ResultWrapper.InProgress
         viewModelScope.launch(Dispatchers.IO) {
-            val response = createDriverPost.execute(
-                hashMapOf(Pair(Constants.TXT_TOKEN, AppPreferences.token),
-                          Pair(Constants.TXT_DRIVER_POST, driverPost)))
+            val response = createDriverPost.execute(driverPost)
 
             withContext(Main) {
                 createResponse.value = response

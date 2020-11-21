@@ -14,17 +14,16 @@ import javax.inject.Inject
  * [BufferooRemote] from the Data layer as it is that layers responsibility for defining the
  * operations in which data store implementation layers can carry out.
  */
-class PassengerPostRemoteImpl @Inject constructor(private val apiService: ApiService,
+class PassengerPostRemoteImpl @Inject constructor(
+                                                  private val authorizedApiService: AuthorizedApiService,
                                                   private val postMapper: PassengerPostMapper,
                                                   private val filterMapper: FilterMapper) :
     PassengerPostRemote {
 
-    override suspend fun filterPassengerPost(token: String,
-                                             lang: String,
-                                             filter: FilterEntity): ResultWrapper<List<PassengerPostEntity>> {
+    override suspend fun filterPassengerPost(filter: FilterEntity): ResultWrapper<List<PassengerPostEntity>> {
         return try {
             val response =
-                apiService.filterPassengerPost(token, lang, filterMapper.mapFromEntity(filter))
+                authorizedApiService.filterPassengerPost(  filterMapper.mapFromEntity(filter))
             if (response.code == 1) {
                 val posts = arrayListOf<PassengerPostEntity>()
                 response.data?.data?.forEach { posts.add(postMapper.mapToEntity(it)) }

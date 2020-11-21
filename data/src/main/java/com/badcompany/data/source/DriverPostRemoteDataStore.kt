@@ -15,34 +15,32 @@ import javax.inject.Inject
 open class DriverPostRemoteDataStore @Inject constructor(private val driverPostRemote: DriverPostRemote) :
     DriverPostDataStore {
 
-    override suspend fun createDriverPost(token: String,
+    override suspend fun createDriverPost(
                                           post: DriverPostEntity): ResultWrapper<String> {
-        return driverPostRemote.createDriverPost(token, post)
+        return driverPostRemote.createDriverPost( post)
     }
 
-    override suspend fun deleteDriverPost(token: String,
+    override suspend fun deleteDriverPost(
                                           identifier: String): ResultWrapper<String> {
-        return driverPostRemote.deleteDriverPost(token, identifier)
+        return driverPostRemote.deleteDriverPost( identifier)
 
     }
 
-    override suspend fun finishDriverPost(token: String,
+    override suspend fun finishDriverPost(
                                           identifier: String): ResultWrapper<String> {
-        return driverPostRemote.finishDriverPost(token, identifier)
+        return driverPostRemote.finishDriverPost( identifier)
 
     }
 
-    override suspend fun getActiveDriverPosts(token: String,
-                                              lang: String): ResultWrapper<List<DriverPostEntity>> {
+    override suspend fun getActiveDriverPosts(
+                                              ): ResultWrapper<List<DriverPostEntity>> {
 
-        return driverPostRemote.getActiveDriverPosts(token, lang)
+        return driverPostRemote.getActiveDriverPosts( )
 
     }
 
-    override suspend fun getHistoryDriverPosts(token: String,
-                                               lang: String,
-                                               page: Int): ResultWrapper<List<DriverPostEntity>> {
-        return driverPostRemote.getHistoryDriverPosts(token, lang,page)
+    override suspend fun getHistoryDriverPosts(                                                                                              page: Int): ResultWrapper<List<DriverPostEntity>> {
+        return driverPostRemote.getHistoryDriverPosts( page)
     }
 
 

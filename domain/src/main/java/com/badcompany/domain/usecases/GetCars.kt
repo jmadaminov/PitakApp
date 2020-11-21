@@ -10,9 +10,9 @@ import com.badcompany.domain.repository.CarRepository
  *
  */
 class GetCars(val repository: CarRepository) :
-    UseCaseWithParams<String, ResultWrapper<List<CarDetails>>>() {
+    UseCase<ResultWrapper<List<CarDetails>>>() {
 
-    override suspend fun buildUseCase(params: String): ResultWrapper<List<CarDetails>> {
-        return repository.getCars(params)
+    override suspend fun buildUseCase(): ResultWrapper<List<CarDetails>> {
+        return repository.getCars()
     }
 }

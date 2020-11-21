@@ -9,10 +9,10 @@ import com.badcompany.domain.repository.CarRepository
  *
  */
 class DeleteCar(val repository: CarRepository) :
-    UseCaseWithParams<HashMap<String, Any>, ResultWrapper<String>>() {
+    UseCaseWithParams<Long, ResultWrapper<String>>() {
 
-    override suspend fun buildUseCase(params: HashMap<String, Any>): ResultWrapper<String> {
-        return repository.deleteCar(params[Constants.TXT_TOKEN]!! as String, params[Constants.TXT_ID]!! as Long)
+    override suspend fun buildUseCase(params: Long): ResultWrapper<String> {
+        return repository.deleteCar(params)
 
     }
 }

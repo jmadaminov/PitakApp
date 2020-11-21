@@ -123,7 +123,7 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
         }
 
         saveCar.setOnClickListener {
-            viewmodel.saveCar(AppPreferences.token, makeCarFromCarViewObj(car))
+            viewmodel.saveCar(makeCarFromCarViewObj(car))
         }
 
         carPlateNumberInput.doAfterTextChanged {

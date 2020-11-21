@@ -4,6 +4,7 @@ package com.badcompany.core
  * Created by jahon on 06-May-20
  */
 object Constants {
+    const val BASE_URL = "http://codeuz.uz:9091/"
 
     const val ROLE_DRIVER = "DRIVER"
     const val TXT_IS_FROM_POST_PREVIEW = "IS_FROM_POST_PREVIEW"

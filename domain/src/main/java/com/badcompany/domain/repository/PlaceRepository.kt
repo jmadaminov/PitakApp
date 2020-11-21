@@ -6,7 +6,7 @@ import com.badcompany.domain.domainmodel.Place
 
 interface PlaceRepository {
 
-    suspend fun getPlacesAutocomplete(token: String,lang: String, queryString:String): ResultWrapper<List<Place>>
+    suspend fun getPlacesAutocomplete( queryString:String): ResultWrapper<List<Place>>
 
 
 }

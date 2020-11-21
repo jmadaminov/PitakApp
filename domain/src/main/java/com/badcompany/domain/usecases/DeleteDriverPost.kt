@@ -10,21 +10,9 @@ import com.badcompany.domain.repository.DriverPostRepository
  *
  */
 class DeleteDriverPost(val repositoryDriver: DriverPostRepository) :
-    UseCaseWithParams<HashMap<String, Any>, ResultWrapper<Int>>() {
+    UseCaseWithParams<String, ResultWrapper<String>>() {
 
-    override suspend fun buildUseCase(params: HashMap<String, Any>): ResultWrapper<Int> {
-        val response = repositoryDriver.deleteDriverPost(params[Constants.TXT_TOKEN] as String,
-                                                         params[Constants.TXT_ID] as String)
-
-        return when (response) {
-            is ErrorWrapper.ResponseError -> response
-            is ErrorWrapper.SystemError -> response
-            is ResultWrapper.Success -> {
-                ResultWrapper.Success(params[Constants.TXT_POSITION] as Int)
-            }
-            ResultWrapper.InProgress -> ResultWrapper.InProgress
-        }
-
-
+    override suspend fun buildUseCase(params: String): ResultWrapper<String> {
+        return repositoryDriver.deleteDriverPost(params)
     }
 }

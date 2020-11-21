@@ -15,11 +15,9 @@ import javax.inject.Inject
 open class PassengerPostRemoteDataStore @Inject constructor(private val passengerPostRemote: PassengerPostRemote) :
     PassengerPostDataStore {
 
-    override suspend fun filterPassengerPost(token: String,
-                                             lang: String,
-                                             filter: FilterEntity): ResultWrapper<List<PassengerPostEntity>> {
+    override suspend fun filterPassengerPost(        filter: FilterEntity): ResultWrapper<List<PassengerPostEntity>> {
 
-        return passengerPostRemote.filterPassengerPost(token, lang, filter)
+        return passengerPostRemote.filterPassengerPost(  filter)
     }
 
 }

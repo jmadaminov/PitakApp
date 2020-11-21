@@ -121,7 +121,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideCarRemote(apiService: ApiService,
+    fun provideCarRemote(apiService: AuthorizedApiService,
                          carModelMapper: com.badcompany.remote.mapper.CarModelMapper,
                          carColorMapper: com.badcompany.remote.mapper.CarColorMapper,
                          carMapper: com.badcompany.remote.mapper.CarMapper,
@@ -132,8 +132,6 @@ object AppModule {
                              carMapper,
                              carDetailsMapper)
     }
-
-
 
 
     @Provides
@@ -158,8 +156,8 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideRemoteCarDetailsMapper():  com.badcompany.remote.mapper.CarDetailsMapper {
-        return  com.badcompany.remote.mapper.CarDetailsMapper()
+    fun provideRemoteCarDetailsMapper(): com.badcompany.remote.mapper.CarDetailsMapper {
+        return com.badcompany.remote.mapper.CarDetailsMapper()
     }
 
     @Singleton
@@ -253,7 +251,7 @@ object AppModule {
     @Provides
 
     @Singleton
-    fun providePassengerPostRemote(apiService: ApiService,
+    fun providePassengerPostRemote(apiService: AuthorizedApiService,
                                    postMapper: com.badcompany.remote.mapper.PassengerPostMapper,
                                    filterMapper: com.badcompany.remote.mapper.FilterMapper): PassengerPostRemote {
         return PassengerPostRemoteImpl(apiService, postMapper, filterMapper)
@@ -354,7 +352,7 @@ object AppModule {
     @Provides
 
     @Singleton
-    fun providePlaceRemote(apiService: ApiService,
+    fun providePlaceRemote(apiService: AuthorizedApiService,
                            placeMapper: com.badcompany.remote.mapper.PlaceMapper): PlaceRemote {
         return PlaceRemoteImpl(apiService, placeMapper)
     }
@@ -363,7 +361,7 @@ object AppModule {
     @Provides
 
     @Singleton
-    fun provideDriverPostRemote(apiService: ApiService,
+    fun provideDriverPostRemote(apiService: AuthorizedApiService,
                                 driverPostMapper: com.badcompany.remote.mapper.DriverPostMapper): DriverPostRemote {
         return DriverPostRemoteImpl(apiService, driverPostMapper)
     }
@@ -479,7 +477,6 @@ object AppModule {
     fun provideRemoteAuthMapper(): com.badcompany.remote.mapper.AuthMapper {
         return com.badcompany.remote.mapper.AuthMapper()
     }
-
 
 
 }

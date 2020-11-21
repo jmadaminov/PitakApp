@@ -32,7 +32,7 @@ class AddPostViewModel @ViewModelInject constructor() :
 //    val carImgResponse = SingleLiveEvent<ResultWrapper<PhotoBody>>()
 
 //    @InternalCoroutinesApi
-//    fun getCarColorsAndModels(token: String) {
+//    fun getCarColorsAndModels() {
 //        viewModelScope.launch(IO) {
 //            withContext(Main) {
 //                colorsAndModels.value = ResultWrapper.InProgress

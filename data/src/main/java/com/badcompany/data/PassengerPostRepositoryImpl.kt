@@ -20,12 +20,10 @@ class PassengerPostRepositoryImpl @Inject constructor(private val factoryPasseng
                                                       private val filterMapper: FilterMapper) :
     PassengerPostRepository {
 
-    override suspend fun filterPassengerPost(token: String,
-                                             lang: String,
-                                             filter: Filter): ResultWrapper<List<PassengerPost>> {
+    override suspend fun filterPassengerPost(filter: Filter): ResultWrapper<List<PassengerPost>> {
 
         val response = factoryPassenger.retrieveDataStore(false)
-            .filterPassengerPost(token, lang, filterMapper.mapToEntity(filter))
+            .filterPassengerPost(  filterMapper.mapToEntity(filter))
 
         return when (response) {
             is ErrorWrapper.ResponseError -> response
@@ -40,11 +38,11 @@ class PassengerPostRepositoryImpl @Inject constructor(private val factoryPasseng
     }
 
 
-//    override suspend fun getHistoryPassengerPosts(token: String,
-//                                               lang: String,
+//    override suspend fun getHistoryPassengerPosts(
+//                                               ,
 //                                               page: Int): ResultWrapper<List<PassengerPost>> {
 //        val response =
-//            factoryPassenger.retrieveDataStore(false).getHistoryPassengerPosts(token, lang,page)
+//            factoryPassenger.retrieveDataStore(false).getHistoryPassengerPosts( page)
 //
 //        return when (response) {
 //            is ErrorWrapper.ResponseError -> response

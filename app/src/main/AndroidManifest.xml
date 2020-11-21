@@ -22,8 +22,13 @@
         android:theme="@style/NoActionBar">
 
         <activity
-            android:name=".ui.fee"
+            android:name=".ui.feedback.FeedbackActivity"
             android:label="@string/feedback"
+            android:theme="@style/AppTheme"></activity>
+
+
+        <activity
+            android:name=".ui.driver_post.DriverPostActivity"
             android:theme="@style/AppTheme"></activity>
 
 

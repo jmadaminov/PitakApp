@@ -150,52 +150,52 @@ class ActiveTripsFragment @Inject constructor(/*private val viewModelFactory: Vi
                 }
             }.exhaustive
         })
-
-        viewmodel.deletePostReponse.observe(viewLifecycleOwner, Observer {
-            val response = it ?: return@Observer
-            when (response) {
-                is ErrorWrapper.ResponseError -> {
-                    Snackbar.make(swipeRefreshLayout,
-                                  response.message!!,
-                                  Snackbar.LENGTH_SHORT).show()
-
-                }
-                is ErrorWrapper.SystemError -> {
-                    Snackbar.make(swipeRefreshLayout,
-                                  response.err.localizedMessage.toString(),
-                                  Snackbar.LENGTH_SHORT).show()
-                }
-                is ResultWrapper.Success -> {
-                    adapter.remove(adapter.getItem(response.value))
-                    adapter.notifyItemRemoved(response.value)
-                }
-                ResultWrapper.InProgress -> {
-                }
-            }.exhaustive
-        })
-
-        viewmodel.finishPostResponse.observe(viewLifecycleOwner, Observer {
-            val response = it ?: return@Observer
-            when (response) {
-                is ErrorWrapper.ResponseError -> {
-                    Snackbar.make(swipeRefreshLayout,
-                                  response.message!!,
-                                  Snackbar.LENGTH_SHORT).show()
-
-                }
-                is ErrorWrapper.SystemError -> {
-                    Snackbar.make(swipeRefreshLayout,
-                                  response.err.localizedMessage.toString(),
-                                  Snackbar.LENGTH_SHORT).show()
-                }
-                is ResultWrapper.Success -> {
-                    adapter.remove(adapter.getItem(response.value))
-                    adapter.notifyItemRemoved(response.value)
-                }
-                ResultWrapper.InProgress -> {
-                }
-            }.exhaustive
-        })
+//
+//        viewmodel.deletePostReponse.observe(viewLifecycleOwner, Observer {
+//            val response = it ?: return@Observer
+//            when (response) {
+//                is ErrorWrapper.ResponseError -> {
+//                    Snackbar.make(swipeRefreshLayout,
+//                                  response.message!!,
+//                                  Snackbar.LENGTH_SHORT).show()
+//
+//                }
+//                is ErrorWrapper.SystemError -> {
+//                    Snackbar.make(swipeRefreshLayout,
+//                                  response.err.localizedMessage.toString(),
+//                                  Snackbar.LENGTH_SHORT).show()
+//                }
+//                is ResultWrapper.Success -> {
+//                    adapter.remove(adapter.getItem(response.value))
+//                    adapter.notifyItemRemoved(response.value)
+//                }
+//                ResultWrapper.InProgress -> {
+//                }
+//            }.exhaustive
+//        })
+//
+//        viewmodel.finishPostResponse.observe(viewLifecycleOwner, Observer {
+//            val response = it ?: return@Observer
+//            when (response) {
+//                is ErrorWrapper.ResponseError -> {
+//                    Snackbar.make(swipeRefreshLayout,
+//                                  response.message!!,
+//                                  Snackbar.LENGTH_SHORT).show()
+//
+//                }
+//                is ErrorWrapper.SystemError -> {
+//                    Snackbar.make(swipeRefreshLayout,
+//                                  response.err.localizedMessage.toString(),
+//                                  Snackbar.LENGTH_SHORT).show()
+//                }
+//                is ResultWrapper.Success -> {
+//                    adapter.remove(adapter.getItem(response.value))
+//                    adapter.notifyItemRemoved(response.value)
+//                }
+//                ResultWrapper.InProgress -> {
+//                }
+//            }.exhaustive
+//        })
 
 
     }

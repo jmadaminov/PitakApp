@@ -11,11 +11,11 @@ import java.io.File
  * operations that need to be implemented
  */
 interface CarDataStore {
-    suspend fun getCars(token: String): ResultWrapper<List<CarDetailsEntity>>
-    suspend fun getCarModels(token: String, lang:String): ResultWrapper<List<CarModelEntity>>
-    suspend fun getCarColors(token: String, lang:String): ResultWrapper<List<CarColorEntity>>
-    suspend fun createCar(token: String, car: CarEntity): ResultWrapper<String>
-    suspend fun updateCar(token: String, car: CarEntity): ResultWrapper<String>
-    suspend fun deleteCar(token: String, id: Long): ResultWrapper<String>
-    suspend fun setDefaultCar(token: String, id: Long): ResultWrapper<String>
+    suspend fun getCars(): ResultWrapper<List<CarDetailsEntity>>
+    suspend fun getCarModels(): ResultWrapper<List<CarModelEntity>>
+    suspend fun getCarColors(): ResultWrapper<List<CarColorEntity>>
+    suspend fun createCar( car: CarEntity): ResultWrapper<String>
+    suspend fun updateCar( car: CarEntity): ResultWrapper<String>
+    suspend fun deleteCar( id: Long): ResultWrapper<String>
+    suspend fun setDefaultCar( id: Long): ResultWrapper<String>
 }

@@ -75,7 +75,7 @@ class ProfileFragment @Inject constructor(/*private val viewModelFactory: ViewMo
         setupCarsRecyclerView()
         setupListeners()
         subscribeObservers()
-        viewModel.getCarList(AppPreferences.token)
+        viewModel.getCarList()
         setupViews()
     }
 
@@ -193,7 +193,7 @@ class ProfileFragment @Inject constructor(/*private val viewModelFactory: ViewMo
                     popUpMenu.setOnMenuItemClickListener { menuItem ->
                         when (menuItem.itemId) {
                             R.id.delete -> {
-                                viewModel.deleteCar(AppPreferences.token, carDetails.id!!, pos)
+                                viewModel.deleteCar( carDetails.id!!, pos)
                             }
                             R.id.edit -> {
                                 val intent = Intent(context, AddCarActivity::class.java)
@@ -216,7 +216,7 @@ class ProfileFragment @Inject constructor(/*private val viewModelFactory: ViewMo
                                 startActivityForResult(intent, CODE_ADD_CAR)
                             }
                             R.id.setDefault -> {
-                                viewModel.setDefault(AppPreferences.token, carDetails.id!!, pos)
+                                viewModel.setDefault( carDetails.id!!, pos)
                             }
                             else -> {
 
@@ -281,7 +281,7 @@ class ProfileFragment @Inject constructor(/*private val viewModelFactory: ViewMo
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == CODE_ADD_CAR && resultCode == RESULT_OK) {
             Log.d("ON ACTIVITY RESULT   ", "  $resultCode")
-            viewModel.getCarList(AppPreferences.token)
+            viewModel.getCarList()
         }
     }
 }

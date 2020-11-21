@@ -28,20 +28,20 @@ class ProfileViewModel  @ViewModelInject constructor(val getCarList: GetCars, va
     val deleteCarResponse = SingleLiveEvent<ResultWrapper<Int>>()
     val defaultCarResponse = SingleLiveEvent<ResultWrapper<Int>>()
 
-    fun getCarList(token: String) {
+    fun getCarList() {
         carsResponse.value = ResultWrapper.InProgress
         viewModelScope.launch(IO) {
-            val response = getCarList.execute(token)
+            val response = getCarList.execute()
             withContext(Main) {
                 carsResponse.value = response
             }
         }
     }
 
-    fun deleteCar(token: String, id: Long, position: Int) {
+    fun deleteCar( id: Long, position: Int) {
         deleteCarResponse.value = ResultWrapper.InProgress
         viewModelScope.launch(IO) {
-            val response = deleteCar.execute(hashMapOf(Pair(TXT_TOKEN, token), Pair(TXT_ID, id)))
+            val response = deleteCar.execute( id)
             withContext(Main) {
                 when (response) {
                     is ErrorWrapper.ResponseError -> deleteCarResponse.value = response
@@ -56,10 +56,10 @@ class ProfileViewModel  @ViewModelInject constructor(val getCarList: GetCars, va
         }
     }
 
-    fun setDefault(token: String, id: Long, pos: Int) {
+    fun setDefault( id: Long, pos: Int) {
         defaultCarResponse.value = ResultWrapper.InProgress
         viewModelScope.launch(IO) {
-            val response = setDefaultCar.execute(hashMapOf(Pair(TXT_TOKEN, token), Pair(TXT_ID, id)))
+            val response = setDefaultCar.execute( id)
             withContext(Main) {
                 when (response) {
                     is ErrorWrapper.ResponseError -> defaultCarResponse.value = response

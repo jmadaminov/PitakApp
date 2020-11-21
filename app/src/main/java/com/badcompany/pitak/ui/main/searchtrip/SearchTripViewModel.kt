@@ -32,10 +32,7 @@ class SearchTripViewModel  @ViewModelInject constructor(private val getPassenger
     fun getPassengerPost() {
         passengerPostsReponse.value = ResultWrapper.InProgress
         viewModelScope.launch(Dispatchers.IO) {
-            val response = getPassengerPostWithFilter.execute(hashMapOf(
-                Pair(Constants.TXT_TOKEN, AppPreferences.token),
-                Pair(Constants.TXT_LANG, AppPreferences.language),
-                Pair(Constants.TXT_FILTER, filter)))
+            val response = getPassengerPostWithFilter.execute(                 filter)
 
             withContext(Dispatchers.Main) {
                 passengerPostsReponse.value = response
@@ -60,12 +57,7 @@ class SearchTripViewModel  @ViewModelInject constructor(private val getPassenger
         else toPlacesResponse.value = ResultWrapper.InProgress
         resetFromFeedJob(isFrom)
         viewModelScope.launch(Dispatchers.IO + if (isFrom) fromFeedJob!! else toFeedJob!!) {
-            val response =
-                getPlacesFeed.execute(hashMapOf(Pair(Constants.TXT_TOKEN,
-                                                     AppPreferences.token),
-                                                Pair(Constants.TXT_LANG,
-                                                     AppPreferences.language),
-                                                Pair(Constants.TXT_PLACE, queryString)))
+            val response =                getPlacesFeed.execute(queryString)
 
             withContext(Dispatchers.Main) {
                 if (isFrom) fromPlacesResponse.value = response

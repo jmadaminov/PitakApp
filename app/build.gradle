@@ -106,7 +106,6 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.coroutinesVersion"
 
 
-
     implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.lifecycleVersion"
     kapt 'android.arch.lifecycle:compiler:' + rootProject.lifecycleVersion
@@ -156,6 +155,8 @@ dependencies {
     //AutoCompleteEditText
     implementation("com.otaliastudios:autocomplete:1.1.0")
 
+    //PAGING
+    implementation "androidx.paging:paging-runtime-ktx:3.0.0-alpha09"
 
 //VIEW PAGER2
     implementation "androidx.viewpager2:viewpager2:1.0.0"
@@ -173,7 +174,6 @@ dependencies {
     implementation "com.github.skydoves:balloon:1.1.9"
 
 
-
     implementation 'com.google.firebase:firebase-crashlytics:17.2.2'
     implementation 'com.google.firebase:firebase-analytics:17.5.0'
     implementation 'com.onesignal:OneSignal:3.15.1'
@@ -186,7 +186,6 @@ dependencies {
     implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_viewmodels"
     kapt "androidx.hilt:hilt-compiler:$hilt_viewmodels"
 //
-
 
 
 }

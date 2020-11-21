@@ -63,28 +63,4 @@ class UserRepositoryImpl @Inject constructor(private val factory: UserDataStoreF
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-
-//    override fun clearUsers(): Completable {
-//        return factory.retrieveCacheDataStore().clearUsers()
-//    }
-//
-//    override fun saveUsers(bufferoos: List<User>): Completable {
-//        val bufferooEntities = mutableListOf<UserEntity>()
-//        bufferoos.map { bufferooEntities.add(bufferooMapper.mapToEntity(it)) }
-//        return factory.retrieveCacheDataStore().saveUsers(bufferooEntities)
-//    }
-//
-//    override fun getUsers(): Flowable<List<User>> {
-//        return factory.retrieveCacheDataStore().isCached()
-//            .flatMapPublisher {
-//                factory.retrieveDataStore(it).getUsers()
-//            }
-//            .flatMap {
-//                Flowable.just(it.map { bufferooMapper.mapFromEntity(it) })
-//            }
-//            .flatMap {
-//                saveUsers(it).toSingle { it }.toFlowable()
-//            }
-//    }
-
 }

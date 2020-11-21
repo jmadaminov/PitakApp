@@ -26,9 +26,8 @@ class CarRepositoryImpl @Inject constructor(private val factory: CarDataStoreFac
                                             private val carDetailsMapper: CarDetailsMapper
 ) : CarRepository {
 
-    override suspend fun getCars(token: String): ResultWrapper<List<CarDetails>> {
-        val response = factory.retrieveDataStore(false)
-            .getCars(token)
+    override suspend fun getCars(): ResultWrapper<List<CarDetails>> {
+        val response = factory.retrieveDataStore(false).getCars()
         return when (response) {
             is ErrorWrapper.ResponseError -> response
             is ErrorWrapper.SystemError -> response
@@ -44,9 +43,9 @@ class CarRepositoryImpl @Inject constructor(private val factory: CarDataStoreFac
     }
 
 
-    override suspend fun getCarModels(token: String, lang:String): ResultWrapper<List<CarModelBody>> {
+    override suspend fun getCarModels(): ResultWrapper<List<CarModelBody>> {
         val response = factory.retrieveDataStore(false)
-            .getCarModels(token,lang)
+            .getCarModels()
         return when (response) {
             is ErrorWrapper.ResponseError -> response
             is ErrorWrapper.SystemError -> response
@@ -61,9 +60,8 @@ class CarRepositoryImpl @Inject constructor(private val factory: CarDataStoreFac
         }
     }
 
-    override suspend fun getCarColors(token: String, lang:String): ResultWrapper<List<CarColorBody>> {
-        val response = factory.retrieveDataStore(false)
-            .getCarColors(token,lang)
+    override suspend fun getCarColors(): ResultWrapper<List<CarColorBody>> {
+        val response = factory.retrieveDataStore(false)            .getCarColors()
         return when (response) {
             is ErrorWrapper.ResponseError -> response
             is ErrorWrapper.SystemError -> response
@@ -78,9 +76,9 @@ class CarRepositoryImpl @Inject constructor(private val factory: CarDataStoreFac
         }
     }
 
-    override suspend fun createCar(token: String, car: Car): ResultWrapper<String> {
+    override suspend fun createCar(car: Car): ResultWrapper<String> {
         val response = factory.retrieveDataStore(false)
-            .createCar(token, carMapper.mapToEntity(car))
+            .createCar(carMapper.mapToEntity(car))
         return when (response) {
             is ErrorWrapper.ResponseError -> response
             is ErrorWrapper.SystemError -> response
@@ -91,9 +89,9 @@ class CarRepositoryImpl @Inject constructor(private val factory: CarDataStoreFac
         }
     }
 
-    override suspend fun updateCar(token: String, car: Car): ResultWrapper<String> {
+    override suspend fun updateCar(car: Car): ResultWrapper<String> {
         val response = factory.retrieveDataStore(false)
-            .updateCar(token, carMapper.mapToEntity(car))
+            .updateCar(carMapper.mapToEntity(car))
         return when (response) {
             is ErrorWrapper.ResponseError -> response
             is ErrorWrapper.SystemError -> response
@@ -104,9 +102,9 @@ class CarRepositoryImpl @Inject constructor(private val factory: CarDataStoreFac
         }
     }
 
-    override suspend fun deleteCar(token: String, id: Long): ResultWrapper<String> {
+    override suspend fun deleteCar(id: Long): ResultWrapper<String> {
         val response = factory.retrieveDataStore(false)
-            .deleteCar(token, id)
+            .deleteCar(id)
         return when (response) {
             is ErrorWrapper.ResponseError -> response
             is ErrorWrapper.SystemError -> response
@@ -117,9 +115,9 @@ class CarRepositoryImpl @Inject constructor(private val factory: CarDataStoreFac
         }
     }
 
-    override suspend fun setDefaultCar(token: String, id: Long): ResultWrapper<String> {
+    override suspend fun setDefaultCar(id: Long): ResultWrapper<String> {
         val response = factory.retrieveDataStore(false)
-            .setDefaultCar(token, id)
+            .setDefaultCar(id)
         return when (response) {
             is ErrorWrapper.ResponseError -> response
             is ErrorWrapper.SystemError -> response

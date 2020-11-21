@@ -7,8 +7,6 @@ import javax.inject.Inject
  * Create an instance of a BufferooDataStore
  */
 open class PlaceDataStoreFactory @Inject constructor(
-//        private val placeCache: BufferooCache,
-//        private val placeCacheDataStore: BufferooCacheDataStore,
         private val placeRemoteDataStore: PlaceRemoteDataStore) {
 
     /**

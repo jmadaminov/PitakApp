@@ -1,16 +1,22 @@
 package com.badcompany.domain.repository
 
+import com.badcompany.core.ResponseWrapper
 import com.badcompany.core.ResultWrapper
 import com.badcompany.domain.domainmodel.DriverPost
 import com.badcompany.domain.domainmodel.PassengerPost
 
 interface DriverPostRepository {
 
-   suspend fun createDriverPost(token: String, post: DriverPost): ResultWrapper<String>
-   suspend fun deleteDriverPost(token: String, identifier: String): ResultWrapper<String>
-   suspend fun finishDriverPost(token: String, identifier: String): ResultWrapper<String>
-   suspend fun getActiveDriverPosts(token: String, lang: String): ResultWrapper<List<DriverPost>>
-   suspend fun getHistoryDriverPosts(token: String, lang: String,
-                                     page: Int): ResultWrapper<List<DriverPost>>
+    suspend fun createDriverPost(post: DriverPost): ResultWrapper<String>
+    suspend fun deleteDriverPost(identifier: String): ResultWrapper<String>
+    suspend fun finishDriverPost(identifier: String): ResultWrapper<String>
+    suspend fun getActiveDriverPosts(): ResultWrapper<List<DriverPost>>
+    suspend fun getHistoryDriverPosts(page: Int): ResultWrapper<List<DriverPost>>
 
+
+    suspend fun getDriverPostById(id: Long): ResponseWrapper<PassengerPost>
+
+    suspend fun acceptOffer(id: Long): ResponseWrapper<String?>
+    suspend fun rejectOffer(id: Long): ResponseWrapper<String?>
+    suspend fun cancelMyOffer(id: Long): ResponseWrapper<String?>
 }

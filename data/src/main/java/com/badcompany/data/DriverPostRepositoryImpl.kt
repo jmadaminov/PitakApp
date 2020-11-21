@@ -1,10 +1,12 @@
 package com.badcompany.data
 
 import com.badcompany.core.ErrorWrapper
+import com.badcompany.core.ResponseWrapper
 import com.badcompany.core.ResultWrapper
 import com.badcompany.data.mapper.DriverPostMapper
 import com.badcompany.data.source.DriverPostDataStoreFactory
 import com.badcompany.domain.domainmodel.DriverPost
+import com.badcompany.domain.domainmodel.PassengerPost
 import com.badcompany.domain.repository.DriverPostRepository
 import com.badcompany.domain.repository.PlaceRepository
 import javax.inject.Inject
@@ -18,27 +20,27 @@ class DriverPostRepositoryImpl @Inject constructor(private val factoryDriver: Dr
     DriverPostRepository {
 
 
-    override suspend fun createDriverPost(token: String, post: DriverPost): ResultWrapper<String> {
+    override suspend fun createDriverPost( post: DriverPost): ResultWrapper<String> {
         return factoryDriver.retrieveDataStore(false)
-            .createDriverPost(token, driverPostMapper.mapToEntity(post))
+            .createDriverPost( driverPostMapper.mapToEntity(post))
     }
 
-    override suspend fun deleteDriverPost(token: String,
+    override suspend fun deleteDriverPost(
                                           identifier: String): ResultWrapper<String> {
 
-        return factoryDriver.retrieveDataStore(false).deleteDriverPost(token, identifier)
+        return factoryDriver.retrieveDataStore(false).deleteDriverPost( identifier)
     }
 
-    override suspend fun finishDriverPost(token: String,
+    override suspend fun finishDriverPost(
                                           identifier: String): ResultWrapper<String> {
-        return factoryDriver.retrieveDataStore(false).finishDriverPost(token, identifier)
+        return factoryDriver.retrieveDataStore(false).finishDriverPost( identifier)
 
     }
 
-    override suspend fun getActiveDriverPosts(token: String,
-                                              lang: String): ResultWrapper<List<DriverPost>> {
+    override suspend fun getActiveDriverPosts(
+                                              ): ResultWrapper<List<DriverPost>> {
         val response =
-            factoryDriver.retrieveDataStore(false).getActiveDriverPosts(token, lang)
+            factoryDriver.retrieveDataStore(false).getActiveDriverPosts( )
 
         return when (response) {
             is ErrorWrapper.ResponseError -> response
@@ -53,11 +55,9 @@ class DriverPostRepositoryImpl @Inject constructor(private val factoryDriver: Dr
         }
     }
 
-    override suspend fun getHistoryDriverPosts(token: String,
-                                               lang: String,
-                                               page: Int): ResultWrapper<List<DriverPost>> {
+    override suspend fun getHistoryDriverPosts(page: Int): ResultWrapper<List<DriverPost>> {
         val response =
-            factoryDriver.retrieveDataStore(false).getHistoryDriverPosts(token, lang,page)
+            factoryDriver.retrieveDataStore(false).getHistoryDriverPosts( page)
 
         return when (response) {
             is ErrorWrapper.ResponseError -> response
@@ -69,6 +69,22 @@ class DriverPostRepositoryImpl @Inject constructor(private val factoryDriver: Dr
             }
             ResultWrapper.InProgress -> ResultWrapper.InProgress
         }
+    }
+
+    override suspend fun getDriverPostById(id: Long): ResponseWrapper<PassengerPost> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun acceptOffer(id: Long): ResponseWrapper<String?> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun rejectOffer(id: Long): ResponseWrapper<String?> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun cancelMyOffer(id: Long): ResponseWrapper<String?> {
+        TODO("Not yet implemented")
     }
 
 

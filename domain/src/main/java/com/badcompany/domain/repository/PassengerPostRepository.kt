@@ -6,7 +6,5 @@ import com.badcompany.domain.domainmodel.PassengerPost
 
 interface PassengerPostRepository {
 
-    suspend fun filterPassengerPost(token: String,
-                                    lang: String,
-                                    filter: Filter): ResultWrapper<List<PassengerPost>>
+    suspend fun filterPassengerPost(filter: Filter): ResultWrapper<List<PassengerPost>>
 }
