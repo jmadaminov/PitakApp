@@ -1,10 +1,11 @@
 package com.badcompany.remote
 
-import com.badcompany.core.ErrorWrapper
-import com.badcompany.core.ResultWrapper
+import com.badcompany.core.*
+import com.badcompany.data.model.DriverOfferEntity
 import com.badcompany.data.model.FilterEntity
 import com.badcompany.data.model.PassengerPostEntity
 import com.badcompany.data.repository.PassengerPostRemote
+import com.badcompany.remote.mapper.DriverOfferMapper
 import com.badcompany.remote.mapper.FilterMapper
 import com.badcompany.remote.mapper.PassengerPostMapper
 import javax.inject.Inject
@@ -15,15 +16,16 @@ import javax.inject.Inject
  * operations in which data store implementation layers can carry out.
  */
 class PassengerPostRemoteImpl @Inject constructor(
-                                                  private val authorizedApiService: AuthorizedApiService,
-                                                  private val postMapper: PassengerPostMapper,
-                                                  private val filterMapper: FilterMapper) :
+    private val authorizedApiService: AuthorizedApiService,
+    private val postMapper: PassengerPostMapper,
+    private val filterMapper: FilterMapper,
+    private val offerMapper: DriverOfferMapper) :
     PassengerPostRemote {
 
     override suspend fun filterPassengerPost(filter: FilterEntity): ResultWrapper<List<PassengerPostEntity>> {
         return try {
             val response =
-                authorizedApiService.filterPassengerPost(  filterMapper.mapFromEntity(filter))
+                authorizedApiService.filterPassengerPost(filterMapper.mapFromEntity(filter))
             if (response.code == 1) {
                 val posts = arrayListOf<PassengerPostEntity>()
                 response.data?.data?.forEach { posts.add(postMapper.mapToEntity(it)) }
@@ -34,5 +36,20 @@ class PassengerPostRemoteImpl @Inject constructor(
         }
     }
 
+    override suspend fun offerARide(myOffer: DriverOfferEntity) =
+        ResponseFormatter.getFormattedResponse {
+            authorizedApiService.offerARide(offerMapper.mapFromEntity(myOffer))
+        }
+
+//    override suspend fun getPassengerPostById(id: Long): ResponseWrapper<PassengerPostEntity> {
+//        val response = ResponseFormatter.getFormattedResponse {
+//            authorizedApiService.getPassengerPostById(id)
+//        }
+//
+//        return when (response) {
+//            is ResponseError -> response
+//            is ResponseSuccess -> ResponseSuccess(postMapper.mapToEntity(response.value))
+//        }.exhaustive
+//    }
 
 }

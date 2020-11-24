@@ -4,6 +4,7 @@ import android.view.View
 import com.badcompany.domain.domainmodel.DriverPost
 import com.badcompany.pitak.R
 import com.badcompany.pitak.ui.driver_post.DriverPostActivity
+import com.badcompany.pitak.ui.driver_post.EXTRA_POST_ID
 import com.badcompany.pitak.ui.interfaces.IOnPostActionListener
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item
@@ -36,7 +37,7 @@ class ActivePostItem(var post: DriverPost, var onPostActionListener: IOnPostActi
 
         viewHolder.itemView.cardParent.setOnClickListener {
             viewHolder.itemView.context.start<DriverPostActivity> {
-                putExtra(DriverPostActivity.EXTRA_POST_ID, post.id)
+                putExtra(EXTRA_POST_ID, post.id)
             }
         }
 

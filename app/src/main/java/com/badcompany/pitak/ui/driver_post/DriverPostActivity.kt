@@ -23,10 +23,11 @@ import kotlinx.android.synthetic.main.activity_driver_post.*
 import splitties.activities.start
 import splitties.experimental.ExperimentalSplittiesApi
 
+const val EXTRA_POST_ID = "POST_ID"
+
 @ExperimentalSplittiesApi class DriverPostActivity : BaseActivity() {
 
     companion object {
-        const val EXTRA_POST_ID = "EXTRA_POST_ID"
         const val REQ_POST_MANIPULATED: Int = 89
     }
 

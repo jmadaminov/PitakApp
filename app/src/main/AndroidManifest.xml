@@ -31,6 +31,10 @@
             android:theme="@style/AppTheme"/>
 
         <activity
+            android:name=".ui.passenger_post.PassengerPostActivity"
+            android:theme="@style/AppTheme"/>
+
+        <activity
             android:name=".ui.addcar.AddCarActivity"
             android:label="@string/title_add_car"
             android:screenOrientation="portrait"

@@ -4,7 +4,7 @@ import com.badcompany.core.Constants
 /**
  * Representation for a [PassengerPost] fetched from the API
  */
-data class PassengerPost(val id: Long?=null,
+data class PassengerPost(val id: Long,
                          val from: Place,
                          val to: Place,
                          val price: Int,

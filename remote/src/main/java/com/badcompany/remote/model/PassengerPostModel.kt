@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 /**
  * Representation for a [PassengerPostModel] fetched from the API
  */
-data class PassengerPostModel(@SerializedName("id") val id: Long?=null,
+data class PassengerPostModel(@SerializedName("id") val id: Long,
                               @SerializedName("from") val from: PlaceModel,
                               @SerializedName("to") val to: PlaceModel,
                               @SerializedName("price") val price: Int,

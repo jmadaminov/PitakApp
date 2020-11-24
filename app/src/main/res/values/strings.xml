@@ -101,5 +101,10 @@
     <string name="have_you_completed_the_ride">Have you completed this ride?</string>
     <string name="post">Post: %1$d</string>
     <string name="do_you_want_to_cancel_this_offer">Do you want to cancel this offer?</string>
+    <string name="jump_in">Jump in</string>
+    <string name="offer_a_ride">Offer a ride</string>
+    <string name="send_offer">Send offer</string>
+    <string name="message">Message</string>
+    <string name="your_price">Your price</string>
 
 </resources>

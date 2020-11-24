@@ -1,10 +1,11 @@
 package com.badcompany.data
 
-import com.badcompany.core.ErrorWrapper
-import com.badcompany.core.ResultWrapper
+import com.badcompany.core.*
+import com.badcompany.data.mapper.DriverOfferMapper
 import com.badcompany.data.mapper.FilterMapper
 import com.badcompany.data.mapper.PassengerPostMapper
 import com.badcompany.data.source.PassengerPostDataStoreFactory
+import com.badcompany.domain.domainmodel.DriverOffer
 import com.badcompany.domain.domainmodel.Filter
 import com.badcompany.domain.domainmodel.PassengerPost
 import com.badcompany.domain.repository.PassengerPostRepository
@@ -17,13 +18,14 @@ import javax.inject.Inject
  */
 class PassengerPostRepositoryImpl @Inject constructor(private val factoryPassenger: PassengerPostDataStoreFactory,
                                                       private val passengerPostMapper: PassengerPostMapper,
-                                                      private val filterMapper: FilterMapper) :
+                                                      private val filterMapper: FilterMapper,
+                                                      private val driverOfferMapper: DriverOfferMapper) :
     PassengerPostRepository {
 
     override suspend fun filterPassengerPost(filter: Filter): ResultWrapper<List<PassengerPost>> {
 
         val response = factoryPassenger.retrieveDataStore(false)
-            .filterPassengerPost(  filterMapper.mapToEntity(filter))
+            .filterPassengerPost(filterMapper.mapToEntity(filter))
 
         return when (response) {
             is ErrorWrapper.ResponseError -> response
@@ -37,24 +39,23 @@ class PassengerPostRepositoryImpl @Inject constructor(private val factoryPasseng
         }
     }
 
+    override suspend fun offerARide(myOffer: DriverOffer): ResponseWrapper<Any> {
+        return factoryPassenger.retrieveDataStore(false)
+            .offerARide(driverOfferMapper.mapToEntity(myOffer))
+    }
 
-//    override suspend fun getHistoryPassengerPosts(
-//                                               ,
-//                                               page: Int): ResultWrapper<List<PassengerPost>> {
-//        val response =
-//            factoryPassenger.retrieveDataStore(false).getHistoryPassengerPosts( page)
+//    override suspend fun getPassengerPostById(id: Long): ResponseWrapper<PassengerPost> {
+//        val response = factoryPassenger.retrieveDataStore(false).getPassengerPostById(id)
 //
 //        return when (response) {
-//            is ErrorWrapper.ResponseError -> response
-//            is ErrorWrapper.SystemError -> response
-//            is ResultWrapper.Success -> {
-//                val posts = arrayListOf<PassengerPost>()
-//                response.value.forEach { posts.add(driverPostMapper.mapFromEntity(it)) }
-//                ResultWrapper.Success(posts)
+//            is ResponseError -> {
+//                response
 //            }
-//            ResultWrapper.InProgress -> ResultWrapper.InProgress
-//        }
+//            is ResponseSuccess -> {
+//                ResponseSuccess(passengerPostMapper.mapFromEntity(response.value))
+//            }
+//        }.exhaustive
 //    }
-
-
 }
+
+

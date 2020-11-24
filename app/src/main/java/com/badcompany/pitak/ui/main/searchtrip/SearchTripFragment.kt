@@ -8,14 +8,12 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.badcompany.core.ErrorWrapper
 import com.badcompany.core.ResultWrapper
 import com.badcompany.core.exhaustive
 import com.badcompany.domain.domainmodel.PassengerPost
 import com.badcompany.pitak.R
-import com.badcompany.pitak.ui.addcar.MyItemClickListener
 import com.badcompany.pitak.ui.main.MainActivity
 import com.badcompany.pitak.ui.viewgroups.LoadingItemSmall
 import com.badcompany.pitak.ui.viewgroups.PassengerPostItem
@@ -307,11 +305,7 @@ class SearchTripFragment @Inject constructor(/*private val viewModelFactory: Vie
         } else {
             infoText.visibility = View.INVISIBLE
             value.forEach {
-                adapter.add(PassengerPostItem(it, object : MyItemClickListener {
-                    override fun onClick(pos: Int) {
-                        super.onClick(pos)
-                    }
-                }))
+                adapter.add(PassengerPostItem(it))
             }
         }
         adapter.notifyDataSetChanged()

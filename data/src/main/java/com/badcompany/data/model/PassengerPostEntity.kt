@@ -5,7 +5,7 @@ import com.badcompany.core.Constants
 /**
  * Representation for a [PassengerPostEntity] fetched from the API
  */
-data class PassengerPostEntity(val id: Long?=null,
+data class PassengerPostEntity(val id: Long,
                                val from: PlaceEntity,
                                val to: PlaceEntity,
                                val price: Int,

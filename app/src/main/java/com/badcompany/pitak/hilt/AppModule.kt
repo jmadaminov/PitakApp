@@ -231,8 +231,12 @@ object AppModule {
     @Singleton
     fun providePassengerPostRepository(factory: PassengerPostDataStoreFactory,
                                        driverPostMapper: PassengerPostMapper,
-                                       filterMapper: FilterMapper): PassengerPostRepository {
-        return PassengerPostRepositoryImpl(factory, driverPostMapper, filterMapper)
+                                       filterMapper: FilterMapper,
+                                       driverOfferMapper: DriverOfferMapper): PassengerPostRepository {
+        return PassengerPostRepositoryImpl(factory,
+                                           driverPostMapper,
+                                           filterMapper,
+                                           driverOfferMapper)
     }
 
     @Provides
@@ -253,8 +257,9 @@ object AppModule {
     @Singleton
     fun providePassengerPostRemote(apiService: AuthorizedApiService,
                                    postMapper: com.badcompany.remote.mapper.PassengerPostMapper,
-                                   filterMapper: com.badcompany.remote.mapper.FilterMapper): PassengerPostRemote {
-        return PassengerPostRemoteImpl(apiService, postMapper, filterMapper)
+                                   filterMapper: com.badcompany.remote.mapper.FilterMapper,
+                                   driverOfferMapper: com.badcompany.remote.mapper.DriverOfferMapper): PassengerPostRemote {
+        return PassengerPostRemoteImpl(apiService, postMapper, filterMapper, driverOfferMapper)
     }
 
 
@@ -269,6 +274,12 @@ object AppModule {
     @Singleton
     fun provideRemoteFilterMapper(): com.badcompany.remote.mapper.FilterMapper {
         return com.badcompany.remote.mapper.FilterMapper()
+    }
+
+    @Provides
+    @Singleton
+    fun provideRemoteDriverOfferMapper(): com.badcompany.remote.mapper.DriverOfferMapper {
+        return com.badcompany.remote.mapper.DriverOfferMapper()
     }
 
 
@@ -314,14 +325,18 @@ object AppModule {
     }
 
     @Provides
-
     @Singleton
     fun provideDriverPostMapper(): DriverPostMapper {
         return DriverPostMapper()
     }
 
     @Provides
+    @Singleton
+    fun provideDriverOfferMapper(): DriverOfferMapper {
+        return DriverOfferMapper()
+    }
 
+    @Provides
     @Singleton
     fun providePlaceDataStoreFactory(placeRemoteDataStore: PlaceRemoteDataStore): PlaceDataStoreFactory {
         return PlaceDataStoreFactory(placeRemoteDataStore)

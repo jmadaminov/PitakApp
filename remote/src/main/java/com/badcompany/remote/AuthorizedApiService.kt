@@ -115,6 +115,14 @@ interface AuthorizedApiService {
     @GET("offer/post/cancel/{id}")
     suspend fun cancelMyOffer(@Path(value = "id", encoded = true) id: Long): RespFormatter<String?>
 
+    @Headers("Content-Type:application/json", "Accept: application/json")
+    @POST("offer/driver/action")
+    suspend fun offerARide(@Body myOfferBody: DriverOfferBody): RespFormatter<Any>
 
+
+//    @Headers("Content-Type:application/json", "Accept: application/json")
+//    @GET("passenger_post/action/{id}")
+//    suspend fun getPassengerPostById(@Path(value = "id",
+//                                           encoded = true) id: Long): RespFormatter<PassengerPostModel>
 }
 
