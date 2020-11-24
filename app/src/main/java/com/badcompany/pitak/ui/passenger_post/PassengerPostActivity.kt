@@ -21,6 +21,7 @@ class PassengerPostActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_passenger_post)
+        setupActionBar()
         passengerPost = intent.getParcelableExtra(ARG_PASSENGER_POST)!!
 
         attachListeners()
@@ -66,4 +67,9 @@ class PassengerPostActivity : BaseActivity() {
 
     }
 
+    private fun setupActionBar() {
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeButtonEnabled(true)
+        supportActionBar?.title = getString(R.string.post, passengerPost.id)
+    }
 }
