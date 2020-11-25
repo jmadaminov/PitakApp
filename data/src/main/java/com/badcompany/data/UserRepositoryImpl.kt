@@ -23,8 +23,8 @@ class UserRepositoryImpl @Inject constructor(private val factory: UserDataStoreF
                                              private val authMapper: AuthMapper) :
     UserRepository {
 
-    override suspend fun loginUser(phoneNum: String): ResultWrapper<String> {
-        return factory.retrieveDataStore(false).userLogin(phoneNum)
+    override suspend fun loginUser(phoneNum: String, deviceId: String): ResultWrapper<String> {
+        return factory.retrieveDataStore(false).userLogin(phoneNum, deviceId)
     }
 
     override suspend fun registerUser(user: User): ResultWrapper<String> {

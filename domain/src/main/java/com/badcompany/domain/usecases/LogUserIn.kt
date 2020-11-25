@@ -10,13 +10,14 @@ import com.badcompany.domain.repository.UserRepository
  *
  */
 class LogUserIn(val repository: UserRepository) :
-    UseCaseWithParams<String, ResultWrapper<String>>() {
+    UseCaseWithParams<HashMap<String, String>, ResultWrapper<String>>() {
 
-    override suspend fun buildUseCase(params: String): ResultWrapper<String> {
-        if (params.length != 12) {
+    override suspend fun buildUseCase(params: HashMap<String, String>): ResultWrapper<String> {
+        if (params[Constants.TXT_PHONE_NUMBER]!!.length != 12) {
             return ErrorWrapper.ResponseError(Constants.errPhoneFormat)
         }
-        return repository.loginUser(params)
+        return repository.loginUser(params[Constants.TXT_PHONE_NUMBER]!!,
+                                    params[Constants.TXT_UDID]!!)
     }
 
 }
