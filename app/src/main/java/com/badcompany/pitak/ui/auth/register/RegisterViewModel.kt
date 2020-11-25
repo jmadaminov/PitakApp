@@ -17,6 +17,7 @@ import com.badcompany.pitak.ui.BaseViewModel
 import com.badcompany.pitak.util.SingleLiveEvent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class RegisterViewModel  @ViewModelInject constructor(private val registerUser: RegisterUser) :
@@ -25,13 +26,16 @@ class RegisterViewModel  @ViewModelInject constructor(private val registerUser: 
     private val _registerForm = SingleLiveEvent<RegisterFormState>()
     val registerFormState: SingleLiveEvent<RegisterFormState> = _registerForm
 
-    val response = SingleLiveEvent<ResultWrapper<String>>()
+    val regResp = SingleLiveEvent<ResultWrapper<String>>()
 
     fun register(user: User) {
-            response.value = ResultWrapper.InProgress
-            viewModelScope.launch(Dispatchers.IO)  {
-                response.value = registerUser.execute(user)
+        regResp.value = ResultWrapper.InProgress
+        viewModelScope.launch(Dispatchers.IO) {
+            val response = registerUser.execute(user)
+            withContext(Dispatchers.Main) {
+                regResp.value = response
             }
+        }
     }
 
 

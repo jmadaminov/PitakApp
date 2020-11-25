@@ -2,19 +2,21 @@ package com.badcompany.pitak.ui.auth.login
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.viewModelScope
+import com.badcompany.core.Constants
 import com.badcompany.core.ResultWrapper
 import com.badcompany.core.numericOnly
 import com.badcompany.domain.usecases.LogUserIn
+import com.badcompany.pitak.App
 import com.badcompany.pitak.ui.BaseViewModel
 import com.badcompany.pitak.util.SingleLiveEvent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import javax.inject.Inject
 
 
-class LoginViewModel  @ViewModelInject constructor(private val logUserIn: LogUserIn) : BaseViewModel() {
+class LoginViewModel @ViewModelInject constructor(private val logUserIn: LogUserIn) :
+    BaseViewModel() {
 
     val loginResponse = SingleLiveEvent<ResultWrapper<String>>()
 //    private val _loginForm = SingleLiveEvent<LoginFormState>()
@@ -28,7 +30,9 @@ class LoginViewModel  @ViewModelInject constructor(private val logUserIn: LogUse
         this.phoneNum = phoneNum
         loginResponse.value = ResultWrapper.InProgress
         viewModelScope.launch(Dispatchers.IO) {
-            val response = logUserIn.execute(phoneNum.numericOnly())
+            val response = logUserIn.execute(hashMapOf(Pair(Constants.TXT_PHONE_NUMBER,
+                                                            phoneNum.numericOnly()),
+                                                       Pair(Constants.TXT_UDID, App.uuid)))
             withContext(Main) {
                 loginResponse.value = response
             }
