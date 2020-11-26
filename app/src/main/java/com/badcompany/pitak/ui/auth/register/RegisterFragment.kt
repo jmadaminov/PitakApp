@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.badcompany.core.*
 import com.badcompany.domain.domainmodel.User
+import com.badcompany.pitak.App
 import com.badcompany.pitak.R
 import com.badcompany.pitak.ui.auth.AuthActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -75,9 +76,10 @@ class RegisterFragment @Inject constructor(/*private val viewModelFactory: ViewM
 
         register.setOnClickListener {
             viewModel.register(User(phone.text.toString().numericOnly(),
-                name.text.toString(),
-                surname.text.toString(),
-                Constants.ROLE_DRIVER))
+                                    name.text.toString(),
+                                    surname.text.toString(),
+//                                    Constants.ROLE_DRIVER,
+                                    App.uuid))
 //            navController.navigate(R.id.action_navRegisterFragment_to_navPhoneConfirmFragment)
         }
 
