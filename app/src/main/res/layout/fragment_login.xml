@@ -86,6 +86,8 @@
         android:layout_gravity="start"
         android:layout_marginStart="48dp"
         android:layout_marginTop="48dp"
+        app:finalCornerAngle="50dp"
+        app:initialCornerAngle="50dp"
         android:layout_marginEnd="48dp"
         android:background="@drawable/button_shape_default_rounded"
         app:spinning_bar_color="#fff"
