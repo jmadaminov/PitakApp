@@ -36,7 +36,7 @@ class CarRemoteImpl @Inject constructor(private val authorizedApiService: Author
                     newCars.add(carDetailsMapper.mapToEntity(it))
                 }
                 ResultWrapper.Success(newCars)
-            } else ErrorWrapper.ResponseError(response.code, response.message)
+            } else ErrorWrapper.RespError(response.code, response.message)
         } catch (e: Exception) {
             ErrorWrapper.SystemError(e)
         }
@@ -51,7 +51,7 @@ class CarRemoteImpl @Inject constructor(private val authorizedApiService: Author
                     newCarModels.add(carModelMapper.mapToEntity(it))
                 }
                 ResultWrapper.Success(newCarModels)
-            } else ErrorWrapper.ResponseError(response.code, response.message)
+            } else ErrorWrapper.RespError(response.code, response.message)
         } catch (e: Exception) {
             ErrorWrapper.SystemError(e)
         }
@@ -66,7 +66,7 @@ class CarRemoteImpl @Inject constructor(private val authorizedApiService: Author
                     newCarColors.add(carColorMapper.mapToEntity(it))
                 }
                 ResultWrapper.Success(newCarColors)
-            } else ErrorWrapper.ResponseError(response.code, response.message)
+            } else ErrorWrapper.RespError(response.code, response.message)
         } catch (e: Exception) {
             ErrorWrapper.SystemError(e)
         }
@@ -77,7 +77,7 @@ class CarRemoteImpl @Inject constructor(private val authorizedApiService: Author
             val response = authorizedApiService.createCar(carMapper.mapFromEntity(car))
             if (response.code == 1) {
                 ResultWrapper.Success("SUCCESS")
-            } else ErrorWrapper.ResponseError(response.code, response.message)
+            } else ErrorWrapper.RespError(response.code, response.message)
         } catch (e: Exception) {
             ErrorWrapper.SystemError(e)
         }
@@ -89,7 +89,7 @@ class CarRemoteImpl @Inject constructor(private val authorizedApiService: Author
                 authorizedApiService.deleteCar(id)
             if (response.code == 1) {
                 ResultWrapper.Success("SUCCESS")
-            } else ErrorWrapper.ResponseError(response.code, response.message)
+            } else ErrorWrapper.RespError(response.code, response.message)
         } catch (e: Exception) {
             ErrorWrapper.SystemError(e)
         }
@@ -101,7 +101,7 @@ class CarRemoteImpl @Inject constructor(private val authorizedApiService: Author
                 authorizedApiService.updateCar(car.id!!, carMapper.mapFromEntity(car))
             if (response.code == 1) {
                 ResultWrapper.Success("SUCCESS")
-            } else ErrorWrapper.ResponseError(response.code, response.message)
+            } else ErrorWrapper.RespError(response.code, response.message)
         } catch (e: Exception) {
             ErrorWrapper.SystemError(e)
         }
@@ -113,7 +113,7 @@ class CarRemoteImpl @Inject constructor(private val authorizedApiService: Author
             val response = authorizedApiService.setDefaultCar(id)
             if (response.code == 1) {
                 ResultWrapper.Success("SUCCESS")
-            } else ErrorWrapper.ResponseError(response.code, response.message)
+            } else ErrorWrapper.RespError(response.code, response.message)
         } catch (e: Exception) {
             ErrorWrapper.SystemError(e)
         }

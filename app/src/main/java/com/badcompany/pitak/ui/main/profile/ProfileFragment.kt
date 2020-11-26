@@ -10,7 +10,6 @@ import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.badcompany.core.Constants.CODE_ADD_CAR
@@ -19,7 +18,6 @@ import com.badcompany.core.ErrorWrapper
 import com.badcompany.core.ResultWrapper
 import com.badcompany.core.exhaustive
 import com.badcompany.domain.domainmodel.CarDetails
-import com.badcompany.pitak.App
 import com.badcompany.pitak.R
 import com.badcompany.pitak.ui.addcar.AddCarActivity
 import com.badcompany.pitak.ui.addcar.MyItemClickListener
@@ -99,7 +97,7 @@ class ProfileFragment @Inject constructor(/*private val viewModelFactory: ViewMo
         viewModel.carsResponse.observe(viewLifecycleOwner, Observer {
             val response = it ?: return@Observer
             when (response) {
-                is ErrorWrapper.ResponseError -> {
+                is ErrorWrapper.RespError -> {
                     adapter.clear()
                     adapter.notifyDataSetChanged()
                     Snackbar.make(clParent, response.message.toString(), Snackbar.LENGTH_SHORT)
@@ -128,7 +126,7 @@ class ProfileFragment @Inject constructor(/*private val viewModelFactory: ViewMo
         viewModel.deleteCarResponse.observe(viewLifecycleOwner, Observer {
             val response = it ?: return@Observer
             when (response) {
-                is ErrorWrapper.ResponseError -> {
+                is ErrorWrapper.RespError -> {
                     Snackbar.make(clParent, response.message.toString(), Snackbar.LENGTH_SHORT)
                         .show()
                 }
@@ -160,7 +158,7 @@ class ProfileFragment @Inject constructor(/*private val viewModelFactory: ViewMo
         viewModel.defaultCarResponse.observe(viewLifecycleOwner, Observer {
             val response = it ?: return@Observer
             when (response) {
-                is ErrorWrapper.ResponseError -> {
+                is ErrorWrapper.RespError -> {
                     Snackbar.make(clParent, response.message.toString(), Snackbar.LENGTH_SHORT)
                         .show()
                 }

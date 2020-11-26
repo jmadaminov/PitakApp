@@ -14,7 +14,7 @@ class LogUserIn(val repository: UserRepository) :
 
     override suspend fun buildUseCase(params: HashMap<String, String>): ResultWrapper<String> {
         if (params[Constants.TXT_PHONE_NUMBER]!!.length != 12) {
-            return ErrorWrapper.ResponseError(Constants.errPhoneFormat)
+            return ErrorWrapper.RespError(Constants.errPhoneFormat)
         }
         return repository.loginUser(params[Constants.TXT_PHONE_NUMBER]!!,
                                     params[Constants.TXT_UDID]!!)

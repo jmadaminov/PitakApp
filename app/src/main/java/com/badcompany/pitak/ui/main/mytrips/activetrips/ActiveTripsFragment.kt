@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.badcompany.core.Constants
 import com.badcompany.core.ErrorWrapper
@@ -21,7 +20,6 @@ import com.badcompany.pitak.ui.interfaces.IOnPostActionListener
 import com.badcompany.pitak.ui.main.MainViewModel
 import com.badcompany.pitak.ui.viewgroups.ActivePostItem
 import com.badcompany.pitak.viewobjects.*
-import com.google.android.material.snackbar.Snackbar
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import dagger.hilt.android.AndroidEntryPoint
@@ -116,7 +114,7 @@ class ActiveTripsFragment @Inject constructor(/*private val viewModelFactory: Vi
         viewmodel.activePostsResponse.observe(viewLifecycleOwner, Observer {
             val response = it ?: return@Observer
             when (response) {
-                is ErrorWrapper.ResponseError -> {
+                is ErrorWrapper.RespError -> {
                     swipeRefreshLayout.isRefreshing = false
 //                    Snackbar.make(rl_parent,
 //                                  response.message!!,

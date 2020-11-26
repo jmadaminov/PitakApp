@@ -28,7 +28,7 @@ class PassengerPostRepositoryImpl @Inject constructor(private val factoryPasseng
             .filterPassengerPost(filterMapper.mapToEntity(filter))
 
         return when (response) {
-            is ErrorWrapper.ResponseError -> response
+            is ErrorWrapper.RespError -> response
             is ErrorWrapper.SystemError -> response
             is ResultWrapper.Success -> {
                 val posts = arrayListOf<PassengerPost>()

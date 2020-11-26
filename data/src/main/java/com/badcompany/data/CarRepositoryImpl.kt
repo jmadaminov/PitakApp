@@ -29,7 +29,7 @@ class CarRepositoryImpl @Inject constructor(private val factory: CarDataStoreFac
     override suspend fun getCars(): ResultWrapper<List<CarDetails>> {
         val response = factory.retrieveDataStore(false).getCars()
         return when (response) {
-            is ErrorWrapper.ResponseError -> response
+            is ErrorWrapper.RespError -> response
             is ErrorWrapper.SystemError -> response
             is ResultWrapper.Success -> {
                 val newCars = ArrayList<CarDetails>()
@@ -47,7 +47,7 @@ class CarRepositoryImpl @Inject constructor(private val factory: CarDataStoreFac
         val response = factory.retrieveDataStore(false)
             .getCarModels()
         return when (response) {
-            is ErrorWrapper.ResponseError -> response
+            is ErrorWrapper.RespError -> response
             is ErrorWrapper.SystemError -> response
             is ResultWrapper.Success -> {
                 val newCarColors = ArrayList<CarModelBody>()
@@ -63,7 +63,7 @@ class CarRepositoryImpl @Inject constructor(private val factory: CarDataStoreFac
     override suspend fun getCarColors(): ResultWrapper<List<CarColorBody>> {
         val response = factory.retrieveDataStore(false)            .getCarColors()
         return when (response) {
-            is ErrorWrapper.ResponseError -> response
+            is ErrorWrapper.RespError -> response
             is ErrorWrapper.SystemError -> response
             is ResultWrapper.Success -> {
                 val newCarColors = ArrayList<CarColorBody>()
@@ -80,7 +80,7 @@ class CarRepositoryImpl @Inject constructor(private val factory: CarDataStoreFac
         val response = factory.retrieveDataStore(false)
             .createCar(carMapper.mapToEntity(car))
         return when (response) {
-            is ErrorWrapper.ResponseError -> response
+            is ErrorWrapper.RespError -> response
             is ErrorWrapper.SystemError -> response
             is ResultWrapper.Success -> {
                 ResultWrapper.Success("SUCCESS")
@@ -93,7 +93,7 @@ class CarRepositoryImpl @Inject constructor(private val factory: CarDataStoreFac
         val response = factory.retrieveDataStore(false)
             .updateCar(carMapper.mapToEntity(car))
         return when (response) {
-            is ErrorWrapper.ResponseError -> response
+            is ErrorWrapper.RespError -> response
             is ErrorWrapper.SystemError -> response
             is ResultWrapper.Success -> {
                 ResultWrapper.Success("SUCCESS")
@@ -106,7 +106,7 @@ class CarRepositoryImpl @Inject constructor(private val factory: CarDataStoreFac
         val response = factory.retrieveDataStore(false)
             .deleteCar(id)
         return when (response) {
-            is ErrorWrapper.ResponseError -> response
+            is ErrorWrapper.RespError -> response
             is ErrorWrapper.SystemError -> response
             is ResultWrapper.Success -> {
                 ResultWrapper.Success("SUCCESS")
@@ -119,7 +119,7 @@ class CarRepositoryImpl @Inject constructor(private val factory: CarDataStoreFac
         val response = factory.retrieveDataStore(false)
             .setDefaultCar(id)
         return when (response) {
-            is ErrorWrapper.ResponseError -> response
+            is ErrorWrapper.RespError -> response
             is ErrorWrapper.SystemError -> response
             is ResultWrapper.Success -> {
                 ResultWrapper.Success("SUCCESS")

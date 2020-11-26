@@ -1,7 +1,6 @@
 package com.badcompany.pitak.ui.addcar
 
 import android.app.Activity
-import android.graphics.Color
 import android.graphics.PorterDuff
 import android.net.Uri
 import android.os.Bundle
@@ -24,13 +23,11 @@ import com.badcompany.core.exhaustive
 import com.badcompany.domain.domainmodel.Car
 import com.badcompany.domain.domainmodel.ColorsAndModels
 import com.badcompany.domain.domainmodel.PhotoBody
-import com.badcompany.pitak.App
 import com.badcompany.pitak.R
 //import com.badcompany.pitak.di.viewmodels.AddCarViewModelFactory
 import com.badcompany.pitak.ui.BaseActivity
 import com.badcompany.pitak.ui.viewgroups.ItemAddPhoto
 import com.badcompany.pitak.ui.viewgroups.ItemCarPhoto
-import com.badcompany.pitak.util.AppPreferences
 import com.badcompany.pitak.util.getFileName
 import com.badcompany.pitak.util.loadImageUrl
 import com.badcompany.pitak.viewobjects.CarColorViewObj
@@ -51,7 +48,6 @@ import splitties.experimental.ExperimentalSplittiesApi
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
-import javax.inject.Inject
 
 
 class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListener,
@@ -184,7 +180,7 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
         viewmodel.carSaveReponse.observe(this, Observer {
             val response = it ?: return@Observer
             when (response) {
-                is ErrorWrapper.ResponseError -> {
+                is ErrorWrapper.RespError -> {
                     saveCar.revertAnimation()
                     Snackbar.make(parentLayout, response.message.toString(), Snackbar.LENGTH_SHORT)
                         .show()
@@ -212,7 +208,7 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
         viewmodel.carAvatarResponse.observe(this, Observer {
             val response = it ?: return@Observer
             when (response) {
-                is ErrorWrapper.ResponseError -> {
+                is ErrorWrapper.RespError -> {
                     stopLoadingAvatar()
                     Snackbar.make(parentLayout, response.message.toString(), Snackbar.LENGTH_SHORT)
                         .show()
@@ -238,7 +234,7 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
         viewmodel.carImgResponse.observe(this, Observer {
             val response = it ?: return@Observer
             when (response) {
-                is ErrorWrapper.ResponseError -> {
+                is ErrorWrapper.RespError -> {
                     showCarImageUploadError(response.message.toString())
                 }
                 is ErrorWrapper.SystemError -> {
@@ -265,7 +261,7 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
             val response = it ?: return@Observer
 
             when (response) {
-                is ErrorWrapper.ResponseError -> {
+                is ErrorWrapper.RespError -> {
                     showColorsModelsGetError(response.message)
                 }
                 is ErrorWrapper.SystemError -> {

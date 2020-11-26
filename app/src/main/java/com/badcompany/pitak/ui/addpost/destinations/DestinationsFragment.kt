@@ -2,15 +2,12 @@ package com.badcompany.pitak.ui.addpost.destinations
 
 import android.graphics.PorterDuff
 import android.os.Bundle
-import android.text.Spannable
 import android.view.View
-import android.view.inputmethod.EditorInfo
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -23,8 +20,6 @@ import com.badcompany.pitak.ui.addpost.AddPostViewModel
 import com.badcompany.pitak.ui.viewgroups.PlaceFeedItemView
 import com.badcompany.pitak.util.AutoCompleteManager
 import com.badcompany.pitak.util.buildAutoCompleteManager
-import com.badcompany.pitak.util.showKeyboard
-import com.otaliastudios.autocomplete.AutocompletePolicy
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_destinations.*
 import splitties.experimental.ExperimentalSplittiesApi
@@ -130,7 +125,7 @@ class DestinationsFragment @Inject constructor(/*private val viewModelFactory: V
             val response = it ?: return@Observer
 
             when (response) {
-                is ErrorWrapper.ResponseError -> {
+                is ErrorWrapper.RespError -> {
 
                 }
                 is ErrorWrapper.SystemError -> {
@@ -155,7 +150,7 @@ class DestinationsFragment @Inject constructor(/*private val viewModelFactory: V
             val response = it ?: return@Observer
 
             when (response) {
-                is ErrorWrapper.ResponseError -> {
+                is ErrorWrapper.RespError -> {
 
                 }
                 is ErrorWrapper.SystemError -> {

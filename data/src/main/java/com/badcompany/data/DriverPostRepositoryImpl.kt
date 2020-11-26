@@ -40,7 +40,7 @@ class DriverPostRepositoryImpl @Inject constructor(private val factoryDriver: Dr
             factoryDriver.retrieveDataStore(false).getActiveDriverPosts()
 
         return when (response) {
-            is ErrorWrapper.ResponseError -> response
+            is ErrorWrapper.RespError -> response
             is ErrorWrapper.SystemError -> response
             is ResultWrapper.Success -> {
 
@@ -57,7 +57,7 @@ class DriverPostRepositoryImpl @Inject constructor(private val factoryDriver: Dr
             factoryDriver.retrieveDataStore(false).getHistoryDriverPosts(page)
 
         return when (response) {
-            is ErrorWrapper.ResponseError -> response
+            is ErrorWrapper.RespError -> response
             is ErrorWrapper.SystemError -> response
             is ResultWrapper.Success -> {
                 val posts = arrayListOf<DriverPost>()

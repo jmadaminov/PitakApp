@@ -22,7 +22,7 @@ class DriverPostRemoteImpl @Inject constructor(private val authorizedApiService:
             val response = authorizedApiService.createPost(postMapper.mapFromEntity(post))
             if (response.code == 1) {
                 ResultWrapper.Success("SUCCESS")
-            } else ErrorWrapper.ResponseError(response.code, response.message)
+            } else ErrorWrapper.RespError(response.code, response.message)
         } catch (e: Exception) {
             ErrorWrapper.SystemError(e)
         }
@@ -34,7 +34,7 @@ class DriverPostRemoteImpl @Inject constructor(private val authorizedApiService:
             val response = authorizedApiService.deletePost(identifier)
             if (response.code == 1) {
                 ResultWrapper.Success("SUCCESS")
-            } else ErrorWrapper.ResponseError(response.code, response.message)
+            } else ErrorWrapper.RespError(response.code, response.message)
         } catch (e: Exception) {
             ErrorWrapper.SystemError(e)
         }
@@ -46,7 +46,7 @@ class DriverPostRemoteImpl @Inject constructor(private val authorizedApiService:
             val response = authorizedApiService.finishPost(identifier)
             if (response.code == 1) {
                 ResultWrapper.Success("SUCCESS")
-            } else ErrorWrapper.ResponseError(response.code, response.message)
+            } else ErrorWrapper.RespError(response.code, response.message)
         } catch (e: Exception) {
             ErrorWrapper.SystemError(e)
         }
@@ -61,7 +61,7 @@ class DriverPostRemoteImpl @Inject constructor(private val authorizedApiService:
                 val posts = arrayListOf<DriverPostEntity>()
                 response.data?.forEach { posts.add(postMapper.mapToEntity(it)) }
                 ResultWrapper.Success(posts)
-            } else ErrorWrapper.ResponseError(response.code, response.message)
+            } else ErrorWrapper.RespError(response.code, response.message)
         } catch (e: Exception) {
             ErrorWrapper.SystemError(e)
         }
@@ -75,7 +75,7 @@ class DriverPostRemoteImpl @Inject constructor(private val authorizedApiService:
                 val posts = arrayListOf<DriverPostEntity>()
                 response.data?.data?.forEach { posts.add(postMapper.mapToEntity(it)) }
                 ResultWrapper.Success(posts)
-            } else ErrorWrapper.ResponseError(response.code, response.message)
+            } else ErrorWrapper.RespError(response.code, response.message)
         } catch (e: Exception) {
             ErrorWrapper.SystemError(e)
         }

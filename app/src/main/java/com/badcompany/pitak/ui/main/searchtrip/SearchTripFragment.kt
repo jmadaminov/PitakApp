@@ -210,7 +210,7 @@ class SearchTripFragment @Inject constructor(/*private val viewModelFactory: Vie
             val response = it ?: return@Observer
 
             when (response) {
-                is ErrorWrapper.ResponseError -> {
+                is ErrorWrapper.RespError -> {
                 }
                 is ErrorWrapper.SystemError -> {
                 }
@@ -234,7 +234,7 @@ class SearchTripFragment @Inject constructor(/*private val viewModelFactory: Vie
             val response = it ?: return@Observer
 
             when (response) {
-                is ErrorWrapper.ResponseError -> {
+                is ErrorWrapper.RespError -> {
                 }
                 is ErrorWrapper.SystemError -> {
                 }
@@ -260,7 +260,7 @@ class SearchTripFragment @Inject constructor(/*private val viewModelFactory: Vie
         viewModel.passengerPostsReponse.observe(viewLifecycleOwner, Observer {
             val response = it ?: return@Observer
             when (response) {
-                is ErrorWrapper.ResponseError -> {
+                is ErrorWrapper.RespError -> {
                     Snackbar.make(nestedScroll,
                                   response.message!!,
                                   Snackbar.LENGTH_SHORT).show()

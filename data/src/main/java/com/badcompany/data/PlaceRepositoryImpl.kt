@@ -22,7 +22,7 @@ class PlaceRepositoryImpl @Inject constructor(private val factory: PlaceDataStor
         val response =
             factory.retrieveDataStore(false).getPlacesAutocomplete(  queryString)
         return when (response) {
-            is ErrorWrapper.ResponseError -> response
+            is ErrorWrapper.RespError -> response
             is ErrorWrapper.SystemError -> response
             is ResultWrapper.Success -> {
                 val places = arrayListOf<Place>()

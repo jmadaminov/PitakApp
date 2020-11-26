@@ -37,7 +37,7 @@ class UserRepositoryImpl @Inject constructor(private val factory: UserDataStoreF
             .confirmSms(userCredentialsMapper.mapToEntity(userCredentials))
 
         return when (response) {
-            is ErrorWrapper.ResponseError -> response
+            is ErrorWrapper.RespError -> response
             is ErrorWrapper.SystemError -> response
             is ResultWrapper.Success -> ResultWrapper.Success(authMapper.mapFromEntity(response.value))
             ResultWrapper.InProgress -> ResultWrapper.InProgress

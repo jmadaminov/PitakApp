@@ -22,7 +22,7 @@ class FileUploadRepositoryImpl @Inject constructor(private val factory: FileUplo
         val response = factory.retrieveDataStore(false)
             .uploadPhoto(file)
         return when (response) {
-            is ErrorWrapper.ResponseError -> response
+            is ErrorWrapper.RespError -> response
             is ErrorWrapper.SystemError -> response
             is ResultWrapper.Success -> ResultWrapper.Success(photoMapper.mapFromEntity(response.value))
             ResultWrapper.InProgress -> ResultWrapper.InProgress

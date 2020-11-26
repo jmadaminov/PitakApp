@@ -14,7 +14,6 @@ import com.badcompany.pitak.ui.BaseActivity
 import com.badcompany.pitak.ui.addpost.AddPostActivity
 import com.badcompany.pitak.ui.interfaces.IOnOfferActionListener
 import com.badcompany.pitak.viewobjects.DriverPostViewObj
-import com.badcompany.pitak.viewobjects.OfferViewObj
 import com.badcompany.pitak.viewobjects.OfferViewObj.Companion.offerToViewObj
 import com.badcompany.pitak.viewobjects.PlaceViewObj
 import com.badcompany.remote.model.OfferDTO
@@ -113,7 +112,7 @@ const val EXTRA_POST_ID = "POST_ID"
         viewModel.deletePostReponse.observe(this, {
             val response = it ?: return@observe
             when (response) {
-                is ErrorWrapper.ResponseError -> {
+                is ErrorWrapper.RespError -> {
                     Snackbar.make(swipeRefreshLayout,
                                   response.message!!,
                                   Snackbar.LENGTH_SHORT).show()
@@ -136,7 +135,7 @@ const val EXTRA_POST_ID = "POST_ID"
         viewModel.finishPostResponse.observe(this, {
             val response = it ?: return@observe
             when (response) {
-                is ErrorWrapper.ResponseError -> {
+                is ErrorWrapper.RespError -> {
                     Snackbar.make(swipeRefreshLayout,
                                   response.message!!,
                                   Snackbar.LENGTH_SHORT).show()

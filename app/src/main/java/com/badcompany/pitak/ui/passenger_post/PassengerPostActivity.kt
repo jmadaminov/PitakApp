@@ -1,6 +1,7 @@
 package com.badcompany.pitak.ui.passenger_post
 
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
 import com.badcompany.pitak.R
@@ -21,8 +22,8 @@ class PassengerPostActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_passenger_post)
-        setupActionBar()
         passengerPost = intent.getParcelableExtra(ARG_PASSENGER_POST)!!
+        setupActionBar()
 
         attachListeners()
         subscribeObservers()
@@ -72,4 +73,16 @@ class PassengerPostActivity : BaseActivity() {
         supportActionBar?.setHomeButtonEnabled(true)
         supportActionBar?.title = getString(R.string.post, passengerPost.id)
     }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                finish()
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+
 }

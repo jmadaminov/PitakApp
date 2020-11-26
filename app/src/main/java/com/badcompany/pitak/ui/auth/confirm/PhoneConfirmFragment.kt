@@ -5,7 +5,6 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -14,7 +13,6 @@ import com.badcompany.core.ErrorWrapper
 import com.badcompany.core.ResultWrapper
 import com.badcompany.core.exhaustive
 import com.badcompany.domain.domainmodel.AuthBody
-import com.badcompany.pitak.App
 import com.badcompany.pitak.R
 import com.badcompany.pitak.ui.auth.AuthActivity
 import com.badcompany.pitak.ui.main.MainActivity
@@ -23,7 +21,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_phone_confirm.*
 import splitties.activities.start
 import splitties.experimental.ExperimentalSplittiesApi
-import splitties.init.appCtx
 import splitties.preferences.edit
 import javax.inject.Inject
 
@@ -68,7 +65,7 @@ class PhoneConfirmFragment @Inject constructor(/*private val viewModelFactory: V
             val response = it ?: return@Observer
 
             when (response) {
-                is ErrorWrapper.ResponseError -> {
+                is ErrorWrapper.RespError -> {
                     confirm.revertAnimation()
                     if (response.code == Constants.errPhoneFormat) {
                         code.error = getString(R.string.incorrect_phone_number_format)

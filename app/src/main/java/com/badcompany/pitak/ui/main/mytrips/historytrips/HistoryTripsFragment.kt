@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.badcompany.core.ErrorWrapper
@@ -129,7 +128,7 @@ class HistoryTripsFragment @Inject constructor(/*private val viewModelFactory: V
         viewmodel.historyPostsResponse.observe(viewLifecycleOwner, Observer {
             val response = it ?: return@Observer
             when (response) {
-                is ErrorWrapper.ResponseError -> {
+                is ErrorWrapper.RespError -> {
                     Snackbar.make(swipeRefreshLayout,
                                   response.message!!,
                                   Snackbar.LENGTH_SHORT).show()
@@ -154,7 +153,7 @@ class HistoryTripsFragment @Inject constructor(/*private val viewModelFactory: V
         viewmodel.cancelOrderReponse.observe(viewLifecycleOwner, Observer {
             val response = it ?: return@Observer
             when (response) {
-                is ErrorWrapper.ResponseError -> {
+                is ErrorWrapper.RespError -> {
                     Snackbar.make(swipeRefreshLayout,
                                   response.message!!,
                                   Snackbar.LENGTH_SHORT).show()

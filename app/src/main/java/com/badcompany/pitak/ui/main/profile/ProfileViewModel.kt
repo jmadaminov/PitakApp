@@ -2,8 +2,6 @@ package com.badcompany.pitak.ui.main.profile
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.viewModelScope
-import com.badcompany.core.Constants.TXT_ID
-import com.badcompany.core.Constants.TXT_TOKEN
 import com.badcompany.core.ErrorWrapper
 import com.badcompany.core.ResultWrapper
 import com.badcompany.core.exhaustive
@@ -17,7 +15,6 @@ import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import javax.inject.Inject
 
 
 class ProfileViewModel  @ViewModelInject constructor(val getCarList: GetCars, val deleteCar: DeleteCar, val setDefaultCar: SetDefaultCar) :
@@ -44,7 +41,7 @@ class ProfileViewModel  @ViewModelInject constructor(val getCarList: GetCars, va
             val response = deleteCar.execute( id)
             withContext(Main) {
                 when (response) {
-                    is ErrorWrapper.ResponseError -> deleteCarResponse.value = response
+                    is ErrorWrapper.RespError -> deleteCarResponse.value = response
                     is ErrorWrapper.SystemError -> deleteCarResponse.value = response
                     is ResultWrapper.Success -> deleteCarResponse.value =
                         ResultWrapper.Success(position)
@@ -62,7 +59,7 @@ class ProfileViewModel  @ViewModelInject constructor(val getCarList: GetCars, va
             val response = setDefaultCar.execute( id)
             withContext(Main) {
                 when (response) {
-                    is ErrorWrapper.ResponseError -> defaultCarResponse.value = response
+                    is ErrorWrapper.RespError -> defaultCarResponse.value = response
                     is ErrorWrapper.SystemError -> defaultCarResponse.value = response
                     is ResultWrapper.Success -> defaultCarResponse.value =
                         ResultWrapper.Success(pos)

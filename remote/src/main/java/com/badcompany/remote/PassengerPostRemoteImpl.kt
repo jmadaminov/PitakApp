@@ -30,7 +30,7 @@ class PassengerPostRemoteImpl @Inject constructor(
                 val posts = arrayListOf<PassengerPostEntity>()
                 response.data?.data?.forEach { posts.add(postMapper.mapToEntity(it)) }
                 ResultWrapper.Success(posts)
-            } else ErrorWrapper.ResponseError(response.code, response.message)
+            } else ErrorWrapper.RespError(response.code, response.message)
         } catch (e: Exception) {
             ErrorWrapper.SystemError(e)
         }

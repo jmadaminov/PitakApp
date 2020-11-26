@@ -25,7 +25,7 @@ class PlaceRemoteImpl @Inject constructor(
                     places.add(placeMapper.mapToEntity(it))
                 }
                 ResultWrapper.Success(places)
-            } else ErrorWrapper.ResponseError(response.code, response.message)
+            } else ErrorWrapper.RespError(response.code, response.message)
         } catch (e: Exception) {
             ErrorWrapper.SystemError(e)
         }
