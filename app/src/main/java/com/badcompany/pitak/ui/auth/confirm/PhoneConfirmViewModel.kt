@@ -21,10 +21,10 @@ class PhoneConfirmViewModel  @ViewModelInject constructor(private val smsConfirm
     BaseViewModel() {
     val confirmResponse = SingleLiveEvent<ResultWrapper<AuthBody>>()
 
-    fun confirm(phone: String, code: String) {
+    fun confirm(userCredentials: UserCredentials) {
         confirmResponse.value = ResultWrapper.InProgress
         viewModelScope.launch(Dispatchers.IO) {
-            val response = smsConfirm.execute(UserCredentials(phone.numericOnly(), code, App.uuid))
+            val response = smsConfirm.execute(userCredentials)
             withContext(Main) {
                 confirmResponse.value = response
             }

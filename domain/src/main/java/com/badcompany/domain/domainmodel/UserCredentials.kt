@@ -1,6 +1,6 @@
 package com.badcompany.domain.domainmodel
 
-data class UserCredentials(var phoneNum: String,
-                           var password: String,
-                           var deviceId: String)
+data class UserCredentials(val phoneNum: String,
+                           val password: String,
+                           val deviceId: String)
 

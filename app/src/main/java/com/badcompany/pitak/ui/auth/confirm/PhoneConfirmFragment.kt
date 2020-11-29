@@ -8,11 +8,10 @@ import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.badcompany.core.Constants
-import com.badcompany.core.ErrorWrapper
-import com.badcompany.core.ResultWrapper
-import com.badcompany.core.exhaustive
+import com.badcompany.core.*
 import com.badcompany.domain.domainmodel.AuthBody
+import com.badcompany.domain.domainmodel.UserCredentials
+import com.badcompany.pitak.App
 import com.badcompany.pitak.R
 import com.badcompany.pitak.ui.auth.AuthActivity
 import com.badcompany.pitak.ui.main.MainActivity
@@ -54,7 +53,7 @@ class PhoneConfirmFragment @Inject constructor(/*private val viewModelFactory: V
         code.setText(args.password)
 
         confirm.setOnClickListener {
-            viewModel.confirm(args.phone, code.text.toString())
+            viewModel.confirm(UserCredentials(args.phone.numericOnly(), code.text.toString(), App.uuid) )
         }
 
     }

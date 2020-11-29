@@ -17,7 +17,7 @@ open class UserCredentialsMapper @Inject constructor() :
      * Map an instance of a [UserModel] to a [UserEntity] model
      */
     override fun mapToEntity(type: UserCredentialsModel): UserCredentialsEntity {
-        return UserCredentialsEntity(type.phoneNum, type.password, type.deviceId)
+        return UserCredentialsEntity(type.phoneNum, type.password, type.udId)
     }
 
     override fun mapFromEntity(type: UserCredentialsEntity): UserCredentialsModel {

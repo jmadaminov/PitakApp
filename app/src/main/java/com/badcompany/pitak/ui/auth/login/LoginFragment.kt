@@ -141,23 +141,6 @@ class LoginFragment @Inject constructor(/*private val viewModelFactory: ViewMode
         })
     }
 
-//    private fun updateUiWithUser(model: LoggedInUserView) {
-//        val welcome = getString(R.string.welcome)
-//        val displayName = model.displayName
-//        // TODO : initiate successful logged in experience
-//        Toast.makeText(
-//            requireContext(),
-//            "$welcome $displayName",
-//            Toast.LENGTH_LONG
-//        ).show()
-//    }
-//
-//    private fun showLoginFailed(@StringRes errorString: Int) {
-//        Toast.makeText(requireContext(), errorString, Toast.LENGTH_SHORT).show()
-//    }
-
-
-
 }
 
 

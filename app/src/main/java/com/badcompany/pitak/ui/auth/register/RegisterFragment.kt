@@ -78,7 +78,6 @@ class RegisterFragment @Inject constructor(/*private val viewModelFactory: ViewM
             viewModel.register(User(phone.text.toString().numericOnly(),
                                     name.text.toString(),
                                     surname.text.toString(),
-//                                    Constants.ROLE_DRIVER,
                                     App.uuid))
 //            navController.navigate(R.id.action_navRegisterFragment_to_navPhoneConfirmFragment)
         }
