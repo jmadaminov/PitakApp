@@ -14,12 +14,10 @@ interface ApiService {
 
     //Passenger POST API
 
-
     //AUTH API
     @Headers("Content-Type:application/json", "Accept: application/json")
     @POST("prof/mb/auth")
     suspend fun userLogin(@Body loginReq: LoginRequest): AuthResponse
-
 
     @Headers("Content-Type:application/json")
     @POST("prof/mb/reg")

@@ -47,19 +47,19 @@ class UserRepositoryImpl @Inject constructor(private val factory: UserDataStoreF
     }
 
 
-    override fun updateUserDetails(user: User): ResultWrapper<Unit> {
+    override suspend fun updateUserDetails(user: User): ResultWrapper<Unit> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun addOrUpdateUserCar(car: Car): ResultWrapper<Unit> {
+    override suspend fun addOrUpdateUserCar(car: Car): ResultWrapper<Unit> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun getUserCars(userId: String): ResultWrapper<List<Car>> {
+    override suspend fun getUserCars(userId: String): ResultWrapper<List<Car>> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun deleteUserCar(carId: String): ResultWrapper<List<Car>> {
+    override suspend fun deleteUserCar(carId: String): ResultWrapper<List<Car>> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 

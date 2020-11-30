@@ -7,7 +7,6 @@ import com.badcompany.remote.AuthorizedApiService
 import javax.inject.Inject
 import javax.inject.Singleton
 
-@Singleton
 class PostOffersRepository @Inject constructor(private val authorizedApiService: AuthorizedApiService) {
 
     fun getOffersForPost(id: Long) =

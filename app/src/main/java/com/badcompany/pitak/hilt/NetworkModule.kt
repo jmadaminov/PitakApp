@@ -23,8 +23,6 @@ object NetworkModule {
     }
 
 
-
-
 //    @Singleton
 //    @Provides
 //    fun provideAuthorizedApiService(): AuthorizedApiService {
