@@ -5,15 +5,13 @@ import com.badcompany.domain.domainmodel.DriverPost
 import com.badcompany.pitak.R
 import com.badcompany.pitak.ui.driver_post.DriverPostActivity
 import com.badcompany.pitak.ui.driver_post.EXTRA_POST_ID
-import com.badcompany.pitak.ui.interfaces.IOnPostActionListener
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item
 import kotlinx.android.synthetic.main.item_active_post.view.*
 import splitties.activities.start
 
 
-class ActivePostItem(var post: DriverPost) :
-    Item() {
+class ActivePostItem(var post: DriverPost, val onClick: () -> Unit) : Item() {
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         viewHolder.itemView.date.text = post.departureDate
@@ -32,13 +30,11 @@ class ActivePostItem(var post: DriverPost) :
         }
 
         if (viewHolder.itemView.findViewById<View>(R.id.progress) != null) {
-            viewHolder.itemView.cl_parent.removeView(viewHolder.itemView.findViewById<View>(R.id.progress))
+            viewHolder.itemView.cl_parent.removeView(viewHolder.itemView.findViewById(R.id.progress))
         }
 
         viewHolder.itemView.cardParent.setOnClickListener {
-            viewHolder.itemView.context.start<DriverPostActivity> {
-                putExtra(EXTRA_POST_ID, post.id)
-            }
+            onClick()
         }
 
     }

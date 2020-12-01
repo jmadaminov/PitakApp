@@ -15,7 +15,6 @@ class PassengerPostActivity : BaseActivity() {
 
     val viewModel: PassengerPostViewModel by viewModels()
 
-    //    var postId: Long by Delegates.notNull()
     private lateinit var passengerPost: PassengerPostViewObj
 
 
@@ -64,8 +63,6 @@ class PassengerPostActivity : BaseActivity() {
         } else {
             note.visibility = View.GONE
         }
-
-
     }
 
     private fun setupActionBar() {

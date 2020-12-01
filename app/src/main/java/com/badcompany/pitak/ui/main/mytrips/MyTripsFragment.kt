@@ -18,6 +18,7 @@ import kotlinx.android.synthetic.main.fragment_my_trips.*
 @AndroidEntryPoint
 class MyTripsFragment : Fragment(R.layout.fragment_my_trips) {
 
+    private lateinit var mediator: TabLayoutMediator
     private val viewModel: MyTripsViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,20 +37,22 @@ class MyTripsFragment : Fragment(R.layout.fragment_my_trips) {
     private fun setupViewPager() {
         val pagerAdapter = ScreenSlidePagerAdapter(childFragmentManager)
         pager.adapter = pagerAdapter
-        TabLayoutMediator(requireActivity().findViewById(R.id.tab_layout), pager) { tab, position ->
+        mediator = TabLayoutMediator(requireActivity().findViewById(R.id.tab_layout),
+                                     pager) { tab, position ->
             tab.text = when (position) {
                 0 -> getString(R.string.active)
                 else -> getString(R.string.history)
             }
-        }.attach()
+        }
+        mediator.attach()
     }
 
     private inner class ScreenSlidePagerAdapter(fm: FragmentManager) :
         FragmentStateAdapter(this) {
 
         lateinit var currentFrag: Fragment
-        var activeOrdersFrag = ActiveTripsFragment(/*viewModelFactory*/)
-        var historyOrdersFrag = HistoryTripsFragment(/*viewModelFactory*/)
+        var activeOrdersFrag = ActiveTripsFragment()
+        var historyOrdersFrag = HistoryTripsFragment()
 
         override fun getItemCount() = 2
 
@@ -66,5 +69,6 @@ class MyTripsFragment : Fragment(R.layout.fragment_my_trips) {
     override fun onDestroyView() {
         super.onDestroyView()
         pager.adapter = null
+        mediator.detach()
     }
 }

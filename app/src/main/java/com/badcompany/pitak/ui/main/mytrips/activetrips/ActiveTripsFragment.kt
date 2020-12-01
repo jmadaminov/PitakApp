@@ -5,12 +5,13 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.badcompany.core.ErrorWrapper
 import com.badcompany.core.ResultWrapper
 import com.badcompany.core.exhaustive
 import com.badcompany.domain.domainmodel.DriverPost
 import com.badcompany.pitak.R
+import com.badcompany.pitak.ui.driver_post.DriverPostActivity
+import com.badcompany.pitak.ui.driver_post.EXTRA_POST_ID
 import com.badcompany.pitak.ui.viewgroups.ActivePostItem
 import com.badcompany.pitak.viewobjects.*
 import com.xwray.groupie.GroupAdapter
@@ -20,62 +21,50 @@ import kotlinx.android.synthetic.main.activity_driver_post.*
 import kotlinx.android.synthetic.main.fragment_active_trips.*
 import kotlinx.android.synthetic.main.fragment_active_trips.swipeRefreshLayout
 import splitties.experimental.ExperimentalSplittiesApi
+import splitties.fragments.start
 
 @AndroidEntryPoint
 class ActiveTripsFragment : Fragment(R.layout.fragment_active_trips) {
 
 
     private val adapter = GroupAdapter<GroupieViewHolder>()
-    val viewmodel: ActiveTripsViewModel by viewModels()
+    val viewModel: ActiveTripsViewModel by viewModels()
 
     @ExperimentalSplittiesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
-        setupRecyclerView()
-        setupListeners()
+        setupViews()
+        attachListeners()
         subscribeObservers()
-        viewmodel.getActivePosts()
+        viewModel.getActivePosts()
     }
 
-    private fun setupRecyclerView() {
-        activeOrdersList.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-
-        activeOrdersList.setHasFixedSize(true)
+    private fun setupViews() {
         activeOrdersList.adapter = adapter
-
     }
 
     @ExperimentalSplittiesApi
-    private fun setupListeners() {
+    private fun attachListeners() {
         swipeRefreshLayout.setOnRefreshListener {
             noActiveOrdersTxt.visibility = View.GONE
-            viewmodel.getActivePosts()
+            viewModel.getActivePosts()
         }
     }
 
     @ExperimentalSplittiesApi
     private fun subscribeObservers() {
 
-        viewmodel.activePostsResponse.observe(viewLifecycleOwner, Observer {
+        viewModel.activePostsResponse.observe(viewLifecycleOwner, Observer {
             val response = it ?: return@Observer
             when (response) {
                 is ErrorWrapper.RespError -> {
                     swipeRefreshLayout.isRefreshing = false
-//                    Snackbar.make(rl_parent,
-//                                  response.message!!,
-//                                  Snackbar.LENGTH_SHORT).show()
-
                     noActiveOrdersTxt.visibility = View.VISIBLE
                     noActiveOrdersTxt.text = response.message
                     activeOrdersList.visibility = View.INVISIBLE
-
                 }
                 is ErrorWrapper.SystemError -> {
-//                    Snackbar.make(rl_parent,
-//                                  response.err.localizedMessage.toString(),
-//                                  Snackbar.LENGTH_SHORT).show()
                     noActiveOrdersTxt.visibility = View.VISIBLE
                     noActiveOrdersTxt.text = response.err.localizedMessage
                     activeOrdersList.visibility = View.INVISIBLE
@@ -95,7 +84,6 @@ class ActiveTripsFragment : Fragment(R.layout.fragment_active_trips) {
                 }
             }.exhaustive
         })
-//
     }
 
     @ExperimentalSplittiesApi
@@ -106,7 +94,11 @@ class ActiveTripsFragment : Fragment(R.layout.fragment_active_trips) {
             noActiveOrdersTxt.text = getString(R.string.no_active_orders)
         } else noActiveOrdersTxt.visibility = View.GONE
 
-        orders.forEach { adapter.add(ActivePostItem(it)) }
+        orders.forEach { post ->
+            adapter.add(ActivePostItem(post) {
+                start<DriverPostActivity> { putExtra(EXTRA_POST_ID, post.id) }
+            })
+        }
         adapter.notifyDataSetChanged()
 
     }
