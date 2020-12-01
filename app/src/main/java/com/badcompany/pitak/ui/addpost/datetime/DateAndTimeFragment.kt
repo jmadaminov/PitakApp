@@ -7,7 +7,6 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -18,14 +17,10 @@ import kotlinx.android.synthetic.main.fragment_date_and_time.*
 import splitties.experimental.ExperimentalSplittiesApi
 import java.text.SimpleDateFormat
 import java.util.*
-import javax.inject.Inject
 
 
-//@FlowPreview
-//@ExperimentalCoroutinesApi
 @AndroidEntryPoint
-class DateAndTimeFragment @Inject constructor(/*private val viewModelFactory: ViewModelProvider.Factory*/) :
-    Fragment(R.layout.fragment_date_and_time) {
+class DateAndTimeFragment : Fragment(R.layout.fragment_date_and_time) {
 
     val args: DateAndTimeFragmentArgs by navArgs()
 
@@ -36,11 +31,8 @@ class DateAndTimeFragment @Inject constructor(/*private val viewModelFactory: Vi
     private var timeFourthPart = false
     val dateFormat = SimpleDateFormat("dd.MM.yyyy")
 
-    private val activityViewModel: AddPostViewModel by activityViewModels() /*{
-        viewModelFactory
-    }
-*/
-    //    val args: PhoneConfirmFragmentArgs by navArgs()
+    private val activityViewModel: AddPostViewModel by activityViewModels()
+
     lateinit var navController: NavController
 
     @ExperimentalSplittiesApi
@@ -61,11 +53,7 @@ class DateAndTimeFragment @Inject constructor(/*private val viewModelFactory: Vi
     }
 
     private fun setupCalendar() {
-//        calendar.state().edit().setMinimumDate(CalendarDay.today()).commit()
-//        calendar.selectedDate = CalendarDay.today()
-
         val cal = Calendar.getInstance()
-
         calendar.minDate = cal.timeInMillis
 
         if (!args.ISFROMPOSTPREVIEW) {
@@ -75,7 +63,6 @@ class DateAndTimeFragment @Inject constructor(/*private val viewModelFactory: Vi
             calendar.date = dateFormat.parse(activityViewModel.departureDate).time
             selectedDate = activityViewModel.departureDate
         }
-
     }
 
 
@@ -101,8 +88,8 @@ class DateAndTimeFragment @Inject constructor(/*private val viewModelFactory: Vi
 //                    .setMaximumDate(CalendarDay.today())
 //                    .commit()
 
-              var cal = Calendar.getInstance().timeInMillis
-                calendar.date =cal
+                var cal = Calendar.getInstance().timeInMillis
+                calendar.date = cal
                 selectedDate = dateFormat.format(cal)
             } else {
 //                val todayPlusThreeMonths = DateTime.now().plusMonths(3)

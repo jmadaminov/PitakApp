@@ -24,26 +24,18 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_destinations.*
 import splitties.experimental.ExperimentalSplittiesApi
 import splitties.fragments.start
-import javax.inject.Inject
 
 
 //@FlowPreview
 //@ExperimentalCoroutinesApi
 @ExperimentalSplittiesApi
 @AndroidEntryPoint
-class DestinationsFragment @Inject constructor(/*private val viewModelFactory: ViewModelProvider.Factory*/) :
-    Fragment(R.layout.fragment_destinations) {
+class DestinationsFragment : Fragment(R.layout.fragment_destinations) {
 
     val args: DestinationsFragmentArgs by navArgs()
 
-    private val viewModel: DestinationsViewModel by viewModels() /*{
-        viewModelFactory
-    }*/
-
-    private val activityViewModel: AddPostViewModel by activityViewModels() /*{
-        viewModelFactory
-    }*/
-
+    private val viewModel: DestinationsViewModel by viewModels()
+    private val activityViewModel: AddPostViewModel by activityViewModels()
     lateinit var navController: NavController
 
 
@@ -203,7 +195,6 @@ class DestinationsFragment @Inject constructor(/*private val viewModelFactory: V
             next.background = bg
         }
     }
-
 
 
 }

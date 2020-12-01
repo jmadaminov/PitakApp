@@ -80,9 +80,9 @@ class SearchTripFragment : Fragment(R.layout.fragment_search_trip) {
 
         calendar.setOnDateChangeListener { view, year, month, dayOfMonth ->
             viewModel.setDate(dayOfMonth, month, year)
-            val cal = Calendar.getInstance()
-            cal.set(year, month, dayOfMonth)
-            date.text = getFormattedDate(cal.timeInMillis)
+            val calTemp = Calendar.getInstance()
+            calTemp.set(year, month, dayOfMonth)
+            date.text = getFormattedDate(calTemp.timeInMillis)
             balloon.dismiss()
 
         }
@@ -115,9 +115,7 @@ class SearchTripFragment : Fragment(R.layout.fragment_search_trip) {
             onQueryAction { queryStr, isFrom ->
                 viewModel.getPlacesFeed(queryStr, isFrom)
             }
-//            targetViewModel { viewModel }
             updateBtnStateAction {
-//                updateNextButtonState()
             }
 
             popUpClickAction { isFrom, item ->
@@ -135,7 +133,6 @@ class SearchTripFragment : Fragment(R.layout.fragment_search_trip) {
         applyFilter.setOnClickListener {
             viewModel.applyFilter()
             slidingLayer.closeLayer(true)
-
         }
 
         range_slider.setOnThumbValueChangeListener { multiSlider, thumb, thumbIndex, value ->

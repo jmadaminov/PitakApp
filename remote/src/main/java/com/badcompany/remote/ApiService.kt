@@ -41,9 +41,6 @@ interface ApiService {
 
     //END FILE UPLOAD API
 
-//    class BufferooResponse {
-//        lateinit var team: List<UserModel>
-//    }
 
 }
 

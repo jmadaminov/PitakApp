@@ -100,16 +100,9 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
     private fun setupListeners() {
         carImage.setOnClickListener {
             val singleSelectionPicker: BSImagePicker =
-                BSImagePicker.Builder("com.badcompany.fileprovider")
-//                    .setMaximumDisplayingImages(24) //Default: Integer.MAX_VALUE. Don't worry about performance :)
+                BSImagePicker.Builder("com.badcompany.pitak.fileprovider")
                     .setSpanCount(3) //Default: 3. This is the number of columns
-//                    .setGridSpacing(Utils.dp2px(2)) //Default: 2dp. Remember to pass in a value in pixel.
-//                    .setPeekHeight(Utils.dp2px(360)) //Default: 360dp. This is the initial height of the dialog.
-                    .hideCameraTile() //Default: show. Set this if you don't want user to take photo.
-                    .hideGalleryTile() //Default: show. Set this if you don't want to further let user select from a gallery app. In such case, I suggest you to set maximum displaying images to Integer.MAX_VALUE.
                     .setTag("IS_AVATAR") //Default: null. Set this if you need to identify which picker is calling back your fragment / activity.
-//                    .dismissOnSelect(true) //Default: true. Set this if you do not want the picker to dismiss right after selection. But then you will have to dismiss by yourself.
-//                    .useFrontCamera(true) //Default: false. Launching camera by intent has no reliable way to open front camera so this does not always work.
                     .build()
             singleSelectionPicker.show(supportFragmentManager, "picker")
         }
@@ -364,12 +357,9 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
 
     override fun onItemClick(item: Item<*>, view: View) {
         val singleSelectionPicker: BSImagePicker =
-            BSImagePicker.Builder("com.badcompany.fileprovider")
+            BSImagePicker.Builder("com.badcompany.pitak.fileprovider")
                 .setSpanCount(3) //Default: 3. This is the number of columns
-                .hideCameraTile() //Default: show. Set this if you don't want user to take photo.
-                .hideGalleryTile() //Default: show. Set this if you don't want to further let user select from a gallery app. In such case, I suggest you to set maximum displaying images to Integer.MAX_VALUE.
                 .setTag(item.getPosition(item).toString())
-                //Default: null. Set this if you need to identify which picker is calling back your fragment / activity.
                 .build()
 
         singleSelectionPicker.show(supportFragmentManager, "picker")
@@ -420,7 +410,7 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
         if (car.fuelType == null) {
             car.fuelType = Constants.FUEL_TYPE_PETROL
         }
-        if ( car.image.link != null) {
+        if (car.image.link != null) {
             carImage.loadImageUrl(car.image!!.link!!)
         }
         if (!car.imageList.isNullOrEmpty()) {
@@ -458,7 +448,7 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
             }
         }
         if (adapter.itemCount < 3) {
-            adapter.add(adapter.itemCount,                        ItemAddPhoto(this))
+            adapter.add(adapter.itemCount, ItemAddPhoto(this))
             adapter.notifyDataSetChanged()
         }
     }

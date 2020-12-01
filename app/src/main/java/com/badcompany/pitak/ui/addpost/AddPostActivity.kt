@@ -24,24 +24,7 @@ import javax.inject.Named
 
 class AddPostActivity : BaseActivity() {
 
-//    @Inject
-//    lateinit var viewModelFactory: AddPostViewModelFactory
-
-
-    private val viewmodel: AddPostViewModel by viewModels() /*{
-        viewModelFactory
-    }*/
-
-  /*  @Inject
-    @Named("AddPostFragmentFactory")
-    lateinit var fragmentFactory: FragmentFactory
-*/
-
-    /*override fun inject() {
-        (application as App).addPostComponent()
-            .inject(this)
-    }*/
-
+    private val viewmodel: AddPostViewModel by viewModels()
 
     @InternalCoroutinesApi
     @ExperimentalCoroutinesApi
@@ -53,7 +36,6 @@ class AddPostActivity : BaseActivity() {
         setContentView(R.layout.activity_add_post)
         setupActionBar()
 //        onRestoreInstanceState()
-
 
         subscribeObservers()
         setupListeners()
