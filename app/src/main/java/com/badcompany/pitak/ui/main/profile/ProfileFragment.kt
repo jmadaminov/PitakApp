@@ -47,19 +47,11 @@ import javax.inject.Inject
 //@FlowPreview
 //@ExperimentalCoroutinesApi
 @AndroidEntryPoint
-class ProfileFragment @Inject constructor(/*private val viewModelFactory: ViewModelProvider.Factory*/) :
-    Fragment(R.layout.fragment_profile) {
+class ProfileFragment :    Fragment(R.layout.fragment_profile) {
 
     private val adapter = GroupAdapter<GroupieViewHolder>()
 
-    private val viewModel: ProfileViewModel by viewModels() /*{
-        viewModelFactory
-    }*/
-
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-    }
+    private val viewModel: ProfileViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

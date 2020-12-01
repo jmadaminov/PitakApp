@@ -29,65 +29,17 @@ import javax.inject.Inject
 import javax.inject.Named
 
 
-class MainActivity : BaseActivity()/*, BottomNavControllerFix.OnNavigationGraphChanged,
-    BottomNavControllerFix.OnNavigationReselectedListener*/ {
-
-//    @Inject
-//    lateinit var viewModelFactory: MainViewModelFactory
-//
-//    @Inject
-//    @Named("MainFragmentFactory")
-//    lateinit var fragmentFactory: FragmentFactory
-
-//    override fun inject() {
-//        (application as App).mainComponent()
-//            .inject(this)
-//    }
-
-//    private val viewModel: MainViewModel by viewModels {
-//        viewModelFactory
-//    }
-
-//    private val bottomNavController by lazy(LazyThreadSafetyMode.NONE) {
-//        BottomNavControllerFix(
-//            this,
-//            R.id.main_fragments_container,
-//            R.id.nav_menu_search,
-//            this)
-//    }
+class MainActivity : BaseActivity() {
 
     @ExperimentalSplittiesApi
     override fun onCreate(savedInstanceState: Bundle?) {
         checkUserLogin()
-//        inject()
         setTheme(R.style.NoActionBar)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-//        app_bar.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
         setupActionBar()
         setupListeners()
         subscribeObservers()
-//        onRestoreInstanceState()
-//        setupBottomNavigationView(savedInstanceState)
-
-//        val mConfig = SlidrConfig.Builder()
-//            .primaryColor(primary)
-//            .position(SlidrPosition.HORIZONTAL)
-//            .velocityThreshold(2400f) //                .distanceThreshold(.25f)
-//            //                .edge(true)
-//            .touchSize(SizeUtils.dpToPx(this, 32))
-//            .sensitivity(1f)
-//            .scrimColor(Color.BLACK)
-//            .scrimStartAlpha(0.8f)
-//            .scrimEndAlpha(0f)
-//            .velocityThreshold(2400F)
-//            .distanceThreshold(0.25f)
-//            .edge(true).edgeSize(0.18f)
-//            .build()
-//
-//        // Attach the Slidr Mechanism to this activity
-//        val slidr = Slidr.attach(this, mConfig)
-//        slidr.unlock()
 
         nav_view.setupWithNavController(findNavController(R.id.nav_host_fragment))
     }
@@ -105,69 +57,10 @@ class MainActivity : BaseActivity()/*, BottomNavControllerFix.OnNavigationGraphC
         }
     }
 
-//    private fun setupBottomNavigationView(savedInstanceState: Bundle?) {
-//        nav_view.setUpNavigation(bottomNavController, this)
-//        if (savedInstanceState == null) {
-//            bottomNavController.setupBottomNavigationBackStack(null)
-//            bottomNavController.onNavigationItemSelected()
-//        } else {
-//            (savedInstanceState[BOTTOM_NAV_BACKSTACK_KEY] as IntArray?)?.let { items ->
-//                val backstack = BottomNavControllerFix.BackStack()
-//                backstack.addAll(items.toTypedArray())
-//                bottomNavController.setupBottomNavigationBackStack(backstack)
-//            }
-//        }
-//    }
-
-
     private fun subscribeObservers() {
     }
 
-//    override fun onReselectNavItem(
-//        navController: NavController,
-//        fragment: Fragment
-//    ) {
-//        Log.d(TAG, "logInfo: onReSelectItem")
-//        when (fragment) {
-//            is SearchTripFragment -> {
-////                navController.navigate(R.id.action_navSearchTripFragment_self)
-//            }
-//
-//            is MyTripsFragment -> {
-////                navController.navigate(R.id.action_nav_menu_my_trips_self)
-//            }
-//
-//            is ProfileFragment -> {
-////                navController.navigate(R.id.action_nav_menu_profile_self)
-//            }
-//            else -> {
-//                // do nothing
-//            }
-//        }
-//    }
-
-//    private fun onRestoreInstanceState() {
-//        val host = supportFragmentManager.findFragmentById(R.id.main_fragments_container)
-//        host?.let { } ?: createNavHost()
-//    }
-
-//    private fun createNavHost() {
-//        val navHost = MainNavHostFragment.create(R.navigation.main_nav_graph)
-//        supportFragmentManager.beginTransaction()
-//            .replace(R.id.main_fragments_container, navHost, getString(
-//                R.string.MainNavHost))
-//            .setPrimaryNavigationFragment(navHost)
-//            .commit()
-//    }
-
-//    override fun onGraphChange() {
-//
-//    }
-
-//    override fun onBackPressed() = bottomNavController.onBackPressed()
-
     private fun setupActionBar() {
-//        setSupportActionBar(tool_bar)
     }
 
     fun showTabLayout() {

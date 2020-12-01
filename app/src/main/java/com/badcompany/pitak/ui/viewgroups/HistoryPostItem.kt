@@ -8,7 +8,7 @@ import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item
 import kotlinx.android.synthetic.main.item_active_post.view.*
 
-class HistoryPostItem(var post: DriverPost, var onPostActionListener: IOnPostActionListener) :
+class HistoryPostItem(var post: DriverPost) :
     Item() {
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         viewHolder.itemView.date.text = post.departureDate

@@ -61,4 +61,6 @@ class ActiveTripsViewModel  @ViewModelInject constructor(val getActiveDriverPost
         }
     }
 
+
+
 }

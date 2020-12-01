@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.item_active_post.view.*
 import splitties.activities.start
 
 
-class ActivePostItem(var post: DriverPost, var onPostActionListener: IOnPostActionListener) :
+class ActivePostItem(var post: DriverPost) :
     Item() {
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {

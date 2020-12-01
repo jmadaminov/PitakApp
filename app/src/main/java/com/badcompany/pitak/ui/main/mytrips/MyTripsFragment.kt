@@ -1,12 +1,10 @@
 package com.badcompany.pitak.ui.main.mytrips
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.badcompany.pitak.R
 import com.badcompany.pitak.ui.main.MainActivity
@@ -15,21 +13,12 @@ import com.badcompany.pitak.ui.main.mytrips.historytrips.HistoryTripsFragment
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_my_trips.*
-import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class MyTripsFragment @Inject constructor(/*private val viewModelFactory: ViewModelProvider.Factory*/) :
-    Fragment(R.layout.fragment_my_trips) {
+class MyTripsFragment : Fragment(R.layout.fragment_my_trips) {
 
-    private val viewModel: MyTripsViewModel by viewModels() /*{
-        viewModelFactory
-    }*/
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-    }
-
+    private val viewModel: MyTripsViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,15 +30,6 @@ class MyTripsFragment @Inject constructor(/*private val viewModelFactory: ViewMo
         setHasOptionsMenu(true)
         (activity as MainActivity).showTabLayout()
 
-//        change_password.setOnClickListener {
-//            findNavController().navigate(R.id.action_accountFragment_to_changePasswordFragment)
-//        }
-//
-//        logout_button.setOnClickListener {
-//            viewModel.logout()
-//        }
-//
-//        subscribeObservers()
         setupViewPager()
     }
 
@@ -83,4 +63,8 @@ class MyTripsFragment @Inject constructor(/*private val viewModelFactory: ViewMo
 
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        pager.adapter = null
+    }
 }
