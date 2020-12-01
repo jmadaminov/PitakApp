@@ -1,94 +1,78 @@
-package com.badcompany.pitak.util;
+package com.badcompany.pitak.util
 
-import android.content.Context;
-import android.util.AttributeSet;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
+import android.content.Context
+import android.util.AttributeSet
+import android.util.Log
+import android.view.View
+import android.widget.LinearLayout
+import android.widget.TextView
+import com.badcompany.pitak.R
 
-import androidx.annotation.Nullable;
+class HorizontalNumberPicker(context: Context?, attrs: AttributeSet?) :
+    LinearLayout(context, attrs) {
+    private val et_number: TextView?
+    var min = 1
+    var max = 8
 
-import com.badcompany.pitak.R;
+    private var onCountChangeListener: ((count: Int) -> Unit)? = null
 
-public class HorizontalNumberPicker extends LinearLayout {
-    private EditText et_number;
-    int min = 1;
-    int max = 8;
+    fun addOnSeatCountChangeListener(onCountChange: (count: Int) -> Unit) {
+        onCountChangeListener = onCountChange
+    }
 
-    public HorizontalNumberPicker(Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
 
-        inflate(context, R.layout.number_picker_horizontal, this);
+    fun setText(text: String) {
+        et_number?.text = text
+    }
 
-        et_number = findViewById(R.id.et_number);
-
-        final Button btn_less = findViewById(R.id.btn_less);
-        btn_less.setOnClickListener(new AddHandler(-1));
-
-        final Button btn_more = findViewById(R.id.btn_more);
-        btn_more.setOnClickListener(new AddHandler(1));
+    fun resetText() {
+        et_number?.text = min.toString()
     }
 
     /***
      * HANDLERS
-     **/
-
-    private class AddHandler implements OnClickListener {
-        final int diff;
-
-        public AddHandler(int diff) {
-            this.diff = diff;
-        }
-
-        @Override
-        public void onClick(View v) {
-            int newValue = getValue() + diff;
+     */
+    private inner class AddHandler(val diff: Int) : OnClickListener {
+        override fun onClick(v: View) {
+            var newValue = value + diff
             if (newValue < min) {
-                newValue = min;
+                newValue = min
             } else if (newValue > max) {
-                newValue = max;
+                newValue = max
+            } else {
+                if (onCountChangeListener != null) onCountChangeListener!!(newValue)
             }
-            et_number.setText(String.valueOf(newValue));
+            et_number!!.text = newValue.toString()
         }
     }
 
     /***
      * GETTERS & SETTERS
      */
-
-    public int getValue() {
-        if (et_number != null) {
-            try {
-                final String value = et_number.getText().toString();
-                return Integer.parseInt(value);
-            } catch (NumberFormatException ex) {
-                Log.e("HorizontalNumberPicker", ex.toString());
+    var value: Int
+        get() {
+            if (et_number != null) {
+                try {
+                    val value = et_number.text.toString()
+                    return value.toInt()
+                } catch (ex: NumberFormatException) {
+                    Log.e("HorizontalNumberPicker", ex.toString())
+                }
+            }
+            return 0
+        }
+        set(value) {
+            if (et_number != null) {
+                et_number.text = value.toString()
             }
         }
-        return 0;
-    }
 
-    public void setValue(final int value) {
-        if (et_number != null) {
-            et_number.setText(String.valueOf(value));
-        }
-    }
-
-    public int getMin() {
-        return min;
-    }
-
-    public void setMin(int min) {
-        this.min = min;
-    }
-
-    public int getMax() {
-        return max;
-    }
-
-    public void setMax(int max) {
-        this.max = max;
+    init {
+        inflate(context, R.layout.number_picker_horizontal, this)
+        et_number = findViewById(R.id.et_number)
+        val btn_less = findViewById<TextView>(R.id.btn_less)
+        btn_less.setOnClickListener(AddHandler(-1))
+        val btn_more = findViewById<TextView>(R.id.btn_more)
+        btn_more.setOnClickListener(AddHandler(1))
     }
 }

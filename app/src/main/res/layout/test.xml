@@ -1,0 +1,158 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/filter_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:elevation="3dp"
+        android:focusable="true"
+        android:orientation="vertical"
+        android:paddingBottom="100dp">
+
+        <!--                    <CalendarView-->
+        <!--                        android:layout_width="match_parent"-->
+        <!--                        android:layout_height="200dp"-->
+        <!--                        android:id="@+id/calendar"/>-->
+
+
+        <ImageView
+            android:id="@+id/resetFilter"
+            android:layout_width="?android:actionBarSize"
+            android:layout_height="?android:actionBarSize"
+            android:layout_gravity="end"
+            android:layout_marginTop="10dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:selectableItemBackground"
+            android:padding="10dp"
+            android:src="@drawable/ic_baseline_replay_24"
+            android:textColor="@color/dark_grey" />
+
+
+        <TextView
+            android:id="@+id/lblPriceRange"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/price_range"
+            android:textSize="14dp" />
+
+        <io.apptik.widget.MultiSlider
+            android:id="@+id/range_slider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            app:drawThumbsApart="true"
+            app:scaleMax="1000000"
+            app:scaleMin="10000"
+            app:scaleStep="10000"
+            app:thumbNumber="2" />
+
+        <CheckBox
+            android:id="@+id/aCCheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:text="@string/air_conditioner"
+            android:textSize="12dp" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/time"
+            android:textSize="14dp" />
+
+        <CheckBox
+            android:id="@+id/timeFirstPart"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_marginStart="12dp"
+            android:text="@string/first_part_of_day_one_line"
+            android:textSize="12dp" />
+
+        <CheckBox
+            android:id="@+id/timeSecondPart"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_marginStart="12dp"
+            android:text="@string/second_part_of_day_one_line"
+            android:textSize="12dp" />
+
+        <CheckBox
+            android:id="@+id/timeThirdPart"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_marginStart="12dp"
+            android:text="@string/third_part_of_day_one_line"
+            android:textSize="12dp" />
+
+        <CheckBox
+            android:id="@+id/timeFourthPart"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_marginStart="12dp"
+            android:text="@string/fourth_part_of_day_one_line"
+            android:textSize="12dp" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"
+            android:gravity="center_horizontal"
+            android:text="@string/number_of_seats"
+            android:textSize="14dp" />
+
+
+        <com.badcompany.pitak.util.HorizontalNumberPicker
+            android:id="@+id/number_picker"
+            android:layout_width="match_parent"
+            android:layout_height="?android:actionBarSize"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp" />
+
+        <!--                <com.shawnlin.numberpicker.NumberPicker-->
+        <!--                    android:id="@+id/number_picker"-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="?android:actionBarSize"-->
+        <!--                    android:layout_marginStart="12dp"-->
+        <!--                    android:layout_marginTop="6dp"-->
+        <!--                    android:layout_marginEnd="12dp"-->
+        <!--                    android:orientation="horizontal"-->
+        <!--                    app:np_dividerColor="@color/colorPrimary"-->
+        <!--                    app:np_max="8"-->
+        <!--                    app:np_min="1"-->
+        <!--                    app:np_orientation="horizontal"-->
+        <!--                    app:np_selectedTextColor="@color/colorPrimary"-->
+        <!--                    app:np_textColor="@color/colorPrimary"-->
+        <!--                    app:np_value="1" />-->
+
+        <Button
+            android:id="@+id/applyFilter"
+            android:layout_width="150dp"
+            android:layout_height="?android:actionBarSize"
+            android:layout_gravity="end"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="12dp"
+            android:gravity="center"
+            android:text="@string/apply"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+
+
+    </LinearLayout>
+</ScrollView>

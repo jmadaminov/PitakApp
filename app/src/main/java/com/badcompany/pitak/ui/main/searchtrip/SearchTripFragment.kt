@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.badcompany.core.ErrorWrapper
 import com.badcompany.core.ResultWrapper
 import com.badcompany.core.exhaustive
+import com.badcompany.domain.domainmodel.MAX_PRICE
+import com.badcompany.domain.domainmodel.MIN_PRICE
 import com.badcompany.domain.domainmodel.PassengerPost
 import com.badcompany.pitak.R
 import com.badcompany.pitak.ui.main.MainActivity
@@ -29,20 +31,15 @@ import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_search_trip.*
 import splitties.experimental.ExperimentalSplittiesApi
-import java.text.SimpleDateFormat
 import java.util.*
-import javax.inject.Inject
 
 @ExperimentalSplittiesApi
 @AndroidEntryPoint
-class SearchTripFragment @Inject constructor(/*private val viewModelFactory: ViewModelProvider.Factory*/) :
-    Fragment(R.layout.fragment_search_trip) {
+class SearchTripFragment : Fragment(R.layout.fragment_search_trip) {
 
     private lateinit var balloon: Balloon
     private val adapter = GroupAdapter<GroupieViewHolder>()
-    private val viewModel: SearchTripViewModel by viewModels() /*{
-        viewModelFactory
-    }*/
+    private val viewModel: SearchTripViewModel by viewModels()
 
     lateinit var autoCompleteManager: AutoCompleteManager
 
@@ -52,18 +49,15 @@ class SearchTripFragment @Inject constructor(/*private val viewModelFactory: Vie
         (activity as MainActivity).hideTabLayout()
         setupAutoCompleteViews()
         setupListeners()
-        setupRecyclerView()
-        viewModel.getPassengerPost()
+        setupViews()
+//        viewModel.getPassengerPost()
         subscribeObservers()
-        lblPriceRange.text =
-            getString(R.string.price_range) + " " + range_slider.getThumb(0).value + " - " + range_slider.getThumb(
-                1).value
 
         setupDateBalloon()
     }
 
     private fun setupDateBalloon() {
-        viewModel.filter.departureDate = SimpleDateFormat("dd.MM.yyyy").format(Date())
+
         date.text = getString(R.string.today)
 
         balloon = Balloon.Builder(requireContext())
@@ -85,12 +79,12 @@ class SearchTripFragment @Inject constructor(/*private val viewModelFactory: Vie
         calendar.minDate = cal.timeInMillis
 
         calendar.setOnDateChangeListener { view, year, month, dayOfMonth ->
-            viewModel.filter.departureDate = "$dayOfMonth.$month.$year"
+            viewModel.setDate(dayOfMonth, month, year)
             val cal = Calendar.getInstance()
             cal.set(year, month, dayOfMonth)
             date.text = getFormattedDate(cal.timeInMillis)
             balloon.dismiss()
-            viewModel.getPassengerPost()
+
         }
     }
 
@@ -127,14 +121,9 @@ class SearchTripFragment @Inject constructor(/*private val viewModelFactory: Vie
             }
 
             popUpClickAction { isFrom, item ->
-                if (isFrom) {
-                    viewModel.filter.fromRegionId = item.place.regionId
-                    viewModel.filter.fromDistrictId = item.place.districtId
-                } else {
-                    viewModel.filter.toRegionId = item.place.regionId
-                    viewModel.filter.toDistrictId = item.place.districtId
-                }
-                viewModel.getPassengerPost()
+                if (isFrom) viewModel.placeFromSelected(item.place)
+                else viewModel.placeToSelected(item.place)
+
             }
         }
     }
@@ -144,32 +133,38 @@ class SearchTripFragment @Inject constructor(/*private val viewModelFactory: Vie
             slidingLayer.openLayer(true)
         }
         applyFilter.setOnClickListener {
-
-//            viewModel.filter.maxPrice = range_slider.getThumb(0).value
-//            viewModel.filter.minPrice = range_slider.getThumb(1).value
+            viewModel.applyFilter()
             slidingLayer.closeLayer(true)
-            checkAppliedFiltersCount()
-            viewModel.getPassengerPost()
+
         }
 
         range_slider.setOnThumbValueChangeListener { multiSlider, thumb, thumbIndex, value ->
             lblPriceRange.text =
-                getString(R.string.price_range) + " " + range_slider.getThumb(0).value + " - " + range_slider.getThumb(
-                    1).value
-
-
+                "${getString(R.string.price_range)} ${range_slider.getThumb(0).value} - ${
+                    range_slider.getThumb(1).value
+                }"
+            viewModel.setFilterPrices(range_slider.getThumb(0).value,
+                                      range_slider.getThumb(1).value)
         }
 
         resetFilter.setOnClickListener {
             slidingLayer.closeLayer(true)
             viewModel.resetFilter()
-            viewModel.getPassengerPost()
+
             filter_count.visibility = View.INVISIBLE
             filter_count.text = ""
+            timeFirstPart.isChecked = false
+            timeSecondPart.isChecked = false
+            timeThirdPart.isChecked = false
+            timeFourthPart.isChecked = false
+            aCCheck.isChecked = false
+            range_slider.min = MIN_PRICE
+            range_slider.max = MAX_PRICE
+            number_picker.resetText()
         }
 
         aCCheck.setOnCheckedChangeListener { buttonView, isChecked ->
-            viewModel.filter.airConditioner = isChecked
+            viewModel.filterAC(isChecked)
         }
 
         date.setOnClickListener {
@@ -177,35 +172,56 @@ class SearchTripFragment @Inject constructor(/*private val viewModelFactory: Vie
             slidingLayer.closeLayer(true)
         }
 
-    }
-
-    private fun checkAppliedFiltersCount() {
-        var count = 1
-        if (range_slider.getThumb(0).value == 10000 && range_slider.getThumb(1).value == 1000000) {
-            viewModel.filter.minPrice = null
-            viewModel.filter.maxPrice = null
-        } else {
-            viewModel.filter.minPrice = range_slider.getThumb(0).value
-            viewModel.filter.maxPrice = range_slider.getThumb(1).value
-            count++
+        timeFirstPart.setOnCheckedChangeListener { buttonView, isChecked ->
+            viewModel.dayTimePartsChecked(timeFirstPart.isChecked,
+                                          timeSecondPart.isChecked,
+                                          timeThirdPart.isChecked,
+                                          timeFourthPart.isChecked)
+        }
+        timeSecondPart.setOnCheckedChangeListener { buttonView, isChecked ->
+            viewModel.dayTimePartsChecked(timeFirstPart.isChecked,
+                                          timeSecondPart.isChecked,
+                                          timeThirdPart.isChecked,
+                                          timeFourthPart.isChecked)
+        }
+        timeThirdPart.setOnCheckedChangeListener { buttonView, isChecked ->
+            viewModel.dayTimePartsChecked(timeFirstPart.isChecked,
+                                          timeSecondPart.isChecked,
+                                          timeThirdPart.isChecked,
+                                          timeFourthPart.isChecked)
+        }
+        timeFourthPart.setOnCheckedChangeListener { buttonView, isChecked ->
+            viewModel.dayTimePartsChecked(timeFirstPart.isChecked,
+                                          timeSecondPart.isChecked,
+                                          timeThirdPart.isChecked,
+                                          timeFourthPart.isChecked)
         }
 
-        if (aCCheck.isChecked) count++
-
-        if (timeFirstPart.isChecked || timeSecondPart.isChecked || timeThirdPart.isChecked || timeFourthPart.isChecked) count++
-
-
-        if (count > 0) {
-            filter_count.visibility = View.VISIBLE
-            filter_count.text = count.toString()
-        } else {
-
-            filter_count.visibility = View.INVISIBLE
-            filter_count.text = "0"
+        number_picker.addOnSeatCountChangeListener { count ->
+            viewModel.seatCountChanged(count)
         }
+
+
     }
+
 
     private fun subscribeObservers() {
+
+        viewModel.filter.observe(viewLifecycleOwner, {
+            viewModel.getPassengerPost()
+        })
+
+        viewModel.count.observe(viewLifecycleOwner, { count ->
+            if (count > 0) {
+                filter_count.visibility = View.VISIBLE
+                filter_count.text = count.toString()
+            } else {
+                filter_count.visibility = View.INVISIBLE
+                filter_count.text = "0"
+            }
+        })
+
+
         viewModel.fromPlacesResponse.observe(viewLifecycleOwner, Observer {
             val response = it ?: return@Observer
 
@@ -282,7 +298,11 @@ class SearchTripFragment @Inject constructor(/*private val viewModelFactory: Vie
 
     }
 
-    private fun setupRecyclerView() {
+    private fun setupViews() {
+        lblPriceRange.text =
+            getString(R.string.price_range) + " " + range_slider.getThumb(0).value + " - " + range_slider.getThumb(
+                1).value
+
         passengerPosts.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 

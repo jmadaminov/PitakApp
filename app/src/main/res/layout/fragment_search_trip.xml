@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:slidingLayer="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -98,10 +99,10 @@
                     android:foreground="?android:selectableItemBackground"
                     android:padding="15dp"
                     android:src="@drawable/ic_sort"
-                    android:tint="@color/colorPrimary"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/filterBtn"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/colorPrimary" />
 
                 <ImageView
                     android:id="@+id/filterBtn"
@@ -113,9 +114,9 @@
                     android:foreground="?android:selectableItemBackground"
                     android:padding="15dp"
                     android:src="@drawable/ic_filter"
-                    android:tint="@color/colorPrimary"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/colorPrimary" />
 
 
                 <TextView
@@ -172,44 +173,41 @@
         android:id="@+id/slidingLayer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingStart="80dp"
         android:elevation="3dp"
-        app:elevation="3dp"
+        android:paddingStart="80dp"
         slidingLayer:changeStateOnTap="true"
-        slidingLayer:offsetDistance="20dp"
-        slidingLayer:previewOffsetDistance="20dp"
-        slidingLayer:shadowSize="40dp"
-        slidingLayer:stickTo="right">
-        <!--        slidingLayer:shadowDrawable="@drawable/sidebar_shadow"-->
+        slidingLayer:stickTo="right"
+        tools:visibility="visible">
 
-        <ScrollView
+        <!--        slidingLayer:shadowSize="40dp"-->
+        <!--        slidingLayer:shadowDrawable="@drawable/sidebar_shadow"-->
+        <!--        slidingLayer:offsetDistance="20dp"-->
+        <!--        slidingLayer:previewOffsetDistance="20dp"-->
+
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="-12dp"
-            android:layout_marginBottom="-12dp"
-            android:background="@color/windowBackground"
-            android:clickable="true"
-            android:focusable="true"
-            android:orientation="vertical">
+            android:layout_marginTop="-5dp"
+            android:layout_marginEnd="-5dp"
+            app:cardElevation="3dp"
+            app:cardUseCompatPadding="true">
 
-
-            <androidx.cardview.widget.CardView
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardElevation="3dp"
-                app:cardUseCompatPadding="true">
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:focusable="true"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:id="@+id/filter_parent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/windowBackground"
                     android:clickable="true"
                     android:elevation="3dp"
                     android:focusable="true"
                     android:orientation="vertical"
                     android:paddingBottom="100dp">
-
 
                     <!--                    <CalendarView-->
                     <!--                        android:layout_width="match_parent"-->
@@ -217,11 +215,25 @@
                     <!--                        android:id="@+id/calendar"/>-->
 
 
+                    <ImageView
+                        android:id="@+id/resetFilter"
+                        android:layout_width="?android:actionBarSize"
+                        android:layout_height="?android:actionBarSize"
+                        android:layout_gravity="end"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="12dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?android:selectableItemBackground"
+                        android:padding="10dp"
+                        android:src="@drawable/ic_baseline_replay_24"
+                        android:textColor="@color/dark_grey" />
+
+
                     <TextView
                         android:id="@+id/lblPriceRange"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
                         android:gravity="center_horizontal"
                         android:text="@string/price_range"
                         android:textSize="14dp" />
@@ -321,43 +333,24 @@
                     <!--                    app:np_textColor="@color/colorPrimary"-->
                     <!--                    app:np_value="1" />-->
 
-                    <TextView
+                    <Button
                         android:id="@+id/applyFilter"
-                        android:layout_width="match_parent"
+                        android:layout_width="150dp"
                         android:layout_height="?android:actionBarSize"
+                        android:layout_gravity="end"
                         android:layout_marginStart="12dp"
                         android:layout_marginTop="12dp"
-                        android:layout_marginEnd="12dp"
-                        android:background="@drawable/selector_neutral_border"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:foreground="?android:selectableItemBackground"
+                        android:layout_marginEnd="24dp"
                         android:gravity="center"
                         android:text="@string/apply"
-                        android:textColor="@color/dark_grey"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
                         android:textSize="20dp" />
 
-                    <TextView
-                        android:id="@+id/resetFilter"
-                        android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginEnd="24dp"
-                        android:background="@drawable/selector_alert_border"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:foreground="?android:selectableItemBackground"
-                        android:gravity="center"
-                        android:text="@string/reset"
-                        android:textColor="@color/dark_grey"
-                        android:textSize="15dp" />
 
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
-        </ScrollView>
-
-
+            </ScrollView>
+        </androidx.cardview.widget.CardView>
     </com.wunderlist.slidinglayer.SlidingLayer>
 
 

@@ -7,6 +7,7 @@ import android.provider.OpenableColumns
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
+import androidx.lifecycle.LiveData
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -15,7 +16,8 @@ import com.bumptech.glide.request.RequestOptions
 /**
  * Created by jahon on 22-May-20
  */
-
+val <T> LiveData<T>.valueNN
+    get() = this.value!!
 
 fun ImageView.loadImageUrl(url: String) {
     val circularProgressDrawable = CircularProgressDrawable(this.context)
