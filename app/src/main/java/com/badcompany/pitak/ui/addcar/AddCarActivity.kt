@@ -1,10 +1,12 @@
 package com.badcompany.pitak.ui.addcar
 
+//import com.badcompany.pitak.di.viewmodels.AddCarViewModelFactory
 import android.app.Activity
 import android.graphics.PorterDuff
 import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
@@ -24,11 +26,10 @@ import com.badcompany.domain.domainmodel.Car
 import com.badcompany.domain.domainmodel.ColorsAndModels
 import com.badcompany.domain.domainmodel.PhotoBody
 import com.badcompany.pitak.R
-//import com.badcompany.pitak.di.viewmodels.AddCarViewModelFactory
 import com.badcompany.pitak.ui.BaseActivity
 import com.badcompany.pitak.ui.viewgroups.ItemAddPhoto
 import com.badcompany.pitak.ui.viewgroups.ItemCarPhoto
-import com.badcompany.pitak.util.getFileName
+import com.badcompany.pitak.util.getRealPathFromURI
 import com.badcompany.pitak.util.loadImageUrl
 import com.badcompany.pitak.viewobjects.CarColorViewObj
 import com.badcompany.pitak.viewobjects.CarViewObj
@@ -46,8 +47,6 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.InternalCoroutinesApi
 import splitties.experimental.ExperimentalSplittiesApi
 import java.io.File
-import java.io.FileInputStream
-import java.io.FileOutputStream
 
 
 class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListener,
@@ -345,14 +344,18 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
     }
 
     override fun onSingleImageSelected(uri: Uri, tag: String) {
-        val parcelFileDescriptor =
-            contentResolver.openFileDescriptor(uri, "r", null) ?: return
+//        val parcelFileDescriptor =
+//            contentResolver.openFileDescriptor(uri, "r", null) ?: return
+//
+//        val inputStream = FileInputStream(parcelFileDescriptor.fileDescriptor)
+//        val file = File(cacheDir, contentResolver.getFileName(uri))
+//        val outputStream = FileOutputStream(file)
+//        inputStream.copyTo(outputStream)
 
-        val inputStream = FileInputStream(parcelFileDescriptor.fileDescriptor)
-        val file = File(cacheDir, contentResolver.getFileName(uri))
-        val outputStream = FileOutputStream(file)
-        inputStream.copyTo(outputStream)
-        viewmodel.uploadCarPhoto(file, tag == "IS_AVATAR")
+
+            viewmodel.uploadCarPhoto(File(uri.getRealPathFromURI(this)), tag == "IS_AVATAR")
+
+
     }
 
     override fun onItemClick(item: Item<*>, view: View) {

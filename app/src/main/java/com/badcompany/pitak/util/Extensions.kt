@@ -2,7 +2,9 @@ package com.badcompany.pitak.util
 
 import android.content.ContentResolver
 import android.content.Context
+import android.database.Cursor
 import android.net.Uri
+import android.provider.MediaStore
 import android.provider.OpenableColumns
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -18,6 +20,21 @@ import com.bumptech.glide.request.RequestOptions
  */
 val <T> LiveData<T>.valueNN
     get() = this.value!!
+
+fun Uri.getRealPathFromURI(context: Context): String? {
+    var result = this.path
+    val cursor: Cursor? =
+        context.contentResolver.query(this, null, null, null, null)
+    if (cursor == null) { // Source is Dropbox or other similar local file path
+        result = this.path
+    } else {
+        if (cursor.moveToFirst()) {
+            result = cursor.getString(cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA))
+        }
+        cursor.close()
+    }
+    return result
+}
 
 fun ImageView.loadImageUrl(url: String) {
     val circularProgressDrawable = CircularProgressDrawable(this.context)
