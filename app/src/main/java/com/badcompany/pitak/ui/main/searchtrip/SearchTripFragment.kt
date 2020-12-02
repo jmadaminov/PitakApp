@@ -47,7 +47,6 @@ class SearchTripFragment : Fragment(R.layout.fragment_search_trip) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
         (activity as MainActivity).hideTabLayout()
-        setupAutoCompleteViews()
         setupListeners()
         setupViews()
 //        viewModel.getPassengerPost()
@@ -296,14 +295,10 @@ class SearchTripFragment : Fragment(R.layout.fragment_search_trip) {
     }
 
     private fun setupViews() {
+        setupAutoCompleteViews()
         lblPriceRange.text =
             getString(R.string.price_range) + " " + range_slider.getThumb(0).value + " - " + range_slider.getThumb(
                 1).value
-
-        passengerPosts.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-
-        passengerPosts.setHasFixedSize(true)
         passengerPosts.adapter = adapter
     }
 
@@ -330,4 +325,10 @@ class SearchTripFragment : Fragment(R.layout.fragment_search_trip) {
     }
 
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        passengerPosts.adapter = null
+
+
+    }
 }

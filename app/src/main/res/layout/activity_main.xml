@@ -43,76 +43,32 @@
         <!--            android:layout_height="wrap_content"-->
         <!--            android:layout_marginTop="?android:actionBarSize">-->
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+
+        <fragment
+            android:id="@+id/nav_host_fragment"
+            android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
-
-            <fragment
-                android:id="@+id/nav_host_fragment"
-                android:name="androidx.navigation.fragment.NavHostFragment"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                app:defaultNavHost="true"
-                app:layout_constraintTop_toTopOf="parent"
-                app:navGraph="@navigation/main_nav_graph" />
+            android:layout_weight="1"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark"
+            app:defaultNavHost="true"
+            app:layout_constraintBottom_toTopOf="@id/bottomAppBar"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navGraph="@navigation/main_nav_graph" />
 
 
-            <!--            <androidx.fragment.app.FragmentContainerView-->
-            <!--                android:id="@+id/main_fragments_container"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="0dp"-->
-            <!--                android:layout_weight="1"-->
-            <!--                app:layout_constraintBottom_toTopOf="@id/nav_view"-->
-            <!--                app:layout_constraintTop_toTopOf="parent" />-->
-
-
-            <!--            <ImageView-->
-            <!--                android:id="@+id/notification"-->
-            <!--                android:layout_width="?android:actionBarSize"-->
-            <!--                android:layout_height="?android:actionBarSize"-->
-            <!--                android:clickable="true"-->
-            <!--                android:focusable="true"-->
-            <!--                android:foreground="?android:selectableItemBackground"-->
-            <!--                android:padding="10dp"-->
-            <!--                android:src="@drawable/ic_baseline_notifications_none_24"-->
-            <!--                android:tint="@color/colorPrimaryDark"-->
-            <!--                app:layout_constraintEnd_toEndOf="parent"-->
-            <!--                app:layout_constraintTop_toTopOf="parent" />-->
-
-            <!--            <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-            <!--                android:id="@+id/addPost"-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_alignParentEnd="true"-->
-            <!--                android:layout_alignParentBottom="true"-->
-            <!--                android:layout_marginEnd="14dp"-->
-            <!--                android:layout_marginBottom="14dp"-->
-            <!--                android:contentDescription="@string/add_post"-->
-            <!--                android:src="@drawable/baseline_add_white_24dp"-->
-            <!--                android:tint="#fff"-->
-            <!--                app:backgroundTint="@color/colorPrimary"-->
-            <!--                app:layout_constraintBottom_toTopOf="@id/nav_view"-->
-            <!--                app:layout_constraintEnd_toEndOf="parent"-->
-            <!--                app:tint="#fff" />-->
-
-            <!--                        <com.google.android.material.bottomnavigation.BottomNavigationView-->
-            <!--                            android:id="@+id/nav_view"-->
-            <!--                            android:layout_width="match_parent"-->
-            <!--                            android:layout_height="wrap_content"-->
-            <!--                            android:layout_alignParentBottom="true"-->
-            <!--                            android:layout_marginStart="0dp"-->
-            <!--                            android:layout_marginEnd="0dp"-->
-            <!--                            android:elevation="3dp"-->
-            <!--                            android:maxHeight="?android:actionBarSize"-->
-            <!--                            app:elevation="3dp"-->
-            <!--                            app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--                            app:menu="@menu/bottom_nav_menu" />-->
-
-
-            <!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <!--            <ImageView-->
+        <!--                android:id="@+id/notification"-->
+        <!--                android:layout_width="?android:actionBarSize"-->
+        <!--                android:layout_height="?android:actionBarSize"-->
+        <!--                android:clickable="true"-->
+        <!--                android:focusable="true"-->
+        <!--                android:foreground="?android:selectableItemBackground"-->
+        <!--                android:padding="10dp"-->
+        <!--                android:src="@drawable/ic_baseline_notifications_none_24"-->
+        <!--                android:tint="@color/colorPrimaryDark"-->
+        <!--                app:layout_constraintEnd_toEndOf="parent"-->
+        <!--                app:layout_constraintTop_toTopOf="parent" />-->
     </LinearLayout>
 
 
@@ -120,227 +76,131 @@
         android:id="@+id/bottomAppBar"
         style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="?android:actionBarSize"
         android:layout_gravity="bottom"
         android:backgroundTint="@color/colorPrimary"
+        android:clipChildren="true"
+        android:clipToPadding="true"
         app:contentInsetEnd="0dp"
         app:contentInsetLeft="0dp"
         app:contentInsetRight="0dp"
         app:contentInsetStart="0dp">
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/nav_view"
+        <!--                <com.google.android.material.bottomnavigation.BottomNavigationView-->
+        <!--                    android:id="@+id/nav_view"-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:elevation="0dp"-->
+        <!--                    app:elevation="0dp"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:background="@android:color/transparent"-->
+        <!--                    app:menu="@menu/bottom_nav_menu" />-->
+
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:elevation="0dp"
-            app:elevation="0dp"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            app:menu="@menu/bottom_nav_menu" />
+            android:layout_height="match_parent"
+            android:background="@drawable/shade_bottom_nav"
+            android:clipChildren="true"
+            android:clipToPadding="true"
+            android:gravity="center_vertical">
+
+
+            <CheckedTextView
+                android:id="@+id/navSearch"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:drawableTop="@drawable/baseline_search_white_24dp"
+                android:focusable="true"
+                android:foreground="?selectableItemBackgroundBorderless"
+                android:gravity="center"
+                android:paddingVertical="5dp"
+                android:checked="true"
+                android:text="@string/search"
+                android:textAlignment="center"
+                android:textColor="@drawable/selector_bottom_nav_item"
+                android:textSize="12dp"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark"
+                app:drawableTint="@drawable/selector_bottom_nav_item" />
+
+
+            <CheckedTextView
+                android:id="@+id/navMyTrips"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="30dp"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:drawableTop="@drawable/baseline_directions_car_white_24dp"
+                android:focusable="true"
+                android:foreground="?selectableItemBackgroundBorderless"
+                android:gravity="center"
+                android:paddingVertical="5dp"
+                android:text="@string/my_trips"
+                android:textAlignment="center"
+                android:textColor="@drawable/selector_bottom_nav_item"
+                android:textSize="12dp"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark"
+                app:drawableTint="@drawable/selector_bottom_nav_item" />
+
+
+            <CheckedTextView
+                android:id="@+id/navNotifications"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="30dp"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:drawableTop="@drawable/ic_baseline_notifications_none_24"
+                android:focusable="true"
+                android:foreground="?selectableItemBackgroundBorderless"
+                android:gravity="center"
+                android:paddingVertical="5dp"
+                android:text="@string/title_notifications"
+                android:textAlignment="center"
+                android:textColor="@drawable/selector_bottom_nav_item"
+                android:textSize="12dp"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark"
+                app:drawableTint="@drawable/selector_bottom_nav_item" />
+
+
+            <CheckedTextView
+                android:id="@+id/navProfile"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:drawableTop="@drawable/baseline_person_outline_white_24dp"
+                android:focusable="true"
+                android:foreground="?selectableItemBackgroundBorderless"
+                android:gravity="center"
+                android:paddingVertical="5dp"
+                android:text="@string/title_profile"
+                android:textAlignment="center"
+                android:textColor="@drawable/selector_bottom_nav_item"
+                android:textSize="12dp"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark"
+                app:drawableTint="@drawable/selector_bottom_nav_item" />
+
+
+        </LinearLayout>
+
     </com.google.android.material.bottomappbar.BottomAppBar>
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addPost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/add_post"
+        android:src="@drawable/baseline_add_white_24dp"
         android:tint="#fff"
         app:backgroundTint="@color/colorPrimary"
         app:layout_anchor="@id/bottomAppBar"
-        app:srcCompat="@drawable/baseline_add_white_24dp"
+        app:layout_constraintBottom_toTopOf="@id/bottomAppBar"
+        app:layout_constraintEnd_toEndOf="parent"
         app:tint="#fff" />
-
-
-
-    <com.wunderlist.slidinglayer.SlidingLayer
-        android:id="@+id/slidingLayer"
-        android:layout_width="match_parent"
-        xmlns:slidingLayer="http://schemas.android.com/apk/res-auto"
-        android:layout_height="match_parent"
-        android:elevation="3dp"
-        android:paddingStart="80dp"
-        app:elevation="3dp"
-        slidingLayer:changeStateOnTap="true"
-        slidingLayer:stickTo="right">
-        <!--        slidingLayer:shadowDrawable="@drawable/sidebar_shadow"-->
-        <!--        slidingLayer:offsetDistance="20dp"-->
-        <!--        slidingLayer:previewOffsetDistance="20dp"-->
-        <!--        slidingLayer:shadowSize="40dp"-->
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="-12dp"
-            android:layout_marginBottom="-12dp"
-            android:background="@color/windowBackground"
-            android:clickable="true"
-            android:focusable="true"
-            android:orientation="vertical">
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardElevation="3dp">
-
-                <LinearLayout
-                    android:id="@+id/filter_parent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/windowBackground"
-                    android:clickable="true"
-                    android:elevation="3dp"
-                    android:focusable="true"
-                    android:orientation="vertical"
-                    android:paddingBottom="100dp">
-
-
-                    <!--                    <CalendarView-->
-                    <!--                        android:layout_width="match_parent"-->
-                    <!--                        android:layout_height="200dp"-->
-                    <!--                        android:id="@+id/calendar"/>-->
-
-
-                    <TextView
-                        android:id="@+id/lblPriceRange"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:gravity="center_horizontal"
-                        android:text="@string/price_range"
-                        android:textSize="14dp" />
-
-                    <io.apptik.widget.MultiSlider
-                        android:id="@+id/range_slider"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
-                        android:layout_marginEnd="12dp"
-                        app:drawThumbsApart="true"
-                        app:scaleMax="1000000"
-                        app:scaleMin="10000"
-                        app:scaleStep="10000"
-                        app:thumbNumber="2" />
-
-                    <CheckBox
-                        android:id="@+id/aCCheck"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
-                        android:layout_marginTop="12dp"
-                        android:text="@string/air_conditioner"
-                        android:textSize="12dp" />
-
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:text="@string/time"
-                        android:textSize="14dp" />
-
-                    <CheckBox
-                        android:id="@+id/timeFirstPart"
-                        android:layout_width="wrap_content"
-                        android:layout_height="35dp"
-                        android:layout_marginStart="12dp"
-                        android:text="@string/first_part_of_day_one_line"
-                        android:textSize="12dp" />
-
-                    <CheckBox
-                        android:id="@+id/timeSecondPart"
-                        android:layout_width="wrap_content"
-                        android:layout_height="35dp"
-                        android:layout_marginStart="12dp"
-                        android:text="@string/second_part_of_day_one_line"
-                        android:textSize="12dp" />
-
-                    <CheckBox
-                        android:id="@+id/timeThirdPart"
-                        android:layout_width="wrap_content"
-                        android:layout_height="35dp"
-                        android:layout_marginStart="12dp"
-                        android:text="@string/third_part_of_day_one_line"
-                        android:textSize="12dp" />
-
-                    <CheckBox
-                        android:id="@+id/timeFourthPart"
-                        android:layout_width="wrap_content"
-                        android:layout_height="35dp"
-                        android:layout_marginStart="12dp"
-                        android:text="@string/fourth_part_of_day_one_line"
-                        android:textSize="12dp" />
-
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        android:layout_marginBottom="6dp"
-                        android:gravity="center_horizontal"
-                        android:text="@string/number_of_seats"
-                        android:textSize="14dp" />
-
-
-                    <com.badcompany.pitak.util.HorizontalNumberPicker
-                        android:id="@+id/number_picker"
-                        android:layout_width="match_parent"
-                        android:layout_height="?android:actionBarSize"
-                        android:layout_marginStart="12dp"
-                        android:layout_marginEnd="12dp" />
-
-                    <!--                <com.shawnlin.numberpicker.NumberPicker-->
-                    <!--                    android:id="@+id/number_picker"-->
-                    <!--                    android:layout_width="match_parent"-->
-                    <!--                    android:layout_height="?android:actionBarSize"-->
-                    <!--                    android:layout_marginStart="12dp"-->
-                    <!--                    android:layout_marginTop="6dp"-->
-                    <!--                    android:layout_marginEnd="12dp"-->
-                    <!--                    android:orientation="horizontal"-->
-                    <!--                    app:np_dividerColor="@color/colorPrimary"-->
-                    <!--                    app:np_max="8"-->
-                    <!--                    app:np_min="1"-->
-                    <!--                    app:np_orientation="horizontal"-->
-                    <!--                    app:np_selectedTextColor="@color/colorPrimary"-->
-                    <!--                    app:np_textColor="@color/colorPrimary"-->
-                    <!--                    app:np_value="1" />-->
-
-                    <TextView
-                        android:id="@+id/applyFilter"
-                        android:layout_width="match_parent"
-                        android:layout_height="?android:actionBarSize"
-                        android:layout_marginStart="12dp"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginEnd="12dp"
-                        android:background="@drawable/selector_neutral_border"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:foreground="?android:selectableItemBackground"
-                        android:gravity="center"
-                        android:text="@string/apply"
-                        android:textColor="@color/dark_grey"
-                        android:textSize="20dp" />
-
-                    <TextView
-                        android:id="@+id/resetFilter"
-                        android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginEnd="24dp"
-                        android:background="@drawable/selector_alert_border"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:foreground="?android:selectableItemBackground"
-                        android:gravity="center"
-                        android:text="@string/reset"
-                        android:textColor="@color/dark_grey"
-                        android:textSize="15dp" />
-
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-        </ScrollView>
-
-
-    </com.wunderlist.slidinglayer.SlidingLayer>
-
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

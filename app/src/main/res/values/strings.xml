@@ -106,5 +106,6 @@
     <string name="send_offer">Send offer</string>
     <string name="message">Message</string>
     <string name="your_price">Your price</string>
+    <string name="search">Search</string>
 
 </resources>

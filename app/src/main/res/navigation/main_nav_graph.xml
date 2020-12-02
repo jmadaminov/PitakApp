@@ -9,22 +9,55 @@
         android:id="@+id/nav_menu_search"
         android:name="com.badcompany.pitak.ui.main.searchtrip.SearchTripFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_search_trip"/>
+        tools:layout="@layout/fragment_search_trip">
 
+        <action
+            android:id="@+id/action_nav_menu_search_to_nav_menu_my_trips"
+            app:destination="@id/nav_menu_my_trips" />
+        <action
+            android:id="@+id/action_nav_menu_search_to_nav_menu_profile"
+            app:destination="@id/nav_menu_profile" />
+        <action
+            android:id="@+id/action_nav_menu_search_self"
+            app:popUpToInclusive="true"
+            app:destination="@id/nav_menu_search" />
+
+    </fragment>
 
     <fragment
         android:id="@+id/nav_menu_my_trips"
         android:name="com.badcompany.pitak.ui.main.mytrips.MyTripsFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_my_trips" />
+        tools:layout="@layout/fragment_my_trips" >
 
+
+        <action
+            android:id="@+id/action_nav_menu_my_trips_to_nav_menu_profile"
+            app:destination="@id/nav_menu_profile" />
+        <action
+            android:id="@+id/action_nav_menu_my_trips_to_nav_menu_search"
+            app:destination="@id/nav_menu_search" />
+        <action
+            android:id="@+id/action_nav_menu_my_trips_self"
+            app:popUpToInclusive="true"
+            app:destination="@id/nav_menu_my_trips" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_menu_profile"
         android:name="com.badcompany.pitak.ui.main.profile.ProfileFragment"
         android:label="@string/title_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
 
-
-
+        <action
+            android:id="@+id/action_nav_menu_profile_to_nav_menu_my_trips"
+            app:destination="@id/nav_menu_my_trips" />
+        <action
+            android:id="@+id/action_nav_menu_profile_to_nav_menu_search"
+            app:destination="@id/nav_menu_search" />
+        <action
+            android:id="@+id/action_nav_menu_profile_self"
+            app:popUpToInclusive="true"
+            app:destination="@id/nav_menu_profile" />
+    </fragment>
 </navigation>

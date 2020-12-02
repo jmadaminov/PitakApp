@@ -15,7 +15,6 @@ interface AuthorizedApiService {
 
     //END PASSENGER POST API
 
-
     //DRIVER POST API
     @Headers("Content-Type:application/json", "Accept: application/json")
     @POST("driver_post/action")
@@ -23,8 +22,8 @@ interface AuthorizedApiService {
 
     @Headers("Content-Type:application/json", "Accept: application/json")
     @PUT("driver_post/action/cancel/{identifier}")
-    suspend fun deletePost(
-        @Path(value = "identifier", encoded = true) identifier: String): PlainResponse
+    suspend fun deletePost(@Path(value = "identifier",
+                                 encoded = true) identifier: String): PlainResponse
 
     @Headers("Content-Type:application/json", "Accept: application/json")
     @PUT("driver_post/action/finish/{identifier}")

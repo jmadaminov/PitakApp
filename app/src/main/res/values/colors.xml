@@ -23,6 +23,7 @@
 
     <color name="neutralColor">#FF393939</color>
     <color name="neutralColorOpacityEighty">#CC393939</color>
+    <color name="colorNavIdle">#80cbc4</color>
 
 
 </resources>

@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.fragment_my_trips.*
 @AndroidEntryPoint
 class MyTripsFragment : Fragment(R.layout.fragment_my_trips) {
 
-    private lateinit var mediator: TabLayoutMediator
+    private var mediator: TabLayoutMediator? = null
     private val viewModel: MyTripsViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,8 +35,7 @@ class MyTripsFragment : Fragment(R.layout.fragment_my_trips) {
     }
 
     private fun setupViewPager() {
-        val pagerAdapter = ScreenSlidePagerAdapter(childFragmentManager)
-        pager.adapter = pagerAdapter
+        pager.adapter = ScreenSlidePagerAdapter(childFragmentManager)
         mediator = TabLayoutMediator(requireActivity().findViewById(R.id.tab_layout),
                                      pager) { tab, position ->
             tab.text = when (position) {
@@ -44,7 +43,7 @@ class MyTripsFragment : Fragment(R.layout.fragment_my_trips) {
                 else -> getString(R.string.history)
             }
         }
-        mediator.attach()
+        mediator?.attach()
     }
 
     private inner class ScreenSlidePagerAdapter(fm: FragmentManager) :
@@ -69,6 +68,7 @@ class MyTripsFragment : Fragment(R.layout.fragment_my_trips) {
     override fun onDestroyView() {
         super.onDestroyView()
         pager.adapter = null
-        mediator.detach()
+        mediator?.detach()
+        mediator = null
     }
 }
