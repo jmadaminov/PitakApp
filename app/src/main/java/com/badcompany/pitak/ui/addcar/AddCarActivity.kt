@@ -6,7 +6,6 @@ import android.graphics.PorterDuff
 import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
-import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
@@ -59,15 +58,7 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
     private lateinit var car: CarViewObj
     val adapter = GroupAdapter<GroupieViewHolder>()
 
-//    @Inject
-//    lateinit var viewModelFactory: AddCarViewModelFactory
-
     private val viewmodel: AddCarViewModel by viewModels()
-
-//    override fun inject() {
-//        (application as App).addCarComponent()
-//            .inject(this)
-//    }
 
     @InternalCoroutinesApi
     @ExperimentalCoroutinesApi
@@ -76,7 +67,6 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
         car = if (intent.extras == null) CarViewObj()
         else intent.getParcelableExtra(Constants.TXT_CAR) as CarViewObj
 
-//        inject()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_car)
         subscribeObservers()
@@ -135,11 +125,10 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
                 car.carModel = IdNameViewObj(carModelsAdapter!!.models[position].id)
                 updateSaveButtonState()
             }
-
         }
+
         carColorSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-            }
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
 
             override fun onItemSelected(parent: AdapterView<*>?,
                                         view: View?,
@@ -148,7 +137,6 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
                 car.carColor = CarColorViewObj(carColorsAdapter!!.colors[position].id)
                 updateSaveButtonState()
             }
-
         }
 
         fuelTypeRadioGroup.setOnCheckedChangeListener { group, checkedId ->
@@ -189,14 +177,13 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
                     saveCar.stopAnimation()
                     setResult(Activity.RESULT_OK)
                     finish()
-//                    (application as App).releaseAddCarComponent()
                 }
                 ResultWrapper.InProgress -> {
                     saveCar.startAnimation()
                 }
             }.exhaustive
-
         })
+
         viewmodel.carAvatarResponse.observe(this, Observer {
             val response = it ?: return@Observer
             when (response) {
@@ -221,8 +208,8 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
                     startLoadingAvatar()
                 }
             }.exhaustive
-
         })
+
         viewmodel.carImgResponse.observe(this, Observer {
             val response = it ?: return@Observer
             when (response) {
@@ -267,8 +254,8 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
                     showColorsModelsLoading()
                 }
             }.exhaustive
-
         })
+
     }
 
     private fun addCarImageToRequestList(photoBody: PhotoBody) {
@@ -333,8 +320,7 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
         adapter.notifyItemChanged(adapter.itemCount - 1)
     }
 
-    private fun makeCarItem(photoBody: PhotoBody) =
-        ItemCarPhoto(photoBody, deleteClickListener)
+    private fun makeCarItem(photoBody: PhotoBody) = ItemCarPhoto(photoBody, deleteClickListener)
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
@@ -353,7 +339,7 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
 //        inputStream.copyTo(outputStream)
 
 
-            viewmodel.uploadCarPhoto(File(uri.getRealPathFromURI(this)), tag == "IS_AVATAR")
+        viewmodel.uploadCarPhoto(File(uri.getRealPathFromURI(this)), tag == "IS_AVATAR")
 
 
     }
@@ -374,10 +360,10 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
 
     private fun makeCarFromCarViewObj(carViewObj: CarViewObj): Car {
         val imgs = arrayListOf<PhotoBody>()
-        carViewObj.imageList?.forEach { imgs.add(PhotoBody(it.id)) }
+        carViewObj.imageList.forEach { imgs.add(PhotoBody(it.id)) }
         return Car(carViewObj.id,
                    carViewObj.carModel!!.id,
-                   carViewObj.image!!.id,
+                   carViewObj.image.id,
                    carViewObj.fuelType,
                    carViewObj.carColor!!.id,
                    carViewObj.carNumber,
@@ -393,7 +379,7 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
                 car.carYear != null &&
                 car.fuelType != null &&
                 car.airConditioner != null &&
-                car.image!!.id != null
+                car.image.id != null
 
         if (saveCar.isEnabled) {
             val bg = saveCar.background
@@ -414,10 +400,10 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
             car.fuelType = Constants.FUEL_TYPE_PETROL
         }
         if (car.image.link != null) {
-            carImage.loadImageUrl(car.image!!.link!!)
+            carImage.loadImageUrl(car.image.link!!)
         }
         if (!car.imageList.isNullOrEmpty()) {
-            car.imageList?.forEach {
+            car.imageList.forEach {
                 adapter.add(ItemCarPhoto(PhotoBody(it.id, link = it.link), deleteClickListener))
             }
         }

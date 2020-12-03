@@ -273,12 +273,14 @@ class SearchTripFragment : Fragment(R.layout.fragment_search_trip) {
             val response = it ?: return@Observer
             when (response) {
                 is ErrorWrapper.RespError -> {
+                    adapter.clear()
                     Snackbar.make(nestedScroll,
                                   response.message!!,
                                   Snackbar.LENGTH_SHORT).show()
 
                 }
                 is ErrorWrapper.SystemError -> {
+                    adapter.clear()
                     Snackbar.make(nestedScroll,
                                   response.err.localizedMessage.toString(),
                                   Snackbar.LENGTH_SHORT).show()
