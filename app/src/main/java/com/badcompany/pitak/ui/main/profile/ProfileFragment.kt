@@ -79,9 +79,7 @@ class ProfileFragment :    Fragment(R.layout.fragment_profile) {
     }
 
     private fun setupCarsRecyclerView() {
-        carsList.layoutManager =
-            LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
-        carsList.setHasFixedSize(true)
+
         carsList.adapter = adapter
     }
 
@@ -273,6 +271,11 @@ class ProfileFragment :    Fragment(R.layout.fragment_profile) {
             Log.d("ON ACTIVITY RESULT   ", "  $resultCode")
             viewModel.getCarList()
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+    carsList.adapter =null
     }
 }
 

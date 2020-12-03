@@ -163,13 +163,18 @@ import splitties.experimental.ExperimentalSplittiesApi
                 EditorInfo.IME_ACTION_DONE -> {
                     to!!.clearFocus()
                     if (toPresenter.getAdr()?.itemCount != 0) {
-                        toFeedCallback.onPopupItemClicked(to!!.editableText, toPresenter.getAdr()!!
+                        toFeedCallback.onPopupItemClicked(to?.editableText, toPresenter.getAdr()!!
                             .getItem(0) as PlaceFeedItemView)
                     }
                 }
             }
             false
         }
+    }
+
+    fun dispose() {
+        toPresenter.disposeAdr()
+        fromPresenter.disposeAdr()
     }
 
 //    @ExperimentalSplittiesApi

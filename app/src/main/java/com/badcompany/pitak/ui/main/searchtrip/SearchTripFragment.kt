@@ -8,7 +8,6 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.badcompany.core.ErrorWrapper
 import com.badcompany.core.ResultWrapper
 import com.badcompany.core.exhaustive
@@ -331,6 +330,6 @@ class SearchTripFragment : Fragment(R.layout.fragment_search_trip) {
         super.onDestroyView()
         passengerPosts.adapter = null
 
-
+        autoCompleteManager.dispose()
     }
 }
