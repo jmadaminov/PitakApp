@@ -59,7 +59,7 @@ class DriverPostViewModel @ViewModelInject constructor(val postRepository: Drive
 
     lateinit var postOffers: LiveData<PagingData<OfferDTO>>
     fun getOffersForPost(id: Long) {
-        postOffers = postOffersRepository.getOffersForPost(id)
+        postOffers = postOffersRepository.getOffersForPost(id).cachedIn(viewModelScope)
     }
 
     val deletePostReponse = SingleLiveEvent<ResultWrapper<String>>()
