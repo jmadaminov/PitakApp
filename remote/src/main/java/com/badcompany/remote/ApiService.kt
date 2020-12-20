@@ -17,7 +17,7 @@ interface ApiService {
     //AUTH API
     @Headers("Content-Type:application/json", "Accept: application/json")
     @POST("prof/mb/auth")
-    suspend fun userLogin(@Body loginReq: LoginRequest): AuthResponse
+    suspend fun userLogin(@Body loginReq: LoginRequest): RespFormatter<UserCredentialsModel>
 
     @Headers("Content-Type:application/json")
     @POST("prof/mb/reg")

@@ -1,7 +1,7 @@
 package com.badcompany.pitak.hilt
 
 import com.badcompany.pitak.BuildConfig
-import com.badcompany.pitak.util.AppPreferences
+import com.badcompany.pitak.util.AppPrefs
 import com.badcompany.remote.ApiServiceFactory
 import com.badcompany.remote.AuthorizedApiService
 import dagger.Module
@@ -16,7 +16,6 @@ import com.badcompany.domain.repository.*
 import com.badcompany.domain.usecases.*
 import com.badcompany.remote.*
 import dagger.Provides
-import javax.inject.Singleton
 
 @Module
 @InstallIn(ActivityComponent::class)
@@ -390,8 +389,8 @@ object ActivityModule {
     @Provides
     fun provideAuthorizedApiService(): AuthorizedApiService {
         return ApiServiceFactory.makeAuthorizedApiService(BuildConfig.DEBUG,
-                                                          AppPreferences.token,
-                                                          AppPreferences.language)
+                                                          AppPrefs.token,
+                                                          AppPrefs.language)
     }
 
 

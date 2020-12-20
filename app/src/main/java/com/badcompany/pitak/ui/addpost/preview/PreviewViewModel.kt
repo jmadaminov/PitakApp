@@ -2,19 +2,16 @@ package com.badcompany.pitak.ui.addpost.preview
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.viewModelScope
-import com.badcompany.core.Constants
 import com.badcompany.core.ResultWrapper
 import com.badcompany.domain.domainmodel.DriverPost
 import com.badcompany.domain.usecases.CreateDriverPost
 import com.badcompany.pitak.ui.BaseViewModel
-import com.badcompany.pitak.util.AppPreferences
 import com.badcompany.pitak.util.SingleLiveEvent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import splitties.experimental.ExperimentalSplittiesApi
-import javax.inject.Inject
 
 
 class PreviewViewModel  @ViewModelInject constructor(private val createDriverPost: CreateDriverPost) :

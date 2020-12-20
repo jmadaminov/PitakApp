@@ -12,22 +12,20 @@ import com.badcompany.core.*
 import com.badcompany.domain.domainmodel.User
 import com.badcompany.pitak.App
 import com.badcompany.pitak.R
-import com.badcompany.pitak.ui.auth.AuthActivity
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_phone_confirm.*
 import kotlinx.android.synthetic.main.fragment_register.*
-import javax.inject.Inject
+import kotlinx.android.synthetic.main.fragment_register.errorMessage
+import kotlinx.android.synthetic.main.fragment_register.ivBack
 
 @AndroidEntryPoint
-class RegisterFragment @Inject constructor(/*private val viewModelFactory: ViewModelProvider.Factory*/) :
-    Fragment(R.layout.fragment_register) {
+class RegisterFragment : Fragment(R.layout.fragment_register) {
 
     val args: RegisterFragmentArgs by navArgs()
 
     lateinit var navController: NavController
 
-    private val viewModel: RegisterViewModel by viewModels() /*{
-        viewModelFactory
-    }*/
+    private val viewModel: RegisterViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,36 +38,10 @@ class RegisterFragment @Inject constructor(/*private val viewModelFactory: ViewM
         setupObservers()
         phone.setMaskedText(args.phone.numericOnly().substring(3, args.phone.numericOnly().length))
 
-//        username.afterTextChanged {
-//            viewModel.loginDataChanged(
-//                username.text.toString(),
-//                password.text.toString()
-//            )
-//        }
+        ivBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
 
-//        password.apply {
-//            afterTextChanged {
-//                viewModel.loginDataChanged(
-//                    username.text.toString(),
-//                    password.text.toString()
-//                )
-//            }
-//
-//            setOnEditorActionListener { _, actionId, _ ->
-//                when (actionId) {
-//                    EditorInfo.IME_ACTION_DONE ->
-//                        viewModel.register(User(
-//                            phone.text.toString(),
-//                            name.text.toString(),
-//                            surname.text.toString(),
-//                            username.text.toString(),
-//                            password.text.toString(),
-//                            false)
-//                        )
-//                }
-//                false
-//            }
-//        }
         register.isEnabled = true
 
         navController = findNavController()
@@ -79,66 +51,28 @@ class RegisterFragment @Inject constructor(/*private val viewModelFactory: ViewM
                                     name.text.toString(),
                                     surname.text.toString(),
                                     App.uuid))
-//            navController.navigate(R.id.action_navRegisterFragment_to_navPhoneConfirmFragment)
         }
 
-//        register.setOnClickListener {
-//            register.startAnimation()
-//            viewModel.register(User(
-//                phone.text.toString(),
-//                name.text.toString(),
-//                surname.text.toString(),/*
-//                    username.text.toString(),
-//                    password.text.toString(),*/
-//                false)
-//            )
-//        }
     }
 
     override fun onResume() {
         super.onResume()
-        (activity as AuthActivity).showActionBar()
     }
 
     private fun setupObservers() {
 
         viewModel.registerFormState.observe(viewLifecycleOwner, Observer {
             val loginState = it ?: return@Observer
-
-            // disable login button unless both username / password is valid
             register.isEnabled = loginState.isDataValid
-
-//            if (loginState.usernameError != null) {
-//                username.error = getString(loginState.usernameError)
-//            }
-//            if (loginState.passwordError != null) {
-//                password.error = getString(loginState.passwordError)
-//            }
         })
 
         viewModel.regResp.observe(viewLifecycleOwner, Observer {
             val response = it ?: return@Observer
-//
-////            loading.visibility = View.GONE
-//            if (loginResult.error != null) {
-//                showLoginFailed(loginResult.error)
-//            }
-//            if (loginResult.success != null) {
-//                updateUiWithUser(loginResult.success)
-//            }
-
             when (response) {
                 is ErrorWrapper.RespError -> {
                     register.revertAnimation()
-                    /*  if (response.code == -1) {
-                          val action =
-                              RegisterFragmentDirections.actionNavRegisterFragmentToNavPhoneConfirmFragment(
-                                  response., viewModel.phoneNum )
-                          findNavController().navigate(action)
-                      } else */if (response.code == Constants.errPhoneFormat) {
+                    if (response.code == Constants.errPhoneFormat) {
                         phone.error = getString(R.string.incorrect_phone_number_format)
-//                        errorMessage.visibility = View.VISIBLE
-//                        errorMessage.text = response.message
                     } else {
                         errorMessage.visibility = View.VISIBLE
                         errorMessage.text = response.message
@@ -166,22 +100,6 @@ class RegisterFragment @Inject constructor(/*private val viewModelFactory: ViewM
 
         })
     }
-
-//    private fun updateUiWithUser(model: RegisterUserView) {
-//        val welcome = getString(R.string.welcome)
-//        val displayName = model.displayName
-//        // TODO : initiate successful logged in experience
-//        Toast.makeText(
-//            requireContext(),
-//            "$welcome $displayName",
-//            Toast.LENGTH_LONG
-//        ).show()
-//    }
-//
-//    private fun showLoginFailed(@StringRes errorString: Int) {
-//        Toast.makeText(requireContext(), errorString, Toast.LENGTH_SHORT).show()
-//    }
-
 
 }
 

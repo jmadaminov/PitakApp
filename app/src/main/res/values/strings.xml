@@ -107,5 +107,8 @@
     <string name="message">Message</string>
     <string name="your_price">Your price</string>
     <string name="search">Search</string>
+    <string name="are_you_sure_to_sign_out">Are you sure you want to sign out?</string>
+    <string name="request_sms_again_in">Didn\'t get the code? You can request again in: 00:%1$s</string>
+    <string name="request_sms_again">Request code again!</string>
 
 </resources>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -11,8 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
         android:layout_marginTop="96dp"
+        android:layout_marginEnd="24dp"
         android:gravity="center"
         android:text="@string/sms_containing_code_has_been_sent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -28,11 +27,12 @@
         android:layout_marginEnd="24dp"
         android:gravity="center_horizontal"
         android:hint="@string/code"
-        android:textColor="#fff"
         android:imeActionLabel="@string/action_sign_in_short"
         android:imeOptions="actionDone"
         android:inputType="textPassword"
         android:selectAllOnFocus="true"
+        android:textColor="#fff"
+        android:textColorHint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/labelSmsSent" />
@@ -44,8 +44,6 @@
         android:layout_height="?android:actionBarSize"
         android:layout_gravity="start"
 
-        app:finalCornerAngle="50dp"
-        app:initialCornerAngle="50dp"     app:spinning_bar_color="#fff"
         android:layout_marginStart="48dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="48dp"
@@ -54,10 +52,13 @@
         android:enabled="false"
         android:text="@string/register"
         android:textColor="#fff"
+        app:finalCornerAngle="50dp"
+        app:initialCornerAngle="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="0.2" />
+        app:layout_constraintVertical_bias="0.2"
+        app:spinning_bar_color="#fff" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

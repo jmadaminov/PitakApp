@@ -1,11 +1,11 @@
 package com.badcompany.remote
 
-import com.badcompany.core.ErrorWrapper
-import com.badcompany.core.ResultWrapper
+import com.badcompany.core.*
 import com.badcompany.data.model.AuthEntity
 import com.badcompany.data.model.UserCredentialsEntity
 import com.badcompany.data.model.UserEntity
 import com.badcompany.data.repository.UserRemote
+import com.badcompany.remote.ResponseFormatter.getFormattedResponseNullable
 import com.badcompany.remote.mapper.AuthMapper
 import com.badcompany.remote.mapper.UserCredentialsMapper
 import com.badcompany.remote.mapper.UserMapper
@@ -22,26 +22,14 @@ class UserRemoteImpl @Inject constructor(private val apiService: ApiService,
                                          private val userMapper: UserMapper,
                                          private val authMapper: AuthMapper) : UserRemote {
 
-//    /**
-//     * Retrieve a list of [BufferooEntity] instances from the [BufferooService].
-//     */
-//    override fun getBufferoos(): Flowable<List<UserEntity>> {
-//        return bufferooService.getBufferoos()
-//                .map { it.team }
-//                .map {
-//                    val entities = mutableListOf<UserEntity>()
-//                    it.forEach { entities.add(entityMapper.mapFromRemote(it)) }
-//                    entities
-//                }
-//    }
-
-    override suspend fun loginUser(phoneNum: String, deviceId: String): ResultWrapper<String> {
+    override suspend fun loginUser(phoneNum: String): ResponseWrapper<UserCredentialsEntity?> {
         return try {
-            val response = apiService.userLogin(LoginRequest(phoneNum, deviceId))
-            if (response.code == 1) ResultWrapper.Success(response.data!!.password!!)
-            else ErrorWrapper.RespError(response.code, response.message)
+            val response =
+                getFormattedResponseNullable { apiService.userLogin(LoginRequest(phoneNum)) }
+            if (response is ResponseSuccess) return ResponseSuccess(null)
+            else return response as ResponseError
         } catch (e: Exception) {
-            ErrorWrapper.SystemError(e)
+            ResponseError(e.localizedMessage)
         }
     }
 

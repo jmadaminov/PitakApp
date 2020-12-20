@@ -23,7 +23,9 @@
             app:destination="@id/navPhoneConfirmFragment" >
             <argument
                 android:name="password"
-                app:argType="string"/>
+                android:defaultValue="@null"
+                app:argType="string"
+                app:nullable="true" />
 
             <argument
                 android:name="phone"
@@ -55,7 +57,9 @@
         tools:layout="@layout/fragment_phone_confirm">
         <argument
             android:name="password"
-            app:argType="string"/>
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true" />
 
         <argument
             android:name="phone"

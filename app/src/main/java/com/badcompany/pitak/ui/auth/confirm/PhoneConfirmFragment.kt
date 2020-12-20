@@ -13,49 +13,52 @@ import com.badcompany.domain.domainmodel.AuthBody
 import com.badcompany.domain.domainmodel.UserCredentials
 import com.badcompany.pitak.App
 import com.badcompany.pitak.R
-import com.badcompany.pitak.ui.auth.AuthActivity
 import com.badcompany.pitak.ui.main.MainActivity
-import com.badcompany.pitak.util.AppPreferences
+import com.badcompany.pitak.util.AppPrefs
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_phone_confirm.*
 import splitties.activities.start
 import splitties.experimental.ExperimentalSplittiesApi
 import splitties.preferences.edit
-import javax.inject.Inject
 
-
-//@FlowPreview
-//@ExperimentalCoroutinesApi
 @AndroidEntryPoint
-class PhoneConfirmFragment @Inject constructor(/*private val viewModelFactory: ViewModelProvider.Factory*/) :
-    Fragment(R.layout.fragment_phone_confirm) {
+class PhoneConfirmFragment : Fragment(R.layout.fragment_phone_confirm) {
 
-    private val viewModel: PhoneConfirmViewModel by viewModels() /*{
-        viewModelFactory
-    }*/
+    private val viewModel: PhoneConfirmViewModel by viewModels()
 
     val args: PhoneConfirmFragmentArgs by navArgs()
     lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.cancelActiveJobs()
+        viewModel.startTimer()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        setupViews()
+
+        attachListeners()
         setupObservers()
+    }
 
-
+    private fun setupViews() {
         navController = findNavController()
         confirm.isEnabled = true
-
         code.setText(args.password)
+    }
 
+    private fun attachListeners() {
         confirm.setOnClickListener {
-            viewModel.confirm(UserCredentials(args.phone.numericOnly(), code.text.toString(), App.uuid) )
+            viewModel.confirm(UserCredentials(args.phone.numericOnly(),
+                                              code.text.toString(),
+                                              App.uuid))
         }
 
+        ivBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 
     @ExperimentalSplittiesApi
@@ -68,8 +71,6 @@ class PhoneConfirmFragment @Inject constructor(/*private val viewModelFactory: V
                     confirm.revertAnimation()
                     if (response.code == Constants.errPhoneFormat) {
                         code.error = getString(R.string.incorrect_phone_number_format)
-//                        errorMessage.visibility = View.VISIBLE
-//                        errorMessage.text = response.message
                     } else {
                         errorMessage.visibility = View.VISIBLE
                         errorMessage.text = response.message
@@ -84,8 +85,6 @@ class PhoneConfirmFragment @Inject constructor(/*private val viewModelFactory: V
                     confirm.revertAnimation()
                     saveCredentials(response)
                     context?.start<MainActivity> { }
-
-//                    (appCtx as App).releaseAuthComponent()
                 }
                 ResultWrapper.InProgress -> {
                     errorMessage.visibility = View.INVISIBLE
@@ -94,11 +93,24 @@ class PhoneConfirmFragment @Inject constructor(/*private val viewModelFactory: V
             }.exhaustive
 
         })
+
+        viewModel.respRegainCode.observe(viewLifecycleOwner) {
+            when (it) {
+                is ResponseError -> {
+                    tvRequestCodeAgain.isClickable = true
+                    tvRequestCodeAgain.text = getString(R.string.request_sms_again)
+                }
+                is ResponseSuccess -> {
+                    tvRequestCodeAgain.isClickable = false
+                    viewModel.startTimer()
+                }
+            }.exhaustive
+        }
     }
 
     @ExperimentalSplittiesApi
     private fun saveCredentials(response: ResultWrapper.Success<AuthBody>) {
-        AppPreferences.edit {
+        AppPrefs.edit {
             token = response.value.jwt!!
             name = response.value.name!!
             surname = response.value.surname!!
@@ -109,7 +121,6 @@ class PhoneConfirmFragment @Inject constructor(/*private val viewModelFactory: V
 
     override fun onResume() {
         super.onResume()
-        (activity as AuthActivity).showActionBar()
     }
 
 

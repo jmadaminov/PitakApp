@@ -2,20 +2,17 @@ package com.badcompany.pitak.ui.main.mytrips.activetrips
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.viewModelScope
-import com.badcompany.core.Constants
 import com.badcompany.core.ResultWrapper
 import com.badcompany.domain.domainmodel.DriverPost
 import com.badcompany.domain.usecases.DeleteDriverPost
 import com.badcompany.domain.usecases.FinishDriverPost
 import com.badcompany.domain.usecases.GetActiveDriverPost
 import com.badcompany.pitak.ui.BaseViewModel
-import com.badcompany.pitak.util.AppPreferences
 import com.badcompany.pitak.util.SingleLiveEvent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import splitties.experimental.ExperimentalSplittiesApi
-import javax.inject.Inject
 
 class ActiveTripsViewModel  @ViewModelInject constructor(val getActiveDriverPost: GetActiveDriverPost,
                                                          val deletePost: DeleteDriverPost,

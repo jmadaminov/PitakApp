@@ -13,6 +13,9 @@ import androidx.lifecycle.LiveData
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.delay
 
 
 /**
@@ -20,6 +23,23 @@ import com.bumptech.glide.request.RequestOptions
  */
 val <T> LiveData<T>.valueNN
     get() = this.value!!
+
+fun CoroutineScope.launchPeriodicAsync(
+    repeatMillis: Long,
+    maxMillis: Long,
+    action: (Long) -> Unit
+) = this.async {
+    if (repeatMillis > 0 && maxMillis > 0 && repeatMillis < maxMillis) {
+        var tempMillis = 0L
+        while (repeatMillis < maxMillis) {
+            action(maxMillis - tempMillis)
+            delay(repeatMillis)
+            tempMillis += repeatMillis
+        }
+    } else {
+        action(0)
+    }
+}
 
 fun Uri.getRealPathFromURI(context: Context): String? {
     var result = this.path

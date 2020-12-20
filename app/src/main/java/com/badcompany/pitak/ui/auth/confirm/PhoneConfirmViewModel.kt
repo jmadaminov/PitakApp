@@ -1,24 +1,31 @@
 package com.badcompany.pitak.ui.auth.confirm
 
 import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.badcompany.core.ResponseWrapper
 import com.badcompany.core.ResultWrapper
 import com.badcompany.core.numericOnly
 import com.badcompany.domain.domainmodel.AuthBody
 import com.badcompany.domain.domainmodel.UserCredentials
+import com.badcompany.domain.usecases.LogUserIn
 import com.badcompany.domain.usecases.SmsConfirm
-import com.badcompany.pitak.App
 import com.badcompany.pitak.ui.BaseViewModel
 import com.badcompany.pitak.util.SingleLiveEvent
-import kotlinx.coroutines.Dispatchers
+import com.badcompany.pitak.util.launchPeriodicAsync
+import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import javax.inject.Inject
 
 
-class PhoneConfirmViewModel  @ViewModelInject constructor(private val smsConfirm: SmsConfirm) :
+class PhoneConfirmViewModel @ViewModelInject constructor(private val smsConfirm: SmsConfirm,
+                                                         private val logUserIn: LogUserIn) :
     BaseViewModel() {
+
+    companion object {
+        const val REGAIN_CODE_INTERVAL = 60000L
+    }
+
     val confirmResponse = SingleLiveEvent<ResultWrapper<AuthBody>>()
 
     fun confirm(userCredentials: UserCredentials) {
@@ -32,13 +39,38 @@ class PhoneConfirmViewModel  @ViewModelInject constructor(private val smsConfirm
 
     }
 
-    // A placeholder username validation check
-    private fun isCodeValid(code: String): Boolean {
-        return code.length == 5
+    private val _requestSmsCountDown = MutableLiveData<Int>()
+    val requestSmsCountDown: LiveData<Int> get() = _requestSmsCountDown
+
+    var counterJob = Job()
+    fun startTimer() {
+        CoroutineScope(Dispatchers.IO + counterJob).launchPeriodicAsync(1000,
+                                                                        REGAIN_CODE_INTERVAL) { timeLeft ->
+            CoroutineScope(Main).launch {
+                _requestSmsCountDown.value = (timeLeft / 1000).toInt()
+            }
+            if (timeLeft == 0L) {
+                resetTimer()
+            }
+        }
     }
 
-    // A placeholder password validation check
-    private fun isPasswordValid(password: String): Boolean {
-        return password.length > 5
+    fun resetTimer() {
+        counterJob.cancel()
+        counterJob = Job()
     }
+
+
+    private var _respRegainCodeSuccess = MutableLiveData<ResponseWrapper<UserCredentials?>>()
+    val respRegainCode: LiveData<ResponseWrapper<UserCredentials?>> get() = _respRegainCodeSuccess
+
+    fun requestCodeAgain(phoneNum: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val response = logUserIn.execute(phoneNum.numericOnly())
+            withContext(Main) {
+                _respRegainCodeSuccess.value = response
+            }
+        }
+    }
+
 }

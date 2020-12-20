@@ -4,30 +4,18 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
-import com.badcompany.core.Constants
-import com.badcompany.core.ErrorWrapper
-import com.badcompany.core.ResultWrapper
-import com.badcompany.core.exhaustive
+import com.badcompany.core.*
 import com.badcompany.pitak.R
-import com.badcompany.pitak.ui.auth.AuthActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_login.*
-import javax.inject.Inject
 
 
-//@FlowPreview
-//@ExperimentalCoroutinesApi
 @AndroidEntryPoint
-class LoginFragment @Inject constructor(/*private val viewModelFactory: ViewModelProvider.Factory*/) :
-    Fragment(R.layout.fragment_login) {
+class LoginFragment : Fragment(R.layout.fragment_login) {
 
-    private val viewModel: LoginViewModel by viewModels()/* {
-        viewModelFactory
-    }*/
-
+    private val viewModel: LoginViewModel by viewModels()
 
     lateinit var navController: NavController
 
@@ -42,68 +30,24 @@ class LoginFragment @Inject constructor(/*private val viewModelFactory: ViewMode
 
         setupObservers()
 
-        /*    phone.addTextChangedListener(PhoneNumberFormattingTextWatcher())
-
-            phone.afterTextChanged {
-                viewModel.loginDataChanged(
-                    phone.text.toString()
-    //                password.text.toString()
-                )
-            }
-
-            password.apply {
-                afterTextChanged {
-                    viewModel.loginDataChanged(
-                        phone.text.toString(),
-                        password.text.toString()
-                    )
-                }
-
-                setOnEditorActionListener { _, actionId, _ ->
-                    when (actionId) {
-                        EditorInfo.IME_ACTION_DONE ->
-                            viewModel.login(
-                                phone.text.toString(),
-                                password.text.toString()
-                            )
-                    }
-                    false
-                }
-
-                login.setOnClickListener {
-                    viewModel.login(phone.text.toString(), password.text.toString())
-                }
-            }
-    */
-
         navController = findNavController()
 
         login.isEnabled = true
         login.setOnClickListener {
             viewModel.login(phone.text.toString())
-//            navController.navigate(R.id.action_navLoginFragment_to_navRegisterFragment)
         }
     }
 
     override fun onResume() {
         super.onResume()
-        (activity as AuthActivity).hideActionBar()
     }
 
     private fun setupObservers() {
-//        viewModel.loginFormState.observe(viewLifecycleOwner, Observer {
-//            val loginState = it ?: return@Observer
-//            if (loginState.phoneError != null) {
-//                phone.error = getString(loginState.phoneError)
-//            }
-//
-//        })
-
-        viewModel.loginResponse.observe(viewLifecycleOwner, Observer {
-            val response = it ?: return@Observer
+        viewModel.loginResponse.observe(viewLifecycleOwner) {
+            val response = it ?: return@observe
 
             when (response) {
-                is ErrorWrapper.RespError -> {
+                is ResponseError -> {
                     login.revertAnimation()
                     if (response.code == -1) {
                         val action =
@@ -112,35 +56,33 @@ class LoginFragment @Inject constructor(/*private val viewModelFactory: ViewMode
                         findNavController().navigate(action)
                     } else if (response.code == Constants.errPhoneFormat) {
                         phone.error = getString(R.string.incorrect_phone_number_format)
-//                        errorMessage.visibility = View.VISIBLE
-//                        errorMessage.text = response.message
                     } else {
                         errorMessage.visibility = View.VISIBLE
                         errorMessage.text = response.message
                     }
                 }
-                is ErrorWrapper.SystemError -> {
-                    errorMessage.visibility = View.VISIBLE
-                    errorMessage.text = response.err.localizedMessage
-                    login.revertAnimation()
-                }
-                is ResultWrapper.Success -> {
+                is ResponseSuccess -> {
                     login.revertAnimation()
                     val action =
                         LoginFragmentDirections.actionNavLoginFragmentToNavPhoneConfirmFragment(
-                            response.value,
-                            viewModel.phoneNum)
+                            password = response.value?.password,
+                            phone = viewModel.phoneNum)
                     findNavController().navigate(action)
                 }
-                ResultWrapper.InProgress -> {
-                    errorMessage.visibility = View.INVISIBLE
-                    login.startAnimation()
-                }
             }.exhaustive
+        }
+        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            if (isLoading ?: return@observe) {
+                errorMessage.visibility = View.INVISIBLE
+                login.startAnimation()
+            } else {
+                login.revertAnimation()
+            }
 
-        })
+        }
+
+
     }
-
 }
 
 

@@ -1,7 +1,6 @@
 package com.badcompany.data
 
-import com.badcompany.core.ErrorWrapper
-import com.badcompany.core.ResultWrapper
+import com.badcompany.core.*
 import com.badcompany.data.mapper.AuthMapper
 import com.badcompany.data.mapper.UserCredentialsMapper
 import com.badcompany.data.mapper.UserMapper
@@ -23,13 +22,24 @@ class UserRepositoryImpl @Inject constructor(private val factory: UserDataStoreF
                                              private val authMapper: AuthMapper) :
     UserRepository {
 
-    override suspend fun loginUser(phoneNum: String, deviceId: String): ResultWrapper<String> {
-        return factory.retrieveDataStore(false).userLogin(phoneNum, deviceId)
+    override suspend fun loginUser(phoneNum: String): ResponseWrapper<UserCredentials?> {
+
+        val response = factory.retrieveDataStore(false)
+            .userLogin(phoneNum)
+
+        return when (response) {
+            is ResponseError -> response
+            is ResponseSuccess -> {
+                response.value?.let {
+                    ResponseSuccess(userCredentialsMapper.mapFromEntity(response.value!!))
+                } ?: ResponseSuccess(null)
+            }
+
+        }
     }
 
-    override suspend fun registerUser(user: User): ResultWrapper<String> {
-        return factory.retrieveDataStore(false).userRegister(userMapper.mapToEntity(user))
-    }
+    override suspend fun registerUser(user: User) =
+        factory.retrieveDataStore(false).userRegister(userMapper.mapToEntity(user))
 
     override suspend fun smsConfirm(userCredentials: UserCredentials): ResultWrapper<AuthBody> {
 
@@ -43,7 +53,6 @@ class UserRepositoryImpl @Inject constructor(private val factory: UserDataStoreF
             ResultWrapper.InProgress -> ResultWrapper.InProgress
         }
 
-//        return factory.retrieveDataStore(false).confirmSms(userCredentialsMapper.mapToEntity(userCredentials))
     }
 
 

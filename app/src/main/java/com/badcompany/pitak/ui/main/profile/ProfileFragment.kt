@@ -1,7 +1,6 @@
 package com.badcompany.pitak.ui.main.profile
 
 import android.app.Activity.RESULT_OK
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -10,8 +9,6 @@ import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.badcompany.core.Constants.CODE_ADD_CAR
 import com.badcompany.core.Constants.TXT_CAR
 import com.badcompany.core.ErrorWrapper
@@ -22,16 +19,17 @@ import com.badcompany.pitak.R
 import com.badcompany.pitak.ui.addcar.AddCarActivity
 import com.badcompany.pitak.ui.addcar.MyItemClickListener
 import com.badcompany.pitak.ui.auth.AuthActivity
+import com.badcompany.pitak.ui.feedback.FeedbackActivity
+import com.badcompany.pitak.ui.interfaces.IOnSignOut
 import com.badcompany.pitak.ui.main.MainActivity
 import com.badcompany.pitak.ui.viewgroups.CarItemView
 import com.badcompany.pitak.ui.viewgroups.ItemAddCar
 import com.badcompany.pitak.ui.viewgroups.LoadingItem
-import com.badcompany.pitak.util.AppPreferences
+import com.badcompany.pitak.util.AppPrefs
 import com.badcompany.pitak.viewobjects.CarColorViewObj
 import com.badcompany.pitak.viewobjects.CarViewObj
 import com.badcompany.pitak.viewobjects.IdNameViewObj
 import com.badcompany.pitak.viewobjects.ImageViewObj
-import com.badcompany.pitak.ui.feedback.FeedbackActivity
 import com.google.android.material.snackbar.Snackbar
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.OnItemClickListener
@@ -42,12 +40,11 @@ import kotlinx.android.synthetic.main.item_car.view.*
 import splitties.experimental.ExperimentalSplittiesApi
 import splitties.fragments.start
 import splitties.preferences.edit
-import javax.inject.Inject
 
 //@FlowPreview
 //@ExperimentalCoroutinesApi
 @AndroidEntryPoint
-class ProfileFragment :    Fragment(R.layout.fragment_profile) {
+class ProfileFragment : Fragment(R.layout.fragment_profile), IOnSignOut {
 
     private val adapter = GroupAdapter<GroupieViewHolder>()
 
@@ -73,8 +70,8 @@ class ProfileFragment :    Fragment(R.layout.fragment_profile) {
     private fun setupViews() {
         (activity as MainActivity).hideTabLayout()
         cardDriver.setBackgroundResource(R.drawable.stroke_rounded_bottom_corners)
-        nameSurname.text = "${AppPreferences.name} ${AppPreferences.surname}"
-        phone.text = "+${AppPreferences.phone}"
+        nameSurname.text = "${AppPrefs.name} ${AppPrefs.surname}"
+        phone.text = "+${AppPrefs.phone}"
 
     }
 
@@ -181,7 +178,7 @@ class ProfileFragment :    Fragment(R.layout.fragment_profile) {
                     popUpMenu.setOnMenuItemClickListener { menuItem ->
                         when (menuItem.itemId) {
                             R.id.delete -> {
-                                viewModel.deleteCar( carDetails.id!!, pos)
+                                viewModel.deleteCar(carDetails.id!!, pos)
                             }
                             R.id.edit -> {
                                 val intent = Intent(context, AddCarActivity::class.java)
@@ -204,7 +201,7 @@ class ProfileFragment :    Fragment(R.layout.fragment_profile) {
                                 startActivityForResult(intent, CODE_ADD_CAR)
                             }
                             R.id.setDefault -> {
-                                viewModel.setDefault( carDetails.id!!, pos)
+                                viewModel.setDefault(carDetails.id!!, pos)
                             }
                             else -> {
 
@@ -244,20 +241,14 @@ class ProfileFragment :    Fragment(R.layout.fragment_profile) {
 
 
         btnFeedback.setOnClickListener {
-            start<FeedbackActivity>{}
+            start<FeedbackActivity> {}
         }
 
 
         signOut.setOnClickListener {
-            requireActivity().finish()
-            AppPreferences.edit {
-                token = ""
-                name = ""
-                surname = ""
-                phone = ""
-            }
-            start<AuthActivity> {}
-//            (requireActivity().applicationContext as App).releaseMainComponent()
+            val dialog = DialogSignOut()
+            dialog.setTargetFragment(this, 88)
+            dialog.show(parentFragmentManager, "")
         }
 
 
@@ -275,7 +266,18 @@ class ProfileFragment :    Fragment(R.layout.fragment_profile) {
 
     override fun onDestroyView() {
         super.onDestroyView()
-    carsList.adapter =null
+        carsList.adapter = null
+    }
+
+    override fun onSignOut() {
+        requireActivity().finish()
+        AppPrefs.edit {
+            token = ""
+            name = ""
+            surname = ""
+            phone = ""
+        }
+        start<AuthActivity> {}
     }
 }
 
