@@ -13,6 +13,7 @@ import com.badcompany.pitak.ui.BaseActivity
 import com.badcompany.pitak.ui.addpost.AddPostActivity
 import com.badcompany.pitak.ui.auth.AuthActivity
 import com.badcompany.pitak.ui.main.mytrips.MyTripsFragment
+import com.badcompany.pitak.ui.main.notifications.NotificationsFragment
 import com.badcompany.pitak.ui.main.profile.ProfileFragment
 import com.badcompany.pitak.ui.main.searchtrip.SearchTripFragment
 import com.badcompany.pitak.util.*
@@ -48,6 +49,8 @@ class MainActivity : BaseActivity() {
                 navController.navigate(R.id.action_nav_menu_profile_to_nav_menu_search)
             } else if ((navController.currentDestination as FragmentNavigator.Destination).className == MyTripsFragment::class.qualifiedName) {
                 navController.navigate(R.id.action_nav_menu_my_trips_to_nav_menu_search)
+            }else if ((navController.currentDestination as FragmentNavigator.Destination).className == NotificationsFragment::class.qualifiedName) {
+                navController.navigate(R.id.action_nav_menu_notifications_to_nav_menu_search)
             }
             uncheckAllButMe(navSearch)
         }
@@ -57,6 +60,8 @@ class MainActivity : BaseActivity() {
                 navController.navigate(R.id.action_nav_menu_search_to_nav_menu_my_trips)
             } else if ((navController.currentDestination as FragmentNavigator.Destination).className == ProfileFragment::class.qualifiedName) {
                 navController.navigate(R.id.action_nav_menu_profile_to_nav_menu_my_trips)
+            } else if ((navController.currentDestination as FragmentNavigator.Destination).className == NotificationsFragment::class.qualifiedName) {
+                navController.navigate(R.id.action_nav_menu_notifications_to_nav_menu_my_trips)
             }
             uncheckAllButMe(navMyTrips)
         }
@@ -65,11 +70,20 @@ class MainActivity : BaseActivity() {
                 navController.navigate(R.id.action_nav_menu_search_to_nav_menu_profile)
             } else if ((navController.currentDestination as FragmentNavigator.Destination).className == MyTripsFragment::class.qualifiedName) {
                 navController.navigate(R.id.action_nav_menu_my_trips_to_nav_menu_profile)
+            } else if ((navController.currentDestination as FragmentNavigator.Destination).className == NotificationsFragment::class.qualifiedName) {
+                navController.navigate(R.id.action_nav_menu_notifications_to_nav_menu_profile)
             }
             uncheckAllButMe(navProfile)
         }
         navNotifications.setOnClickListener {
-            uncheckAllButMe(navNotifications)
+            if ((navController.currentDestination as FragmentNavigator.Destination).className == SearchTripFragment::class.qualifiedName) {
+                navController.navigate(R.id.action_nav_menu_search_to_nav_menu_notifications)
+            } else if ((navController.currentDestination as FragmentNavigator.Destination).className == MyTripsFragment::class.qualifiedName) {
+                navController.navigate(R.id.action_nav_menu_my_trips_to_nav_menu_notifications)
+            } else if ((navController.currentDestination as FragmentNavigator.Destination).className == ProfileFragment::class.qualifiedName) {
+                navController.navigate(R.id.action_nav_menu_profile_to_nav_menu_notifications)
+            }
+            uncheckAllButMe(navProfile)
         }
     }
 

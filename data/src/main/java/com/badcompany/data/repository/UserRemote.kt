@@ -23,5 +23,5 @@ interface UserRemote {
 
     suspend  fun registerUser(user: UserEntity): ResultWrapper<String>
     suspend  fun confirmUser(user: UserCredentialsEntity): ResultWrapper<AuthEntity>
-
+    suspend fun updateUserInfo(name: String, surName: String, uploadedAvatarId: Long?): ResponseWrapper<Any?>
 }

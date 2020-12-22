@@ -1,17 +1,28 @@
 package com.badcompany.pitak.hilt
 //import com.example.benefit.ui.auth.LoginFragmentFactory
-import com.badcompany.data.*
-import com.badcompany.data.mapper.*
-import com.badcompany.data.repository.*
-import com.badcompany.data.source.*
-import com.badcompany.domain.repository.*
-import com.badcompany.domain.usecases.*
-import com.badcompany.remote.*
+import com.badcompany.data.UserRepositoryImpl
+import com.badcompany.data.mapper.AuthMapper
+import com.badcompany.data.mapper.UserCredentialsMapper
+import com.badcompany.data.mapper.UserMapper
+import com.badcompany.data.repository.UserRemote
+import com.badcompany.data.source.UserDataStoreFactory
+import com.badcompany.data.source.UserRemoteDataStore
+import com.badcompany.domain.repository.UserRepository
+import com.badcompany.domain.usecases.LogUserIn
+import com.badcompany.domain.usecases.RegisterUser
+import com.badcompany.domain.usecases.SmsConfirm
+import com.badcompany.pitak.BuildConfig
+import com.badcompany.pitak.util.AppPrefs
+import com.badcompany.remote.ApiService
+import com.badcompany.remote.ApiServiceFactory
+import com.badcompany.remote.AuthorizedApiService
+import com.badcompany.remote.UserRemoteImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import splitties.experimental.ExperimentalSplittiesApi
 import javax.inject.Singleton
 
 @ExperimentalCoroutinesApi
@@ -84,8 +95,9 @@ object AppModule {
     fun provideUserRemote(apiService: ApiService,
                           userCredMapper: com.badcompany.remote.mapper.UserCredentialsMapper,
                           userMapper: com.badcompany.remote.mapper.UserMapper,
-                          authMapper: com.badcompany.remote.mapper.AuthMapper): UserRemote {
-        return UserRemoteImpl(apiService, userCredMapper, userMapper, authMapper)
+                          authMapper: com.badcompany.remote.mapper.AuthMapper,
+                          authApiService: AuthorizedApiService): UserRemote {
+        return UserRemoteImpl(apiService, authApiService, userCredMapper, userMapper, authMapper)
     }
 
 

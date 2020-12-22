@@ -119,6 +119,11 @@ interface AuthorizedApiService {
     suspend fun offerARide(@Body myOfferBody: DriverOfferBody): RespFormatter<Any>
 
 
+    @Headers("Content-Type:application/json", "Accept: application/json")
+    @PUT("prof/action/detail/mb")
+    suspend fun updateUserInfo(@Body reqUpdateProfileInfo: ReqUpdateProfileInfo): RespFormatter<Any>
+
+
 //    @Headers("Content-Type:application/json", "Accept: application/json")
 //    @GET("passenger_post/action/{id}")
 //    suspend fun getPassengerPostById(@Path(value = "id",

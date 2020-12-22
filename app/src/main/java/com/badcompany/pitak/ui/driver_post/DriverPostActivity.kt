@@ -203,8 +203,8 @@ const val EXTRA_POST_ID = "POST_ID"
                                   post.to.regionId,
                                   post.to.lat,
                                   post.to.lon,
-                                  post.from.regionName,
-                                  post.from.name)
+                                  post.to.regionName,
+                                  post.to.name)
 
             start<AddPostActivity> {
 

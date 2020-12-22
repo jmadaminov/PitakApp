@@ -40,21 +40,11 @@ class PreviewFragment @Inject constructor(/*private val viewModelFactory: ViewMo
     private var placeFrom: Place? = null
     private var placeTo: Place? = null
 
-    private val activityViewModel: AddPostViewModel by activityViewModels() /*{
-        viewModelFactory
-    }*/
+    private val activityViewModel: AddPostViewModel by activityViewModels()
 
-    private val viewModel: PreviewViewModel by viewModels() /*{
-        viewModelFactory
-    }*/
-
-    //    val args: PhoneConfirmFragmentArgs by navArgs()
+    private val viewModel: PreviewViewModel by viewModels()
     lateinit var navController: NavController
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-//        activityViewModel.cancelActiveJobs()
-    }
 
     @ExperimentalSplittiesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -63,21 +53,27 @@ class PreviewFragment @Inject constructor(/*private val viewModelFactory: ViewMo
         setupListeners()
         setupViews()
         navController = findNavController()
-//        confirm.isEnabled = true
-//
-//        code.setText(args.password)
-//
-//        confirm.setOnClickListener {
-//            viewModel.confirm(args.phone, code.text.toString())
-//        }
+
 
         setupCarList()
     }
 
     private fun setupViews() {
-        if (activityViewModel.isEditing) navBack.visibility = View.INVISIBLE
-        labelFrom.text = activityViewModel.placeFrom!!.name
-        labelTo.text = activityViewModel.placeTo!!.name
+        if (activityViewModel.isEditing) {
+            navBack.visibility = View.INVISIBLE
+            postCreate.text = getString(R.string.update)
+        }
+
+        val fromLbl = StringBuilder()
+        val toLbl = StringBuilder()
+
+        activityViewModel.placeFrom?.regionName?.let { fromLbl.append(it) }
+        activityViewModel.placeFrom?.districtName?.let { fromLbl.append(" $it") }
+        activityViewModel.placeTo?.regionName?.let { toLbl.append(it) }
+        activityViewModel.placeTo?.districtName?.let { toLbl.append(" $it") }
+
+        labelFrom.text = fromLbl
+        labelTo.text = toLbl
 
 
         var time = ""

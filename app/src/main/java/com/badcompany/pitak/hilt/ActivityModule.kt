@@ -385,14 +385,6 @@ object ActivityModule {
 
 
 
-    @ExperimentalSplittiesApi
-    @Provides
-    fun provideAuthorizedApiService(): AuthorizedApiService {
-        return ApiServiceFactory.makeAuthorizedApiService(BuildConfig.DEBUG,
-                                                          AppPrefs.token,
-                                                          AppPrefs.language)
-    }
-
 
 }
 

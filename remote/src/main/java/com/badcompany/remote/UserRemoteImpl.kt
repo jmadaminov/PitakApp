@@ -9,7 +9,9 @@ import com.badcompany.remote.ResponseFormatter.getFormattedResponseNullable
 import com.badcompany.remote.mapper.AuthMapper
 import com.badcompany.remote.mapper.UserCredentialsMapper
 import com.badcompany.remote.mapper.UserMapper
+import com.badcompany.remote.model.IdNameBody
 import com.badcompany.remote.model.LoginRequest
+import com.badcompany.remote.model.ReqUpdateProfileInfo
 import javax.inject.Inject
 
 /**
@@ -18,6 +20,7 @@ import javax.inject.Inject
  * operations in which data store implementation layers can carry out.
  */
 class UserRemoteImpl @Inject constructor(private val apiService: ApiService,
+                                         private val authApiService: AuthorizedApiService,
                                          private val userCredMapper: UserCredentialsMapper,
                                          private val userMapper: UserMapper,
                                          private val authMapper: AuthMapper) : UserRemote {
@@ -52,5 +55,16 @@ class UserRemoteImpl @Inject constructor(private val apiService: ApiService,
             ErrorWrapper.SystemError(e)
         }
     }
+
+    override suspend fun updateUserInfo(name: String,
+                                        surName: String,
+                                        uploadedAvatarId: Long?) =
+        getFormattedResponseNullable {
+            authApiService.updateUserInfo(ReqUpdateProfileInfo(name,
+                                                               surName,
+                                                               uploadedAvatarId?.let {
+                                                                   IdNameBody(uploadedAvatarId)
+                                                               }))
+        }
 
 }

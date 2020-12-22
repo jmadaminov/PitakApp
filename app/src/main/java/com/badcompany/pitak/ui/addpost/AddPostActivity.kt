@@ -1,25 +1,21 @@
 package com.badcompany.pitak.ui.addpost
 
+//import com.badcompany.pitak.di.viewmodels.AddPostViewModelFactory
+//import com.badcompany.pitak.fragments.AddPostNavHostFragment
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.activity.viewModels
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentFactory
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.badcompany.core.Constants
 import com.badcompany.domain.domainmodel.*
-import com.badcompany.pitak.App
 import com.badcompany.pitak.R
-//import com.badcompany.pitak.di.viewmodels.AddPostViewModelFactory
-//import com.badcompany.pitak.fragments.AddPostNavHostFragment
 import com.badcompany.pitak.ui.BaseActivity
 import com.badcompany.pitak.viewobjects.DriverPostViewObj
+import kotlinx.android.synthetic.main.activity_add_post.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.InternalCoroutinesApi
 import splitties.experimental.ExperimentalSplittiesApi
-import javax.inject.Inject
-import javax.inject.Named
 
 
 class AddPostActivity : BaseActivity() {
@@ -82,14 +78,16 @@ class AddPostActivity : BaseActivity() {
                                                                                   "http://codeuz.uz:9091/attach/image/eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyMDIwLTA2LTIzLTIxLTA5LTA4LTgxMi5qcGciLCJpc3MiOiJwaXRha2oxMmJpaG1hbiIsImlhdCI6MTU5MzU5NDIxOH0.dpoNfy19v9pvFaFB9O3oZ-b0PTR78ukxGemaS_Jgzng")
                 ))
 
-//            val navOptions = NavOptions.Builder()
-//                .setPopUpTo(R.id.previewFragment, true)
-//                .build()
+            val navOptions = NavOptions.Builder()
+                .setPopUpTo(R.id.previewFragment, true)
+                .build()
 
-//            navHost.findNavController()
-//                .navigate(R.id.action_destinationsFragment_to_previewFragment,
-//                          null,
-//                          navOptions)
+            nav_host_fragment.findNavController()
+                .navigate(R.id.action_destinationsFragment_to_previewFragment,
+                          null,
+                          navOptions)
+
+            title = getString(R.string.edit_post)
         }
 
     }

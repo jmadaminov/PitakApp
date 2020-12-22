@@ -143,7 +143,7 @@
     </ScrollView>
 
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="12dp"
@@ -164,7 +164,10 @@
             android:gravity="center"
             android:text="@string/back"
             android:textColor="@color/dark_grey"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/postCreate"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
             android:id="@+id/postCreate"
@@ -176,7 +179,6 @@
             android:layout_weight="1"
             android:background="@drawable/selector_primary"
             android:clickable="true"
-            app:spinning_bar_color="#fff"
             android:focusable="true"
             android:foreground="?android:selectableItemBackground"
             android:gravity="center"
@@ -185,8 +187,12 @@
             android:textColor="#fff"
             android:textSize="20dp"
             app:finalCornerAngle="50dp"
-            app:initialCornerAngle="8dp" />
+            app:initialCornerAngle="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/navBack"
+            app:spinning_bar_color="#fff" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

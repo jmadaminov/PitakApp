@@ -1,5 +1,6 @@
 package com.badcompany.data.source
 
+import com.badcompany.core.ResponseWrapper
 import com.badcompany.data.model.UserCredentialsEntity
 import com.badcompany.data.model.UserEntity
 import com.badcompany.data.repository.UserDataStore
@@ -19,6 +20,11 @@ open class UserRemoteDataStore @Inject constructor(private val userRemote: UserR
 
     override suspend fun confirmSms(userCredentialsEntity: UserCredentialsEntity) =
         userRemote.confirmUser(userCredentialsEntity)
+
+    override suspend fun updateUserInfo(name: String,
+                                        surName: String,
+                                        uploadedAvatarId: Long?) =
+        userRemote.updateUserInfo(name, surName,uploadedAvatarId)
 //
 //    override fun isCached(): Single<Boolean> {
 //        throw UnsupportedOperationException()

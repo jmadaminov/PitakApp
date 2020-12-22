@@ -19,6 +19,7 @@ import com.badcompany.pitak.R
 import com.badcompany.pitak.ui.addcar.AddCarActivity
 import com.badcompany.pitak.ui.addcar.MyItemClickListener
 import com.badcompany.pitak.ui.auth.AuthActivity
+import com.badcompany.pitak.ui.edit_profile.EditProfileActivity
 import com.badcompany.pitak.ui.feedback.FeedbackActivity
 import com.badcompany.pitak.ui.interfaces.IOnSignOut
 import com.badcompany.pitak.ui.main.MainActivity
@@ -26,6 +27,7 @@ import com.badcompany.pitak.ui.viewgroups.CarItemView
 import com.badcompany.pitak.ui.viewgroups.ItemAddCar
 import com.badcompany.pitak.ui.viewgroups.LoadingItem
 import com.badcompany.pitak.util.AppPrefs
+import com.badcompany.pitak.util.loadImageUrl
 import com.badcompany.pitak.viewobjects.CarColorViewObj
 import com.badcompany.pitak.viewobjects.CarViewObj
 import com.badcompany.pitak.viewobjects.IdNameViewObj
@@ -69,7 +71,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile), IOnSignOut {
     @ExperimentalSplittiesApi
     private fun setupViews() {
         (activity as MainActivity).hideTabLayout()
-        cardDriver.setBackgroundResource(R.drawable.stroke_rounded_bottom_corners)
+        cardProfile.setBackgroundResource(R.drawable.stroke_rounded_bottom_corners)
         nameSurname.text = "${AppPrefs.name} ${AppPrefs.surname}"
         phone.text = "+${AppPrefs.phone}"
 
@@ -214,31 +216,19 @@ class ProfileFragment : Fragment(R.layout.fragment_profile), IOnSignOut {
             }))
         }
         if (value.size < 4) {
-            adapter.add(ItemAddCar(OnItemClickListener { item, view ->
-                val intent = Intent(context, AddCarActivity::class.java)
-                startActivityForResult(intent, CODE_ADD_CAR)
-            }))
+            adapter.add(ItemAddCar({ item, view ->
+                                       val intent = Intent(context, AddCarActivity::class.java)
+                                       startActivityForResult(intent, CODE_ADD_CAR)
+                                   }))
         }
         adapter.notifyDataSetChanged()
     }
 
     private fun setupListeners() {
-        //        change_password.setOnClickListener {
-//            findNavController().navigate(R.id.action_accountFragment_to_changePasswordFragment)
-//        }
-//
-//        logout_button.setOnClickListener {
-//            viewModel.logout()
-//        }
-//
-//        subscribeObservers()
 
-//        carNameAndNumber.setOnClickListener {
-////            start<AddCarActivity>()
-//            val intent = Intent(context, AddCarActivity::class.java)
-//            startActivityForResult(intent, CODE_ADD_CAR)
-//        }
-
+        cardProfile.setOnClickListener {
+            start<EditProfileActivity> {}
+        }
 
         btnFeedback.setOnClickListener {
             start<FeedbackActivity> {}
@@ -278,6 +268,12 @@ class ProfileFragment : Fragment(R.layout.fragment_profile), IOnSignOut {
             phone = ""
         }
         start<AuthActivity> {}
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (AppPrefs.avatar.isNotBlank())      profilePhoto.loadImageUrl(AppPrefs.avatar)
+        nameSurname.text = "${AppPrefs.name} ${AppPrefs.surname}"
     }
 }
 

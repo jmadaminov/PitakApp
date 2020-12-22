@@ -8,12 +8,15 @@
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardDriver"
+        android:id="@+id/cardProfile"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_marginStart="12dp"
         android:layout_marginEnd="12dp"
         android:layout_marginBottom="12dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:selectableItemBackgroundBorderless"
         app:cardElevation="3dp">
 
 
@@ -27,7 +30,7 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_margin="15dp"
-                android:background="@drawable/shape_round"
+                android:src="@drawable/ic_baseline_account_circle_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -149,10 +152,10 @@
         android:id="@+id/carsList"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_add_car"
+        android:layout_gravity="center_vertical"
         android:orientation="horizontal"
-        android:layout_gravity="center_vertical" />
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_add_car" />
 
 
     <TextView
@@ -168,7 +171,7 @@
         android:text="@string/feedback"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/cardDriver" />
+        app:layout_constraintTop_toBottomOf="@id/cardProfile" />
 
 
     <TextView

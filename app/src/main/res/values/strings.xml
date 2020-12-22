@@ -111,5 +111,7 @@
     <string name="request_sms_again_in">Didn\'t get the code? You can request again in: 00:%1$s</string>
     <string name="request_sms_again">Request code again!</string>
     <string name="update">Update</string>
+    <string name="edit_profile">Edit profile</string>
+    <string name="edit_post">Edit post</string>
 
 </resources>

@@ -17,5 +17,6 @@ interface UserRepository {
     suspend fun addOrUpdateUserCar(car: Car): ResultWrapper<Unit>
     suspend fun getUserCars(userId: String): ResultWrapper<List<Car>>
     suspend fun deleteUserCar(carId: String): ResultWrapper<List<Car>>
+    suspend fun updateUserInfo(name: String, surName: String, uploadedAvatarId: Long?): ResponseWrapper<Any?>
 
 }

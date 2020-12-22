@@ -3,6 +3,7 @@ package com.badcompany.pitak.util
 import android.content.ContentResolver
 import android.content.Context
 import android.database.Cursor
+import android.graphics.Bitmap
 import android.net.Uri
 import android.provider.MediaStore
 import android.provider.OpenableColumns
@@ -54,6 +55,11 @@ fun Uri.getRealPathFromURI(context: Context): String? {
         cursor.close()
     }
     return result
+}
+
+
+fun ImageView.loadBitmap(bitmap: Bitmap) {
+    Glide.with(this.context).load(bitmap).into(this)
 }
 
 fun ImageView.loadImageUrl(url: String) {

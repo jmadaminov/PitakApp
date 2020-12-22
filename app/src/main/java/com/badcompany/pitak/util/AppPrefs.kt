@@ -9,16 +9,11 @@ import splitties.experimental.ExperimentalSplittiesApi
 import splitties.preferences.Preferences
 
 @ExperimentalSplittiesApi object AppPrefs : Preferences("myPrefs") {
-//    @ExperimentalSplittiesApi
-//    var isUserLoggedIn by boolPref(false)
-    @ExperimentalSplittiesApi
-    var token by stringPref("")
-    @ExperimentalSplittiesApi
-    var language by stringPref("uz")
-    @ExperimentalSplittiesApi
-    var name by stringPref("")
-    @ExperimentalSplittiesApi
-    var surname by stringPref("")
-    @ExperimentalSplittiesApi
-    var phone by stringPref("")
+
+    var token by StringPref("TOKEN", "")
+    var language by StringPref("LANGUAGE", "ru")
+    var name by StringPref("NAME", "")
+    var surname by StringPref("SURNAME", "")
+    var phone by StringPref("PHONE", "")
+    var avatar by StringPref("AVATAR", "")
 }

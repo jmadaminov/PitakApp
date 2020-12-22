@@ -43,6 +43,7 @@
         android:inputType="text"
         android:selectAllOnFocus="true"
         android:textColor="#fff"
+        android:textColorHint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
