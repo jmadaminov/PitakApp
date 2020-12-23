@@ -83,7 +83,7 @@ class MainActivity : BaseActivity() {
             } else if ((navController.currentDestination as FragmentNavigator.Destination).className == ProfileFragment::class.qualifiedName) {
                 navController.navigate(R.id.action_nav_menu_profile_to_nav_menu_notifications)
             }
-            uncheckAllButMe(navProfile)
+            uncheckAllButMe(navNotifications)
         }
     }
 

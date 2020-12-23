@@ -11,7 +11,9 @@ interface AuthorizedApiService {
     @Headers("Content-Type:application/json", "Accept: application/json")
     @POST("passenger_post/action/filter")
     suspend fun filterPassengerPost(
-        @Body filter: FilterModel): PassengerPostsResponse
+        @Body filter: FilterModel,
+        @Query("page") page: Int = 0,
+        @Query("size") size: Int = 10,): PassengerPostsResponse
 
     //END PASSENGER POST API
 

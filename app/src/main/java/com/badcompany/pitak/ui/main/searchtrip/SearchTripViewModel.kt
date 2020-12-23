@@ -4,49 +4,37 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.badcompany.core.ResultWrapper
-import com.badcompany.domain.domainmodel.*
-import com.badcompany.domain.usecases.GetPassengerPostWithFilter
+import com.badcompany.domain.domainmodel.MAX_PRICE
+import com.badcompany.domain.domainmodel.MIN_PRICE
+import com.badcompany.domain.domainmodel.Place
 import com.badcompany.domain.usecases.GetPlacesFeed
 import com.badcompany.pitak.ui.BaseViewModel
 import com.badcompany.pitak.util.SingleLiveEvent
 import com.badcompany.pitak.util.valueNN
+import com.badcompany.remote.model.FilterModel
+import com.badcompany.remote.model.PassengerPostModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import splitties.experimental.ExperimentalSplittiesApi
 
-class SearchTripViewModel @ViewModelInject constructor(private val getPassengerPostWithFilter: GetPassengerPostWithFilter,
+class SearchTripViewModel @ViewModelInject constructor(val postFilterRepository: PostFilterRepository,
                                                        private val getPlacesFeed: GetPlacesFeed) :
     BaseViewModel() {
 
-
-    val passengerPostsReponse = SingleLiveEvent<ResultWrapper<List<PassengerPost>>>()
-    var currentPage = 0
-
-    private val _filter = MutableLiveData(Filter())
-    val filter: LiveData<Filter> get() = _filter
+    private val _filter = MutableLiveData(FilterModel())
+    val filter: LiveData<FilterModel> get() = _filter
     private val _count = MutableLiveData<Int>()
     val count: LiveData<Int> get() = _count
-//    private var filter = Filter()
 
-    @ExperimentalSplittiesApi
+    var postOffers: LiveData<PagingData<PassengerPostModel>> = MutableLiveData()
     fun getPassengerPost() {
-        passengerPostsReponse.value = ResultWrapper.InProgress
-        viewModelScope.launch(Dispatchers.IO) {
-            val response = getPassengerPostWithFilter.execute(_filter.valueNN)
-
-            withContext(Dispatchers.Main) {
-                passengerPostsReponse.value = response
-            }
-
-        }
+        postOffers = postFilterRepository.getFilteredPosts(_filter.valueNN).cachedIn(viewModelScope)
     }
-
-
-//    var placeFrom: Place? = null
-//    var placeTo: Place? = null
 
     private var fromFeedJob: Job? = null
     private var toFeedJob: Job? = null
@@ -83,7 +71,7 @@ class SearchTripViewModel @ViewModelInject constructor(private val getPassengerP
     }
 
     fun resetFilter() {
-        _filter.value = Filter()
+        _filter.value = FilterModel()
     }
 
 

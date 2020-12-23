@@ -113,5 +113,7 @@
     <string name="update">Update</string>
     <string name="edit_profile">Edit profile</string>
     <string name="edit_post">Edit post</string>
+    <string name="results_could_not_be_loaded">Results could not be loaded</string>
+    <string name="there_are_no_posts_yet_come_back_later">There are no posts yet, come back later!</string>
 
 </resources>
