@@ -18,6 +18,7 @@ import com.badcompany.remote.model.FilterModel
 import com.badcompany.remote.model.PassengerPostModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import splitties.experimental.ExperimentalSplittiesApi
@@ -31,7 +32,7 @@ class SearchTripViewModel @ViewModelInject constructor(val postFilterRepository:
     private val _count = MutableLiveData<Int>()
     val count: LiveData<Int> get() = _count
 
-    var postOffers: LiveData<PagingData<PassengerPostModel>> = MutableLiveData()
+    var postOffers = flow<PagingData<PassengerPostModel>> { }
     fun getPassengerPost() {
         postOffers = postFilterRepository.getFilteredPosts(_filter.valueNN).cachedIn(viewModelScope)
     }

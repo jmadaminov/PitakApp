@@ -13,7 +13,7 @@ interface AuthorizedApiService {
     suspend fun filterPassengerPost(
         @Body filter: FilterModel,
         @Query("page") page: Int = 0,
-        @Query("size") size: Int = 10,): PassengerPostsResponse
+        @Query("size") size: Int = 10): PassengerPostsResponse
 
     //END PASSENGER POST API
 

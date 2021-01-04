@@ -1,6 +1,8 @@
 package com.badcompany.remote.model
 
 import com.google.gson.annotations.SerializedName
+import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  * Representation for a [FilterModel] fetched from the API
@@ -18,4 +20,9 @@ data class FilterModel(@SerializedName("airConditioner") var airConditioner: Boo
                        @SerializedName("timeFirstPart") var timeFirstPart: Boolean? = null,
                        @SerializedName("timeFourthPart") var timeFourthPart: Boolean? = null,
                        @SerializedName("timeSecondPart") var timeSecondPart: Boolean? = null,
-                       @SerializedName("timeThirdPart") var timeThirdPart: Boolean? = null)
+                       @SerializedName("timeThirdPart") var timeThirdPart: Boolean? = null) {
+    init {
+        departureDate = SimpleDateFormat("dd.MM.yyyy").format(Date())
+        seat = 1
+    }
+}

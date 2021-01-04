@@ -17,5 +17,5 @@ class PostFilterRepository @Inject constructor(private val authorizedApiService:
             maxSize = 100,
             enablePlaceholders = false
         ),
-              pagingSourceFactory = { PostFilterPagingSource(authorizedApiService, filter) }).liveData
+              pagingSourceFactory = { PostFilterPagingSource(authorizedApiService, filter) }).flow
 }
