@@ -1,5 +1,6 @@
 package com.badcompany.pitak.ui.main.searchtrip
 
+import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,6 +8,8 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.badcompany.core.ResultWrapper
+import com.badcompany.data.UserRepositoryImpl
+import com.badcompany.domain.domainmodel.Filter
 import com.badcompany.domain.domainmodel.MAX_PRICE
 import com.badcompany.domain.domainmodel.MIN_PRICE
 import com.badcompany.domain.domainmodel.Place
@@ -14,11 +17,10 @@ import com.badcompany.domain.usecases.GetPlacesFeed
 import com.badcompany.pitak.ui.BaseViewModel
 import com.badcompany.pitak.util.SingleLiveEvent
 import com.badcompany.pitak.util.valueNN
-import com.badcompany.remote.model.FilterModel
 import com.badcompany.remote.model.PassengerPostModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import splitties.experimental.ExperimentalSplittiesApi
@@ -27,14 +29,15 @@ class SearchTripViewModel @ViewModelInject constructor(val postFilterRepository:
                                                        private val getPlacesFeed: GetPlacesFeed) :
     BaseViewModel() {
 
-    private val _filter = MutableLiveData(FilterModel())
-    val filter: LiveData<FilterModel> get() = _filter
+    private val _filter = MutableLiveData(Filter())
+    val filter: LiveData<Filter> get() = _filter
     private val _count = MutableLiveData<Int>()
     val count: LiveData<Int> get() = _count
 
-    var postOffers = flow<PagingData<PassengerPostModel>> { }
+    var postOffers: LiveData<PagingData<PassengerPostModel>> = MutableLiveData()
     fun getPassengerPost() {
         postOffers = postFilterRepository.getFilteredPosts(_filter.valueNN).cachedIn(viewModelScope)
+
     }
 
     private var fromFeedJob: Job? = null
@@ -72,7 +75,7 @@ class SearchTripViewModel @ViewModelInject constructor(val postFilterRepository:
     }
 
     fun resetFilter() {
-        _filter.value = FilterModel()
+        _filter.value = Filter()
     }
 
 

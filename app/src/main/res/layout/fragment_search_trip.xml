@@ -146,6 +146,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:clipChildren="false"
+            android:background="@color/colorAccent"
             android:clipToPadding="false"
             android:paddingBottom="90dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

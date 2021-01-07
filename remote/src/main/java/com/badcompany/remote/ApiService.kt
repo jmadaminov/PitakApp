@@ -14,6 +14,13 @@ interface ApiService {
 
     //Passenger POST API
 
+    @Headers("Content-Type:application/json", "Accept: application/json")
+    @POST("passenger_post/action/filter")
+    suspend fun filterPassengerPost(
+        @Body filter: FilterModel,
+        @Query("page") page: Int = 0,
+        @Query("size") size: Int = 10): PassengerPostsResponse
+
     //AUTH API
     @Headers("Content-Type:application/json", "Accept: application/json")
     @POST("prof/mb/auth")

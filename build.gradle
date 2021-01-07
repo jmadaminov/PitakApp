@@ -19,8 +19,8 @@ buildscript {
         ktlintVersion = '0.30.0'
         lifecycleVersion = '2.2.0'
         materialVersion = '1.2.1'
-        navigationVersion = '2.3.1'
-        recyclerViewVersion = '1.2.0-alpha06'
+        navigationVersion = '2.3.2'
+        recyclerViewVersion = '1.2.0-beta01'
         runnerVersion = '1.0.1'
         supportLibraryVersion = '1.2.0'
         supportCompatVersion = '1.2.0'
@@ -28,7 +28,7 @@ buildscript {
         okHttpVersion = '3.12.0'
         splitties_version = '3.0.0-beta01'
         groupie_version = '2.8.1'
-        pagingVersion = '3.0.0-alpha09'
+        pagingVersion = '3.0.0-alpha11'
 
 
         javaxInjectVersion = '1'
