@@ -88,6 +88,13 @@ dependencies {
     implementation project(":core")
     implementation project(":remote")
 //    implementation project (":Autocomplete-master")
+    implementation "com.squareup.retrofit2:retrofit:${retrofitVersion}"
+    implementation "com.squareup.retrofit2:converter-gson:${retrofitVersion}"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}"
+    implementation "com.squareup.okhttp3:okhttp:4.9.0"
+    implementation "com.squareup.okhttp3:logging-interceptor:4.9.0"
+
+
 
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
     implementation 'androidx.annotation:annotation:1.1.0'
@@ -103,7 +110,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$rootProject.kotlinVersion"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.coroutinesVersion"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.coroutinesVersion"
-
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.2.1'
 
     implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.lifecycleVersion"
@@ -156,6 +163,7 @@ dependencies {
 
     //PAGING
     implementation "androidx.paging:paging-runtime-ktx:3.0.0-alpha11"
+//    implementation "androidx.paging:paging-runtime-ktx:2.1.2"
 
 //VIEW PAGER2
     implementation "androidx.viewpager2:viewpager2:1.0.0"
@@ -185,8 +193,6 @@ dependencies {
     implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_viewmodels"
     kapt "androidx.hilt:hilt-compiler:$hilt_viewmodels"
 //
-    //PAGING
-    implementation "androidx.paging:paging-runtime-ktx:$pagingVersion"
 }
 
 sourceCompatibility = "1.8"

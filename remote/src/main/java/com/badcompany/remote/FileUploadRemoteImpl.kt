@@ -6,8 +6,10 @@ import com.badcompany.data.model.PhotoEntity
 import com.badcompany.data.repository.FileUploadRemote
 import com.badcompany.remote.mapper.PhotoMapper
 import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 import javax.inject.Inject
 
@@ -24,7 +26,7 @@ class FileUploadRemoteImpl @Inject constructor(private val apiService: ApiServic
 
     override suspend fun uploadPhoto(file: File): ResultWrapper<PhotoEntity> {
         return try {
-            val requestFile = RequestBody.create(MediaType.parse("image/jpg"), file)
+            val requestFile = file.asRequestBody("image/jpg".toMediaType())
             val body = MultipartBody.Part.createFormData("file", file.name, requestFile)
             val response = apiService.uploadPhoto(body)
             if (response.code == 1) ResultWrapper.Success(photoMapper.mapToEntity(response.data!!))

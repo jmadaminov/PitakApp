@@ -234,17 +234,12 @@ class SearchTripFragment : Fragment(R.layout.fragment_search_trip) {
                 }
             }.exhaustive
 
-//            lifecycleScope.launch {
-//                viewModel.postOffers.collectLatest() {
-//                    postsAdapter.submitData(lifecycle, it)
-//
-//                }
-//            }
 
-            viewModel.postOffers.observe(viewLifecycleOwner, {
-                val value = it ?: return@observe
-                postsAdapter.submitData(lifecycle, value)
-            })
+        })
+
+        viewModel.postOffers.observe(viewLifecycleOwner, {
+            val value = it ?: return@observe
+            postsAdapter.submitData(lifecycle, value)
         })
 
         viewModel.toPlacesResponse.observe(viewLifecycleOwner, Observer {
@@ -277,7 +272,7 @@ class SearchTripFragment : Fragment(R.layout.fragment_search_trip) {
     }
 
     private fun setupViews() {
-
+        motionLayout.getTransition(R.id.search_trip_panel_trans).setEnable(false)
         setupAutoCompleteViews()
 
         rvPosts.adapter = postsAdapter.withLoadStateHeaderAndFooter(
@@ -298,9 +293,12 @@ class SearchTripFragment : Fragment(R.layout.fragment_search_trip) {
                 rvPosts.isVisible = false
                 tv_error.isVisible = true
                 tv_error.setText(R.string.there_are_no_posts_yet_come_back_later)
+                motionLayout.getTransition(R.id.search_trip_panel_trans).setEnable(false)
+
             } else if (loadState.source.refresh !is LoadState.Error) {
                 rvPosts.isVisible = true
                 tv_error.isVisible = false
+                motionLayout.getTransition(R.id.search_trip_panel_trans).setEnable(true)
             }
         }
 

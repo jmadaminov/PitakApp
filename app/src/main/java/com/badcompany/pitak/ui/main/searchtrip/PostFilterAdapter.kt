@@ -48,8 +48,8 @@ class PostFilterAdapter() :
                 }
                 cardParent.setOnClickListener {
                     context.start<PassengerPostActivity> {
-                        putExtra(ARG_PASSENGER_POST,
-                                 PassengerPostViewObj.mapFromPassengerPostModel(post))
+//                        putExtra(ARG_PASSENGER_POST,
+//                                 PassengerPostViewObj.mapFromPassengerPostModel(post))
                     }
                 }
             }

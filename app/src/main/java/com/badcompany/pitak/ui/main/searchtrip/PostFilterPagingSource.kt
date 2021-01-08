@@ -10,14 +10,14 @@ import com.badcompany.remote.model.PassengerPostModel
 private const val POST_OFFER_STARTING_PAGE_INDEX = 0
 
 class PostFilterPagingSource(
-    private val authorizedApiService: ApiService,
+    private val authorizedApiService: AuthorizedApiService,
     private val filter: Filter
 ) : PagingSource<Int, PassengerPostModel>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, PassengerPostModel> {
         val position = params.key ?: POST_OFFER_STARTING_PAGE_INDEX
         val fltr = FilterMapper().mapFromEntity(com.badcompany.data.mapper.FilterMapper()
-                                                            .mapToEntity(filter))
+                                                    .mapToEntity(filter))
 
         return try {
             val response =

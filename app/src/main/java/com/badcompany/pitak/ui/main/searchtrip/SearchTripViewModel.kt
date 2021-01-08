@@ -1,6 +1,5 @@
 package com.badcompany.pitak.ui.main.searchtrip
 
-import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -19,14 +18,14 @@ import com.badcompany.pitak.util.SingleLiveEvent
 import com.badcompany.pitak.util.valueNN
 import com.badcompany.remote.model.PassengerPostModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import splitties.experimental.ExperimentalSplittiesApi
 
 class SearchTripViewModel @ViewModelInject constructor(val postFilterRepository: PostFilterRepository,
-                                                       private val getPlacesFeed: GetPlacesFeed) :
+                                                       private val getPlacesFeed: GetPlacesFeed,
+                                                       val userRepositoryImpl: UserRepositoryImpl) :
     BaseViewModel() {
 
     private val _filter = MutableLiveData(Filter())
@@ -37,7 +36,6 @@ class SearchTripViewModel @ViewModelInject constructor(val postFilterRepository:
     var postOffers: LiveData<PagingData<PassengerPostModel>> = MutableLiveData()
     fun getPassengerPost() {
         postOffers = postFilterRepository.getFilteredPosts(_filter.valueNN).cachedIn(viewModelScope)
-
     }
 
     private var fromFeedJob: Job? = null

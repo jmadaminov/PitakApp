@@ -1,5 +1,6 @@
 package com.badcompany.domain.domainmodel
 import com.badcompany.core.Constants
+import com.badcompany.core.EPostType
 
 /**
  * Representation for a [PassengerPost] fetched from the API
@@ -20,4 +21,4 @@ data class PassengerPost(val id: Long,
                          val remark: String,
                          val postStatus: String,
                          val seat: Int,
-                         val postType: String = Constants.PASSENGER_POST_SIMPLE)
+                         val postType: EPostType = EPostType.PASSENGER_SM)

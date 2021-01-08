@@ -1,6 +1,7 @@
 package com.badcompany.pitak.viewobjects
 
 import android.os.Parcelable
+import com.badcompany.core.EPostType
 import com.badcompany.domain.domainmodel.PassengerPost
 import com.badcompany.remote.model.PassengerPostModel
 import kotlinx.android.parcel.Parcelize
@@ -22,7 +23,7 @@ data class PassengerPostViewObj(val id: Long,
                                 val remark: String,
                                 val postStatus: String,
                                 val seat: Int,
-                                val postType: String) : Parcelable {
+                                val postType: EPostType) : Parcelable {
 
 
     companion object {

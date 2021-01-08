@@ -50,7 +50,7 @@ class EditProfileActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedL
 
         cardAvatar.setOnClickListener {
             val singleSelectionPicker: BSImagePicker =
-                BSImagePicker.Builder("com.badcompany.pitakpass.fileprovider")
+                BSImagePicker.Builder("com.badcompany.pitak.fileprovider")
                     .setSpanCount(3) //Default: 3. This is the number of columns
                     .setTag("")
                     .build()
