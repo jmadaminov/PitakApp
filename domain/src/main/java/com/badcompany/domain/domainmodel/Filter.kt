@@ -24,8 +24,5 @@ data class Filter(var airConditioner: Boolean? = null,
                   var timeSecondPart: Boolean? = null,
                   var timeThirdPart: Boolean? = null,
                   var timeFourthPart: Boolean? = null) {
-    init {
-        departureDate = SimpleDateFormat("dd.MM.yyyy").format(Date())
-        seat = 1
-    }
+
 }

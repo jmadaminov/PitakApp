@@ -20,6 +20,7 @@ data class PassengerPostViewObj(val id: Long,
                                 val timeThirdPart: Boolean,
                                 val timeFourthPart: Boolean,
                                 val airConditioner: Boolean,
+                                val profileViewObj: ProfileViewObj,
                                 val remark: String,
                                 val postStatus: String,
                                 val seat: Int,
@@ -27,8 +28,20 @@ data class PassengerPostViewObj(val id: Long,
 
 
     companion object {
-        fun mapFromPassengerPostModel(model: PassengerPost):PassengerPostViewObj {
-          return  PassengerPostViewObj(
+        fun mapFromPassengerPostModel(model: PassengerPost): PassengerPostViewObj {
+
+            val profileImage = model.profile.image?.let {
+                ImageViewObj(it.id, it.link)
+            }
+
+            val profileVObj = ProfileViewObj(model.profile.phoneNum,
+                                             model.profile.name,
+                                             model.profile.surname,
+                                             model.profile.id,
+                                             profileImage)
+
+
+            return PassengerPostViewObj(
                 model.id,
                 PlaceViewObj(model.from.districtId,
                              model.from.regionId,
@@ -52,14 +65,26 @@ data class PassengerPostViewObj(val id: Long,
                 model.timeThirdPart,
                 model.timeFourthPart,
                 model.airConditioner,
+                profileVObj,
                 model.remark,
                 model.postStatus,
                 model.seat,
                 model.postType,
             )
         }
-        fun mapFromPassengerPostModel(model: PassengerPostModel):PassengerPostViewObj {
-          return  PassengerPostViewObj(
+
+        fun mapFromPassengerPostModel(model: PassengerPostModel): PassengerPostViewObj {
+
+            val profileImage = model.profileDTO.image?.let {
+                ImageViewObj(it.id, it.link)
+            }
+
+            val profileModel = ProfileViewObj(model.profileDTO.phoneNum,
+                                              model.profileDTO.name,
+                                              model.profileDTO.surname,
+                                              model.profileDTO.id,
+                                              profileImage)
+            return PassengerPostViewObj(
                 model.id,
                 PlaceViewObj(model.from.districtId,
                              model.from.regionId,
@@ -83,6 +108,7 @@ data class PassengerPostViewObj(val id: Long,
                 model.timeThirdPart,
                 model.timeFourthPart,
                 model.airConditioner,
+                profileModel,
                 model.remark,
                 model.postStatus,
                 model.seat,

@@ -31,6 +31,16 @@ open class PassengerPostMapper @Inject constructor() :
                                  type.to.regionName,
                                  type.to.name)
 
+        val profileImage = type.profileDTO.image?.let {
+            Image(it.id, it.link)
+        }
+
+        val profile = Profile(type.profileDTO.phoneNum,
+                                          type.profileDTO.name,
+                                          type.profileDTO.surname,
+                                          type.profileDTO.id,
+                                          profileImage)
+
         return PassengerPost(type.id,
                                   placeFrom,
                                   placeTo,
@@ -44,7 +54,8 @@ open class PassengerPostMapper @Inject constructor() :
                                   type.timeThirdPart,
                                   type.timeFourthPart,
                                   type.airConditioner,
-                                  type.remark,
+                             profile,
+                             type.remark,
                                   type.postStatus,
                                   type.seat,
                                   type.postType)
@@ -69,6 +80,16 @@ open class PassengerPostMapper @Inject constructor() :
                                   type.to.regionName,
                                   type.to.name)
 
+        val profileImage = type.profile.image?.let {
+            ImageEntity(it.id, it.link)
+        }
+
+        val profileEntity = ProfileEntity(type.profile.phoneNum,
+                                       type.profile.name,
+                                       type.profile.surname,
+                                       type.profile.id,
+                                       profileImage)
+        
 
         return PassengerPostEntity(type.id,
                                    placeFrom,
@@ -83,6 +104,7 @@ open class PassengerPostMapper @Inject constructor() :
                                    type.timeThirdPart,
                                    type.timeFourthPart,
                                    type.airConditioner,
+                                   profileEntity,
                                    type.remark,
                                    type.postStatus,
                                    type.seat,

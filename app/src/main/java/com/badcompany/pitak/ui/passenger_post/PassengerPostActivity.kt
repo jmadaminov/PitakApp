@@ -8,8 +8,10 @@ import com.badcompany.pitak.R
 import com.badcompany.pitak.ui.BaseActivity
 import com.badcompany.pitak.ui.passenger_post.offer_a_ride.ARG_PASSENGER_POST
 import com.badcompany.pitak.ui.passenger_post.offer_a_ride.DialogOfferARideFragment
+import com.badcompany.pitak.util.loadCircleImageUrl
 import com.badcompany.pitak.viewobjects.PassengerPostViewObj
 import kotlinx.android.synthetic.main.activity_passenger_post.*
+import java.text.DecimalFormat
 
 class PassengerPostActivity : BaseActivity() {
 
@@ -45,6 +47,10 @@ class PassengerPostActivity : BaseActivity() {
             dialog.show(supportFragmentManager, "")
         }
 
+        swipeRefreshLayout.setOnRefreshListener {
+
+        }
+
     }
 
 
@@ -53,8 +59,7 @@ class PassengerPostActivity : BaseActivity() {
         from.text = post.from.regionName
         to.text = post.to.regionName
         price.text =
-            getString(R.string.price_and_seats_format,
-                      post.price.toString(), post.seat.toString())
+            DecimalFormat("#,###").format(post.price) +" "+ getString(R.string.sum)
 //        seats.text = post.seat.toString()
 
         if (!post.remark.isBlank()) {
@@ -63,6 +68,16 @@ class PassengerPostActivity : BaseActivity() {
         } else {
             note.visibility = View.GONE
         }
+
+
+        post.profileViewObj.let {
+            tvPassengerName.text = it.name + " " + it.surname
+        }
+
+        post.profileViewObj.image?.link?.let {
+            ivPassenger.loadCircleImageUrl(it)
+        }
+
     }
 
     private fun setupActionBar() {

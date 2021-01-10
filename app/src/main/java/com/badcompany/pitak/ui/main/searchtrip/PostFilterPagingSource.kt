@@ -1,7 +1,9 @@
 package com.badcompany.pitak.ui.main.searchtrip
 
+import androidx.lifecycle.LiveData
 import androidx.paging.PagingSource
 import com.badcompany.domain.domainmodel.Filter
+import com.badcompany.pitak.util.valueNN
 import com.badcompany.remote.ApiService
 import com.badcompany.remote.AuthorizedApiService
 import com.badcompany.remote.mapper.FilterMapper
@@ -11,13 +13,13 @@ private const val POST_OFFER_STARTING_PAGE_INDEX = 0
 
 class PostFilterPagingSource(
     private val authorizedApiService: AuthorizedApiService,
-    private val filter: Filter
+    private val filter: LiveData<Filter>
 ) : PagingSource<Int, PassengerPostModel>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, PassengerPostModel> {
         val position = params.key ?: POST_OFFER_STARTING_PAGE_INDEX
         val fltr = FilterMapper().mapFromEntity(com.badcompany.data.mapper.FilterMapper()
-                                                    .mapToEntity(filter))
+                                                    .mapToEntity(filter.valueNN))
 
         return try {
             val response =

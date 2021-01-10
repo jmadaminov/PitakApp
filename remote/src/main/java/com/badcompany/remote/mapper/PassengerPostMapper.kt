@@ -1,12 +1,8 @@
 package com.badcompany.remote.mapper
 
 import com.badcompany.data.mapper.Mapper
-import com.badcompany.data.model.DriverPostEntity
-import com.badcompany.data.model.PassengerPostEntity
-import com.badcompany.data.model.PlaceEntity
-import com.badcompany.remote.model.DriverPostModel
-import com.badcompany.remote.model.PassengerPostModel
-import com.badcompany.remote.model.PlaceModel
+import com.badcompany.data.model.*
+import com.badcompany.remote.model.*
 import javax.inject.Inject
 
 
@@ -36,6 +32,16 @@ open class PassengerPostMapper @Inject constructor() :
                                  type.to.regionName,
                                  type.to.name)
 
+        val profileImage = type.profileDTO.image?.let {
+            Image(it.id, it.link)
+        }
+
+        val profileDTO = ProfileDTO(type.profileDTO.phoneNum,
+                                    type.profileDTO.name,
+                                    type.profileDTO.surname,
+                                    type.profileDTO.id,
+                                    profileImage)
+
         return PassengerPostModel(type.id,
                                   placeFrom,
                                   placeTo,
@@ -49,6 +55,7 @@ open class PassengerPostMapper @Inject constructor() :
                                   type.timeThirdPart,
                                   type.timeFourthPart,
                                   type.airConditioner,
+                                  profileDTO,
                                   type.remark,
                                   type.postStatus,
                                   type.seat,
@@ -74,6 +81,15 @@ open class PassengerPostMapper @Inject constructor() :
                                   type.to.regionName,
                                   type.to.name)
 
+        val profileImage = type.profileDTO.image?.let {
+            ImageEntity(it.id, it.link)
+        }
+
+        val profileDTO = ProfileEntity(type.profileDTO.phoneNum,
+                                       type.profileDTO.name,
+                                       type.profileDTO.surname,
+                                       type.profileDTO.id,
+                                       profileImage)
 
         return PassengerPostEntity(type.id,
                                    placeFrom,
@@ -88,6 +104,7 @@ open class PassengerPostMapper @Inject constructor() :
                                    type.timeThirdPart,
                                    type.timeFourthPart,
                                    type.airConditioner,
+                                   profileDTO,
                                    type.remark,
                                    type.postStatus,
                                    type.seat,

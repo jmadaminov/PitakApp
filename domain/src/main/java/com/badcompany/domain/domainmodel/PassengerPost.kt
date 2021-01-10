@@ -1,5 +1,5 @@
 package com.badcompany.domain.domainmodel
-import com.badcompany.core.Constants
+
 import com.badcompany.core.EPostType
 
 /**
@@ -12,12 +12,13 @@ data class PassengerPost(val id: Long,
                          val departureDate: String,
                          val createdDate: String,
                          val updatedDate: String,
-                         val finishedDate: String?=null,
+                         val finishedDate: String? = null,
                          val timeFirstPart: Boolean,
                          val timeSecondPart: Boolean,
                          val timeThirdPart: Boolean,
                          val timeFourthPart: Boolean,
                          val airConditioner: Boolean,
+                         val profile: Profile,
                          val remark: String,
                          val postStatus: String,
                          val seat: Int,

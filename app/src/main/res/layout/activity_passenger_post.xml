@@ -36,10 +36,35 @@
                 app:cardUseCompatPadding="true"
                 app:layout_constraintTop_toTopOf="parent">
 
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingBottom="12dp">
+
+                    <ImageView
+                        android:id="@+id/ivPassenger"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="12dp"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        />
+
+
+                    <TextView
+                        android:id="@+id/tvPassengerName"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="12dp"
+                        app:layout_constraintStart_toEndOf="@id/ivPassenger"
+                        app:layout_constraintTop_toTopOf="@id/ivPassenger"
+                        tools:text="Name Surname" />
+
 
                     <View
                         android:id="@+id/line"
@@ -60,7 +85,8 @@
                         android:layout_marginTop="12dp"
                         android:src="@drawable/shape_round_disabled"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toBottomOf="@id/ivPassenger"
+                        />
 
 
                     <ImageView
@@ -68,10 +94,11 @@
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_marginStart="12dp"
+                        android:layout_marginTop="15dp"
                         android:layout_marginBottom="12dp"
                         android:src="@drawable/shape_circle_disabled"
-                        app:layout_constraintBottom_toTopOf="@id/note"
-                        app:layout_constraintStart_toStartOf="parent" />
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/circleFrom" />
 
 
                     <TextView
@@ -79,58 +106,22 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginStart="12dp"
+                        android:text="TASHKENT"
                         android:textColor="@color/dark_grey"
                         app:layout_constraintBottom_toBottomOf="@id/circleFrom"
                         app:layout_constraintStart_toEndOf="@id/circleFrom"
-                        app:layout_constraintTop_toTopOf="@id/circleFrom"
-                        tools:text="TASHKENT" />
+                        app:layout_constraintTop_toTopOf="@id/circleFrom" />
 
                     <TextView
                         android:id="@+id/to"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginStart="12dp"
+                        android:text="ANDIJAN"
                         android:textColor="@color/dark_grey"
                         app:layout_constraintBottom_toBottomOf="@id/circleTo"
                         app:layout_constraintStart_toEndOf="@id/circleTo"
-                        app:layout_constraintTop_toTopOf="@id/circleTo"
-                        tools:text="ANDIJAN" />
-
-
-                    <TextView
-                        android:id="@+id/date"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="14dp"
-                        android:textColor="@color/dark_grey"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/from"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:text="02.05.2200" />
-
-                    <TextView
-                        android:id="@+id/seats"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:textColor="@color/dark_grey"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_weight="1"
-                        app:layout_constraintStart_toStartOf="@id/date"
-                        app:layout_constraintTop_toBottomOf="@id/date"
-                        tools:text="4/3" />
-
-
-                    <TextView
-                        android:id="@+id/price"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:textColor="@color/dark_grey"
-                        app:layout_constraintBottom_toTopOf="@id/note"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_weight="1"
-                        app:layout_constraintStart_toStartOf="@id/date"
-                        app:layout_constraintTop_toBottomOf="@id/seats"
-                        tools:text="50,000 sum" />
+                        app:layout_constraintTop_toTopOf="@id/circleTo" />
 
 
                     <TextView
@@ -140,15 +131,71 @@
                         android:layout_marginStart="12dp"
                         android:layout_marginTop="12dp"
                         android:layout_marginEnd="12dp"
+                        android:text="note note sohisdf asdfasdf sadfas fsd fsadf asdfsd"
                         android:textColor="@color/dark_grey"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/price"
-                        tools:text="note note sohisdf asdfasdf sadfas fsd fsadf asdfsd" />
+                        android:visibility="gone"
+                        app:layout_constraintTop_toBottomOf="@id/circleTo" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="14dp"
+                        android:paddingLeft="12dp"
+                        android:paddingEnd="12dp"
+                        app:layout_constraintTop_toBottomOf="@id/note">
+
+                        <TextView
+                            android:id="@+id/price"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:drawableRight="@drawable/ic_baseline_money_24"
+                            android:drawablePadding="10dp"
+                            android:gravity="center_vertical|end"
+                            android:text="50,000 sum"
+                            android:textColor="@color/dark_grey"
+                            app:layout_constraintBottom_toTopOf="@id/note"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_weight="1"
+                            app:layout_constraintStart_toStartOf="@id/date"
+                            app:layout_constraintTop_toBottomOf="@id/seats" />
+
+                        <TextView
+                            android:id="@+id/seats"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.5"
+                            android:drawableRight="@drawable/ic_baseline_airline_seat_recline_extra_24"
+                            android:drawablePadding="10dp"
+                            android:gravity="center_vertical|end"
+                            android:paddingEnd="20dp"
+                            android:textColor="@color/dark_grey"
+                            app:drawableTint="@color/colorPrimary"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_weight="1"
+                            app:layout_constraintStart_toStartOf="@id/date"
+                            app:layout_constraintTop_toBottomOf="@id/date"
+                            tools:text="3" />
+
+
+                        <TextView
+                            android:id="@+id/date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:drawableRight="@drawable/ic_baseline_calendar_today_24"
+                            android:drawablePadding="10dp"
+                            android:gravity="center_vertical|end"
+                            android:text="02.05.2200"
+                            android:textColor="@color/dark_grey"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_weight="1"
+                            app:layout_constraintStart_toEndOf="@id/from"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </LinearLayout>
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
             </androidx.cardview.widget.CardView>

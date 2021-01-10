@@ -1,6 +1,7 @@
 package com.badcompany.pitak.ui.main.searchtrip
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.liveData
@@ -12,7 +13,7 @@ import javax.inject.Singleton
 @Singleton
 class PostFilterRepository @Inject constructor(private val authorizedApiService: AuthorizedApiService) {
 
-    fun getFilteredPosts(filter: Filter) =
+    fun getFilteredPosts(filter: LiveData<Filter>) =
         Pager(config = PagingConfig(
             pageSize = 25,
             maxSize = 100,

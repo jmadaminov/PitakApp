@@ -51,7 +51,7 @@ class SearchTripFragment : Fragment(R.layout.fragment_search_trip) {
 
     private fun setupDateBalloon() {
 
-        date.text = getString(R.string.today)
+        date.text = getString(R.string.anytime)
 
         balloon = Balloon.Builder(requireContext())
             .setLayout(R.layout.layout_calendar)
@@ -72,6 +72,7 @@ class SearchTripFragment : Fragment(R.layout.fragment_search_trip) {
         calendar.minDate = cal.timeInMillis
 
         calendar.setOnDateChangeListener { view, year, month, dayOfMonth ->
+
             viewModel.setDate(dayOfMonth, month, year)
             val calTemp = Calendar.getInstance()
             calTemp.set(year, month, dayOfMonth)
@@ -140,7 +141,9 @@ class SearchTripFragment : Fragment(R.layout.fragment_search_trip) {
         resetFilter.setOnClickListener {
             slidingLayer.closeLayer(true)
             viewModel.resetFilter()
+            date.text = getString(R.string.anytime)
 
+            balloon.getContentView().findViewById<CalendarView>(R.id.calendar).date
             filter_count.visibility = View.INVISIBLE
             filter_count.text = ""
             timeFirstPart.isChecked = false
@@ -198,8 +201,10 @@ class SearchTripFragment : Fragment(R.layout.fragment_search_trip) {
     private fun subscribeObservers() {
 
         viewModel.filter.observe(viewLifecycleOwner, {
-            viewModel.getPassengerPost()
+//            viewModel.getPassengerPost()
+            postsAdapter.refresh()
         })
+
 
         viewModel.count.observe(viewLifecycleOwner, { count ->
             if (count > 0) {
