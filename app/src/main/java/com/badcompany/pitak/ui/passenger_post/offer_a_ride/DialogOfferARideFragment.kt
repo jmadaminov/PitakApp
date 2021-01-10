@@ -8,15 +8,24 @@ import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
+import com.badcompany.core.ErrorWrapper
+import com.badcompany.core.ResultWrapper
+import com.badcompany.core.exhaustive
+import com.badcompany.domain.domainmodel.DriverPost
 import com.badcompany.pitak.R
+import com.badcompany.pitak.ui.viewgroups.ActivePostItem
 import com.badcompany.pitak.viewobjects.PassengerPostViewObj
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.dialog_offer_a_ride.*
+import splitties.experimental.ExperimentalSplittiesApi
 
 const val ARG_PASSENGER_POST = "PASSENGER_POST"
 
 @AndroidEntryPoint
 class DialogOfferARideFragment : DialogFragment() {
+    private val adapter = GroupAdapter<GroupieViewHolder>()
 
     private lateinit var passengerPost: PassengerPostViewObj
     val viewModel: OfferARideViewModel by viewModels()
@@ -40,7 +49,7 @@ class DialogOfferARideFragment : DialogFragment() {
 
         attachListeners()
         subscribeObservers()
-
+        viewModel.getActivePosts()
     }
 
     private fun subscribeObservers() {
@@ -50,7 +59,27 @@ class DialogOfferARideFragment : DialogFragment() {
         })
 
         viewModel.hasFinished.observe(viewLifecycleOwner, { hasFinished ->
-           if (hasFinished) dismiss()
+            if (hasFinished) dismiss()
+        })
+
+        viewModel.activePostsResponse.observe(viewLifecycleOwner, {
+            val response = it ?: return@observe
+            when (response) {
+                is ErrorWrapper.RespError -> {
+
+                }
+                is ErrorWrapper.SystemError -> {
+
+
+                }
+                is ResultWrapper.Success -> {
+
+                    loadData(response.value)
+                }
+                ResultWrapper.InProgress -> {
+
+                }
+            }.exhaustive
         })
 
     }
@@ -64,7 +93,27 @@ class DialogOfferARideFragment : DialogFragment() {
             viewModel.offerARide(passengerPost.id,
                                  if (edtPrice.text.isNullOrBlank()) null else edtPrice.text.toString()
                                      .toInt(),
-                                 messageInput.text.toString())
+                                 messageInput.text.toString(),
+                                 passengerPost)
         }
     }
+
+    @ExperimentalSplittiesApi
+    private fun loadData(orders: List<DriverPost>) {
+        adapter.clear()
+        if (orders.isEmpty()) {
+            lblSelectPost.visibility = View.GONE
+            rvMyPosts.visibility = View.GONE
+        } else{
+            lblSelectPost.visibility = View.VISIBLE
+            rvMyPosts.visibility = View.VISIBLE
+        }
+
+        orders.forEach { post ->
+            adapter.add(ActivePostItem(post) {
+
+            })
+        }
+    }
+
 }

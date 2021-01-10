@@ -116,5 +116,6 @@
     <string name="results_could_not_be_loaded">Results could not be loaded</string>
     <string name="there_are_no_posts_yet_come_back_later">There are no posts yet, come back later!</string>
     <string name="sum">Sum</string>
+    <string name="select_your_trip_if_you_have_one">Select your existing trip, otherwise we will create a new trip for you!</string>
 
 </resources>
