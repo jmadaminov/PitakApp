@@ -16,17 +16,43 @@ class DriverPostRemoteImpl @Inject constructor(private val authorizedApiService:
                                                private val postMapper: DriverPostMapper) :
     DriverPostRemote {
 
-    override suspend fun createDriverPost(post: DriverPostEntity): ResultWrapper<String> {
+    override suspend fun createDriverPost(post: DriverPostEntity): ResultWrapper<DriverPostEntity> {
+        val response =
+            getFormattedResponse { authorizedApiService.createPost(postMapper.mapFromEntity(post)) }
 
-        return try {
-            val response = authorizedApiService.createPost(postMapper.mapFromEntity(post))
-            if (response.code == 1) {
-                ResultWrapper.Success("SUCCESS")
-            } else ErrorWrapper.RespError(response.code, response.message)
-        } catch (e: Exception) {
-            ErrorWrapper.SystemError(e)
-        }
+        (return when (response) {
+            is ResponseError -> {
+                ErrorWrapper.RespError(message = response.message, code = response.code)
+            }
+            is ResponseSuccess -> {
+                ResultWrapper.Success(postMapper.mapToEntity(response.value))
+            }
+        }).exhaustive
+
+//        return try {
+//            if (response.code == 1) {
+//                ResultWrapper.Success("SUCCESS")
+//            } else ErrorWrapper.RespError(response.code, response.message)
+//        } catch (e: Exception) {
+//            ErrorWrapper.SystemError(e)
+//        }
+
+//        return if (response is ResponseSuccess)
+//            ResponseSuccess(postMapper.mapToEntity(response.value))
+//        else response as ResponseError
     }
+
+//    {
+//
+//        return try {
+//            val response = authorizedApiService.createPost(postMapper.mapFromEntity(post))
+//            if (response.code == 1) {
+//                ResultWrapper.Success("SUCCESS")
+//            } else ErrorWrapper.RespError(response.code, response.message)
+//        } catch (e: Exception) {
+//            ErrorWrapper.SystemError(e)
+//        }
+//    }
 
     override suspend fun deleteDriverPost(
         identifier: String): ResultWrapper<String> {

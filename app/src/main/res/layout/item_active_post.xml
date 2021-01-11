@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardParent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="5dp"
-    android:id="@+id/cardParent"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?android:selectableItemBackground"
+    app:cardCornerRadius="5dp"
     app:cardElevation="3dp"
     app:cardUseCompatPadding="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_parent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
+        android:layout_height="wrap_content"
+        android:paddingBottom="15dp">
 
 
         <View
@@ -80,15 +80,15 @@
             android:layout_height="25dp"
             android:layout_marginStart="8dp"
             android:background="@drawable/round_top_right_primary"
+            android:drawableLeft="@drawable/ic_baseline_airline_seat_recline_extra_24"
             android:gravity="center"
             android:paddingStart="12dp"
             android:paddingTop="4dp"
             android:paddingEnd="12dp"
-            android:textSize="12dp"
             android:paddingBottom="4dp"
-            android:drawableLeft="@drawable/ic_baseline_airline_seat_recline_extra_24"
             android:text="ACTIVE"
             android:textColor="#fff"
+            android:textSize="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -104,8 +104,6 @@
             app:layout_constraintEnd_toStartOf="@id/status"
             app:layout_constraintStart_toEndOf="@id/from"
             app:layout_constraintTop_toTopOf="parent" />
-
-
 
 
         <TextView
@@ -126,7 +124,9 @@
             android:id="@+id/note"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="12dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="12dp"
             android:text="note note sohisdf asdfasdf sadfas fsd fsadf asdfsd"
             android:textColor="@color/dark_grey"
             android:textSize="10dp"
@@ -136,48 +136,48 @@
             app:layout_constraintTop_toBottomOf="@id/price" />
 
 
-<!--        <ImageView-->
-<!--            android:id="@+id/done"-->
-<!--            android:layout_width="50dp"-->
-<!--            android:layout_height="50dp"-->
-<!--            android:clickable="true"-->
-<!--            android:focusable="true"-->
-<!--            android:foreground="?android:selectableItemBackground"-->
-<!--            android:padding="12dp"-->
-<!--            android:src="@drawable/baseline_done_outline_black_24dp"-->
-<!--            android:tint="@color/colorPrimary"-->
-<!--            app:layout_constraintBottom_toTopOf="@id/edit"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@id/status" />-->
+        <!--        <ImageView-->
+        <!--            android:id="@+id/done"-->
+        <!--            android:layout_width="50dp"-->
+        <!--            android:layout_height="50dp"-->
+        <!--            android:clickable="true"-->
+        <!--            android:focusable="true"-->
+        <!--            android:foreground="?android:selectableItemBackground"-->
+        <!--            android:padding="12dp"-->
+        <!--            android:src="@drawable/baseline_done_outline_black_24dp"-->
+        <!--            android:tint="@color/colorPrimary"-->
+        <!--            app:layout_constraintBottom_toTopOf="@id/edit"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintTop_toBottomOf="@id/status" />-->
 
-<!--        <ImageView-->
-<!--            android:id="@+id/edit"-->
-<!--            android:layout_width="50dp"-->
-<!--            android:layout_height="50dp"-->
-<!--            android:clickable="true"-->
-<!--            android:focusable="true"-->
-<!--            android:foreground="?android:selectableItemBackground"-->
-<!--            android:padding="12dp"-->
-<!--            android:src="@drawable/outline_edit_black_24dp"-->
-<!--            android:tint="@color/orange"-->
-<!--            app:layout_constraintBottom_toTopOf="@id/cancel"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@id/done" />-->
+        <!--        <ImageView-->
+        <!--            android:id="@+id/edit"-->
+        <!--            android:layout_width="50dp"-->
+        <!--            android:layout_height="50dp"-->
+        <!--            android:clickable="true"-->
+        <!--            android:focusable="true"-->
+        <!--            android:foreground="?android:selectableItemBackground"-->
+        <!--            android:padding="12dp"-->
+        <!--            android:src="@drawable/outline_edit_black_24dp"-->
+        <!--            android:tint="@color/orange"-->
+        <!--            app:layout_constraintBottom_toTopOf="@id/cancel"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintTop_toBottomOf="@id/done" />-->
 
 
-<!--        <ImageView-->
-<!--            android:id="@+id/cancel"-->
-<!--            android:layout_width="50dp"-->
-<!--            android:layout_height="50dp"-->
-<!--            android:clickable="true"-->
-<!--            android:focusable="true"-->
-<!--            android:foreground="?android:selectableItemBackground"-->
-<!--            android:padding="12dp"-->
-<!--            android:src="@drawable/baseline_delete_outline_black_24dp"-->
-<!--            android:tint="@color/error_red"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@id/edit" />-->
+        <!--        <ImageView-->
+        <!--            android:id="@+id/cancel"-->
+        <!--            android:layout_width="50dp"-->
+        <!--            android:layout_height="50dp"-->
+        <!--            android:clickable="true"-->
+        <!--            android:focusable="true"-->
+        <!--            android:foreground="?android:selectableItemBackground"-->
+        <!--            android:padding="12dp"-->
+        <!--            android:src="@drawable/baseline_delete_outline_black_24dp"-->
+        <!--            android:tint="@color/error_red"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintTop_toBottomOf="@id/edit" />-->
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

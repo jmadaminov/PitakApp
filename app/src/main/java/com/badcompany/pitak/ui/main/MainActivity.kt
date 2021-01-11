@@ -1,5 +1,7 @@
 package com.badcompany.pitak.ui.main
 
+//import com.badcompany.pitak.di.viewmodels.MainViewModelFactory
+//import com.badcompany.pitak.fragments.MainNavHostFragment
 import android.os.Bundle
 import android.view.View
 import android.widget.CheckedTextView
@@ -7,8 +9,6 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.FragmentNavigator
 import com.badcompany.pitak.R
-//import com.badcompany.pitak.di.viewmodels.MainViewModelFactory
-//import com.badcompany.pitak.fragments.MainNavHostFragment
 import com.badcompany.pitak.ui.BaseActivity
 import com.badcompany.pitak.ui.addpost.AddPostActivity
 import com.badcompany.pitak.ui.auth.AuthActivity
@@ -16,7 +16,7 @@ import com.badcompany.pitak.ui.main.mytrips.MyTripsFragment
 import com.badcompany.pitak.ui.main.notifications.NotificationsFragment
 import com.badcompany.pitak.ui.main.profile.ProfileFragment
 import com.badcompany.pitak.ui.main.searchtrip.SearchTripFragment
-import com.badcompany.pitak.util.*
+import com.badcompany.pitak.util.AppPrefs
 import kotlinx.android.synthetic.main.activity_main.*
 import splitties.activities.start
 import splitties.experimental.ExperimentalSplittiesApi
@@ -49,7 +49,7 @@ class MainActivity : BaseActivity() {
                 navController.navigate(R.id.action_nav_menu_profile_to_nav_menu_search)
             } else if ((navController.currentDestination as FragmentNavigator.Destination).className == MyTripsFragment::class.qualifiedName) {
                 navController.navigate(R.id.action_nav_menu_my_trips_to_nav_menu_search)
-            }else if ((navController.currentDestination as FragmentNavigator.Destination).className == NotificationsFragment::class.qualifiedName) {
+            } else if ((navController.currentDestination as FragmentNavigator.Destination).className == NotificationsFragment::class.qualifiedName) {
                 navController.navigate(R.id.action_nav_menu_notifications_to_nav_menu_search)
             }
             uncheckAllButMe(navSearch)
@@ -99,6 +99,7 @@ class MainActivity : BaseActivity() {
     private fun checkUserLogin() {
         if (AppPrefs.token.isBlank()) {
             start<AuthActivity> { }
+            finish()
         }
     }
 

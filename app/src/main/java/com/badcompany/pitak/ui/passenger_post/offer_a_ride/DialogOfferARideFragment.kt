@@ -46,7 +46,7 @@ class DialogOfferARideFragment : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        rvMyPosts.adapter = adapter
         attachListeners()
         subscribeObservers()
         viewModel.getActivePosts()
@@ -103,17 +103,17 @@ class DialogOfferARideFragment : DialogFragment() {
         adapter.clear()
         if (orders.isEmpty()) {
             lblSelectPost.visibility = View.GONE
-            rvMyPosts.visibility = View.GONE
-        } else{
+            rvContainer.visibility = View.GONE
+        } else {
             lblSelectPost.visibility = View.VISIBLE
-            rvMyPosts.visibility = View.VISIBLE
+            rvContainer.visibility = View.VISIBLE
         }
 
         orders.forEach { post ->
             adapter.add(ActivePostItem(post) {
-
             })
         }
+
     }
 
 }

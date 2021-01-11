@@ -17,9 +17,18 @@ class DriverPostRepositoryImpl @Inject constructor(private val factoryDriver: Dr
     DriverPostRepository {
 
 
-    override suspend fun createDriverPost(post: DriverPost): ResultWrapper<String> {
-        return factoryDriver.retrieveDataStore(false)
+    override suspend fun createDriverPost(post: DriverPost): ResultWrapper<DriverPost> {
+        val response = factoryDriver.retrieveDataStore(false)
             .createDriverPost(driverPostMapper.mapToEntity(post))
+
+        return when (response) {
+            is ErrorWrapper.RespError -> response
+            is ErrorWrapper.SystemError -> response
+            is ResultWrapper.Success -> {
+                ResultWrapper.Success(driverPostMapper.mapFromEntity(response.value))
+            }
+            ResultWrapper.InProgress -> ResultWrapper.InProgress
+        }
     }
 
     override suspend fun deleteDriverPost(
@@ -68,17 +77,21 @@ class DriverPostRepositoryImpl @Inject constructor(private val factoryDriver: Dr
         }
     }
 
-    override suspend fun getDriverPostById(id: Long): ResponseWrapper<DriverPost>{
+    override suspend fun getDriverPostById(id: Long): ResponseWrapper<DriverPost> {
         val response = factoryDriver.retrieveDataStore(false).getDriverPostById(id)
         return if (response is ResponseSuccess)
             ResponseSuccess(driverPostMapper.mapFromEntity(response.value))
         else response as ResponseError
     }
 
-    override suspend fun acceptOffer(id: Long)=    factoryDriver.retrieveDataStore(false).acceptOffer(id)
-    override suspend fun rejectOffer(id: Long)=    factoryDriver.retrieveDataStore(false).rejectOffer(id)
+    override suspend fun acceptOffer(id: Long) =
+        factoryDriver.retrieveDataStore(false).acceptOffer(id)
 
-    override suspend fun cancelMyOffer(id: Long)=    factoryDriver.retrieveDataStore(false).cancelMyOffer(id)
+    override suspend fun rejectOffer(id: Long) =
+        factoryDriver.retrieveDataStore(false).rejectOffer(id)
+
+    override suspend fun cancelMyOffer(id: Long) =
+        factoryDriver.retrieveDataStore(false).cancelMyOffer(id)
 
 
 }

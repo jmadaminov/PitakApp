@@ -19,10 +19,10 @@ class HistoryPostItem(var post: DriverPost) :
                                                   post.price.toString(), post.seat.toString())
 //        viewHolder.itemView.seats.text = post.seat.toString()
 
-        if (!post.remark.isBlank()) {
+        post.remark?.also {
             viewHolder.itemView.note.visibility = View.VISIBLE
             viewHolder.itemView.note.text = post.remark
-        } else {
+        } ?: run {
             viewHolder.itemView.note.visibility = View.GONE
         }
 

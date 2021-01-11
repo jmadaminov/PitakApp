@@ -43,13 +43,15 @@ const val EXTRA_POST_ID = "POST_ID"
         offersAdapter = PostOffersAdapter(object : IOnOfferActionListener {
             override fun onCancelClick(offer: OfferDTO) {
                 val dialog = DialogCancelOffer()
-                dialog.arguments = Bundle().apply { putParcelable(ARG_OFFER, offerToViewObj(offer)) }
+                dialog.arguments =
+                    Bundle().apply { putParcelable(ARG_OFFER, offerToViewObj(offer)) }
                 dialog.show(supportFragmentManager, "")
             }
 
             override fun onAcceptClick(offer: OfferDTO) {
                 val dialog = DialogAcceptOffer()
-                dialog.arguments = Bundle().apply { putParcelable(ARG_OFFER, offerToViewObj(offer) ) }
+                dialog.arguments =
+                    Bundle().apply { putParcelable(ARG_OFFER, offerToViewObj(offer)) }
                 dialog.show(supportFragmentManager, "")
             }
 
@@ -167,12 +169,10 @@ const val EXTRA_POST_ID = "POST_ID"
             getString(R.string.price_and_seats_format,
                       post.price.toString(), post.seat.toString())
 
-        if (!post.remark.isBlank()) {
+        post.remark?.also {
             note.visibility = View.VISIBLE
             note.text = post.remark
-        } else {
-            note.visibility = View.GONE
-        }
+        } ?: run { note.visibility = View.GONE }
     }
 
     private fun attachListeners() {
@@ -210,18 +210,18 @@ const val EXTRA_POST_ID = "POST_ID"
 
                 putExtra(Constants.TXT_DRIVER_POST,
                          DriverPostViewObj(from,
-                                              to,
-                                              post.price,
-                                              post.departureDate,
-                                              post.timeFirstPart,
-                                              post.timeSecondPart,
-                                              post.timeThirdPart,
-                                              post.timeFourthPart,
-                                              null,
-                                              null,
-                                              post.remark,
-                                              post.seat,
-                                              post.postType))
+                                           to,
+                                           post.price,
+                                           post.departureDate,
+                                           post.timeFirstPart,
+                                           post.timeSecondPart,
+                                           post.timeThirdPart,
+                                           post.timeFourthPart,
+                                           null,
+                                           null,
+                                           post.remark,
+                                           post.seat,
+                                           post.postType))
             }
         }
     }

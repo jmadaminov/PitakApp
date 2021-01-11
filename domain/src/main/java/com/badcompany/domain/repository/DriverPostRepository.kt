@@ -7,7 +7,7 @@ import com.badcompany.domain.domainmodel.PassengerPost
 
 interface DriverPostRepository {
 
-    suspend fun createDriverPost(post: DriverPost): ResultWrapper<String>
+    suspend fun createDriverPost(post: DriverPost): ResultWrapper<DriverPost>
     suspend fun deleteDriverPost(identifier: String): ResultWrapper<String>
     suspend fun finishDriverPost(identifier: String): ResultWrapper<String>
     suspend fun getActiveDriverPosts(): ResultWrapper<List<DriverPost>>

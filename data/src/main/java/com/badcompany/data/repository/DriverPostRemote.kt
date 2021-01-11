@@ -7,7 +7,7 @@ import com.badcompany.domain.domainmodel.DriverPost
 
 interface DriverPostRemote {
 
-    suspend fun createDriverPost( post: DriverPostEntity): ResultWrapper<String>
+    suspend fun createDriverPost( post: DriverPostEntity): ResultWrapper<DriverPostEntity>
     suspend fun deleteDriverPost( identifier: String): ResultWrapper<String>
     suspend fun finishDriverPost( identifier: String): ResultWrapper<String>
     suspend fun getActiveDriverPosts(

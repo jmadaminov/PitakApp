@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_margin="25dp"
+        android:layout_margin="15dp"
         app:cardCornerRadius="10dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -44,7 +44,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/messageInput"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="wrap_content"
                     android:gravity="start|top"
                     android:hint="@string/message"
                     android:imeOptions="actionDone"
@@ -66,17 +66,22 @@
                 />
 
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                app:layout_constraintBottom_toTopOf="@id/btnSendOffer"
+                app:layout_constraintTop_toBottomOf="@id/lblSelectPost"
+                android:layout_marginBottom="15dp"
+                android:id="@+id/rvContainer"
+                android:layout_height="wrap_content">
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvMyPosts"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintBottom_toTopOf="@id/btnSendOffer"
-                app:layout_constraintTop_toBottomOf="@id/lblSelectPost"
                 tools:listitem="@layout/item_active_post" />
-
+            </RelativeLayout>
             <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
                 android:id="@+id/btnSendOffer"
                 android:layout_width="150dp"
@@ -90,7 +95,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rvMyPosts" />
+                app:layout_constraintTop_toBottomOf="@id/rvContainer" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

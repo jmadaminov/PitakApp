@@ -14,7 +14,7 @@ data class DriverPost(val id: Long? = null,
                       val timeFourthPart: Boolean,
                       val carId: Long?=null,
                       val car: CarInPost?=null,
-                      val remark: String,
+                      val remark: String?=null,
                       val seat: Int,
                       val availableSeats: Int?=null,
                       val postType: String = Constants.DRIVER_POST_SIMPLE)

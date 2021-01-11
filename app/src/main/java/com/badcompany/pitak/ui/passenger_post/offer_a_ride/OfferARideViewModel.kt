@@ -3,10 +3,7 @@ package com.badcompany.pitak.ui.passenger_post.offer_a_ride
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.badcompany.core.ResponseError
-import com.badcompany.core.ResponseSuccess
-import com.badcompany.core.ResultWrapper
-import com.badcompany.core.exhaustive
+import com.badcompany.core.*
 import com.badcompany.domain.domainmodel.DriverOffer
 import com.badcompany.domain.domainmodel.DriverPost
 import com.badcompany.domain.domainmodel.Place
@@ -15,6 +12,7 @@ import com.badcompany.domain.usecases.CreateDriverPost
 import com.badcompany.domain.usecases.GetActiveDriverPost
 import com.badcompany.pitak.ui.BaseViewModel
 import com.badcompany.pitak.util.SingleLiveEvent
+import com.badcompany.pitak.util.valueNN
 import com.badcompany.pitak.viewobjects.PassengerPostViewObj
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -30,14 +28,14 @@ class OfferARideViewModel @ViewModelInject constructor(private val repository: P
     val hasFinished = MutableLiveData<Boolean>()
     val errorMessage = MutableLiveData<String>()
 
-    val offeringPostId = MutableLiveData<Int>()
+    val offeringPostId = MutableLiveData<Long>()
 
 
-    fun offerARide(postId: Long, myPrice: Int?, message: String, passPost:PassengerPostViewObj) {
+    fun offerARide(postId: Long, myPrice: Int?, message: String, passPost: PassengerPostViewObj) {
         isOffering.value = true
+        viewModelScope.launch(Dispatchers.IO) {
 
-        if (offeringPostId == null) {
-            viewModelScope.launch(Dispatchers.IO) {
+            if (offeringPostId.value == null) {
 
                 val placeFrom = Place(
                     passPost.from.districtId,
@@ -56,24 +54,49 @@ class OfferARideViewModel @ViewModelInject constructor(private val repository: P
                     passPost.to.name,
                 )
                 val driverPost = DriverPost(null, placeFrom, placeTo, passPost.price,
-                passPost.departureDate,
-                passPost.finishedDate,
-                passPost.timeFirstPart,
-                passPost.timeSecondPart,
-                passPost.timeThirdPart,
-                passPost.timeFourthPart,
-                passPost.car
+                                            passPost.departureDate,
+                                            passPost.finishedDate,
+                                            passPost.timeFirstPart,
+                                            passPost.timeSecondPart,
+                                            passPost.timeThirdPart,
+                                            passPost.timeFourthPart,
+                                            null,
+                                            null,
+                                            null,
+                                            passPost.seat
                 )
-                val response = createDriverPost.execute()
+                val response = createDriverPost.execute(driverPost)
 
-                withContext(Dispatchers.Main) {
-                    createResponse.value = response
-                }
+                when (response) {
+                    is ErrorWrapper.RespError -> {
+                        withContext(Dispatchers.Main) {
+                            createResponse.value = response
+                            errorMessage.value = response.message
+                            isOffering.value = false
+                        }
+                    }
+                    is ErrorWrapper.SystemError -> {
+                        withContext(Dispatchers.Main) {
+                            createResponse.value = response
+                            errorMessage.value = response.err.localizedMessage
+                            isOffering.value = false
+                        }
+                    }
+                    is ResultWrapper.Success -> {
+                        offeringPostId.value = response.value.id
+                    }
+                    ResultWrapper.InProgress -> {
+
+                    }
+                }.exhaustive
             }
-        }
+//        }
+//        viewModelScope.launch(Dispatchers.IO) {
 
-        viewModelScope.launch(Dispatchers.IO) {
-            val response = repository.offerARide(DriverOffer(postId, myPrice, message))
+
+
+            val response =
+                repository.offerARide(DriverOffer(postId, myPrice, message, offeringPostId.valueNN))
             withContext(Dispatchers.Main) {
                 when (response) {
                     is ResponseError -> {
@@ -87,25 +110,24 @@ class OfferARideViewModel @ViewModelInject constructor(private val repository: P
                 }.exhaustive
             }
         }
-
     }
 
 
-    val createResponse = SingleLiveEvent<ResultWrapper<String>>()
+    val createResponse = SingleLiveEvent<ResultWrapper<DriverPost>>()
 
-    @ExperimentalSplittiesApi
-    fun createDriverPost(driverPost: DriverPost) {
-        createResponse.value = ResultWrapper.InProgress
-
-
-        viewModelScope.launch(Dispatchers.IO) {
-            val response = createDriverPost.execute(driverPost)
-
-            withContext(Dispatchers.Main) {
-                createResponse.value = response
-            }
-        }
-    }
+//    @ExperimentalSplittiesApi
+//    fun createDriverPost(driverPost: DriverPost) {
+//        createResponse.value = ResultWrapper.InProgress
+//
+//
+//        viewModelScope.launch(Dispatchers.IO) {
+//            val response = createDriverPost.execute(driverPost)
+//
+//            withContext(Dispatchers.Main) {
+//                createResponse.value = response
+//            }
+//        }
+//    }
 
     val activePostsResponse = SingleLiveEvent<ResultWrapper<List<DriverPost>>>()
 
