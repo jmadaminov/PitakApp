@@ -96,6 +96,12 @@ class DialogOfferARideFragment : DialogFragment() {
                                  messageInput.text.toString(),
                                  passengerPost)
         }
+        ivClearSelected.setOnClickListener {
+            viewModel.setOfferingPost(null)
+            lblSelectPost.visibility = View.VISIBLE
+            tvSelectedPost.visibility = View.GONE
+            ivClearSelected.visibility = View.GONE
+        }
     }
 
     @ExperimentalSplittiesApi
@@ -111,6 +117,12 @@ class DialogOfferARideFragment : DialogFragment() {
 
         orders.forEach { post ->
             adapter.add(ActivePostItem(post) {
+                lblSelectPost.visibility = View.GONE
+                tvSelectedPost.visibility = View.VISIBLE
+                ivClearSelected.visibility = View.VISIBLE
+                tvSelectedPost.text = getString(R.string.offering_post_id, post.id)
+                viewModel.setOfferingPost(post.id)
+
             })
         }
 

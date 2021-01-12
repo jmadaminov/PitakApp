@@ -55,33 +55,69 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+
+            <ImageView
+                android:id="@+id/ivClearSelected"
+                android:layout_width="?android:actionBarSize"
+                android:layout_height="?android:actionBarSize"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:selectableItemBackgroundBorderless"
+
+                tools:visibility="visible"
+                android:visibility="gone"
+                android:padding="15dp"
+                android:src="@drawable/close_icon"
+                app:layout_constraintBottom_toBottomOf="@id/tvSelectedPost"
+                app:layout_constraintStart_toEndOf="@id/tvSelectedPost"
+                app:layout_constraintTop_toTopOf="@id/tvSelectedPost" />
+
+
+            <TextView
+                android:id="@+id/tvSelectedPost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:gravity="center"
+                android:text="Offering Post ID: "
+                android:textColor="@color/colorPrimaryDark"
+                tools:visibility="visible"
+                android:visibility="gone"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/messageLayout" />
+
+
             <TextView
                 android:id="@+id/lblSelectPost"
                 android:layout_width="match_parent"
-                android:gravity="center"
-                app:layout_constraintTop_toBottomOf="@id/messageLayout"
-                android:text="@string/select_your_trip_if_you_have_one"
-                android:layout_margin="15dp"
                 android:layout_height="wrap_content"
-                />
+                android:layout_margin="15dp"
+                android:gravity="center"
+                android:text="@string/select_your_trip_if_you_have_one"
+                app:layout_constraintTop_toBottomOf="@id/messageLayout" />
 
 
             <RelativeLayout
-                android:layout_width="match_parent"
-                app:layout_constraintBottom_toTopOf="@id/btnSendOffer"
-                app:layout_constraintTop_toBottomOf="@id/lblSelectPost"
-                android:layout_marginBottom="15dp"
                 android:id="@+id/rvContainer"
-                android:layout_height="wrap_content">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvMyPosts"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_active_post" />
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                app:layout_constraintBottom_toTopOf="@id/btnSendOffer"
+                app:layout_constraintTop_toBottomOf="@id/lblSelectPost">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvMyPosts"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_active_post" />
             </RelativeLayout>
+
             <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
                 android:id="@+id/btnSendOffer"
                 android:layout_width="150dp"
