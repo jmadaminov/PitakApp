@@ -22,18 +22,13 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import splitties.experimental.ExperimentalSplittiesApi
-import java.text.SimpleDateFormat
-import java.util.*
 
 class SearchTripViewModel @ViewModelInject constructor(val postFilterRepository: PostFilterRepository,
                                                        private val getPlacesFeed: GetPlacesFeed,
                                                        val userRepositoryImpl: UserRepositoryImpl) :
     BaseViewModel() {
 
-    private val _filter =
-        MutableLiveData(Filter(/*departureDate = SimpleDateFormat("dd.MM.yyyy").format(
-            Date()
-        ), seat = 1*/))
+    private val _filter = MutableLiveData(Filter())
     val filter: LiveData<Filter> get() = _filter
     private val _count = MutableLiveData<Int>()
     val count: LiveData<Int> get() = _count
@@ -109,9 +104,10 @@ class SearchTripViewModel @ViewModelInject constructor(val postFilterRepository:
         applyFilter()
     }
 
-    fun setDate(dayOfMonth: Int,  month: Int, year: Int) {
-     val properMonthIndex = month+1
-        val monthString = if (properMonthIndex.toString().length == 1) "0$properMonthIndex" else properMonthIndex.toString()
+    fun setDate(dayOfMonth: Int, month: Int, year: Int) {
+        val properMonthIndex = month + 1
+        val monthString =
+            if (properMonthIndex.toString().length == 1) "0$properMonthIndex" else properMonthIndex.toString()
         _filter.valueNN.departureDate = "$dayOfMonth.$monthString.$year"
         applyFilter()
     }

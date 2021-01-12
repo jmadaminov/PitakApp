@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/swipeRefreshLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -11,19 +13,24 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/historyPostsList"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:paddingBottom="90dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_history_post" />
 
         <TextView
             android:id="@+id/noHistoryPostsTxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:visibility="gone"
             android:layout_margin="24dp"
             android:gravity="center"
             android:text="@string/no_history_posts"
             android:textColor="@color/ic_grey"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:visibility="gone" />
 
     </RelativeLayout>
 

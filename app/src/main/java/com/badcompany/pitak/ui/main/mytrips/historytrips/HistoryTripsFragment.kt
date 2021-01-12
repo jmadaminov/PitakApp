@@ -43,8 +43,7 @@ class HistoryTripsFragment : Fragment(R.layout.fragment_history_trips) {
 
     @ExperimentalSplittiesApi
     private fun setupRecyclerView() {
-        historyPostsList.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+
 
         historyPostsList.setHasFixedSize(true)
         adapter.clear()

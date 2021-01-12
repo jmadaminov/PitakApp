@@ -93,7 +93,6 @@ class SearchTripFragment : Fragment(R.layout.fragment_search_trip) {
             }
             now[Calendar.DATE] - smsTime[Calendar.DATE] == -1 -> {
                 getString(R.string.tomorrow)
-
             }
             else -> {
                 DateFormat.format(dateTimeFormatString, Date(smsTimeInMilis)).toString()
@@ -143,7 +142,6 @@ class SearchTripFragment : Fragment(R.layout.fragment_search_trip) {
             viewModel.resetFilter()
             date.text = getString(R.string.anytime)
 
-            balloon.getContentView().findViewById<CalendarView>(R.id.calendar).date
             filter_count.visibility = View.INVISIBLE
             filter_count.text = ""
             timeFirstPart.isChecked = false
@@ -201,10 +199,8 @@ class SearchTripFragment : Fragment(R.layout.fragment_search_trip) {
     private fun subscribeObservers() {
 
         viewModel.filter.observe(viewLifecycleOwner, {
-//            viewModel.getPassengerPost()
             postsAdapter.refresh()
         })
-
 
         viewModel.count.observe(viewLifecycleOwner, { count ->
             if (count > 0) {
@@ -231,7 +227,6 @@ class SearchTripFragment : Fragment(R.layout.fragment_search_trip) {
                         autoCompleteManager.fromPresenter.getAdr()!!
                             .add(PlaceFeedItemView(place,
                                                    autoCompleteManager.fromPresenter))
-
                     }
                     autoCompleteManager.fromPresenter.getAdr()!!.notifyDataSetChanged()
                 }

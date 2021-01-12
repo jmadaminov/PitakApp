@@ -118,5 +118,6 @@
     <string name="sum">Sum</string>
     <string name="select_your_trip_if_you_have_one">Select your existing trip, otherwise we will create a new trip for you!</string>
     <string name="offering_post_id">"Offering post ID: %1$d"</string>
+    <string name="we_will_create_an_order_for_you">We will create an order for you with the destinations of the passenger post!</string>
 
 </resources>

@@ -66,18 +66,13 @@ class DialogOfferARideFragment : DialogFragment() {
             val response = it ?: return@observe
             when (response) {
                 is ErrorWrapper.RespError -> {
-
                 }
                 is ErrorWrapper.SystemError -> {
-
-
                 }
                 is ResultWrapper.Success -> {
-
                     loadData(response.value)
                 }
                 ResultWrapper.InProgress -> {
-
                 }
             }.exhaustive
         })
@@ -108,10 +103,10 @@ class DialogOfferARideFragment : DialogFragment() {
     private fun loadData(orders: List<DriverPost>) {
         adapter.clear()
         if (orders.isEmpty()) {
-            lblSelectPost.visibility = View.GONE
+            lblSelectPost.text = getString(R.string.we_will_create_an_order_for_you)
             rvContainer.visibility = View.GONE
         } else {
-            lblSelectPost.visibility = View.VISIBLE
+            lblSelectPost.text = getString(R.string.select_your_trip_if_you_have_one)
             rvContainer.visibility = View.VISIBLE
         }
 

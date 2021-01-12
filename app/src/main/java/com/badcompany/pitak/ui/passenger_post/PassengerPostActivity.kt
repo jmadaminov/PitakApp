@@ -60,7 +60,6 @@ class PassengerPostActivity : BaseActivity() {
         to.text = post.to.regionName
         price.text =
             DecimalFormat("#,###").format(post.price) +" "+ getString(R.string.sum)
-//        seats.text = post.seat.toString()
 
         if (!post.remark.isBlank()) {
             note.visibility = View.VISIBLE

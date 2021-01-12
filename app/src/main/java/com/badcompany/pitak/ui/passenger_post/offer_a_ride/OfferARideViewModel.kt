@@ -21,7 +21,7 @@ import splitties.experimental.ExperimentalSplittiesApi
 
 class OfferARideViewModel @ViewModelInject constructor(private val repository: PassengerPostRepository,
                                                        private val createDriverPost: CreateDriverPost,
-                                                       val getActiveDriverPost: GetActiveDriverPost) :
+                                                       private val getActiveDriverPost: GetActiveDriverPost) :
     BaseViewModel() {
 
     val isOffering = MutableLiveData<Boolean>()
@@ -33,13 +33,10 @@ class OfferARideViewModel @ViewModelInject constructor(private val repository: P
 
     fun offerARide(postId: Long, myPrice: Int?, message: String, passPost: PassengerPostViewObj) {
         isOffering.value = true
-
-
         viewModelScope.launch(Dispatchers.IO) {
             if (offeringPostId.value == null) createPost(passPost)
             sendAnOffer(postId, myPrice, message)
         }
-
     }
 
     private suspend fun createPost(passPost: PassengerPostViewObj) {

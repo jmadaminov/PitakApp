@@ -11,29 +11,30 @@ import kotlinx.android.synthetic.main.item_active_post.view.*
 class ActivePostItem(var post: DriverPost, val onClick: () -> Unit) : Item() {
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
-        viewHolder.itemView.date.text = post.departureDate
-        viewHolder.itemView.from.text = post.from.regionName
-        viewHolder.itemView.to.text = post.to.regionName
-        viewHolder.itemView.price.text = post.price.toString()
-        viewHolder.itemView.status.text =
-            (post.seat - post.availableSeats!!).toString() + "/" + post.seat.toString() + "   " + viewHolder.itemView.context.getString(
-                R.string.active)
+        viewHolder.itemView.apply {
+            date.text = post.departureDate
+            from.text = post.from.regionName
+            to.text = post.to.regionName
+            price.text = post.price.toString()
+            status.text =
+                (post.seat - post.availableSeats!!).toString() + "/" + post.seat.toString() + "   " + context.getString(
+                    R.string.active)
 
-        post.remark?.also {
-            viewHolder.itemView.note.visibility = View.VISIBLE
-            viewHolder.itemView.note.text = post.remark
-        } ?: run {
-            viewHolder.itemView.note.visibility = View.GONE
+            post.remark?.also {
+                note.visibility = View.VISIBLE
+                note.text = post.remark
+            } ?: run {
+                note.visibility = View.GONE
+            }
+
+            if (findViewById<View>(R.id.progress) != null) {
+                cl_parent.removeView(findViewById(R.id.progress))
+            }
+
+            cardParent.setOnClickListener {
+                onClick()
+            }
         }
-
-        if (viewHolder.itemView.findViewById<View>(R.id.progress) != null) {
-            viewHolder.itemView.cl_parent.removeView(viewHolder.itemView.findViewById(R.id.progress))
-        }
-
-        viewHolder.itemView.cardParent.setOnClickListener {
-            onClick()
-        }
-
     }
 
     override fun getLayout() = R.layout.item_active_post

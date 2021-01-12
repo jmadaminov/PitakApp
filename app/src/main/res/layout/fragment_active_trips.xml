@@ -13,6 +13,9 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/activeOrdersList"
+            android:clipToPadding="false"
+            android:clipChildren="false"
+            android:paddingBottom="90dp"
             android:layout_width="match_parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_active_post"

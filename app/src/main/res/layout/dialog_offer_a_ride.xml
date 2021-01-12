@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        app:cardBackgroundColor="@color/windowBackground"
         android:layout_margin="15dp"
         app:cardCornerRadius="10dp">
 
@@ -17,18 +18,26 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/edtPrice"
-                android:layout_width="150dp"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/priceLayout"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:hint="@string/your_price"
-                android:inputType="number"
+                android:clipChildren="false"
+                android:clipToPadding="false"
                 app:layout_constraintBottom_toTopOf="@id/messageLayout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent">
 
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtPrice"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/your_price"
+                    android:inputType="number" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/messageLayout"
@@ -39,7 +48,7 @@
                 android:clipToPadding="false"
                 app:layout_constraintBottom_toTopOf="@id/lblSelectPost"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/edtPrice">
+                app:layout_constraintTop_toBottomOf="@id/priceLayout">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/messageInput"
@@ -64,13 +73,13 @@
                 android:focusable="true"
                 android:foreground="?android:selectableItemBackgroundBorderless"
 
-                tools:visibility="visible"
-                android:visibility="gone"
                 android:padding="15dp"
                 android:src="@drawable/close_icon"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@id/tvSelectedPost"
                 app:layout_constraintStart_toEndOf="@id/tvSelectedPost"
-                app:layout_constraintTop_toTopOf="@id/tvSelectedPost" />
+                app:layout_constraintTop_toTopOf="@id/tvSelectedPost"
+                tools:visibility="visible" />
 
 
             <TextView
@@ -81,23 +90,26 @@
                 android:gravity="center"
                 android:text="Offering Post ID: "
                 android:textColor="@color/colorPrimaryDark"
-                tools:visibility="visible"
-                android:visibility="gone"
                 android:textSize="16dp"
                 android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@id/rvContainer"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/messageLayout" />
+                app:layout_constraintTop_toBottomOf="@id/messageLayout"
+                tools:visibility="visible" />
 
 
             <TextView
                 android:id="@+id/lblSelectPost"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="15dp"
                 android:gravity="center"
-                android:text="@string/select_your_trip_if_you_have_one"
-                app:layout_constraintTop_toBottomOf="@id/messageLayout" />
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintBottom_toTopOf="@id/rvContainer"
+                app:layout_constraintTop_toBottomOf="@id/messageLayout"
+                tools:text="@string/select_your_trip_if_you_have_one" />
 
 
             <RelativeLayout
@@ -105,7 +117,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:layout_marginBottom="15dp"
                 app:layout_constraintBottom_toTopOf="@id/btnSendOffer"
                 app:layout_constraintTop_toBottomOf="@id/lblSelectPost">
 
@@ -122,6 +133,7 @@
                 android:id="@+id/btnSendOffer"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
                 android:layout_marginBottom="15dp"
                 android:text="@string/send_offer"
                 android:textAllCaps="false"
