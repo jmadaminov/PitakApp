@@ -62,21 +62,34 @@ class AddPostActivity : BaseActivity() {
                                       driverPostViewObj.from.regionName,
                                       driverPostViewObj.from.name)
 
+
+
             viewmodel.timeFirstPart = driverPostViewObj.timeFirstPart
             viewmodel.timeSecondPart = driverPostViewObj.timeSecondPart
             viewmodel.timeThirdPart = driverPostViewObj.timeThirdPart
             viewmodel.timeFourthPart = driverPostViewObj.timeFourthPart
             viewmodel.departureDate = driverPostViewObj.departureDate
             viewmodel.note = driverPostViewObj.remark
+            val carImageList = arrayListOf<Image>()
+            driverPostViewObj.car?.imageList?.forEach {
+                carImageList.add(Image(it.id, it.link))
+            }
+
             viewmodel.car = CarDetails(driverPostViewObj.carId,
-                                       IdName(2L, "MODEL 1"),
-                                       Image(2L,
-                                             "http://codeuz.uz:9091/attach/image/eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyMDIwLTA2LTIzLTIxLTA5LTA4LTgxMi5qcGciLCJpc3MiOiJwaXRha2oxMmJpaG1hbiIsImlhdCI6MTU5MzU5NDIxOH0.dpoNfy19v9pvFaFB9O3oZ-b0PTR78ukxGemaS_Jgzng"),
-                                       Constants.FUEL_TYPE_METHANE,
-                                       CarColorBody(3L, "#eb4034", "RED", "qizil", "KRASNIY"),
-                                       "01XU239A", 2013, true, true, listOf(Image(2L,
-                                                                                  "http://codeuz.uz:9091/attach/image/eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyMDIwLTA2LTIzLTIxLTA5LTA4LTgxMi5qcGciLCJpc3MiOiJwaXRha2oxMmJpaG1hbiIsImlhdCI6MTU5MzU5NDIxOH0.dpoNfy19v9pvFaFB9O3oZ-b0PTR78ukxGemaS_Jgzng")
-                ))
+                                       IdName(driverPostViewObj.car!!.carModel!!.id,
+                                              driverPostViewObj.car.carModel!!.name),
+                                       Image(driverPostViewObj.car.image?.id,
+                                             driverPostViewObj.car.image?.link),
+                                       driverPostViewObj.car.fuelType,
+                                       CarColorBody(driverPostViewObj.car.carColor?.id,
+                                                    driverPostViewObj.car.carColor?.hex,
+                                                    driverPostViewObj.car.carColor?.name),
+                                       driverPostViewObj.car.carNumber,
+                                       driverPostViewObj.car.carYear,
+                                       driverPostViewObj.car.airConditioner,
+                                       driverPostViewObj.car.def,
+                                       carImageList
+            )
 
             val navOptions = NavOptions.Builder()
                 .setPopUpTo(R.id.previewFragment, true)
@@ -102,24 +115,6 @@ class AddPostActivity : BaseActivity() {
 
 
     }
-
-
-//    var host: Fragment? = null
-//    lateinit var navHost: Fragment
-
-//    private fun onRestoreInstanceState() {
-//        host = supportFragmentManager.findFragmentById(R.id.add_post_fragments_container)
-//        host?.let { /*do nothing*/ } ?: createNavHost()
-//    }
-
-//    private fun createNavHost() {
-//        navHost = AddPostNavHostFragment.create(R.navigation.add_post_nav_graph)
-//        supportFragmentManager.beginTransaction()
-//            .replace(R.id.add_post_fragments_container, navHost, getString(R.string.AuthNavHost))
-//            .setPrimaryNavigationFragment(navHost)
-//            .commit()
-//    }
-
 
     private fun setupActionBar() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

@@ -17,14 +17,14 @@ open class CarColorMapper @Inject constructor() : Mapper<CarColorEntity, CarColo
      * Map a [UserEntity] instance to a [User] instance
      */
     override fun mapFromEntity(type: CarColorEntity): CarColorBody {
-        return CarColorBody(type.id, type.hex, type.nameEn, type.nameUz, type.nameRu)
+        return CarColorBody(type.id, type.hex, type.name)
     }
 
     /**
      * Map a [User] instance to a [UserEntity] instance
      */
     override fun mapToEntity(type: CarColorBody): CarColorEntity {
-        return CarColorEntity(type.id!!, type.hex!!, type.nameEn!!, type.nameUz!!, type.nameRu!!)
+        return CarColorEntity(type.id!!, type.hex!!, type.name)
     }
 
 

@@ -20,7 +20,7 @@ class ColorsArrayAdapter(val context: Context,
         val view: View
         if (convertView == null) {
             view = LayoutInflater.from(context).inflate(R.layout.item_car_color, parent, false)
-            view.textColor.text = colors[position].nameEn
+            view.textColor.text = colors[position].name
             view.imgColor.backgroundTintList =
                 ColorStateList.valueOf(Color.parseColor(colors[position].hex))
             /*   view.itemParentView.setOnClickListener {

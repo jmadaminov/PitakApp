@@ -13,12 +13,12 @@ import javax.inject.Inject
 open class CarColorMapper @Inject constructor() : EntityMapper<CarColorModel, CarColorEntity> {
 
     override fun mapToEntity(type: CarColorModel): CarColorEntity {
-        return CarColorEntity(type.id, type.hex, type.nameEn, type.nameUz, type.nameRu)
+        return CarColorEntity(type.id, type.hex, type.name)
 
     }
 
     override fun mapFromEntity(type: CarColorEntity): CarColorModel {
-        return CarColorModel(type.id, type.hex, type.nameEn, type.nameUz, type.nameRu)
+        return CarColorModel(type.id, type.hex, type.name)
     }
 
 

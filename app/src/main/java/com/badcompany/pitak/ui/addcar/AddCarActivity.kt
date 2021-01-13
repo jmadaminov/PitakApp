@@ -399,9 +399,11 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
         if (car.fuelType == null) {
             car.fuelType = Constants.FUEL_TYPE_PETROL
         }
-        if (car.image!!.link != null) {
-            carImage.loadImageUrl(car.image!!.link!!)
-        }
+
+       car.image?.link?.let{
+           carImage.loadImageUrl(it)
+       }
+
         if (!car.imageList.isNullOrEmpty()) {
             car.imageList.forEach {
                 adapter.add(ItemCarPhoto(PhotoBody(it.id, link = it.link), deleteClickListener))

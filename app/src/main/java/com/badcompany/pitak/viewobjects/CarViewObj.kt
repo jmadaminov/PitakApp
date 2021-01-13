@@ -26,6 +26,4 @@ data class ImageViewObj(var id: Long? = null,
 @Parcelize
 data class CarColorViewObj(val id: Long? = null,
                            val hex: String? = null,
-                           val nameEn: String? = null,
-                           val nameUz: String? = null,
-                           val nameRu: String? = null) : Parcelable
+                           val name: String? = null) : Parcelable

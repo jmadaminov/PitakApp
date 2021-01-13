@@ -31,10 +31,8 @@ import splitties.experimental.ExperimentalSplittiesApi
 import javax.inject.Inject
 
 
-//@FlowPreview
-//@ExperimentalCoroutinesApi
 @AndroidEntryPoint
-class CarAndTextFragment @Inject constructor(/*private val viewModelFactory: ViewModelProvider.Factory*/) :
+class CarAndTextFragment @Inject constructor() :
     Fragment(R.layout.fragment_car_and_note) {
 
     val args: CarAndTextFragmentArgs by navArgs()
@@ -43,21 +41,12 @@ class CarAndTextFragment @Inject constructor(/*private val viewModelFactory: Vie
     private var selectedCar: CarDetails? = null
     private val adapter = GroupAdapter<GroupieViewHolder>()
 
-    private val activityViewModel: AddPostViewModel by activityViewModels() /*{
-        viewModelFactory
-    }*/
+    private val activityViewModel: AddPostViewModel by activityViewModels()
 
-    private val viewModel: CarAndTextViewModel by viewModels() /*{
-        viewModelFactory
-    }*/
+    private val viewModel: CarAndTextViewModel by viewModels()
 
     //    val args: PhoneConfirmFragmentArgs by navArgs()
     lateinit var navController: NavController
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-//        activityViewModel.cancelActiveJobs()
-    }
 
     @ExperimentalSplittiesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -72,22 +61,12 @@ class CarAndTextFragment @Inject constructor(/*private val viewModelFactory: Vie
         setupObservers()
 
         navController = findNavController()
-//        confirm.isEnabled = true
-//
-//        code.setText(args.password)
-//
-//        confirm.setOnClickListener {
-//            viewModel.confirm(args.phone, code.text.toString())
-//        }
 
         viewModel.getCars()
         updateNextButtonState()
     }
 
     private fun setupCarList() {
-        carsList.layoutManager =
-            LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
-        carsList.setHasFixedSize(true)
         carsList.adapter = adapter
 
     }
@@ -140,7 +119,6 @@ class CarAndTextFragment @Inject constructor(/*private val viewModelFactory: Vie
 
         adapter.clear()
         adapter.add(ErrorTextItem(message))
-        adapter.notifyDataSetChanged()
 
     }
 
