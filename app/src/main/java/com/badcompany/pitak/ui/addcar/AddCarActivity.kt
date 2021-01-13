@@ -201,7 +201,7 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
                 }
                 is ResultWrapper.Success -> {
                     stopLoadingAvatar()
-                    car.image.id = response.value.id!!
+                    car.image?.id = response.value.id!!
                     carImage.loadImageUrl(response.value.link!!)
                 }
                 ResultWrapper.InProgress -> {
@@ -363,7 +363,7 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
         carViewObj.imageList.forEach { imgs.add(PhotoBody(it.id)) }
         return Car(carViewObj.id,
                    carViewObj.carModel!!.id,
-                   carViewObj.image.id,
+                   carViewObj.image!!.id,
                    carViewObj.fuelType,
                    carViewObj.carColor!!.id,
                    carViewObj.carNumber,
@@ -379,7 +379,7 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
                 car.carYear != null &&
                 car.fuelType != null &&
                 car.airConditioner != null &&
-                car.image.id != null
+                car.image!!.id != null
 
         if (saveCar.isEnabled) {
             val bg = saveCar.background
@@ -399,8 +399,8 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
         if (car.fuelType == null) {
             car.fuelType = Constants.FUEL_TYPE_PETROL
         }
-        if (car.image.link != null) {
-            carImage.loadImageUrl(car.image.link!!)
+        if (car.image!!.link != null) {
+            carImage.loadImageUrl(car.image!!.link!!)
         }
         if (!car.imageList.isNullOrEmpty()) {
             car.imageList.forEach {

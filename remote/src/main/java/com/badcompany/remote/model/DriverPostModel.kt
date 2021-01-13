@@ -21,4 +21,6 @@ data class DriverPostModel(@SerializedName("id") val id: Long?=null,
                            @SerializedName("remark") val remark: String?=null,
                            @SerializedName("seat") val seat: Int,
                            @SerializedName("availableSeats") val availableSeats: Int?=null,
+                           @SerializedName("pkg") val pkg: Boolean?=null,
+                           @SerializedName("passengerList") val passengerList: List<PassengerModel>?=null,
                            @SerializedName("postType") val postType: String = Constants.DRIVER_POST_SIMPLE)

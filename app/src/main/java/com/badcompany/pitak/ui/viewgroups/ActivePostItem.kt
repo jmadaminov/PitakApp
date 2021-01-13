@@ -6,6 +6,7 @@ import com.badcompany.pitak.R
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item
 import kotlinx.android.synthetic.main.item_active_post.view.*
+import java.text.DecimalFormat
 
 
 class ActivePostItem(var post: DriverPost, val onClick: () -> Unit) : Item() {
@@ -15,7 +16,8 @@ class ActivePostItem(var post: DriverPost, val onClick: () -> Unit) : Item() {
             date.text = post.departureDate
             from.text = post.from.regionName
             to.text = post.to.regionName
-            price.text = post.price.toString()
+            price.text =
+                DecimalFormat("#,###").format(post.price) + " " + context.getString(R.string.sum)
             status.text =
                 (post.seat - post.availableSeats!!).toString() + "/" + post.seat.toString() + "   " + context.getString(
                     R.string.active)

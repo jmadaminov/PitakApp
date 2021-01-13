@@ -17,5 +17,7 @@ data class DriverPostEntity(val id: Long? = null,
                             val remark: String?=null,
                             val seat: Int,
                             val availableSeats: Int?=null,
+                           val pkg: Boolean?=null,
+                            val passengerList: List<PassengerEntity>?=null,
                             val postType: String = Constants.DRIVER_POST_SIMPLE)
 

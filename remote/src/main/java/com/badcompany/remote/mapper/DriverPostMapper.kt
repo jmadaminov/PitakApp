@@ -32,15 +32,27 @@ open class DriverPostMapper @Inject constructor() : Mapper<DriverPostEntity, Dri
                                  type.to.name)
 
 
-        val car =  if (type.car == null) null else CarInPostModel(type.car!!.id,
-                                 type.car!!.modelId,
-                                 ImageModel(type.car!!.image!!.id, type.car!!.image!!.link),
-                                 CarModelModel(type.car!!.carModel!!.id, type.car!!.carModel!!.name),
-                                 type.car!!.fuelType,
-                                 type.car!!.colorId,
-                                 type.car!!.carNumber,
-                                 type.car!!.carYear,
-                                 type.car!!.airConditioner)
+        val car = if (type.car == null) null else CarInPostModel(type.car!!.id,
+                                                                 type.car!!.modelId,
+                                                                 ImageModel(type.car!!.image!!.id,
+                                                                            type.car!!.image!!.link),
+                                                                 CarModelModel(type.car!!.carModel!!.id,
+                                                                               type.car!!.carModel!!.name),
+                                                                 type.car!!.fuelType,
+                                                                 type.car!!.colorId,
+                                                                 type.car!!.carNumber,
+                                                                 type.car!!.carYear,
+                                                                 type.car!!.airConditioner)
+
+        val passengerList = arrayListOf<PassengerModel>()
+        type.passengerList?.forEach {
+            passengerList.add(PassengerModel(it.id, ProfileDTO(it.profileDTO!!.phoneNum,
+                                                               it.profileDTO!!.name,
+                                                               it.profileDTO!!.surname,
+                                                               it.profileDTO!!.id,
+                                                               Image(it.profileDTO!!.image?.id,
+                                                                     it.profileDTO!!.image?.link))))
+        }
 
         return DriverPostModel(type.id,
                                placeFrom,
@@ -57,6 +69,8 @@ open class DriverPostMapper @Inject constructor() : Mapper<DriverPostEntity, Dri
                                type.remark,
                                type.seat,
                                type.availableSeats,
+                               type.pkg,
+                               passengerList,
                                type.postType)
     }
 
@@ -79,31 +93,45 @@ open class DriverPostMapper @Inject constructor() : Mapper<DriverPostEntity, Dri
                                   type.to.regionName,
                                   type.to.name)
 
-        val car = if (type.car == null) null else  CarInPostEntity(type.car.id,
-                                  type.car.modelId,
-                                  ImageEntity(type.car.image!!.id, type.car.image!!.link),
-                                  CarModelEntity(type.car.carModel!!.id, type.car.carModel!!.name),
-                                  type.car.fuelType,
-                                  type.car.colorId,
-                                  type.car.carNumber,
-                                  type.car.carYear,
-                                  type.car.airConditioner)
+        val car = if (type.car == null) null else CarInPostEntity(type.car.id,
+                                                                  type.car.modelId,
+                                                                  ImageEntity(type.car.image!!.id,
+                                                                              type.car.image!!.link),
+                                                                  CarModelEntity(type.car.carModel!!.id,
+                                                                                 type.car.carModel!!.name),
+                                                                  type.car.fuelType,
+                                                                  type.car.colorId,
+                                                                  type.car.carNumber,
+                                                                  type.car.carYear,
+                                                                  type.car.airConditioner)
+
+        val passengerList = arrayListOf<PassengerEntity>()
+        type.passengerList?.forEach {
+            passengerList.add(PassengerEntity(it.id, ProfileEntity(it.profileDTO!!.phoneNum,
+                                                                     it.profileDTO!!.name,
+                                                                     it.profileDTO!!.surname,
+                                                                     it.profileDTO!!.id,
+                                                                     ImageEntity(it.profileDTO!!.image?.id,
+                                                                     it.profileDTO!!.image?.link))))
+        }
 
         return DriverPostEntity(type.id,
-                               placeFrom,
-                               placeTo,
-                               type.price,
-                               type.departureDate,
-                               type.finishedDate,
-                               type.timeFirstPart,
-                               type.timeSecondPart,
-                               type.timeThirdPart,
-                               type.timeFourthPart,
-                               type.carId,
-                               car,
-                               type.remark,
-                               type.seat,
+                                placeFrom,
+                                placeTo,
+                                type.price,
+                                type.departureDate,
+                                type.finishedDate,
+                                type.timeFirstPart,
+                                type.timeSecondPart,
+                                type.timeThirdPart,
+                                type.timeFourthPart,
+                                type.carId,
+                                car,
+                                type.remark,
+                                type.seat,
                                 type.availableSeats,
+                                type.pkg,
+                                passengerList,
                                 type.postType)
     }
 

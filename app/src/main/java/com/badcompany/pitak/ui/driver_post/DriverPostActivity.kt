@@ -13,14 +13,18 @@ import com.badcompany.pitak.R
 import com.badcompany.pitak.ui.BaseActivity
 import com.badcompany.pitak.ui.addpost.AddPostActivity
 import com.badcompany.pitak.ui.interfaces.IOnOfferActionListener
+import com.badcompany.pitak.ui.viewgroups.PassengerItem
 import com.badcompany.pitak.viewobjects.DriverPostViewObj
 import com.badcompany.pitak.viewobjects.OfferViewObj.Companion.offerToViewObj
 import com.badcompany.pitak.viewobjects.PlaceViewObj
 import com.badcompany.remote.model.OfferDTO
 import com.google.android.material.snackbar.Snackbar
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import kotlinx.android.synthetic.main.activity_driver_post.*
 import splitties.activities.start
 import splitties.experimental.ExperimentalSplittiesApi
+import java.text.DecimalFormat
 
 const val EXTRA_POST_ID = "POST_ID"
 
@@ -35,6 +39,9 @@ const val EXTRA_POST_ID = "POST_ID"
     private val viewModel: DriverPostViewModel by viewModels()
 
     lateinit var offersAdapter: PostOffersAdapter
+    val passengersAdapter = GroupAdapter<GroupieViewHolder>()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_driver_post)
@@ -62,7 +69,7 @@ const val EXTRA_POST_ID = "POST_ID"
 
         rvOffers.setHasFixedSize(true)
         rvOffers.adapter = offersAdapter
-
+        rvPassengers.adapter = passengersAdapter
         viewModel.getPostById(postId)
         viewModel.getOffersForPost(postId)
 
@@ -165,14 +172,26 @@ const val EXTRA_POST_ID = "POST_ID"
         date.text = post.departureDate
         from.text = post.from.regionName
         to.text = post.to.regionName
-        price.text =
-            getString(R.string.price_and_seats_format,
-                      post.price.toString(), post.seat.toString())
+        seats.text = "${post.seat - post.availableSeats!!}/${post.seat}"
+        price.text = DecimalFormat("#,###").format(post.price) + " " + getString(R.string.sum)
 
         post.remark?.also {
             note.visibility = View.VISIBLE
             note.text = post.remark
         } ?: run { note.visibility = View.GONE }
+
+        passengersAdapter.clear()
+
+        if (post.passengerList != null && post.passengerList!!.isNotEmpty()) {
+            lblMyPassengers.text = getString(R.string.your_passengers)
+        }else{
+            lblMyPassengers.text = getString(R.string.no_passengers_yet)
+        }
+
+        post.passengerList?.forEach {
+            passengersAdapter.add(PassengerItem(it) {
+            })
+        }
     }
 
     private fun attachListeners() {
@@ -180,6 +199,7 @@ const val EXTRA_POST_ID = "POST_ID"
         swipeRefreshLayout.setOnRefreshListener {
             viewModel.getPostById(postId)
             viewModel.getOffersForPost(postId)
+            offersAdapter.refresh()
         }
 
         done.setOnClickListener {

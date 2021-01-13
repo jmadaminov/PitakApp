@@ -56,15 +56,16 @@ class PassengerPostActivity : BaseActivity() {
 
     private fun showPostData(post: PassengerPostViewObj) {
         date.text = post.departureDate
+        seats.text = post.seat.toString()
         from.text = post.from.regionName
         to.text = post.to.regionName
         price.text =
             DecimalFormat("#,###").format(post.price) +" "+ getString(R.string.sum)
 
-        if (!post.remark.isBlank()) {
+        post.remark?.also {
             note.visibility = View.VISIBLE
             note.text = post.remark
-        } else {
+        } ?: run {
             note.visibility = View.GONE
         }
 

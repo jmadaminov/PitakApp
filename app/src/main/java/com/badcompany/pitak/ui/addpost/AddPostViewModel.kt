@@ -3,11 +3,7 @@ package com.badcompany.pitak.ui.addpost
 import androidx.hilt.lifecycle.ViewModelInject
 import com.badcompany.domain.domainmodel.CarDetails
 import com.badcompany.domain.domainmodel.Place
-import com.badcompany.pitak.App
 import com.badcompany.pitak.ui.BaseViewModel
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import splitties.init.appCtx
-import javax.inject.Inject
 
 /**
  * Created by jahon on 28-Apr-20
@@ -15,6 +11,7 @@ import javax.inject.Inject
 class AddPostViewModel @ViewModelInject constructor() :
     BaseViewModel() {
 
+    val isPackage: Boolean = false
     var isEditing: Boolean = false
     var id: Long? = null
     var placeFrom: Place? = null

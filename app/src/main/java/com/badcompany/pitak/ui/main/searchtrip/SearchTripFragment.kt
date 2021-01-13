@@ -1,7 +1,6 @@
 package com.badcompany.pitak.ui.main.searchtrip
 
 import android.os.Bundle
-import android.text.format.DateFormat
 import android.view.View
 import android.widget.CalendarView
 import androidx.core.content.ContextCompat
@@ -19,6 +18,7 @@ import com.badcompany.pitak.R
 import com.badcompany.pitak.ui.main.MainActivity
 import com.badcompany.pitak.ui.viewgroups.PlaceFeedItemView
 import com.badcompany.pitak.util.AutoCompleteManager
+import com.badcompany.pitak.util.DateUtils.getFormattedDate
 import com.badcompany.pitak.util.buildAutoCompleteManager
 import com.skydoves.balloon.ArrowOrientation
 import com.skydoves.balloon.Balloon
@@ -76,29 +76,12 @@ class SearchTripFragment : Fragment(R.layout.fragment_search_trip) {
             viewModel.setDate(dayOfMonth, month, year)
             val calTemp = Calendar.getInstance()
             calTemp.set(year, month, dayOfMonth)
-            date.text = getFormattedDate(calTemp.timeInMillis)
+            date.text = getFormattedDate(calTemp.timeInMillis, requireContext())
             balloon.dismiss()
 
         }
     }
 
-    fun getFormattedDate(smsTimeInMilis: Long): String {
-        val smsTime = Calendar.getInstance()
-        smsTime.timeInMillis = smsTimeInMilis
-        val now = Calendar.getInstance()
-        val dateTimeFormatString = "dd.MM.yyyy"
-        return when {
-            now[Calendar.DATE] == smsTime[Calendar.DATE] -> {
-                getString(R.string.today)
-            }
-            now[Calendar.DATE] - smsTime[Calendar.DATE] == -1 -> {
-                getString(R.string.tomorrow)
-            }
-            else -> {
-                DateFormat.format(dateTimeFormatString, Date(smsTimeInMilis)).toString()
-            }
-        }
-    }
 
     private fun setupAutoCompleteViews() {
         autoCompleteManager = buildAutoCompleteManager {

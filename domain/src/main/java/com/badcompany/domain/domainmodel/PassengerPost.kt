@@ -19,7 +19,7 @@ data class PassengerPost(val id: Long,
                          val timeFourthPart: Boolean,
                          val airConditioner: Boolean,
                          val profile: Profile,
-                         val remark: String,
+                         val remark: String?=null,
                          val postStatus: String,
                          val seat: Int,
                          val postType: EPostType = EPostType.PASSENGER_SM)

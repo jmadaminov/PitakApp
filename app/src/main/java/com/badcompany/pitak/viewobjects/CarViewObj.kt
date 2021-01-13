@@ -6,7 +6,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class CarViewObj(var id: Long? = null,
                       var carModel: IdNameViewObj? = null,
-                      var image: ImageViewObj = ImageViewObj(),
+                      var image: ImageViewObj? = null,
                       var fuelType: String? = null,
                       var carColor: CarColorViewObj? = null,
                       var carNumber: String? = null,

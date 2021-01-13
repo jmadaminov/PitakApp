@@ -3,40 +3,60 @@ package com.badcompany.pitak.viewobjects
 import android.os.Parcelable
 import com.badcompany.core.EOfferStatus
 import com.badcompany.core.EPostType
+import com.badcompany.remote.model.Image
 import com.badcompany.remote.model.OfferDTO
+import com.badcompany.remote.model.ProfileDTO
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class OfferViewObj(val id: Long,
                         val postId: Long,
-                        val postType: EPostType,
+                        val offerType: EPostType,
                         val profileId: Long,
+                        val profileViewObj: ProfileViewObj,
                         val status: EOfferStatus,
                         val visible: Boolean,
                         val submitDate: String,
-                        val message: String) : Parcelable {
- companion object{
+                        val message: String?=null) : Parcelable {
+    companion object {
 
-    fun offerToViewObj(offerDTO: OfferDTO) :OfferViewObj{
-        return OfferViewObj(offerDTO.id,
-                            offerDTO.postId,
-                            offerDTO.postType,
-                            offerDTO.profileId,
-                            offerDTO.status,
-                            offerDTO.visible,
-                            offerDTO.submitDate,
-                            offerDTO.message)
-    }
+        fun offerToViewObj(offerDTO: OfferDTO): OfferViewObj {
+            val profileViewObj =
+                ProfileViewObj(offerDTO.profileDTO.phoneNum,
+                               offerDTO.profileDTO.name,
+                               offerDTO.profileDTO.surname,
+                               offerDTO.profileDTO.id,
+                               ImageViewObj(offerDTO.profileDTO.image!!.id,
+                                            offerDTO.profileDTO.image!!.link))
+            return OfferViewObj(offerDTO.id,
+                                offerDTO.postId,
+                                offerDTO.offerType,
+                                offerDTO.profileId,
+                                profileViewObj,
+                                offerDTO.status,
+                                offerDTO.visible,
+                                offerDTO.submitDate,
+                                offerDTO.message)
+        }
 
-    fun offerToDTO(offerViewObj: OfferViewObj) :OfferDTO{
-        return OfferDTO(offerViewObj.id,
+        fun offerToDTO(offerViewObj: OfferViewObj): OfferDTO {
+            val profileDto =
+                ProfileDTO(offerViewObj.profileViewObj.phoneNum,
+                               offerViewObj.profileViewObj.name,
+                               offerViewObj.profileViewObj.surname,
+                               offerViewObj.profileViewObj.id,
+                               Image(offerViewObj.profileViewObj.image?.id,
+                                            offerViewObj.profileViewObj.image?.link))
+
+            return OfferDTO(offerViewObj.id,
                             offerViewObj.postId,
-                            offerViewObj.postType,
+                            offerViewObj.offerType,
                             offerViewObj.profileId,
+                            profileDto,
                             offerViewObj.status,
                             offerViewObj.visible,
                             offerViewObj.submitDate,
                             offerViewObj.message)
+        }
     }
- }
 }

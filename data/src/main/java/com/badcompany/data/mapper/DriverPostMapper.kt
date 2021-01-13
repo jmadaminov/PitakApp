@@ -42,6 +42,16 @@ open class DriverPostMapper @Inject constructor() : Mapper<DriverPostEntity, Dri
                                                             type.car.carYear,
                                                             type.car.airConditioner)
 
+        val passengerList = arrayListOf<Passenger>()
+        type.passengerList?.forEach {
+            passengerList.add(Passenger(it.id, Profile(it.profileDTO!!.phoneNum,
+                                                               it.profileDTO!!.name,
+                                                               it.profileDTO!!.surname,
+                                                               it.profileDTO!!.id,
+                                                               Image(it.profileDTO!!.image?.id,
+                                                                     it.profileDTO!!.image?.link))))
+        }
+
         return DriverPost(type.id,
                           placeFrom,
                           placeTo,
@@ -57,6 +67,8 @@ open class DriverPostMapper @Inject constructor() : Mapper<DriverPostEntity, Dri
                           type.remark,
                           type.seat,
                           type.availableSeats,
+                          type.pkg,
+                          passengerList ,
                           type.postType)
     }
 
@@ -90,6 +102,17 @@ open class DriverPostMapper @Inject constructor() : Mapper<DriverPostEntity, Dri
                                                                   type.car!!.carYear,
                                                                   type.car!!.airConditioner)
 
+        val passengerList = arrayListOf<PassengerEntity>()
+        type.passengerList?.forEach {
+            passengerList.add(PassengerEntity(it.id, ProfileEntity(it.profile!!.phoneNum,
+                                                       it.profile!!.name,
+                                                       it.profile!!.surname,
+                                                       it.profile!!.id,
+                                                       ImageEntity(it.profile!!.image?.id,
+                                                             it.profile!!.image?.link))))
+        }
+
+
         return DriverPostEntity(type.id,
                                 placeFrom,
                                 placeTo,
@@ -105,6 +128,8 @@ open class DriverPostMapper @Inject constructor() : Mapper<DriverPostEntity, Dri
                                 type.remark,
                                 type.seat,
                                 type.availableSeats,
+                                type.pkg,
+                                passengerList ,
                                 type.postType)
     }
 

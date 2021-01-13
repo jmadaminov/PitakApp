@@ -21,7 +21,7 @@ data class PassengerPostViewObj(val id: Long,
                                 val timeFourthPart: Boolean,
                                 val airConditioner: Boolean,
                                 val profileViewObj: ProfileViewObj,
-                                val remark: String,
+                                val remark: String?=null,
                                 val postStatus: String,
                                 val seat: Int,
                                 val postType: EPostType) : Parcelable {
