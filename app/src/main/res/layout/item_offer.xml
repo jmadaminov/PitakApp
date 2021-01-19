@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="5dp"
-    android:layout_marginEnd="5dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
     app:cardCornerRadius="5dp"
     app:cardUseCompatPadding="true"
     app:contentPadding="10dp">
@@ -37,12 +37,15 @@
         <!--        app:layout_constraintStart_toStartOf="parent"-->
         <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
+
         <TextView
             android:id="@+id/tvName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:gravity="start"
+            android:textSize="12dp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@id/ivAccept"
             app:layout_constraintStart_toEndOf="@id/ivAvatar"
             app:layout_constraintTop_toTopOf="parent"
@@ -52,8 +55,8 @@
             android:id="@+id/tvMessage"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:gravity="center"
+            android:layout_marginStart="10dp"
+            android:gravity="start"
             app:layout_constraintEnd_toStartOf="@id/ivAccept"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toEndOf="@id/ivAvatar"
@@ -66,9 +69,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:background="@drawable/selector_neutral_border"
+            android:drawableRight="@drawable/ic_baseline_money_24"
+            android:drawablePadding="10dp"
             android:gravity="center"
             android:padding="7dp"
+            app:drawableRightCompat="@drawable/ic_baseline_money_24"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvMessage"

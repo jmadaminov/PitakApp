@@ -121,5 +121,6 @@
     <string name="we_will_create_an_order_for_you">We will create an order for you with the destinations of the passenger post!</string>
     <string name="no_passengers_yet">You have no passengers for this trip yet.</string>
     <string name="your_passengers">Your passengers</string>
+    <string name="offers">Offers</string>
 
 </resources>
