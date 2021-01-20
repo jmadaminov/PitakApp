@@ -132,6 +132,13 @@
                     app:layout_constraintStart_toEndOf="@id/profilePhoto"
                     app:layout_constraintTop_toBottomOf="@id/nameSurname" />
 
+                <RatingBar
+                    android:id="@+id/myRating"
+                    style="@style/Widget.AppCompat.RatingBar.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@id/phone"
+                    app:layout_constraintTop_toBottomOf="@id/phone" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

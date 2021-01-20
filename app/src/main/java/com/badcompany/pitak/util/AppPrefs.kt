@@ -16,4 +16,5 @@ import splitties.preferences.Preferences
     var surname by StringPref("SURNAME", "")
     var phone by StringPref("PHONE", "")
     var avatar by StringPref("AVATAR", "")
+    var rating by FloatPref("RATING", 0F)
 }

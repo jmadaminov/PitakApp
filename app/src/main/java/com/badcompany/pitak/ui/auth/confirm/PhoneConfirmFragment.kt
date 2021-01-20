@@ -55,7 +55,9 @@ class PhoneConfirmFragment : Fragment(R.layout.fragment_phone_confirm) {
                                               code.text.toString(),
                                               App.uuid))
         }
-
+        tvRequestCodeAgain.setOnClickListener {
+            viewModel.requestCodeAgain(args.phone)
+        }
         ivBack.setOnClickListener {
             findNavController().popBackStack()
         }
@@ -115,6 +117,7 @@ class PhoneConfirmFragment : Fragment(R.layout.fragment_phone_confirm) {
             name = response.value.name!!
             surname = response.value.surname!!
             phone = response.value.phoneNum!!
+            rating = response.value.rating
         }
     }
 
