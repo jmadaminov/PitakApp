@@ -74,6 +74,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile), IOnSignOut {
         cardProfile.setBackgroundResource(R.drawable.stroke_rounded_bottom_corners)
         nameSurname.text = "${AppPrefs.name} ${AppPrefs.surname}"
         phone.text = "+${AppPrefs.phone}"
+        myRating.rating = AppPrefs.rating
 
     }
 

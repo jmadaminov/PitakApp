@@ -122,5 +122,6 @@
     <string name="no_passengers_yet">You have no passengers for this trip yet.</string>
     <string name="your_passengers">Your passengers</string>
     <string name="offers">Offers</string>
+    <string name="settings">Settings</string>
 
 </resources>

@@ -192,12 +192,12 @@
             android:layout_height="40dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="15dp"
-            android:background="@drawable/selector_alert_border"
+            android:background="@drawable/selector_neutral_border"
             android:clickable="true"
             android:focusable="true"
             android:foreground="?android:selectableItemBackground"
             android:gravity="center"
-            android:text="@string/action_sign_out"
+            android:text="@string/settings"
             android:textColor="@color/dark_grey"
             android:textSize="18dp" />
 

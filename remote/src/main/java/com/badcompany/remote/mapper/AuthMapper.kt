@@ -16,11 +16,11 @@ open class AuthMapper @Inject constructor(): EntityMapper<UserInfoModel, AuthEnt
      * Map an instance of a [UserInfoModel] to a [AuthEntity] model
      */
     override fun mapToEntity(type: UserInfoModel): AuthEntity {
-        return AuthEntity(type.phoneNum, type.name,type.jwt, type.surname,  type.role)
+        return AuthEntity(type.phoneNum, type.name,type.jwt, type.surname,type.rating,   type.role)
     }
 
     override fun mapFromEntity(type: AuthEntity): UserInfoModel {
-        return UserInfoModel(type.phoneNum, type.name, type.surname, type.jwt, type.role)
+        return UserInfoModel(type.phoneNum, type.name, type.surname, type.jwt, type.rating, type.role)
     }
 
 

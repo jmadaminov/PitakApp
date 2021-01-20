@@ -7,4 +7,5 @@ data class AuthEntity( val phoneNum:String?=null,
                       val name:String?=null,
                       val jwt:String?=null,
                       val surname:String?=null,
-                      val role : String?=null)
+                       val rating: Float = 0F,
+                       val role : String?=null)
