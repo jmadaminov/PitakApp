@@ -123,5 +123,8 @@
     <string name="your_passengers">Your passengers</string>
     <string name="offers">Offers</string>
     <string name="settings">Settings</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">Ok</string>
+    <string name="please_add_your_car_first">Please describe your car first.</string>
 
 </resources>

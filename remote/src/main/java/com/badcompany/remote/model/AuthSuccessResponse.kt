@@ -14,4 +14,5 @@ data class UserInfoModel(@SerializedName("phoneNum") val phoneNum: String? = nul
                         @SerializedName("surname")  val surname: String? = null,
                         @SerializedName("jwt")  val jwt: String? = null,
                          @SerializedName("rating")  val rating: Float = 0F,
+                         @SerializedName("defCarId")  val defCarId: String? = null,
                          @SerializedName("role")  val role: String? = null)

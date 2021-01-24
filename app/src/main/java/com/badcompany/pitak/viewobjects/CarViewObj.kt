@@ -11,8 +11,8 @@ data class CarViewObj(var id: Long? = null,
                       var carColor: CarColorViewObj? = null,
                       var carNumber: String? = null,
                       var carYear: Int? = null,
-                      var airConditioner: Boolean? = null,
-                      var def: Boolean? = null,
+                      var airConditioner: Boolean = false,
+                      var def: Boolean= false,
                       var imageList: List<ImageViewObj> = arrayListOf()) : Parcelable
 
 @Parcelize

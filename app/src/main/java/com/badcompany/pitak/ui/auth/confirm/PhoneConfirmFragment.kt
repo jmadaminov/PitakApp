@@ -118,6 +118,7 @@ class PhoneConfirmFragment : Fragment(R.layout.fragment_phone_confirm) {
             surname = response.value.surname!!
             phone = response.value.phoneNum!!
             rating = response.value.rating
+            defaultCarId = response.value.defCarId
         }
     }
 

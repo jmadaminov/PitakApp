@@ -6,8 +6,10 @@ import android.view.View
 import androidx.activity.viewModels
 import com.badcompany.pitak.R
 import com.badcompany.pitak.ui.BaseActivity
+import com.badcompany.pitak.ui.dialogs.DialogAddCarFirst
 import com.badcompany.pitak.ui.passenger_post.offer_a_ride.ARG_PASSENGER_POST
 import com.badcompany.pitak.ui.passenger_post.offer_a_ride.DialogOfferARideFragment
+import com.badcompany.pitak.util.AppPrefs
 import com.badcompany.pitak.util.loadCircleImageUrl
 import com.badcompany.pitak.viewobjects.PassengerPostViewObj
 import kotlinx.android.synthetic.main.activity_passenger_post.*
@@ -42,9 +44,17 @@ class PassengerPostActivity : BaseActivity() {
 
     private fun attachListeners() {
         btnOfferARide.setOnClickListener {
-            val dialog = DialogOfferARideFragment()
-            dialog.arguments = Bundle().apply { putParcelable(ARG_PASSENGER_POST, passengerPost) }
-            dialog.show(supportFragmentManager, "")
+
+            if (AppPrefs.defaultCarId.isNullOrBlank()) {
+                DialogAddCarFirst().show(supportFragmentManager, "")
+            } else {
+                val dialog = DialogOfferARideFragment()
+                dialog.arguments =
+                    Bundle().apply { putParcelable(ARG_PASSENGER_POST, passengerPost) }
+                dialog.show(supportFragmentManager, "")
+            }
+
+
         }
 
         swipeRefreshLayout.setOnRefreshListener {
@@ -60,7 +70,7 @@ class PassengerPostActivity : BaseActivity() {
         from.text = post.from.regionName
         to.text = post.to.regionName
         price.text =
-            DecimalFormat("#,###").format(post.price) +" "+ getString(R.string.sum)
+            DecimalFormat("#,###").format(post.price) + " " + getString(R.string.sum)
 
         post.remark?.also {
             note.visibility = View.VISIBLE

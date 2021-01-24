@@ -10,11 +10,12 @@ import splitties.preferences.Preferences
 
 @ExperimentalSplittiesApi object AppPrefs : Preferences("myPrefs") {
 
-    var token by StringPref("TOKEN", "")
-    var language by StringPref("LANGUAGE", "ru")
-    var name by StringPref("NAME", "")
-    var surname by StringPref("SURNAME", "")
-    var phone by StringPref("PHONE", "")
-    var avatar by StringPref("AVATAR", "")
-    var rating by FloatPref("RATING", 0F)
+    var token by stringPref("token","")
+    var language by stringPref("language","ru")
+    var name by stringPref("name","")
+    var defaultCarId by stringOrNullPref("defaultCarId", null)
+    var surname by stringPref("surname","")
+    var phone by stringPref("phone","")
+    var avatar by stringPref("avatar","")
+    var rating by floatPref("rating",0F)
 }

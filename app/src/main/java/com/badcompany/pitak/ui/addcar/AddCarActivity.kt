@@ -64,7 +64,7 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
     @ExperimentalCoroutinesApi
     @ExperimentalSplittiesApi
     override fun onCreate(savedInstanceState: Bundle?) {
-        car = if (intent.extras == null) CarViewObj()
+        car = if (intent.extras == null) CarViewObj(fuelType = Constants.FUEL_TYPE_PETROL)
         else intent.getParcelableExtra(Constants.TXT_CAR) as CarViewObj
 
         super.onCreate(savedInstanceState)
@@ -201,7 +201,7 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
                 }
                 is ResultWrapper.Success -> {
                     stopLoadingAvatar()
-                    car.image?.id = response.value.id!!
+                    car.image = ImageViewObj(response.value.id!!)
                     carImage.loadImageUrl(response.value.link!!)
                 }
                 ResultWrapper.InProgress -> {
@@ -264,6 +264,14 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
     }
 
     private fun setupColorsModelsSpinners(value: ColorsAndModels) {
+        if (car.carColor == null && value.colors.isNotEmpty()) {
+            car.carColor = CarColorViewObj(value.colors[0].id)
+        }
+
+        if (car.carModel == null && value.models.isNotEmpty()) {
+            car.carModel = IdNameViewObj(value.models[0].id)
+        }
+
         carColorsAdapter = ColorsArrayAdapter(this, value.colors)
         carModelsAdapter = ModelsArrayAdapter(this, value.models)
         carModelSpinner.adapter = carModelsAdapter
@@ -368,18 +376,16 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
                    carViewObj.carColor!!.id,
                    carViewObj.carNumber,
                    carViewObj.carYear,
-                   carViewObj.airConditioner!!,
+                   carViewObj.airConditioner,
                    imgs)
     }
 
     fun updateSaveButtonState() {
         saveCar.isEnabled = !car.carNumber.isNullOrBlank() &&
-                car.carModel!!.id != null &&
-                car.carColor!!.id != null &&
+                car.carModel?.id != null &&
+                car.carColor?.id != null &&
                 car.carYear != null &&
-                car.fuelType != null &&
-                car.airConditioner != null &&
-                car.image!!.id != null
+                car.image?.id != null
 
         if (saveCar.isEnabled) {
             val bg = saveCar.background
@@ -400,9 +406,9 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
             car.fuelType = Constants.FUEL_TYPE_PETROL
         }
 
-       car.image?.link?.let{
-           carImage.loadImageUrl(it)
-       }
+        car.image?.link?.let {
+            carImage.loadImageUrl(it)
+        }
 
         if (!car.imageList.isNullOrEmpty()) {
             car.imageList.forEach {

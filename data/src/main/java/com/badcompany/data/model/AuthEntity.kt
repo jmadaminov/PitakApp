@@ -8,4 +8,5 @@ data class AuthEntity( val phoneNum:String?=null,
                       val jwt:String?=null,
                       val surname:String?=null,
                        val rating: Float = 0F,
+                       val defCarId: String? = null,
                        val role : String?=null)

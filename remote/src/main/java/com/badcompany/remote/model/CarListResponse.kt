@@ -25,9 +25,9 @@ data class CarDetails(
     @SerializedName("carYear")
     var carYear: Int? = null,
     @SerializedName("airConditioner")
-    var airConditioner: Boolean? = null,
+    var airConditioner: Boolean = false,
     @SerializedName("def")
-    var def: Boolean? = null,
+    var def: Boolean = false,
     @SerializedName("imageList")
     var imageList: List<ImageBody>? = null)
 

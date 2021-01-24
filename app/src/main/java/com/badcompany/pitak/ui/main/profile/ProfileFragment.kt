@@ -34,7 +34,6 @@ import com.badcompany.pitak.viewobjects.IdNameViewObj
 import com.badcompany.pitak.viewobjects.ImageViewObj
 import com.google.android.material.snackbar.Snackbar
 import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.OnItemClickListener
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_profile.*
@@ -121,21 +120,20 @@ class ProfileFragment : Fragment(R.layout.fragment_profile), IOnSignOut {
                         .show()
                 }
                 is ErrorWrapper.SystemError -> {
-                    Snackbar.make(clParent,
-                                  getString(R.string.system_error),
-                                  Snackbar.LENGTH_SHORT)
+                    Snackbar.make(clParent, getString(R.string.system_error), Snackbar.LENGTH_SHORT)
                         .show()
                 }
                 is ResultWrapper.Success -> {
                     adapter.remove(adapter.getItem(response.value))
                     adapter.notifyItemRemoved(response.value)
                     if (adapter.itemCount > 0 && adapter.getItem(adapter.itemCount - 1) is CarItemView) {
-                        adapter.add(ItemAddCar(OnItemClickListener { item, view ->
-                            val intent = Intent(context, AddCarActivity::class.java)
-                            startActivityForResult(intent, CODE_ADD_CAR)
-                        }))
+                        adapter.add(ItemAddCar({ item, view ->
+                                                   startActivityForResult(Intent(context,
+                                                                                 AddCarActivity::class.java),
+                                                                          CODE_ADD_CAR)
+                                               }))
                         adapter.notifyItemInserted(adapter.itemCount)
-                    } else {
+                    } else  {
 
                     }
                 }
@@ -159,7 +157,11 @@ class ProfileFragment : Fragment(R.layout.fragment_profile), IOnSignOut {
                         .show()
                 }
                 is ResultWrapper.Success -> {
-                    (adapter.getItem(response.value) as CarItemView).car.def = true
+                    val editingCarItem = (adapter.getItem(response.value) as CarItemView)
+                    AppPrefs.edit {
+                        defaultCarId = editingCarItem.car.id.toString()
+                    }
+                    editingCarItem.car.def = true
                     adapter.notifyItemChanged(response.value)
                 }
                 ResultWrapper.InProgress -> {

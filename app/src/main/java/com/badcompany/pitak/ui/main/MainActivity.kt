@@ -12,6 +12,7 @@ import com.badcompany.pitak.R
 import com.badcompany.pitak.ui.BaseActivity
 import com.badcompany.pitak.ui.addpost.AddPostActivity
 import com.badcompany.pitak.ui.auth.AuthActivity
+import com.badcompany.pitak.ui.dialogs.DialogAddCarFirst
 import com.badcompany.pitak.ui.main.mytrips.MyTripsFragment
 import com.badcompany.pitak.ui.main.notifications.NotificationsFragment
 import com.badcompany.pitak.ui.main.profile.ProfileFragment
@@ -41,7 +42,11 @@ class MainActivity : BaseActivity() {
 
     private fun setupListeners() {
         addPost.setOnClickListener {
-            start<AddPostActivity>()
+            if (AppPrefs.defaultCarId.isNullOrBlank()) {
+                DialogAddCarFirst().show(supportFragmentManager, "")
+            } else {
+                start<AddPostActivity>()
+            }
         }
 
         navSearch.setOnClickListener {

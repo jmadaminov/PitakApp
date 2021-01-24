@@ -10,8 +10,8 @@ data class CarDetailsEntity(var id: Long? = null,
                             var carColor: CarColorEntity? = null,
                             var carNumber: String? = null,
                             var carYear: Int? = null,
-                            var airConditioner: Boolean? = null,
-                            var def: Boolean? = null,
+                            var airConditioner: Boolean,
+                            var def: Boolean,
                             var imageList: List<ImageEntity>? = null)
 
 data class IdNameEntity(var id: Long? = null,

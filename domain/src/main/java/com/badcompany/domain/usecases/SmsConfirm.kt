@@ -1,7 +1,5 @@
 package com.badcompany.domain.usecases
 
-import com.badcompany.core.Constants
-import com.badcompany.core.ErrorWrapper
 import com.badcompany.core.ResultWrapper
 import com.badcompany.domain.domainmodel.AuthBody
 import com.badcompany.domain.domainmodel.UserCredentials
