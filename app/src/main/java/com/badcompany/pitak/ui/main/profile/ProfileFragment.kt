@@ -28,10 +28,7 @@ import com.badcompany.pitak.ui.viewgroups.ItemAddCar
 import com.badcompany.pitak.ui.viewgroups.LoadingItem
 import com.badcompany.pitak.util.AppPrefs
 import com.badcompany.pitak.util.loadImageUrl
-import com.badcompany.pitak.viewobjects.CarColorViewObj
 import com.badcompany.pitak.viewobjects.CarViewObj
-import com.badcompany.pitak.viewobjects.IdNameViewObj
-import com.badcompany.pitak.viewobjects.ImageViewObj
 import com.google.android.material.snackbar.Snackbar
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
@@ -42,8 +39,6 @@ import splitties.experimental.ExperimentalSplittiesApi
 import splitties.fragments.start
 import splitties.preferences.edit
 
-//@FlowPreview
-//@ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class ProfileFragment : Fragment(R.layout.fragment_profile), IOnSignOut {
 
@@ -124,18 +119,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile), IOnSignOut {
                         .show()
                 }
                 is ResultWrapper.Success -> {
-                    adapter.remove(adapter.getItem(response.value))
-                    adapter.notifyItemRemoved(response.value)
-                    if (adapter.itemCount > 0 && adapter.getItem(adapter.itemCount - 1) is CarItemView) {
-                        adapter.add(ItemAddCar({ item, view ->
-                                                   startActivityForResult(Intent(context,
-                                                                                 AddCarActivity::class.java),
-                                                                          CODE_ADD_CAR)
-                                               }))
-                        adapter.notifyItemInserted(adapter.itemCount)
-                    } else  {
-
-                    }
+                    showCars(response.value)
                 }
                 ResultWrapper.InProgress -> {
                 }
@@ -176,6 +160,12 @@ class ProfileFragment : Fragment(R.layout.fragment_profile), IOnSignOut {
     private fun showCars(value: List<CarDetails>) {
         adapter.clear()
         value.forEach { carDetails ->
+            if (carDetails.def){
+                AppPrefs.edit {
+                    defaultCarId = carDetails.id.toString()
+                }
+            }
+
             adapter.add(CarItemView(carDetails, object : MyItemClickListener {
                 override fun onClick(pos: Int, view: View) {
                     val popUpMenu = PopupMenu(context, view.carAction)
@@ -183,26 +173,11 @@ class ProfileFragment : Fragment(R.layout.fragment_profile), IOnSignOut {
                     popUpMenu.setOnMenuItemClickListener { menuItem ->
                         when (menuItem.itemId) {
                             R.id.delete -> {
-                                viewModel.deleteCar(carDetails.id!!, pos)
+                                viewModel.deleteCar(carDetails.id!!)
                             }
                             R.id.edit -> {
                                 val intent = Intent(context, AddCarActivity::class.java)
-                                val imgList = arrayListOf<ImageViewObj>()
-                                carDetails.imageList?.forEach {
-                                    imgList.add(ImageViewObj(it.id, it.link))
-                                }
-                                val carViewObj = CarViewObj(carDetails.id,
-                                                            IdNameViewObj(carDetails.carModel!!.id),
-                                                            ImageViewObj(carDetails.image!!.id,
-                                                                         carDetails.image!!.link),
-                                                            carDetails.fuelType,
-                                                            CarColorViewObj(carDetails.carColor!!.id),
-                                                            carDetails.carNumber,
-                                                            carDetails.carYear,
-                                                            carDetails.airConditioner,
-                                                            carDetails.def,
-                                                            imgList)
-                                intent.putExtra(TXT_CAR, carViewObj)
+                                intent.putExtra(TXT_CAR, CarViewObj.fromCarModel(carDetails))
                                 startActivityForResult(intent, CODE_ADD_CAR)
                             }
                             R.id.setDefault -> {

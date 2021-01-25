@@ -37,8 +37,14 @@ class ActiveTripsFragment : Fragment(R.layout.fragment_active_trips) {
         setupViews()
         attachListeners()
         subscribeObservers()
-        viewModel.getActivePosts()
     }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getActivePosts()
+
+    }
+
 
     private fun setupViews() {
         activeOrdersList.adapter = adapter

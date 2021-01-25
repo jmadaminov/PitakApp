@@ -35,14 +35,23 @@ class PassengerPostActivity : BaseActivity() {
 
     private fun subscribeObservers() {
 
-//        viewModel.isLoading.observe(this, {
-//            val value = it ?: return@observe
-//            swipeRefreshLayout.isRefreshing = value
-//        })
+        viewModel.isLoading.observe(this, {
+            swipeRefreshLayout.isRefreshing = it ?: return@observe
+        })
+
+        viewModel.postData.observe(this) {
+            val result = it ?: return@observe
+            showPostData(PassengerPostViewObj.mapFromPassengerPostModel(result))
+        }
 
     }
 
     private fun attachListeners() {
+
+        swipeRefreshLayout.setOnRefreshListener {
+            viewModel.getPostById(passengerPost.id)
+        }
+
         btnOfferARide.setOnClickListener {
 
             if (AppPrefs.defaultCarId.isNullOrBlank()) {
@@ -57,9 +66,7 @@ class PassengerPostActivity : BaseActivity() {
 
         }
 
-        swipeRefreshLayout.setOnRefreshListener {
 
-        }
 
     }
 

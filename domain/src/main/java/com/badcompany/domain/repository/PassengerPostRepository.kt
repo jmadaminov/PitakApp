@@ -10,6 +10,6 @@ interface PassengerPostRepository {
 
     suspend fun filterPassengerPost(filter: Filter): ResultWrapper<List<PassengerPost>>
     suspend fun offerARide(myOffer: DriverOffer): ResponseWrapper<Any>
-//    suspend fun getPassengerPostById(id:Long): ResponseWrapper<PassengerPost>
+    suspend fun getPassengerPostById(id:Long): ResponseWrapper<PassengerPost>
 
 }

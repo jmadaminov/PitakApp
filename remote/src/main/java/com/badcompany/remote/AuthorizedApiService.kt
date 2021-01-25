@@ -73,7 +73,7 @@ interface AuthorizedApiService {
     @Headers("Content-Type:application/json", "Accept: application/json")
     @DELETE("car/action/{identifier}")
     suspend fun deleteCar(@Path(value = "identifier",
-                                encoded = true) identifier: Long): PlainResponse
+                                encoded = true) identifier: Long): CarListResponse
 
     @Headers("Content-Type:application/json", "Accept: application/json")
     @PUT("car/action/{identifier}/def")
@@ -103,6 +103,12 @@ interface AuthorizedApiService {
     @GET("driver_post/action/{id}")
     suspend fun getDriverPostById(@Path(value = "id",
                                         encoded = true) id: Long): RespFormatter<DriverPostModel>
+
+
+    @Headers("Content-Type:application/json", "Accept: application/json")
+    @GET("passenger_post/action/{id}")
+    suspend fun getPassengerPostById(@Path(value = "id",
+                                           encoded = true) id: Long): RespFormatter<PassengerPostModel>
 
     @Headers("Content-Type:application/json", "Accept: application/json")
     @GET("offer/post/accept/{id}")

@@ -17,12 +17,14 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 
-class ProfileViewModel  @ViewModelInject constructor(val getCarList: GetCars, val deleteCar: DeleteCar, val setDefaultCar: SetDefaultCar) :
+class ProfileViewModel @ViewModelInject constructor(val getCarList: GetCars,
+                                                    val deleteCar: DeleteCar,
+                                                    val setDefaultCar: SetDefaultCar) :
     BaseViewModel() {
 
 
     val carsResponse = SingleLiveEvent<ResultWrapper<List<CarDetails>>>()
-    val deleteCarResponse = SingleLiveEvent<ResultWrapper<Int>>()
+    val deleteCarResponse = SingleLiveEvent<ResultWrapper<List<CarDetails>>>()
     val defaultCarResponse = SingleLiveEvent<ResultWrapper<Int>>()
 
     fun getCarList() {
@@ -35,28 +37,20 @@ class ProfileViewModel  @ViewModelInject constructor(val getCarList: GetCars, va
         }
     }
 
-    fun deleteCar( id: Long, position: Int) {
+    fun deleteCar(id: Long) {
         deleteCarResponse.value = ResultWrapper.InProgress
         viewModelScope.launch(IO) {
-            val response = deleteCar.execute( id)
+            val response = deleteCar.execute(id)
             withContext(Main) {
-                when (response) {
-                    is ErrorWrapper.RespError -> deleteCarResponse.value = response
-                    is ErrorWrapper.SystemError -> deleteCarResponse.value = response
-                    is ResultWrapper.Success -> deleteCarResponse.value =
-                        ResultWrapper.Success(position)
-                    ResultWrapper.InProgress -> deleteCarResponse.value = ResultWrapper.InProgress
-                }.exhaustive
-
-
+                deleteCarResponse.value = response
             }
         }
     }
 
-    fun setDefault( id: Long, pos: Int) {
+    fun setDefault(id: Long, pos: Int) {
         defaultCarResponse.value = ResultWrapper.InProgress
         viewModelScope.launch(IO) {
-            val response = setDefaultCar.execute( id)
+            val response = setDefaultCar.execute(id)
             withContext(Main) {
                 when (response) {
                     is ErrorWrapper.RespError -> defaultCarResponse.value = response

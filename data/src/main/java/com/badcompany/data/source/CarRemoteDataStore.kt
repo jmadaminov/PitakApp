@@ -36,7 +36,7 @@ open class CarRemoteDataStore @Inject constructor(private val carRemote: CarRemo
         return carRemote.updateCar(car)
     }
 
-    override suspend fun deleteCar(id: Long): ResultWrapper<String> {
+    override suspend fun deleteCar(id: Long): ResultWrapper<List<CarDetailsEntity>> {
         return carRemote.deleteCar(id)
     }
 

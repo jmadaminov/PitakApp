@@ -61,7 +61,7 @@ class CarRepositoryImpl @Inject constructor(private val factory: CarDataStoreFac
     }
 
     override suspend fun getCarColors(): ResultWrapper<List<CarColorBody>> {
-        val response = factory.retrieveDataStore(false)            .getCarColors()
+        val response = factory.retrieveDataStore(false).getCarColors()
         return when (response) {
             is ErrorWrapper.RespError -> response
             is ErrorWrapper.SystemError -> response
@@ -102,14 +102,16 @@ class CarRepositoryImpl @Inject constructor(private val factory: CarDataStoreFac
         }
     }
 
-    override suspend fun deleteCar(id: Long): ResultWrapper<String> {
+    override suspend fun deleteCar(id: Long): ResultWrapper<List<CarDetails>> {
         val response = factory.retrieveDataStore(false)
             .deleteCar(id)
         return when (response) {
             is ErrorWrapper.RespError -> response
             is ErrorWrapper.SystemError -> response
             is ResultWrapper.Success -> {
-                ResultWrapper.Success("SUCCESS")
+                val cars = arrayListOf<CarDetails>()
+                response.value.forEach { cars.add(carDetailsMapper.mapFromEntity(it)) }
+                ResultWrapper.Success(cars)
             }
             ResultWrapper.InProgress -> ResultWrapper.InProgress
         }

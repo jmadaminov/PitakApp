@@ -11,7 +11,7 @@ interface CarRepository {
     suspend fun getCarColors(): ResultWrapper<List<CarColorBody>>
     suspend fun createCar( car: Car): ResultWrapper<String>
     suspend fun updateCar( car: Car): ResultWrapper<String>
-    suspend fun deleteCar( id: Long): ResultWrapper<String>
+    suspend fun deleteCar( id: Long): ResultWrapper<List<CarDetails>>
     suspend fun setDefaultCar( id:Long): ResultWrapper<String>
 
 

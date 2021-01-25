@@ -16,6 +16,6 @@ interface CarDataStore {
     suspend fun getCarColors(): ResultWrapper<List<CarColorEntity>>
     suspend fun createCar( car: CarEntity): ResultWrapper<String>
     suspend fun updateCar( car: CarEntity): ResultWrapper<String>
-    suspend fun deleteCar( id: Long): ResultWrapper<String>
+    suspend fun deleteCar( id: Long): ResultWrapper<List<CarDetailsEntity>>
     suspend fun setDefaultCar( id: Long): ResultWrapper<String>
 }

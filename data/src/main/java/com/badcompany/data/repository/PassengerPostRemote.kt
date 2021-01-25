@@ -12,6 +12,6 @@ interface PassengerPostRemote {
 
     suspend fun filterPassengerPost(filter: FilterEntity): ResultWrapper<List<PassengerPostEntity>>
     suspend fun offerARide(myOffer: DriverOfferEntity): ResponseWrapper<Any>
-//    suspend fun getPassengerPostById(id:Long): ResponseWrapper<PassengerPostEntity>
+    suspend fun getPassengerPostById(id:Long): ResponseWrapper<PassengerPostEntity>
 
 }

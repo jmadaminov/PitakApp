@@ -37,8 +37,6 @@ class PreviewFragment @Inject constructor(/*private val viewModelFactory: ViewMo
 
 
     private val adapter = GroupAdapter<GroupieViewHolder>()
-    private var placeFrom: Place? = null
-    private var placeTo: Place? = null
 
     private val activityViewModel: AddPostViewModel by activityViewModels()
 
@@ -69,8 +67,10 @@ class PreviewFragment @Inject constructor(/*private val viewModelFactory: ViewMo
 
         activityViewModel.placeFrom?.regionName?.let { fromLbl.append(it) }
         activityViewModel.placeFrom?.districtName?.let { fromLbl.append(" $it") }
+        if (fromLbl.isBlank()) activityViewModel.placeFrom?.name?.let { fromLbl.append(it) }
         activityViewModel.placeTo?.regionName?.let { toLbl.append(it) }
         activityViewModel.placeTo?.districtName?.let { toLbl.append(" $it") }
+        if (toLbl.isBlank()) activityViewModel.placeTo?.name?.let { toLbl.append(it) }
 
         labelFrom.text = fromLbl
         labelTo.text = toLbl
@@ -226,7 +226,6 @@ class PreviewFragment @Inject constructor(/*private val viewModelFactory: ViewMo
 
     override fun onResume() {
         super.onResume()
-//        (activity as AddPostActivity).showActionBar()
     }
 
 

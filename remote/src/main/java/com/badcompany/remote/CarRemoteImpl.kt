@@ -83,12 +83,13 @@ class CarRemoteImpl @Inject constructor(private val authorizedApiService: Author
         }
     }
 
-    override suspend fun deleteCar(id: Long): ResultWrapper<String> {
+    override suspend fun deleteCar(id: Long): ResultWrapper<List<CarDetailsEntity>> {
         return try {
-            val response =
-                authorizedApiService.deleteCar(id)
+            val response = authorizedApiService.deleteCar(id)
             if (response.code == 1) {
-                ResultWrapper.Success("SUCCESS")
+                val cars = arrayListOf<CarDetailsEntity>()
+                response.data?.forEach { cars.add(carDetailsMapper.mapToEntity(it)) }
+                ResultWrapper.Success(cars)
             } else ErrorWrapper.RespError(response.code, response.message)
         } catch (e: Exception) {
             ErrorWrapper.SystemError(e)

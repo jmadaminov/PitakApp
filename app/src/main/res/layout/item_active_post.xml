@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cardParent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -55,7 +56,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginStart="12dp"
-            android:text="TASHKENT"
+            tools:text="TASHKENT"
             android:textColor="@color/dark_grey"
             android:textSize="14dp"
             app:layout_constraintBottom_toBottomOf="@id/circleFrom"
@@ -67,7 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginStart="12dp"
-            android:text="ANDIJAN"
+            tools:text="ANDIJAN"
             android:textColor="@color/dark_grey"
             android:textSize="14dp"
             app:layout_constraintStart_toEndOf="@id/circleTo"
@@ -86,7 +87,7 @@
             android:paddingTop="4dp"
             android:paddingEnd="12dp"
             android:paddingBottom="4dp"
-            android:text="ACTIVE"
+            tools:text="ACTIVE"
             android:textColor="#fff"
             android:textSize="12dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -123,7 +124,7 @@
                 android:drawableRight="@drawable/ic_baseline_money_24"
                 android:drawablePadding="10dp"
                 android:gravity="center_vertical|end"
-                android:text="50,000 sum"
+                tools:text="50,000 sum"
                 android:textColor="@color/dark_grey" />
 
             <TextView
@@ -134,7 +135,7 @@
                 android:drawableRight="@drawable/ic_baseline_calendar_today_24"
                 android:drawablePadding="10dp"
                 android:gravity="center_vertical|end"
-                android:text="02.05.2200"
+                tools:text="02.05.2200"
                 android:textColor="@color/dark_grey" />
         </LinearLayout>
 

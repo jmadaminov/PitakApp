@@ -41,15 +41,14 @@ class PassengerPostRemoteImpl @Inject constructor(
             authorizedApiService.offerARide(offerMapper.mapFromEntity(myOffer))
         }
 
-//    override suspend fun getPassengerPostById(id: Long): ResponseWrapper<PassengerPostEntity> {
-//        val response = ResponseFormatter.getFormattedResponse {
-//            authorizedApiService.getPassengerPostById(id)
-//        }
-//
-//        return when (response) {
-//            is ResponseError -> response
-//            is ResponseSuccess -> ResponseSuccess(postMapper.mapToEntity(response.value))
-//        }.exhaustive
-//    }
+    override suspend fun getPassengerPostById(id: Long): ResponseWrapper<PassengerPostEntity> {
+        val response =
+            ResponseFormatter.getFormattedResponse { authorizedApiService.getPassengerPostById(id) }
+
+        return when (response) {
+            is ResponseError -> response
+            is ResponseSuccess -> ResponseSuccess(postMapper.mapToEntity(response.value))
+        }.exhaustive
+    }
 
 }

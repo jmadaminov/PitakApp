@@ -44,18 +44,15 @@ class PassengerPostRepositoryImpl @Inject constructor(private val factoryPasseng
             .offerARide(driverOfferMapper.mapToEntity(myOffer))
     }
 
-//    override suspend fun getPassengerPostById(id: Long): ResponseWrapper<PassengerPost> {
-//        val response = factoryPassenger.retrieveDataStore(false).getPassengerPostById(id)
-//
-//        return when (response) {
-//            is ResponseError -> {
-//                response
-//            }
-//            is ResponseSuccess -> {
-//                ResponseSuccess(passengerPostMapper.mapFromEntity(response.value))
-//            }
-//        }.exhaustive
-//    }
+    override suspend fun getPassengerPostById(id: Long): ResponseWrapper<PassengerPost> {
+        val response = factoryPassenger.retrieveDataStore(false).getPassengerPostById(id)
+        return when (response) {
+            is ResponseError -> response
+            is ResponseSuccess -> ResponseSuccess(passengerPostMapper.mapFromEntity(response.value))
+        }.exhaustive
+    }
+
+
 }
 
 

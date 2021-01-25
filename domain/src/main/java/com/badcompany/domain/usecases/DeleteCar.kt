@@ -2,6 +2,7 @@ package com.badcompany.domain.usecases
 
 import com.badcompany.core.Constants
 import com.badcompany.core.ResultWrapper
+import com.badcompany.domain.domainmodel.CarDetails
 import com.badcompany.domain.repository.CarRepository
 
 
@@ -9,9 +10,9 @@ import com.badcompany.domain.repository.CarRepository
  *
  */
 class DeleteCar(val repository: CarRepository) :
-    UseCaseWithParams<Long, ResultWrapper<String>>() {
+    UseCaseWithParams<Long, ResultWrapper<List<CarDetails>>>() {
 
-    override suspend fun buildUseCase(params: Long): ResultWrapper<String> {
+    override suspend fun buildUseCase(params: Long): ResultWrapper<List<CarDetails>> {
         return repository.deleteCar(params)
 
     }
