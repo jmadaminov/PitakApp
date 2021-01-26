@@ -102,10 +102,10 @@
                     android:layout_marginTop="12dp"
                     android:layout_marginEnd="12dp"
                     android:gravity="center"
-                    android:text="Trips: 88"
                     android:textColor="@color/dark_grey"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Trips: 88" />
 
                 <TextView
                     android:id="@+id/nameSurname"
@@ -115,10 +115,10 @@
                     android:layout_marginTop="12dp"
                     android:layout_marginEnd="12dp"
                     android:gravity="center"
-                    android:text="Polonchiev Polonchi"
                     android:textColor="@color/dark_grey"
                     app:layout_constraintStart_toEndOf="@id/profilePhoto"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Polonchiev Polonchi" />
 
                 <TextView
                     android:id="@+id/phone"
@@ -127,10 +127,10 @@
                     android:layout_marginStart="12dp"
                     android:layout_marginEnd="12dp"
                     android:gravity="center"
-                    android:text="+998909998877"
                     android:textColor="@color/dark_grey"
                     app:layout_constraintStart_toEndOf="@id/profilePhoto"
-                    app:layout_constraintTop_toBottomOf="@id/nameSurname" />
+                    app:layout_constraintTop_toBottomOf="@id/nameSurname"
+                    tools:text="+998909998877" />
 
                 <RatingBar
                     android:id="@+id/myRating"
@@ -170,21 +170,21 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_add_car" />
 
+
         <TextView
             android:id="@+id/btnFeedback"
-            android:layout_width="match_parent"
-            android:layout_height="?android:actionBarSize"
-            android:layout_margin="24dp"
-            android:background="@drawable/selector_primary"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/selector_neutral_border"
             android:clickable="true"
             android:focusable="true"
             android:foreground="?android:selectableItemBackground"
             android:gravity="center"
             android:text="@string/feedback"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            app:layout_constraintTop_toBottomOf="@id/cardProfile" />
-
+            android:textColor="@color/dark_grey"
+            android:textSize="18dp" />
 
         <TextView
             android:id="@+id/settings"

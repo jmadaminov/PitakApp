@@ -51,11 +51,6 @@ class DriverPostViewModel @ViewModelInject constructor(val postRepository: Drive
         }
     }
 
-    var page = 0
-
-
-    //    val postOffers = SingleLiveEvent<PagingData<OfferDTO>>()
-//     val postOffers =         postOffersRepository.getOffersForPost(14).cachedIn(viewModelScope)
 
     lateinit var postOffers: LiveData<PagingData<OfferDTO>>
     fun getOffersForPost(id: Long) {

@@ -21,6 +21,9 @@ open class UserRemoteDataStore @Inject constructor(private val userRemote: UserR
     override suspend fun confirmSms(userCredentialsEntity: UserCredentialsEntity) =
         userRemote.confirmUser(userCredentialsEntity)
 
+    override suspend fun sendFeedback(feedback: String) =
+        userRemote.sendFeedback(feedback)
+
     override suspend fun updateUserInfo(name: String,
                                         surName: String,
                                         uploadedAvatarId: Long?) =

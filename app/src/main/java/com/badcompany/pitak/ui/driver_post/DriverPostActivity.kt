@@ -16,7 +16,6 @@ import com.badcompany.pitak.ui.interfaces.IOnOfferActionListener
 import com.badcompany.pitak.ui.viewgroups.PassengerItem
 import com.badcompany.pitak.viewobjects.DriverPostViewObj
 import com.badcompany.pitak.viewobjects.OfferViewObj.Companion.offerToViewObj
-import com.badcompany.pitak.viewobjects.PlaceViewObj
 import com.badcompany.remote.model.OfferDTO
 import com.google.android.material.snackbar.Snackbar
 import com.xwray.groupie.GroupAdapter
@@ -184,7 +183,7 @@ const val EXTRA_POST_ID = "POST_ID"
 
         if (post.passengerList != null && post.passengerList!!.isNotEmpty()) {
             lblMyPassengers.text = getString(R.string.your_passengers)
-        }else{
+        } else {
             lblMyPassengers.text = getString(R.string.no_passengers_yet)
         }
 
@@ -212,36 +211,8 @@ const val EXTRA_POST_ID = "POST_ID"
         }
 
         edit.setOnClickListener {
-            val from = PlaceViewObj(post.from.districtId,
-                                    post.from.regionId,
-                                    post.from.lat,
-                                    post.from.lon,
-                                    post.from.regionName,
-                                    post.from.name)
-
-            val to = PlaceViewObj(post.to.districtId,
-                                  post.to.regionId,
-                                  post.to.lat,
-                                  post.to.lon,
-                                  post.to.regionName,
-                                  post.to.name)
-
             start<AddPostActivity> {
-
-                putExtra(Constants.TXT_DRIVER_POST,
-                         DriverPostViewObj(from,
-                                           to,
-                                           post.price,
-                                           post.departureDate,
-                                           post.timeFirstPart,
-                                           post.timeSecondPart,
-                                           post.timeThirdPart,
-                                           post.timeFourthPart,
-                                           null,
-                                           null,
-                                           post.remark,
-                                           post.seat,
-                                           post.postType))
+                putExtra(Constants.TXT_DRIVER_POST, DriverPostViewObj.fromDriverPost(post))
             }
         }
     }

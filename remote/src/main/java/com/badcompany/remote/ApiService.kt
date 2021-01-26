@@ -30,6 +30,8 @@ interface ApiService {
     @POST("prof/mb/reg")
     suspend fun userRegister(@Body user: UserModel): AuthResponse
 
+
+
     @Headers("Content-Type:application/json", "Accept: application/json")
     @POST("prof/mb/confirm")
     suspend fun smsConfirm(@Body user: UserCredentialsModel): AuthSuccessResponse

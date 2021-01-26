@@ -18,5 +18,6 @@ interface UserDataStore {
     suspend fun userLogin(phoneNum: String): ResponseWrapper<UserCredentialsEntity?>
     suspend fun userRegister(user: UserEntity): ResultWrapper<String>
     suspend fun confirmSms(userCredentialsEntity: UserCredentialsEntity): ResultWrapper<AuthEntity>
+    suspend fun sendFeedback(feedback:String): ResponseWrapper<Any?>
     suspend fun updateUserInfo(name: String, surName: String, uploadedAvatarId: Long?): ResponseWrapper<Any?>
 }

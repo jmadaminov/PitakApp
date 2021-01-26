@@ -1,42 +1,52 @@
 package com.badcompany.pitak.ui.feedback
 
+
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.activity.viewModels
-import com.badcompany.pitak.App
+import androidx.core.widget.doOnTextChanged
 import com.badcompany.pitak.R
-//import com.badcompany.pitak.di.viewmodels.MainViewModelFactory
 import com.badcompany.pitak.ui.BaseActivity
-//import com.badcompany.pitak.App
-//import com.badcompany.pitak.R
-//import com.badcompany.pitak.di.viewmodels.AddPostViewModelFactory
-//import com.badcompany.pitak.di.viewmodels.MainViewModelFactory
-//import com.badcompany.pitak.ui.BaseActivity
-//import com.badcompany.pitak.ui.addpost.AddPostViewModel
-import javax.inject.Inject
+import kotlinx.android.synthetic.main.activity_feedback.*
 
 class FeedbackActivity : BaseActivity() {
-
-//    @Inject
-//    lateinit var viewModelFactory: MainViewModelFactory
-
-//    private val viewmodel: FeedbackViewModel by viewModels {
-//        viewModelFactory
-//    }
-
-//    override fun inject() {
-//
-//        (application as App).mainComponent()
-//            .inject(this)
-//    }
+    private val viewModel: FeedbackViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_feedback)
-//        setSupportActionBar(tool_bar)
+
+        setupActionbar()
+        attachListeners()
+        subscribeObservers()
+    }
+
+    private fun subscribeObservers() {
+
+        viewModel.isLoading.observe(this, {
+            if (it) btnSend.startAnimation() else btnSend.revertAnimation()
+        })
+
+        viewModel.feedbackResponse.observe(this, {
+            finish()
+        })
+
+    }
+
+    private fun attachListeners() {
+        btnSend.setOnClickListener {
+            viewModel.sendFeedback(noteInput.text.toString())
+        }
+
+        noteInput.doOnTextChanged { text, start, before, count ->
+            btnSend.isEnabled = !text.isNullOrBlank()
+        }
+
+    }
+
+    private fun setupActionbar() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeButtonEnabled(true)
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -45,5 +55,6 @@ class FeedbackActivity : BaseActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
+
 
 }

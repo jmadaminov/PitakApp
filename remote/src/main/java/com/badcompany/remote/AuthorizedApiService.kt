@@ -44,6 +44,12 @@ interface AuthorizedApiService {
 
     //
 
+
+
+    @Headers("Content-Type:application/json", "Accept: application/json")
+    @POST("feedback/action")
+    suspend fun sendFeedback(@Body body: FeedbackBody): RespFormatter<Any>
+
     //Places Feed
 
     @Headers("Content-Type:application/json", "Accept: application/json")

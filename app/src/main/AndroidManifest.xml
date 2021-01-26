@@ -29,6 +29,10 @@
             android:name=".ui.feedback.FeedbackActivity"
             android:label="@string/feedback"
             android:theme="@style/AppTheme"/>
+        <activity
+            android:name=".ui.settings.SettingsActivity"
+            android:label="@string/settings"
+            android:theme="@style/AppTheme"/>
 
         <activity
             android:name=".ui.driver_post.DriverPostActivity"

@@ -23,6 +23,7 @@ import com.badcompany.pitak.ui.edit_profile.EditProfileActivity
 import com.badcompany.pitak.ui.feedback.FeedbackActivity
 import com.badcompany.pitak.ui.interfaces.IOnSignOut
 import com.badcompany.pitak.ui.main.MainActivity
+import com.badcompany.pitak.ui.settings.SettingsActivity
 import com.badcompany.pitak.ui.viewgroups.CarItemView
 import com.badcompany.pitak.ui.viewgroups.ItemAddCar
 import com.badcompany.pitak.ui.viewgroups.LoadingItem
@@ -73,7 +74,6 @@ class ProfileFragment : Fragment(R.layout.fragment_profile), IOnSignOut {
     }
 
     private fun setupCarsRecyclerView() {
-
         carsList.adapter = adapter
     }
 
@@ -210,6 +210,10 @@ class ProfileFragment : Fragment(R.layout.fragment_profile), IOnSignOut {
 
         btnFeedback.setOnClickListener {
             start<FeedbackActivity> {}
+        }
+
+        settings.setOnClickListener {
+            start<SettingsActivity> {}
         }
 
 

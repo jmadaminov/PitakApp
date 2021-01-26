@@ -9,6 +9,7 @@ import com.badcompany.remote.ResponseFormatter.getFormattedResponseNullable
 import com.badcompany.remote.mapper.AuthMapper
 import com.badcompany.remote.mapper.UserCredentialsMapper
 import com.badcompany.remote.mapper.UserMapper
+import com.badcompany.remote.model.FeedbackBody
 import com.badcompany.remote.model.IdNameBody
 import com.badcompany.remote.model.LoginRequest
 import com.badcompany.remote.model.ReqUpdateProfileInfo
@@ -46,6 +47,9 @@ class UserRemoteImpl @Inject constructor(private val apiService: ApiService,
         }
     }
 
+    override suspend fun sendFeedback(feedback: String) =
+        getFormattedResponseNullable { authApiService.sendFeedback(FeedbackBody(feedback)) }
+
     override suspend fun confirmUser(user: UserCredentialsEntity): ResultWrapper<AuthEntity> {
         return try {
             val response = apiService.smsConfirm(userCredMapper.mapFromEntity(user))
@@ -56,9 +60,7 @@ class UserRemoteImpl @Inject constructor(private val apiService: ApiService,
         }
     }
 
-    override suspend fun updateUserInfo(name: String,
-                                        surName: String,
-                                        uploadedAvatarId: Long?) =
+    override suspend fun updateUserInfo(name: String, surName: String, uploadedAvatarId: Long?) =
         getFormattedResponseNullable {
             authApiService.updateUserInfo(ReqUpdateProfileInfo(name,
                                                                surName,

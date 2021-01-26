@@ -55,6 +55,9 @@ class UserRepositoryImpl @Inject constructor(private val factory: UserDataStoreF
 
     }
 
+    override suspend fun sendFeedback(feedback: String)= factory.retrieveDataStore(false)
+        .sendFeedback(feedback)
+
 
     override suspend fun updateUserDetails(user: User): ResultWrapper<Unit> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
