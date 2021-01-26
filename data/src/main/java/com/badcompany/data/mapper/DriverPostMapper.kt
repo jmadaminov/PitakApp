@@ -44,12 +44,12 @@ open class DriverPostMapper @Inject constructor() : Mapper<DriverPostEntity, Dri
 
         val passengerList = arrayListOf<Passenger>()
         type.passengerList?.forEach {
-            passengerList.add(Passenger(it.id, Profile(it.profileDTO!!.phoneNum,
-                                                               it.profileDTO!!.name,
-                                                               it.profileDTO!!.surname,
-                                                               it.profileDTO!!.id,
-                                                               Image(it.profileDTO!!.image?.id,
-                                                                     it.profileDTO!!.image?.link))))
+            passengerList.add(Passenger(it.id, Profile(it.profile!!.phoneNum,
+                                                               it.profile!!.name,
+                                                               it.profile!!.surname,
+                                                               it.profile!!.id,
+                                                               Image(it.profile!!.image?.id,
+                                                                     it.profile!!.image?.link))))
         }
 
         return DriverPost(type.id,

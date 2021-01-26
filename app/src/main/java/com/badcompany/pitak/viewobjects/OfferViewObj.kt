@@ -22,12 +22,12 @@ data class OfferViewObj(val id: Long,
 
         fun offerToViewObj(offerDTO: OfferDTO): OfferViewObj {
             val profileViewObj =
-                ProfileViewObj(offerDTO.profileDTO.phoneNum,
-                               offerDTO.profileDTO.name,
-                               offerDTO.profileDTO.surname,
-                               offerDTO.profileDTO.id,
-                               ImageViewObj(offerDTO.profileDTO.image!!.id,
-                                            offerDTO.profileDTO.image!!.link))
+                ProfileViewObj(offerDTO.profile.phoneNum,
+                               offerDTO.profile.name,
+                               offerDTO.profile.surname,
+                               offerDTO.profile.id,
+                               ImageViewObj(offerDTO.profile.image!!.id,
+                                            offerDTO.profile.image!!.link))
             return OfferViewObj(offerDTO.id,
                                 offerDTO.postId,
                                 offerDTO.offerType,

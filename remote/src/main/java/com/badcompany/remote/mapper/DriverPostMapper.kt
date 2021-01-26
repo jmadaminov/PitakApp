@@ -46,12 +46,12 @@ open class DriverPostMapper @Inject constructor() : Mapper<DriverPostEntity, Dri
 
         val passengerList = arrayListOf<PassengerModel>()
         type.passengerList?.forEach {
-            passengerList.add(PassengerModel(it.id, ProfileDTO(it.profileDTO!!.phoneNum,
-                                                               it.profileDTO!!.name,
-                                                               it.profileDTO!!.surname,
-                                                               it.profileDTO!!.id,
-                                                               Image(it.profileDTO!!.image?.id,
-                                                                     it.profileDTO!!.image?.link))))
+            passengerList.add(PassengerModel(it.id, ProfileDTO(it.profile!!.phoneNum,
+                                                               it.profile!!.name,
+                                                               it.profile!!.surname,
+                                                               it.profile!!.id,
+                                                               Image(it.profile!!.image?.id,
+                                                                     it.profile!!.image?.link))))
         }
 
         return DriverPostModel(type.id,
@@ -107,12 +107,12 @@ open class DriverPostMapper @Inject constructor() : Mapper<DriverPostEntity, Dri
 
         val passengerList = arrayListOf<PassengerEntity>()
         type.passengerList?.forEach {
-            passengerList.add(PassengerEntity(it.id, ProfileEntity(it.profileDTO!!.phoneNum,
-                                                                     it.profileDTO!!.name,
-                                                                     it.profileDTO!!.surname,
-                                                                     it.profileDTO!!.id,
-                                                                     ImageEntity(it.profileDTO!!.image?.id,
-                                                                     it.profileDTO!!.image?.link))))
+            passengerList.add(PassengerEntity(it.id, ProfileEntity(it.profile!!.phoneNum,
+                                                                     it.profile!!.name,
+                                                                     it.profile!!.surname,
+                                                                     it.profile!!.id,
+                                                                     ImageEntity(it.profile!!.image?.id,
+                                                                     it.profile!!.image?.link))))
         }
 
         return DriverPostEntity(type.id,

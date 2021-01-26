@@ -31,14 +31,14 @@ open class PassengerPostMapper @Inject constructor() :
                                  type.to.regionName,
                                  type.to.name)
 
-        val profileImage = type.profileDTO.image?.let {
+        val profileImage = type.profile.image?.let {
             Image(it.id, it.link)
         }
 
-        val profile = Profile(type.profileDTO.phoneNum,
-                                          type.profileDTO.name,
-                                          type.profileDTO.surname,
-                                          type.profileDTO.id,
+        val profile = Profile(type.profile.phoneNum,
+                                          type.profile.name,
+                                          type.profile.surname,
+                                          type.profile.id,
                                           profileImage)
 
         return PassengerPost(type.id,

@@ -32,14 +32,14 @@ open class PassengerPostMapper @Inject constructor() :
                                  type.to.regionName,
                                  type.to.name)
 
-        val profileImage = type.profileDTO.image?.let {
+        val profileImage = type.profile.image?.let {
             Image(it.id, it.link)
         }
 
-        val profileDTO = ProfileDTO(type.profileDTO.phoneNum,
-                                    type.profileDTO.name,
-                                    type.profileDTO.surname,
-                                    type.profileDTO.id,
+        val profile = ProfileDTO(type.profile.phoneNum,
+                                    type.profile.name,
+                                    type.profile.surname,
+                                    type.profile.id,
                                     profileImage)
 
         return PassengerPostModel(type.id,
@@ -55,7 +55,7 @@ open class PassengerPostMapper @Inject constructor() :
                                   type.timeThirdPart,
                                   type.timeFourthPart,
                                   type.airConditioner,
-                                  profileDTO,
+                                  profile,
                                   type.remark,
                                   type.postStatus,
                                   type.seat,
@@ -81,14 +81,14 @@ open class PassengerPostMapper @Inject constructor() :
                                   type.to.regionName,
                                   type.to.name)
 
-        val profileImage = type.profileDTO.image?.let {
+        val profileImage = type.profile.image?.let {
             ImageEntity(it.id, it.link)
         }
 
-        val profileDTO = ProfileEntity(type.profileDTO.phoneNum,
-                                       type.profileDTO.name,
-                                       type.profileDTO.surname,
-                                       type.profileDTO.id,
+        val profile = ProfileEntity(type.profile.phoneNum,
+                                       type.profile.name,
+                                       type.profile.surname,
+                                       type.profile.id,
                                        profileImage)
 
         return PassengerPostEntity(type.id,
@@ -104,7 +104,7 @@ open class PassengerPostMapper @Inject constructor() :
                                    type.timeThirdPart,
                                    type.timeFourthPart,
                                    type.airConditioner,
-                                   profileDTO,
+                                   profile,
                                    type.remark,
                                    type.postStatus,
                                    type.seat,

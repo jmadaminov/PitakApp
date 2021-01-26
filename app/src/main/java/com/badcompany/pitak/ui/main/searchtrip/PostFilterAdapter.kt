@@ -54,11 +54,11 @@ class PostFilterAdapter() :
                     }
                 }
 
-                post.profileDTO?.let {
+                post.profile?.let {
                     tvPassengerName.text = it.name + " " + it.surname
                 }
 
-                post.profileDTO?.image?.link?.let {
+                post.profile?.image?.link?.let {
                     ivPassenger.loadCircleImageUrl(it)
                 }
 

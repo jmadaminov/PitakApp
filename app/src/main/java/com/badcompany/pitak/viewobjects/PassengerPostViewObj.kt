@@ -75,14 +75,14 @@ data class PassengerPostViewObj(val id: Long,
 
         fun mapFromPassengerPostModel(model: PassengerPostModel): PassengerPostViewObj {
 
-            val profileImage = model.profileDTO.image?.let {
+            val profileImage = model.profile.image?.let {
                 ImageViewObj(it.id, it.link)
             }
 
-            val profileModel = ProfileViewObj(model.profileDTO.phoneNum,
-                                              model.profileDTO.name,
-                                              model.profileDTO.surname,
-                                              model.profileDTO.id,
+            val profileModel = ProfileViewObj(model.profile.phoneNum,
+                                              model.profile.name,
+                                              model.profile.surname,
+                                              model.profile.id,
                                               profileImage)
             return PassengerPostViewObj(
                 model.id,
