@@ -121,6 +121,10 @@ interface AuthorizedApiService {
     suspend fun acceptOffer(@Path(value = "id", encoded = true) id: Long): RespFormatter<String?>
 
     @Headers("Content-Type:application/json", "Accept: application/json")
+    @GET("driver_post/action/start/{id}")
+    suspend fun startTrip(@Path(value = "id", encoded = true) id: Long): RespFormatter<String?>
+
+    @Headers("Content-Type:application/json", "Accept: application/json")
     @GET("offer/post/reject/{id}")
     suspend fun rejectOffer(@Path(value = "id", encoded = true) id: Long): RespFormatter<String?>
 

@@ -15,6 +15,7 @@ interface DriverPostRepository {
 
 
     suspend fun getDriverPostById(id: Long): ResponseWrapper<DriverPost>
+    suspend fun startTrip(id: Long): ResponseWrapper<String?>
 
     suspend fun acceptOffer(id: Long): ResponseWrapper<String?>
     suspend fun rejectOffer(id: Long): ResponseWrapper<String?>

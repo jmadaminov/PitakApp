@@ -1,6 +1,7 @@
 package com.badcompany.remote.model
 
 import com.badcompany.core.Constants
+import com.badcompany.core.EPostStatus
 import com.badcompany.core.EPostType
 import com.google.gson.annotations.SerializedName
 
@@ -22,6 +23,6 @@ data class PassengerPostModel(@SerializedName("id") val id: Long,
                               @SerializedName("airConditioner") val airConditioner: Boolean,
                               @SerializedName("profile") val profile: ProfileDTO,
                               @SerializedName("remark") val remark: String?=null,
-                              @SerializedName("postStatus") val postStatus: String,
+                              @SerializedName("postStatus") val postStatus: EPostStatus,
                               @SerializedName("seat") val seat: Int,
                               @SerializedName("postType") val postType :EPostType = EPostType.PASSENGER_SM)

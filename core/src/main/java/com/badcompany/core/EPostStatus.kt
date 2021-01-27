@@ -1,6 +1,12 @@
 package com.badcompany.core
 
 enum class EPostStatus {
-    ACTIVE,
-    WAITING_FOR_START
+    WAITING_FOR_START,
+    START,
+    CANCELED,
+    FINISHED,
+    REJECTED,
+    CREATED,
+    SYSTEM_REJECTED
+
 }

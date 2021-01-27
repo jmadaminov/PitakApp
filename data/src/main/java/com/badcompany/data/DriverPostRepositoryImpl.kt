@@ -84,6 +84,9 @@ class DriverPostRepositoryImpl @Inject constructor(private val factoryDriver: Dr
         else response as ResponseError
     }
 
+    override suspend fun startTrip(id: Long) =
+        factoryDriver.retrieveDataStore(false).startTrip(id)
+
     override suspend fun acceptOffer(id: Long) =
         factoryDriver.retrieveDataStore(false).acceptOffer(id)
 

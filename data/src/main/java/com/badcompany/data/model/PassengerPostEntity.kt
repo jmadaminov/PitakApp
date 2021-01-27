@@ -1,5 +1,6 @@
 package com.badcompany.data.model
 
+import com.badcompany.core.EPostStatus
 import com.badcompany.core.EPostType
 
 /**
@@ -20,6 +21,6 @@ data class PassengerPostEntity(val id: Long,
                                val airConditioner: Boolean,
                                val profile: ProfileEntity,
                                val remark: String?=null,
-                               val postStatus: String,
+                               val postStatus: EPostStatus,
                                val seat: Int,
                                val postType: EPostType = EPostType.PASSENGER_SM)

@@ -1,6 +1,7 @@
 package com.badcompany.data.model
 
 import com.badcompany.core.Constants
+import com.badcompany.core.EPostStatus
 
 data class DriverPostEntity(val id: Long? = null,
                             val from: PlaceEntity,
@@ -17,7 +18,8 @@ data class DriverPostEntity(val id: Long? = null,
                             val remark: String?=null,
                             val seat: Int,
                             val availableSeats: Int?=null,
-                           val pkg: Boolean?=null,
+                            val postStatus: EPostStatus,
+                            val pkg: Boolean?=null,
                             val passengerList: List<PassengerEntity>?=null,
                             val postType: String = Constants.DRIVER_POST_SIMPLE)
 

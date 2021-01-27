@@ -28,31 +28,8 @@ class DriverPostRemoteImpl @Inject constructor(private val authorizedApiService:
                 ResultWrapper.Success(postMapper.mapToEntity(response.value))
             }
         }).exhaustive
-
-//        return try {
-//            if (response.code == 1) {
-//                ResultWrapper.Success("SUCCESS")
-//            } else ErrorWrapper.RespError(response.code, response.message)
-//        } catch (e: Exception) {
-//            ErrorWrapper.SystemError(e)
-//        }
-
-//        return if (response is ResponseSuccess)
-//            ResponseSuccess(postMapper.mapToEntity(response.value))
-//        else response as ResponseError
     }
 
-//    {
-//
-//        return try {
-//            val response = authorizedApiService.createPost(postMapper.mapFromEntity(post))
-//            if (response.code == 1) {
-//                ResultWrapper.Success("SUCCESS")
-//            } else ErrorWrapper.RespError(response.code, response.message)
-//        } catch (e: Exception) {
-//            ErrorWrapper.SystemError(e)
-//        }
-//    }
 
     override suspend fun deleteDriverPost(
         identifier: String): ResultWrapper<String> {
@@ -113,6 +90,9 @@ class DriverPostRemoteImpl @Inject constructor(private val authorizedApiService:
             ResponseSuccess(postMapper.mapToEntity(response.value))
         else response as ResponseError
     }
+
+    override suspend fun startTrip(id: Long) =
+        getFormattedResponse { authorizedApiService.startTrip(id) }
 
     override suspend fun acceptOffer(id: Long) =
         getFormattedResponse { authorizedApiService.acceptOffer(id) }

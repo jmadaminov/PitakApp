@@ -14,7 +14,7 @@ interface DriverPostDataStore {
     suspend fun getHistoryDriverPosts(page: Int): ResultWrapper<List<DriverPostEntity>>
 
     suspend fun getDriverPostById(id: Long): ResponseWrapper<DriverPostEntity>
-
+    suspend fun startTrip(id: Long): ResponseWrapper<String?>
     suspend fun acceptOffer(id: Long): ResponseWrapper<String?>
     suspend fun rejectOffer(id: Long): ResponseWrapper<String?>
     suspend fun cancelMyOffer(id: Long): ResponseWrapper<String?>

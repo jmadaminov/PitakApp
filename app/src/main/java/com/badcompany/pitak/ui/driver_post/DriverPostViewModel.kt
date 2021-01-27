@@ -127,4 +127,16 @@ class DriverPostViewModel @ViewModelInject constructor(val postRepository: Drive
         }
     }
 
+    fun startTrip(id: Long) {
+        isLoading.value = true
+        viewModelScope.launch(Dispatchers.IO) {
+            val response = postRepository.startTrip(id)
+            withContext(Dispatchers.Main) {
+                isLoading.value = false
+
+            }
+        }
+
+    }
+
 }

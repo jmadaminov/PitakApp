@@ -10,10 +10,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.badcompany.core.Constants
-import com.badcompany.core.ErrorWrapper
-import com.badcompany.core.ResultWrapper
-import com.badcompany.core.exhaustive
+import com.badcompany.core.*
 import com.badcompany.domain.domainmodel.DriverPost
 import com.badcompany.domain.domainmodel.Place
 import com.badcompany.pitak.R
@@ -165,6 +162,7 @@ class PreviewFragment @Inject constructor(/*private val viewModelFactory: ViewMo
                                                   activityViewModel.note!!,
                                                   activityViewModel.seat!!,
                                                   null,
+                                                  EPostStatus.CREATED,
                                                   activityViewModel.isPackage,
                                                   null,
                                                   Constants.DRIVER_POST_SIMPLE))

@@ -1,5 +1,6 @@
 package com.badcompany.domain.domainmodel
 
+import com.badcompany.core.EPostStatus
 import com.badcompany.core.EPostType
 
 /**
@@ -20,6 +21,6 @@ data class PassengerPost(val id: Long,
                          val airConditioner: Boolean,
                          val profile: Profile,
                          val remark: String?=null,
-                         val postStatus: String,
+                         val postStatus: EPostStatus,
                          val seat: Int,
                          val postType: EPostType = EPostType.PASSENGER_SM)

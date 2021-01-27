@@ -4,10 +4,8 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
-import com.badcompany.core.Constants
-import com.badcompany.core.ErrorWrapper
-import com.badcompany.core.ResultWrapper
-import com.badcompany.core.exhaustive
+import androidx.core.view.isVisible
+import com.badcompany.core.*
 import com.badcompany.domain.domainmodel.DriverPost
 import com.badcompany.pitak.R
 import com.badcompany.pitak.ui.BaseActivity
@@ -168,6 +166,13 @@ const val EXTRA_POST_ID = "POST_ID"
     }
 
     private fun showPostData() {
+        edit.isVisible =
+            post.postStatus == EPostStatus.CREATED && !post.passengerList.isNullOrEmpty()
+        done.isVisible = post.postStatus == EPostStatus.START
+
+        btnStart.isVisible =
+            post.postStatus == EPostStatus.WAITING_FOR_START && !post.passengerList.isNullOrEmpty()
+
         date.text = post.departureDate
         from.text = post.from.regionName
         to.text = post.to.regionName
@@ -195,6 +200,11 @@ const val EXTRA_POST_ID = "POST_ID"
 
     private fun attachListeners() {
 
+        btnStart.setOnClickListener {
+            viewModel.startTrip(post.id!!)
+        }
+
+
         swipeRefreshLayout.setOnRefreshListener {
             viewModel.getPostById(postId)
             viewModel.getOffersForPost(postId)
@@ -207,7 +217,6 @@ const val EXTRA_POST_ID = "POST_ID"
 
         cancel.setOnClickListener {
             DialogDeletePost().show(supportFragmentManager, "")
-//            viewModel.deletePost(post.id.toString())
         }
 
         edit.setOnClickListener {

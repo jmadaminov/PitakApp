@@ -1,6 +1,7 @@
 package com.badcompany.pitak.viewobjects
 
 import android.os.Parcelable
+import com.badcompany.core.EPostStatus
 import com.badcompany.core.EPostType
 import com.badcompany.domain.domainmodel.PassengerPost
 import com.badcompany.remote.model.PassengerPostModel
@@ -22,7 +23,7 @@ data class PassengerPostViewObj(val id: Long,
                                 val airConditioner: Boolean,
                                 val profileViewObj: ProfileViewObj,
                                 val remark: String?=null,
-                                val postStatus: String,
+                                val postStatus: EPostStatus,
                                 val seat: Int,
                                 val postType: EPostType) : Parcelable {
 
