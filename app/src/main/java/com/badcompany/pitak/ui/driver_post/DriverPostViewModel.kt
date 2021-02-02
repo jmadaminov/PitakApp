@@ -8,15 +8,13 @@ import androidx.paging.cachedIn
 import com.badcompany.core.ResponseError
 import com.badcompany.core.ResponseSuccess
 import com.badcompany.core.ResultWrapper
-
 import com.badcompany.core.exhaustive
 import com.badcompany.domain.domainmodel.DriverPost
 import com.badcompany.domain.repository.DriverPostRepository
 import com.badcompany.domain.usecases.DeleteDriverPost
 import com.badcompany.domain.usecases.FinishDriverPost
 import com.badcompany.pitak.ui.BaseViewModel
-import com.badcompany.pitak.util.*
-import com.badcompany.pitak.viewobjects.OfferViewObj
+import com.badcompany.pitak.util.SingleLiveEvent
 import com.badcompany.remote.model.OfferDTO
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -127,12 +125,21 @@ class DriverPostViewModel @ViewModelInject constructor(val postRepository: Drive
         }
     }
 
+    val startedTripResp = SingleLiveEvent<Boolean>()
+
     fun startTrip(id: Long) {
         isLoading.value = true
         viewModelScope.launch(Dispatchers.IO) {
             val response = postRepository.startTrip(id)
             withContext(Dispatchers.Main) {
                 isLoading.value = false
+                when (response) {
+                    is ResponseError -> {
+                    }
+                    is ResponseSuccess -> {
+                        startedTripResp.value = true
+                    }
+                }.exhaustive
 
             }
         }

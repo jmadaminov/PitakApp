@@ -2,17 +2,21 @@ package com.badcompany.pitak.ui.main
 
 //import com.badcompany.pitak.di.viewmodels.MainViewModelFactory
 //import com.badcompany.pitak.fragments.MainNavHostFragment
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.CheckedTextView
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.FragmentNavigator
+import com.badcompany.pitak.NotificationOpenHandler
 import com.badcompany.pitak.R
 import com.badcompany.pitak.ui.BaseActivity
 import com.badcompany.pitak.ui.addpost.AddPostActivity
 import com.badcompany.pitak.ui.auth.AuthActivity
 import com.badcompany.pitak.ui.dialogs.DialogAddCarFirst
+import com.badcompany.pitak.ui.driver_post.DriverPostActivity
+import com.badcompany.pitak.ui.driver_post.EXTRA_POST_ID
 import com.badcompany.pitak.ui.main.mytrips.MyTripsFragment
 import com.badcompany.pitak.ui.main.notifications.NotificationsFragment
 import com.badcompany.pitak.ui.main.profile.ProfileFragment
@@ -25,6 +29,7 @@ import splitties.experimental.ExperimentalSplittiesApi
 
 class MainActivity : BaseActivity() {
 
+    private var notificationPostId: Long? = null
     private lateinit var navController: NavController
 
     @ExperimentalSplittiesApi
@@ -32,6 +37,15 @@ class MainActivity : BaseActivity() {
         checkUserLogin()
         setTheme(R.style.NoActionBar)
         super.onCreate(savedInstanceState)
+
+        notificationPostId = intent.extras?.getLong(EXTRA_POST_ID)
+
+        notificationPostId?.let {
+            startActivity(Intent(this, DriverPostActivity::class.java).apply {
+                putExtra(EXTRA_POST_ID, notificationPostId)
+            })
+        }
+
         setContentView(R.layout.activity_main)
         setupActionBar()
         setupListeners()

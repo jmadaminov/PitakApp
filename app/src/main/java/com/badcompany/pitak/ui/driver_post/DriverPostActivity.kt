@@ -93,6 +93,7 @@ const val EXTRA_POST_ID = "POST_ID"
 
         viewModel.offerActionResp.observe(this, {
             viewModel.getOffersForPost(postId)
+            offersAdapter.refresh()
         })
 
         viewModel.isLoading.observe(this, {
@@ -115,13 +116,17 @@ const val EXTRA_POST_ID = "POST_ID"
             Snackbar.make(swipeRefreshLayout, it ?: return@observe, Snackbar.LENGTH_SHORT).show()
         })
 
+        viewModel.startedTripResp.observe(this, {
+            viewModel.getOffersForPost(postId)
+            offersAdapter.refresh()
+        })
+
         viewModel.deletePostReponse.observe(this, {
             val response = it ?: return@observe
             when (response) {
                 is ErrorWrapper.RespError -> {
-                    Snackbar.make(swipeRefreshLayout,
-                                  response.message!!,
-                                  Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(swipeRefreshLayout, response.message!!, Snackbar.LENGTH_SHORT)
+                        .show()
 
                 }
                 is ErrorWrapper.SystemError -> {
@@ -167,7 +172,7 @@ const val EXTRA_POST_ID = "POST_ID"
 
     private fun showPostData() {
         edit.isVisible =
-            post.postStatus == EPostStatus.CREATED && !post.passengerList.isNullOrEmpty()
+            post.postStatus == EPostStatus.CREATED && post.passengerList.isNullOrEmpty()
         done.isVisible = post.postStatus == EPostStatus.START
 
         btnStart.isVisible =

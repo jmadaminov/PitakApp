@@ -30,11 +30,42 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:gravity="start"
+            android:maxLines="2"
             app:layout_constraintBottom_toBottomOf="@id/ivAvatar"
-            app:layout_constraintEnd_toStartOf="@id/fabCall"
+            app:layout_constraintEnd_toStartOf="@id/tvPersonCount"
             app:layout_constraintStart_toEndOf="@id/ivAvatar"
             app:layout_constraintTop_toTopOf="@id/ivAvatar"
             tools:text="Name Surname" />
+
+
+        <TextView
+            android:id="@+id/tvPersonCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:drawableTint="@color/colorPrimary"
+            android:gravity="center"
+            android:drawablePadding="5dp"
+            app:drawableStartCompat="@drawable/baseline_person_outline_white_24dp"
+            app:layout_constraintBottom_toBottomOf="@id/ivAvatar"
+            app:layout_constraintEnd_toStartOf="@id/tvAgreedPrice"
+            app:layout_constraintStart_toEndOf="@id/tvName"
+            app:layout_constraintTop_toTopOf="@id/ivAvatar"
+            tools:text="1" />
+
+        <TextView
+            android:id="@+id/tvAgreedPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:gravity="start"
+            app:layout_constraintBottom_toBottomOf="@id/ivAvatar"
+            app:layout_constraintEnd_toStartOf="@id/fabCall"
+            app:layout_constraintStart_toEndOf="@id/tvPersonCount"
+            app:layout_constraintTop_toTopOf="@id/ivAvatar"
+            tools:text="100,000 sum" />
 
         <ImageView
             android:id="@+id/fabCall"

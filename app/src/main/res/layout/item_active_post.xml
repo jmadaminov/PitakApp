@@ -81,7 +81,7 @@
             android:layout_height="25dp"
             android:layout_marginStart="8dp"
             android:background="@drawable/round_top_right_primary"
-            android:drawableLeft="@drawable/ic_baseline_airline_seat_recline_extra_24"
+            android:drawableStart="@drawable/ic_baseline_airline_seat_recline_extra_24"
             android:gravity="center"
             android:paddingStart="12dp"
             android:paddingTop="4dp"
