@@ -243,12 +243,6 @@ class ProfileFragment : Fragment(R.layout.fragment_profile), IOnSignOut {
 
     override fun onSignOut() {
         requireActivity().finish()
-//        AppPrefs.edit {
-//            token = ""
-//            name = ""
-//            surname = ""
-//            phone = ""
-//        }
         AppPrefs.prefs.edit().clear().apply()
         start<AuthActivity> {}
     }

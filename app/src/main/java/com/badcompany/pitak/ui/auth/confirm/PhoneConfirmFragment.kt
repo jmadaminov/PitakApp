@@ -114,6 +114,7 @@ class PhoneConfirmFragment : Fragment(R.layout.fragment_phone_confirm) {
     private fun saveCredentials(response: ResultWrapper.Success<AuthBody>) {
         AppPrefs.edit {
             token = response.value.jwt!!
+            userId = response.value.id!!
             name = response.value.name!!
             surname = response.value.surname!!
             phone = response.value.phoneNum!!

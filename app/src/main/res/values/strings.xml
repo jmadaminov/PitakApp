@@ -133,5 +133,6 @@
     <string name="completed">Completed</string>
     <string name="rejected">Rejected</string>
     <string name="boarding">Boarding</string>
+    <string name="language">Language</string>
 
 </resources>

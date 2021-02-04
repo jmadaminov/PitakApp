@@ -1,7 +1,5 @@
 package com.badcompany.pitak.ui.main
 
-//import com.badcompany.pitak.di.viewmodels.MainViewModelFactory
-//import com.badcompany.pitak.fragments.MainNavHostFragment
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -9,7 +7,6 @@ import android.widget.CheckedTextView
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.FragmentNavigator
-import com.badcompany.pitak.NotificationOpenHandler
 import com.badcompany.pitak.R
 import com.badcompany.pitak.ui.BaseActivity
 import com.badcompany.pitak.ui.addpost.AddPostActivity
@@ -22,6 +19,7 @@ import com.badcompany.pitak.ui.main.notifications.NotificationsFragment
 import com.badcompany.pitak.ui.main.profile.ProfileFragment
 import com.badcompany.pitak.ui.main.searchtrip.SearchTripFragment
 import com.badcompany.pitak.util.AppPrefs
+import com.badcompany.pitak.util.ContextUtils.setLocale
 import kotlinx.android.synthetic.main.activity_main.*
 import splitties.activities.start
 import splitties.experimental.ExperimentalSplittiesApi
@@ -34,6 +32,7 @@ class MainActivity : BaseActivity() {
 
     @ExperimentalSplittiesApi
     override fun onCreate(savedInstanceState: Bundle?) {
+        setLocale(AppPrefs.language, this)
         checkUserLogin()
         setTheme(R.style.NoActionBar)
         super.onCreate(savedInstanceState)

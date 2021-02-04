@@ -9,7 +9,8 @@ data class AuthSuccessResponse(val code: Int? = null,
                                val message: String? = null,
                                val data: UserInfoModel? = null)
 
-data class UserInfoModel(@SerializedName("phoneNum") val phoneNum: String? = null,
+data class UserInfoModel(@SerializedName("id") val id: String? = null,
+                         @SerializedName("phoneNum") val phoneNum: String? = null,
                         @SerializedName("name")  val name: String? = null,
                         @SerializedName("surname")  val surname: String? = null,
                         @SerializedName("jwt")  val jwt: String? = null,
