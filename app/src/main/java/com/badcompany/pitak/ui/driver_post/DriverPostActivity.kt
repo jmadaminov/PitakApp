@@ -92,6 +92,7 @@ const val EXTRA_POST_ID = "POST_ID"
         })
 
         viewModel.offerActionResp.observe(this, {
+            viewModel.getPostById(postId)
             viewModel.getOffersForPost(postId)
             offersAdapter.refresh()
         })

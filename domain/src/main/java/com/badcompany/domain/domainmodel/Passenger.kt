@@ -12,5 +12,5 @@ data class Passenger(var id: Long? = null,
 
 data class ArrangedOffer(var message: String? = null,
                          var priceInt: Int? = null,
-                         var seats: Int? = null,
+                         var seat: Int? = null,
                          var history: String? = null)

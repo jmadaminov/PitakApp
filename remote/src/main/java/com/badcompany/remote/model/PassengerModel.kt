@@ -12,5 +12,5 @@ data class PassengerModel(@SerializedName("id") var id: Long? = null,
 
 data class ArrangedOfferDTO(@SerializedName("message") var message: String? = null,
                             @SerializedName("priceInt") var priceInt: Int? = null,
-                            @SerializedName("seats") var seats: Int? = null,
+                            @SerializedName("seat") var seat: Int? = null,
                             @SerializedName("history") var history: String? = null)

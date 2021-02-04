@@ -20,6 +20,7 @@ import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.dialog_offer_a_ride.*
 import splitties.experimental.ExperimentalSplittiesApi
+import java.text.DecimalFormat
 
 const val ARG_PASSENGER_POST = "PASSENGER_POST"
 
@@ -46,6 +47,8 @@ class DialogOfferARideFragment : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+//        edtPrice.hint =
+//            DecimalFormat("#,###").format(passengerPost.price) + " " + getString(R.string.sum)
         rvMyPosts.adapter = adapter
         attachListeners()
         subscribeObservers()
@@ -86,7 +89,7 @@ class DialogOfferARideFragment : DialogFragment() {
 
         btnSendOffer.setOnClickListener {
             viewModel.offerARide(passengerPost.id,
-                                 if (edtPrice.text.isNullOrBlank()) null else edtPrice.text.toString()
+                                 if (edtPrice.text.isNullOrBlank()) passengerPost.price else edtPrice.text.toString()
                                      .toInt(),
                                  messageInput.text.toString(),
                                  passengerPost)

@@ -45,7 +45,7 @@ open class DriverPostMapper @Inject constructor() : Mapper<DriverPostEntity, Dri
         val passengerList = arrayListOf<Passenger>()
         type.passengerList?.forEach {
             val offerEntity =
-                ArrangedOffer(it.offer?.message, it.offer?.priceInt, it.offer?.seats, it.offer?.history)
+                ArrangedOffer(it.offer?.message, it.offer?.priceInt, it.offer?.seat, it.offer?.history)
             val profile = Profile(it.profile!!.phoneNum,
                                   it.profile!!.name,
                                   it.profile!!.surname,
@@ -116,7 +116,7 @@ open class DriverPostMapper @Inject constructor() : Mapper<DriverPostEntity, Dri
 
             val offer = ArrangedOfferEntity(it.offer?.message,
                                             it.offer?.priceInt,
-                                            it.offer?.seats,
+                                            it.offer?.seat,
                                             it.offer?.history)
 
             val profile = ProfileEntity(it.profile!!.phoneNum,

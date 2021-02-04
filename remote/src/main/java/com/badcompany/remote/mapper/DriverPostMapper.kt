@@ -50,7 +50,7 @@ open class DriverPostMapper @Inject constructor() : Mapper<DriverPostEntity, Dri
             val offerEntity =
                 ArrangedOfferDTO(it.offer?.message,
                                       it.offer?.priceInt,
-                                      it.offer?.seats,
+                                      it.offer?.seat,
                                       it.offer?.history)
 
             passengerList.add(PassengerModel(it.id,
@@ -121,7 +121,7 @@ open class DriverPostMapper @Inject constructor() : Mapper<DriverPostEntity, Dri
             val offer =
                 ArrangedOfferEntity(it.offer?.message,
                                          it.offer?.priceInt,
-                                         it.offer?.seats,
+                                         it.offer?.seat,
                                          it.offer?.history)
             passengerList.add(PassengerEntity(it.id, ProfileEntity(it.profile!!.phoneNum,
                                                                    it.profile!!.name,
