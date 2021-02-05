@@ -13,6 +13,7 @@ import splitties.preferences.Preferences
     var userId by stringPref("userId","")
     var token by stringPref("token","")
     var language by stringPref("language","ru")
+    var isFirstTime by boolPref("isFirstTime",true)
     var name by stringPref("name","")
     var defaultCarId by stringOrNullPref("defaultCarId", null)
     var surname by stringPref("surname","")

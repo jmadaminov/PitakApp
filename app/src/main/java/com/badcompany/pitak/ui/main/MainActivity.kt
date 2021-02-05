@@ -14,6 +14,7 @@ import com.badcompany.pitak.ui.auth.AuthActivity
 import com.badcompany.pitak.ui.dialogs.DialogAddCarFirst
 import com.badcompany.pitak.ui.driver_post.DriverPostActivity
 import com.badcompany.pitak.ui.driver_post.EXTRA_POST_ID
+import com.badcompany.pitak.ui.intro.IntroActivity
 import com.badcompany.pitak.ui.main.mytrips.MyTripsFragment
 import com.badcompany.pitak.ui.main.notifications.NotificationsFragment
 import com.badcompany.pitak.ui.main.profile.ProfileFragment
@@ -36,7 +37,10 @@ class MainActivity : BaseActivity() {
         checkUserLogin()
         setTheme(R.style.NoActionBar)
         super.onCreate(savedInstanceState)
-
+        if (AppPrefs.isFirstTime) {
+            startActivity(Intent(this, IntroActivity::class.java))
+            finish()
+        }
         notificationPostId = intent.extras?.getLong(EXTRA_POST_ID)
 
         notificationPostId?.let {
