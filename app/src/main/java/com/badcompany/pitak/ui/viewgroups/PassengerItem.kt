@@ -15,8 +15,10 @@ class PassengerItem(val obj: Passenger, onDeleteClick: () -> Unit) : Item() {
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         viewHolder.itemView.apply {
             tvName.text = obj.profile?.name + " " + obj.profile?.surname
-            tvAgreedPrice.text =
-                DecimalFormat("#,###").format(obj.offer?.priceInt) + " " + context.getString(R.string.sum)
+            obj.offer?.priceInt?.let {
+                tvAgreedPrice.text =
+                    DecimalFormat("#,###").format(obj.offer?.priceInt) + " " + context.getString(R.string.sum)
+            }
             tvPersonCount.text = obj.offer?.seat?.toString()
             obj.profile?.image?.link?.let {
                 ivAvatar.loadCircleImageUrl(it)

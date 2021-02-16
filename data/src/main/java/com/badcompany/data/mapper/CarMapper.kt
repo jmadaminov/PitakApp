@@ -31,6 +31,7 @@ open class CarMapper @Inject constructor() : Mapper<CarEntity, Car> {
                    type.carNumber,
                    type.carYear,
                    type.airConditioner!!,
+                   type.def!!,
                    images)
     }
 
@@ -49,6 +50,7 @@ open class CarMapper @Inject constructor() : Mapper<CarEntity, Car> {
                          type.carNumber,
                          type.carYear,
                          type.airConditioner,
+                         type.def,
                          images)
     }
 

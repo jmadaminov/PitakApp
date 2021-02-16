@@ -222,6 +222,7 @@
                         android:focusable="true"
                         android:foreground="?android:selectableItemBackground"
                         android:padding="12dp"
+                        android:visibility="gone"
                         android:src="@drawable/baseline_delete_outline_black_24dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"

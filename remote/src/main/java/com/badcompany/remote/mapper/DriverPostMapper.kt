@@ -39,19 +39,22 @@ open class DriverPostMapper @Inject constructor() : Mapper<DriverPostEntity, Dri
                                                                  CarModelModel(type.car!!.carModel!!.id,
                                                                                type.car!!.carModel!!.name),
                                                                  type.car!!.fuelType,
-                                                                 type.car!!.colorId,
+                                                                 CarColorModel(type.car!!.color!!.id,
+                                                                               type.car!!.color!!.hex,
+                                                                               type.car!!.color!!.name!!),
                                                                  type.car!!.carNumber,
                                                                  type.car!!.carYear,
-                                                                 type.car!!.airConditioner)
+                                                                 type.car!!.airConditioner,
+                                                                 type.car!!.def)
 
         val passengerList = arrayListOf<PassengerModel>()
         type.passengerList?.forEach {
 
             val offerEntity =
                 ArrangedOfferDTO(it.offer?.message,
-                                      it.offer?.priceInt,
-                                      it.offer?.seat,
-                                      it.offer?.history)
+                                 it.offer?.priceInt,
+                                 it.offer?.seat,
+                                 it.offer?.history)
 
             passengerList.add(PassengerModel(it.id,
                                              ProfileDTO(it.profile!!.phoneNum,
@@ -78,6 +81,7 @@ open class DriverPostMapper @Inject constructor() : Mapper<DriverPostEntity, Dri
                                car,
                                type.remark,
                                type.seat,
+                               type.offerCount,
                                type.availableSeats,
                                type.postStatus,
                                type.pkg,
@@ -111,25 +115,28 @@ open class DriverPostMapper @Inject constructor() : Mapper<DriverPostEntity, Dri
                                                                   CarModelEntity(type.car.carModel!!.id,
                                                                                  type.car.carModel!!.name),
                                                                   type.car.fuelType,
-                                                                  type.car.colorId,
+                                                                  CarColorEntity(type.car.carColor!!.id,
+                                                                                 type.car.carColor!!.hex,
+                                                                                 type.car.carColor!!.name!!),
                                                                   type.car.carNumber,
                                                                   type.car.carYear,
-                                                                  type.car.airConditioner)
+                                                                  type.car.airConditioner,
+                                                                  type.car.def)
 
         val passengerList = arrayListOf<PassengerEntity>()
         type.passengerList?.forEach {
             val offer =
                 ArrangedOfferEntity(it.offer?.message,
-                                         it.offer?.priceInt,
-                                         it.offer?.seat,
-                                         it.offer?.history)
+                                    it.offer?.priceInt,
+                                    it.offer?.seat,
+                                    it.offer?.history)
             passengerList.add(PassengerEntity(it.id, ProfileEntity(it.profile!!.phoneNum,
                                                                    it.profile!!.name,
                                                                    it.profile!!.surname,
                                                                    it.profile!!.id,
                                                                    ImageEntity(it.profile!!.image?.id,
                                                                                it.profile!!.image?.link)),
-            it.submitDate, offer))
+                                              it.submitDate, offer))
         }
 
         return DriverPostEntity(type.id,
@@ -146,6 +153,7 @@ open class DriverPostMapper @Inject constructor() : Mapper<DriverPostEntity, Dri
                                 car,
                                 type.remark,
                                 type.seat,
+                                type.offerCount,
                                 type.availableSeats,
                                 type.postStatus,
                                 type.pkg,

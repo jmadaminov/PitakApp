@@ -56,43 +56,64 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginStart="12dp"
-            tools:text="TASHKENT"
             android:textColor="@color/dark_grey"
             android:textSize="14dp"
             app:layout_constraintBottom_toBottomOf="@id/circleFrom"
             app:layout_constraintStart_toEndOf="@id/circleFrom"
-            app:layout_constraintTop_toTopOf="@id/circleFrom" />
+            app:layout_constraintTop_toTopOf="@id/circleFrom"
+            tools:text="TASHKENT" />
 
         <TextView
             android:id="@+id/to"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginStart="12dp"
-            tools:text="ANDIJAN"
             android:textColor="@color/dark_grey"
             android:textSize="14dp"
             app:layout_constraintStart_toEndOf="@id/circleTo"
-            app:layout_constraintTop_toBottomOf="@id/from" />
+            app:layout_constraintTop_toBottomOf="@id/from"
+            tools:text="ANDIJAN" />
 
-
-        <TextView
-            android:id="@+id/status"
+        <LinearLayout
+            android:id="@+id/llStatus"
             android:layout_width="wrap_content"
-            android:layout_height="25dp"
-            android:layout_marginStart="8dp"
+            android:layout_height="wrap_content"
             android:background="@drawable/round_top_right_primary"
-            android:drawableStart="@drawable/ic_baseline_airline_seat_recline_extra_24"
-            android:gravity="center"
-            android:paddingStart="12dp"
-            android:paddingTop="4dp"
-            android:paddingEnd="12dp"
-            android:paddingBottom="4dp"
-            tools:text="ACTIVE"
-            android:textColor="#fff"
-            android:textSize="12dp"
+            android:gravity="center_vertical"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
 
+
+            <TextView
+                android:id="@+id/status"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:drawableStart="@drawable/ic_baseline_airline_seat_recline_extra_24"
+                android:gravity="center"
+                android:paddingStart="12dp"
+                android:paddingTop="4dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="4dp"
+                android:textColor="#fff"
+                android:textSize="12dp"
+                tools:text="ACTIVE" />
+
+
+            <TextView
+                android:id="@+id/tvOffersCount"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:visibility="gone"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/shape_round_alert"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="12dp"
+                tools:text="3" />
+
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/note"
@@ -124,8 +145,8 @@
                 android:drawableRight="@drawable/ic_baseline_money_24"
                 android:drawablePadding="10dp"
                 android:gravity="center_vertical|end"
-                tools:text="50,000 sum"
-                android:textColor="@color/dark_grey" />
+                android:textColor="@color/dark_grey"
+                tools:text="50,000 sum" />
 
             <TextView
                 android:id="@+id/date"
@@ -135,8 +156,8 @@
                 android:drawableRight="@drawable/ic_baseline_calendar_today_24"
                 android:drawablePadding="10dp"
                 android:gravity="center_vertical|end"
-                tools:text="02.05.2200"
-                android:textColor="@color/dark_grey" />
+                android:textColor="@color/dark_grey"
+                tools:text="02.05.2200" />
         </LinearLayout>
 
 

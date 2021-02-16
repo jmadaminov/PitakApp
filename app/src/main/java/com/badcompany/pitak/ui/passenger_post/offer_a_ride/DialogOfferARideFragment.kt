@@ -15,12 +15,12 @@ import com.badcompany.domain.domainmodel.DriverPost
 import com.badcompany.pitak.R
 import com.badcompany.pitak.ui.viewgroups.ActivePostItem
 import com.badcompany.pitak.viewobjects.PassengerPostViewObj
+import com.google.android.material.snackbar.Snackbar
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.dialog_offer_a_ride.*
 import splitties.experimental.ExperimentalSplittiesApi
-import java.text.DecimalFormat
 
 const val ARG_PASSENGER_POST = "PASSENGER_POST"
 
@@ -63,6 +63,13 @@ class DialogOfferARideFragment : DialogFragment() {
 
         viewModel.hasFinished.observe(viewLifecycleOwner, { hasFinished ->
             if (hasFinished) dismiss()
+        })
+
+        viewModel.errorMessage.observe(viewLifecycleOwner, { hasFinished ->
+            Snackbar.make(view?.rootView!!,
+                          getString(R.string.you_have_reached_post_limit),
+                          Snackbar.LENGTH_SHORT).show()
+
         })
 
         viewModel.activePostsResponse.observe(viewLifecycleOwner, {

@@ -377,6 +377,7 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
                    carViewObj.carNumber,
                    carViewObj.carYear,
                    carViewObj.airConditioner,
+                   carViewObj.def,
                    imgs)
     }
 

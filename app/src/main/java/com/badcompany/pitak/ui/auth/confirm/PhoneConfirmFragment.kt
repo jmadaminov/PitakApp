@@ -87,6 +87,7 @@ class PhoneConfirmFragment : Fragment(R.layout.fragment_phone_confirm) {
                     confirm.revertAnimation()
                     saveCredentials(response)
                     context?.start<MainActivity> { }
+                    requireActivity().finish()
                 }
                 ResultWrapper.InProgress -> {
                     errorMessage.visibility = View.INVISIBLE

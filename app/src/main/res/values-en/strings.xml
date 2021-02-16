@@ -134,5 +134,6 @@
     <string name="rejected">Rejected</string>
     <string name="boarding">Boarding</string>
     <string name="language">Language</string>
+    <string name="you_have_reached_post_limit">You have reached the post limit!</string>
 
 </resources>

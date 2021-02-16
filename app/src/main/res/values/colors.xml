@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryOpacityEighty">#CC008577</color>
-    <color name="colorPrimaryOpacityTwenty">#33008577</color>
-    <color name="colorPrimaryDarkOpacityFifty">#50008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryOpacityEighty">#CC3F51B5</color>
+    <color name="colorPrimaryOpacityTwenty">#333F51B5</color>
+    <color name="colorPrimaryDarkOpacityFifty">#503F51B5</color>
+    <color name="colorPrimaryDark">#283593</color>
     <color name="windowBackground">#fff</color>
     <color name="colorAccent">#D81B60</color>
     <color name="splashGradientEnd">#4F2A93</color>
@@ -16,14 +16,16 @@
     <color name="greyBackground">@android:color/background_light</color>
     <color name="textColorGreyDark">#6e6e70</color>
     <color name="orange">#FFA000</color>
+    <color name="orangeDarker">#F57C00</color>
     <color name="orangeOpacityEighty">#CCFFA000</color>
+    <color name="orangeOpacityFifty">#50FFA000</color>
     <color name="orangeOpacityTwenty">#33FFA000</color>
     <color name="ic_grey" >#a1a9c3</color>
     <color name="light_grey" >#ebebee</color>
 
     <color name="neutralColor">#FF393939</color>
     <color name="neutralColorOpacityEighty">#CC393939</color>
-    <color name="colorNavIdle">#80cbc4</color>
+    <color name="colorNavIdle">#7986CB</color>
 
 
 

@@ -4,6 +4,7 @@ import com.badcompany.core.*
 import com.badcompany.data.model.DriverPostEntity
 import com.badcompany.data.repository.DriverPostRemote
 import com.badcompany.remote.ResponseFormatter.getFormattedResponse
+import com.badcompany.remote.ResponseFormatter.getFormattedResponseNullable
 import com.badcompany.remote.mapper.DriverPostMapper
 import javax.inject.Inject
 
@@ -92,7 +93,7 @@ class DriverPostRemoteImpl @Inject constructor(private val authorizedApiService:
     }
 
     override suspend fun startTrip(id: Long) =
-        getFormattedResponse { authorizedApiService.startTrip(id) }
+        getFormattedResponseNullable { authorizedApiService.startTrip(id) }
 
     override suspend fun acceptOffer(id: Long) =
         getFormattedResponse { authorizedApiService.acceptOffer(id) }

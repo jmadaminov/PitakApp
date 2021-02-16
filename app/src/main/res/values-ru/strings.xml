@@ -134,5 +134,6 @@
     <string name="rejected">Отклонено</string>
     <string name="boarding">Посадка</string>
     <string name="language">Язык</string>
+    <string name="you_have_reached_post_limit">You have reached the post limit!</string>
 
 </resources>

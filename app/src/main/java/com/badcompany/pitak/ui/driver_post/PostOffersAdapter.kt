@@ -47,29 +47,12 @@ class PostOffersAdapter(val onOfferActionListener: IOnOfferActionListener) :
                 }
 
                 tvName.text = offer.profile.name + " " + offer.profile.surname
+                tvSeats.text = offer.seat.toString()
                 offer.profile.image?.let {
                     it.link?.let { link ->
                         ivAvatar.loadCircleImageUrl(link)
                     }
                 }
-
-//                when (offer.status) {
-//                    EOfferStatus.ACTIVE -> {
-//                        tvStatus.setBackgroundResource(R.color.colorPrimaryDarkOpacityFifty)
-//                        ivAccept.visibility = View.VISIBLE
-//                        ivPhone.visibility = View.INVISIBLE
-//                    }
-//                    EOfferStatus.ACCEPTED -> {
-//                        ivAccept.visibility = View.INVISIBLE
-//                        ivPhone.visibility = View.VISIBLE
-//                        tvStatus.setBackgroundResource(R.color.green)
-//                    }
-//                    EOfferStatus.REJECTED -> {
-//                        ivAccept.visibility = View.INVISIBLE
-//                        ivPhone.visibility = View.INVISIBLE
-//                        tvStatus.setBackgroundResource(R.color.colorAccent)
-//                    }
-//                }.exhaustive
 
                 ivDeny.setOnClickListener {
                     onOfferActionListener.onCancelClick(offer)
@@ -77,9 +60,7 @@ class PostOffersAdapter(val onOfferActionListener: IOnOfferActionListener) :
                 ivAccept.setOnClickListener {
                     onOfferActionListener.onAcceptClick(offer)
                 }
-//                ivPhone.setOnClickListener {
-//                    onOfferActionListener.onPhoneCallClick(offer)
-//                }
+
             }
         }
     }

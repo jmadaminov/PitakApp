@@ -13,4 +13,5 @@ data class OfferDTO(@SerializedName("id") val id: Long,
                     @SerializedName("visible") val visible: Boolean,
                     @SerializedName("submitDate") val submitDate: String,
                     @SerializedName("message") val message: String?=null,
-                    @SerializedName("price") val price: Int? = null)
+                    @SerializedName("price") val price: Int? = null,
+                    @SerializedName("seat") val seat: Int? = null)

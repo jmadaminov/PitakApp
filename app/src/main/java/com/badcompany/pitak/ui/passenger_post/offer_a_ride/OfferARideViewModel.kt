@@ -68,6 +68,7 @@ class OfferARideViewModel @ViewModelInject constructor(private val repository: P
                                     null,
                                     null,
                                     passPost.seat,
+                                    0,
                                     postStatus = EPostStatus.CREATED
         )
         when (val response = createDriverPost.execute(driverPost)) {

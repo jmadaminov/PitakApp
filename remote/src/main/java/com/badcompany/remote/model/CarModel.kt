@@ -22,5 +22,7 @@ data class CarModel(
     var carYear: Int? = null,
     @SerializedName("airConditioner")
     var airConditioner: Boolean? = null,
+    @SerializedName("def")
+    var def: Boolean? = null,
     @SerializedName("imageList")
     var imageList: List<PhotoUploadModel>? = null)

@@ -161,6 +161,7 @@ class PreviewFragment @Inject constructor(/*private val viewModelFactory: ViewMo
                                                   null,
                                                   activityViewModel.note!!,
                                                   activityViewModel.seat!!,
+                                                  0,
                                                   null,
                                                   EPostStatus.CREATED,
                                                   activityViewModel.isPackage,

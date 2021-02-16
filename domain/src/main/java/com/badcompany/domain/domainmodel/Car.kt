@@ -8,5 +8,6 @@ data class Car(var id: Long? = null,
                var carNumber: String? = null,
                var carYear: Int? = null,
                var airConditioner: Boolean = false,
+               var def: Boolean = false,
                var imageList: List<PhotoBody> = arrayListOf())
 

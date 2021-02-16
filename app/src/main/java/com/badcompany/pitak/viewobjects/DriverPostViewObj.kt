@@ -22,6 +22,19 @@ data class DriverPostViewObj(val from: PlaceViewObj,
                              val postType: String = Constants.DRIVER_POST_SIMPLE) : Parcelable {
     companion object {
         fun fromDriverPost(post: DriverPost): DriverPostViewObj {
+            val car = CarViewObj(post.car!!.id,
+                                 IdNameViewObj(post.car!!.carModel!!.id,
+                                               post.car!!.carModel!!.name),
+                                 ImageViewObj(post.car!!.image!!.id, post.car!!.image!!.link),
+                                 post.car!!.fuelType,
+                                 CarColorViewObj(post.car!!.color!!.id,
+                                                 post.car!!.color!!.hex,
+                                                 post.car!!.color!!.name),
+                                 post.car!!.carNumber,
+                                 post.car!!.carYear,
+                                 post.car!!.airConditioner!!,
+                                 post.car!!.def!!
+            )
             return DriverPostViewObj(PlaceViewObj.fromPlace(post.from),
                                      PlaceViewObj.fromPlace(post.to),
                                      post.price,
@@ -31,7 +44,7 @@ data class DriverPostViewObj(val from: PlaceViewObj,
                                      post.timeThirdPart,
                                      post.timeFourthPart,
                                      null,
-                                     null,
+                                     car,
                                      post.remark,
                                      post.seat,
                                      post.postType)

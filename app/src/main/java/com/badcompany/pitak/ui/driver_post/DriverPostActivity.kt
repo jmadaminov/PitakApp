@@ -119,6 +119,7 @@ const val EXTRA_POST_ID = "POST_ID"
 
         viewModel.startedTripResp.observe(this, {
             viewModel.getOffersForPost(postId)
+            cancel.visibility = View.GONE
             offersAdapter.refresh()
         })
 
@@ -128,7 +129,6 @@ const val EXTRA_POST_ID = "POST_ID"
                 is ErrorWrapper.RespError -> {
                     Snackbar.make(swipeRefreshLayout, response.message!!, Snackbar.LENGTH_SHORT)
                         .show()
-
                 }
                 is ErrorWrapper.SystemError -> {
                     Snackbar.make(swipeRefreshLayout,
@@ -136,6 +136,7 @@ const val EXTRA_POST_ID = "POST_ID"
                                   Snackbar.LENGTH_SHORT).show()
                 }
                 is ResultWrapper.Success -> {
+
                     setResult(RESULT_OK)
                     finish()
                 }
@@ -175,9 +176,11 @@ const val EXTRA_POST_ID = "POST_ID"
         edit.isVisible =
             post.postStatus == EPostStatus.CREATED && post.passengerList.isNullOrEmpty()
         done.isVisible = post.postStatus == EPostStatus.START
+        cancel.isVisible =
+            post.postStatus == EPostStatus.CREATED || post.postStatus == EPostStatus.WAITING_FOR_START
 
         btnStart.isVisible =
-            post.postStatus == EPostStatus.WAITING_FOR_START && !post.passengerList.isNullOrEmpty()
+            post.postStatus == EPostStatus.WAITING_FOR_START || !post.passengerList.isNullOrEmpty() && post.postStatus == EPostStatus.CREATED
 
         date.text = post.departureDate
         from.text = post.from.regionName

@@ -135,9 +135,10 @@ class DriverPostViewModel @ViewModelInject constructor(val postRepository: Drive
                 isLoading.value = false
                 when (response) {
                     is ResponseError -> {
+                        errorMessage.value = response.message
                     }
                     is ResponseSuccess -> {
-                        startedTripResp.value = true
+                        startedTripResp.postValue(true)
                     }
                 }.exhaustive
 
