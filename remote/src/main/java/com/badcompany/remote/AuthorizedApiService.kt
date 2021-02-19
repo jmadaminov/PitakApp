@@ -61,7 +61,7 @@ interface AuthorizedApiService {
 
     @Headers("Content-Type:application/json", "Accept: application/json")
     @GET("car/action")
-    suspend fun getCars(/*@Header("Content-Language") lang: String,*/): CarListResponse
+    suspend fun getCars(/*@Header("Content-Language") lang: String,*/):  CarListResponse
 
     @Headers("Content-Type:application/json", "Accept: application/json")
     @POST("car/action")

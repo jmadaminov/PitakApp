@@ -32,7 +32,7 @@ class CarRemoteImpl @Inject constructor(private val authorizedApiService: Author
             val response = authorizedApiService.getCars()
             if (response.code == 1) {
                 val newCars = ArrayList<CarDetailsEntity>()
-                response.data!!.forEach {
+                response.data?.forEach {
                     newCars.add(carDetailsMapper.mapToEntity(it))
                 }
                 ResultWrapper.Success(newCars)
