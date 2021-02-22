@@ -28,11 +28,11 @@ open class CarRemoteDataStore @Inject constructor(private val carRemote: CarRemo
         return carRemote.getCarColors()
     }
 
-    override suspend fun createCar(car: CarEntity): ResultWrapper<String> {
+    override suspend fun createCar(car: CarEntity): ResultWrapper<CarEntity> {
         return carRemote.createCar(car)
     }
 
-    override suspend fun updateCar(car: CarEntity): ResultWrapper<String> {
+    override suspend fun updateCar(car: CarEntity): ResultWrapper<CarEntity> {
         return carRemote.updateCar(car)
     }
 

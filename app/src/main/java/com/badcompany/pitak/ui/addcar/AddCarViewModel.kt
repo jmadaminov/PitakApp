@@ -3,6 +3,7 @@ package com.badcompany.pitak.ui.addcar
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.viewModelScope
 import com.badcompany.core.ErrorWrapper
+import com.badcompany.core.ResponseWrapper
 import com.badcompany.core.ResultWrapper
 import com.badcompany.domain.domainmodel.*
 import com.badcompany.domain.usecases.GetCarColors
@@ -10,11 +11,13 @@ import com.badcompany.domain.usecases.GetCarModels
 import com.badcompany.domain.usecases.SaveCar
 import com.badcompany.domain.usecases.UploadPhoto
 import com.badcompany.pitak.ui.BaseViewModel
+import com.badcompany.pitak.util.AppPrefs
 import com.badcompany.pitak.util.SingleLiveEvent
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import splitties.experimental.ExperimentalSplittiesApi
+import splitties.preferences.edit
 import java.io.File
 
 /**
@@ -26,7 +29,7 @@ class AddCarViewModel @ViewModelInject constructor(private val uploadPhoto: Uplo
                                                    private val getCarModels: GetCarModels) :
     BaseViewModel() {
 
-    val carSaveReponse = SingleLiveEvent<ResultWrapper<String>>()
+    val carSaveReponse = SingleLiveEvent<ResultWrapper<Car>>()
     val colorsAndModels = SingleLiveEvent<ResultWrapper<ColorsAndModels>>()
     val carAvatarResponse = SingleLiveEvent<ResultWrapper<PhotoBody>>()
     val carImgResponse = SingleLiveEvent<ResultWrapper<PhotoBody>>()
@@ -47,7 +50,7 @@ class AddCarViewModel @ViewModelInject constructor(private val uploadPhoto: Uplo
             withContext(IO) {
                 try {
                     val colors = async { getCarColors.execute() }
-                    val models = async { getCarModels.execute()}
+                    val models = async { getCarModels.execute() }
                     processResponses(colors.await(), models.await())
                 } catch (e: Exception) {
                     withContext(Main) {
@@ -86,12 +89,12 @@ class AddCarViewModel @ViewModelInject constructor(private val uploadPhoto: Uplo
     }
 
 
-    fun saveCar( car: Car) {
+    fun saveCar(car: Car) {
         carSaveReponse.value = ResultWrapper.InProgress
         viewModelScope.launch(IO) {
-            val response =
-                saveCar.execute( car)
+            val response = saveCar.execute(car)
             withContext(Main) {
+
                 carSaveReponse.value = response
             }
 

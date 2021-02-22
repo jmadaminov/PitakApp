@@ -301,7 +301,9 @@ class SearchTripFragment : Fragment(R.layout.fragment_search_trip) {
 
     override fun onDestroyView() {
         super.onDestroyView()
-
+        postsAdapter.removeLoadStateListener { }
         autoCompleteManager.dispose()
     }
+
+
 }

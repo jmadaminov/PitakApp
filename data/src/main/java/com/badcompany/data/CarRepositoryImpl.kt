@@ -76,27 +76,27 @@ class CarRepositoryImpl @Inject constructor(private val factory: CarDataStoreFac
         }
     }
 
-    override suspend fun createCar(car: Car): ResultWrapper<String> {
+    override suspend fun createCar(car: Car): ResultWrapper<Car> {
         val response = factory.retrieveDataStore(false)
             .createCar(carMapper.mapToEntity(car))
         return when (response) {
             is ErrorWrapper.RespError -> response
             is ErrorWrapper.SystemError -> response
             is ResultWrapper.Success -> {
-                ResultWrapper.Success("SUCCESS")
+                ResultWrapper.Success(carMapper.mapFromEntity(response.value))
             }
             ResultWrapper.InProgress -> ResultWrapper.InProgress
         }
     }
 
-    override suspend fun updateCar(car: Car): ResultWrapper<String> {
+    override suspend fun updateCar(car: Car): ResultWrapper<Car> {
         val response = factory.retrieveDataStore(false)
             .updateCar(carMapper.mapToEntity(car))
         return when (response) {
             is ErrorWrapper.RespError -> response
             is ErrorWrapper.SystemError -> response
             is ResultWrapper.Success -> {
-                ResultWrapper.Success("SUCCESS")
+                ResultWrapper.Success(carMapper.mapFromEntity(response.value))
             }
             ResultWrapper.InProgress -> ResultWrapper.InProgress
         }

@@ -30,12 +30,13 @@
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="96dp"
+        android:background="@drawable/shape_rounded_corners_white"
         android:hint="@string/prompt_phone_number"
         android:imeOptions="actionDone"
         android:inputType="phone"
         android:maxLength="19"
+        android:padding="10dp"
         android:selectAllOnFocus="true"
-        android:textColor="#fff"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -43,7 +44,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:mask="+998(**) ***-**-**"
         app:notMaskedSymbol="*" />
-
     <!--
         <EditText
             android:id="@+id/password"
@@ -86,18 +86,18 @@
         android:layout_gravity="start"
         android:layout_marginStart="48dp"
         android:layout_marginTop="48dp"
-        app:finalCornerAngle="50dp"
-        android:textAllCaps="false"
-        app:initialCornerAngle="50dp"
         android:layout_marginEnd="48dp"
-        android:background="@drawable/button_shape_default_rounded"
-        app:spinning_bar_color="#fff"
+        android:background="@drawable/button_shape_orange_gradient_rounded"
         android:elevation="3dp"
         android:enabled="false"
         android:text="@string/authorize"
+        android:textAllCaps="false"
         android:textColor="#fff"
+        app:finalCornerAngle="50dp"
+        app:initialCornerAngle="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/phone" />
+        app:layout_constraintTop_toBottomOf="@id/phone"
+        app:spinning_bar_color="#fff" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

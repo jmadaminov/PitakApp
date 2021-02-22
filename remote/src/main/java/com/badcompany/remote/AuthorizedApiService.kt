@@ -45,7 +45,6 @@ interface AuthorizedApiService {
     //
 
 
-
     @Headers("Content-Type:application/json", "Accept: application/json")
     @POST("feedback/action")
     suspend fun sendFeedback(@Body body: FeedbackBody): RespFormatter<Any>
@@ -61,20 +60,18 @@ interface AuthorizedApiService {
 
     @Headers("Content-Type:application/json", "Accept: application/json")
     @GET("car/action")
-    suspend fun getCars(/*@Header("Content-Language") lang: String,*/):  CarListResponse
+    suspend fun getCars(/*@Header("Content-Language") lang: String,*/): CarListResponse
 
     @Headers("Content-Type:application/json", "Accept: application/json")
     @POST("car/action")
     suspend fun createCar(/*@Header("Content-Language") lang: String,*/
 
-        @Body car: CarModel): PlainResponse
+        @Body car: CarModel): RespFormatter<CarModel>
 
     @Headers("Content-Type:application/json", "Accept: application/json")
     @PUT("car/action/{identifier}")
-    suspend fun updateCar(/*@Header("Content-Language") lang: String,*/
-
-        @Path(value = "identifier", encoded = true) identifier: Long,
-        @Body car: CarModel): PlainResponse
+    suspend fun updateCar(@Path(value = "identifier", encoded = true) identifier: Long,
+                          @Body car: CarModel): RespFormatter<CarModel>
 
     @Headers("Content-Type:application/json", "Accept: application/json")
     @DELETE("car/action/{identifier}")

@@ -36,7 +36,8 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
         setupObservers()
-        phone.setMaskedText(args.phone.numericOnly().substring(3, args.phone.numericOnly().length))
+//        phone.setMaskedText(args.phone.numericOnly().substring(3, args.phone.numericOnly().length))
+        phone.setText(args.phone)
 
         ivBack.setOnClickListener {
             findNavController().popBackStack()

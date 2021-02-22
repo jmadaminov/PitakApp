@@ -1,6 +1,5 @@
 package com.badcompany.pitak.ui.addcar
 
-//import com.badcompany.pitak.di.viewmodels.AddCarViewModelFactory
 import android.app.Activity
 import android.graphics.PorterDuff
 import android.net.Uri
@@ -28,6 +27,7 @@ import com.badcompany.pitak.R
 import com.badcompany.pitak.ui.BaseActivity
 import com.badcompany.pitak.ui.viewgroups.ItemAddPhoto
 import com.badcompany.pitak.ui.viewgroups.ItemCarPhoto
+import com.badcompany.pitak.util.AppPrefs
 import com.badcompany.pitak.util.getRealPathFromURI
 import com.badcompany.pitak.util.loadImageUrl
 import com.badcompany.pitak.viewobjects.CarColorViewObj
@@ -45,6 +45,7 @@ import kotlinx.android.synthetic.main.activity_auth.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.InternalCoroutinesApi
 import splitties.experimental.ExperimentalSplittiesApi
+import splitties.preferences.edit
 import java.io.File
 
 
@@ -176,6 +177,14 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
                 is ResultWrapper.Success -> {
                     saveCar.stopAnimation()
                     setResult(Activity.RESULT_OK)
+                    if (AppPrefs.defaultCarId.isNullOrBlank() || AppPrefs.defaultCarId == "0") {
+                        if (response.value.def) {
+                            AppPrefs.edit {
+                                defaultCarId = response.value.id!!.toString()
+                            }
+                        }
+                    }
+
                     finish()
                 }
                 ResultWrapper.InProgress -> {

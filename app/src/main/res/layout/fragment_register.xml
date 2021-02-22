@@ -19,22 +19,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.github.pinball83.maskededittext.MaskedEditText
+
+    <TextView
         android:id="@+id/phone"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
+        android:layout_marginBottom="8dp"
         android:hint="@string/prompt_phone_number"
         android:imeOptions="actionNext"
         android:inputType="phone"
         android:maxLength="19"
+        android:padding="10dp"
         android:selectAllOnFocus="true"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/name"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:mask="+998(**) ***-**-**"
-        app:notMaskedSymbol="*" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 
     <EditText
@@ -42,12 +46,14 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/shape_rounded_corners_white"
         android:hint="@string/name"
         android:imeActionLabel="@string/action_username"
         android:imeOptions="actionNext"
         android:inputType="textPersonName"
+        android:padding="10dp"
         android:selectAllOnFocus="true"
         app:layout_constraintBottom_toTopOf="@id/surname"
         app:layout_constraintEnd_toEndOf="parent"
@@ -59,10 +65,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
+        android:background="@drawable/shape_rounded_corners_white"
         android:hint="@string/surname"
         android:imeActionLabel="@string/action_username"
         android:imeOptions="actionDone"
         android:inputType="textPersonName"
+        android:padding="10dp"
         android:selectAllOnFocus="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -91,9 +99,10 @@
         android:layout_marginStart="48dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="48dp"
-        android:background="@drawable/button_shape_default_rounded"
+        android:background="@drawable/button_shape_orange_gradient_rounded"
         android:enabled="false"
         android:text="@string/register"
+        android:textAllCaps="false"
         android:textColor="#fff"
         app:finalCornerAngle="50dp"
         app:initialCornerAngle="50dp"

@@ -135,5 +135,7 @@
     <string name="boarding">Посадка</string>
     <string name="language">Язык</string>
     <string name="you_have_reached_post_limit">You have reached the post limit!</string>
+    <string name="app_version_too_old">Версия приложения устарела! Пожалуйста, обновите через Google Play Market.</string>
+    <string name="finish">Finish</string>
 
 </resources>

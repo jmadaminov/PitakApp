@@ -25,4 +25,5 @@ interface UserRemote {
     suspend fun sendFeedback(feedback:String): ResponseWrapper<Any?>
     suspend  fun confirmUser(user: UserCredentialsEntity): ResultWrapper<AuthEntity>
     suspend fun updateUserInfo(name: String, surName: String, uploadedAvatarId: Long?): ResponseWrapper<Any?>
+    suspend fun getActiveAppVersions(): ResponseWrapper<List<String>>
 }

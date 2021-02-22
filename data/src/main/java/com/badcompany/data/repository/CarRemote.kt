@@ -16,8 +16,8 @@ interface CarRemote {
     suspend fun getCars(): ResultWrapper<List<CarDetailsEntity>>
     suspend fun getCarModels(): ResultWrapper<List<CarModelEntity>>
     suspend fun getCarColors(): ResultWrapper<List<CarColorEntity>>
-    suspend fun createCar( car: CarEntity): ResultWrapper<String>
+    suspend fun createCar( car: CarEntity): ResultWrapper<CarEntity>
     suspend fun deleteCar( id: Long): ResultWrapper<List<CarDetailsEntity>>
-    suspend fun updateCar( car: CarEntity): ResultWrapper<String>
+    suspend fun updateCar( car: CarEntity): ResultWrapper<CarEntity>
     suspend fun setDefaultCar( id: Long): ResultWrapper<String>
 }

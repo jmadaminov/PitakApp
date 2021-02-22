@@ -72,11 +72,11 @@ class CarRemoteImpl @Inject constructor(private val authorizedApiService: Author
         }
     }
 
-    override suspend fun createCar(car: CarEntity): ResultWrapper<String> {
+    override suspend fun createCar(car: CarEntity): ResultWrapper<CarEntity> {
         return try {
             val response = authorizedApiService.createCar(carMapper.mapFromEntity(car))
             if (response.code == 1) {
-                ResultWrapper.Success("SUCCESS")
+                ResultWrapper.Success(carMapper.mapToEntity(response.data!!))
             } else ErrorWrapper.RespError(response.code, response.message)
         } catch (e: Exception) {
             ErrorWrapper.SystemError(e)
@@ -96,12 +96,11 @@ class CarRemoteImpl @Inject constructor(private val authorizedApiService: Author
         }
     }
 
-    override suspend fun updateCar(car: CarEntity): ResultWrapper<String> {
+    override suspend fun updateCar(car: CarEntity): ResultWrapper<CarEntity> {
         return try {
-            val response =
-                authorizedApiService.updateCar(car.id!!, carMapper.mapFromEntity(car))
+            val response = authorizedApiService.updateCar(car.id!!, carMapper.mapFromEntity(car))
             if (response.code == 1) {
-                ResultWrapper.Success("SUCCESS")
+                ResultWrapper.Success(carMapper.mapToEntity(response.data!!))
             } else ErrorWrapper.RespError(response.code, response.message)
         } catch (e: Exception) {
             ErrorWrapper.SystemError(e)

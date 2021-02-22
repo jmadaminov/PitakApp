@@ -185,61 +185,50 @@
                     </androidx.cardview.widget.CardView>
 
 
-                    <ImageView
-                        android:id="@+id/done"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:clickable="true"
-                        android:visibility="gone"
-                        android:focusable="true"
-                        android:foreground="?android:selectableItemBackground"
-                        android:padding="12dp"
-                        android:src="@drawable/baseline_done_outline_black_24dp"
-                        app:layout_constraintStart_toEndOf="@id/edit"
-                        app:layout_constraintTop_toBottomOf="@id/card"
-                        app:tint="@color/colorPrimary" />
+                    <!--                    <ImageView-->
+                    <!--                        android:id="@+id/done"-->
+                    <!--                        android:layout_width="50dp"-->
+                    <!--                        android:layout_height="50dp"-->
+                    <!--                        android:clickable="true"-->
+                    <!--                        android:focusable="true"-->
+                    <!--                        android:foreground="?android:selectableItemBackground"-->
+                    <!--                        android:padding="12dp"-->
+                    <!--                        android:src="@drawable/baseline_done_outline_black_24dp"-->
+                    <!--                        android:visibility="gone"-->
+                    <!--                        app:layout_constraintStart_toEndOf="@id/edit"-->
+                    <!--                        app:layout_constraintTop_toBottomOf="@id/card"-->
+                    <!--                        app:tint="@color/colorPrimary" />-->
 
-                    <ImageView
-                        android:id="@+id/edit"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:clickable="true"
-                        android:visibility="gone"
-                        android:focusable="true"
-                        android:foreground="?android:selectableItemBackground"
-                        android:padding="12dp"
-                        android:src="@drawable/outline_edit_black_24dp"
-                        app:layout_constraintStart_toEndOf="@id/cancel"
-                        app:layout_constraintTop_toBottomOf="@id/card"
-                        app:tint="@color/orange" />
-
-
-                    <ImageView
-                        android:id="@+id/cancel"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:foreground="?android:selectableItemBackground"
-                        android:padding="12dp"
-                        android:visibility="gone"
-                        android:src="@drawable/baseline_delete_outline_black_24dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/card"
-                        app:tint="@color/error_red" />
+                    <!--                    <ImageView-->
+                    <!--                        android:id="@+id/edit"-->
+                    <!--                        android:layout_width="50dp"-->
+                    <!--                        android:layout_height="50dp"-->
+                    <!--                        android:clickable="true"-->
+                    <!--                        android:focusable="true"-->
+                    <!--                        android:foreground="?android:selectableItemBackground"-->
+                    <!--                        android:padding="12dp"-->
+                    <!--                        android:src="@drawable/outline_edit_black_24dp"-->
+                    <!--                        android:visibility="gone"-->
+                    <!--                        app:layout_constraintStart_toEndOf="@id/cancel"-->
+                    <!--                        app:layout_constraintTop_toBottomOf="@id/card"-->
+                    <!--                        app:tint="@color/orange" />-->
 
 
-                    <Button
-                        android:id="@+id/btnStart"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="15dp"
-                        android:text="@string/start"
-                        android:textAllCaps="false"
-                        android:visibility="invisible"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent" />
+                    <!--                    <ImageView-->
+                    <!--                        android:id="@+id/cancel"-->
+                    <!--                        android:layout_width="50dp"-->
+                    <!--                        android:layout_height="50dp"-->
+                    <!--                        android:clickable="true"-->
+                    <!--                        android:focusable="true"-->
+                    <!--                        android:foreground="?android:selectableItemBackground"-->
+                    <!--                        android:padding="12dp"-->
+                    <!--                        android:src="@drawable/baseline_delete_outline_black_24dp"-->
+                    <!--                        android:visibility="gone"-->
+                    <!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+                    <!--                        app:layout_constraintStart_toStartOf="parent"-->
+                    <!--                        app:layout_constraintTop_toBottomOf="@id/card"-->
+                    <!--                        app:tint="@color/error_red" />-->
+
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -263,9 +252,11 @@
                         android:id="@+id/rvPassengers"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:clipChildren="false"
+                        android:clipToPadding="false"
+                        android:paddingBottom="100dp"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         tools:listitem="@layout/item_passenger" />
-
 
                     <TextView
                         android:id="@+id/lblMyOffers"
@@ -298,5 +289,78 @@
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:padding="10dp">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/error_red"
+                android:contentDescription="@string/add_post"
+                android:src="@drawable/baseline_delete_outline_black_24dp"
+                android:tint="#fff"
+                android:visibility="gone"
+                app:backgroundTint="@color/error_red"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="#fff" />
+
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                android:id="@+id/btnStart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/green"
+                android:gravity="center"
+                android:text="@string/start"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:visibility="gone"
+                app:backgroundTint="@color/green"
+                app:icon="@drawable/ic_steering_wheel"
+                app:iconTint="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                android:id="@+id/done"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorPrimary"
+                android:gravity="center"
+                android:text="@string/finish"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:visibility="gone"
+                app:backgroundTint="@color/colorPrimary"
+                app:icon="@drawable/ic_finish_flag"
+                app:iconTint="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/orange"
+                android:contentDescription="@string/add_post"
+                android:src="@drawable/outline_edit_black_24dp"
+                android:tint="#fff"
+                android:visibility="gone"
+                app:backgroundTint="@color/orange"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="#fff" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </RelativeLayout>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

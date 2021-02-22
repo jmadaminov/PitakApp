@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.CheckedTextView
+import androidx.activity.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.FragmentNavigator
@@ -31,6 +32,8 @@ class MainActivity : BaseActivity() {
     private var notificationPostId: Long? = null
     private lateinit var navController: NavController
 
+    val viewModel: MainViewModel by viewModels()
+
     @ExperimentalSplittiesApi
     override fun onCreate(savedInstanceState: Bundle?) {
         setLocale(AppPrefs.language, this)
@@ -55,14 +58,16 @@ class MainActivity : BaseActivity() {
         subscribeObservers()
 
         navController = findNavController(R.id.nav_host_fragment)
+
+        viewModel.getActiveAppVersions()
     }
 
     private fun setupListeners() {
         addPost.setOnClickListener {
-            if (AppPrefs.defaultCarId.isNullOrBlank()) {
-                DialogAddCarFirst().show(supportFragmentManager, "")
-            } else {
+            if (!AppPrefs.defaultCarId.isNullOrBlank() && AppPrefs.defaultCarId != "0") {
                 start<AddPostActivity>()
+            } else {
+                DialogAddCarFirst().show(supportFragmentManager, "")
             }
         }
 
@@ -126,6 +131,10 @@ class MainActivity : BaseActivity() {
     }
 
     private fun subscribeObservers() {
+
+        viewModel.isAppVersionDeprecated.observe(this) { isDeprecated ->
+            if (isDeprecated) DialogForceUpdate().show(supportFragmentManager, "")
+        }
     }
 
     private fun setupActionBar() {

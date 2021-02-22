@@ -75,6 +75,9 @@ class UserRepositoryImpl @Inject constructor(private val factory: UserDataStoreF
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
+    override suspend fun getActiveAppVersions()= factory.retrieveDataStore(false)
+        .getActiveAppVersions()
+
     override suspend fun updateUserInfo(name: String,
                                         surName: String,
                                         uploadedAvatarId: Long?) = factory.retrieveDataStore(false)

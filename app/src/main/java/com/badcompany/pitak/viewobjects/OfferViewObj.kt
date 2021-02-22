@@ -26,8 +26,8 @@ data class OfferViewObj(val id: Long,
                                offerDTO.profile.name,
                                offerDTO.profile.surname,
                                offerDTO.profile.id,
-                               ImageViewObj(offerDTO.profile.image!!.id,
-                                            offerDTO.profile.image!!.link))
+                               ImageViewObj(offerDTO.profile.image?.id,
+                                            offerDTO.profile.image?.link))
             return OfferViewObj(offerDTO.id,
                                 offerDTO.postId,
                                 offerDTO.offerType,

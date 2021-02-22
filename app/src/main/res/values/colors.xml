@@ -12,6 +12,7 @@
     <color name="button_grey">#B6B6B6</color>
     <color name="dark_grey">#FF393939</color>
     <color name="error_red">#F44336</color>
+    <color name="error_red_darker">#B71C1C</color>
     <color name="line_textColorGrey">#b9b9bc</color>
     <color name="greyBackground">@android:color/background_light</color>
     <color name="textColorGreyDark">#6e6e70</color>
@@ -22,12 +23,11 @@
     <color name="orangeOpacityTwenty">#33FFA000</color>
     <color name="ic_grey" >#a1a9c3</color>
     <color name="light_grey" >#ebebee</color>
+    <color name="green" >#388E3C</color>
 
     <color name="neutralColor">#FF393939</color>
     <color name="neutralColorOpacityEighty">#CC393939</color>
     <color name="colorNavIdle">#7986CB</color>
-
-
 
 
 </resources>

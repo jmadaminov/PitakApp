@@ -5,6 +5,7 @@ import com.badcompany.data.model.AuthEntity
 import com.badcompany.data.model.UserCredentialsEntity
 import com.badcompany.data.model.UserEntity
 import com.badcompany.data.repository.UserRemote
+import com.badcompany.remote.ResponseFormatter.getFormattedResponse
 import com.badcompany.remote.ResponseFormatter.getFormattedResponseNullable
 import com.badcompany.remote.mapper.AuthMapper
 import com.badcompany.remote.mapper.UserCredentialsMapper
@@ -40,7 +41,7 @@ class UserRemoteImpl @Inject constructor(private val apiService: ApiService,
     override suspend fun registerUser(user: UserEntity): ResultWrapper<String> {
         return try {
             val response = apiService.userRegister(userMapper.mapFromEntity(user))
-            if (response.code == 1) ResultWrapper.Success(response.data!!.password!!)
+            if (response.code == 1) ResultWrapper.Success("")
             else ErrorWrapper.RespError(response.code, response.message)
         } catch (e: Exception) {
             ErrorWrapper.SystemError(e)
@@ -68,5 +69,19 @@ class UserRemoteImpl @Inject constructor(private val apiService: ApiService,
                                                                    IdNameBody(uploadedAvatarId)
                                                                }))
         }
+
+    override suspend fun getActiveAppVersions(): ResponseWrapper<List<String>> {
+        val response = getFormattedResponse { apiService.getActiveAppVersions() }
+        return when (response) {
+            is ResponseError -> response
+            is ResponseSuccess -> {
+                val versions = arrayListOf<String>()
+                response.value.forEach {
+                    versions.add(it.version)
+                }
+                ResponseSuccess(versions)
+            }
+        }.exhaustive
+    }
 
 }

@@ -9,9 +9,9 @@ import com.badcompany.domain.repository.CarRepository
  *
  */
 class SaveCar(val repository: CarRepository) :
-    UseCaseWithParams<Car, ResultWrapper<String>>() {
+    UseCaseWithParams<Car, ResultWrapper<Car>>() {
 
-    override suspend fun buildUseCase(params: Car): ResultWrapper<String> {
+    override suspend fun buildUseCase(params: Car): ResultWrapper<Car> {
         return if (params.id == null)
             repository.createCar(params)
         else repository.updateCar(params)

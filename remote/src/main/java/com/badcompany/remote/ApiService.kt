@@ -1,11 +1,9 @@
 package com.badcompany.remote
 
+import com.badcompany.core.EAppType
 import com.badcompany.remote.model.*
 import okhttp3.MultipartBody
-import retrofit2.http.Body
-import retrofit2.http.Multipart
-import retrofit2.http.POST
-import retrofit2.http.Part
+import retrofit2.http.*
 
 interface ApiService {
 
@@ -21,6 +19,10 @@ interface ApiService {
     @Multipart
     @POST("attach/image")
     suspend fun uploadPhoto(@Part file: MultipartBody.Part): PhotoUploadResponse
+
+    @GET("force_update/action/versions")
+    suspend fun getActiveAppVersions(@Query("appType") appType: String = EAppType.DRIVER.name,
+                                     @Query("platformType") platformType: String = "ANDROID") : RespFormatter<List<IdVersionDTO>>
 
 }
 
