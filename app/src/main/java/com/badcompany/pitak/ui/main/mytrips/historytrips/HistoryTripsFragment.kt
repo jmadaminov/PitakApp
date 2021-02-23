@@ -1,23 +1,13 @@
 package com.badcompany.pitak.ui.main.mytrips.historytrips
 
 import android.os.Bundle
-import android.util.Log.wtf
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.badcompany.core.ErrorWrapper
-import com.badcompany.core.ResultWrapper
-import com.badcompany.core.exhaustive
-import com.badcompany.domain.domainmodel.DriverPost
+import androidx.paging.LoadState
 import com.badcompany.pitak.R
-import com.badcompany.pitak.ui.viewgroups.HistoryPostItem
-import com.badcompany.pitak.ui.viewgroups.LoadingItemSmall
-import com.google.android.material.snackbar.Snackbar
-import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
+import com.badcompany.pitak.ui.main.searchtrip.PostLoadStateAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_history_trips.*
 import splitties.experimental.ExperimentalSplittiesApi
@@ -26,138 +16,69 @@ import splitties.experimental.ExperimentalSplittiesApi
 @AndroidEntryPoint
 class HistoryTripsFragment : Fragment(R.layout.fragment_history_trips) {
 
+    var postsAdapter = HistoryPostAdapter()
 
-    private val adapter = GroupAdapter<GroupieViewHolder>()
     val viewModel: HistoryTripsViewModel by viewModels()
 
     @ExperimentalSplittiesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
-        setupRecyclerView()
+        setupViews()
         setupListeners()
+        viewModel.getHistoryPost()
         subscribeObservers()
-        viewModel.getHistoryPosts(0)
     }
 
+    private fun setupViews() {
 
-    @ExperimentalSplittiesApi
-    private fun setupRecyclerView() {
+        rvPosts.adapter = postsAdapter.withLoadStateHeaderAndFooter(
+            header = PostLoadStateAdapter { postsAdapter.retry() },
+            footer = PostLoadStateAdapter { postsAdapter.retry() }
+        )
 
-
-        historyPostsList.setHasFixedSize(true)
-        adapter.clear()
-        historyPostsList.adapter = adapter
-
-        historyPostsList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-                if (!recyclerView.canScrollVertically(1) && newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    if (adapter.itemCount % 10 == 0) viewModel.getHistoryPosts(adapter.itemCount / 10)
-                    wtf("-----", "end")
-                }
+        postsAdapter.addLoadStateListener { loadState ->
+//            swipeRefreshLayout.isRefreshing = loadState.source.refresh is LoadState.Loading
+            swipeRefreshLayout.isRefreshing = loadState.source.refresh is LoadState.Loading
+            rvPosts.isVisible = loadState.source.refresh is LoadState.NotLoading
+            tv_error.isVisible = loadState.source.refresh is LoadState.Error
+            if (loadState.source.refresh is LoadState.Error) {
+                tv_error.text = (loadState.source.refresh as LoadState.Error).error.localizedMessage
             }
-        })
+            btn_retry.isVisible = loadState.source.refresh is LoadState.Error
 
+            if (loadState.source.refresh is LoadState.NotLoading && loadState.append.endOfPaginationReached && postsAdapter.itemCount < 1) {
+                rvPosts.isVisible = false
+                tv_error.isVisible = true
+                tv_error.setText(R.string.there_are_no_posts_yet_come_back_later)
+
+            } else if (loadState.source.refresh !is LoadState.Error) {
+                rvPosts.isVisible = true
+                tv_error.isVisible = false
+            }
+        }
     }
+
 
     @ExperimentalSplittiesApi
     private fun setupListeners() {
         swipeRefreshLayout.setOnRefreshListener {
-            noHistoryPostsTxt.visibility = View.GONE
-            viewModel.getHistoryPosts(0)
+            postsAdapter.refresh()
         }
     }
 
     @ExperimentalSplittiesApi
     private fun subscribeObservers() {
+        viewModel.postOffers.observe(viewLifecycleOwner, {
+            val value = it ?: return@observe
+            postsAdapter.submitData(lifecycle, value)
 
-        viewModel.historyPostsResponse.observe(viewLifecycleOwner, Observer {
-            val response = it ?: return@Observer
-            when (response) {
-                is ErrorWrapper.RespError -> {
-                    Snackbar.make(swipeRefreshLayout,
-                                  response.message!!,
-                                  Snackbar.LENGTH_SHORT).show()
-                    removeLoadingMore()
-                }
-                is ErrorWrapper.SystemError -> {
-                    Snackbar.make(swipeRefreshLayout,
-                                  response.err.localizedMessage.toString(),
-                                  Snackbar.LENGTH_SHORT).show()
-                    removeLoadingMore()
-                }
-                is ResultWrapper.Success -> {
-                    removeLoadingMore()
-                    loadData(response.value)
-                }
-                ResultWrapper.InProgress -> {
-                    addLoading()
-                }
-            }.exhaustive
         })
-
-        viewModel.cancelOrderReponse.observe(viewLifecycleOwner, Observer {
-            val response = it ?: return@Observer
-            when (response) {
-                is ErrorWrapper.RespError -> {
-                    Snackbar.make(swipeRefreshLayout,
-                                  response.message!!,
-                                  Snackbar.LENGTH_SHORT).show()
-
-                }
-                is ErrorWrapper.SystemError -> {
-                    Snackbar.make(swipeRefreshLayout,
-                                  response.err.localizedMessage.toString(),
-                                  Snackbar.LENGTH_SHORT).show()
-                }
-                is ResultWrapper.Success -> {
-
-                }
-                ResultWrapper.InProgress -> {
-                }
-            }.exhaustive
-        })
-
-
     }
-
-    private fun addLoading() {
-        if (viewModel.currentPage == 0) {
-            swipeRefreshLayout.isRefreshing = true
-        } else {
-            adapter.add(LoadingItemSmall())
-            adapter.notifyItemInserted(adapter.itemCount - 1)
-        }
-
-    }
-
-    private fun removeLoadingMore() {
-        if (viewModel.currentPage == 0) {
-            swipeRefreshLayout.isRefreshing = false
-        } else {
-            adapter.remove(adapter.getItem(adapter.itemCount - 1))
-            adapter.notifyItemRemoved(adapter.itemCount - 1)
-        }
-    }
-
-
-    @ExperimentalSplittiesApi
-    private fun loadData(orders: List<DriverPost>) {
-        if (viewModel.currentPage == 0) {
-            adapter.clear()
-            if (orders.isEmpty()) noHistoryPostsTxt.visibility = View.VISIBLE
-            else noHistoryPostsTxt.visibility = View.GONE
-        }
-
-        orders.forEach { adapter.add(HistoryPostItem(it)) }
-        adapter.notifyDataSetChanged()
-
-    }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
-        historyPostsList.adapter = null
+        postsAdapter.removeLoadStateListener { }
+        rvPosts.adapter = null
     }
 }

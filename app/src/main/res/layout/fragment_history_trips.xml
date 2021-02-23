@@ -11,7 +11,7 @@
         android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/historyPostsList"
+            android:id="@+id/rvPosts"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipChildren="false"
@@ -20,17 +20,41 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_history_post" />
 
+
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:visibility="gone"
+            android:layout_centerInParent="true"/>
+
+
         <TextView
-            android:id="@+id/noHistoryPostsTxt"
+            android:id="@+id/tv_error"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_margin="24dp"
+            android:layout_below="@id/btn_retry"
+            android:layout_margin="15dp"
             android:gravity="center"
-            android:text="@string/no_history_posts"
-            android:textColor="@color/ic_grey"
-            android:textSize="20dp"
-            android:visibility="gone" />
+            android:text="@string/system_error"
+            android:textSize="16dp"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+
+        <Button
+            android:id="@+id/btn_retry"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/selector_neutral_border"
+            android:orientation="vertical"
+            android:text="@string/retry"
+            android:textAllCaps="false"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
 
     </RelativeLayout>
 

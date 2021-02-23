@@ -5,6 +5,10 @@
     android:layout_height="wrap_content"
     app:cardCornerRadius="5dp"
     app:cardElevation="3dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:selectableItemBackground"
+    android:id="@+id/cardHistoryItem"
     app:cardUseCompatPadding="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout

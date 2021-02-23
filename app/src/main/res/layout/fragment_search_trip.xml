@@ -78,40 +78,6 @@
             android:background="@color/colorPrimary"
             app:layout_constraintTop_toBottomOf="@id/toInput">
 
-            <!--        <com.google.android.material.textfield.TextInputLayout-->
-            <!--            android:id="@+id/fromInputLayout"-->
-            <!--            android:layout_width="match_parent"-->
-            <!--            android:layout_height="wrap_content"-->
-            <!--            android:layout_marginStart="24dp"-->
-            <!--            android:layout_marginTop="12dp"-->
-            <!--            android:layout_marginEnd="24dp"-->
-            <!--            android:layout_marginBottom="6dp"-->
-            <!--            android:clipChildren="false"-->
-            <!--            android:clipToPadding="false"-->
-            <!--            app:layout_constraintStart_toStartOf="parent"-->
-            <!--            app:layout_constraintTop_toTopOf="parent">-->
-
-
-            <!--        </com.google.android.material.textfield.TextInputLayout>-->
-
-
-            <!--                <com.google.android.material.textfield.TextInputLayout-->
-            <!--                    android:id="@+id/toInputLayout"-->
-            <!--                    android:layout_width="match_parent"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:layout_marginStart="24dp"-->
-            <!--                    android:layout_marginTop="10dp"-->
-            <!--                    android:layout_marginEnd="24dp"-->
-            <!--                    android:layout_marginBottom="6dp"-->
-            <!--                    android:clipChildren="false"-->
-            <!--                    android:clipToPadding="false"-->
-            <!--                    app:layout_constraintStart_toStartOf="parent"-->
-            <!--                    app:layout_constraintTop_toBottomOf="@id/fromInputLayout">-->
-
-
-            <!--        </com.google.android.material.textfield.TextInputLayout>-->
-
-
             <TextView
                 android:id="@+id/date"
                 android:layout_width="wrap_content"

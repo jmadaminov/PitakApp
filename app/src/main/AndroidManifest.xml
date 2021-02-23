@@ -23,27 +23,32 @@
         <activity
             android:name=".ui.edit_profile.EditProfileActivity"
             android:label="@string/edit_profile"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
 
         <activity
             android:name=".ui.feedback.FeedbackActivity"
             android:label="@string/feedback"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".ui.settings.SettingsActivity"
             android:label="@string/settings"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
 
         <activity
             android:name=".ui.driver_post.DriverPostActivity"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".ui.history_post.HistoryPostActivity"
+            android:label="@string/history"
+            android:theme="@style/AppTheme" />
 
         <activity
             android:name=".ui.passenger_post.PassengerPostActivity"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".ui.intro.IntroActivity"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
 
         <activity
             android:name=".ui.addcar.AddCarActivity"
