@@ -137,5 +137,6 @@
     <string name="you_have_reached_post_limit">You have reached the post limit!</string>
     <string name="app_version_too_old">The version of the app is too old! Please update from Google Play Market.</string>
     <string name="finish">Finish</string>
+    <string name="go_to_play_market">Go to Play Market</string>
 
 </resources>

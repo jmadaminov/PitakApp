@@ -35,7 +35,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                android:text="@string/ok"
+                android:text="@string/go_to_play_market"
                 android:textAllCaps="false" />
 
 
