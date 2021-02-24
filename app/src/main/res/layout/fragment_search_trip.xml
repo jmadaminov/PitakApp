@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:slidingLayer="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,24 +7,21 @@
     android:layout_height="match_parent">
 
 
-
     <TextView
         android:id="@+id/infoText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:layout_margin="24dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:gravity="center"
+        android:textSize="16dp"
+        android:visibility="invisible" />
 
     <androidx.constraintlayout.motion.widget.MotionLayout
         android:id="@+id/motionLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutDescription="@xml/fragment_search_trip_scene">
-
 
         <View
             android:id="@+id/bgPoints"
@@ -43,6 +40,8 @@
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="6dp"
             android:background="@drawable/shape_rounded_corners_white"
+            android:drawableStart="@drawable/ic_round_my_location_24"
+            android:drawablePadding="10dp"
             android:hint="@string/from"
             android:imeOptions="actionDone"
             android:inputType="text"
@@ -61,6 +60,8 @@
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="6dp"
             android:background="@drawable/shape_rounded_corners_white"
+            android:drawableStart="@drawable/ic_round_location_on_24"
+            android:drawablePadding="10dp"
             android:gravity="center_vertical"
             android:hint="@string/to"
             android:imeOptions="actionDone"
@@ -71,18 +72,20 @@
             android:textColor="@color/dark_grey"
             app:layout_constraintTop_toBottomOf="@id/fromInput" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:id="@+id/clToolPanel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
+            android:orientation="horizontal"
             app:layout_constraintTop_toBottomOf="@id/toInput">
 
             <TextView
                 android:id="@+id/date"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="24dp"
+                android:layout_weight="1"
                 android:clickable="true"
                 android:focusable="true"
                 android:foreground="?android:selectableItemBackground"
@@ -92,10 +95,7 @@
                 android:text="@string/today"
                 android:textColor="@color/white"
                 android:textSize="14dp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@id/sort"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/sort" />
+                android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/sort"
@@ -107,108 +107,89 @@
                 android:foreground="?android:selectableItemBackground"
                 android:padding="15dp"
                 android:src="@drawable/ic_sort"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/filterBtn"
-                app:layout_constraintTop_toTopOf="parent"
+                android:visibility="gone"
                 app:tint="@color/white" />
 
-            <ImageView
-                android:id="@+id/filterBtn"
+            <RelativeLayout
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginEnd="24dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?android:selectableItemBackground"
-                android:padding="15dp"
-                android:src="@drawable/ic_filter"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/sort"
-                app:tint="@color/white" />
+                android:layout_marginEnd="24dp">
 
+                <ImageView
+                    android:id="@+id/filterBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:selectableItemBackground"
+                    android:padding="15dp"
+                    android:src="@drawable/ic_filter"
+                    app:tint="@color/white" />
 
-            <TextView
-                android:id="@+id/filter_count"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:layout_marginEnd="5dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/shape_round_alert"
-                android:paddingStart="4dp"
-                android:paddingTop="1dp"
-                android:text="3"
-                android:textColor="#fff"
-                android:textSize="10dp"
-                android:textStyle="bold"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="@id/filterBtn"
-                app:layout_constraintEnd_toEndOf="@id/filterBtn" />
+                <TextView
+                    android:id="@+id/filter_count"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/shape_round_alert"
+                    android:paddingStart="4dp"
+                    android:paddingTop="1dp"
+                    android:text="3"
+                    android:textColor="#fff"
+                    android:textSize="10dp"
+                    android:textStyle="bold"
+                    android:visibility="invisible" />
 
+            </RelativeLayout>
 
+        </LinearLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvPosts"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:paddingBottom="90dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/clToolPanel"
+            tools:listitem="@layout/item_passenger_post" />
 
-<!--        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout-->
-<!--            android:id="@+id/swipeRefreshLayout"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="0dp"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@id/clToolPanel">-->
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvPosts"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/clToolPanel"
-                android:clipChildren="false"
-                android:clipToPadding="false"
-                android:paddingBottom="90dp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
-<!--        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>-->
     </androidx.constraintlayout.motion.widget.MotionLayout>
-
-
 
     <ProgressBar
         android:id="@+id/progress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        android:layout_centerInParent="true"
+        android:layout_marginTop="15dp" />
 
     <TextView
         android:id="@+id/tv_error"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/btn_retry"
         android:layout_margin="15dp"
         android:gravity="center"
         android:text="@string/system_error"
         android:textSize="16dp"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@id/btn_retry"
         tools:visibility="visible" />
-
 
     <Button
         android:id="@+id/btn_retry"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
+        android:layout_centerInParent="true"
         android:background="@drawable/selector_neutral_border"
         android:orientation="vertical"
         android:text="@string/retry"
         android:textAllCaps="false"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         tools:visibility="visible" />
 
     <com.wunderlist.slidinglayer.SlidingLayer
@@ -378,4 +359,4 @@
     </com.wunderlist.slidinglayer.SlidingLayer>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

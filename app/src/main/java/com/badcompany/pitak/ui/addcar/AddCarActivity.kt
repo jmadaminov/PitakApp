@@ -66,7 +66,7 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
     @ExperimentalSplittiesApi
     override fun onCreate(savedInstanceState: Bundle?) {
         car = if (intent.extras == null) CarViewObj(fuelType = Constants.FUEL_TYPE_PETROL)
-        else intent.getParcelableExtra(Constants.TXT_CAR) as CarViewObj
+        else intent.getParcelableExtra(Constants.TXT_CAR)!!
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_car)
@@ -190,6 +190,7 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
                 ResultWrapper.InProgress -> {
                     saveCar.startAnimation()
                 }
+
             }.exhaustive
         })
 

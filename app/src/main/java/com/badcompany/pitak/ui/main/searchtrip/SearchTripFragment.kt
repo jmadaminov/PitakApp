@@ -1,9 +1,11 @@
 package com.badcompany.pitak.ui.main.searchtrip
 
+import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.View
 import android.widget.CalendarView
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -104,9 +106,35 @@ class SearchTripFragment : Fragment(R.layout.fragment_search_trip) {
 
     private fun setupListeners() {
 
-//        swipeRefreshLayout.setOnRefreshListener {
-//            postsAdapter.refresh()
-//        }
+        fromInput.setOnFocusChangeListener { v, hasFocus ->
+            val drawable =
+                DrawableCompat.wrap(resources.getDrawable(R.drawable.ic_round_my_location_24))
+            if (hasFocus) {
+                DrawableCompat.setTint(drawable,
+                                       ContextCompat.getColor(requireContext(),
+                                                              R.color.colorAccent))
+            } else {
+                DrawableCompat.setTint(drawable,
+                                       ContextCompat.getColor(requireContext(), R.color.ic_grey))
+            }
+            DrawableCompat.setTintMode(drawable, PorterDuff.Mode.SRC_ATOP)
+            fromInput.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
+        }
+
+        toInput.setOnFocusChangeListener { v, hasFocus ->
+            val drawable =
+                DrawableCompat.wrap(resources.getDrawable(R.drawable.ic_round_location_on_24))
+            if (hasFocus) {
+                DrawableCompat.setTint(drawable,
+                                       ContextCompat.getColor(requireContext(),
+                                                              R.color.colorAccent))
+            } else {
+                DrawableCompat.setTint(drawable,
+                                       ContextCompat.getColor(requireContext(), R.color.ic_grey))
+            }
+            DrawableCompat.setTintMode(drawable, PorterDuff.Mode.SRC_ATOP)
+            toInput.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
+        }
 
         filterBtn.setOnClickListener {
             slidingLayer.openLayer(true)
@@ -222,14 +250,12 @@ class SearchTripFragment : Fragment(R.layout.fragment_search_trip) {
                 }
             }.exhaustive
 
-
         })
 
         viewModel.postOffers.observe(viewLifecycleOwner, {
             val value = it ?: return@observe
             postsAdapter.submitData(lifecycle, value)
-//            motionLayout.getTransition(R.id.search_trip_panel_trans)
-//                .setEnable(postsAdapter.itemCount > 1)
+
         })
 
         viewModel.toPlacesResponse.observe(viewLifecycleOwner, Observer {
@@ -282,8 +308,8 @@ class SearchTripFragment : Fragment(R.layout.fragment_search_trip) {
 
             if (loadState.source.refresh is LoadState.NotLoading && loadState.append.endOfPaginationReached && postsAdapter.itemCount < 1) {
                 rvPosts.isVisible = false
-                tv_error.isVisible = true
-                tv_error.setText(R.string.there_are_no_posts_yet_come_back_later)
+                infoText.isVisible = true
+                infoText.setText(R.string.there_are_no_posts_yet_come_back_later)
                 motionLayout.getTransition(R.id.search_trip_panel_trans).setEnable(false)
 
             } else if (loadState.source.refresh !is LoadState.Error) {
