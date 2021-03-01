@@ -73,48 +73,48 @@ object ActivityModule {
     }
 
     @Provides
-    
+
     fun provideCarColorMapper(): CarColorMapper {
         return CarColorMapper()
     }
 
     @Provides
-    
+
     fun provideCarDetailsMapper(): CarDetailsMapper {
         return CarDetailsMapper()
     }
 
 
     @Provides
-    
+
     fun provideCarMapper(): CarMapper {
         return CarMapper()
     }
 
 
     @Provides
-    
+
     fun provideCarModelMapper(): CarModelMapper {
         return CarModelMapper()
     }
 
 
     @Provides
-    
+
     fun provideCarDataStoreFactory(carRemoteDataStore: CarRemoteDataStore): CarDataStoreFactory {
         return CarDataStoreFactory(carRemoteDataStore)
     }
 
 
     @Provides
-    
+
     fun provideCarRemoteDataStore(carRemote: CarRemote): CarRemoteDataStore {
         return CarRemoteDataStore(carRemote)
     }
 
 
     @Provides
-    
+
     fun provideCarRemote(apiService: AuthorizedApiService,
                          carModelMapper: com.badcompany.remote.mapper.CarModelMapper,
                          carColorMapper: com.badcompany.remote.mapper.CarColorMapper,
@@ -129,77 +129,77 @@ object ActivityModule {
 
 
     @Provides
-    
+
     fun provideRemoteCarModelMapper(): com.badcompany.remote.mapper.CarModelMapper {
         return com.badcompany.remote.mapper.CarModelMapper()
     }
 
 
     @Provides
-    
+
     fun provideRemoteCarColorMapper(): com.badcompany.remote.mapper.CarColorMapper {
         return com.badcompany.remote.mapper.CarColorMapper()
     }
 
 
     @Provides
-    
+
     fun provideRemoteCarMapper(): com.badcompany.remote.mapper.CarMapper {
         return com.badcompany.remote.mapper.CarMapper()
     }
 
-    
+
     @Provides
     fun provideRemoteCarDetailsMapper(): com.badcompany.remote.mapper.CarDetailsMapper {
         return com.badcompany.remote.mapper.CarDetailsMapper()
     }
 
-    
+
     @Provides
     fun provideUploadPhoto(repository: FileUploadRepository): UploadPhoto {
         return UploadPhoto(repository)
     }
 
-    
+
     @Provides
     fun provideFileUploadRepository(factory: FileUploadDataStoreFactory,
                                     photoMapper: PhotoMapper): FileUploadRepository {
         return FileUploadRepositoryImpl(factory, photoMapper)
     }
 
-    
+
     @Provides
     fun provideFileUploadDataStoreFactory(dataStore: FileUploadRemoteDataStore): FileUploadDataStoreFactory {
         return FileUploadDataStoreFactory(dataStore)
     }
 
-    
+
     @Provides
     fun provideFileUploadRemoteDataStore(remoteDS: FileUploadRemote): FileUploadRemoteDataStore {
         return FileUploadRemoteDataStore(remoteDS)
     }
 
-    
+
     @Provides
     fun provideFileUploadRemote(apiService: ApiService,
                                 photoMapper: com.badcompany.remote.mapper.PhotoMapper): FileUploadRemote {
         return FileUploadRemoteImpl(apiService, photoMapper)
     }
 
-    
+
     @Provides
     fun providePhotoMapper(): PhotoMapper {
         return PhotoMapper()
     }
 
-    
+
     @Provides
     fun provideRemotePhotoMapper(): com.badcompany.remote.mapper.PhotoMapper {
         return com.badcompany.remote.mapper.PhotoMapper()
     }
 
 
-    
+
     @Provides
     fun provideGetPlacesFeed(placeRepository: PlaceRepository): GetPlacesFeed {
         return GetPlacesFeed(placeRepository)
@@ -207,7 +207,7 @@ object ActivityModule {
 
 
     @Provides
-    
+
     fun providePlaceRepository(factory: PlaceDataStoreFactory,
                                placeMapper: PlaceMapper): PlaceRepository {
         return PlaceRepositoryImpl(factory, placeMapper)
@@ -215,14 +215,14 @@ object ActivityModule {
 
 
     @Provides
-    
+
     fun provideGetPassengerPostWithFilter(passengerPostRepository: PassengerPostRepository): GetPassengerPostWithFilter {
         return GetPassengerPostWithFilter(passengerPostRepository)
     }
 
 
     @Provides
-    
+
     fun providePassengerPostRepository(factory: PassengerPostDataStoreFactory,
                                        driverPostMapper: PassengerPostMapper,
                                        filterMapper: FilterMapper,
@@ -234,21 +234,21 @@ object ActivityModule {
     }
 
     @Provides
-    
+
     fun providePassengerPostDataStoreFactory(postDataStore: PassengerPostDataStore): PassengerPostDataStoreFactory {
         return PassengerPostDataStoreFactory(postDataStore)
     }
 
     @Provides
 
-    
+
     fun providePassengerPostDataStore(passengerPostRemote: PassengerPostRemote): PassengerPostDataStore {
         return PassengerPostRemoteDataStore(passengerPostRemote)
     }
 
     @Provides
 
-    
+
     fun providePassengerPostRemote(apiService: AuthorizedApiService,
                                    postMapper: com.badcompany.remote.mapper.PassengerPostMapper,
                                    filterMapper: com.badcompany.remote.mapper.FilterMapper,
@@ -258,101 +258,101 @@ object ActivityModule {
 
 
     @Provides
-    
+
     fun provideRemotePassengerPostMapper(): com.badcompany.remote.mapper.PassengerPostMapper {
         return com.badcompany.remote.mapper.PassengerPostMapper()
     }
 
 
     @Provides
-    
+
     fun provideRemoteFilterMapper(): com.badcompany.remote.mapper.FilterMapper {
         return com.badcompany.remote.mapper.FilterMapper()
     }
 
     @Provides
-    
+
     fun provideRemoteDriverOfferMapper(): com.badcompany.remote.mapper.DriverOfferMapper {
         return com.badcompany.remote.mapper.DriverOfferMapper()
     }
 
 
     @Provides
-    
+
     fun provideGetActiveDriverPost(driverPostRepository: DriverPostRepository): GetActiveDriverPost {
         return GetActiveDriverPost(driverPostRepository)
     }
 
 
     @Provides
-    
+
     fun provideDeleteDriverPost(driverPostRepository: DriverPostRepository): DeleteDriverPost {
         return DeleteDriverPost(driverPostRepository)
     }
 
 
     @Provides
-    
+
     fun provideFinishDriverPost(driverPostRepository: DriverPostRepository): FinishDriverPost {
         return FinishDriverPost(driverPostRepository)
     }
 
 
     @Provides
-    
+
     fun provideGetHistoryDriverPost(driverPostRepository: DriverPostRepository): GetHistoryDriverPost {
         return GetHistoryDriverPost(driverPostRepository)
     }
 
 
     @Provides
-    
+
     fun provideDriverPostRepository(factory: DriverPostDataStoreFactory,
                                     driverPostMapper: DriverPostMapper): DriverPostRepository {
         return DriverPostRepositoryImpl(factory, driverPostMapper)
     }
 
     @Provides
-    
+
     fun providePlaceMapper(): PlaceMapper {
         return PlaceMapper()
     }
 
     @Provides
-    
+
     fun provideDriverPostMapper(): DriverPostMapper {
         return DriverPostMapper()
     }
 
     @Provides
-    
+
     fun provideDriverOfferMapper(): DriverOfferMapper {
         return DriverOfferMapper()
     }
 
     @Provides
-    
+
     fun providePlaceDataStoreFactory(placeRemoteDataStore: PlaceRemoteDataStore): PlaceDataStoreFactory {
         return PlaceDataStoreFactory(placeRemoteDataStore)
     }
 
     @Provides
 
-    
+
     fun provideDriverPostDataStoreFactory(driverPostRemoteDataStore: DriverPostRemoteDataStore): DriverPostDataStoreFactory {
         return DriverPostDataStoreFactory(driverPostRemoteDataStore)
     }
 
     @Provides
 
-    
+
     fun providePlaceRemoteDataStore(placeRemote: PlaceRemote): PlaceRemoteDataStore {
         return PlaceRemoteDataStore(placeRemote)
     }
 
     @Provides
 
-    
+
     fun provideDriverPostRemoteDataStore(driverDriverPostRemote: DriverPostRemote): DriverPostRemoteDataStore {
         return DriverPostRemoteDataStore(driverDriverPostRemote)
     }

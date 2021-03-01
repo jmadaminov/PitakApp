@@ -1,6 +1,7 @@
 package com.badcompany.pitak.ui.driver_post
 
 import androidx.paging.PagingSource
+import androidx.paging.PagingState
 import com.badcompany.core.EOfferStatus
 import com.badcompany.pitak.viewobjects.OfferViewObj
 import com.badcompany.remote.AuthorizedApiService
@@ -38,5 +39,9 @@ class PostOffersPagingSource(
             LoadResult.Error(exception)
         }
 
+    }
+
+    override fun getRefreshKey(state: PagingState<Int, OfferDTO>): Int? {
+        return state.anchorPosition
     }
 }

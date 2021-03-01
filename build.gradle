@@ -13,9 +13,9 @@ buildscript {
 
         mockkVersion = '1.9.3'
         coreTestingVersion = '2.1.0'
-        coroutinesVersion = "1.3.7"
+        coroutinesVersion = "1.4.2"
         junitVersion = '5.3.1'
-        kotlinVersion = '1.4.21'
+        kotlinVersion = '1.4.30'
         ktlintVersion = '0.30.0'
         lifecycleVersion = '2.2.0'
         materialVersion = '1.2.1'
@@ -24,7 +24,7 @@ buildscript {
         runnerVersion = '1.0.1'
         supportLibraryVersion = '1.2.0'
         supportCompatVersion = '1.2.0'
-        retrofitVersion = '2.7.2'
+        retrofitVersion = '2.9.0'
         splitties_version = '3.0.0-beta01'
         groupie_version = '2.8.1'
         pagingVersion = '3.0.0-alpha09'
@@ -40,7 +40,7 @@ buildscript {
 
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.1'
+        classpath 'com.android.tools.build:gradle:4.1.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigationVersion"
         // NOTE: Do not place your application dependencies here; they belong

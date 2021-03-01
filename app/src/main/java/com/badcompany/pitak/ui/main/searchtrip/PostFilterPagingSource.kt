@@ -2,6 +2,7 @@ package com.badcompany.pitak.ui.main.searchtrip
 
 import androidx.lifecycle.LiveData
 import androidx.paging.PagingSource
+import androidx.paging.PagingState
 import com.badcompany.domain.domainmodel.Filter
 import com.badcompany.pitak.util.valueNN
 import com.badcompany.remote.ApiService
@@ -34,5 +35,9 @@ class PostFilterPagingSource(
             LoadResult.Error(exception)
         }
 
+    }
+
+    override fun getRefreshKey(state: PagingState<Int, PassengerPostModel>): Int? {
+        return state.anchorPosition
     }
 }

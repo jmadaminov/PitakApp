@@ -1,8 +1,10 @@
 package com.badcompany.pitak.ui.main.mytrips.historytrips
 
 import androidx.paging.PagingSource
+import androidx.paging.PagingState
 import com.badcompany.remote.AuthorizedApiService
 import com.badcompany.remote.model.DriverPostModel
+import com.badcompany.remote.model.OfferDTO
 
 private const val POST_OFFER_STARTING_PAGE_INDEX = 0
 
@@ -26,4 +28,10 @@ class HistoryPostPagingSource(private val authorizedApiService: AuthorizedApiSer
         }
 
     }
+
+    override fun getRefreshKey(state: PagingState<Int, DriverPostModel>): Int? {
+            return state.anchorPosition
+    }
+
+
 }

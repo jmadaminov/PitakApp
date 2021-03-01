@@ -1,14 +1,11 @@
 package com.badcompany.pitak.hilt
 
-import com.badcompany.core.Constants
 import com.badcompany.pitak.BuildConfig
 import com.badcompany.pitak.util.AppPrefs
 //import com.badcompany.pitak.util.AuthAPIServiceTEST
 import com.badcompany.remote.ApiService
 import com.badcompany.remote.ApiServiceFactory
-import com.badcompany.remote.AuthInterceptor
 import com.badcompany.remote.AuthorizedApiService
-import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
