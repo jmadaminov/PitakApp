@@ -37,32 +37,6 @@ object NetworkModule {
                                                           AppPrefs.language)
     }
 
-//    @ExperimentalSplittiesApi
-//    @Provides
-//    fun provideAuthorizedApiServiceTest(): AuthAPIServiceTEST {
-//
-//        val logging = HttpLoggingInterceptor()
-//        logging.level = if (BuildConfig.DEBUG)
-//            HttpLoggingInterceptor.Level.BODY
-//        else
-//            HttpLoggingInterceptor.Level.NONE
-//
-//        val okHttpClient = OkHttpClient.Builder()
-//            .addInterceptor(logging)
-//            .addInterceptor(AuthInterceptor(AppPrefs.token, AppPrefs.language))
-//            .connectTimeout(20, TimeUnit.SECONDS)
-//            .writeTimeout(20, TimeUnit.SECONDS)
-//            .readTimeout(20, TimeUnit.SECONDS)
-//            .build()
-//
-//        return Retrofit.Builder()
-//            .baseUrl(Constants.BASE_URL)
-//            .client(okHttpClient)
-//            .addConverterFactory(GsonConverterFactory.create(GsonBuilder()
-//                                                                 .setLenient()
-//                                                                 .create()))
-//            .build().create(AuthAPIServiceTEST::class.java)
-//    }
 
 
 }
