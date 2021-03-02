@@ -1,4 +1,4 @@
-package com.badcompany.pitak
+package com.novatec.pitak
 
 import org.junit.Test
 

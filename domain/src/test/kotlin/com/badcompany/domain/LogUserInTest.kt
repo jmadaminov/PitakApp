@@ -1,9 +1,9 @@
-package com.badcompany.domain
+package com.novatec.domain
 
 
-import com.badcompany.core.Constants
-import com.badcompany.domain.repository.UserRepository
-import com.badcompany.domain.usecases.LogUserIn
+import com.novatec.core.Constants
+import com.novatec.domain.repository.UserRepository
+import com.novatec.domain.usecases.LogUserIn
 import io.mockk.coVerify
 import io.mockk.mockk
 import kotlinx.coroutines.test.runBlockingTest

@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/navMyTripsFragment"
-        android:name="com.badcompany.pitak.ui.main.mytrips.MyTripsFragment"
+        android:name="com.novatec.pitak.ui.main.mytrips.MyTripsFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_my_trips"/>
 

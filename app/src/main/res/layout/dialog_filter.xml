@@ -90,7 +90,7 @@
 <!--            app:np_value="1"-->
 <!--            app:np_width="64dp" />-->
 
-        <com.badcompany.pitak.util.HorizontalNumberPicker
+        <com.novatec.pitak.util.HorizontalNumberPicker
             android:layout_width="match_parent"
             android:layout_height="?android:actionBarSize"
             android:id="@+id/number_picker"

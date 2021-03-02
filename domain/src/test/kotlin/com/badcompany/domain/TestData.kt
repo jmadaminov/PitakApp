@@ -1,4 +1,4 @@
-import com.badcompany.domain.domainmodel.UserCredentials
+import com.novatec.domain.domainmodel.UserCredentials
 
 
 fun userLogin() = "token"

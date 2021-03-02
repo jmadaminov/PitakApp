@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/navLoginFragment"
-        android:name="com.badcompany.pitak.ui.auth.login.LoginFragment"
+        android:name="com.novatec.pitak.ui.auth.login.LoginFragment"
         android:label="@string/title_login"
         tools:layout="@layout/fragment_login">
         <action
@@ -35,7 +35,7 @@
 
     <fragment
         android:id="@+id/navRegisterFragment"
-        android:name="com.badcompany.pitak.ui.auth.register.RegisterFragment"
+        android:name="com.novatec.pitak.ui.auth.register.RegisterFragment"
         android:label="@string/title_register"
         tools:layout="@layout/fragment_register">
         <action
@@ -52,7 +52,7 @@
 
     <fragment
         android:id="@+id/navPhoneConfirmFragment"
-        android:name="com.badcompany.pitak.ui.auth.confirm.PhoneConfirmFragment"
+        android:name="com.novatec.pitak.ui.auth.confirm.PhoneConfirmFragment"
         android:label="@string/phone_confirmation"
         tools:layout="@layout/fragment_phone_confirm">
         <argument

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/nav_menu_search"
-        android:name="com.badcompany.pitak.ui.main.searchtrip.SearchTripFragment"
+        android:name="com.novatec.pitak.ui.main.searchtrip.SearchTripFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_search_trip">
 
@@ -29,7 +29,7 @@
 
     <fragment
         android:id="@+id/nav_menu_my_trips"
-        android:name="com.badcompany.pitak.ui.main.mytrips.MyTripsFragment"
+        android:name="com.novatec.pitak.ui.main.mytrips.MyTripsFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_my_trips">
 
@@ -52,7 +52,7 @@
 
     <fragment
         android:id="@+id/nav_menu_notifications"
-        android:name="com.badcompany.pitak.ui.main.notifications.NotificationsFragment"
+        android:name="com.novatec.pitak.ui.main.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications">
 
@@ -73,7 +73,7 @@
 
     <fragment
         android:id="@+id/nav_menu_profile"
-        android:name="com.badcompany.pitak.ui.main.profile.ProfileFragment"
+        android:name="com.novatec.pitak.ui.main.profile.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile">
 

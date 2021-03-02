@@ -4,7 +4,7 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.badcompany.pitak",
+  "applicationId": "com.novatec.pitak",
   "variantName": "processReleaseResources",
   "elements": [
     {
