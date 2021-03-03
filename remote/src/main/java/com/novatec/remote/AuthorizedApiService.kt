@@ -22,6 +22,12 @@ interface AuthorizedApiService {
     @POST("driver_post/action")
     suspend fun createPost(@Body driverPostBody: DriverPostModel): RespFormatter<DriverPostModel>
 
+    //DRIVER POST API
+    @Headers("Content-Type:application/json", "Accept: application/json")
+    @PUT("driver_post/action/{identifier}")
+    suspend fun editPost(@Path(value = "identifier",
+                               encoded = true) identifier: Long,@Body driverPostBody: DriverPostModel): RespFormatter<DriverPostModel?>
+
     @Headers("Content-Type:application/json", "Accept: application/json")
     @PUT("driver_post/action/cancel/{identifier}")
     suspend fun deletePost(@Path(value = "identifier",

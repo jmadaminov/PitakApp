@@ -10,9 +10,9 @@ import com.novatec.domain.repository.DriverPostRepository
  *
  */
 class CreateDriverPost(val repositoryDriver: DriverPostRepository) :
-    UseCaseWithParams<DriverPost, ResultWrapper<DriverPost>>() {
+    UseCaseWithParams<DriverPost, ResultWrapper<DriverPost?>>() {
 
-    override suspend fun buildUseCase(params: DriverPost): ResultWrapper<DriverPost> {
+    override suspend fun buildUseCase(params: DriverPost): ResultWrapper<DriverPost?> {
         return repositoryDriver.createDriverPost(params)
 
     }

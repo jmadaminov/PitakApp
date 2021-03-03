@@ -61,7 +61,7 @@ class ActivePostItem(var post: DriverPost, val onClick: () -> Unit) : Item() {
             }
 
             status.text =
-                (post.seat - post.availableSeats!!).toString() + "/" + post.seat.toString() + "   " + currentStatusStr
+                post.passengerCount.toString() + "/" + post.seat.toString() + "   " + currentStatusStr
 
             post.remark?.also {
                 note.visibility = View.VISIBLE

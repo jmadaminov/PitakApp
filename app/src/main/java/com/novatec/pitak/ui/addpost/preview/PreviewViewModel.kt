@@ -17,7 +17,7 @@ import splitties.experimental.ExperimentalSplittiesApi
 class PreviewViewModel  @ViewModelInject constructor(private val createDriverPost: CreateDriverPost) :
     BaseViewModel() {
 
-    val createResponse = SingleLiveEvent<ResultWrapper<DriverPost>>()
+    val createResponse = SingleLiveEvent<ResultWrapper<DriverPost?>>()
 
 
     @ExperimentalSplittiesApi

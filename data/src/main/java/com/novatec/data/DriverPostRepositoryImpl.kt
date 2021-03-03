@@ -17,7 +17,7 @@ class DriverPostRepositoryImpl @Inject constructor(private val factoryDriver: Dr
     DriverPostRepository {
 
 
-    override suspend fun createDriverPost(post: DriverPost): ResultWrapper<DriverPost> {
+    override suspend fun createDriverPost(post: DriverPost): ResultWrapper<DriverPost?> {
         val response = factoryDriver.retrieveDataStore(false)
             .createDriverPost(driverPostMapper.mapToEntity(post))
 
@@ -25,7 +25,7 @@ class DriverPostRepositoryImpl @Inject constructor(private val factoryDriver: Dr
             is ErrorWrapper.RespError -> response
             is ErrorWrapper.SystemError -> response
             is ResultWrapper.Success -> {
-                ResultWrapper.Success(driverPostMapper.mapFromEntity(response.value))
+                ResultWrapper.Success(if (response.value!=null) driverPostMapper.mapFromEntity(response.value!!) else null)
             }
             ResultWrapper.InProgress -> ResultWrapper.InProgress
         }

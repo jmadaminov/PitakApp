@@ -7,7 +7,7 @@ import com.novatec.domain.domainmodel.DriverPost
 
 interface DriverPostRemote {
 
-    suspend fun createDriverPost( post: DriverPostEntity): ResultWrapper<DriverPostEntity>
+    suspend fun createDriverPost( post: DriverPostEntity): ResultWrapper<DriverPostEntity?>
     suspend fun deleteDriverPost( identifier: String): ResultWrapper<String>
     suspend fun finishDriverPost( identifier: String): ResultWrapper<String>
     suspend fun getActiveDriverPosts(

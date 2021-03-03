@@ -88,7 +88,7 @@ class OfferARideViewModel @ViewModelInject constructor(private val repository: P
             }
             is ResultWrapper.Success -> {
                 withContext(Dispatchers.Main) {
-                    offeringPostId.value = response.value.id
+                    offeringPostId.value = response.value!!.id
                 }
             }
             else -> {

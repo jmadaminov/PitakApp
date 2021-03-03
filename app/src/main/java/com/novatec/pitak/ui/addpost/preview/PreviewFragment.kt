@@ -147,7 +147,8 @@ class PreviewFragment @Inject constructor(/*private val viewModelFactory: ViewMo
         }
 
         postCreate.setOnClickListener {
-            viewModel.createDriverPost(DriverPost(null,
+
+            viewModel.createDriverPost(DriverPost(activityViewModel.id,
                                                   activityViewModel.placeFrom!!,
                                                   activityViewModel.placeTo!!,
                                                   activityViewModel.price!!,

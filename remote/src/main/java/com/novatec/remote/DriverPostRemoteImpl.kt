@@ -17,16 +17,22 @@ class DriverPostRemoteImpl @Inject constructor(private val authorizedApiService:
                                                private val postMapper: DriverPostMapper) :
     DriverPostRemote {
 
-    override suspend fun createDriverPost(post: DriverPostEntity): ResultWrapper<DriverPostEntity> {
+    override suspend fun createDriverPost(post: DriverPostEntity): ResultWrapper<DriverPostEntity?> {
         val response =
-            getFormattedResponse { authorizedApiService.createPost(postMapper.mapFromEntity(post)) }
+            if (post.id != null) getFormattedResponseNullable {
+                authorizedApiService.editPost(post.id!!,
+                                              postMapper.mapFromEntity(post))
+            }
+            else getFormattedResponse {
+                authorizedApiService.createPost(postMapper.mapFromEntity(post))
+            }
 
         (return when (response) {
             is ResponseError -> {
                 ErrorWrapper.RespError(message = response.message, code = response.code)
             }
             is ResponseSuccess -> {
-                ResultWrapper.Success(postMapper.mapToEntity(response.value))
+                ResultWrapper.Success(if (response.value != null) postMapper.mapToEntity(response.value!!) else null)
             }
         }).exhaustive
     }

@@ -45,6 +45,7 @@ class AddPostActivity : BaseActivity() {
 
     private fun checkIfEditing(driverPostViewObj: DriverPostViewObj?) {
         if (driverPostViewObj != null) {
+            viewmodel.id = driverPostViewObj.id
             viewmodel.isEditing = true
             viewmodel.price = driverPostViewObj.price
             viewmodel.seat = driverPostViewObj.seat
@@ -75,7 +76,7 @@ class AddPostActivity : BaseActivity() {
                 carImageList.add(Image(it.id, it.link))
             }
 
-            viewmodel.car = CarDetails(driverPostViewObj.carId,
+            viewmodel.car = CarDetails(driverPostViewObj.car?.id,
                                        IdName(driverPostViewObj.car!!.carModel!!.id,
                                               driverPostViewObj.car.carModel!!.name),
                                        Image(driverPostViewObj.car.image?.id,
