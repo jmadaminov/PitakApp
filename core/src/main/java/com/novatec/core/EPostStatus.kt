@@ -7,6 +7,10 @@ enum class EPostStatus {
     FINISHED,
     REJECTED,
     CREATED,
-    SYSTEM_REJECTED
+    SYSTEM_REJECTED;
+
+    fun isOfferable(): Boolean {
+       return this == CREATED
+    }
 
 }

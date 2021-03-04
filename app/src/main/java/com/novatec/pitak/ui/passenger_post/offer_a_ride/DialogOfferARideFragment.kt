@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
+import com.google.android.material.snackbar.Snackbar
 import com.novatec.core.ErrorWrapper
 import com.novatec.core.ResultWrapper
 import com.novatec.core.exhaustive
@@ -15,7 +16,6 @@ import com.novatec.domain.domainmodel.DriverPost
 import com.novatec.pitak.R
 import com.novatec.pitak.ui.viewgroups.ActivePostItem
 import com.novatec.pitak.viewobjects.PassengerPostViewObj
-import com.google.android.material.snackbar.Snackbar
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import dagger.hilt.android.AndroidEntryPoint
@@ -80,7 +80,9 @@ class DialogOfferARideFragment : DialogFragment() {
                 is ErrorWrapper.SystemError -> {
                 }
                 is ResultWrapper.Success -> {
-                    loadData(response.value)
+                    loadData(response.value.filter { myPost ->
+                        myPost.departureDate == passengerPost.departureDate && myPost.postStatus.isOfferable()
+                    })
                 }
                 ResultWrapper.InProgress -> {
                 }

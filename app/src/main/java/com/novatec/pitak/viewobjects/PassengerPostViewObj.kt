@@ -11,7 +11,7 @@ import kotlinx.android.parcel.Parcelize
 data class PassengerPostViewObj(val id: Long,
                                 val from: PlaceViewObj,
                                 val to: PlaceViewObj,
-                                val price: Int,
+                                var price: Int,
                                 val departureDate: String,
                                 val createdDate: String,
                                 val updatedDate: String,

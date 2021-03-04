@@ -34,6 +34,7 @@ class OfferARideViewModel @ViewModelInject constructor(private val repository: P
     fun offerARide(postId: Long, myPrice: Int?, message: String, passPost: PassengerPostViewObj) {
         isOffering.value = true
         viewModelScope.launch(Dispatchers.IO) {
+            myPrice?.let { passPost.price = myPrice }
             if (offeringPostId.value == null) createPost(passPost)
             sendAnOffer(postId, myPrice, message)
         }

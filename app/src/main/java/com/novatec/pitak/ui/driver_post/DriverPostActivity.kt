@@ -136,7 +136,6 @@ const val EXTRA_POST_ID = "POST_ID"
                                   Snackbar.LENGTH_SHORT).show()
                 }
                 is ResultWrapper.Success -> {
-
                     setResult(RESULT_OK)
                     finish()
                 }
