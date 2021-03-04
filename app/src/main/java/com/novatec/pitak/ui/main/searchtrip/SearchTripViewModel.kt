@@ -24,8 +24,7 @@ import kotlinx.coroutines.withContext
 import splitties.experimental.ExperimentalSplittiesApi
 
 class SearchTripViewModel @ViewModelInject constructor(val postFilterRepository: PostFilterRepository,
-                                                       private val getPlacesFeed: GetPlacesFeed,
-                                                       val userRepositoryImpl: UserRepositoryImpl) :
+                                                       private val getPlacesFeed: GetPlacesFeed) :
     BaseViewModel() {
 
     private val _filter = MutableLiveData(Filter())

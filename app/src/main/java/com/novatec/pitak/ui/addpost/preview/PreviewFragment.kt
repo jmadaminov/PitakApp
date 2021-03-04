@@ -160,7 +160,7 @@ class PreviewFragment @Inject constructor(/*private val viewModelFactory: ViewMo
                                                   activityViewModel.timeFourthPart,
                                                   activityViewModel.car!!.id!!,
                                                   null,
-                                                  activityViewModel.note!!,
+                                                  activityViewModel.note,
                                                   activityViewModel.seat!!,
                                                   0,
                                                   null,

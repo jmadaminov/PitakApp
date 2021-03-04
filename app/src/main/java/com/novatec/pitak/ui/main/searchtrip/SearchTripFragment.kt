@@ -105,6 +105,7 @@ class SearchTripFragment : Fragment(R.layout.fragment_search_trip) {
     }
 
     private fun setupListeners() {
+        btn_retry.setOnClickListener { postsAdapter.refresh() }
 
         fromInput.setOnFocusChangeListener { v, hasFocus ->
             val drawable =
@@ -300,21 +301,23 @@ class SearchTripFragment : Fragment(R.layout.fragment_search_trip) {
 //            swipeRefreshLayout.isRefreshing = loadState.source.refresh is LoadState.Loading
             progress.isVisible = loadState.source.refresh is LoadState.Loading
             rvPosts.isVisible = loadState.source.refresh is LoadState.NotLoading
-            tv_error.isVisible = loadState.source.refresh is LoadState.Error
             if (loadState.source.refresh is LoadState.Error) {
+                tv_error.isVisible = true
                 tv_error.text = (loadState.source.refresh as LoadState.Error).error.localizedMessage
-            }
-            btn_retry.isVisible = loadState.source.refresh is LoadState.Error
-
-            if (loadState.source.refresh is LoadState.NotLoading && loadState.append.endOfPaginationReached && postsAdapter.itemCount < 1) {
+                btn_retry.isVisible = true
+                motionLayout.getTransition(R.id.search_trip_panel_trans).setEnable(false)
+            } else if (loadState.source.refresh is LoadState.NotLoading && loadState.append.endOfPaginationReached && postsAdapter.itemCount < 1) {
                 rvPosts.isVisible = false
                 infoText.isVisible = true
                 infoText.setText(R.string.there_are_no_posts_yet_come_back_later)
                 motionLayout.getTransition(R.id.search_trip_panel_trans).setEnable(false)
+                btn_retry.isVisible = false
 
             } else if (loadState.source.refresh !is LoadState.Error) {
+                btn_retry.isVisible = false
                 rvPosts.isVisible = true
                 tv_error.isVisible = false
+                infoText.isVisible = false
                 motionLayout.getTransition(R.id.search_trip_panel_trans).setEnable(true)
             }
         }
