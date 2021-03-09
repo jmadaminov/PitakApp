@@ -8,6 +8,8 @@ import androidx.activity.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.FragmentNavigator
+import com.novatec.domain.domainmodel.DriverPost
+import com.novatec.domain.domainmodel.PassengerPost
 import com.novatec.pitak.R
 import com.novatec.pitak.ui.BaseActivity
 import com.novatec.pitak.ui.addpost.AddPostActivity
