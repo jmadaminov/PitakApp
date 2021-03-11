@@ -28,6 +28,7 @@
     <color name="neutralColor">#FF393939</color>
     <color name="neutralColorOpacityEighty">#CC393939</color>
     <color name="colorNavIdle">#B2EBF2</color>
+    <color name="transparentGrey">#80000000</color>
 
 
 </resources>

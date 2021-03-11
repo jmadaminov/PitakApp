@@ -4,6 +4,7 @@ import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
@@ -37,8 +38,8 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
         navController = findNavController()
 
-        login.isEnabled = true
-        login.setOnClickListener {
+        tvGo.isEnabled = true
+        tvGo.setOnClickListener {
             viewModel.login(phone.text.toString())
         }
     }
@@ -53,7 +54,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
             when (response) {
                 is ResponseError -> {
-                    login.revertAnimation()
+                    progress.isVisible = false
                     if (response.code == -1) {
                         val action =
                             LoginFragmentDirections.actionNavLoginFragmentToNavRegisterFragment(
@@ -67,7 +68,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                     }
                 }
                 is ResponseSuccess -> {
-                    login.revertAnimation()
+                    progress.isVisible = false
                     val action =
                         LoginFragmentDirections.actionNavLoginFragmentToNavPhoneConfirmFragment(
                             password = response.value?.password,
@@ -79,9 +80,9 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
             if (isLoading ?: return@observe) {
                 errorMessage.visibility = View.INVISIBLE
-                login.startAnimation()
+                progress.isVisible = true
             } else {
-                login.revertAnimation()
+                progress.isVisible = false
             }
 
         }

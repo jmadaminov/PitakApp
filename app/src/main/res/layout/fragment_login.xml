@@ -5,7 +5,18 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:background="@drawable/bg"
     tools:context="com.novatec.pitak.ui.auth.AuthActivity">
+
+    <ProgressBar
+        android:id="@+id/progress"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -27,6 +38,8 @@
         android:layout_marginEnd="40dp"
         android:layout_marginBottom="96dp"
         android:background="@drawable/shape_rounded_corners_white"
+        android:clickable="false"
+        android:focusable="false"
         android:hint="@string/prompt_phone_number"
         android:imeOptions="actionDone"
         android:inputType="phone"
@@ -69,35 +82,35 @@
         android:text="server error"
         android:textColor="@color/error_red"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@id/login"
+        app:layout_constraintBottom_toTopOf="@id/numberGrid"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/phone" />
 
 
-    <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
-        android:id="@+id/login"
-        android:layout_width="match_parent"
-        android:layout_height="?android:actionBarSize"
-        android:layout_gravity="start"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="48dp"
-        android:background="@drawable/button_shape_orange_gradient_rounded"
-        android:elevation="3dp"
-        android:enabled="false"
-        android:text="@string/authorize"
-        android:textAllCaps="false"
-        android:textColor="#fff"
-        app:finalCornerAngle="50dp"
-        app:initialCornerAngle="50dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/phone"
-        app:spinning_bar_color="#fff" />
+    <!--    <br.com.simplepass.loadingbutton.customViews.CircularProgressButton-->
+    <!--        android:id="@+id/login"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="?android:actionBarSize"-->
+    <!--        android:layout_gravity="start"-->
+    <!--        android:layout_marginStart="48dp"-->
+    <!--        android:layout_marginTop="48dp"-->
+    <!--        android:layout_marginEnd="48dp"-->
+    <!--        android:background="@drawable/button_shape_orange_gradient_rounded"-->
+    <!--        android:enabled="false"-->
+    <!--        android:text="@string/authorize"-->
+    <!--        android:textAllCaps="false"-->
+    <!--        android:textColor="#fff"-->
+    <!--        app:finalCornerAngle="50dp"-->
+    <!--        app:initialCornerAngle="50dp"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/phone"-->
+    <!--        app:spinning_bar_color="#fff" />-->
 
 
     <GridLayout
+        android:id="@+id/numberGrid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:columnCount="3"
@@ -111,11 +124,13 @@
             android:layout_height="?android:actionBarSize"
             android:layout_columnWeight="1"
             android:clickable="true"
-            android:elevation="3dp"
             android:focusable="true"
-            android:shadowRadius="10dp"
             android:foreground="?android:selectableItemBackgroundBorderless"
             android:gravity="center"
+            android:shadowColor="@color/black"
+            android:shadowDx="3"
+            android:shadowDy="3"
+            android:shadowRadius="5"
             android:text="1"
             android:textColor="@color/white"
             android:textSize="30dp" />
@@ -126,13 +141,13 @@
             android:layout_height="?android:actionBarSize"
             android:layout_columnWeight="1"
             android:clickable="true"
-            android:shadowRadius="10dp"
-            android:shadowDx="5dp"
-            android:shadowDy="5dp"
-            android:elevation="3dp"
             android:focusable="true"
             android:foreground="?android:selectableItemBackgroundBorderless"
             android:gravity="center"
+            android:shadowColor="@color/black"
+            android:shadowDx="3"
+            android:shadowDy="3"
+            android:shadowRadius="5"
             android:text="2"
             android:textColor="@color/white"
             android:textSize="30dp" />
@@ -142,15 +157,15 @@
             android:layout_width="0dp"
             android:layout_height="?android:actionBarSize"
             android:layout_columnWeight="1"
-
-            android:shadowRadius="5dp"
-            android:shadowDx="2dp"
-            android:shadowDy="2dp"
             android:clickable="true"
-            android:elevation="3dp"
             android:focusable="true"
             android:foreground="?android:selectableItemBackgroundBorderless"
             android:gravity="center"
+
+            android:shadowColor="@color/black"
+            android:shadowDx="3"
+            android:shadowDy="3"
+            android:shadowRadius="5"
             android:text="3"
             android:textColor="@color/white"
             android:textSize="30dp" />
@@ -162,10 +177,15 @@
             android:layout_height="?android:actionBarSize"
             android:layout_columnWeight="1"
             android:clickable="true"
-            android:elevation="3dp"
+
             android:focusable="true"
             android:foreground="?android:selectableItemBackgroundBorderless"
             android:gravity="center"
+            android:shadowColor="@color/black"
+
+            android:shadowDx="3"
+            android:shadowDy="3"
+            android:shadowRadius="5"
             android:text="4"
             android:textColor="@color/white"
             android:textSize="30dp" />
@@ -176,10 +196,15 @@
             android:layout_height="?android:actionBarSize"
             android:layout_columnWeight="1"
             android:clickable="true"
-            android:elevation="3dp"
+
             android:focusable="true"
             android:foreground="?android:selectableItemBackgroundBorderless"
             android:gravity="center"
+            android:shadowColor="@color/black"
+
+            android:shadowDx="3"
+            android:shadowDy="3"
+            android:shadowRadius="5"
             android:text="5"
             android:textColor="@color/white"
             android:textSize="30dp" />
@@ -190,10 +215,14 @@
             android:layout_height="?android:actionBarSize"
             android:layout_columnWeight="1"
             android:clickable="true"
-            android:elevation="3dp"
+
             android:focusable="true"
             android:foreground="?android:selectableItemBackgroundBorderless"
             android:gravity="center"
+            android:shadowColor="@color/black"
+            android:shadowDx="3"
+            android:shadowDy="3"
+            android:shadowRadius="5"
             android:text="6"
             android:textColor="@color/white"
             android:textSize="30dp" />
@@ -204,10 +233,14 @@
             android:layout_height="?android:actionBarSize"
             android:layout_columnWeight="1"
             android:clickable="true"
-            android:elevation="3dp"
+
             android:focusable="true"
             android:foreground="?android:selectableItemBackgroundBorderless"
             android:gravity="center"
+            android:shadowColor="@color/black"
+            android:shadowDx="3"
+            android:shadowDy="3"
+            android:shadowRadius="5"
             android:text="7"
             android:textColor="@color/white"
             android:textSize="30dp" />
@@ -218,10 +251,14 @@
             android:layout_height="?android:actionBarSize"
             android:layout_columnWeight="1"
             android:clickable="true"
-            android:elevation="3dp"
+
             android:focusable="true"
             android:foreground="?android:selectableItemBackgroundBorderless"
             android:gravity="center"
+            android:shadowColor="@color/black"
+            android:shadowDx="3"
+            android:shadowDy="3"
+            android:shadowRadius="5"
             android:text="8"
             android:textColor="@color/white"
             android:textSize="30dp" />
@@ -232,10 +269,14 @@
             android:layout_height="?android:actionBarSize"
             android:layout_columnWeight="1"
             android:clickable="true"
-            android:elevation="3dp"
+
             android:focusable="true"
             android:foreground="?android:selectableItemBackgroundBorderless"
             android:gravity="center"
+            android:shadowColor="@color/black"
+            android:shadowDx="3"
+            android:shadowDy="3"
+            android:shadowRadius="5"
             android:text="9"
             android:textColor="@color/white"
             android:textSize="30dp" />
@@ -251,25 +292,31 @@
             android:layout_height="?android:actionBarSize"
             android:layout_columnWeight="1"
             android:clickable="true"
-            android:elevation="3dp"
             android:focusable="true"
             android:foreground="?android:selectableItemBackgroundBorderless"
             android:gravity="center"
-            android:text="5"
+            android:shadowColor="@color/black"
+            android:shadowDx="3"
+            android:shadowDy="3"
+            android:shadowRadius="5"
+            android:text="0"
             android:textColor="@color/white"
             android:textSize="30dp" />
 
-        <TextView
+        <ImageView
             android:id="@+id/tvGo"
             android:layout_width="0dp"
             android:layout_height="?android:actionBarSize"
             android:layout_columnWeight="1"
             android:clickable="true"
-            android:elevation="3dp"
             android:focusable="true"
             android:foreground="?android:selectableItemBackgroundBorderless"
-            android:gravity="center"
-            android:text="->"
+            android:padding="15dp"
+            android:shadowColor="@color/black"
+            android:shadowDx="3"
+            android:shadowDy="3"
+            android:shadowRadius="5"
+            android:src="@drawable/ic_round_arrow_forward_24"
             android:textColor="@color/white"
             android:textSize="30dp" />
 
