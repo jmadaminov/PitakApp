@@ -1,7 +1,5 @@
 package com.novatec.pitak.ui.auth.login
 
-import android.app.Activity.RESULT_OK
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
@@ -11,9 +9,6 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.novatec.core.*
 import com.novatec.pitak.R
-import com.google.android.gms.auth.api.Auth
-import com.google.android.gms.auth.api.credentials.Credential
-import com.google.android.gms.auth.api.credentials.HintRequest
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_login.*
 
@@ -39,9 +34,21 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         navController = findNavController()
 
         tvGo.isEnabled = true
+        attachListeners()
+    }
+
+    private fun attachListeners() {
+
         tvGo.setOnClickListener {
             viewModel.login(phone.text.toString())
         }
+
+
+        tv1.setOnClickListener {
+            phone.append("1")
+        }
+
+
     }
 
     override fun onResume() {
