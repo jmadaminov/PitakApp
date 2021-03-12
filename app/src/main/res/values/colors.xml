@@ -7,6 +7,7 @@
     <color name="colorPrimaryDark">#0097A7</color>
     <color name="windowBackground">#fff</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="darkLogoColor">#0f3f4f</color>
     <color name="splashGradientEnd">#4F2A93</color>
     <color name="splashGradientStart">#CBB5FF</color>
     <color name="button_grey">#B6B6B6</color>

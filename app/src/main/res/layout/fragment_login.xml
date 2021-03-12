@@ -18,17 +18,31 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginBottom="25dp"
+        android:src="@drawable/logo"
+        android:layout_marginStart="?android:actionBarSize"
+        app:layout_constraintBottom_toTopOf="@id/phone"
+        app:layout_constraintEnd_toStartOf="@id/logoTitle"
+        app:layout_constraintHeight_percent="0.3"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <TextView
+        android:id="@+id/logoTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="PITAK"
-        android:textColor="@color/colorAccent"
-        android:textSize="50dp"
+        android:layout_marginStart="120dp"
+        android:text="itak"
+        android:textColor="@color/darkLogoColor"
+        android:textSize="90dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/phone"
+        app:layout_constraintBottom_toBottomOf="@id/logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        />
 
     <com.github.pinball83.maskededittext.MaskedEditText
         android:id="@+id/phone"
@@ -36,16 +50,16 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
-        android:layout_marginBottom="96dp"
         android:background="@drawable/shape_rounded_corners_white"
         android:clickable="false"
+        android:cursorVisible="false"
         android:focusable="false"
+        android:focusableInTouchMode="false"
         android:hint="@string/prompt_phone_number"
-        android:imeOptions="actionDone"
-        android:inputType="phone"
+        android:longClickable="false"
         android:maxLength="19"
         android:padding="10dp"
-        android:selectAllOnFocus="true"
+        android:textIsSelectable="false"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -53,6 +67,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:mask="+998(**) ***-**-**"
         app:notMaskedSymbol="*" />
+    <!--    android:selectAllOnFocus="true"-->
+
     <!--
         <EditText
             android:id="@+id/password"
@@ -281,10 +297,20 @@
             android:textColor="@color/white"
             android:textSize="30dp" />
 
-        <View
+        <ImageView
+            android:id="@+id/ivBackspace"
             android:layout_width="0dp"
             android:layout_height="?android:actionBarSize"
-            android:layout_columnWeight="1" />
+            android:layout_columnWeight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:selectableItemBackgroundBorderless"
+            android:padding="15dp"
+            android:shadowColor="@color/black"
+            android:shadowDx="3"
+            android:shadowDy="3"
+            android:shadowRadius="5"
+            android:src="@drawable/ic_round_backspace_24" />
 
         <TextView
             android:id="@+id/tv0"

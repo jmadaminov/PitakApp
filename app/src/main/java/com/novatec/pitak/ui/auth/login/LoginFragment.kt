@@ -3,6 +3,7 @@ package com.novatec.pitak.ui.auth.login
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
@@ -29,23 +30,76 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
 
-        setupObservers()
-
+        setupViews()
+        subscribeObservers()
         navController = findNavController()
 
-        tvGo.isEnabled = true
         attachListeners()
     }
 
+    private fun setupViews() {
+        phone.isFocusable = false
+        phone.isFocusableInTouchMode = false
+        tvGo.isEnabled = true
+    }
+
     private fun attachListeners() {
+
+        phone.doOnTextChanged { text, start, before, count ->
+            tvGo.isEnabled = phone.unmaskedText.length == 9
+        }
 
         tvGo.setOnClickListener {
             viewModel.login(phone.text.toString())
         }
 
 
+
+
         tv1.setOnClickListener {
-            phone.append("1")
+            phone.setMaskedText(phone.unmaskedText.plus("1"))
+        }
+
+        tv2.setOnClickListener {
+            phone.setMaskedText(phone.unmaskedText.plus("2"))
+        }
+
+        tv3.setOnClickListener {
+            phone.setMaskedText(phone.unmaskedText.plus("3"))
+        }
+
+        tv4.setOnClickListener {
+            phone.setMaskedText(phone.unmaskedText.plus("4"))
+        }
+
+        tv5.setOnClickListener {
+            phone.setMaskedText(phone.unmaskedText.plus("5"))
+        }
+
+        tv6.setOnClickListener {
+            phone.setMaskedText(phone.unmaskedText.plus("6"))
+        }
+
+        tv7.setOnClickListener {
+            phone.setMaskedText(phone.unmaskedText.plus("7"))
+        }
+
+        tv8.setOnClickListener {
+            phone.setMaskedText(phone.unmaskedText.plus("8"))
+        }
+
+        tv9.setOnClickListener {
+            phone.setMaskedText(phone.unmaskedText.plus("9"))
+        }
+
+        tv0.setOnClickListener {
+            phone.setMaskedText(phone.unmaskedText.plus("0"))
+        }
+
+        ivBackspace.setOnClickListener {
+
+            if (phone.unmaskedText.isEmpty()) return@setOnClickListener
+            phone.setMaskedText(phone.unmaskedText.substring(0, phone.unmaskedText.length - 1))
         }
 
 
@@ -55,7 +109,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         super.onResume()
     }
 
-    private fun setupObservers() {
+    private fun subscribeObservers() {
         viewModel.loginResponse.observe(viewLifecycleOwner) {
             val response = it ?: return@observe
 
