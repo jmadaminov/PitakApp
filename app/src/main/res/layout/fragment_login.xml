@@ -4,9 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
     tools:background="@drawable/bg"
+    android:layout_height="match_parent"
     tools:context="com.novatec.pitak.ui.auth.AuthActivity">
+
+<!--    <ImageView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="250dp"-->
+<!--        android:scaleType="centerCrop"-->
+<!--        android:src="@drawable/bg_three"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        tools:src="@drawable/bg_three" />-->
+
+
 
     <ProgressBar
         android:id="@+id/progress"
@@ -22,11 +32,11 @@
         android:id="@+id/logo"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
+        android:layout_marginEnd="?android:actionBarSize"
         android:layout_marginBottom="25dp"
         android:src="@drawable/logo"
-        android:layout_marginStart="?android:actionBarSize"
         app:layout_constraintBottom_toTopOf="@id/phone"
-        app:layout_constraintEnd_toStartOf="@id/logoTitle"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.3"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -34,15 +44,20 @@
         android:id="@+id/logoTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="120dp"
+        android:layout_marginEnd="70dp"
+        android:layout_marginBottom="50dp"
+        android:rotation="-45"
         android:text="itak"
-        android:textColor="@color/darkLogoColor"
-        android:textSize="90dp"
+        android:shadowColor="@color/black"
+        android:shadowDx="3"
+        android:shadowDy="3"
+        android:shadowRadius="5"
+        android:padding="10dp"
+        android:textColor="@color/bg_transparent"
+        android:textSize="45dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/logo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        />
+        app:layout_constraintEnd_toEndOf="@id/logo" />
 
     <com.github.pinball83.maskededittext.MaskedEditText
         android:id="@+id/phone"

@@ -7,6 +7,7 @@
     <color name="colorPrimaryDark">#0097A7</color>
     <color name="windowBackground">#fff</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="bg_transparent">#D026C6DA</color>
     <color name="darkLogoColor">#0f3f4f</color>
     <color name="splashGradientEnd">#4F2A93</color>
     <color name="splashGradientStart">#CBB5FF</color>
@@ -30,6 +31,8 @@
     <color name="neutralColorOpacityEighty">#CC393939</color>
     <color name="colorNavIdle">#B2EBF2</color>
     <color name="transparentGrey">#80000000</color>
+    <color name="black_twenty_opacity">#80005050</color>
+    <color name="black_fifty_opacity">#D0000000</color>
 
 
 </resources>
