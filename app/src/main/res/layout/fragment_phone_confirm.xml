@@ -109,11 +109,12 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvRequestCodeAgain"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="25dp"
         android:clickable="true"
         android:focusable="true"
+        android:gravity="center"
         android:textColor="@color/white"
         android:textSize="16dp"
         app:elevation="3dp"

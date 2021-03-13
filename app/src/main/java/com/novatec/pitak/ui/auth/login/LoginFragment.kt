@@ -31,16 +31,15 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         setHasOptionsMenu(true)
 
         setupViews()
-        subscribeObservers()
-        navController = findNavController()
-
         attachListeners()
+        subscribeObservers()
     }
 
     private fun setupViews() {
         phone.isFocusable = false
         phone.isFocusableInTouchMode = false
-        tvGo.isEnabled = true
+        tvGo.isEnabled = false
+        navController = findNavController()
     }
 
     private fun attachListeners() {
@@ -105,9 +104,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
     }
 
-    override fun onResume() {
-        super.onResume()
-    }
+
 
     private fun subscribeObservers() {
         viewModel.loginResponse.observe(viewLifecycleOwner) {

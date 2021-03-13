@@ -1,6 +1,5 @@
 package com.novatec.pitak.ui.auth.confirm
 
-import android.app.Activity
 import android.content.*
 import android.os.Bundle
 import android.util.Log
@@ -11,6 +10,8 @@ import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.google.android.gms.auth.api.phone.SmsRetriever
+import com.google.android.gms.tasks.Task
 import com.novatec.core.*
 import com.novatec.domain.domainmodel.AuthBody
 import com.novatec.domain.domainmodel.UserCredentials
@@ -18,8 +19,6 @@ import com.novatec.pitak.App
 import com.novatec.pitak.R
 import com.novatec.pitak.ui.main.MainActivity
 import com.novatec.pitak.util.AppPrefs
-import com.google.android.gms.auth.api.phone.SmsRetriever
-import com.google.android.gms.tasks.Task
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_phone_confirm.*
 import splitties.activities.start
@@ -40,15 +39,12 @@ class PhoneConfirmFragment : Fragment(R.layout.fragment_phone_confirm) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel.startTimer()
-
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         setupViews()
-
         attachListeners()
         setupObservers()
         startSmsBroadcastReceiver()
@@ -132,6 +128,18 @@ class PhoneConfirmFragment : Fragment(R.layout.fragment_phone_confirm) {
 
         })
 
+        viewModel.requestSmsCountDown.observe(viewLifecycleOwner) { timeLeft ->
+
+            if (timeLeft > 0) {
+                tvRequestCodeAgain.isClickable = false
+                tvRequestCodeAgain.text =
+                    getString(R.string.request_sms_again_in, timeLeft.toString())
+            } else {
+                tvRequestCodeAgain.isClickable = true
+                tvRequestCodeAgain.text = getString(R.string.request_sms_again)
+            }
+
+        }
         viewModel.respRegainCode.observe(viewLifecycleOwner) {
             when (it) {
                 is ResponseError -> {
@@ -157,11 +165,6 @@ class PhoneConfirmFragment : Fragment(R.layout.fragment_phone_confirm) {
             rating = response.value.rating
             defaultCarId = response.value.defCarId
         }
-    }
-
-
-    override fun onResume() {
-        super.onResume()
     }
 
 

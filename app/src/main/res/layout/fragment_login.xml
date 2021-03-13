@@ -53,7 +53,7 @@
         android:shadowDy="3"
         android:shadowRadius="5"
         android:padding="10dp"
-        android:textColor="@color/bg_transparent"
+        android:textColor="@color/darkLogoColor"
         android:textSize="45dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/logo"
