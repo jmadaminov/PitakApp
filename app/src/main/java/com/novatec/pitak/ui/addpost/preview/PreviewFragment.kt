@@ -2,6 +2,7 @@ package com.novatec.pitak.ui.addpost.preview
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -62,12 +63,22 @@ class PreviewFragment @Inject constructor(/*private val viewModelFactory: ViewMo
         val fromLbl = StringBuilder()
         val toLbl = StringBuilder()
 
-        activityViewModel.placeFrom?.regionName?.let { fromLbl.append(it) }
-        activityViewModel.placeFrom?.districtName?.let { fromLbl.append(" $it") }
+        activityViewModel.placeFrom?.districtName?.let {
+            fromLbl.append(" $it")
+        }
         if (fromLbl.isBlank()) activityViewModel.placeFrom?.name?.let { fromLbl.append(it) }
-        activityViewModel.placeTo?.regionName?.let { toLbl.append(it) }
+        activityViewModel.placeFrom?.regionName?.let {
+            labelFromRegion.isVisible = true
+            labelFromRegion.text = it
+        }
+
         activityViewModel.placeTo?.districtName?.let { toLbl.append(" $it") }
         if (toLbl.isBlank()) activityViewModel.placeTo?.name?.let { toLbl.append(it) }
+        activityViewModel.placeTo?.regionName?.let {
+            labelToRegion.isVisible = true
+            labelToRegion.text = it
+        }
+
 
         labelFrom.text = fromLbl
         labelTo.text = toLbl
@@ -202,8 +213,7 @@ class PreviewFragment @Inject constructor(/*private val viewModelFactory: ViewMo
                     postCreate.revertAnimation()
                     Snackbar.make(scrollView,
                                   response.err.localizedMessage!!,
-                                  Snackbar.LENGTH_SHORT)
-                        .show()
+                                  Snackbar.LENGTH_SHORT)                        .show()
                 }
                 is ResultWrapper.Success -> {
                     postCreate.stopAnimation()

@@ -177,14 +177,11 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
                 is ResultWrapper.Success -> {
                     saveCar.stopAnimation()
                     setResult(Activity.RESULT_OK)
-                    if (AppPrefs.defaultCarId.isNullOrBlank() || AppPrefs.defaultCarId == "0") {
                         if (response.value.def) {
                             AppPrefs.edit {
                                 defaultCarId = response.value.id!!.toString()
                             }
                         }
-                    }
-
                     finish()
                 }
                 ResultWrapper.InProgress -> {

@@ -94,7 +94,6 @@ class AddCarViewModel @ViewModelInject constructor(private val uploadPhoto: Uplo
         viewModelScope.launch(IO) {
             val response = saveCar.execute(car)
             withContext(Main) {
-
                 carSaveReponse.value = response
             }
 

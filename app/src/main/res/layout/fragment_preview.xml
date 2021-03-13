@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <ScrollView
@@ -16,117 +17,168 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/layoutDestinations"
+
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="24dp"
-                android:background="@drawable/shape_grey_border"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?android:selectableItemBackground"
-                android:padding="12dp">
+                android:layout_margin="15dp"
+                app:cardCornerRadius="10dp">
 
-                <TextView
-                    android:id="@+id/labelFrom"
-                    android:layout_width="wrap_content"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layoutDestinations"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/dark_grey"
-                    android:textSize="20dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:selectableItemBackground"
+                    android:padding="12dp">
 
-                <TextView
-                    android:id="@+id/labelTo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:textColor="@color/dark_grey"
-                    android:textSize="20dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/labelFrom" />
-
-                <View
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@drawable/line_vertical"
-                    android:paddingTop="24dp"
-                    android:rotation="90"
-                    app:layout_constraintBottom_toTopOf="@id/circleTo"
-                    app:layout_constraintEnd_toEndOf="@id/circleFrom"
-                    app:layout_constraintStart_toStartOf="@id/circleFrom"
-                    app:layout_constraintTop_toBottomOf="@id/circleFrom" />
-
-                <ImageView
-                    android:id="@+id/circleFrom"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/shape_round_primary"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    <TextView
+                        android:id="@+id/labelFrom"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="20dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="Tashkent" />
 
 
-                <ImageView
-                    android:id="@+id/circleTo"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/shape_circle_primary"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    <TextView
+                        android:id="@+id/labelFromRegion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/textColorGreyDark"
+                        android:textSize="14dp"
+                        android:visibility="gone"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/labelFrom"
+                        tools:text="Tashkent"
+                        tools:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/labelTo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="20dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/labelFromRegion"
+                        tools:text="Samarqand shahri" />
+
+                    <TextView
+                        android:id="@+id/labelToRegion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/textColorGreyDark"
+                        android:textSize="14dp"
+                        android:visibility="gone"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/labelTo"
+                        tools:text="Samarqand"
+                        tools:visibility="visible" />
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/line_vertical"
+                        android:paddingTop="24dp"
+                        android:rotation="90"
+                        app:layout_constraintBottom_toTopOf="@id/circleTo"
+                        app:layout_constraintEnd_toEndOf="@id/circleFrom"
+                        app:layout_constraintStart_toStartOf="@id/circleFrom"
+                        app:layout_constraintTop_toBottomOf="@id/circleFrom" />
+
+                    <ImageView
+                        android:id="@+id/circleFrom"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/shape_round_primary"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    <ImageView
+                        android:id="@+id/circleTo"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/shape_circle_primary"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
 
 
-            <TextView
-                android:id="@+id/dateTime"
-                android:layout_width="match_parent"
-                android:layout_height="?android:actionBarSize"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:background="@drawable/shape_grey_border"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?android:selectableItemBackground"
-                android:gravity="center_vertical"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp"
-                android:text="02/02/2020"
-                android:textColor="@color/dark_grey" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <TextView
-                android:id="@+id/priceAndSeat"
-                android:layout_width="match_parent"
-                android:layout_height="?android:actionBarSize"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="24dp"
-                android:background="@drawable/shape_grey_border"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?android:selectableItemBackground"
-                android:gravity="center_vertical"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp"
-                android:text="80,000 sums * 4 Seats"
-                android:textColor="@color/dark_grey" />
+            </androidx.cardview.widget.CardView>
 
-
-            <TextView
-                android:id="@+id/note"
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="24dp"
-                android:background="@drawable/shape_grey_border"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?android:selectableItemBackground"
-                android:gravity="start|top"
-                android:padding="12dp"
-                android:textColor="@color/dark_grey" />
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                app:cardCornerRadius="10dp">
+
+                <TextView
+                    android:id="@+id/dateTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="?android:actionBarSize"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:selectableItemBackground"
+                    android:gravity="center_vertical"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:text="02/02/2020"
+                    android:textColor="@color/dark_grey" />
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginTop="15dp"
+                app:cardCornerRadius="10dp">
+
+                <TextView
+                    android:id="@+id/priceAndSeat"
+                    android:layout_width="match_parent"
+                    android:layout_height="?android:actionBarSize"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:selectableItemBackground"
+                    android:gravity="center_vertical"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:text="80,000 sums * 4 Seats"
+                    android:textColor="@color/dark_grey" />
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                app:cardCornerRadius="10dp">
+
+                <TextView
+                    android:id="@+id/note"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    tools:text="Bu yerda note qoldirish mumkin"
+                    android:foreground="?android:selectableItemBackground"
+                    android:gravity="start|top"
+                    android:padding="12dp"
+                    android:textColor="@color/dark_grey" />
+
+
+            </androidx.cardview.widget.CardView>
 
 
             <androidx.recyclerview.widget.RecyclerView
