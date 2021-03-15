@@ -9,7 +9,7 @@
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
+    <string name="welcome">Welcome!</string>
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
@@ -21,7 +21,7 @@
     <string name="name">Name</string>
     <string name="surname">Surname</string>
     <string name="code">Code</string>
-    <string name="sms_containing_code_has_been_sent">"We've just sent you an SMS with verification code. Please enter it to verify your phone."</string>
+    <string name="sms_containing_code_has_been_sent">We\'ve just sent you an SMS with verification code. Please enter it to verify your phone.</string>
     <string name="passenger">Passenger</string>
     <string name="driver">Driver</string>
     <string name="title_profile">Profile</string>
@@ -117,7 +117,7 @@
     <string name="there_are_no_posts_yet_come_back_later">There are no posts yet, come back later!</string>
     <string name="sum">Sum</string>
     <string name="select_your_trip_if_you_have_one">Select your existing trip, otherwise we will create a new trip for you!</string>
-    <string name="offering_post_id">"Offering post ID: %1$d"</string>
+    <string name="offering_post_id">Offering post ID: %1$d</string>
     <string name="we_will_create_an_order_for_you">We will create an order for you with the destinations of the passenger post!</string>
     <string name="no_passengers_yet">You have no passengers for this trip yet.</string>
     <string name="your_passengers">Your passengers</string>

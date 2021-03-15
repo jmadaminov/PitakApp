@@ -93,6 +93,7 @@ class HistoryPostActivity : BaseActivity() {
 
         post.passengerList?.forEach {
             passengersAdapter.add(PassengerItem(it, true) {
+
             })
         }
     }
