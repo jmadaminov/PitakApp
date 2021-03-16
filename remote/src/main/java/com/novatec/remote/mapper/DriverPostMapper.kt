@@ -22,6 +22,7 @@ open class DriverPostMapper @Inject constructor() : Mapper<DriverPostEntity, Dri
                                    type.from.lat,
                                    type.from.lon,
                                    type.from.regionName,
+                                   type.from.districtName,
                                    type.from.name)
 
         val placeTo = PlaceModel(type.to.districtId,
@@ -29,6 +30,7 @@ open class DriverPostMapper @Inject constructor() : Mapper<DriverPostEntity, Dri
                                  type.to.lat,
                                  type.to.lon,
                                  type.to.regionName,
+                                 type.to.districtName,
                                  type.to.name)
 
 
@@ -99,6 +101,7 @@ open class DriverPostMapper @Inject constructor() : Mapper<DriverPostEntity, Dri
                                     type.from.lat,
                                     type.from.lon,
                                     type.from.regionName,
+                                    type.from.districtName,
                                     type.from.name)
 
         val placeTo = PlaceEntity(type.to.districtId,
@@ -106,6 +109,7 @@ open class DriverPostMapper @Inject constructor() : Mapper<DriverPostEntity, Dri
                                   type.to.lat,
                                   type.to.lon,
                                   type.to.regionName,
+                                  type.to.districtName,
                                   type.to.name)
 
         val car = if (type.car == null) null else CarInPostEntity(type.car.id,

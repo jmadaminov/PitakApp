@@ -12,7 +12,20 @@ import com.novatec.pitak.ui.driver_post.EXTRA_POST_ID
 import com.novatec.pitak.ui.viewgroups.PassengerItem
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
+import kotlinx.android.synthetic.main.activity_driver_post.*
 import kotlinx.android.synthetic.main.activity_history_post.*
+import kotlinx.android.synthetic.main.activity_history_post.date
+import kotlinx.android.synthetic.main.activity_history_post.from
+import kotlinx.android.synthetic.main.activity_history_post.fromDistrict
+import kotlinx.android.synthetic.main.activity_history_post.lblMyPassengers
+import kotlinx.android.synthetic.main.activity_history_post.llOffersContainer
+import kotlinx.android.synthetic.main.activity_history_post.note
+import kotlinx.android.synthetic.main.activity_history_post.price
+import kotlinx.android.synthetic.main.activity_history_post.rvPassengers
+import kotlinx.android.synthetic.main.activity_history_post.seats
+import kotlinx.android.synthetic.main.activity_history_post.to
+import kotlinx.android.synthetic.main.activity_history_post.toDistrict
+import kotlinx.android.synthetic.main.activity_history_post.tvMessage
 import java.text.DecimalFormat
 
 class HistoryPostActivity : BaseActivity() {
@@ -73,27 +86,24 @@ class HistoryPostActivity : BaseActivity() {
 
 
         date.text = post.departureDate
-        val fromLbl = StringBuilder()
-        val toLbl = StringBuilder()
-
-        post.from.districtName?.let {
-            fromLbl.append(" $it")
-        }
-        if (fromLbl.isBlank()) post.from.name?.let { fromLbl.append(it) }
-        post.from.regionName?.let {
+        if (post.from.name == null && post.from.districtName == null) {
+            fromDistrict.isVisible = false
+            from.text = post.from.regionName
+        } else {
             fromDistrict.isVisible = true
-            fromDistrict.text = it
+            fromDistrict.text = post.from.regionName ?: post.from.name
+            from.text = post.from.districtName
         }
 
-        post.to.districtName?.let { toLbl.append(" $it") }
-        if (toLbl.isBlank()) post.to.name?.let { toLbl.append(it) }
-        post.to.regionName?.let {
+        if (post.to.name == null && post.to.districtName == null) {
+            toDistrict.isVisible = false
+            to.text = post.to.regionName
+        } else {
             toDistrict.isVisible = true
-            toDistrict.text = it
+            toDistrict.text = post.to.regionName ?: post.to.name
+            to.text = post.to.districtName
         }
 
-        from.text = fromLbl
-        to.text = toLbl
         seats.text = "${post.passengerCount!!}/${post.seat}"
         price.text = DecimalFormat("#,###").format(post.price) + " " + getString(R.string.sum)
 

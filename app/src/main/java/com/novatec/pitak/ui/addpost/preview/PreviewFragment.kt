@@ -23,8 +23,10 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_preview.*
+import kotlinx.android.synthetic.main.fragment_preview.note
 import splitties.experimental.ExperimentalSplittiesApi
 import javax.inject.Inject
+import kotlin.to
 
 
 //@FlowPreview
@@ -60,28 +62,24 @@ class PreviewFragment @Inject constructor(/*private val viewModelFactory: ViewMo
             postCreate.text = getString(R.string.update)
         }
 
-        val fromLbl = StringBuilder()
-        val toLbl = StringBuilder()
-
-        activityViewModel.placeFrom?.districtName?.let {
-            fromLbl.append(" $it")
-        }
-        if (fromLbl.isBlank()) activityViewModel.placeFrom?.name?.let { fromLbl.append(it) }
-        activityViewModel.placeFrom?.regionName?.let {
+        if (activityViewModel.placeFrom?.name == null && activityViewModel.placeFrom?.districtName == null) {
+            labelFromRegion.isVisible = false
+            labelFrom.text = activityViewModel.placeFrom?.regionName
+        } else {
             labelFromRegion.isVisible = true
-            labelFromRegion.text = it
+            labelFromRegion.text = activityViewModel.placeFrom?.regionName ?: activityViewModel.placeFrom?.name
+            labelFrom.text = activityViewModel.placeFrom?.districtName
         }
 
-        activityViewModel.placeTo?.districtName?.let { toLbl.append(" $it") }
-        if (toLbl.isBlank()) activityViewModel.placeTo?.name?.let { toLbl.append(it) }
-        activityViewModel.placeTo?.regionName?.let {
+        if (activityViewModel.placeTo?.name == null && activityViewModel.placeTo?.districtName == null) {
+            labelToRegion.isVisible = false
+            labelTo.text = activityViewModel.placeTo?.regionName
+        } else {
             labelToRegion.isVisible = true
-            labelToRegion.text = it
+            labelToRegion.text = activityViewModel.placeTo?.regionName ?: activityViewModel.placeTo?.name
+            labelTo.text = activityViewModel.placeTo?.districtName
         }
 
-
-        labelFrom.text = fromLbl
-        labelTo.text = toLbl
 
 
         var time = ""

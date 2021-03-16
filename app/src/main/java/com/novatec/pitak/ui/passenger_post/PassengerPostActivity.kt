@@ -13,7 +13,17 @@ import com.novatec.pitak.ui.passenger_post.offer_a_ride.DialogOfferARideFragment
 import com.novatec.pitak.util.AppPrefs
 import com.novatec.pitak.util.loadCircleImageUrl
 import com.novatec.pitak.viewobjects.PassengerPostViewObj
+import kotlinx.android.synthetic.main.activity_driver_post.*
 import kotlinx.android.synthetic.main.activity_passenger_post.*
+import kotlinx.android.synthetic.main.activity_passenger_post.date
+import kotlinx.android.synthetic.main.activity_passenger_post.from
+import kotlinx.android.synthetic.main.activity_passenger_post.fromDistrict
+import kotlinx.android.synthetic.main.activity_passenger_post.note
+import kotlinx.android.synthetic.main.activity_passenger_post.price
+import kotlinx.android.synthetic.main.activity_passenger_post.seats
+import kotlinx.android.synthetic.main.activity_passenger_post.swipeRefreshLayout
+import kotlinx.android.synthetic.main.activity_passenger_post.to
+import kotlinx.android.synthetic.main.activity_passenger_post.toDistrict
 import java.text.DecimalFormat
 
 class PassengerPostActivity : BaseActivity() {
@@ -75,27 +85,24 @@ class PassengerPostActivity : BaseActivity() {
     private fun showPostData(post: PassengerPostViewObj) {
         date.text = post.departureDate
         seats.text = post.seat.toString()
-        val fromLbl = StringBuilder()
-        val toLbl = StringBuilder()
-
-        post.from.districtName?.let {
-            fromLbl.append(" $it")
-        }
-        if (fromLbl.isBlank()) post.from.name?.let { fromLbl.append(it) }
-        post.from.regionName?.let {
+        if (post.from.name == null && post.from.districtName == null) {
+            fromDistrict.isVisible = false
+            from.text = post.from.regionName
+        } else {
             fromDistrict.isVisible = true
-            fromDistrict.text = it
+            fromDistrict.text = post.from.regionName ?: post.from.name
+            from.text = post.from.districtName
         }
 
-        post.to.districtName?.let { toLbl.append(" $it") }
-        if (toLbl.isBlank()) post.to.name?.let { toLbl.append(it) }
-        post.to.regionName?.let {
+        if (post.to.name == null && post.to.districtName == null) {
+            toDistrict.isVisible = false
+            to.text = post.to.regionName
+        } else {
             toDistrict.isVisible = true
-            toDistrict.text = it
+            toDistrict.text = post.to.regionName ?: post.to.name
+            to.text = post.to.districtName
         }
 
-        from.text = fromLbl
-        to.text = toLbl
         price.text =
             DecimalFormat("#,###").format(post.price) + " " + getString(R.string.sum)
 
