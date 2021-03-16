@@ -36,8 +36,7 @@ class DestinationsViewModel @ViewModelInject constructor(private val getPlacesFe
             val response =
                 getPlacesFeed.execute(queryString)
 
-            withContext(Main) {
-                if (isFrom) fromPlacesResponse.value = response
+            withContext(Main) { if (isFrom) fromPlacesResponse.value = response
                 else toPlacesResponse.value = response
             }
         }

@@ -148,7 +148,7 @@ import splitties.experimental.ExperimentalSplittiesApi
             when (actionId) {
                 EditorInfo.IME_ACTION_DONE -> {
                     if (fromPresenter.getAdr()?.itemCount != 0) {
-                        val itm = fromPresenter.getAdr()!!.getItem(0) as PlaceFeedItemView
+                        val itm = fromPresenter.getAdr()?.getItem(0) as PlaceFeedItemView
                         from!!.clearFocus()
                         fromFeedCallback.onPopupItemClicked(from!!.editableText, itm)
                         to!!.requestFocus()

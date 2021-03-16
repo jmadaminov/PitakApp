@@ -73,8 +73,27 @@ class HistoryPostActivity : BaseActivity() {
 
 
         date.text = post.departureDate
-        from.text = post.from.regionName
-        to.text = post.to.regionName
+        val fromLbl = StringBuilder()
+        val toLbl = StringBuilder()
+
+        post.from.districtName?.let {
+            fromLbl.append(" $it")
+        }
+        if (fromLbl.isBlank()) post.from.name?.let { fromLbl.append(it) }
+        post.from.regionName?.let {
+            fromDistrict.isVisible = true
+            fromDistrict.text = it
+        }
+
+        post.to.districtName?.let { toLbl.append(" $it") }
+        if (toLbl.isBlank()) post.to.name?.let { toLbl.append(it) }
+        post.to.regionName?.let {
+            toDistrict.isVisible = true
+            toDistrict.text = it
+        }
+
+        from.text = fromLbl
+        to.text = toLbl
         seats.text = "${post.passengerCount!!}/${post.seat}"
         price.text = DecimalFormat("#,###").format(post.price) + " " + getString(R.string.sum)
 

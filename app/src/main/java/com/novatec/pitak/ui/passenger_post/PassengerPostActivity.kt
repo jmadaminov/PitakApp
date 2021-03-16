@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
+import androidx.core.view.isVisible
 import com.novatec.pitak.R
 import com.novatec.pitak.ui.BaseActivity
 import com.novatec.pitak.ui.dialogs.DialogAddCarFirst
@@ -74,16 +75,35 @@ class PassengerPostActivity : BaseActivity() {
     private fun showPostData(post: PassengerPostViewObj) {
         date.text = post.departureDate
         seats.text = post.seat.toString()
-        from.text = post.from.regionName
-        to.text = post.to.regionName
+        val fromLbl = StringBuilder()
+        val toLbl = StringBuilder()
+
+        post.from.districtName?.let {
+            fromLbl.append(" $it")
+        }
+        if (fromLbl.isBlank()) post.from.name?.let { fromLbl.append(it) }
+        post.from.regionName?.let {
+            fromDistrict.isVisible = true
+            fromDistrict.text = it
+        }
+
+        post.to.districtName?.let { toLbl.append(" $it") }
+        if (toLbl.isBlank()) post.to.name?.let { toLbl.append(it) }
+        post.to.regionName?.let {
+            toDistrict.isVisible = true
+            toDistrict.text = it
+        }
+
+        from.text = fromLbl
+        to.text = toLbl
         price.text =
             DecimalFormat("#,###").format(post.price) + " " + getString(R.string.sum)
 
-        post.remark?.also {
+        if (post.remark.isNullOrBlank()){
+            note.visibility = View.GONE
+        }else{
             note.visibility = View.VISIBLE
             note.text = post.remark
-        } ?: run {
-            note.visibility = View.GONE
         }
 
 

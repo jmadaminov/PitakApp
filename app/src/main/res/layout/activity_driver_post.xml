@@ -52,9 +52,10 @@
                             android:layout_height="wrap_content"
                             android:paddingBottom="12dp">
 
+
                             <View
                                 android:id="@+id/line"
-                                android:layout_width="3dp"
+                                android:layout_width="2dp"
                                 android:layout_height="0dp"
                                 android:layout_gravity="center_horizontal"
                                 android:background="@color/ic_grey"
@@ -63,26 +64,30 @@
                                 app:layout_constraintStart_toStartOf="@id/circleFrom"
                                 app:layout_constraintTop_toBottomOf="@id/circleFrom" />
 
+
                             <ImageView
                                 android:id="@+id/circleFrom"
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
+                                android:layout_width="10dp"
+                                android:layout_height="10dp"
                                 android:layout_marginStart="12dp"
                                 android:layout_marginTop="12dp"
                                 android:src="@drawable/shape_round_disabled"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:tint="@color/colorPrimary" />
 
 
                             <ImageView
                                 android:id="@+id/circleTo"
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
-                                android:layout_marginStart="12dp"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_marginStart="4.5dp"
+                                android:layout_marginTop="40dp"
                                 android:layout_marginBottom="12dp"
-                                android:src="@drawable/shape_circle_disabled"
-                                app:layout_constraintBottom_toTopOf="@id/note"
-                                app:layout_constraintStart_toStartOf="parent" />
+                                android:src="@drawable/ic_round_location_on_24"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/circleFrom"
+                                app:tint="@color/error_red" />
 
 
                             <TextView
@@ -90,22 +95,47 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:layout_marginStart="12dp"
+                                tools:text="Tashkent city"
                                 android:textColor="@color/dark_grey"
+                                android:textSize="14dp"
                                 app:layout_constraintBottom_toBottomOf="@id/circleFrom"
                                 app:layout_constraintStart_toEndOf="@id/circleFrom"
-                                app:layout_constraintTop_toTopOf="@id/circleFrom"
-                                tools:text="TASHKENT" />
+                                app:layout_constraintTop_toTopOf="@id/circleFrom" />
+
+                            <TextView
+                                android:id="@+id/fromDistrict"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                tools:text="Tashkent"
+                                android:textColor="@color/textColorGreyDark"
+                                android:textSize="11dp"
+                                android:visibility="gone"
+                                app:layout_constraintStart_toStartOf="@id/from"
+                                app:layout_constraintTop_toBottomOf="@id/from"
+                                tools:visibility="visible" />
 
                             <TextView
                                 android:id="@+id/to"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:layout_marginStart="12dp"
+                                android:layout_marginStart="5dp"
+                                tools:text="Andijan city"
                                 android:textColor="@color/dark_grey"
+                                android:textSize="14dp"
+                                app:layout_constraintBottom_toTopOf="@id/toDistrict"
+                                app:layout_constraintStart_toEndOf="@id/circleTo" />
+
+                            <TextView
+                                android:id="@+id/toDistrict"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                tools:text="Andijan"
+                                android:textColor="@color/textColorGreyDark"
+                                android:textSize="11dp"
+                                android:visibility="gone"
                                 app:layout_constraintBottom_toBottomOf="@id/circleTo"
-                                app:layout_constraintStart_toEndOf="@id/circleTo"
-                                app:layout_constraintTop_toTopOf="@id/circleTo"
-                                tools:text="ANDIJAN" />
+                                app:layout_constraintStart_toStartOf="@id/to"
+                                tools:visibility="visible" />
 
 
                             <TextView
@@ -115,11 +145,15 @@
                                 android:layout_marginStart="12dp"
                                 android:layout_marginTop="12dp"
                                 android:layout_marginEnd="12dp"
+                                android:maxLines="4"
                                 android:textColor="@color/dark_grey"
+                                android:textSize="14dp"
+                                android:visibility="gone"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@id/to"
-                                tools:text="note note sohisdf asdfasdf sadfas fsd fsadf asdfsd" />
+                                app:layout_constraintTop_toBottomOf="@id/circleTo"
+                                tools:text="note note sohisdf asdfasdf sadfas fsd fsadf asdfsd"
+                                tools:visibility="visible" />
 
 
                             <LinearLayout
@@ -137,7 +171,7 @@
                                     android:drawableRight="@drawable/ic_baseline_money_24"
                                     android:drawablePadding="10dp"
                                     android:gravity="center_vertical|end"
-                                    android:text="50,000 sum"
+                                    tools:text="50,000 sum"
                                     android:textColor="@color/dark_grey"
                                     app:layout_constraintBottom_toTopOf="@id/note"
                                     app:layout_constraintEnd_toEndOf="parent"
@@ -170,7 +204,7 @@
                                     android:drawableRight="@drawable/ic_baseline_calendar_today_24"
                                     android:drawablePadding="10dp"
                                     android:gravity="center_vertical|end"
-                                    android:text="02.05.2200"
+                                    tools:text="02.05.2200"
                                     android:textColor="@color/dark_grey"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintHorizontal_weight="1"

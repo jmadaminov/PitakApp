@@ -1,15 +1,15 @@
 package com.novatec.pitak.ui.main
 
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.View
 import android.widget.CheckedTextView
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.FragmentNavigator
-import com.novatec.domain.domainmodel.DriverPost
-import com.novatec.domain.domainmodel.PassengerPost
 import com.novatec.pitak.R
 import com.novatec.pitak.ui.BaseActivity
 import com.novatec.pitak.ui.addpost.AddPostActivity
@@ -23,6 +23,7 @@ import com.novatec.pitak.ui.main.notifications.NotificationsFragment
 import com.novatec.pitak.ui.main.profile.ProfileFragment
 import com.novatec.pitak.ui.main.searchtrip.SearchTripFragment
 import com.novatec.pitak.util.AppPrefs
+import com.novatec.pitak.util.AppSignatureHelper
 import com.novatec.pitak.util.ContextUtils.setLocale
 import kotlinx.android.synthetic.main.activity_main.*
 import splitties.activities.start
@@ -47,6 +48,11 @@ class MainActivity : BaseActivity() {
             finish()
         }
         notificationPostId = intent.extras?.getLong(EXTRA_POST_ID, -1)
+
+
+        //r8a57qwFnXK
+//        Toast.makeText(this, AppSignatureHelper(this).appSignatures[0]!!, Toast.LENGTH_LONG).show()
+
 
         if (notificationPostId != null && notificationPostId != -1L) {
             startActivity(Intent(this, DriverPostActivity::class.java).apply {

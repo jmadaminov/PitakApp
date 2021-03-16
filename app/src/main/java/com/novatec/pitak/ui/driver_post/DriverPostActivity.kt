@@ -5,6 +5,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
+import com.google.android.material.snackbar.Snackbar
 import com.novatec.core.*
 import com.novatec.domain.domainmodel.DriverPost
 import com.novatec.pitak.R
@@ -15,7 +16,6 @@ import com.novatec.pitak.ui.viewgroups.PassengerItem
 import com.novatec.pitak.viewobjects.DriverPostViewObj
 import com.novatec.pitak.viewobjects.OfferViewObj.Companion.offerToViewObj
 import com.novatec.remote.model.OfferDTO
-import com.google.android.material.snackbar.Snackbar
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import kotlinx.android.synthetic.main.activity_driver_post.*
@@ -182,8 +182,26 @@ const val EXTRA_POST_ID = "POST_ID"
             post.postStatus == EPostStatus.WAITING_FOR_START || !post.passengerList.isNullOrEmpty() && post.postStatus == EPostStatus.CREATED
 
         date.text = post.departureDate
-        from.text = post.from.regionName
-        to.text = post.to.regionName
+
+        if (post.from.name == null && post.from.districtName == null) {
+            fromDistrict.isVisible = false
+            from.text = post.from.regionName
+        } else {
+            fromDistrict.isVisible = true
+            fromDistrict.text = post.from.regionName ?: post.from.name
+            from.text = post.from.districtName
+        }
+
+        if (post.to.name == null && post.to.districtName == null) {
+            toDistrict.isVisible = false
+            to.text = post.to.regionName
+        } else {
+            toDistrict.isVisible = true
+            toDistrict.text = post.to.regionName ?: post.to.name
+            to.text = post.to.districtName
+        }
+
+
         seats.text = "${post.passengerCount}/${post.seat}"
         price.text = DecimalFormat("#,###").format(post.price) + " " + getString(R.string.sum)
 

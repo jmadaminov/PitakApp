@@ -30,11 +30,11 @@
         android:text="@string/sms_containing_code_has_been_sent"
         android:textColor="#fff"
         android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@id/code" />
+        app:layout_constraintBottom_toTopOf="@id/edtCode" />
 
 
     <EditText
-        android:id="@+id/code"
+        android:id="@+id/edtCode"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="150dp"
@@ -82,7 +82,7 @@
         app:layout_constraintBottom_toTopOf="@id/confirm"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/code" />
+        app:layout_constraintTop_toBottomOf="@id/edtCode" />
 
 
     <br.com.simplepass.loadingbutton.customViews.CircularProgressButton

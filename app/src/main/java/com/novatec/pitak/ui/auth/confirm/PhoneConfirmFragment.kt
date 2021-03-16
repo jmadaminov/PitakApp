@@ -11,6 +11,8 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.gms.auth.api.phone.SmsRetriever
+import com.google.android.gms.common.api.CommonStatusCodes
+import com.google.android.gms.common.api.Status
 import com.google.android.gms.tasks.Task
 import com.novatec.core.*
 import com.novatec.domain.domainmodel.AuthBody
@@ -48,6 +50,11 @@ class PhoneConfirmFragment : Fragment(R.layout.fragment_phone_confirm) {
         attachListeners()
         setupObservers()
         startSmsBroadcastReceiver()
+        val intentFilter = IntentFilter(SmsRetriever.SMS_RETRIEVED_ACTION)
+        requireActivity().registerReceiver(receiver,
+                                           intentFilter,
+                                           SmsRetriever.SEND_PERMISSION,
+                                           null)
     }
 
     private fun startSmsBroadcastReceiver() {
@@ -77,13 +84,13 @@ class PhoneConfirmFragment : Fragment(R.layout.fragment_phone_confirm) {
     private fun setupViews() {
         navController = findNavController()
         confirm.isEnabled = true
-        code.setText(args.password)
+        edtCode.setText(args.password)
     }
 
     private fun attachListeners() {
         confirm.setOnClickListener {
             viewModel.confirm(UserCredentials(args.phone.numericOnly(),
-                                              code.text.toString(),
+                                              edtCode.text.toString(),
                                               App.uuid))
         }
         tvRequestCodeAgain.setOnClickListener {
@@ -103,7 +110,7 @@ class PhoneConfirmFragment : Fragment(R.layout.fragment_phone_confirm) {
                 is ErrorWrapper.RespError -> {
                     confirm.revertAnimation()
                     if (response.code == Constants.errPhoneFormat) {
-                        code.error = getString(R.string.incorrect_phone_number_format)
+                        edtCode.error = getString(R.string.incorrect_phone_number_format)
                     } else {
                         errorMessage.visibility = View.VISIBLE
                         errorMessage.text = response.message
@@ -153,6 +160,10 @@ class PhoneConfirmFragment : Fragment(R.layout.fragment_phone_confirm) {
             }.exhaustive
         }
     }
+    fun smsCodeReceived(code: String) {
+        edtCode.setText(code)
+        confirm.performClick()
+    }
 
     @ExperimentalSplittiesApi
     private fun saveCredentials(response: ResultWrapper.Success<AuthBody>) {
@@ -166,8 +177,30 @@ class PhoneConfirmFragment : Fragment(R.layout.fragment_phone_confirm) {
             defaultCarId = response.value.defCarId
         }
     }
+    val receiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
 
+            if (SmsRetriever.SMS_RETRIEVED_ACTION == intent!!.action) {
+                val extras = intent.extras
+                val status: Status = extras!![SmsRetriever.EXTRA_STATUS] as Status
+                when (status.statusCode) {
+                    CommonStatusCodes.SUCCESS -> {    // Get SMS message contents
+                        val message = extras[SmsRetriever.EXTRA_SMS_MESSAGE] as String?
+                        message?.let {
+                            smsCodeReceived(it.replace(" ", "").split(":")[1].substring(0, 5))
+                        }
+                    }
+                    CommonStatusCodes.TIMEOUT -> {
+                    }
+                }
+            }
+        }
+    }
 
+    override fun onDestroyView() {
+        requireActivity().unregisterReceiver(receiver)
+        super.onDestroyView()
+    }
 }
 
 

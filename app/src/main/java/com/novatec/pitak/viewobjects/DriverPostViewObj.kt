@@ -58,7 +58,11 @@ data class PlaceViewObj(val districtId: Int? = null,
                         val lat: Double? = null,
                         val lon: Double? = null,
                         val regionName: String? = null,
+                        val districtName: String? = null,
                         val name: String? = null) : Parcelable {
+
+
+
     companion object {
         fun fromPlace(place: Place): PlaceViewObj {
             return PlaceViewObj(place.districtId,
@@ -66,6 +70,7 @@ data class PlaceViewObj(val districtId: Int? = null,
                                 place.lat,
                                 place.lon,
                                 place.regionName,
+                                place.districtName,
                                 place.name)
         }
     }
