@@ -26,7 +26,8 @@ interface AuthorizedApiService {
     @Headers("Content-Type:application/json", "Accept: application/json")
     @PUT("driver_post/action/{identifier}")
     suspend fun editPost(@Path(value = "identifier",
-                               encoded = true) identifier: Long,@Body driverPostBody: DriverPostModel): RespFormatter<DriverPostModel?>
+                               encoded = true) identifier: Long,
+                         @Body driverPostBody: DriverPostModel): RespFormatter<DriverPostModel?>
 
     @Headers("Content-Type:application/json", "Accept: application/json")
     @PUT("driver_post/action/cancel/{identifier}")

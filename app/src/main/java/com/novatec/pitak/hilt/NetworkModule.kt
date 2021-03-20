@@ -20,7 +20,7 @@ object NetworkModule {
     @Singleton
     @Provides
     fun provideApiService(): ApiService {
-        return ApiServiceFactory.makeApiService(BuildConfig.DEBUG)
+        return ApiServiceFactory.makeApiService(BuildConfig.DEBUG, AppPrefs.language)
     }
 
 
@@ -31,7 +31,6 @@ object NetworkModule {
                                                           AppPrefs.token,
                                                           AppPrefs.language)
     }
-
 
 
 }
