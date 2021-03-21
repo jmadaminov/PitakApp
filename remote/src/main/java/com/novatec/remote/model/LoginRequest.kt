@@ -7,4 +7,4 @@ import com.google.gson.annotations.SerializedName
  * Representation for a [LoginRequest] fetched from the API
  */
 data class LoginRequest(@SerializedName("phoneNum") val phoneNum: String,
-                        @SerializedName("role") val role: String = Constants.ROLE_DRIVER)
+                        @SerializedName("userType") val userType: String = Constants.ROLE_DRIVER)
