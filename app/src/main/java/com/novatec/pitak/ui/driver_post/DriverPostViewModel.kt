@@ -72,6 +72,28 @@ class DriverPostViewModel @ViewModelInject constructor(val postRepository: Drive
         }
     }
 
+
+    @ExperimentalSplittiesApi
+    fun deletePassenger(passengerId: Long, postId: Long) {
+        isLoading.value = true
+        viewModelScope.launch(Dispatchers.IO) {
+            val response = postRepository.removePassengerFromPost(postId, passengerId)
+            withContext(Dispatchers.Main) {
+                isLoading.value = false
+                when (response) {
+                    is ResponseError -> {
+                        errorMessage.value = response.message
+                    }
+                    is ResponseSuccess -> {
+                        if (response.value != null) postData.value =
+                            response.value else getPostById(postId)
+                        getOffersForPost(postId)
+                    }
+                }
+            }
+        }
+    }
+
     @ExperimentalSplittiesApi
     fun finishPost(identifier: String) {
         isLoading.value = true

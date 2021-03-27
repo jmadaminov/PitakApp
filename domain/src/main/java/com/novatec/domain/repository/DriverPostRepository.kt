@@ -3,7 +3,6 @@ package com.novatec.domain.repository
 import com.novatec.core.ResponseWrapper
 import com.novatec.core.ResultWrapper
 import com.novatec.domain.domainmodel.DriverPost
-import com.novatec.domain.domainmodel.PassengerPost
 
 interface DriverPostRepository {
 
@@ -20,4 +19,5 @@ interface DriverPostRepository {
     suspend fun acceptOffer(id: Long): ResponseWrapper<String?>
     suspend fun rejectOffer(id: Long): ResponseWrapper<String?>
     suspend fun cancelMyOffer(id: Long): ResponseWrapper<String?>
+    suspend fun removePassengerFromPost(postId: Long, passengerId: Long): ResponseWrapper<DriverPost?>
 }

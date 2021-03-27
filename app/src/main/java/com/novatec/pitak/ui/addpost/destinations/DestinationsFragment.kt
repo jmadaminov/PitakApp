@@ -124,14 +124,13 @@ class DestinationsFragment : Fragment(R.layout.fragment_destinations) {
 
                 }
                 is ResultWrapper.Success -> {
-                    autoCompleteManager.fromPresenter.getAdr()!!.clear()
-                    response.value.forEach { place ->
-                        autoCompleteManager.fromPresenter.getAdr()!!
-                            .add(PlaceFeedItemView(place,
-                                                   autoCompleteManager.fromPresenter))
-
+                    autoCompleteManager.fromPresenter.getAdr()?.let { adapter ->
+                        adapter.clear()
+                        response.value.forEach { place ->
+                            adapter.add(PlaceFeedItemView(place, autoCompleteManager.fromPresenter))
+                        }
+                        adapter.notifyDataSetChanged()
                     }
-                    autoCompleteManager.fromPresenter.getAdr()!!.notifyDataSetChanged()
                 }
                 ResultWrapper.InProgress -> {
                 }
@@ -149,16 +148,12 @@ class DestinationsFragment : Fragment(R.layout.fragment_destinations) {
 
                 }
                 is ResultWrapper.Success -> {
-                    if (autoCompleteManager.toPresenter.getAdr() != null) {
-                        autoCompleteManager.toPresenter.getAdr()!!.clear()
+                    autoCompleteManager.toPresenter.getAdr()?.let { adapter ->
+                        adapter.clear()
                         response.value.forEach { place ->
-                            autoCompleteManager.toPresenter.getAdr()!!
-                                .add(PlaceFeedItemView(place,
-                                                       autoCompleteManager.toPresenter))
+                            adapter.add(PlaceFeedItemView(place, autoCompleteManager.toPresenter))
                         }
-                        autoCompleteManager.toPresenter.getAdr()!!
-                            .notifyDataSetChanged()
-                    } else {
+                        adapter.notifyDataSetChanged()
                     }
                 }
                 ResultWrapper.InProgress -> {

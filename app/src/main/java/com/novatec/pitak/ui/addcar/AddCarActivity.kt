@@ -16,6 +16,8 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.asksira.bsimagepicker.BSImagePicker
+import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.Snackbar
 import com.novatec.core.Constants
 import com.novatec.core.ErrorWrapper
 import com.novatec.core.ResultWrapper
@@ -34,8 +36,6 @@ import com.novatec.pitak.viewobjects.CarColorViewObj
 import com.novatec.pitak.viewobjects.CarViewObj
 import com.novatec.pitak.viewobjects.IdNameViewObj
 import com.novatec.pitak.viewobjects.ImageViewObj
-import com.bumptech.glide.Glide
-import com.google.android.material.snackbar.Snackbar
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
@@ -74,6 +74,7 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
         setupActionBar()
         setupListeners()
         setupCarPhotoGrid()
+        checkboxAC.isChecked = car.airConditioner
         viewmodel.getCarColorsAndModels()
     }
 
@@ -177,11 +178,11 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
                 is ResultWrapper.Success -> {
                     saveCar.stopAnimation()
                     setResult(Activity.RESULT_OK)
-                        if (response.value.def) {
-                            AppPrefs.edit {
-                                defaultCarId = response.value.id!!.toString()
-                            }
+                    if (response.value.def) {
+                        AppPrefs.edit {
+                            defaultCarId = response.value.id!!.toString()
                         }
+                    }
                     finish()
                 }
                 ResultWrapper.InProgress -> {

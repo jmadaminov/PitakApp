@@ -12,6 +12,7 @@ import com.novatec.pitak.R
 import com.novatec.pitak.ui.BaseActivity
 import com.novatec.pitak.ui.addpost.AddPostActivity
 import com.novatec.pitak.ui.interfaces.IOnOfferActionListener
+import com.novatec.pitak.ui.interfaces.IOnPassengerDelete
 import com.novatec.pitak.ui.viewgroups.PassengerItem
 import com.novatec.pitak.viewobjects.DriverPostViewObj
 import com.novatec.pitak.viewobjects.OfferViewObj.Companion.offerToViewObj
@@ -25,7 +26,8 @@ import java.text.DecimalFormat
 
 const val EXTRA_POST_ID = "POST_ID"
 
-@ExperimentalSplittiesApi class DriverPostActivity : BaseActivity() {
+@ExperimentalSplittiesApi
+class DriverPostActivity : BaseActivity(), IOnPassengerDelete {
 
     companion object {
         const val REQ_POST_MANIPULATED: Int = 89
@@ -123,6 +125,8 @@ const val EXTRA_POST_ID = "POST_ID"
             offersAdapter.refresh()
         })
 
+
+
         viewModel.deletePostReponse.observe(this, {
             val response = it ?: return@observe
             when (response) {
@@ -219,7 +223,13 @@ const val EXTRA_POST_ID = "POST_ID"
         }
 
         post.passengerList?.forEach {
-            passengersAdapter.add(PassengerItem(it) {
+            passengersAdapter.add(PassengerItem(it) { passenger ->
+                val dialog = DialogDeletePassenger().apply {
+                    val args = Bundle()
+                    args.putLong(ARG_PASSENGER_ID, passenger.id!!)
+                    arguments = args
+                }
+                dialog.show(supportFragmentManager, "")
             })
         }
     }
@@ -272,6 +282,11 @@ const val EXTRA_POST_ID = "POST_ID"
     fun deletePost() = viewModel.deletePost(post.id.toString())
     fun acceptOffer(offer: OfferDTO) = viewModel.acceptOffer(offer.id)
     fun cancelOffer(offer: OfferDTO) = viewModel.cancelOffer(offer.id)
+
+    override fun onPassengerDelete(passengerId: Long) {
+        viewModel.deletePassenger(passengerId, postId)
+
+    }
 
 
 }

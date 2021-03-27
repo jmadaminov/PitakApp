@@ -1,6 +1,7 @@
 package com.novatec.remote
 
 import com.novatec.remote.model.*
+import retrofit2.Response
 import retrofit2.http.*
 
 /**
@@ -144,6 +145,13 @@ interface AuthorizedApiService {
     @Headers("Content-Type:application/json", "Accept: application/json")
     @PUT("prof/action/detail/mb")
     suspend fun updateUserInfo(@Body reqUpdateProfileInfo: ReqUpdateProfileInfo): RespFormatter<Any>
+
+
+    @Headers("Content-Type:application/json", "Accept: application/json")
+    @DELETE("driver_post/action/{postId}/passenger/{passengerId}")
+    suspend fun removePassengerFromPost(@Path(value = "postId", encoded = true) postId: Long,
+                                        @Path(value = "passengerId",
+                                              encoded = true) passengerId: Long):RespFormatter< DriverPostModel>
 
 
 //    @Headers("Content-Type:application/json", "Accept: application/json")

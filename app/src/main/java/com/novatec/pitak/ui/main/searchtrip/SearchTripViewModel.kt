@@ -39,8 +39,8 @@ class SearchTripViewModel @ViewModelInject constructor(val postFilterRepository:
 
     private var fromFeedJob: Job? = null
     private var toFeedJob: Job? = null
-    val fromPlacesResponse = SingleLiveEvent<ResultWrapper<List<Place>>>()
-    val toPlacesResponse = SingleLiveEvent<ResultWrapper<List<Place>>>()
+    val fromPlacesResponse = MutableLiveData<ResultWrapper<List<Place>>>()
+    val toPlacesResponse = MutableLiveData<ResultWrapper<List<Place>>>()
 
 
     @ExperimentalSplittiesApi

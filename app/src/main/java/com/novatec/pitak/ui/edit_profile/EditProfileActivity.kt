@@ -13,6 +13,8 @@ import androidx.core.graphics.drawable.toBitmap
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import com.asksira.bsimagepicker.BSImagePicker
+import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.Snackbar
 import com.novatec.core.ErrorWrapper
 import com.novatec.core.ResultWrapper
 import com.novatec.core.exhaustive
@@ -22,8 +24,6 @@ import com.novatec.pitak.util.AppPrefs
 import com.novatec.pitak.util.getRealPathFromURI
 import com.novatec.pitak.util.loadBitmap
 import com.novatec.pitak.util.loadImageUrl
-import com.bumptech.glide.Glide
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_edit_profile.*
 import java.io.File
 
@@ -134,6 +134,7 @@ class EditProfileActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedL
     }
 
     override fun onSingleImageSelected(uri: Uri, tag: String?) {
+        checkInputs()
         val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, uri)
         ivAvatar.loadBitmap(bitmap)
         viewModel.uploadAvatar(File(uri.getRealPathFromURI(this)))

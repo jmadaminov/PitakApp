@@ -7,7 +7,7 @@ import java.util.*
  * Representation for a [Filter] fetched from the API
  */
 
-const val MAX_PRICE = 1000000
+const val MAX_PRICE = 500000
 const val MIN_PRICE = 10000
 
 data class Filter(var airConditioner: Boolean? = null,

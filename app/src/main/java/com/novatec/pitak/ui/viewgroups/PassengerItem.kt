@@ -15,6 +15,7 @@ import java.text.DecimalFormat
 class PassengerItem(val obj: Passenger,
                     val isHistoryPost: Boolean = false,
                     val onDeleteClick: (obj: Passenger) -> Unit) : Item() {
+
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         viewHolder.itemView.apply {
             tvName.text = obj.profile?.name + " " + obj.profile?.surname
@@ -28,6 +29,7 @@ class PassengerItem(val obj: Passenger,
             }
 
             fabCall.isVisible = !isHistoryPost
+            ivDelete.isVisible = !isHistoryPost
 
             fabCall.setOnClickListener {
                 val intent = Intent(Intent.ACTION_DIAL)

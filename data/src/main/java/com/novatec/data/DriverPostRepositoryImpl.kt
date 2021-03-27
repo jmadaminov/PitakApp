@@ -25,7 +25,8 @@ class DriverPostRepositoryImpl @Inject constructor(private val factoryDriver: Dr
             is ErrorWrapper.RespError -> response
             is ErrorWrapper.SystemError -> response
             is ResultWrapper.Success -> {
-                ResultWrapper.Success(if (response.value!=null) driverPostMapper.mapFromEntity(response.value!!) else null)
+                ResultWrapper.Success(if (response.value != null) driverPostMapper.mapFromEntity(
+                    response.value!!) else null)
             }
             ResultWrapper.InProgress -> ResultWrapper.InProgress
         }
@@ -95,6 +96,23 @@ class DriverPostRepositoryImpl @Inject constructor(private val factoryDriver: Dr
 
     override suspend fun cancelMyOffer(id: Long) =
         factoryDriver.retrieveDataStore(false).cancelMyOffer(id)
+
+    override suspend fun removePassengerFromPost(postId: Long,
+                                                 passengerId: Long): ResponseWrapper<DriverPost?> {
+
+        val resp =
+            factoryDriver.retrieveDataStore(false).removePassengerFromPost(postId, passengerId)
+
+        return when (resp) {
+            is ResponseError -> {
+                resp
+            }
+            is ResponseSuccess -> {
+                ResponseSuccess(if (resp.value != null) driverPostMapper.mapFromEntity(resp.value!!) else null)
+            }
+        }
+
+    }
 
 
 }

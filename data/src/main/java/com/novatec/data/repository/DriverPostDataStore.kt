@@ -18,5 +18,5 @@ interface DriverPostDataStore {
     suspend fun acceptOffer(id: Long): ResponseWrapper<String?>
     suspend fun rejectOffer(id: Long): ResponseWrapper<String?>
     suspend fun cancelMyOffer(id: Long): ResponseWrapper<String?>
-
+    suspend fun removePassengerFromPost(postId: Long, passengerId: Long): ResponseWrapper<DriverPostEntity?>
 }

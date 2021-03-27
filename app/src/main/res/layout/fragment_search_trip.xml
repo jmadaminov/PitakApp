@@ -51,6 +51,21 @@
             android:textColor="@color/dark_grey"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageView
+            android:id="@+id/ivClearFrom"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:selectableItemBackground"
+            android:padding="10dp"
+            android:src="@drawable/ic_round_close_24"
+            app:layout_constraintBottom_toBottomOf="@id/fromInput"
+            app:layout_constraintEnd_toEndOf="@id/fromInput"
+            app:layout_constraintTop_toTopOf="@id/fromInput"
+            tools:visibility="visible" />
+
+
         <EditText
             android:id="@+id/toInput"
             android:layout_width="match_parent"
@@ -71,6 +86,20 @@
             android:paddingEnd="10dp"
             android:textColor="@color/dark_grey"
             app:layout_constraintTop_toBottomOf="@id/fromInput" />
+
+        <ImageView
+            android:id="@+id/ivClearTo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:selectableItemBackground"
+            android:padding="10dp"
+            android:src="@drawable/ic_round_close_24"
+            app:layout_constraintBottom_toBottomOf="@id/toInput"
+            app:layout_constraintEnd_toEndOf="@id/toInput"
+            app:layout_constraintTop_toTopOf="@id/toInput"
+            tools:visibility="visible" />
 
         <LinearLayout
             android:id="@+id/clToolPanel"
