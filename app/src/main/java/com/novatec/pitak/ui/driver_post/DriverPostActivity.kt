@@ -95,7 +95,6 @@ class DriverPostActivity : BaseActivity(), IOnPassengerDelete {
 
         viewModel.offerActionResp.observe(this, {
             viewModel.getPostById(postId)
-            viewModel.getOffersForPost(postId)
             offersAdapter.refresh()
         })
 
@@ -165,7 +164,6 @@ class DriverPostActivity : BaseActivity(), IOnPassengerDelete {
                 is ResultWrapper.Success -> {
                     setResult(RESULT_OK)
                     finish()
-
                 }
                 ResultWrapper.InProgress -> {
                 }
@@ -243,7 +241,6 @@ class DriverPostActivity : BaseActivity(), IOnPassengerDelete {
 
         swipeRefreshLayout.setOnRefreshListener {
             viewModel.getPostById(postId)
-            viewModel.getOffersForPost(postId)
             offersAdapter.refresh()
         }
 
