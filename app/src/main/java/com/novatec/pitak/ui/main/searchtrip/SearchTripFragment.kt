@@ -15,8 +15,6 @@ import androidx.paging.LoadState
 import com.novatec.core.ErrorWrapper
 import com.novatec.core.ResultWrapper
 import com.novatec.core.exhaustive
-import com.novatec.domain.domainmodel.MAX_PRICE
-import com.novatec.domain.domainmodel.MIN_PRICE
 import com.novatec.pitak.R
 import com.novatec.pitak.ui.main.MainActivity
 import com.novatec.pitak.ui.viewgroups.PlaceFeedItemView
@@ -109,11 +107,13 @@ class SearchTripFragment : Fragment(R.layout.fragment_search_trip) {
         ivClearFrom.setOnClickListener {
             fromInput.setText("")
             ivClearFrom.visibility = View.GONE
+            fromInput.clearFocus()
         }
 
         ivClearTo.setOnClickListener {
             toInput.setText("")
             ivClearTo.visibility = View.GONE
+            toInput.clearFocus()
         }
 
         fromInput.doOnTextChanged { text, start, before, count ->
@@ -185,8 +185,6 @@ class SearchTripFragment : Fragment(R.layout.fragment_search_trip) {
             timeThirdPart.isChecked = false
             timeFourthPart.isChecked = false
             aCCheck.isChecked = false
-            range_slider.min = MIN_PRICE
-            range_slider.max = MAX_PRICE
             number_picker.resetText()
         }
 

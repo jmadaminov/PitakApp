@@ -9,8 +9,8 @@ import androidx.paging.cachedIn
 import com.novatec.core.ResultWrapper
 import com.novatec.data.UserRepositoryImpl
 import com.novatec.domain.domainmodel.Filter
-import com.novatec.domain.domainmodel.MAX_PRICE
-import com.novatec.domain.domainmodel.MIN_PRICE
+import com.novatec.domain.domainmodel.Filter.Companion.MAX_PRICE
+import com.novatec.domain.domainmodel.Filter.Companion.MIN_PRICE
 import com.novatec.domain.domainmodel.Place
 import com.novatec.domain.usecases.GetPlacesFeed
 import com.novatec.pitak.ui.BaseViewModel

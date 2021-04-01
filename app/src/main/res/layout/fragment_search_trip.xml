@@ -51,19 +51,28 @@
             android:textColor="@color/dark_grey"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/ivClearFrom"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?android:selectableItemBackground"
-            android:padding="10dp"
-            android:src="@drawable/ic_round_close_24"
+
+        <RelativeLayout
+            android:id="@+id/rlClearFrom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="@id/fromInput"
             app:layout_constraintEnd_toEndOf="@id/fromInput"
-            app:layout_constraintTop_toTopOf="@id/fromInput"
-            tools:visibility="visible" />
+            app:layout_constraintTop_toTopOf="@id/fromInput">
+
+            <ImageView
+                android:id="@+id/ivClearFrom"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:visibility="gone"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:selectableItemBackground"
+                android:padding="10dp"
+                android:src="@drawable/ic_round_close_24"
+                tools:visibility="visible" />
+        </RelativeLayout>
+
 
 
         <EditText
@@ -87,19 +96,28 @@
             android:textColor="@color/dark_grey"
             app:layout_constraintTop_toBottomOf="@id/fromInput" />
 
-        <ImageView
-            android:id="@+id/ivClearTo"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?android:selectableItemBackground"
-            android:padding="10dp"
-            android:src="@drawable/ic_round_close_24"
+        <RelativeLayout
+            android:id="@+id/rlClearTo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="@id/toInput"
             app:layout_constraintEnd_toEndOf="@id/toInput"
-            app:layout_constraintTop_toTopOf="@id/toInput"
-            tools:visibility="visible" />
+            app:layout_constraintTop_toTopOf="@id/toInput">
+
+            <ImageView
+                android:id="@+id/ivClearTo"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:selectableItemBackground"
+                android:padding="10dp"
+                android:visibility="gone"
+                android:src="@drawable/ic_round_close_24"
+                tools:visibility="visible" />
+
+        </RelativeLayout>
+
 
         <LinearLayout
             android:id="@+id/clToolPanel"
@@ -297,7 +315,7 @@
                         android:layout_marginStart="12dp"
                         android:layout_marginEnd="12dp"
                         app:drawThumbsApart="true"
-                        app:scaleMax="1000000"
+                        app:scaleMax="500000"
                         app:scaleMin="10000"
                         app:scaleStep="10000"
                         app:thumbNumber="2" />

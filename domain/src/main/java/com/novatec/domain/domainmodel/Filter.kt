@@ -7,8 +7,7 @@ import java.util.*
  * Representation for a [Filter] fetched from the API
  */
 
-const val MAX_PRICE = 500000
-const val MIN_PRICE = 10000
+
 
 data class Filter(var airConditioner: Boolean? = null,
                   var departureDate: String? = null,
@@ -24,5 +23,10 @@ data class Filter(var airConditioner: Boolean? = null,
                   var timeSecondPart: Boolean? = null,
                   var timeThirdPart: Boolean? = null,
                   var timeFourthPart: Boolean? = null) {
+    companion object {
+        const val MAX_PRICE = 500000
+        const val MIN_PRICE = 10000
+        const val STEP = 10000
+    }
 
 }
