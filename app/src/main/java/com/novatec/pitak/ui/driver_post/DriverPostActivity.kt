@@ -224,7 +224,7 @@ class DriverPostActivity : BaseActivity(), IOnPassengerDelete {
             passengersAdapter.add(PassengerItem(it) { passenger ->
                 val dialog = DialogDeletePassenger().apply {
                     val args = Bundle()
-                    args.putLong(ARG_PASSENGER_ID, passenger.id!!)
+                    args.putLong(ARG_PASSENGER_ID, passenger.profile!!.id.toLong())
                     arguments = args
                 }
                 dialog.show(supportFragmentManager, "")

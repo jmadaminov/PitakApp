@@ -100,7 +100,6 @@ class DriverPostViewModel @ViewModelInject constructor(val postRepository: Drive
         finishPostResponse.value = ResultWrapper.InProgress
         viewModelScope.launch(Dispatchers.IO) {
             val response = finishPost.execute(identifier)
-
             withContext(Dispatchers.Main) {
                 isLoading.value = false
                 finishPostResponse.value = response
@@ -111,11 +110,9 @@ class DriverPostViewModel @ViewModelInject constructor(val postRepository: Drive
     val offerActionResp = SingleLiveEvent<String>()
     val offerActionError = SingleLiveEvent<String>()
     fun acceptOffer(id: Long) {
-
         offerActionLoading.value = true
         viewModelScope.launch(Dispatchers.IO) {
             val response = postRepository.acceptOffer(id)
-
             withContext(Dispatchers.Main) {
                 offerActionLoading.value = false
                 when (response) {
@@ -130,7 +127,6 @@ class DriverPostViewModel @ViewModelInject constructor(val postRepository: Drive
     }
 
     fun cancelOffer(id: Long) {
-
         offerActionLoading.value = true
         viewModelScope.launch(Dispatchers.IO) {
             val response = postRepository.rejectOffer(id)
@@ -163,10 +159,8 @@ class DriverPostViewModel @ViewModelInject constructor(val postRepository: Drive
                         startedTripResp.postValue(true)
                     }
                 }.exhaustive
-
             }
         }
-
     }
 
 }
