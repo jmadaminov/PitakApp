@@ -41,6 +41,16 @@ open class PassengerPostMapper @Inject constructor() :
                                           type.profile.id,
                                           profileImage)
 
+
+        val myLastOffer = if (type.myLastOffer != null) UserOffer(type.myLastOffer.id,
+                                                                        type.myLastOffer.id,
+                                                                        type.myLastOffer.repliedPostId,
+                                                                        type.myLastOffer.status,
+                                                                        type.myLastOffer.message,
+                                                                        type.myLastOffer.submitDate,
+                                                                        type.myLastOffer.priceInt,
+                                                                        type.myLastOffer.seat) else null
+
         return PassengerPost(type.id,
                                   placeFrom,
                                   placeTo,
@@ -57,6 +67,7 @@ open class PassengerPostMapper @Inject constructor() :
                              profile,
                              type.remark,
                                   type.postStatus,
+                             myLastOffer,
                                   type.seat,
                                   type.postType)
     }
@@ -89,7 +100,15 @@ open class PassengerPostMapper @Inject constructor() :
                                        type.profile.surname,
                                        type.profile.id,
                                        profileImage)
-        
+
+        val myLastOffer = if (type.myLastOffer != null) UserOfferEntity(type.myLastOffer!!.id,
+                                                                        type.myLastOffer!!.id,
+                                                                        type.myLastOffer!!.repliedPostId,
+                                                                        type.myLastOffer!!.status,
+                                                                        type.myLastOffer!!.message,
+                                                                        type.myLastOffer!!.submitDate,
+                                                                        type.myLastOffer!!.priceInt,
+                                                                        type.myLastOffer!!.seat) else null
 
         return PassengerPostEntity(type.id,
                                    placeFrom,
@@ -107,6 +126,7 @@ open class PassengerPostMapper @Inject constructor() :
                                    profileEntity,
                                    type.remark,
                                    type.postStatus,
+                                   myLastOffer,
                                    type.seat,
                                    type.postType)
     }

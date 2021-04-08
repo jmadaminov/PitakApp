@@ -103,7 +103,7 @@ interface AuthorizedApiService {
 
 
     @Headers("Content-Type:application/json", "Accept: application/json")
-    @GET("offer/post/action/{id}")
+    @GET("offer/driver/post/{id}")
     suspend fun getOffersForPost(@Path(value = "id", encoded = true) id: Long,
                                  @Query("page") page: Int = 0,
                                  @Query("size") size: Int = 10
@@ -117,7 +117,7 @@ interface AuthorizedApiService {
 
 
     @Headers("Content-Type:application/json", "Accept: application/json")
-    @GET("passenger_post/action/{id}")
+    @GET("passenger_post/action/{id}/as_driver")
     suspend fun getPassengerPostById(@Path(value = "id",
                                            encoded = true) id: Long): RespFormatter<PassengerPostModel>
 

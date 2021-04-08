@@ -22,5 +22,16 @@ data class PassengerPost(val id: Long,
                          val profile: Profile,
                          val remark: String?=null,
                          val postStatus: EPostStatus,
+                         val myLastOffer: UserOffer?=null,
                          val seat: Int,
                          val postType: EPostType = EPostType.PASSENGER_SM)
+
+
+data class UserOffer( val id: Long,
+                            val postId: Long,
+                            val repliedPostId: Long,
+                            val status: String,
+                            val message: String,
+                            val submitDate: String,
+                            val priceInt: Int,
+                            val seat: Int)
