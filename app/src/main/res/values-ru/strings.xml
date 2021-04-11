@@ -211,7 +211,7 @@
 
     <string name="message">Сообщение</string>
 
-    <string name="your_price">Ваша цена</string>
+    <string name="my_price">Ваша цена</string>
 
     <string name="search">Поиск</string>
 
@@ -277,5 +277,9 @@
 
     <string name="go_to_play_market">Go to Play Market</string>
     <string name="sure_to_delete_this_passenger">Вы уверены, что хотите удалить этого пассажира?</string>
+    <string name="my_last_offer">My last offer</string>
+    <string name="attached_post_id">Attached post id</string>
+    <string name="price">Price</string>
+    <string name="update_offer">Update offer</string>
 
 </resources>

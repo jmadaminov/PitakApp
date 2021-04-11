@@ -43,7 +43,7 @@ class PostOffersAdapter(val onOfferActionListener: IOnOfferActionListener) :
                         DecimalFormat("#,###").format(it) + " " + context.getString(R.string.sum)
                 } ?: run {
                     tvOfferingPrice.text =
-                        context.getString(R.string.your_price)
+                        context.getString(R.string.my_price)
                 }
 
                 tvName.text = offer.profile.name + " " + offer.profile.surname
@@ -52,6 +52,8 @@ class PostOffersAdapter(val onOfferActionListener: IOnOfferActionListener) :
                     it.link?.let { link ->
                         ivAvatar.loadCircleImageUrl(link)
                     }
+                } ?: run{
+                    ivAvatar.setImageResource(R.drawable.ic_baseline_account_circle_24)
                 }
 
                 ivDeny.setOnClickListener {

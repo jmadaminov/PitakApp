@@ -23,7 +23,7 @@ import com.novatec.pitak.ui.BaseActivity
 import com.novatec.pitak.util.AppPrefs
 import com.novatec.pitak.util.getRealPathFromURI
 import com.novatec.pitak.util.loadBitmap
-import com.novatec.pitak.util.loadImageUrl
+import com.novatec.pitak.util.load
 import kotlinx.android.synthetic.main.activity_edit_profile.*
 import java.io.File
 
@@ -130,7 +130,7 @@ class EditProfileActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedL
 
         edtSurname.setText(AppPrefs.surname)
         edtName.setText(AppPrefs.name)
-        if (AppPrefs.avatar.isNotBlank()) ivAvatar.loadImageUrl(AppPrefs.avatar)
+        if (AppPrefs.avatar.isNotBlank()) ivAvatar.load(AppPrefs.avatar)
     }
 
     override fun onSingleImageSelected(uri: Uri, tag: String?) {

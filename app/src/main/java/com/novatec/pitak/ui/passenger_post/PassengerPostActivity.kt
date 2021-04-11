@@ -24,6 +24,7 @@ import kotlinx.android.synthetic.main.activity_passenger_post.seats
 import kotlinx.android.synthetic.main.activity_passenger_post.swipeRefreshLayout
 import kotlinx.android.synthetic.main.activity_passenger_post.to
 import kotlinx.android.synthetic.main.activity_passenger_post.toDistrict
+import kotlinx.android.synthetic.main.item_offer.view.*
 import java.text.DecimalFormat
 
 class PassengerPostActivity : BaseActivity() {
@@ -41,7 +42,7 @@ class PassengerPostActivity : BaseActivity() {
 
         attachListeners()
         subscribeObservers()
-        showPostData(passengerPost)
+//        showPostData(passengerPost)
     }
 
     private fun subscribeObservers() {
@@ -52,7 +53,8 @@ class PassengerPostActivity : BaseActivity() {
 
         viewModel.postData.observe(this) {
             val result = it ?: return@observe
-            showPostData(PassengerPostViewObj.mapFromPassengerPostModel(result))
+            passengerPost = PassengerPostViewObj.mapFromPassengerPostModel(result)
+            showPostData(passengerPost)
         }
 
     }
@@ -76,7 +78,6 @@ class PassengerPostActivity : BaseActivity() {
 
 
         }
-
 
 
     }
@@ -106,9 +107,9 @@ class PassengerPostActivity : BaseActivity() {
         price.text =
             DecimalFormat("#,###").format(post.price) + " " + getString(R.string.sum)
 
-        if (post.remark.isNullOrBlank()){
+        if (post.remark.isNullOrBlank()) {
             note.visibility = View.GONE
-        }else{
+        } else {
             note.visibility = View.VISIBLE
             note.text = post.remark
         }
@@ -120,6 +121,8 @@ class PassengerPostActivity : BaseActivity() {
 
         post.profileViewObj.image?.link?.let {
             ivPassenger.loadCircleImageUrl(it)
+        } ?: run {
+            ivPassenger.setImageResource(R.drawable.ic_baseline_account_circle_24)
         }
 
     }
@@ -141,4 +144,12 @@ class PassengerPostActivity : BaseActivity() {
     }
 
 
+    override fun onResume() {
+        super.onResume()
+        refreshPost()
+    }
+
+    fun refreshPost() {
+        viewModel.getPostById(passengerPost.id)
+    }
 }

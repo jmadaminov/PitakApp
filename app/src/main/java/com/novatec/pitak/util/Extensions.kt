@@ -62,7 +62,7 @@ fun ImageView.loadBitmap(bitmap: Bitmap) {
     Glide.with(this.context).load(bitmap).into(this)
 }
 
-fun ImageView.loadImageUrl(url: String) {
+fun ImageView.load(url: String) {
     val circularProgressDrawable = CircularProgressDrawable(this.context)
     circularProgressDrawable.strokeWidth = 5f
     circularProgressDrawable.centerRadius = 30f

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
@@ -14,8 +15,10 @@ import com.novatec.core.ResultWrapper
 import com.novatec.core.exhaustive
 import com.novatec.domain.domainmodel.DriverPost
 import com.novatec.pitak.R
+import com.novatec.pitak.ui.passenger_post.PassengerPostActivity
 import com.novatec.pitak.ui.viewgroups.ActivePostItem
 import com.novatec.pitak.viewobjects.PassengerPostViewObj
+import com.novatec.pitak.viewobjects.UserOfferViewObj
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import dagger.hilt.android.AndroidEntryPoint
@@ -52,7 +55,22 @@ class DialogOfferARideFragment : DialogFragment() {
         rvMyPosts.adapter = adapter
         attachListeners()
         subscribeObservers()
-        viewModel.getActivePosts()
+
+        passengerPost.myLastOffer?.let { showOfferSent(passengerPost.myLastOffer!!) } ?: run {
+            viewModel.getActivePosts()
+        }
+
+    }
+
+    private fun showOfferSent(myLastOffer: UserOfferViewObj) {
+        viewModel.offeringPostId.value = myLastOffer.repliedPostId
+        rvContainer.isVisible = false
+        cardLastOffer.isVisible = true
+        tvLastOfferPrice.text = getString(R.string.price) + " " + myLastOffer.priceInt.toString()
+        tvLastOfferRepliedPostId.text =
+            getString(R.string.attached_post_id) + " " + myLastOffer.repliedPostId.toString()
+        tvLastOfferMessage.text = getString(R.string.message) + " " + myLastOffer.message
+        btnSendOffer.text = getString(R.string.update_offer)
     }
 
     private fun subscribeObservers() {
@@ -62,12 +80,14 @@ class DialogOfferARideFragment : DialogFragment() {
         })
 
         viewModel.hasFinished.observe(viewLifecycleOwner, { hasFinished ->
+            (requireActivity() as PassengerPostActivity).refreshPost()
             if (hasFinished) dismiss()
+
         })
 
-        viewModel.errorMessage.observe(viewLifecycleOwner, { hasFinished ->
+        viewModel.errorMessage.observe(viewLifecycleOwner, { message ->
             Snackbar.make(view?.rootView!!,
-                          getString(R.string.you_have_reached_post_limit),
+                          message,
                           Snackbar.LENGTH_SHORT).show()
 
         })

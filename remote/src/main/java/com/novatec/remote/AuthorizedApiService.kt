@@ -122,7 +122,7 @@ interface AuthorizedApiService {
                                            encoded = true) id: Long): RespFormatter<PassengerPostModel>
 
     @Headers("Content-Type:application/json", "Accept: application/json")
-    @GET("offer/post/accept/{id}")
+    @GET("offer/main/accept/{id}")
     suspend fun acceptOffer(@Path(value = "id", encoded = true) id: Long): RespFormatter<String?>
 
     @Headers("Content-Type:application/json", "Accept: application/json")
@@ -130,11 +130,11 @@ interface AuthorizedApiService {
     suspend fun startTrip(@Path(value = "id", encoded = true) id: Long): RespFormatter<String?>
 
     @Headers("Content-Type:application/json", "Accept: application/json")
-    @GET("offer/post/reject/{id}")
+    @GET("offer/main/reject/{id}")
     suspend fun rejectOffer(@Path(value = "id", encoded = true) id: Long): RespFormatter<String?>
 
     @Headers("Content-Type:application/json", "Accept: application/json")
-    @GET("offer/post/cancel/{id}")
+    @GET("offer/main/cancel/{id}")
     suspend fun cancelMyOffer(@Path(value = "id", encoded = true) id: Long): RespFormatter<String?>
 
     @Headers("Content-Type:application/json", "Accept: application/json")
@@ -154,7 +154,7 @@ interface AuthorizedApiService {
                                               encoded = true) passengerId: Long):RespFormatter< DriverPostModel>
 
 
-//    @Headers("Content-Type:application/json", "Accept: application/json")
+//    @Headers("Content-Type:application/json", "Accept: application/json")0
 //    @GET("passenger_post/action/{id}")
 //    suspend fun getPassengerPostById(@Path(value = "id",
 //                                           encoded = true) id: Long): RespFormatter<PassengerPostModel>

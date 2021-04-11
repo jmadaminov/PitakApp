@@ -22,9 +22,10 @@ data class PassengerPostViewObj(val id: Long,
                                 val timeFourthPart: Boolean,
                                 val airConditioner: Boolean,
                                 val profileViewObj: ProfileViewObj,
-                                val remark: String?=null,
+                                val remark: String? = null,
                                 val postStatus: EPostStatus,
                                 val seat: Int,
+                                val myLastOffer: UserOfferViewObj? = null,
                                 val postType: EPostType) : Parcelable {
 
 
@@ -41,6 +42,16 @@ data class PassengerPostViewObj(val id: Long,
                                              model.profile.id,
                                              profileImage)
 
+
+            val myLastOffer =
+                if (model.myLastOffer != null) UserOfferViewObj(model.myLastOffer!!.id,
+                                                                model.myLastOffer!!.id,
+                                                                model.myLastOffer!!.repliedPostId,
+                                                                model.myLastOffer!!.status,
+                                                                model.myLastOffer!!.message,
+                                                                model.myLastOffer!!.submitDate,
+                                                                model.myLastOffer!!.priceInt,
+                                                                model.myLastOffer!!.seat) else null
 
             return PassengerPostViewObj(
                 model.id,
@@ -70,6 +81,7 @@ data class PassengerPostViewObj(val id: Long,
                 model.remark,
                 model.postStatus,
                 model.seat,
+                myLastOffer,
                 model.postType,
             )
         }
@@ -85,6 +97,17 @@ data class PassengerPostViewObj(val id: Long,
                                               model.profile.surname,
                                               model.profile.id,
                                               profileImage)
+
+
+            val myLastOffer =
+                if (model.myLastOffer != null) UserOfferViewObj(model.myLastOffer!!.id,
+                                                                model.myLastOffer!!.id,
+                                                                model.myLastOffer!!.repliedPostId,
+                                                                model.myLastOffer!!.status,
+                                                                model.myLastOffer!!.message,
+                                                                model.myLastOffer!!.submitDate,
+                                                                model.myLastOffer!!.priceInt,
+                                                                model.myLastOffer!!.seat) else null
             return PassengerPostViewObj(
                 model.id,
                 PlaceViewObj(model.from.districtId,
@@ -113,9 +136,20 @@ data class PassengerPostViewObj(val id: Long,
                 model.remark,
                 model.postStatus,
                 model.seat,
+                myLastOffer,
                 model.postType,
             )
         }
     }
 
 }
+
+@Parcelize
+data class UserOfferViewObj(val id: Long,
+                            val postId: Long,
+                            val repliedPostId: Long,
+                            val status: String,
+                            val message: String,
+                            val submitDate: String,
+                            val priceInt: Int,
+                            val seat: Int) : Parcelable

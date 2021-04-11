@@ -31,7 +31,7 @@ import com.novatec.pitak.ui.viewgroups.ItemAddPhoto
 import com.novatec.pitak.ui.viewgroups.ItemCarPhoto
 import com.novatec.pitak.util.AppPrefs
 import com.novatec.pitak.util.getRealPathFromURI
-import com.novatec.pitak.util.loadImageUrl
+import com.novatec.pitak.util.load
 import com.novatec.pitak.viewobjects.CarColorViewObj
 import com.novatec.pitak.viewobjects.CarViewObj
 import com.novatec.pitak.viewobjects.IdNameViewObj
@@ -210,7 +210,7 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
                 is ResultWrapper.Success -> {
                     stopLoadingAvatar()
                     car.image = ImageViewObj(response.value.id!!)
-                    carImage.loadImageUrl(response.value.link!!)
+                    carImage.load(response.value.link!!)
                 }
                 ResultWrapper.InProgress -> {
                     startLoadingAvatar()
@@ -416,7 +416,7 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
         }
 
         car.image?.link?.let {
-            carImage.loadImageUrl(it)
+            carImage.load(it)
         }
 
         if (!car.imageList.isNullOrEmpty()) {

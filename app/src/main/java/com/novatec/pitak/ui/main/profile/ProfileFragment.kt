@@ -28,7 +28,7 @@ import com.novatec.pitak.ui.viewgroups.CarItemView
 import com.novatec.pitak.ui.viewgroups.ItemAddCar
 import com.novatec.pitak.ui.viewgroups.LoadingItem
 import com.novatec.pitak.util.AppPrefs
-import com.novatec.pitak.util.loadImageUrl
+import com.novatec.pitak.util.load
 import com.novatec.pitak.viewobjects.CarViewObj
 import com.google.android.material.snackbar.Snackbar
 import com.xwray.groupie.GroupAdapter
@@ -249,7 +249,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile), IOnSignOut {
 
     override fun onResume() {
         super.onResume()
-        if (AppPrefs.avatar.isNotBlank()) profilePhoto.loadImageUrl(AppPrefs.avatar)
+        if (AppPrefs.avatar.isNotBlank()) profilePhoto.load(AppPrefs.avatar)
         nameSurname.text = "${AppPrefs.name} ${AppPrefs.surname}"
     }
 }

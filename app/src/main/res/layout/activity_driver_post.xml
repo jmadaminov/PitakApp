@@ -24,6 +24,7 @@
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
+            android:fillViewport="true"
             android:layout_height="match_parent">
 
             <LinearLayout
@@ -288,7 +289,6 @@
                         android:layout_height="wrap_content"
                         android:clipChildren="false"
                         android:clipToPadding="false"
-                        android:paddingBottom="100dp"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         tools:listitem="@layout/item_passenger" />
 
@@ -300,7 +300,7 @@
                         android:gravity="center"
                         android:textColor="@color/colorPrimary"
                         android:textStyle="bold"
-                        tools:text="@string/offers" />
+                        android:text="@string/offers" />
 
                     <ProgressBar
                         android:id="@+id/progressOfferAction"
@@ -316,6 +316,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:minHeight="200dp"
+                        android:paddingBottom="70dp"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         tools:listitem="@layout/item_offer" />
 

@@ -105,7 +105,7 @@
     <string name="offer_a_ride">Offer a ride</string>
     <string name="send_offer">Send offer</string>
     <string name="message">Message</string>
-    <string name="your_price">Your price</string>
+    <string name="my_price">My price</string>
     <string name="search">Search</string>
     <string name="are_you_sure_to_sign_out">Are you sure you want to sign out?</string>
     <string name="request_sms_again_in">Didn\'t get the code? You can request again in: 00:%1$s</string>
@@ -139,5 +139,9 @@
     <string name="finish">Finish</string>
     <string name="go_to_play_market">Go to Play Market</string>
     <string name="sure_to_delete_this_passenger">Are you sure that you want to delete this passenger?</string>
+    <string name="my_last_offer">My last offer</string>
+    <string name="attached_post_id">Attached post id</string>
+    <string name="price">Price</string>
+    <string name="update_offer">Update offer</string>
 
 </resources>

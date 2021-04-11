@@ -26,6 +26,8 @@ class PassengerItem(val obj: Passenger,
             tvPersonCount.text = obj.offer?.seat?.toString()
             obj.profile?.image?.link?.let {
                 ivAvatar.loadCircleImageUrl(it)
+            } ?: run{
+                ivAvatar.setImageResource(R.drawable.ic_baseline_account_circle_24)
             }
 
             fabCall.isVisible = !isHistoryPost

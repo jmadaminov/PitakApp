@@ -40,7 +40,7 @@
                         android:id="@+id/edtPrice"
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
-                        android:hint="@string/your_price"
+                        android:hint="@string/my_price"
                         android:inputType="number" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -116,6 +116,55 @@
                     app:layout_constraintBottom_toTopOf="@id/rvContainer"
                     app:layout_constraintTop_toBottomOf="@id/messageLayout"
                     tools:text="@string/select_your_trip_if_you_have_one" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cardLastOffer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toTopOf="@id/btnSendOffer"
+                    app:layout_constraintTop_toBottomOf="@id/lblSelectPost"
+                    tools:visibility="visible">
+
+                    <TextView
+                        android:id="@+id/tvLastOfferTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/my_last_offer"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvLastOfferRepliedPostId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvLastOfferTitle" />
+
+
+                    <TextView
+                        android:id="@+id/tvLastOfferPrice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvLastOfferRepliedPostId" />
+
+                    <TextView
+                        android:id="@+id/tvLastOfferMessage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvLastOfferPrice" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
 
                 <RelativeLayout

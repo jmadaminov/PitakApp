@@ -13,7 +13,6 @@ import com.novatec.pitak.ui.passenger_post.offer_a_ride.ARG_PASSENGER_POST
 import com.novatec.pitak.util.loadCircleImageUrl
 import com.novatec.pitak.viewobjects.PassengerPostViewObj
 import com.novatec.remote.model.PassengerPostModel
-import kotlinx.android.synthetic.main.activity_driver_post.*
 import kotlinx.android.synthetic.main.item_passenger_post.view.*
 import splitties.activities.start
 import java.text.DecimalFormat
@@ -72,12 +71,14 @@ class PostFilterAdapter() :
                     }
                 }
 
-                post.profile?.let {
+                post.profile.let {
                     tvPassengerName.text = it.name + " " + it.surname
                 }
 
-                post.profile?.image?.link?.let {
+                post.profile.image?.link?.let {
                     ivPassenger.loadCircleImageUrl(it)
+                } ?: run{
+                    ivPassenger.setImageResource(R.drawable.ic_baseline_account_circle_24)
                 }
 
             }
