@@ -8,7 +8,7 @@ import javax.inject.Inject
  * Map a [UserInfoModel] to and from a [AuthEntity] instance when data is moving between
  * this later and the Data layer
  */
-open class AuthMapper @Inject constructor() : EntityMapper<UserInfoModel, AuthEntity> {
+open class AuthMapper : EntityMapper<UserInfoModel, AuthEntity> {
 
     /**
      * Map an instance of a [UserInfoModel] to a [AuthEntity] model

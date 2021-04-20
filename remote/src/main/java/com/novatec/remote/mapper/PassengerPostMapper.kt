@@ -10,7 +10,7 @@ import javax.inject.Inject
  * Map a [DriverPostEntity] to and from a [DriverPostModel] instance when data is moving between
  * this later and the Domain layer
  */
-open class PassengerPostMapper @Inject constructor() :
+open class PassengerPostMapper :
     Mapper<PassengerPostEntity, PassengerPostModel> {
 
     /**

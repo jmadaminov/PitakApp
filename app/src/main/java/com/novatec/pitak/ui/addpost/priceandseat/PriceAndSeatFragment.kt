@@ -24,7 +24,7 @@ import javax.inject.Inject
 //@FlowPreview
 //@ExperimentalCoroutinesApi
 @AndroidEntryPoint
-class PriceAndSeatFragment @Inject constructor(/*private val viewModelFactory: ViewModelProvider.Factory*/) :
+class PriceAndSeatFragment :
     Fragment(R.layout.fragment_price_and_seat) {
 
     val args: PriceAndSeatFragmentArgs by navArgs()

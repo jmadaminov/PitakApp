@@ -5,6 +5,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
+import androidx.paging.LoadState
 import com.google.android.material.snackbar.Snackbar
 import com.novatec.core.*
 import com.novatec.domain.domainmodel.DriverPost
@@ -65,6 +66,22 @@ class DriverPostActivity : BaseActivity(), IOnPassengerDelete {
             }
 
         })
+
+        offersAdapter.addLoadStateListener { loadState ->
+            when (loadState.source.refresh) {
+                is LoadState.NotLoading -> {
+                    lblMyOffers.text =
+                        if (offersAdapter.itemCount < 1) getString(R.string.you_have_no_offers_yet_come_back_later)
+                        else getString(R.string.offers)
+                }
+                LoadState.Loading -> {
+
+                }
+                is LoadState.Error -> {
+
+                }
+            }
+        }
 
         rvOffers.setHasFixedSize(true)
         rvOffers.adapter = offersAdapter
@@ -282,7 +299,6 @@ class DriverPostActivity : BaseActivity(), IOnPassengerDelete {
 
     override fun onPassengerDelete(passengerId: Long) {
         viewModel.deletePassenger(passengerId, postId)
-
     }
 
 

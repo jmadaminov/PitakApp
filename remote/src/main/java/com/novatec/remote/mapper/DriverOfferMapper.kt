@@ -10,7 +10,7 @@ import javax.inject.Inject
  * Map a [DriverOfferEntity] to and from a [DriverOfferBody] instance when data is moving between
  * this later and the Domain layer
  */
-open class DriverOfferMapper @Inject constructor() : Mapper<DriverOfferEntity, DriverOfferBody> {
+open class DriverOfferMapper : Mapper<DriverOfferEntity, DriverOfferBody> {
 
     /**
      * Map a [DriverOfferEntity] instance to a [DriverOfferBody] instance

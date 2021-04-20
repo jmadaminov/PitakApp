@@ -1,7 +1,5 @@
 package com.novatec.pitak.ui.addpost
 
-//import com.novatec.pitak.di.viewmodels.AddPostViewModelFactory
-//import com.novatec.pitak.fragments.AddPostNavHostFragment
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.activity.viewModels
@@ -26,13 +24,10 @@ class AddPostActivity : BaseActivity() {
     @ExperimentalCoroutinesApi
     @ExperimentalSplittiesApi
     override fun onCreate(savedInstanceState: Bundle?) {
-//        inject()
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_add_post)
         setupActionBar()
-//        onRestoreInstanceState()
-
         subscribeObservers()
         setupListeners()
     }

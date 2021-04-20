@@ -10,7 +10,7 @@ import splitties.experimental.ExperimentalSplittiesApi
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class NotificationsFragment @Inject constructor() : Fragment(R.layout.fragment_notifications) {
+class NotificationsFragment : Fragment(R.layout.fragment_notifications) {
 
     private val viewModel: NotificationsViewModel by viewModels()
 

@@ -3,6 +3,9 @@ package com.novatec.pitak.ui.main.searchtrip
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.LinearLayout
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -35,8 +38,16 @@ class PostFilterAdapter() :
     class PassengerPostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(post: PassengerPostModel) {
             itemView.apply {
-
-                date.text =  post.departureDate
+                llSeatsContainer.removeAllViews()
+                for (i in 0 until post.seat) {
+                    val seat = ImageView(context)
+                    seat.layoutParams =
+                        LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                                                  ViewGroup.LayoutParams.WRAP_CONTENT)
+                    seat.setImageResource(R.drawable.ic_round_emoji_people_24)
+                    llSeatsContainer.addView(seat)
+                }
+                date.text = post.departureDate
                 if (post.from.name == null && post.from.districtName == null) {
                     fromDistrict.isVisible = false
                     from.text = post.from.regionName
@@ -55,16 +66,17 @@ class PostFilterAdapter() :
                     to.text = post.to.districtName
                 }
 
-                price.text = DecimalFormat("#,###").format(post.price) +" "+ itemView.context. getString(R.string.sum)
-                seats.text = post.seat.toString()
+                price.text =
+                    DecimalFormat("#,###").format(post.price) + " " + itemView.context.getString(R.string.sum)
+//                seats.text = post.seat.toString()
 
-                post.remark?.also {
-                    note.visibility = View.VISIBLE
-                    note.text = post.remark
-                } ?: run {
-                    note.visibility = View.GONE
-                }
-                cardParent.setOnClickListener {
+//                post.remark?.also {
+//                    note.visibility = View.VISIBLE
+//                    note.text = post.remark
+//                } ?: run {
+//                    note.visibility = View.GONE
+//                }
+                card.setOnClickListener {
                     context.start<PassengerPostActivity> {
                         putExtra(ARG_PASSENGER_POST,
                                  PassengerPostViewObj.mapFromPassengerPostModel(post))
@@ -77,7 +89,7 @@ class PostFilterAdapter() :
 
                 post.profile.image?.link?.let {
                     ivPassenger.loadCircleImageUrl(it)
-                } ?: run{
+                } ?: run {
                     ivPassenger.setImageResource(R.drawable.ic_baseline_account_circle_24)
                 }
 

@@ -8,7 +8,7 @@ import javax.inject.Inject
  * Map a [UserModel] to and from a [UserEntity] instance when data is moving between
  * this later and the Data layer
  */
-open class CarDetailsMapper @Inject constructor() : EntityMapper<CarDetails, CarDetailsEntity> {
+open class CarDetailsMapper : EntityMapper<CarDetails, CarDetailsEntity> {
 
     override fun mapToEntity(type: CarDetails): CarDetailsEntity {
         val images = arrayListOf<ImageEntity>()

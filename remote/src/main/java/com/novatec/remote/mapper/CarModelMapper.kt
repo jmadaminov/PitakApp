@@ -10,7 +10,7 @@ import javax.inject.Inject
  * Map a [UserModel] to and from a [UserEntity] instance when data is moving between
  * this later and the Data layer
  */
-open class CarModelMapper @Inject constructor() : EntityMapper<CarModelModel, CarModelEntity> {
+open class CarModelMapper : EntityMapper<CarModelModel, CarModelEntity> {
 
     override fun mapToEntity(type: CarModelModel): CarModelEntity {
         return CarModelEntity(type.id, type.name)

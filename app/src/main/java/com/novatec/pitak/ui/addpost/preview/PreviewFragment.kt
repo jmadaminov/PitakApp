@@ -1,5 +1,6 @@
 package com.novatec.pitak.ui.addpost.preview
 
+import android.app.Activity.RESULT_OK
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
@@ -11,29 +12,21 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.novatec.core.*
 import com.novatec.domain.domainmodel.DriverPost
-import com.novatec.domain.domainmodel.Place
 import com.novatec.pitak.R
 import com.novatec.pitak.ui.addcar.MyItemClickListener
 import com.novatec.pitak.ui.addpost.AddPostViewModel
 import com.novatec.pitak.ui.viewgroups.CarItemSelectionView
-import com.google.android.material.snackbar.Snackbar
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_preview.*
-import kotlinx.android.synthetic.main.fragment_preview.note
 import splitties.experimental.ExperimentalSplittiesApi
-import javax.inject.Inject
-import kotlin.to
 
-
-//@FlowPreview
-//@ExperimentalCoroutinesApi
 @AndroidEntryPoint
-class PreviewFragment @Inject constructor(/*private val viewModelFactory: ViewModelProvider.Factory*/) :
-    Fragment(R.layout.fragment_preview) {
+class PreviewFragment : Fragment(R.layout.fragment_preview) {
 
 
     private val adapter = GroupAdapter<GroupieViewHolder>()
@@ -67,7 +60,8 @@ class PreviewFragment @Inject constructor(/*private val viewModelFactory: ViewMo
             labelFrom.text = activityViewModel.placeFrom?.regionName
         } else {
             labelFromRegion.isVisible = true
-            labelFromRegion.text = activityViewModel.placeFrom?.regionName ?: activityViewModel.placeFrom?.name
+            labelFromRegion.text =
+                activityViewModel.placeFrom?.regionName ?: activityViewModel.placeFrom?.name
             labelFrom.text = activityViewModel.placeFrom?.districtName
         }
 
@@ -76,10 +70,10 @@ class PreviewFragment @Inject constructor(/*private val viewModelFactory: ViewMo
             labelTo.text = activityViewModel.placeTo?.regionName
         } else {
             labelToRegion.isVisible = true
-            labelToRegion.text = activityViewModel.placeTo?.regionName ?: activityViewModel.placeTo?.name
+            labelToRegion.text =
+                activityViewModel.placeTo?.regionName ?: activityViewModel.placeTo?.name
             labelTo.text = activityViewModel.placeTo?.districtName
         }
-
 
 
         var time = ""
@@ -211,10 +205,11 @@ class PreviewFragment @Inject constructor(/*private val viewModelFactory: ViewMo
                     postCreate.revertAnimation()
                     Snackbar.make(scrollView,
                                   response.err.localizedMessage!!,
-                                  Snackbar.LENGTH_SHORT)                        .show()
+                                  Snackbar.LENGTH_SHORT).show()
                 }
                 is ResultWrapper.Success -> {
                     postCreate.stopAnimation()
+                    requireActivity().setResult(RESULT_OK)
                     requireActivity().finish()
                 }
                 ResultWrapper.InProgress -> {

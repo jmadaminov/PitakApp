@@ -10,7 +10,7 @@ import javax.inject.Inject
  * Map a [PlaceEntity] to and from a [PlaceModel] instance when data is moving between
  * this later and the Domain layer
  */
-open class PlaceMapper @Inject constructor() : Mapper<PlaceEntity, PlaceModel> {
+open class PlaceMapper : Mapper<PlaceEntity, PlaceModel> {
 
     /**
      * Map a [PlaceEntity] instance to a [PlaceModel] instance

@@ -1,11 +1,9 @@
 package com.novatec.pitak.ui.main
 
 import android.content.Intent
-import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.View
 import android.widget.CheckedTextView
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -23,7 +21,6 @@ import com.novatec.pitak.ui.main.notifications.NotificationsFragment
 import com.novatec.pitak.ui.main.profile.ProfileFragment
 import com.novatec.pitak.ui.main.searchtrip.SearchTripFragment
 import com.novatec.pitak.util.AppPrefs
-import com.novatec.pitak.util.AppSignatureHelper
 import com.novatec.pitak.util.ContextUtils.setLocale
 import kotlinx.android.synthetic.main.activity_main.*
 import splitties.activities.start
@@ -31,6 +28,11 @@ import splitties.experimental.ExperimentalSplittiesApi
 
 
 class MainActivity : BaseActivity() {
+
+    companion object {
+        private val REQ_CODE_ADD_POST = 98
+
+    }
 
     private var notificationPostId: Long? = null
     private lateinit var navController: NavController
@@ -73,7 +75,7 @@ class MainActivity : BaseActivity() {
     private fun setupListeners() {
         addPost.setOnClickListener {
             if (!AppPrefs.defaultCarId.isNullOrBlank() && AppPrefs.defaultCarId != "0") {
-                start<AddPostActivity>()
+                startActivityForResult(Intent(this, AddPostActivity::class.java), REQ_CODE_ADD_POST)
             } else {
                 DialogAddCarFirst().show(supportFragmentManager, "")
             }
@@ -136,6 +138,16 @@ class MainActivity : BaseActivity() {
             start<AuthActivity> { }
             finish()
         }
+    }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (resultCode == RESULT_OK && requestCode == REQ_CODE_ADD_POST) {
+            navMyTrips.performClick()
+        }
+
     }
 
     private fun subscribeObservers() {

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="line">
+    android:shape="line"
+    >
     <stroke
         android:width="3dp"
         android:color="@color/button_grey"
-        android:dashWidth="30dp"
-        android:dashGap="10dp" />
+        android:dashWidth="7dp"
+        android:dashGap="4dp" />
 
 </shape>

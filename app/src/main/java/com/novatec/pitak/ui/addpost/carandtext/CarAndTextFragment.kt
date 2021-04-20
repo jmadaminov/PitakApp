@@ -32,7 +32,7 @@ import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class CarAndTextFragment @Inject constructor() :
+class CarAndTextFragment :
     Fragment(R.layout.fragment_car_and_note) {
 
     val args: CarAndTextFragmentArgs by navArgs()
