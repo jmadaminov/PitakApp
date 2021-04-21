@@ -25,10 +25,10 @@ class DateAndTimeFragment : Fragment(R.layout.fragment_date_and_time) {
     val args: DateAndTimeFragmentArgs by navArgs()
 
     private var selectedDate: String? = null
-    private var timeFirstPart = false
-    private var timeSecondPart = false
-    private var timeThirdPart = false
-    private var timeFourthPart = false
+    private var timeFirstPart = true
+    private var timeSecondPart = true
+    private var timeThirdPart = true
+    private var timeFourthPart = true
     val dateFormat = SimpleDateFormat("dd.MM.yyyy")
 
     private val activityViewModel: AddPostViewModel by activityViewModels()
@@ -68,20 +68,20 @@ class DateAndTimeFragment : Fragment(R.layout.fragment_date_and_time) {
 
     @ExperimentalSplittiesApi
     private fun setupListeners() {
-        asapCheck.setOnCheckedChangeListener { buttonView, isChecked ->
+//        asapCheck.setOnCheckedChangeListener { buttonView, isChecked ->
+//
+//            checkSecondPartDay.isEnabled = !isChecked
+//            checkThirdPartDay.isEnabled = !isChecked
+//            checkFirstPartDay.isEnabled = !isChecked
+//            checkFourthPartDay.isEnabled = !isChecked
 
-            checkSecondPartDay.isEnabled = !isChecked
-            checkThirdPartDay.isEnabled = !isChecked
-            checkFirstPartDay.isEnabled = !isChecked
-            checkFourthPartDay.isEnabled = !isChecked
-
-            checkSecondPartDay.isChecked = isChecked
-            checkThirdPartDay.isChecked = isChecked
-            checkFirstPartDay.isChecked = isChecked
-            checkFourthPartDay.isChecked = isChecked
+        checkFirstPartDay.isChecked = true
+        checkSecondPartDay.isChecked = true
+        checkThirdPartDay.isChecked = true
+        checkFourthPartDay.isChecked = true
 
 
-            if (isChecked) {
+//            if (isChecked) {
 //                calendar.selectedDate = CalendarDay.today()
 //                calendar.state().edit()
 //                    .setMinimumDate(CalendarDay.today())
@@ -91,7 +91,7 @@ class DateAndTimeFragment : Fragment(R.layout.fragment_date_and_time) {
                 var cal = Calendar.getInstance().timeInMillis
                 calendar.date = cal
                 selectedDate = dateFormat.format(cal)
-            } else {
+//            } else {
 //                val todayPlusThreeMonths = DateTime.now().plusMonths(3)
 //                calendar.state().edit().setMinimumDate(CalendarDay.today())
 //                    .setMaximumDate(CalendarDay.from(todayPlusThreeMonths.year,
@@ -99,9 +99,9 @@ class DateAndTimeFragment : Fragment(R.layout.fragment_date_and_time) {
 //                                                     todayPlusThreeMonths.dayOfMonth)).commit()
 
 
-            }
+//            }
 
-        }
+//        }
 
 
         checkFirstPartDay.setOnCheckedChangeListener { buttonView, isChecked ->
@@ -139,18 +139,13 @@ class DateAndTimeFragment : Fragment(R.layout.fragment_date_and_time) {
             navController.navigate(if (args.ISFROMPOSTPREVIEW) R.id.action_dateTimeFragment_to_previewFragment else R.id.action_dateTimeFragment_to_priceAndSeatFragment)
         }
 
-        navBack.setOnClickListener {
-            requireActivity().onBackPressed()
-        }
-
-
         calendar.setOnDateChangeListener { view, year, month, dayOfMonth ->
             val cal = Calendar.getInstance()
             cal[Calendar.YEAR] = year
             cal[Calendar.MONTH] = month
             cal[Calendar.DAY_OF_MONTH] = dayOfMonth
             selectedDate = dateFormat.format(cal.time)
-            asapCheck.isChecked = false
+//            asapCheck.isChecked = false
         }
 
     }
@@ -174,37 +169,6 @@ class DateAndTimeFragment : Fragment(R.layout.fragment_date_and_time) {
 
     @ExperimentalSplittiesApi
     private fun setupObservers() {
-//        viewModel.fromPlacesResponse.observe(viewLifecycleOwner, Observer {
-//            val response = it ?: return@Observer
-//
-//            when (response) {
-//                is ErrorWrapper.ResponseError -> {
-//
-//                }
-//                is ErrorWrapper.SystemError -> {
-//
-//                }
-//                is ResultWrapper.Success -> {
-//                    fromAutocompletePresenter.getAdr().clear()
-//                    response.value.forEach { place ->
-//                        fromAutocompletePresenter.getAdr().add(PlaceAutocompleteItemView(place,
-//                                                                                        fromAutocompletePresenter))
-//
-//                    }
-//                    fromAutocompletePresenter.getAdr().notifyDataSetChanged()
-//                }
-//                ResultWrapper.InProgress -> {
-//                    if (fromAutocompletePresenter.getAdr().itemCount == 0 || fromAutocompletePresenter.getAdr().getItem(
-//                            fromAutocompletePresenter.getAdr().itemCount - 1) !is LoadingItemSmall) {
-//                        fromAutocompletePresenter.getAdr().add(LoadingItemSmall())
-//                        fromAutocompletePresenter.getAdr().notifyDataSetChanged()
-//                    } else {
-//
-//                    }
-//                }
-//            }.exhaustive
-//
-//        })
 
     }
 

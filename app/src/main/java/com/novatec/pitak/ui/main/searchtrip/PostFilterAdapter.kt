@@ -1,11 +1,11 @@
 package com.novatec.pitak.ui.main.searchtrip
 
+import android.text.format.DateFormat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
-import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -13,14 +13,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.novatec.pitak.R
 import com.novatec.pitak.ui.passenger_post.PassengerPostActivity
 import com.novatec.pitak.ui.passenger_post.offer_a_ride.ARG_PASSENGER_POST
+import com.novatec.pitak.util.PostUtils.timeFromDayParts
 import com.novatec.pitak.util.loadCircleImageUrl
 import com.novatec.pitak.viewobjects.PassengerPostViewObj
 import com.novatec.remote.model.PassengerPostModel
 import kotlinx.android.synthetic.main.item_passenger_post.view.*
 import splitties.activities.start
 import java.text.DecimalFormat
+import java.text.SimpleDateFormat
 
-class PostFilterAdapter() :
+class PostFilterAdapter :
     PagingDataAdapter<PassengerPostModel, PostFilterAdapter.PassengerPostViewHolder>(
         FILTER_COMPARATOR) {
 
@@ -47,7 +49,16 @@ class PostFilterAdapter() :
                     seat.setImageResource(R.drawable.ic_round_emoji_people_24)
                     llSeatsContainer.addView(seat)
                 }
-                date.text = post.departureDate
+
+                time.text = timeFromDayParts(post.timeFirstPart,
+                                             post.timeSecondPart,
+                                             post.timeThirdPart,
+                                             post.timeFourthPart)
+
+                date.text = DateFormat.format("dd MMMM",
+                                              SimpleDateFormat("dd.MM.yyyy").parse(post.departureDate))
+                    .toString()
+
                 if (post.from.name == null && post.from.districtName == null) {
                     fromDistrict.isVisible = false
                     from.text = post.from.regionName

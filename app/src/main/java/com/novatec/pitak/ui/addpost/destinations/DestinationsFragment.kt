@@ -82,19 +82,19 @@ class DestinationsFragment : Fragment(R.layout.fragment_destinations) {
             viewModel.placeFrom = activityViewModel.placeFrom
             fromInput.setText(viewModel.placeFrom!!.regionName)
             toInput.setText(viewModel.placeTo!!.regionName)
-            navBack.visibility = View.VISIBLE
+//            navBack.visibility = View.VISIBLE
         } else {
-            navBack.visibility = View.INVISIBLE
+//            navBack.visibility = View.INVISIBLE
         }
     }
 
     private fun setupListeners() {
 
-        navBack.setOnClickListener {
-            requireActivity().onBackPressed()
-        }
+//        navBack.setOnClickListener {
+//            requireActivity().onBackPressed()
+//        }
 
-        next.setOnClickListener {
+        navNext.setOnClickListener {
             activityViewModel.placeFrom = viewModel.placeFrom
             activityViewModel.placeTo = viewModel.placeTo
 
@@ -176,18 +176,18 @@ class DestinationsFragment : Fragment(R.layout.fragment_destinations) {
     }
 
     private fun updateNextButtonState() {
-        next.isEnabled = viewModel.placeFrom != null && viewModel.placeTo != null
+        navNext.isEnabled = viewModel.placeFrom != null && viewModel.placeTo != null
 
-        if (next.isEnabled) {
-            val bg = next.background
+        if (navNext.isEnabled) {
+            val bg = navNext.background
             bg.setColorFilter(ContextCompat.getColor(requireContext(), R.color.colorPrimary),
                               PorterDuff.Mode.SRC_ATOP)
-            next.background = bg
+            navNext.background = bg
         } else {
-            val bg = next.background
+            val bg = navNext.background
             bg.setColorFilter(ContextCompat.getColor(requireContext(), R.color.ic_grey),
                               PorterDuff.Mode.SRC_ATOP)
-            next.background = bg
+            navNext.background = bg
         }
     }
 

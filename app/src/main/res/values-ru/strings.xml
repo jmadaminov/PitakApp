@@ -282,5 +282,6 @@
     <string name="price">Price</string>
     <string name="update_offer">Update offer</string>
     <string name="you_have_no_offers_yet_come_back_later">You have no offers yet, please come back later!</string>
+    <string name="close">Close</string>
 
 </resources>

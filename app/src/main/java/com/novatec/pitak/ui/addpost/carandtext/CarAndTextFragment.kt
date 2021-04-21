@@ -11,8 +11,6 @@ import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.novatec.core.ErrorWrapper
 import com.novatec.core.ResultWrapper
 import com.novatec.core.exhaustive
@@ -28,12 +26,10 @@ import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_car_and_note.*
 import splitties.experimental.ExperimentalSplittiesApi
-import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class CarAndTextFragment :
-    Fragment(R.layout.fragment_car_and_note) {
+class CarAndTextFragment : Fragment(R.layout.fragment_car_and_note) {
 
     val args: CarAndTextFragmentArgs by navArgs()
 
@@ -84,9 +80,7 @@ class CarAndTextFragment :
             navController.navigate(if (args.ISFROMPOSTPREVIEW) R.id.action_carAndTextFragment_to_previewFragment else R.id.action_carAndTextFragment_to_previewFragment)
         }
 
-        navBack.setOnClickListener {
-            requireActivity().onBackPressed()
-        }
+
     }
 
 

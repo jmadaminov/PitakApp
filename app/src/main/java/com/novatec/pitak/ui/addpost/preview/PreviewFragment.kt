@@ -51,7 +51,7 @@ class PreviewFragment : Fragment(R.layout.fragment_preview) {
 
     private fun setupViews() {
         if (activityViewModel.isEditing) {
-            navBack.visibility = View.INVISIBLE
+//            navBack.visibility = View.INVISIBLE
             postCreate.text = getString(R.string.update)
         }
 
@@ -128,9 +128,9 @@ class PreviewFragment : Fragment(R.layout.fragment_preview) {
     private fun setupListeners() {
 
 
-        navBack.setOnClickListener {
-            requireActivity().onBackPressed()
-        }
+//        navBack.setOnClickListener {
+//            requireActivity().onBackPressed()
+//        }
 
         layoutDestinations.setOnClickListener {
             navController.navigate(PreviewFragmentDirections.actionPreviewFragmentToDestinationsFragment(
@@ -219,16 +219,6 @@ class PreviewFragment : Fragment(R.layout.fragment_preview) {
 
         })
 
-    }
-
-
-    override fun onPause() {
-        super.onPause()
-
-    }
-
-    override fun onResume() {
-        super.onResume()
     }
 
 

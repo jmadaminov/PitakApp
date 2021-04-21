@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.navigation.NavOptions
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.novatec.core.Constants
 import com.novatec.domain.domainmodel.*
@@ -103,7 +104,14 @@ class AddPostActivity : BaseActivity() {
 
 
     private fun setupListeners() {
-
+        tvClose.setOnClickListener {
+            finish()
+        }
+        ivBack.setOnClickListener {
+            if (!findNavController(R.id.nav_host_fragment).popBackStack()) {
+                finish()
+            }
+        }
 
     }
 
@@ -113,18 +121,9 @@ class AddPostActivity : BaseActivity() {
     }
 
     private fun setupActionBar() {
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setHomeButtonEnabled(true)
+        setSupportActionBar(toolbar)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            android.R.id.home -> {
-                finish()
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
 
 
 }

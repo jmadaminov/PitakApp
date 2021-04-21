@@ -61,7 +61,7 @@
             android:name=".ui.addpost.AddPostActivity"
             android:label="@string/title_add_post"
             
-            android:theme="@style/AppTheme"
+            android:theme="@style/NoActionBar"
             android:windowSoftInputMode="adjustPan" />
 
         <!--        <activity android:name=".SmsConfirmationActivity" />-->
