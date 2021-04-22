@@ -1,7 +1,6 @@
 package com.novatec.pitak.ui.addpost
 
 import android.os.Bundle
-import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
@@ -10,6 +9,7 @@ import com.novatec.core.Constants
 import com.novatec.domain.domainmodel.*
 import com.novatec.pitak.R
 import com.novatec.pitak.ui.BaseActivity
+import com.novatec.pitak.ui.addpost.destinations.DestinationsFragmentDirections
 import com.novatec.pitak.viewobjects.DriverPostViewObj
 import kotlinx.android.synthetic.main.activity_add_post.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -88,14 +88,8 @@ class AddPostActivity : BaseActivity() {
                                        carImageList
             )
 
-            val navOptions = NavOptions.Builder()
-                .setPopUpTo(R.id.previewFragment, true)
-                .build()
-
             nav_host_fragment.findNavController()
-                .navigate(R.id.action_destinationsFragment_to_previewFragment,
-                          null,
-                          navOptions)
+                .navigate(DestinationsFragmentDirections.actionDestinationsFragmentToPreviewFragmentClearBackstack())
 
             title = getString(R.string.edit_post)
         }
@@ -123,7 +117,6 @@ class AddPostActivity : BaseActivity() {
     private fun setupActionBar() {
         setSupportActionBar(toolbar)
     }
-
 
 
 }

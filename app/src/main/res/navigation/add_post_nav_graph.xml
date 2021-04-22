@@ -27,6 +27,16 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
 
+        <action
+            android:id="@+id/action_destinationsFragment_to_previewFragment_clear_backstack"
+            app:destination="@id/previewFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@+id/add_car_nav_graph"
+            app:popUpToInclusive="true"/>
+
         <argument
             android:name="IS_FROM_POST_PREVIEW"
             android:defaultValue="false"

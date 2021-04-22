@@ -64,15 +64,14 @@
                 android:id="@+id/ivClearFrom"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:visibility="gone"
                 android:clickable="true"
                 android:focusable="true"
                 android:foreground="?android:selectableItemBackground"
                 android:padding="10dp"
                 android:src="@drawable/ic_round_close_24"
+                android:visibility="gone"
                 tools:visibility="visible" />
         </RelativeLayout>
-
 
 
         <EditText
@@ -112,8 +111,8 @@
                 android:focusable="true"
                 android:foreground="?android:selectableItemBackground"
                 android:padding="10dp"
-                android:visibility="gone"
                 android:src="@drawable/ic_round_close_24"
+                android:visibility="gone"
                 tools:visibility="visible" />
 
         </RelativeLayout>

@@ -9,7 +9,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="bottomNavigationStyle">@style/AppBottomNavigation</item>
         <item name="textInputStyle">@style/AppTextField</item>
-        <item name="android:windowBackground">@color/windowBackground</item>
+<!--        <item name="android:windowBackground">@color/windowBackground</item>-->
         <item name="fontFamily">@font/valera_round_regular</item>
         <!--        <item name="android:homeAsUpIndicator">@drawable/baseline_arrow_back_white_24dp</item>-->
         <item name="actionBarTheme">@style/ToolBarStyle</item>
@@ -24,7 +24,7 @@
         <item name="bottomNavigationStyle">@style/AppBottomNavigation</item>
 
         <item name="textInputStyle">@style/AppTextField</item>
-        <item name="android:windowBackground">@color/windowBackground</item>
+<!--        <item name="android:windowBackground">@color/windowBackground</item>-->
         <item name="fontFamily">@font/valera_round_regular</item>
         <item name="actionBarTheme">@style/ToolBarStyle</item>
         <item name="android:windowIsTranslucent">true</item>
