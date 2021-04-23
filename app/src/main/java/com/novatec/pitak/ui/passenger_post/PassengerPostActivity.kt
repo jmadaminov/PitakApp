@@ -1,8 +1,12 @@
 package com.novatec.pitak.ui.passenger_post
 
 import android.os.Bundle
+import android.text.format.DateFormat
 import android.view.MenuItem
 import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.LinearLayout
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import com.novatec.pitak.R
@@ -11,21 +15,19 @@ import com.novatec.pitak.ui.dialogs.DialogAddCarFirst
 import com.novatec.pitak.ui.passenger_post.offer_a_ride.ARG_PASSENGER_POST
 import com.novatec.pitak.ui.passenger_post.offer_a_ride.DialogOfferARideFragment
 import com.novatec.pitak.util.AppPrefs
+import com.novatec.pitak.util.PostUtils
 import com.novatec.pitak.util.loadCircleImageUrl
 import com.novatec.pitak.viewobjects.PassengerPostViewObj
-import kotlinx.android.synthetic.main.activity_driver_post.*
 import kotlinx.android.synthetic.main.activity_passenger_post.*
 import kotlinx.android.synthetic.main.activity_passenger_post.date
 import kotlinx.android.synthetic.main.activity_passenger_post.from
 import kotlinx.android.synthetic.main.activity_passenger_post.fromDistrict
 import kotlinx.android.synthetic.main.activity_passenger_post.note
-import kotlinx.android.synthetic.main.activity_passenger_post.price
-import kotlinx.android.synthetic.main.activity_passenger_post.seats
 import kotlinx.android.synthetic.main.activity_passenger_post.swipeRefreshLayout
 import kotlinx.android.synthetic.main.activity_passenger_post.to
 import kotlinx.android.synthetic.main.activity_passenger_post.toDistrict
-import kotlinx.android.synthetic.main.item_offer.view.*
 import java.text.DecimalFormat
+import java.text.SimpleDateFormat
 
 class PassengerPostActivity : BaseActivity() {
 
@@ -84,8 +86,23 @@ class PassengerPostActivity : BaseActivity() {
 
 
     private fun showPostData(post: PassengerPostViewObj) {
-        date.text = post.departureDate
-        seats.text = post.seat.toString()
+        llSeatsContainer.removeAllViews()
+        for (i in 0 until post.seat) {
+            val seat = ImageView(this)
+            seat.layoutParams =
+                LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                                          ViewGroup.LayoutParams.WRAP_CONTENT)
+            seat.setImageResource(R.drawable.ic_round_emoji_people_24)
+            llSeatsContainer.addView(seat)
+        }
+        time.text = PostUtils.timeFromDayParts(post.timeFirstPart,
+                                               post.timeSecondPart,
+                                               post.timeThirdPart,
+                                               post.timeFourthPart)
+
+        date.text = DateFormat.format("dd MMMM",
+                                      SimpleDateFormat("dd.MM.yyyy").parse(post.departureDate))
+            .toString()
         if (post.from.name == null && post.from.districtName == null) {
             fromDistrict.isVisible = false
             from.text = post.from.regionName
@@ -113,7 +130,6 @@ class PassengerPostActivity : BaseActivity() {
             note.visibility = View.VISIBLE
             note.text = post.remark
         }
-
 
         post.profileViewObj.let {
             tvPassengerName.text = it.name + " " + it.surname

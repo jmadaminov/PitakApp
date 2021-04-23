@@ -119,27 +119,6 @@
         app:layout_constraintTop_toBottomOf="@id/phone" />
 
 
-    <!--    <br.com.simplepass.loadingbutton.customViews.CircularProgressButton-->
-    <!--        android:id="@+id/login"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="?android:actionBarSize"-->
-    <!--        android:layout_gravity="start"-->
-    <!--        android:layout_marginStart="48dp"-->
-    <!--        android:layout_marginTop="48dp"-->
-    <!--        android:layout_marginEnd="48dp"-->
-    <!--        android:background="@drawable/button_shape_orange_gradient_rounded"-->
-    <!--        android:enabled="false"-->
-    <!--        android:text="@string/authorize"-->
-    <!--        android:textAllCaps="false"-->
-    <!--        android:textColor="#fff"-->
-    <!--        app:finalCornerAngle="50dp"-->
-    <!--        app:initialCornerAngle="50dp"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@id/phone"-->
-    <!--        app:spinning_bar_color="#fff" />-->
-
-
     <GridLayout
         android:id="@+id/numberGrid"
         android:layout_width="match_parent"

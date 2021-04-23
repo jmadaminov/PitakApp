@@ -1,23 +1,51 @@
 package com.novatec.pitak.ui.viewgroups
 
+import android.text.format.DateFormat
 import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.novatec.core.EPostStatus
 import com.novatec.domain.domainmodel.DriverPost
 import com.novatec.pitak.R
+import com.novatec.pitak.util.PostUtils
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item
-import kotlinx.android.synthetic.main.activity_driver_post.*
 import kotlinx.android.synthetic.main.item_active_post.view.*
 import java.text.DecimalFormat
+import java.text.SimpleDateFormat
 
 
 class ActivePostItem(var post: DriverPost, val onClick: () -> Unit) : Item() {
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         viewHolder.itemView.apply {
-            date.text = post.departureDate
+            llSeatsContainer.removeAllViews()
+            var availableSeats = post.seat - post.passengerCount!!
+            for (i in 0 until post.seat) {
+                val seat = ImageView(context)
+                seat.layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                                                              ViewGroup.LayoutParams.WRAP_CONTENT)
+                seat.setImageResource(R.drawable.ic_round_event_seat_24)
+                if (availableSeats > 0) {
+                    seat.setColorFilter(ContextCompat.getColor(context, R.color.colorPrimary))
+                    availableSeats--
+                } else {
+                    seat.setColorFilter(ContextCompat.getColor(context, R.color.green))
+                }
+                llSeatsContainer.addView(seat)
+            }
+            time.text = PostUtils.timeFromDayParts(post.timeFirstPart,
+                                                   post.timeSecondPart,
+                                                   post.timeThirdPart,
+                                                   post.timeFourthPart)
+
+            date.text = DateFormat.format("dd MMMM",
+                                          SimpleDateFormat("dd.MM.yyyy").parse(post.departureDate))
+                .toString()
+
             if (post.from.name == null && post.from.districtName == null) {
                 fromDistrict.isVisible = false
                 from.text = post.from.regionName
@@ -42,7 +70,7 @@ class ActivePostItem(var post: DriverPost, val onClick: () -> Unit) : Item() {
             if (post.offerCount > 0) {
                 tvOffersCount.visibility = View.VISIBLE
                 tvOffersCount.text = post.offerCount.toString()
-            }else{
+            } else {
                 tvOffersCount.visibility = View.GONE
             }
 
@@ -79,14 +107,8 @@ class ActivePostItem(var post: DriverPost, val onClick: () -> Unit) : Item() {
             }
 
             status.text =
-                post.passengerCount.toString() + "/" + post.seat.toString() + "   " + currentStatusStr
-
-            post.remark?.also {
-                note.visibility = View.VISIBLE
-                note.text = post.remark
-            } ?: run {
-                note.visibility = View.GONE
-            }
+                    /*  post.passengerCount.toString() + "/" + post.seat.toString() + "   " +*/
+                currentStatusStr
 
             if (findViewById<View>(R.id.progress) != null) {
                 cl_parent.removeView(findViewById(R.id.progress))

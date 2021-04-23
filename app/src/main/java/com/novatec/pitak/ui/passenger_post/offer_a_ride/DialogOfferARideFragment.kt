@@ -65,6 +65,7 @@ class DialogOfferARideFragment : DialogFragment() {
     private fun showOfferSent(myLastOffer: UserOfferViewObj) {
         viewModel.offeringPostId.value = myLastOffer.repliedPostId
         rvContainer.isVisible = false
+        lblSelectPost.isVisible = false
         cardLastOffer.isVisible = true
         tvLastOfferPrice.text = getString(R.string.price) + " " + myLastOffer.priceInt.toString()
         tvLastOfferRepliedPostId.text =
