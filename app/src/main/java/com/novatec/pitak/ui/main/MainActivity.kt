@@ -73,6 +73,32 @@ class MainActivity : BaseActivity() {
     }
 
     private fun setupListeners() {
+
+        nav_host_fragment.childFragmentManager.addOnBackStackChangedListener {
+            val fragments = nav_host_fragment.childFragmentManager.fragments
+
+            if (fragments.isNotEmpty()) {
+                when (fragments[0]) {
+                    is SearchTripFragment -> {
+                        uncheckAllButMe(navSearch)
+                    }
+                    is MyTripsFragment -> {
+                        uncheckAllButMe(navMyTrips)
+
+                    }
+                    is NotificationsFragment -> {
+                        uncheckAllButMe(navNotifications)
+
+                    }
+                    is ProfileFragment -> {
+                        uncheckAllButMe(navProfile)
+
+                    }
+                }
+            }
+        }
+
+
         addPost.setOnClickListener {
             if (!AppPrefs.defaultCarId.isNullOrBlank() && AppPrefs.defaultCarId != "0") {
                 startActivityForResult(Intent(this, AddPostActivity::class.java), REQ_CODE_ADD_POST)
