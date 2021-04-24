@@ -13,6 +13,7 @@ import android.widget.ImageView
 import androidx.lifecycle.LiveData
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.async
@@ -71,6 +72,19 @@ fun ImageView.load(url: String) {
     Glide.with(this.context).load(url).placeholder(circularProgressDrawable)
         .apply(RequestOptions().centerInside()).into(this)
 }
+
+
+fun ImageView.loadRounded(url: String, cornerRadius: Int = 10) {
+    val circularProgressDrawable = CircularProgressDrawable(this.context)
+    circularProgressDrawable.strokeWidth = 5f
+    circularProgressDrawable.centerRadius = 30f
+    circularProgressDrawable.start()
+    Glide.with(this.context).load(url).placeholder(circularProgressDrawable)
+        .apply(RequestOptions().centerInside())
+        .apply(RequestOptions.bitmapTransform(RoundedCorners(cornerRadius)))
+        .into(this)
+}
+
 
 fun ImageView.loadCircleImageUrl(url: String) {
     Glide.with(this.context).load(url).apply(RequestOptions().circleCrop()).into(this)

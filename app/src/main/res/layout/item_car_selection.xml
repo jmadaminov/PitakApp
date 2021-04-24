@@ -1,110 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cardParent"
-    android:layout_width="200dp"
-    android:layout_height="120dp"
-    android:clickable="true"
+    android:layout_width="250dp"
+    android:layout_height="150dp"
+    android:layout_margin="10dp"
+    android:clipChildren="true"
     android:elevation="3dp"
-    android:focusable="true"
-    android:foreground="?android:selectableItemBackground"
-    app:cardCornerRadius="5dp"
+    app:cardCornerRadius="10dp"
     app:cardElevation="3dp"
-    app:cardUseCompatPadding="true"
     app:elevation="3dp">
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/frame"
+    <ImageView
+        android:id="@+id/carAvatar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/carModel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/carAvatar"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Nexia" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/plateNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="10dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/shape_plate_number_bg"
+        android:paddingStart="7dp"
+        android:paddingTop="2dp"
+        android:paddingEnd="7dp"
+        android:paddingBottom="2dp"
+        android:text="01CAX046ss"
+        android:textColor="@color/dark_grey"
+        android:textSize="12dp"
+        app:layout_constraintStart_toEndOf="@id/carAvatar"
+        app:layout_constraintTop_toBottomOf="@id/carModel" />
 
 
-        <ImageView
-            android:id="@+id/carAvatar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:src="@drawable/bg"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-        <TextView
-            android:id="@+id/carModel"
-            android:layout_width="120dp"
-            android:layout_height="20dp"
-            android:background="@drawable/shape_round_bottom_left"
-            android:gravity="center"
-            android:maxLines="1"
-            android:paddingTop="2dp"
-            android:text="Nexia"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="12dp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/plateNumber"
-            android:layout_width="120dp"
-            android:layout_height="20dp"
-            android:layout_marginStart="12dp"
-            android:background="@drawable/shape_round_top_left"
-            android:gravity="center"
-            android:paddingBottom="2dp"
-            android:text="01CAX046ss"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="12dp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <ImageView
-            android:id="@+id/stroke"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/selector_border_thic_car"
-            android:scaleType="centerCrop"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <!--        <TextView-->
-        <!--            android:id="@+id/carYear"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginStart="12dp"-->
-        <!--            android:layout_marginEnd="12dp"-->
-        <!--            android:text="1922"-->
-        <!--            app:layout_constraintStart_toEndOf="@id/carAvatar"-->
-        <!--            app:layout_constraintTop_toBottomOf="@id/plateNumber" />-->
-
-
-        <!--        <TextView-->
-        <!--            android:id="@+id/fuelType"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginStart="12dp"-->
-        <!--            android:layout_marginEnd="12dp"-->
-        <!--            android:text="PETROL"-->
-        <!--            app:layout_constraintStart_toEndOf="@id/carAvatar"-->
-        <!--            app:layout_constraintTop_toBottomOf="@id/carYear" />-->
-
-
-        <!--        <CheckBox-->
-        <!--            android:id="@+id/checkboxAC"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginStart="12dp"-->
-        <!--            android:layout_marginEnd="12dp"-->
-        <!--            android:clickable="false"-->
-        <!--            android:enabled="false"-->
-        <!--            android:focusable="false"-->
-        <!--            android:text="AC"-->
-        <!--            app:layout_constraintStart_toStartOf="@id/carAvatar"-->
-        <!--            app:layout_constraintTop_toBottomOf="@id/carAvatar" />-->
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <View
+        android:id="@+id/selectedStroke"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:background="@drawable/stroke_primary" />
 
 </androidx.cardview.widget.CardView>

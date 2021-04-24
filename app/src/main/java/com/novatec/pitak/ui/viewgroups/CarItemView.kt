@@ -1,10 +1,10 @@
 package com.novatec.pitak.ui.viewgroups
 
-import android.view.View
+import androidx.core.view.isVisible
 import com.novatec.domain.domainmodel.CarDetails
 import com.novatec.pitak.R
 import com.novatec.pitak.ui.addcar.MyItemClickListener
-import com.novatec.pitak.util.load
+import com.novatec.pitak.util.loadRounded
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item
 import kotlinx.android.synthetic.main.item_car.view.*
@@ -13,7 +13,7 @@ class CarItemView(val car: CarDetails, val onItemClickListener: MyItemClickListe
 
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
-        viewHolder.itemView.carAvatar.load(car.image!!.link!!)
+        viewHolder.itemView.carAvatar.loadRounded(car.image!!.link!!)
         viewHolder.itemView.plateNumber.text = car.carNumber
 //        viewHolder.itemView.plateNumber.setTextFuture(
 //            PrecomputedTextCompat.getTextFuture(car.carNumber!!,
@@ -21,22 +21,20 @@ class CarItemView(val car: CarDetails, val onItemClickListener: MyItemClickListe
 //                                                null)
 //        )
 //        viewHolder.itemView.plateNumber.text = car.carNumber
-        viewHolder.itemView.carYear.text = car.carYear.toString()
+//        viewHolder.itemView.carYear.text = car.carYear.toString()
         viewHolder.itemView.carModel.text = car.carModel!!.name.toString()
         viewHolder.itemView.carAction.setOnClickListener {
             onItemClickListener.onClick(position, it)
         }
 
-        if (car.def != null && car.def!!) {
-            viewHolder.itemView.cardParent.setBackgroundResource(R.drawable.stroke_primary)
-        }
+        viewHolder.itemView.selectedStroke.isVisible = car.def
 
-        if (car.airConditioner != null && car.airConditioner!!) {
-            viewHolder.itemView.checkboxAC.visibility = View.VISIBLE
-            viewHolder.itemView.checkboxAC.isChecked = car.airConditioner!!
-        } else {
-            viewHolder.itemView.checkboxAC.visibility = View.INVISIBLE
-        }
+//        if (car.airConditioner != null && car.airConditioner!!) {
+//            viewHolder.itemView.checkboxAC.visibility = View.VISIBLE
+//            viewHolder.itemView.checkboxAC.isChecked = car.airConditioner!!
+//        } else {
+//            viewHolder.itemView.checkboxAC.visibility = View.INVISIBLE
+//        }
 
     }
 
