@@ -6,9 +6,11 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.PopupMenu
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import com.google.android.material.snackbar.Snackbar
 import com.novatec.core.Constants.CODE_ADD_CAR
 import com.novatec.core.Constants.TXT_CAR
 import com.novatec.core.ErrorWrapper
@@ -30,7 +32,6 @@ import com.novatec.pitak.ui.viewgroups.LoadingItem
 import com.novatec.pitak.util.AppPrefs
 import com.novatec.pitak.util.load
 import com.novatec.pitak.viewobjects.CarViewObj
-import com.google.android.material.snackbar.Snackbar
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import dagger.hilt.android.AndroidEntryPoint
@@ -66,10 +67,13 @@ class ProfileFragment : Fragment(R.layout.fragment_profile), IOnSignOut {
     @ExperimentalSplittiesApi
     private fun setupViews() {
         (activity as MainActivity).hideTabLayout()
-        cardProfile.setBackgroundResource(R.drawable.stroke_rounded_bottom_corners)
+//        cardProfile.setBackgroundResource(R.drawable.stroke_rounded_bottom_corners)
         nameSurname.text = "${AppPrefs.name} ${AppPrefs.surname}"
         phone.text = "+${AppPrefs.phone}"
-        myRating.rating = AppPrefs.rating
+        if (AppPrefs.rating > 0) {
+            ratingBarDriver.isVisible = true
+            ratingBarDriver.text = AppPrefs.rating.toString()
+        }
 
     }
 
@@ -160,7 +164,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile), IOnSignOut {
     private fun showCars(value: List<CarDetails>) {
         adapter.clear()
         value.forEach { carDetails ->
-            if (carDetails.def){
+            if (carDetails.def) {
                 AppPrefs.edit {
                     defaultCarId = carDetails.id.toString()
                 }
@@ -204,7 +208,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile), IOnSignOut {
 
     private fun setupListeners() {
 
-        cardProfile.setOnClickListener {
+        ivEditProfile.setOnClickListener {
             start<EditProfileActivity> {}
         }
 

@@ -13,137 +13,102 @@
         android:orientation="vertical"
         android:paddingBottom="90dp">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardProfile"
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginStart="12dp"
-            android:layout_marginEnd="12dp"
-            android:layout_marginBottom="12dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?android:selectableItemBackgroundBorderless"
-            app:cardElevation="3dp">
+            android:layout_height="match_parent">
 
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/profilePhoto"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="15dp"
+                android:src="@drawable/ic_baseline_account_circle_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/ridesCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:gravity="center"
+                android:textColor="@color/dark_grey"
+                app:layout_constraintStart_toStartOf="@id/nameSurname"
+                app:layout_constraintTop_toBottomOf="@id/phone"
+                tools:text="Trips: 88" />
 
 
-                <ImageView
-                    android:id="@+id/profilePhoto"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_margin="15dp"
-                    android:src="@drawable/ic_baseline_account_circle_24"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:id="@+id/ivEditProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:selectableItemBackground"
+                android:gravity="center"
+                android:padding="15dp"
+                android:src="@drawable/outline_edit_black_24dp"
+                android:textColor="@color/dark_grey"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/colorPrimaryDark"
+                tools:text="Trips: 88" />
 
-                <!--                    <TextView-->
-                <!--                        android:id="@+id/carNameAndNumber"-->
-                <!--                        android:layout_width="wrap_content"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_marginLeft="15dp"-->
-                <!--                        android:layout_marginTop="15dp"-->
-                <!--                        android:clickable="true"-->
-                <!--                        android:focusable="true"-->
-                <!--                        android:foreground="?android:selectableItemBackground"-->
-                <!--                        android:text="Lacetti 01|XU941A"-->
-                <!--                        android:textColor="@color/dark_grey"-->
-                <!--                        app:layout_constraintStart_toEndOf="@id/profilePhoto"-->
-                <!--                        app:layout_constraintTop_toTopOf="parent" />-->
+            <TextView
+                android:id="@+id/nameSurname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="12dp"
+                android:gravity="center"
+                android:textColor="@color/dark_grey"
+                app:layout_constraintStart_toEndOf="@id/profilePhoto"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Polonchiev Polonchi" />
 
-                <!--                    <TextView-->
-                <!--                        android:id="@+id/direction"-->
-                <!--                        android:layout_width="0dp"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:text="Tash. &ndash;&gt; Xiva"-->
-                <!--                        android:textColor="@color/dark_grey"-->
-                <!--                        app:layout_constraintBottom_toTopOf="@id/ridesCount"-->
-                <!--                        app:layout_constraintEnd_toEndOf="@id/carNameAndNumber"-->
-                <!--                        app:layout_constraintHorizontal_weight="1"-->
-                <!--                        app:layout_constraintStart_toStartOf="@id/carNameAndNumber"-->
-                <!--                        app:layout_constraintTop_toBottomOf="@id/carNameAndNumber" />-->
+            <TextView
+                android:id="@+id/phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:gravity="center"
+                android:textColor="@color/dark_grey"
+                app:layout_constraintStart_toEndOf="@id/profilePhoto"
+                app:layout_constraintTop_toBottomOf="@id/nameSurname"
+                tools:text="+998909998877" />
 
-                <!--                    <RatingBar-->
-                <!--                        android:id="@+id/rating"-->
-                <!--                        style="@style/Widget.AppCompat.RatingBar.Small"-->
-                <!--                        android:layout_width="0dp"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_marginLeft="15dp"-->
-                <!--                        android:layout_marginTop="15dp"-->
-                <!--                        android:layout_marginRight="15dp"-->
-                <!--                        android:numStars="5"-->
-                <!--                        android:textColor="@color/dark_grey"-->
-                <!--                        app:layout_constraintEnd_toEndOf="parent"-->
-                <!--                        app:layout_constraintHorizontal_weight="1"-->
-                <!--                        app:layout_constraintStart_toEndOf="@id/carNameAndNumber"-->
-                <!--                        app:layout_constraintTop_toTopOf="parent" />-->
+            <!--            <RatingBar-->
+            <!--                android:id="@+id/myRating"-->
+            <!--                style="@style/Widget.AppCompat.RatingBar.Small"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                app:layout_constraintStart_toStartOf="@id/phone"-->
+            <!--                app:layout_constraintTop_toBottomOf="@id/phone" />-->
+            <TextView
+                android:id="@+id/ratingBarDriver"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_rounded_corners_primary"
+                android:drawableStart="@drawable/ic_round_star_24"
+                android:gravity="center"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:textColor="@color/white"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/profilePhoto"
+                app:layout_constraintEnd_toEndOf="@id/profilePhoto"
+                app:layout_constraintStart_toStartOf="@id/profilePhoto"
+                app:layout_constraintTop_toBottomOf="@id/profilePhoto"
+                tools:text="2.5" />
 
-                <!--                    <TextView-->
-                <!--                        android:id="@+id/price"-->
-                <!--                        android:layout_width="0dp"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_marginLeft="15dp"-->
-                <!--                        android:layout_marginRight="15dp"-->
-                <!--                        android:text="Price: 50,000 Sum"-->
-                <!--                        android:textColor="@color/dark_grey"-->
-                <!--                        app:layout_constraintEnd_toEndOf="parent"-->
-                <!--                        app:layout_constraintHorizontal_weight="1"-->
-                <!--                        app:layout_constraintStart_toEndOf="@id/carNameAndNumber"-->
-                <!--                        app:layout_constraintTop_toTopOf="@id/direction" />-->
-
-                <TextView
-                    android:id="@+id/ridesCount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginEnd="12dp"
-                    android:gravity="center"
-                    android:textColor="@color/dark_grey"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="Trips: 88" />
-
-                <TextView
-                    android:id="@+id/nameSurname"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginEnd="12dp"
-                    android:gravity="center"
-                    android:textColor="@color/dark_grey"
-                    app:layout_constraintStart_toEndOf="@id/profilePhoto"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="Polonchiev Polonchi" />
-
-                <TextView
-                    android:id="@+id/phone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:layout_marginEnd="12dp"
-                    android:gravity="center"
-                    android:textColor="@color/dark_grey"
-                    app:layout_constraintStart_toEndOf="@id/profilePhoto"
-                    app:layout_constraintTop_toBottomOf="@id/nameSurname"
-                    tools:text="+998909998877" />
-
-                <RatingBar
-                    android:id="@+id/myRating"
-                    style="@style/Widget.AppCompat.RatingBar.Small"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="@id/phone"
-                    app:layout_constraintTop_toBottomOf="@id/phone" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.cardview.widget.CardView>
-
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/labelMyAutos"
