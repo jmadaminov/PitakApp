@@ -224,10 +224,12 @@ class DriverPostActivity : BaseActivity(), IOnPassengerDelete {
         seats.text = "${post.passengerCount}/${post.seat}"
         price.text = DecimalFormat("#,###").format(post.price) + " " + getString(R.string.sum)
 
-        post.remark?.also {
+        if (post.remark.isNullOrBlank()) {
+            note.visibility = View.GONE
+        } else {
             note.visibility = View.VISIBLE
             note.text = post.remark
-        } ?: run { note.visibility = View.GONE }
+        }
 
         passengersAdapter.clear()
 
