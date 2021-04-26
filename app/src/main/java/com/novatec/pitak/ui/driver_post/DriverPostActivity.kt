@@ -233,7 +233,7 @@ class DriverPostActivity : BaseActivity(), IOnPassengerDelete {
 
         passengersAdapter.clear()
 
-        if (post.passengerList != null && post.passengerList!!.isNotEmpty()) {`
+        if (post.passengerList != null && post.passengerList!!.isNotEmpty()) {
             lblMyPassengers.text = getString(R.string.your_passengers)
         } else {
             lblMyPassengers.text = getString(R.string.no_passengers_yet)
