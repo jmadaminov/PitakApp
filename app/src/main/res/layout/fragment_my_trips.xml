@@ -3,11 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/car_pattern_bg" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/pager"
