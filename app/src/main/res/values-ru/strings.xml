@@ -285,5 +285,7 @@
     <string name="close">Close</string>
     <string name="passengers">Passengers</string>
     <string name="price_for_one">Price for one</string>
+    <string name="seats">Seats</string>
+    <string name="willing_price_for_one">Willing price for one</string>
 
 </resources>

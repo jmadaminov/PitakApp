@@ -22,8 +22,8 @@ import com.novatec.pitak.R
 import com.novatec.pitak.ui.BaseActivity
 import com.novatec.pitak.util.AppPrefs
 import com.novatec.pitak.util.getRealPathFromURI
-import com.novatec.pitak.util.loadBitmap
 import com.novatec.pitak.util.load
+import com.novatec.pitak.util.loadRound
 import kotlinx.android.synthetic.main.activity_edit_profile.*
 import java.io.File
 
@@ -48,7 +48,7 @@ class EditProfileActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedL
 
         edtSurname.doOnTextChanged { text, start, before, count -> checkInputs() }
 
-        cardAvatar.setOnClickListener {
+        ivAvatar.setOnClickListener {
             val singleSelectionPicker: BSImagePicker =
                 BSImagePicker.Builder("com.novatec.pitak.fileprovider")
                     .setSpanCount(3) //Default: 3. This is the number of columns
@@ -130,13 +130,13 @@ class EditProfileActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedL
 
         edtSurname.setText(AppPrefs.surname)
         edtName.setText(AppPrefs.name)
-        if (AppPrefs.avatar.isNotBlank()) ivAvatar.load(AppPrefs.avatar)
+        if (AppPrefs.avatar.isNotBlank()) ivAvatar.loadRound(AppPrefs.avatar)
     }
 
     override fun onSingleImageSelected(uri: Uri, tag: String?) {
         checkInputs()
         val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, uri)
-        ivAvatar.loadBitmap(bitmap)
+        ivAvatar.loadRound(bitmap)
         viewModel.uploadAvatar(File(uri.getRealPathFromURI(this)))
     }
 

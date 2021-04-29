@@ -13,8 +13,10 @@ import android.widget.ImageView
 import androidx.lifecycle.LiveData
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
+import com.novatec.pitak.util.SizeUtils.dpToPx
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
@@ -59,36 +61,26 @@ fun Uri.getRealPathFromURI(context: Context): String? {
 }
 
 
-fun ImageView.loadBitmap(bitmap: Bitmap) {
-    Glide.with(this.context).load(bitmap).into(this)
-}
-
 fun ImageView.load(url: String) {
-    val circularProgressDrawable = CircularProgressDrawable(this.context)
-    circularProgressDrawable.strokeWidth = 5f
-    circularProgressDrawable.centerRadius = 30f
-    circularProgressDrawable.start()
-
-    Glide.with(this.context).load(url).placeholder(circularProgressDrawable)
-        .apply(RequestOptions().centerInside()).into(this)
+    Glide.with(this.context).load(url).into(this)
 }
 
-
-fun ImageView.loadRounded(url: String, cornerRadius: Int = 10) {
-    val circularProgressDrawable = CircularProgressDrawable(this.context)
-    circularProgressDrawable.strokeWidth = 5f
-    circularProgressDrawable.centerRadius = 30f
-    circularProgressDrawable.start()
-    Glide.with(this.context).load(url).placeholder(circularProgressDrawable)
-        .apply(RequestOptions().centerInside())
-        .apply(RequestOptions.bitmapTransform(RoundedCorners(cornerRadius)))
-        .into(this)
-}
-
-
-fun ImageView.loadCircleImageUrl(url: String) {
+fun ImageView.loadRound(url: String) {
     Glide.with(this.context).load(url).apply(RequestOptions().circleCrop()).into(this)
 }
+
+fun ImageView.loadRounded(url: String, radius: Int = 10) {
+    Glide.with(this.context).load(url)
+        .transform(CenterCrop(), RoundedCorners(dpToPx(this.context, radius).toInt())).into(this)
+}
+
+fun ImageView.load(bitmap: Bitmap) {
+    Glide.with(this.context).load(bitmap).into(this)
+}
+fun ImageView.loadRound(bitmap: Bitmap) {
+    Glide.with(this.context).load(bitmap).apply(RequestOptions().circleCrop()).into(this)
+}
+
 
 fun View.hideKeyboard() {
     val imm = this.context!!.getSystemService(Context.INPUT_METHOD_SERVICE)!! as InputMethodManager

@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.novatec.pitak.R
 import com.novatec.pitak.ui.interfaces.IOnOfferActionListener
-import com.novatec.pitak.util.loadCircleImageUrl
+import com.novatec.pitak.util.loadRound
 import com.novatec.remote.model.OfferDTO
 import kotlinx.android.synthetic.main.item_offer.view.*
 import java.text.DecimalFormat
@@ -50,7 +50,7 @@ class PostOffersAdapter(val onOfferActionListener: IOnOfferActionListener) :
                 tvSeats.text = offer.seat.toString()
                 offer.profile.image?.let {
                     it.link?.let { link ->
-                        ivAvatar.loadCircleImageUrl(link)
+                        ivAvatar.loadRound(link)
                     }
                 } ?: run{
                     ivAvatar.setImageResource(R.drawable.ic_baseline_account_circle_24)

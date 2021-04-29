@@ -227,7 +227,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="15dp"
                     android:gravity="center"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/dark_grey"
                     android:textStyle="bold"
                     tools:text="@string/no_passengers_yet" />
 
@@ -247,7 +247,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="15dp"
                     android:gravity="center"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/dark_grey"
                     android:textStyle="bold"
                     tools:text="@string/offers" />
 

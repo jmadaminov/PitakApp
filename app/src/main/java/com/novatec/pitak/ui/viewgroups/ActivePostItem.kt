@@ -23,7 +23,7 @@ class ActivePostItem(var post: DriverPost, val onClick: () -> Unit) : Item() {
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         viewHolder.itemView.apply {
             llSeatsContainer.removeAllViews()
-            var availableSeats = post.seat - post.passengerCount!!
+            var availableSeats = post.seat - post.passengerList!!.size
             for (i in 0 until post.seat) {
                 val seat = ImageView(context)
                 seat.layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,

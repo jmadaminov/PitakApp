@@ -1,9 +1,14 @@
 package com.novatec.pitak.ui.driver_post
 
 import android.os.Bundle
+import android.text.format.DateFormat
 import android.view.MenuItem
 import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.LinearLayout
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.paging.LoadState
 import com.google.android.material.snackbar.Snackbar
@@ -15,6 +20,7 @@ import com.novatec.pitak.ui.addpost.AddPostActivity
 import com.novatec.pitak.ui.interfaces.IOnOfferActionListener
 import com.novatec.pitak.ui.interfaces.IOnPassengerDelete
 import com.novatec.pitak.ui.viewgroups.PassengerItem
+import com.novatec.pitak.util.PostUtils
 import com.novatec.pitak.viewobjects.DriverPostViewObj
 import com.novatec.pitak.viewobjects.OfferViewObj.Companion.offerToViewObj
 import com.novatec.remote.model.OfferDTO
@@ -24,6 +30,7 @@ import kotlinx.android.synthetic.main.activity_driver_post.*
 import splitties.activities.start
 import splitties.experimental.ExperimentalSplittiesApi
 import java.text.DecimalFormat
+import java.text.SimpleDateFormat
 
 const val EXTRA_POST_ID = "POST_ID"
 
@@ -136,8 +143,7 @@ class DriverPostActivity : BaseActivity(), IOnPassengerDelete {
         })
 
         viewModel.startedTripResp.observe(this, {
-            viewModel.getOffersForPost(postId)
-            cancel.visibility = View.GONE
+            viewModel.getPostById(postId)
             offersAdapter.refresh()
         })
 
@@ -200,7 +206,6 @@ class DriverPostActivity : BaseActivity(), IOnPassengerDelete {
         btnStart.isVisible =
             post.postStatus == EPostStatus.WAITING_FOR_START || !post.passengerList.isNullOrEmpty() && post.postStatus == EPostStatus.CREATED
 
-        date.text = post.departureDate
 
         if (post.from.name == null && post.from.districtName == null) {
             fromDistrict.isVisible = false
@@ -220,8 +225,33 @@ class DriverPostActivity : BaseActivity(), IOnPassengerDelete {
             to.text = post.to.districtName
         }
 
+        llSeatsContainer.removeAllViews()
+        var availableSeats = post.seat - post.passengerList!!.size
+        for (i in 0 until post.seat) {
+            val seat = ImageView(this)
+            seat.layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                                                          ViewGroup.LayoutParams.WRAP_CONTENT)
+            seat.setImageResource(R.drawable.ic_round_event_seat_24)
+            if (availableSeats > 0) {
+                seat.setColorFilter(ContextCompat.getColor(this, R.color.colorPrimary))
+                availableSeats--
+            } else {
+                seat.setColorFilter(ContextCompat.getColor(this, R.color.green))
+            }
+            llSeatsContainer.addView(seat)
+        }
 
-        seats.text = "${post.passengerCount}/${post.seat}"
+
+        time.text = PostUtils.timeFromDayParts(post.timeFirstPart,
+                                               post.timeSecondPart,
+                                               post.timeThirdPart,
+                                               post.timeFourthPart)
+
+        date.text = DateFormat.format("dd MMMM",
+                                      SimpleDateFormat("dd.MM.yyyy").parse(post.departureDate))
+            .toString()
+
+
         price.text = DecimalFormat("#,###").format(post.price) + " " + getString(R.string.sum)
 
         if (post.remark.isNullOrBlank()) {

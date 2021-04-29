@@ -16,7 +16,7 @@ import com.novatec.pitak.ui.passenger_post.offer_a_ride.ARG_PASSENGER_POST
 import com.novatec.pitak.ui.passenger_post.offer_a_ride.DialogOfferARideFragment
 import com.novatec.pitak.util.AppPrefs
 import com.novatec.pitak.util.PostUtils
-import com.novatec.pitak.util.loadCircleImageUrl
+import com.novatec.pitak.util.loadRound
 import com.novatec.pitak.viewobjects.PassengerPostViewObj
 import kotlinx.android.synthetic.main.activity_passenger_post.*
 import kotlinx.android.synthetic.main.activity_passenger_post.date
@@ -136,7 +136,7 @@ class PassengerPostActivity : BaseActivity() {
         }
 
         post.profileViewObj.image?.link?.let {
-            ivPassenger.loadCircleImageUrl(it)
+            ivPassenger.loadRound(it)
         } ?: run {
             ivPassenger.setImageResource(R.drawable.ic_baseline_account_circle_24)
         }

@@ -104,7 +104,7 @@ class HistoryPostActivity : BaseActivity() {
             to.text = post.to.districtName
         }
 
-        seats.text = "${post.passengerCount!!}/${post.seat}"
+        seats.text = "${post.passengerList!!.size!!}/${post.seat}"
         price.text = DecimalFormat("#,###").format(post.price) + " " + getString(R.string.sum)
 
         post.remark?.also {

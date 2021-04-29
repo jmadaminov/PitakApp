@@ -5,7 +5,7 @@ import android.net.Uri
 import androidx.core.view.isVisible
 import com.novatec.domain.domainmodel.Passenger
 import com.novatec.pitak.R
-import com.novatec.pitak.util.loadCircleImageUrl
+import com.novatec.pitak.util.loadRound
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item
 import kotlinx.android.synthetic.main.item_passenger.view.*
@@ -25,7 +25,7 @@ class PassengerItem(val obj: Passenger,
             }
             tvPersonCount.text = obj.offer?.seat?.toString()
             obj.profile?.image?.link?.let {
-                ivAvatar.loadCircleImageUrl(it)
+                ivAvatar.loadRound(it)
             } ?: run{
                 ivAvatar.setImageResource(R.drawable.ic_baseline_account_circle_24)
             }

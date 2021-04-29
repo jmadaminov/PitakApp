@@ -10,20 +10,18 @@
     android:orientation="vertical"
     tools:context=".ui.edit_profile.EditProfileActivity">
 
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardAvatar"
+    <RelativeLayout
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_marginTop="15dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:foreground="?android:selectableItemBackground">
+        android:layout_marginTop="15dp">
 
         <ImageView
             android:id="@+id/ivAvatar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:selectableItemBackgroundBorderless"
             android:src="@drawable/ic_baseline_account_circle_24" />
 
 
@@ -31,11 +29,12 @@
             android:id="@+id/progressAvatar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:layout_gravity="center"
             android:visibility="invisible"
             tools:visibility="visible" />
 
-    </androidx.cardview.widget.CardView>
+    </RelativeLayout>
 
 
     <com.google.android.material.textfield.TextInputLayout

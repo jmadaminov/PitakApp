@@ -24,248 +24,210 @@
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:fillViewport="true"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:fillViewport="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="12dp">
 
 
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/card"
+                    <View
+                        android:id="@+id/line"
+                        android:layout_width="2dp"
+                        android:layout_height="0dp"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@color/ic_grey"
+                        app:layout_constraintBottom_toTopOf="@id/circleTo"
+                        app:layout_constraintEnd_toEndOf="@id/circleFrom"
+                        app:layout_constraintStart_toStartOf="@id/circleFrom"
+                        app:layout_constraintTop_toBottomOf="@id/circleFrom" />
+
+
+                    <ImageView
+                        android:id="@+id/circleFrom"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="12dp"
+                        android:src="@drawable/shape_round_disabled"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/colorPrimary" />
+
+
+                    <ImageView
+                        android:id="@+id/circleTo"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_marginStart="4.5dp"
+                        android:layout_marginTop="40dp"
+                        android:layout_marginBottom="12dp"
+                        android:src="@drawable/ic_round_location_on_24"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/circleFrom"
+                        app:tint="@color/error_red" />
+
+
+                    <TextView
+                        android:id="@+id/from"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="12dp"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="14dp"
+                        app:layout_constraintBottom_toBottomOf="@id/circleFrom"
+                        app:layout_constraintStart_toEndOf="@id/circleFrom"
+                        app:layout_constraintTop_toTopOf="@id/circleFrom"
+                        tools:text="Tashkent city" />
+
+                    <TextView
+                        android:id="@+id/fromDistrict"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:textColor="@color/textColorGreyDark"
+                        android:textSize="11dp"
+                        android:visibility="gone"
+                        app:layout_constraintStart_toStartOf="@id/from"
+                        app:layout_constraintTop_toBottomOf="@id/from"
+                        tools:text="Tashkent"
+                        tools:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/to"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="5dp"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="14dp"
+                        app:layout_constraintBottom_toTopOf="@id/toDistrict"
+                        app:layout_constraintStart_toEndOf="@id/circleTo"
+                        tools:text="Andijan city" />
+
+                    <TextView
+                        android:id="@+id/toDistrict"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:textColor="@color/textColorGreyDark"
+                        android:textSize="11dp"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="@id/circleTo"
+                        app:layout_constraintStart_toStartOf="@id/to"
+                        tools:text="Andijan"
+                        tools:visibility="visible" />
+
+
+                    <TextView
+                        android:id="@+id/lblDriversCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginStart="12dp"
+                        android:text="@string/seats"
+                        android:textSize="14dp"
+                        app:layout_constraintStart_toStartOf="@id/circleTo"
+                        app:layout_constraintTop_toBottomOf="@id/circleTo" />
+
+                    <GridLayout
+                        android:id="@+id/llSeatsContainer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginBottom="7dp"
+                        android:orientation="horizontal"
+                        app:layout_constraintBottom_toBottomOf="@id/lblDriversCount"
+                        app:layout_constraintStart_toEndOf="@id/lblDriversCount"
+                        app:layout_constraintTop_toTopOf="@id/lblDriversCount" />
+
+
+                    <TextView
+                        android:id="@+id/note"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="5dp"
-                        app:cardCornerRadius="10dp"
-                        app:cardElevation="3dp"
-                        app:cardUseCompatPadding="true"
-                        app:layout_constraintTop_toTopOf="parent">
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="12dp"
+                        android:background="@drawable/note_bg"
+                        android:maxLines="4"
+                        android:padding="12dp"
+                        android:text="note note sohisdf asdfasdf sadfas fsd fsadf asdfsd"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="16dp"
+                        android:textStyle="italic"
+                        android:visibility="gone"
+                        app:layout_constraintTop_toBottomOf="@id/lblDriversCount"
+                        tools:visibility="visible" />
 
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingBottom="12dp">
+                    <TextView
+                        android:id="@+id/time"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="12dp"
+                        android:layout_weight="1"
+                        android:drawablePadding="7dp"
+                        android:gravity="center_vertical|end"
+                        android:paddingStart="5dp"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="14dp"
+                        app:drawableEndCompat="@drawable/ic_round_access_time_24"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/date"
+                        tools:text="18:00 - 24:00" />
 
+                    <TextView
+                        android:id="@+id/date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="12dp"
+                        android:drawablePadding="7dp"
+                        android:gravity="center_vertical|end"
+                        android:paddingStart="5dp"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        app:drawableEndCompat="@drawable/ic_round_today_24"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="11 March" />
 
-                            <View
-                                android:id="@+id/line"
-                                android:layout_width="2dp"
-                                android:layout_height="0dp"
-                                android:layout_gravity="center_horizontal"
-                                android:background="@color/ic_grey"
-                                app:layout_constraintBottom_toTopOf="@id/circleTo"
-                                app:layout_constraintEnd_toEndOf="@id/circleFrom"
-                                app:layout_constraintStart_toStartOf="@id/circleFrom"
-                                app:layout_constraintTop_toBottomOf="@id/circleFrom" />
+                    <TextView
+                        android:id="@+id/lblPricePerDriver"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/willing_price_for_one"
+                        android:textSize="13dp"
+                        app:layout_constraintBottom_toTopOf="@id/price"
+                        app:layout_constraintEnd_toEndOf="@id/price"
+                        app:layout_constraintStart_toStartOf="@id/price" />
 
-
-                            <ImageView
-                                android:id="@+id/circleFrom"
-                                android:layout_width="10dp"
-                                android:layout_height="10dp"
-                                android:layout_marginStart="12dp"
-                                android:layout_marginTop="12dp"
-                                android:src="@drawable/shape_round_disabled"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:tint="@color/colorPrimary" />
-
-
-                            <ImageView
-                                android:id="@+id/circleTo"
-                                android:layout_width="25dp"
-                                android:layout_height="25dp"
-                                android:layout_marginStart="4.5dp"
-                                android:layout_marginTop="40dp"
-                                android:layout_marginBottom="12dp"
-                                android:src="@drawable/ic_round_location_on_24"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@id/circleFrom"
-                                app:tint="@color/error_red" />
-
-
-                            <TextView
-                                android:id="@+id/from"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="12dp"
-                                tools:text="Tashkent city"
-                                android:textColor="@color/dark_grey"
-                                android:textSize="14dp"
-                                app:layout_constraintBottom_toBottomOf="@id/circleFrom"
-                                app:layout_constraintStart_toEndOf="@id/circleFrom"
-                                app:layout_constraintTop_toTopOf="@id/circleFrom" />
-
-                            <TextView
-                                android:id="@+id/fromDistrict"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                tools:text="Tashkent"
-                                android:textColor="@color/textColorGreyDark"
-                                android:textSize="11dp"
-                                android:visibility="gone"
-                                app:layout_constraintStart_toStartOf="@id/from"
-                                app:layout_constraintTop_toBottomOf="@id/from"
-                                tools:visibility="visible" />
-
-                            <TextView
-                                android:id="@+id/to"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="5dp"
-                                tools:text="Andijan city"
-                                android:textColor="@color/dark_grey"
-                                android:textSize="14dp"
-                                app:layout_constraintBottom_toTopOf="@id/toDistrict"
-                                app:layout_constraintStart_toEndOf="@id/circleTo" />
-
-                            <TextView
-                                android:id="@+id/toDistrict"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                tools:text="Andijan"
-                                android:textColor="@color/textColorGreyDark"
-                                android:textSize="11dp"
-                                android:visibility="gone"
-                                app:layout_constraintBottom_toBottomOf="@id/circleTo"
-                                app:layout_constraintStart_toStartOf="@id/to"
-                                tools:visibility="visible" />
-
-
-                            <TextView
-                                android:id="@+id/note"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="12dp"
-                                android:layout_marginTop="12dp"
-                                android:layout_marginEnd="12dp"
-                                android:maxLines="4"
-                                android:textColor="@color/dark_grey"
-                                android:textSize="14dp"
-                                android:visibility="gone"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@id/circleTo"
-                                tools:text="note note sohisdf asdfasdf sadfas fsd fsadf asdfsd"
-                                tools:visibility="visible" />
-
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
-                                android:paddingLeft="12dp"
-                                android:paddingEnd="12dp"
-                                app:layout_constraintTop_toBottomOf="@id/note">
-
-                                <TextView
-                                    android:id="@+id/price"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="match_parent"
-                                    android:drawableRight="@drawable/ic_baseline_money_24"
-                                    android:drawablePadding="10dp"
-                                    android:gravity="center_vertical|end"
-                                    tools:text="50,000 sum"
-                                    android:textColor="@color/dark_grey"
-                                    app:layout_constraintBottom_toTopOf="@id/note"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintHorizontal_weight="1"
-                                    app:layout_constraintStart_toStartOf="@id/date"
-                                    app:layout_constraintTop_toBottomOf="@id/seats" />
-
-                                <TextView
-                                    android:id="@+id/seats"
-                                    android:layout_width="0dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="0.5"
-                                    android:drawableRight="@drawable/ic_baseline_airline_seat_recline_extra_24"
-                                    android:drawablePadding="10dp"
-                                    android:gravity="center_vertical|end"
-                                    android:paddingEnd="20dp"
-                                    android:textColor="@color/dark_grey"
-                                    app:drawableTint="@color/colorPrimary"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintHorizontal_weight="1"
-                                    app:layout_constraintStart_toStartOf="@id/date"
-                                    app:layout_constraintTop_toBottomOf="@id/date"
-                                    tools:text="3" />
-
-
-                                <TextView
-                                    android:id="@+id/date"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="match_parent"
-                                    android:drawableRight="@drawable/ic_baseline_calendar_today_24"
-                                    android:drawablePadding="10dp"
-                                    android:gravity="center_vertical|end"
-                                    tools:text="02.05.2200"
-                                    android:textColor="@color/dark_grey"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintHorizontal_weight="1"
-                                    app:layout_constraintStart_toEndOf="@id/from"
-                                    app:layout_constraintTop_toTopOf="parent" />
-                            </LinearLayout>
-
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-                    </androidx.cardview.widget.CardView>
-
-
-                    <!--                    <ImageView-->
-                    <!--                        android:id="@+id/done"-->
-                    <!--                        android:layout_width="50dp"-->
-                    <!--                        android:layout_height="50dp"-->
-                    <!--                        android:clickable="true"-->
-                    <!--                        android:focusable="true"-->
-                    <!--                        android:foreground="?android:selectableItemBackground"-->
-                    <!--                        android:padding="12dp"-->
-                    <!--                        android:src="@drawable/baseline_done_outline_black_24dp"-->
-                    <!--                        android:visibility="gone"-->
-                    <!--                        app:layout_constraintStart_toEndOf="@id/edit"-->
-                    <!--                        app:layout_constraintTop_toBottomOf="@id/card"-->
-                    <!--                        app:tint="@color/colorPrimary" />-->
-
-                    <!--                    <ImageView-->
-                    <!--                        android:id="@+id/edit"-->
-                    <!--                        android:layout_width="50dp"-->
-                    <!--                        android:layout_height="50dp"-->
-                    <!--                        android:clickable="true"-->
-                    <!--                        android:focusable="true"-->
-                    <!--                        android:foreground="?android:selectableItemBackground"-->
-                    <!--                        android:padding="12dp"-->
-                    <!--                        android:src="@drawable/outline_edit_black_24dp"-->
-                    <!--                        android:visibility="gone"-->
-                    <!--                        app:layout_constraintStart_toEndOf="@id/cancel"-->
-                    <!--                        app:layout_constraintTop_toBottomOf="@id/card"-->
-                    <!--                        app:tint="@color/orange" />-->
-
-
-                    <!--                    <ImageView-->
-                    <!--                        android:id="@+id/cancel"-->
-                    <!--                        android:layout_width="50dp"-->
-                    <!--                        android:layout_height="50dp"-->
-                    <!--                        android:clickable="true"-->
-                    <!--                        android:focusable="true"-->
-                    <!--                        android:foreground="?android:selectableItemBackground"-->
-                    <!--                        android:padding="12dp"-->
-                    <!--                        android:src="@drawable/baseline_delete_outline_black_24dp"-->
-                    <!--                        android:visibility="gone"-->
-                    <!--                        app:layout_constraintBottom_toBottomOf="parent"-->
-                    <!--                        app:layout_constraintStart_toStartOf="parent"-->
-                    <!--                        app:layout_constraintTop_toBottomOf="@id/card"-->
-                    <!--                        app:tint="@color/error_red" />-->
-
+                    <TextView
+                        android:id="@+id/price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="12dp"
+                        android:drawablePadding="10dp"
+                        android:gravity="center_vertical|end"
+                        android:paddingStart="5dp"
+                        android:paddingTop="2dp"
+                        android:paddingEnd="5dp"
+                        android:paddingBottom="2dp"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="24dp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@id/lblDriversCount"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        tools:text="50,000 sum" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
 
                 <LinearLayout
                     android:id="@+id/llOffersContainer"
@@ -279,7 +241,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="15dp"
                         android:gravity="center"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/dark_grey"
                         android:textStyle="bold"
                         tools:text="@string/no_passengers_yet" />
 
@@ -298,9 +260,9 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="15dp"
                         android:gravity="center"
-                        android:textColor="@color/colorPrimary"
-                        android:textStyle="bold"
-                        android:text="@string/offers" />
+                        android:text="@string/offers"
+                        android:textColor="@color/dark_grey"
+                        android:textStyle="bold" />
 
                     <ProgressBar
                         android:id="@+id/progressOfferAction"
