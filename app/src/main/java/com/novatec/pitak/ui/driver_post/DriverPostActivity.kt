@@ -1,5 +1,6 @@
 package com.novatec.pitak.ui.driver_post
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.format.DateFormat
 import android.view.MenuItem
@@ -27,7 +28,6 @@ import com.novatec.remote.model.OfferDTO
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import kotlinx.android.synthetic.main.activity_driver_post.*
-import splitties.activities.start
 import splitties.experimental.ExperimentalSplittiesApi
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
@@ -95,7 +95,6 @@ class DriverPostActivity : BaseActivity(), IOnPassengerDelete {
         rvPassengers.adapter = passengersAdapter
         viewModel.getPostById(postId)
         viewModel.getOffersForPost(postId)
-
         attachListeners()
         subscribes()
     }
@@ -118,8 +117,7 @@ class DriverPostActivity : BaseActivity(), IOnPassengerDelete {
         })
 
         viewModel.offerActionResp.observe(this, {
-            viewModel.getPostById(postId)
-            offersAdapter.refresh()
+           refreshAll()
         })
 
         viewModel.isLoading.observe(this, {
@@ -143,8 +141,7 @@ class DriverPostActivity : BaseActivity(), IOnPassengerDelete {
         })
 
         viewModel.startedTripResp.observe(this, {
-            viewModel.getPostById(postId)
-            offersAdapter.refresh()
+          refreshAll()
         })
 
 
@@ -289,8 +286,7 @@ class DriverPostActivity : BaseActivity(), IOnPassengerDelete {
 
 
         swipeRefreshLayout.setOnRefreshListener {
-            viewModel.getPostById(postId)
-            offersAdapter.refresh()
+            refreshAll()
         }
 
         done.setOnClickListener {
@@ -302,10 +298,15 @@ class DriverPostActivity : BaseActivity(), IOnPassengerDelete {
         }
 
         edit.setOnClickListener {
-            start<AddPostActivity> {
+            startActivityForResult(Intent(this, AddPostActivity::class.java).apply {
                 putExtra(Constants.TXT_DRIVER_POST, DriverPostViewObj.fromDriverPost(post))
-            }
+            }, REQ_POST_MANIPULATED)
         }
+    }
+
+    private fun refreshAll() {
+        viewModel.getPostById(postId)
+        offersAdapter.refresh()
     }
 
 
@@ -334,4 +335,10 @@ class DriverPostActivity : BaseActivity(), IOnPassengerDelete {
     }
 
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == RESULT_OK && requestCode == REQ_POST_MANIPULATED) {
+            refreshAll()
+        }
+    }
 }
