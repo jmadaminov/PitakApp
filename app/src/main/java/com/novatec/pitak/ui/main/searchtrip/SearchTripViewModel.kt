@@ -122,7 +122,7 @@ class SearchTripViewModel @ViewModelInject constructor(val postFilterRepository:
         _filter.valueNN.timeFourthPart = timeFourthPart
     }
 
-    fun seatCountChanged(count: Int) {
+    fun seatCountChanged(count: Int?) {
         _filter.valueNN.seat = count
     }
 
@@ -133,7 +133,7 @@ class SearchTripViewModel @ViewModelInject constructor(val postFilterRepository:
             appliedFilterCount++
         }
         if (_filter.valueNN.airConditioner == true) appliedFilterCount++
-        if (_filter.valueNN.seat != null && _filter.valueNN.seat != 1) appliedFilterCount++
+        if (_filter.valueNN.seat != null ) appliedFilterCount++
         if (_filter.valueNN.timeFirstPart == true || _filter.valueNN.timeSecondPart == true || _filter.valueNN.timeThirdPart == true || _filter.valueNN.timeFourthPart == true) appliedFilterCount++
         _count.value = appliedFilterCount
     }

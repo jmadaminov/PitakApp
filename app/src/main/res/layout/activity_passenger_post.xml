@@ -144,8 +144,9 @@
                 android:layout_marginTop="12dp"
                 android:text="@string/passengers"
                 android:textSize="14dp"
+                app:layout_constraintBottom_toBottomOf="@id/llSeatsContainer"
                 app:layout_constraintStart_toStartOf="@id/circleTo"
-                app:layout_constraintTop_toBottomOf="@id/circleTo" />
+                app:layout_constraintTop_toTopOf="@id/llSeatsContainer" />
 
             <GridLayout
                 android:id="@+id/llSeatsContainer"
@@ -153,10 +154,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:layout_marginBottom="7dp"
+                android:layout_marginTop="7dp"
+                android:columnCount="4"
                 android:orientation="horizontal"
-                app:layout_constraintBottom_toBottomOf="@id/lblPassengersCount"
+                android:rowCount="2"
                 app:layout_constraintStart_toEndOf="@id/lblPassengersCount"
-                app:layout_constraintTop_toTopOf="@id/lblPassengersCount" />
+                app:layout_constraintTop_toBottomOf="@id/circleTo" />
 
 
             <TextView
@@ -174,15 +177,15 @@
                 android:textSize="16dp"
                 android:textStyle="italic"
                 android:visibility="gone"
-                app:layout_constraintTop_toBottomOf="@id/lblPassengersCount"
+                app:layout_constraintTop_toBottomOf="@id/llSeatsContainer"
                 tools:visibility="visible" />
 
 
             <TextView
                 android:id="@+id/lblPricePerPassenger"
                 android:layout_width="0dp"
-                android:gravity="center"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="@string/price_for_one"
                 android:textSize="13dp"
                 app:layout_constraintBottom_toTopOf="@id/price"

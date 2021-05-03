@@ -11,12 +11,12 @@ import com.novatec.pitak.R
 class HorizontalNumberPicker(context: Context?, attrs: AttributeSet?) :
     LinearLayout(context, attrs) {
     private val et_number: TextView?
-    var min = 1
+    var min = 0
     var max = 8
 
-    private var onCountChangeListener: ((count: Int) -> Unit)? = null
+    private var onCountChangeListener: ((count: Int?) -> Unit)? = null
 
-    fun addOnSeatCountChangeListener(onCountChange: (count: Int) -> Unit) {
+    fun addOnSeatCountChangeListener(onCountChange: (count: Int?) -> Unit) {
         onCountChangeListener = onCountChange
     }
 
@@ -26,7 +26,7 @@ class HorizontalNumberPicker(context: Context?, attrs: AttributeSet?) :
     }
 
     fun resetText() {
-        et_number?.text = min.toString()
+        et_number?.text = context.getString(R.string.any)
     }
 
     /***
@@ -40,9 +40,9 @@ class HorizontalNumberPicker(context: Context?, attrs: AttributeSet?) :
             } else if (newValue > max) {
                 newValue = max
             } else {
-                if (onCountChangeListener != null) onCountChangeListener!!(newValue)
+                if (onCountChangeListener != null) onCountChangeListener!!(if (newValue == 0) null else newValue)
             }
-            et_number!!.text = newValue.toString()
+            et_number!!.text = if (newValue == 0) context.getString(R.string.any) else newValue.toString()
         }
     }
 
