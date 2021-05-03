@@ -6,5 +6,6 @@ package com.novatec.data.model
 data class UserEntity(val phoneNum: String,
                       val name: String,
                       val surname: String,
-//                      val role: String,
-                      val deviceId: String)
+                      val deviceId: String,
+                      val userType: String,
+)

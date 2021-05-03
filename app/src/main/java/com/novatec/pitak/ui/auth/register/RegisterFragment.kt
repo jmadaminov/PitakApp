@@ -51,7 +51,8 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
             viewModel.register(User(phone.text.toString().numericOnly(),
                                     name.text.toString(),
                                     surname.text.toString(),
-                                    App.uuid))
+                                    App.uuid,
+                                    Constants.ROLE_DRIVER))
         }
 
     }

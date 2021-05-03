@@ -20,8 +20,7 @@ class DriverPostRemoteImpl @Inject constructor(private val authorizedApiService:
     override suspend fun createDriverPost(post: DriverPostEntity): ResultWrapper<DriverPostEntity?> {
         val response =
             if (post.id != null) getFormattedResponseNullable {
-                authorizedApiService.editPost(post.id!!,
-                                              postMapper.mapFromEntity(post))
+                authorizedApiService.editPost(post.id!!, postMapper.mapFromEntity(post))
             }
             else getFormattedResponse {
                 authorizedApiService.createPost(postMapper.mapFromEntity(post))

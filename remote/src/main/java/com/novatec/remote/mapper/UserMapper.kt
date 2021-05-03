@@ -17,11 +17,11 @@ open class UserMapper: EntityMapper<UserModel, UserEntity> {
      * Map an instance of a [UserModel] to a [UserEntity] model
      */
     override fun mapToEntity(type: UserModel): UserEntity {
-        return UserEntity(type.phoneNum, type.name, type.surname, /*type.role,*/ type.udId)
+        return UserEntity(type.phoneNum, type.name, type.surname,  type.udId, type.userType)
     }
 
     override fun mapFromEntity(type: UserEntity): UserModel {
-        return UserModel(type.phoneNum, type.name, type.surname, /*type.role, */type.deviceId)
+        return UserModel(type.phoneNum, type.name, type.surname,  type.deviceId, type.userType)
     }
 
 
