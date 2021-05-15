@@ -167,6 +167,7 @@ class PreviewFragment : Fragment(R.layout.fragment_preview) {
                                                   activityViewModel.seat!!,
                                                   0,
                                                   null,
+                                                  activityViewModel.seat!!,
                                                   EPostStatus.CREATED,
                                                   activityViewModel.isPackage,
                                                   null,

@@ -7,6 +7,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.observe
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -146,6 +147,7 @@ class PhoneConfirmFragment : Fragment(R.layout.fragment_phone_confirm) {
                 tvRequestCodeAgain.text = getString(R.string.request_sms_again)
             }
 
+
         }
         viewModel.respRegainCode.observe(viewLifecycleOwner) {
             when (it) {
@@ -175,6 +177,9 @@ class PhoneConfirmFragment : Fragment(R.layout.fragment_phone_confirm) {
             phone = response.value.phoneNum!!
             rating = response.value.rating
             defaultCarId = response.value.defCarId
+            response.value.image?.let{
+                avatar = it.link!!
+            }
         }
     }
     val receiver = object : BroadcastReceiver() {

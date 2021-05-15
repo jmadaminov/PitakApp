@@ -5,6 +5,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
+import androidx.lifecycle.observe
 import com.novatec.domain.domainmodel.DriverPost
 import com.novatec.pitak.R
 import com.novatec.pitak.ui.BaseActivity
@@ -57,17 +58,18 @@ class HistoryPostActivity : BaseActivity() {
     }
 
     private fun subscribes() {
-        viewModel.postData.observe(this, {
+        viewModel.postData.observe(this) {
             post = it ?: return@observe
             showPostData()
-        })
+        }
 
-        viewModel.isLoading.observe(this, {
+        viewModel.isLoading.observe(this) {
             val value = it ?: return@observe
             progress.isVisible = value
-        })
 
-        viewModel.errorMessage.observe(this, {
+        }
+
+        viewModel.errorMessage.observe(this) {
             if (it.isNullOrBlank()) {
                 tvMessage.visibility = View.GONE
                 llOffersContainer.visibility = View.VISIBLE
@@ -76,7 +78,7 @@ class HistoryPostActivity : BaseActivity() {
                 tvMessage.visibility = View.VISIBLE
                 tvMessage.text = it
             }
-        })
+        }
     }
 
 
@@ -121,7 +123,7 @@ class HistoryPostActivity : BaseActivity() {
         }
 
         post.passengerList?.forEach {
-            passengersAdapter.add(PassengerItem(it, true) {
+            passengersAdapter.add(PassengerItem(it,  true) {
 
             })
         }

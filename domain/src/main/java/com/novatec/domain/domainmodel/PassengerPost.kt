@@ -24,6 +24,7 @@ data class PassengerPost(val id: Long,
                          val postStatus: EPostStatus,
                          val myLastOffer: UserOffer?=null,
                          val seat: Int,
+                         val agreedOffer: AgreedOffer?=null,
                          val postType: EPostType = EPostType.PASSENGER_SM)
 
 
@@ -35,3 +36,8 @@ data class UserOffer( val id: Long,
                             val submitDate: String,
                             val priceInt: Int,
                             val seat: Int)
+
+
+data class AgreedOffer( val message: String,
+                        val priceInt: Int,
+                        val seat: Int)

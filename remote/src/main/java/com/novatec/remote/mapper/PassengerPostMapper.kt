@@ -51,6 +51,12 @@ open class PassengerPostMapper :
                                                                      type.myLastOffer!!.submitDate,
                                                                      type.myLastOffer!!.priceInt,
                                                                      type.myLastOffer!!.seat) else null
+        var agreedOffer : AgreedOfferDTO? = null
+        type.agreedOffer?.let{
+            agreedOffer = AgreedOfferDTO(it.message, it.priceInt, it.seat )
+        }
+
+
         return PassengerPostModel(type.id,
                                   placeFrom,
                                   placeTo,
@@ -69,6 +75,7 @@ open class PassengerPostMapper :
                                   type.postStatus,
                                   type.seat,
                                   myLastOffer,
+                                  agreedOffer,
                                   type.postType)
     }
 
@@ -111,6 +118,12 @@ open class PassengerPostMapper :
                                                                              type.myLastOffer.priceInt,
                                                                              type.myLastOffer.seat) else null
 
+        var agreedOffer : AgreedOfferEntity? = null
+        type.agreedOffer?.let{
+            agreedOffer = AgreedOfferEntity( it.message, it.priceInt,it.seat )
+        }
+
+
         return PassengerPostEntity(type.id,
                                    placeFrom,
                                    placeTo,
@@ -128,6 +141,7 @@ open class PassengerPostMapper :
                                    type.remark,
                                    type.postStatus,
                                    myLastOffer,
+                                   agreedOffer,
                                    type.seat,
                                    type.postType)
     }

@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
+import androidx.lifecycle.observe
 import com.novatec.pitak.R
 import com.novatec.pitak.ui.BaseActivity
 import com.novatec.pitak.ui.dialogs.DialogAddCarFirst
@@ -49,9 +50,10 @@ class PassengerPostActivity : BaseActivity() {
 
     private fun subscribeObservers() {
 
-        viewModel.isLoading.observe(this, {
+        viewModel.isLoading.observe(this) {
             swipeRefreshLayout.isRefreshing = it ?: return@observe
-        })
+
+        }
 
         viewModel.postData.observe(this) {
             val result = it ?: return@observe

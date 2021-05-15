@@ -5,7 +5,8 @@ package com.novatec.core
  */
 object Constants {
 //    http://178.218.207.92:9091/api/v1/force_update/action
-    const val BASE_URL = "http://178.218.207.92:9091/api/v1/"
+//    const val BASE_URL = "http://178.218.207.92:9091/api/v1/"
+    const val BASE_URL = "https://api.epitak.uz/api/v1/"
 //    const val BASE_URL = "http://codeuz.uz:9091/"
 
     const val ROLE_DRIVER = "DRIVER"

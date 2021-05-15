@@ -51,25 +51,33 @@ open class PassengerPostMapper @Inject constructor() :
                                                                         type.myLastOffer.priceInt,
                                                                         type.myLastOffer.seat) else null
 
+
+        var agreedOffer : AgreedOffer? = null
+        type.agreedOffer?.let{
+            agreedOffer = AgreedOffer( it.message, it.priceInt,it.seat )
+        }
+
+
         return PassengerPost(type.id,
-                                  placeFrom,
-                                  placeTo,
-                                  type.price,
-                                  type.departureDate,
-                                  type.createdDate,
-                                  type.updatedDate,
-                                  type.finishedDate,
-                                  type.timeFirstPart,
-                                  type.timeSecondPart,
-                                  type.timeThirdPart,
-                                  type.timeFourthPart,
-                                  type.airConditioner,
+                             placeFrom,
+                             placeTo,
+                             type.price,
+                             type.departureDate,
+                             type.createdDate,
+                             type.updatedDate,
+                             type.finishedDate,
+                             type.timeFirstPart,
+                             type.timeSecondPart,
+                             type.timeThirdPart,
+                             type.timeFourthPart,
+                             type.airConditioner,
                              profile,
                              type.remark,
-                                  type.postStatus,
+                             type.postStatus,
                              myLastOffer,
-                                  type.seat,
-                                  type.postType)
+                             type.seat,
+                             agreedOffer,
+                             type.postType)
     }
 
     /**
@@ -109,6 +117,11 @@ open class PassengerPostMapper @Inject constructor() :
                                                                         type.myLastOffer!!.submitDate,
                                                                         type.myLastOffer!!.priceInt,
                                                                         type.myLastOffer!!.seat) else null
+        var agreedOffer : AgreedOfferEntity? = null
+        type.agreedOffer?.let{
+            agreedOffer = AgreedOfferEntity( it.message, it.priceInt,it.seat )
+        }
+
 
         return PassengerPostEntity(type.id,
                                    placeFrom,
@@ -127,6 +140,7 @@ open class PassengerPostMapper @Inject constructor() :
                                    type.remark,
                                    type.postStatus,
                                    myLastOffer,
+                                   agreedOffer,
                                    type.seat,
                                    type.postType)
     }

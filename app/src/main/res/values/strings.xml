@@ -150,5 +150,6 @@
     <string name="seats">Seats</string>
     <string name="willing_price_for_one">Willing price for one</string>
     <string name="any">Any</string>
+    <string name="agreed_price">Agreed price: %1$s Sums</string>
 
 </resources>

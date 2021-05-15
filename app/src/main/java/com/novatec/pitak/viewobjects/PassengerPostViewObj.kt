@@ -4,6 +4,7 @@ import android.os.Parcelable
 import com.novatec.core.EPostStatus
 import com.novatec.core.EPostType
 import com.novatec.domain.domainmodel.PassengerPost
+import com.novatec.remote.model.OfferDTO
 import com.novatec.remote.model.PassengerPostModel
 import kotlinx.android.parcel.Parcelize
 
@@ -26,6 +27,7 @@ data class PassengerPostViewObj(val id: Long,
                                 val postStatus: EPostStatus,
                                 val seat: Int,
                                 val myLastOffer: UserOfferViewObj? = null,
+                                val offer: AgreedOfferViewObj? = null,
                                 val postType: EPostType) : Parcelable {
 
 
@@ -52,6 +54,10 @@ data class PassengerPostViewObj(val id: Long,
                                                                 model.myLastOffer!!.submitDate,
                                                                 model.myLastOffer!!.priceInt,
                                                                 model.myLastOffer!!.seat) else null
+            var agreedOffer : AgreedOfferViewObj? = null
+            model.agreedOffer?.let{
+                agreedOffer = AgreedOfferViewObj( it.message, it.priceInt,it.seat )
+            }
 
             return PassengerPostViewObj(
                 model.id,
@@ -82,6 +88,7 @@ data class PassengerPostViewObj(val id: Long,
                 model.postStatus,
                 model.seat,
                 myLastOffer,
+                agreedOffer,
                 model.postType,
             )
         }
@@ -108,6 +115,11 @@ data class PassengerPostViewObj(val id: Long,
                                                                 model.myLastOffer!!.submitDate,
                                                                 model.myLastOffer!!.priceInt,
                                                                 model.myLastOffer!!.seat) else null
+            var agreedOffer : AgreedOfferViewObj? = null
+           model.agreedOffer?.let{
+               agreedOffer = AgreedOfferViewObj( it.message, it.priceInt,it.seat )
+           }
+
             return PassengerPostViewObj(
                 model.id,
                 PlaceViewObj(model.from.districtId,
@@ -137,6 +149,7 @@ data class PassengerPostViewObj(val id: Long,
                 model.postStatus,
                 model.seat,
                 myLastOffer,
+                agreedOffer,
                 model.postType,
             )
         }
@@ -153,3 +166,8 @@ data class UserOfferViewObj(val id: Long,
                             val submitDate: String,
                             val priceInt: Int,
                             val seat: Int) : Parcelable
+
+@Parcelize
+data class AgreedOfferViewObj(val message: String,
+                              val priceInt: Int,
+                              val seat: Int) : Parcelable

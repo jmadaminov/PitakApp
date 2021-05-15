@@ -10,4 +10,5 @@ data class AuthEntity( val id: String? = null,
                       val surname:String?=null,
                        val rating: Float = 0F,
                        val defCarId: String? = null,
-                       val role : String?=null)
+                       val role : String?=null,
+                       val image : ImageEntity?=null)

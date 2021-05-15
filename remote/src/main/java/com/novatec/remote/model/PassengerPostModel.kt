@@ -25,7 +25,9 @@ data class PassengerPostModel(@SerializedName("id") val id: Long,
                               @SerializedName("postStatus") val postStatus: EPostStatus,
                               @SerializedName("seat") val seat: Int,
                               @SerializedName("myOffer") val myLastOffer: UserOfferDTO?=null,
-                              @SerializedName("postType") val postType :EPostType = EPostType.PASSENGER_SM)
+                              @SerializedName("offer") val agreedOffer: AgreedOfferDTO?=null,
+                              @SerializedName("postType") val postType :EPostType = EPostType.PASSENGER_SM) {
+}
 
 
 data class UserOfferDTO(@SerializedName("id") val id: Long,
@@ -36,3 +38,8 @@ data class UserOfferDTO(@SerializedName("id") val id: Long,
                         @SerializedName("submitDate") val submitDate: String,
                         @SerializedName("priceInt") val priceInt: Int,
                         @SerializedName("seat") val seat: Int)
+
+
+data class AgreedOfferDTO(@SerializedName("message") val message: String,
+                          @SerializedName("priceInt") val priceInt: Int,
+                          @SerializedName("seat") val seat: Int)

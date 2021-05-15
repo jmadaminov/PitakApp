@@ -1,6 +1,7 @@
 package com.novatec.pitak.ui.driver_post
 
 import android.content.Intent
+import android.graphics.Paint
 import android.os.Bundle
 import android.text.format.DateFormat
 import android.view.MenuItem
@@ -11,6 +12,7 @@ import android.widget.LinearLayout
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import androidx.lifecycle.observe
 import androidx.paging.LoadState
 import com.google.android.material.snackbar.Snackbar
 import com.novatec.core.*
@@ -101,31 +103,31 @@ class DriverPostActivity : BaseActivity(), IOnPassengerDelete {
 
     private fun subscribes() {
 
-        viewModel.postOffers.observe(this, {
-            val value = it ?: return@observe
+        viewModel.postOffers.observe(this) {
+            val value = it
             offersAdapter.submitData(lifecycle, value)
             rvOffers.requestLayout()
-        })
+        }
 
-        viewModel.postData.observe(this, {
+        viewModel.postData.observe(this) {
             post = it ?: return@observe
             showPostData()
-        })
+        }
 
-        viewModel.offerActionLoading.observe(this, {
+        viewModel.offerActionLoading.observe(this) {
             progressOfferAction.visibility = if (it ?: return@observe) View.VISIBLE else View.GONE
-        })
+        }
 
-        viewModel.offerActionResp.observe(this, {
-           refreshAll()
-        })
+        viewModel.offerActionResp.observe(this) {
+            refreshAll()
+        }
 
-        viewModel.isLoading.observe(this, {
+        viewModel.isLoading.observe(this) {
             val value = it ?: return@observe
             swipeRefreshLayout.isRefreshing = value
-        })
+        }
 
-        viewModel.errorMessage.observe(this, {
+        viewModel.errorMessage.observe(this) {
             if (it.isNullOrBlank()) {
                 tvMessage.visibility = View.GONE
                 llOffersContainer.visibility = View.VISIBLE
@@ -134,19 +136,19 @@ class DriverPostActivity : BaseActivity(), IOnPassengerDelete {
                 tvMessage.visibility = View.VISIBLE
                 tvMessage.text = it
             }
-        })
+        }
 
-        viewModel.offerActionError.observe(this, {
+        viewModel.offerActionError.observe(this) {
             Snackbar.make(swipeRefreshLayout, it ?: return@observe, Snackbar.LENGTH_SHORT).show()
-        })
+        }
 
-        viewModel.startedTripResp.observe(this, {
-          refreshAll()
-        })
+        viewModel.startedTripResp.observe(this) {
+            refreshAll()
+        }
 
 
 
-        viewModel.deletePostReponse.observe(this, {
+        viewModel.deletePostReponse.observe(this) {
             val response = it ?: return@observe
             when (response) {
                 is ErrorWrapper.RespError -> {
@@ -165,9 +167,9 @@ class DriverPostActivity : BaseActivity(), IOnPassengerDelete {
                 ResultWrapper.InProgress -> {
                 }
             }.exhaustive
-        })
+        }
 
-        viewModel.finishPostResponse.observe(this, {
+        viewModel.finishPostResponse.observe(this) {
             val response = it ?: return@observe
             when (response) {
                 is ErrorWrapper.RespError -> {
@@ -188,7 +190,7 @@ class DriverPostActivity : BaseActivity(), IOnPassengerDelete {
                 ResultWrapper.InProgress -> {
                 }
             }.exhaustive
-        })
+        }
 
 
     }
@@ -223,7 +225,7 @@ class DriverPostActivity : BaseActivity(), IOnPassengerDelete {
         }
 
         llSeatsContainer.removeAllViews()
-        var availableSeats = post.seat - post.passengerList!!.size
+        var availableSeats = post.seat - post.availableSeats
         for (i in 0 until post.seat) {
             val seat = ImageView(this)
             seat.layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
@@ -267,6 +269,8 @@ class DriverPostActivity : BaseActivity(), IOnPassengerDelete {
         }
 
         post.passengerList?.forEach {
+            price.paintFlags = price.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+
             passengersAdapter.add(PassengerItem(it) { passenger ->
                 val dialog = DialogDeletePassenger().apply {
                     val args = Bundle()

@@ -70,7 +70,8 @@ class OfferARideViewModel @ViewModelInject constructor(private val repository: P
                                     null,
                                     passPost.seat,
                                     0,
-                                    postStatus = EPostStatus.CREATED
+                                    postStatus = EPostStatus.CREATED,
+                                    availableSeats = passPost.seat
         )
         when (val response = createDriverPost.execute(driverPost)) {
             is ErrorWrapper.RespError -> {

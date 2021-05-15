@@ -19,8 +19,10 @@ data class DriverPost(val id: Long? = null,
                       val seat: Int,
                       val offerCount: Int,
                       val passengerCount: Int?=null,
+                      val availableSeats: Int,
                       val postStatus: EPostStatus,
                       val pkg: Boolean?=null,
                       val passengerList: List<Passenger>?=null,
-                      val postType: String = Constants.DRIVER_POST_SIMPLE)
+                      val postType: String = Constants.DRIVER_POST_SIMPLE) {
+}
 
