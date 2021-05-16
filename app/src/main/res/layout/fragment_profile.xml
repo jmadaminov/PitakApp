@@ -136,13 +136,15 @@
             tools:listitem="@layout/item_add_car" />
 
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/light_grey" />
+
         <TextView
             android:id="@+id/btnFeedback"
-            android:layout_width="150dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/selector_neutral_border"
+            android:layout_width="match_parent"
+            android:layout_height="?android:actionBarSize"
             android:clickable="true"
             android:focusable="true"
             android:foreground="?android:selectableItemBackground"
@@ -151,13 +153,15 @@
             android:textColor="@color/dark_grey"
             android:textSize="18dp" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/light_grey" />
+
         <TextView
             android:id="@+id/settings"
-            android:layout_width="150dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/selector_neutral_border"
+            android:layout_width="match_parent"
+            android:layout_height="?android:actionBarSize"
             android:clickable="true"
             android:focusable="true"
             android:foreground="?android:selectableItemBackground"
@@ -166,20 +170,27 @@
             android:textColor="@color/dark_grey"
             android:textSize="18dp" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/light_grey" />
+
         <TextView
             android:id="@+id/signOut"
-            android:layout_width="150dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/selector_alert_border"
+            android:layout_width="match_parent"
+            android:layout_height="?android:actionBarSize"
             android:clickable="true"
             android:focusable="true"
             android:foreground="?android:selectableItemBackground"
             android:gravity="center"
             android:text="@string/action_sign_out"
-            android:textColor="@color/dark_grey"
+            android:textColor="@color/error_red_darker"
             android:textSize="18dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/light_grey" />
 
     </LinearLayout>
 </ScrollView>

@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/navSearchTripsFragment"
-        android:name="com.novatec.pitak.ui.main.searchtrip.SearchTripFragment"
+        android:name="com.novatec.epitak.ui.main.searchtrip.SearchTripFragment"
         android:label="@string/search_trip"
         tools:layout="@layout/fragment_search_trip" />
 

@@ -15,7 +15,7 @@
 
     <string name="prompt_password">Пароль</string>
 
-    <string name="action_sign_in">Войти или зарегистрироваться</string>
+    <string name="action_sign_in">Войти или Зарегистрироваться</string>
 
     <string name="action_sign_in_short">Войти</string>
 
@@ -101,9 +101,9 @@
 
     <string name="edit">Редактировать</string>
 
-    <string name="add_post">Добавить пост</string>
+    <string name="add_post">Добавить поездку</string>
 
-    <string name="title_add_post">Добавить пост</string>
+    <string name="title_add_post">Добавить поездку</string>
 
     <string name="destinations">Направления</string>
 
@@ -115,7 +115,7 @@
 
     <string name="car_and_text">Автомобиль и заметка</string>
 
-    <string name="preview_post">Предварительный просмотр поста</string>
+    <string name="preview_post">Предварительный просмотр поездки</string>
 
     <string name="price_and_seats">Цена и места</string>
 
@@ -163,7 +163,7 @@
 
     <string name="anytime">В любое время</string>
 
-    <string name="active">Активный</string>
+    <string name="active">Активные поездки</string>
 
     <string name="history">История</string>
 
@@ -179,7 +179,7 @@
 
     <string name="today">Сегодня</string>
 
-    <string name="no_posts_found">Постов не найдено…</string>
+    <string name="no_posts_found">Поездок не найдено…</string>
 
     <string name="reset">Сброс</string>
 
@@ -199,7 +199,7 @@
 
     <string name="have_you_completed_the_ride">Вы завершили эту поездку?</string>
 
-    <string name="post">Пост: %1$d</string>
+    <string name="post">Поездка: %1$d</string>
 
     <string name="do_you_want_to_cancel_this_offer">Вы хотите отменить это предложение?</string>
 
@@ -225,7 +225,7 @@
 
     <string name="edit_profile">Редактировать профиль</string>
 
-    <string name="edit_post">Редактировать пост</string>
+    <string name="edit_post">Редактировать поездку</string>
 
     <string name="results_could_not_be_loaded">Результаты не могут быть загружены</string>
 
@@ -235,7 +235,7 @@
 
     <string name="select_your_trip_if_you_have_one">Выберите уже существующую поездку, иначе мы создадим для вас новую поездку!</string>
 
-    <string name="offering_post_id">"ID поста предложения: %1$d"</string>
+    <string name="offering_post_id">"ID поездки предложения: %1$d"</string>
 
     <string name="we_will_create_an_order_for_you">Создадим для вас поездку с указанием направлений пассажирского поста!</string>
 
@@ -275,19 +275,25 @@
 
     <string name="finish">Финиш</string>
 
-    <string name="go_to_play_market">Go to Play Market</string>
+    <string name="go_to_play_market">Перейти в Play Market</string>
     <string name="sure_to_delete_this_passenger">Вы уверены, что хотите удалить этого пассажира?</string>
-    <string name="my_last_offer">My last offer</string>
-    <string name="attached_post_id">Attached post id</string>
-    <string name="price">Price</string>
-    <string name="update_offer">Update offer</string>
-    <string name="you_have_no_offers_yet_come_back_later">You have no offers yet, please come back later!</string>
-    <string name="close">Close</string>
-    <string name="passengers">Passengers</string>
-    <string name="price_for_one">Price for one</string>
-    <string name="seats">Seats</string>
-    <string name="willing_price_for_one">Willing price for one</string>
-    <string name="any">Any</string>
-    <string name="agreed_price">Agreed price: %1$s Sums</string>
+    <string name="my_last_offer">Мое последнее предложение</string>
+    <string name="attached_post_id">Прикрепленное id поездки</string>
+    <string name="price">Цена</string>
+    <string name="update_offer">Обновить предложение</string>
+    <string name="you_have_no_offers_yet_come_back_later">У вас пока нет предложений, пожалуйста зайдите позже</string>
+    <string name="close">Закрыть</string>
+    <string name="passengers">Пассажиры</string>
+    <string name="price_for_one">Цена на одного Пассажира</string>
+    <string name="seats">Места</string>
+    <string name="willing_price_for_one">Желаеммая цена за поездку</string>
+    <string name="any">∞</string>
+    <string name="agreed_price">Подтвержденная Цена: %1$s Sums</string>
+
+
+    <string name="add_post_btn_description">Нажмите эту кнопку, чтобы создать пост о планируемой поездке!</string>
+    <string name="got_it">Понятно</string>
+    <string name="no_notifications_yet">Уведомлений пока нет…</string>
+
 
 </resources>

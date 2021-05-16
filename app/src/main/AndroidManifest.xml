@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.novatec.pitak">
+    package="com.novatec.epitak">
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -104,7 +104,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.novatec.pitak.fileprovider"
+            android:authorities="com.novatec.epitak.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

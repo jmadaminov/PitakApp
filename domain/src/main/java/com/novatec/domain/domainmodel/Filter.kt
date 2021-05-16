@@ -19,10 +19,10 @@ data class Filter(var airConditioner: Boolean? = null,
                   var minPrice: Int? = null,
                   var priceOrder: String? = null,
                   var seat: Int? = null,
-                  var timeFirstPart: Boolean? = null,
-                  var timeSecondPart: Boolean? = null,
-                  var timeThirdPart: Boolean? = null,
-                  var timeFourthPart: Boolean? = null) {
+                  var timeFirstPart: Boolean? = true,
+                  var timeSecondPart: Boolean? = true,
+                  var timeThirdPart: Boolean? = true,
+                  var timeFourthPart: Boolean? = true) {
     companion object {
         const val MAX_PRICE = 500000
         const val MIN_PRICE = 10000

@@ -4,8 +4,8 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.novatec.pitak",
-  "variantName": "processReleaseResources",
+  "applicationId": "com.novatec.epitak",
+  "variantName": "release",
   "elements": [
     {
       "type": "SINGLE",

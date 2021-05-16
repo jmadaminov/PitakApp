@@ -32,7 +32,6 @@
             android:layout_margin="24dp"
             android:gravity="center"
             android:text="@string/no_active_orders"
-            android:textColor="@color/textColorGreyDark"
             android:textSize="20dp" />
 
 

@@ -5,7 +5,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.novatec.pitak.ui.auth.AuthActivity">
+    tools:context="com.novatec.epitak.ui.auth.AuthActivity">
 
 
     <ImageView
@@ -41,7 +41,8 @@
         android:background="@drawable/shape_rounded_corners_white"
         android:hint="@string/code"
         android:imeOptions="actionDone"
-        android:inputType="text"
+        android:inputType="number"
+        android:maxLength="5"
         android:padding="10dp"
         android:selectAllOnFocus="true"
         app:layout_constraintBottom_toBottomOf="parent"

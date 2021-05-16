@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/navProfileFragment"
-        android:name="com.novatec.pitak.ui.main.profile.ProfileFragment"
+        android:name="com.novatec.epitak.ui.main.profile.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile"/>
 

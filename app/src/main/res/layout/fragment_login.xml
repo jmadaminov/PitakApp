@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:background="@drawable/bg"
-    tools:context="com.novatec.pitak.ui.auth.AuthActivity">
+    tools:context="com.novatec.epitak.ui.auth.AuthActivity">
 
     <!--    <ImageView-->
     <!--        android:layout_width="match_parent"-->
@@ -285,7 +285,6 @@
             android:layout_height="?android:actionBarSize"
             android:layout_columnWeight="1"
             android:clickable="true"
-
             android:focusable="true"
             android:foreground="?android:selectableItemBackgroundBorderless"
             android:gravity="center"
@@ -345,7 +344,6 @@
             android:src="@drawable/ic_round_arrow_forward_24"
             android:textColor="@color/white"
             android:textSize="30dp" />
-
 
     </GridLayout>
 
