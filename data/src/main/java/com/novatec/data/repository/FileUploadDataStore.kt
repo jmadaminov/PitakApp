@@ -14,6 +14,6 @@ import java.io.File
  */
 interface FileUploadDataStore {
 
-    suspend fun uploadPhoto(file: File): ResultWrapper<PhotoEntity>
+    suspend fun uploadPhoto(bytes: ByteArray): ResultWrapper<PhotoEntity>
 
 }

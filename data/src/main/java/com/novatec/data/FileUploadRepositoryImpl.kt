@@ -7,7 +7,6 @@ import com.novatec.data.source.FileUploadDataStoreFactory
 import com.novatec.domain.domainmodel.PhotoBody
 import com.novatec.domain.repository.FileUploadRepository
 import com.novatec.domain.repository.UserRepository
-import java.io.File
 import javax.inject.Inject
 
 /**
@@ -18,18 +17,14 @@ class FileUploadRepositoryImpl @Inject constructor(private val factory: FileUplo
                                                    private val photoMapper: PhotoMapper
 ) : FileUploadRepository {
 
-    override suspend fun uploadPhoto(file: File): ResultWrapper<PhotoBody> {
-        val response = factory.retrieveDataStore(false)
-            .uploadPhoto(file)
-        return when (response) {
+    override suspend fun uploadPhoto(bytes: ByteArray): ResultWrapper<PhotoBody> {
+        return when (val response = factory.retrieveDataStore(false).uploadPhoto(bytes)) {
             is ErrorWrapper.RespError -> response
             is ErrorWrapper.SystemError -> response
             is ResultWrapper.Success -> ResultWrapper.Success(photoMapper.mapFromEntity(response.value))
             ResultWrapper.InProgress -> ResultWrapper.InProgress
         }
     }
-
-
 
 
 }

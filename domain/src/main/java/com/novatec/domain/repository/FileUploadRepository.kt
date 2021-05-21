@@ -9,6 +9,6 @@ import java.io.File
 
 interface FileUploadRepository {
 
-    suspend fun uploadPhoto(file: File): ResultWrapper<PhotoBody>
+    suspend fun uploadPhoto(bytes: ByteArray): ResultWrapper<PhotoBody>
 
 }

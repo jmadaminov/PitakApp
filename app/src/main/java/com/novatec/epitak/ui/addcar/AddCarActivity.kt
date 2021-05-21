@@ -1,9 +1,11 @@
 package com.novatec.epitak.ui.addcar
 
 import android.app.Activity
+import android.graphics.Bitmap
 import android.graphics.PorterDuff
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.text.Editable
 import android.view.MenuItem
 import android.view.View
@@ -30,7 +32,6 @@ import com.novatec.epitak.ui.BaseActivity
 import com.novatec.epitak.ui.viewgroups.ItemAddPhoto
 import com.novatec.epitak.ui.viewgroups.ItemCarPhoto
 import com.novatec.epitak.util.AppPrefs
-import com.novatec.epitak.util.getRealPathFromURI
 import com.novatec.epitak.util.load
 import com.novatec.epitak.viewobjects.CarColorViewObj
 import com.novatec.epitak.viewobjects.CarViewObj
@@ -46,7 +47,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.InternalCoroutinesApi
 import splitties.experimental.ExperimentalSplittiesApi
 import splitties.preferences.edit
-import java.io.File
+import java.io.ByteArrayOutputStream
 
 
 class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListener,
@@ -346,18 +347,10 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
     }
 
     override fun onSingleImageSelected(uri: Uri, tag: String) {
-//        val parcelFileDescriptor =
-//            contentResolver.openFileDescriptor(uri, "r", null) ?: return
-//
-//        val inputStream = FileInputStream(parcelFileDescriptor.fileDescriptor)
-//        val file = File(cacheDir, contentResolver.getFileName(uri))
-//        val outputStream = FileOutputStream(file)
-//        inputStream.copyTo(outputStream)
-
-
-        viewmodel.uploadCarPhoto(File(uri.getRealPathFromURI(this)), tag == "IS_AVATAR")
-
-
+        val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, uri)
+        val out = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 40, out)
+        viewmodel.uploadCarPhoto(out.toByteArray(), tag == "IS_AVATAR")
     }
 
     override fun onItemClick(item: Item<*>, view: View) {

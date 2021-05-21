@@ -131,17 +131,17 @@
 
     <string name="second_part_of_day">До полудня \n(6:00–12:00)</string>
 
-    <string name="third_part_of_day">После полудня \n(18:00–12:00)</string>
+    <string name="third_part_of_day">После полудня \n(12:00–18:00)</string>
 
-    <string name="fourth_part_of_day">Вечер \n(00:00–18:00)</string>
+    <string name="fourth_part_of_day">Вечер \n(18:00–00:00)</string>
 
     <string name="first_part_of_day_one_line">Рассвет (00:00–6:00)</string>
 
     <string name="second_part_of_day_one_line">До полудня (6:00–12:00)</string>
 
-    <string name="third_part_of_day_one_line">После полудня (18:00–12:00)</string>
+    <string name="third_part_of_day_one_line">После полудня (12:00–18:00)</string>
 
-    <string name="fourth_part_of_day_one_line">Вечер (00:00–18:00)</string>
+    <string name="fourth_part_of_day_one_line">Вечер (18:00–00:00)</string>
 
     <string name="time">Время</string>
 

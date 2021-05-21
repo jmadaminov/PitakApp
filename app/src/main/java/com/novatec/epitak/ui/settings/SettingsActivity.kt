@@ -17,6 +17,7 @@ class SettingsActivity : BaseActivity() {
         setContentView(R.layout.activity_settings)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeButtonEnabled(true)
+        supportActionBar?.setTitle(R.string.settings)
 
 
         cl_language.setOnClickListener {

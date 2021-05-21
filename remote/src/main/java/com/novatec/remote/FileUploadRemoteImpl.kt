@@ -5,12 +5,9 @@ import com.novatec.core.ResultWrapper
 import com.novatec.data.model.PhotoEntity
 import com.novatec.data.repository.FileUploadRemote
 import com.novatec.remote.mapper.PhotoMapper
-import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
-import okhttp3.RequestBody.Companion.asRequestBody
-import java.io.File
+import okhttp3.RequestBody.Companion.toRequestBody
 import javax.inject.Inject
 
 
@@ -24,10 +21,11 @@ class FileUploadRemoteImpl @Inject constructor(private val apiService: ApiServic
     FileUploadRemote {
 
 
-    override suspend fun uploadPhoto(file: File): ResultWrapper<PhotoEntity> {
+    override suspend fun uploadPhoto(bytes: ByteArray): ResultWrapper<PhotoEntity> {
         return try {
-            val requestFile = file.asRequestBody("image/jpg".toMediaType())
-            val body = MultipartBody.Part.createFormData("file", file.name, requestFile)
+            val requestFile = bytes.toRequestBody("image/jpg".toMediaType())
+//            val requestFile = file.asRequestBody("image/jpg".toMediaType())
+            val body = MultipartBody.Part.createFormData("file", "", requestFile)
             val response = apiService.uploadPhoto(body)
             if (response.code == 1) ResultWrapper.Success(photoMapper.mapToEntity(response.data!!))
             else ErrorWrapper.RespError(response.code, response.message)

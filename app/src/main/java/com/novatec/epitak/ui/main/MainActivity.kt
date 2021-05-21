@@ -7,8 +7,6 @@ import android.util.DisplayMetrics
 import android.view.View
 import android.view.animation.DecelerateInterpolator
 import android.widget.CheckedTextView
-import android.widget.Toast.LENGTH_SHORT
-import android.widget.Toast.makeText
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.core.view.doOnPreDraw
@@ -57,13 +55,13 @@ class MainActivity : BaseActivity() {
     @ExperimentalSplittiesApi
     override fun onCreate(savedInstanceState: Bundle?) {
         setLocale(AppPrefs.language, this)
-        checkUserLogin()
         setTheme(R.style.NoActionBar)
-        super.onCreate(savedInstanceState)
         if (AppPrefs.isFirstTime) {
             startActivity(Intent(this, IntroActivity::class.java))
             finish()
-        }
+        } else checkUserLogin()
+        super.onCreate(savedInstanceState)
+
         notificationPostId = intent.extras?.getLong(EXTRA_POST_ID, -1)
 
 
@@ -86,7 +84,7 @@ class MainActivity : BaseActivity() {
 
         viewModel.getActiveAppVersions()
 
-        if (!AppPrefs.hasSeenTutorial) {
+        if (AppPrefs.token.isNotBlank() && !AppPrefs.hasSeenTutorial) {
             showAddBtnTutorial()
             AppPrefs.edit {
                 hasSeenTutorial = true

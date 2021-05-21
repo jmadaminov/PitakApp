@@ -65,12 +65,12 @@
     <string name="departure_asap">To\'lishi bilan jo\'nash</string>
     <string name="first_part_of_day">Tong \n(00:00–6:00)</string>
     <string name="second_part_of_day">Ertalab \n(6:00–12:00)</string>
-    <string name="third_part_of_day">Peshindan keyin \n(18:00–12:00)</string>
-    <string name="fourth_part_of_day">Kechqurun \n(00:00–18:00)</string>
+    <string name="third_part_of_day">Peshindan keyin \n(12:00–18:00)</string>
+    <string name="fourth_part_of_day">Kechqurun \n(18:00–00:00)</string>
     <string name="first_part_of_day_one_line">Tong (00:00–6:00)</string>
     <string name="second_part_of_day_one_line">Ertalab (6:00–12:00)</string>
-    <string name="third_part_of_day_one_line">Peshindan keyin (18:00–12:00)</string>
-    <string name="fourth_part_of_day_one_line">Kechqurun (00:00–18:00)</string>
+    <string name="third_part_of_day_one_line">Peshindan keyin (12:00–18:00)</string>
+    <string name="fourth_part_of_day_one_line">Kechqurun (18:00–00:00)</string>
     <string name="time">Vaqt</string>
     <string name="day">Kun</string>
     <string name="price_for_one_passenger">Bitta yo\'lovchining narxi</string>

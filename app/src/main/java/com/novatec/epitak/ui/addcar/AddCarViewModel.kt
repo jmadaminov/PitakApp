@@ -77,11 +77,11 @@ class AddCarViewModel @Inject constructor(private val uploadPhoto: UploadPhoto,
     }
 
 
-    fun uploadCarPhoto(file: File, isAvatar: Boolean = false) {
+    fun uploadCarPhoto(bytes: ByteArray, isAvatar: Boolean = false) {
         val liveData = if (isAvatar) carAvatarResponse else carImgResponse
         liveData.value = ResultWrapper.InProgress
         viewModelScope.launch(IO) {
-            val response = uploadPhoto.execute(file)
+            val response = uploadPhoto.execute(bytes)
             withContext(Main) {
                 liveData.value = response
             }

@@ -11,9 +11,9 @@ import java.io.File
  *
  */
 class UploadPhoto(val repository: FileUploadRepository) :
-    UseCaseWithParams<File, ResultWrapper<PhotoBody>>() {
+    UseCaseWithParams<ByteArray, ResultWrapper<PhotoBody>>() {
 
-    override suspend fun buildUseCase(params: File): ResultWrapper<PhotoBody> {
+    override suspend fun buildUseCase(params:ByteArray): ResultWrapper<PhotoBody> {
         return repository.uploadPhoto(params)
     }
 }

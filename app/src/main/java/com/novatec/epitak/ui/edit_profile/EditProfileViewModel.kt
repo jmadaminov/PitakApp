@@ -12,6 +12,8 @@ import com.novatec.core.exhaustive
 import com.novatec.domain.domainmodel.PhotoBody
 import com.novatec.domain.repository.FileUploadRepository
 import com.novatec.domain.repository.UserRepository
+import com.novatec.epitak.App
+import com.novatec.epitak.R
 import com.novatec.epitak.util.AppPrefs
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -48,7 +50,7 @@ class EditProfileViewModel @Inject constructor(private val userRepository: UserR
                 _isUpdating.value = false
                 when (response) {
                     is ResponseError -> {
-                        _errorMessage.value = response.message
+                        _errorMessage.value = response.message ?: App.getInstance().getString(R.string.system_error)
                     }
                     is ResponseSuccess -> {
                         AppPrefs.edit {
@@ -69,10 +71,10 @@ class EditProfileViewModel @Inject constructor(private val userRepository: UserR
     var _uploadPhotoResp = MutableLiveData<ResultWrapper<PhotoBody>>()
     val uploadPhotoResp: LiveData<ResultWrapper<PhotoBody>> get() = _uploadPhotoResp
 
-    fun uploadAvatar(file: File) {
+    fun uploadAvatar(bytes:ByteArray) {
         _uploadPhotoResp.value = ResultWrapper.InProgress
         viewModelScope.launch(Dispatchers.IO) {
-            val response = fileUploadRepository.uploadPhoto(file)
+            val response = fileUploadRepository.uploadPhoto(bytes)
             withContext(Dispatchers.Main) {
                 _uploadPhotoResp.value = response
             }

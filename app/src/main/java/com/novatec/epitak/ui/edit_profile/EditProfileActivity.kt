@@ -1,5 +1,7 @@
 package com.novatec.epitak.ui.edit_profile
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
@@ -25,6 +27,8 @@ import com.novatec.epitak.util.getRealPathFromURI
 import com.novatec.epitak.util.load
 import com.novatec.epitak.util.loadRound
 import kotlinx.android.synthetic.main.activity_edit_profile.*
+import java.io.ByteArrayInputStream
+import java.io.ByteArrayOutputStream
 import java.io.File
 
 class EditProfileActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListener,
@@ -136,8 +140,11 @@ class EditProfileActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedL
     override fun onSingleImageSelected(uri: Uri, tag: String?) {
         checkInputs()
         val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, uri)
-        ivAvatar.loadRound(bitmap)
-        viewModel.uploadAvatar(File(uri.getRealPathFromURI(this)))
+        val out = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 20, out)
+        val decoded = BitmapFactory.decodeStream(ByteArrayInputStream(out.toByteArray()))
+        ivAvatar.loadRound(decoded)
+        viewModel.uploadAvatar(out.toByteArray())
     }
 
     override fun loadImage(imageUri: Uri?, ivImage: ImageView) {
