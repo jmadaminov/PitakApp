@@ -26,7 +26,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:textColor="@color/colorPrimaryDark"
+        android:background="@drawable/selector_rounded_corners_primary"
+        android:paddingStart="7dp"
+        android:paddingEnd="7dp"
+        android:textColor="@color/white"
         android:textSize="16dp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@id/carAvatar"
@@ -63,17 +66,17 @@
         android:foreground="?android:selectableItemBackground"
         android:padding="10dp"
         android:src="@drawable/outline_edit_black_24dp"
-        app:tint="@color/colorPrimaryDark"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/colorPrimaryDark" />
 
 
     <View
         android:id="@+id/selectedStroke"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/stroke_primary"
         android:visibility="gone"
-        tools:visibility="visible"
-        android:background="@drawable/stroke_primary" />
+        tools:visibility="visible" />
 
 </androidx.cardview.widget.CardView>

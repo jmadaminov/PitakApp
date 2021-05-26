@@ -12,7 +12,6 @@ import android.widget.LinearLayout
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
-import androidx.lifecycle.observe
 import androidx.paging.LoadState
 import com.google.android.material.snackbar.Snackbar
 import com.novatec.core.*
@@ -205,6 +204,8 @@ class DriverPostActivity : BaseActivity(), IOnPassengerDelete {
         btnStart.isVisible =
             post.postStatus == EPostStatus.WAITING_FOR_START || !post.passengerList.isNullOrEmpty() && post.postStatus == EPostStatus.CREATED
 
+
+        cbTakeParcel.isVisible = post.pkg ?: false
 
         if (post.from.name == null && post.from.districtName == null) {
             fromDistrict.isVisible = false

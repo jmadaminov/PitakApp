@@ -99,6 +99,18 @@ class SearchTripViewModel @Inject constructor(val postFilterRepository: PostFilt
         applyFilter()
     }
 
+    fun clearPlaceFromSelection() {
+        _filter.valueNN.fromRegionId = null
+        _filter.valueNN.fromDistrictId = null
+        applyFilter()
+    }
+    fun clearPlaceToSelection() {
+        _filter.valueNN.toRegionId = null
+        _filter.valueNN.toDistrictId = null
+        applyFilter()
+    }
+
+
     fun placeToSelected(place: Place) {
         _filter.valueNN.toRegionId = place.regionId
         _filter.valueNN.toDistrictId = place.districtId

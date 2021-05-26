@@ -32,7 +32,7 @@
                 android:id="@+id/ivPassenger"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_marginStart="12dp"
+                android:layout_marginStart="2dp"
                 android:layout_marginTop="12dp"
                 android:scaleType="centerCrop"
                 app:layout_constraintStart_toStartOf="parent"
@@ -141,9 +141,8 @@
                 android:id="@+id/lblPassengersCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
                 android:text="@string/passengers"
-                android:textSize="14dp"
+                android:textSize="16dp"
                 app:layout_constraintBottom_toBottomOf="@id/llSeatsContainer"
                 app:layout_constraintStart_toStartOf="@id/circleTo"
                 app:layout_constraintTop_toTopOf="@id/llSeatsContainer" />
@@ -153,8 +152,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:layout_marginBottom="7dp"
-                android:layout_marginTop="7dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="12dp"
                 android:columnCount="4"
                 android:orientation="horizontal"
                 android:rowCount="2"
@@ -185,12 +184,14 @@
                 android:id="@+id/lblPricePerPassenger"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
                 android:gravity="center"
                 android:text="@string/price_for_one"
                 android:textSize="13dp"
                 app:layout_constraintBottom_toTopOf="@id/price"
                 app:layout_constraintEnd_toEndOf="@id/price"
-                app:layout_constraintStart_toStartOf="@id/price" />
+                app:layout_constraintStart_toStartOf="@id/price"
+                app:layout_constraintTop_toBottomOf="@id/note" />
 
             <TextView
                 android:id="@+id/price"
@@ -206,8 +207,9 @@
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="24dp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@id/lblPassengersCount"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/lblPricePerPassenger"
                 tools:text="50,000 sum" />
 
             <TextView

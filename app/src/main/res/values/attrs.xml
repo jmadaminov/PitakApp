@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="PersonCounter">
+        <attr name="min_passengers" format="integer"/>
+        <attr name="max_passengers" format="integer"/>
+    </declare-styleable>
+</resources>

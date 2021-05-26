@@ -163,6 +163,7 @@ open class DriverPostMapper : Mapper<DriverPostEntity, DriverPostModel> {
                                 type.availableSeats,
                                 type.postStatus,
                                 type.pkg,
+                                type.parcelCount,
                                 passengerList,
                                 type.postType)
     }

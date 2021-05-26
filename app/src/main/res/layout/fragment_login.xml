@@ -8,15 +8,6 @@
     tools:background="@drawable/bg"
     tools:context="com.novatec.epitak.ui.auth.AuthActivity">
 
-    <!--    <ImageView-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="250dp"-->
-    <!--        android:scaleType="centerCrop"-->
-    <!--        android:src="@drawable/bg_three"-->
-    <!--        app:layout_constraintTop_toTopOf="parent"-->
-    <!--        tools:src="@drawable/bg_three" />-->
-
-
     <ProgressBar
         android:id="@+id/progress"
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
@@ -25,7 +16,6 @@
         android:indeterminate="true"
         android:visibility="gone"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <ImageView
         android:id="@+id/logo"
@@ -267,7 +257,6 @@
             android:layout_height="?android:actionBarSize"
             android:layout_columnWeight="1"
             android:clickable="true"
-
             android:focusable="true"
             android:foreground="?android:selectableItemBackgroundBorderless"
             android:gravity="center"

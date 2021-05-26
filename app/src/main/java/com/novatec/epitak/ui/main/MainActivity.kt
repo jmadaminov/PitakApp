@@ -44,6 +44,7 @@ class MainActivity : BaseActivity() {
     companion object {
         private val REQ_CODE_ADD_POST = 98
 
+        var displayMetrics = DisplayMetrics()
     }
 
     private lateinit var spotlight: Spotlight
@@ -54,6 +55,7 @@ class MainActivity : BaseActivity() {
 
     @ExperimentalSplittiesApi
     override fun onCreate(savedInstanceState: Bundle?) {
+        display?.getMetrics(displayMetrics)
         setLocale(AppPrefs.language, this)
         setTheme(R.style.NoActionBar)
         if (AppPrefs.isFirstTime) {

@@ -19,6 +19,8 @@ data class DriverPostViewObj(val id: Long? = null,
                              val car: CarViewObj? = null,
                              val remark: String? = null,
                              val seat: Int,
+                             val pkg: Boolean? = null,
+                             val parcelCount: Int,
                              val postType: String = Constants.DRIVER_POST_SIMPLE) : Parcelable {
     companion object {
         fun fromDriverPost(post: DriverPost): DriverPostViewObj {
@@ -47,6 +49,8 @@ data class DriverPostViewObj(val id: Long? = null,
                                      car,
                                      post.remark,
                                      post.seat,
+                                     post.pkg,
+                                     post.parcelCount,
                                      post.postType)
         }
     }
@@ -62,7 +66,6 @@ data class PlaceViewObj(val districtId: Int? = null,
                         val name: String? = null) : Parcelable {
 
 
-
     companion object {
         fun fromPlace(place: Place): PlaceViewObj {
             return PlaceViewObj(place.districtId,
@@ -73,6 +76,17 @@ data class PlaceViewObj(val districtId: Int? = null,
                                 place.districtName,
                                 place.name)
         }
+
+    }
+
+    fun toPlace(): Place {
+        return Place(districtId,
+                     regionId,
+                     lat,
+                     lon,
+                     regionName,
+                     districtName,
+                     name)
     }
 
 }

@@ -30,6 +30,7 @@ class App : Application() {
 
         fun getAppContext() = INSTANCE
         fun getInstance(): Context = INSTANCE
+
     }
 
 

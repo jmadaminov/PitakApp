@@ -25,12 +25,14 @@
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+
             android:fillViewport="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="10dp">
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -41,10 +43,11 @@
 
                     <View
                         android:id="@+id/line"
-                        android:layout_width="2dp"
+                        android:layout_width="50dp"
                         android:layout_height="0dp"
                         android:layout_gravity="center_horizontal"
-                        android:background="@color/ic_grey"
+                        android:background="@drawable/line_dash"
+                        android:rotation="-90"
                         app:layout_constraintBottom_toTopOf="@id/circleTo"
                         app:layout_constraintEnd_toEndOf="@id/circleFrom"
                         app:layout_constraintStart_toStartOf="@id/circleFrom"
@@ -55,7 +58,7 @@
                         android:id="@+id/circleFrom"
                         android:layout_width="10dp"
                         android:layout_height="10dp"
-                        android:layout_marginStart="12dp"
+                        android:layout_marginStart="24dp"
                         android:layout_marginTop="12dp"
                         android:src="@drawable/shape_round_disabled"
                         app:layout_constraintStart_toStartOf="parent"
@@ -67,11 +70,11 @@
                         android:id="@+id/circleTo"
                         android:layout_width="25dp"
                         android:layout_height="25dp"
-                        android:layout_marginStart="4.5dp"
                         android:layout_marginTop="40dp"
                         android:layout_marginBottom="12dp"
                         android:src="@drawable/ic_round_location_on_24"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="@id/circleFrom"
+                        app:layout_constraintStart_toStartOf="@id/circleFrom"
                         app:layout_constraintTop_toBottomOf="@id/circleFrom"
                         app:tint="@color/error_red" />
 
@@ -125,13 +128,13 @@
 
 
                     <TextView
-                        android:id="@+id/lblDriversCount"
+                        android:id="@+id/lblSeatsCount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
                         android:layout_marginStart="12dp"
+                        android:layout_marginTop="24dp"
                         android:text="@string/seats"
-                        android:textSize="14dp"
+                        android:textSize="16dp"
                         app:layout_constraintStart_toStartOf="@id/circleTo"
                         app:layout_constraintTop_toBottomOf="@id/circleTo" />
 
@@ -140,11 +143,33 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
-                        android:layout_marginBottom="7dp"
+                        android:columnCount="4"
                         android:orientation="horizontal"
-                        app:layout_constraintBottom_toBottomOf="@id/lblDriversCount"
-                        app:layout_constraintStart_toEndOf="@id/lblDriversCount"
-                        app:layout_constraintTop_toTopOf="@id/lblDriversCount" />
+                        android:rowCount="2"
+                        app:layout_constraintBottom_toBottomOf="@id/lblSeatsCount"
+                        app:layout_constraintStart_toEndOf="@id/lblSeatsCount"
+                        app:layout_constraintTop_toTopOf="@id/lblSeatsCount" />
+
+
+                    <TextView
+                        android:id="@+id/cbTakeParcel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="24dp"
+                        android:checked="true"
+                        android:drawablePadding="12dp"
+                        android:enabled="false"
+                        android:gravity="center_vertical"
+                        android:text="@string/can_take_package"
+                        android:textColor="@color/dark_grey"
+                        android:visibility="gone"
+                        app:drawableStartCompat="@drawable/ic_package"
+                        app:layout_constraintBottom_toTopOf="@id/note"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/lblSeatsCount"
+                        tools:visibility="visible" />
 
 
                     <TextView
@@ -162,7 +187,7 @@
                         android:textSize="16dp"
                         android:textStyle="italic"
                         android:visibility="gone"
-                        app:layout_constraintTop_toBottomOf="@id/lblDriversCount"
+                        app:layout_constraintTop_toBottomOf="@id/cbTakeParcel"
                         tools:visibility="visible" />
 
                     <TextView
@@ -197,22 +222,24 @@
                         app:layout_constraintTop_toTopOf="parent"
                         tools:text="11 March" />
 
+
                     <TextView
-                        android:id="@+id/lblPricePerDriver"
-                        android:layout_width="0dp"
+                        android:id="@+id/lblPricePerPassenger"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
                         android:gravity="center"
                         android:text="@string/willing_price_for_one"
                         android:textSize="13dp"
                         app:layout_constraintBottom_toTopOf="@id/price"
                         app:layout_constraintEnd_toEndOf="@id/price"
-                        app:layout_constraintStart_toStartOf="@id/price" />
+                        app:layout_constraintStart_toStartOf="@id/price"
+                        app:layout_constraintTop_toBottomOf="@id/note" />
 
                     <TextView
                         android:id="@+id/price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="12dp"
                         android:drawablePadding="10dp"
                         android:gravity="center_vertical|end"
                         android:paddingStart="5dp"
@@ -222,9 +249,12 @@
                         android:textColor="@color/dark_grey"
                         android:textSize="24dp"
                         android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="@id/lblDriversCount"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/lblPricePerPassenger"
                         tools:text="50,000 sum" />
+
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

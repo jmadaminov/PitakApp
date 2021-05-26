@@ -294,6 +294,10 @@
     <string name="add_post_btn_description">Нажмите эту кнопку, чтобы создать пост о планируемой поездке!</string>
     <string name="got_it">Понятно</string>
     <string name="no_notifications_yet">Уведомлений пока нет…</string>
+    <string name="date">Дата</string>
+    <string name="can_take_package">Могу взять посылку</string>
+    <string name="no_destination_found">Маршрут не найден...</string>
+    <string name="enter_search_location">Введите адрес...</string>
 
 
 </resources>

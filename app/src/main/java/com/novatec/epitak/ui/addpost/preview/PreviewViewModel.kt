@@ -34,10 +34,4 @@ class PreviewViewModel  @Inject constructor(private val createDriverPost: Create
         }
     }
 
-
-    override fun onCleared() {
-        super.onCleared()
-    }
-
-
 }

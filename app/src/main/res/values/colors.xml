@@ -8,7 +8,7 @@
     <color name="windowBackground">#f8f8f8</color>
     <color name="colorAccent">#ff5722</color>
     <color name="bg_transparent">#D026C6DA</color>
-    <color name="darkLogoColor">#0f2f3f</color>
+    <color name="darkLogoColor">#0f2f5f</color>
     <color name="splashGradientEnd">#4F2A93</color>
     <color name="splashGradientStart">#CBB5FF</color>
     <color name="button_grey">#B6B6B6</color>
@@ -34,8 +34,9 @@
     <color name="black_twenty_opacity">#80005050</color>
     <color name="black_fifty_opacity">#D0000000</color>
     <color name="black_80_opacity">#CC000000</color>
+    <color name="white_transparent" > #80ffffff</color>
 
-<!--    100% — FF-->
+    <!--    100% — FF-->
 <!--    95% — F2-->
 <!--    90% — E6-->
 <!--    85% — D9-->

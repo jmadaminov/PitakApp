@@ -145,7 +145,7 @@
     <string name="update_offer">taklifni Yangilash</string>
     <string name="you_have_no_offers_yet_come_back_later">Sizda hali takliflar yo\'q, iltimos keyinroq qayta kiring!</string>
     <string name="close">Yopmoq</string>
-    <string name="passengers">Yo\'lovshilar</string>
+    <string name="passengers">Yo\'lovchilar</string>
     <string name="price_for_one">Bir kishiga narx</string>
     <string name="seats">O\'rindiqlar</string>
     <string name="willing_price_for_one">Bir kishi uchun soralgan narx</string>
@@ -155,5 +155,9 @@
     <string name="add_post_btn_description">Rejalashtirilgan sayohat haqida e\'lon yaratish uchun ushbu tugmani bosing!</string>
     <string name="got_it">Tushunarli</string>
     <string name="no_notifications_yet">Xabarlar mavjud emas…</string>
+    <string name="date">Sana</string>
+    <string name="can_take_package">Po\'chta olaman</string>
+    <string name="no_destination_found">Yo\'nalish topilmadi...</string>
+    <string name="enter_search_location">Manzilni kiriting...</string>
 
 </resources>

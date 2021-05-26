@@ -21,9 +21,9 @@
         android:right="120dp"
         android:top="210dp">
 
-        <bitmap
-            android:gravity="center"
-            android:src="@drawable/ic_launcher_foreground"/>
+<!--        <bitmap-->
+<!--            android:gravity="center"-->
+<!--            android:src="@drawable/ic_launcher_foreground"/>-->
 
     </item>
 </layer-list>

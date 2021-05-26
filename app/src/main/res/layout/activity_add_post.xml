@@ -1,59 +1,317 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:id="@+id/scrollView"
+    android:layout_height="match_parent">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            style="@style/ToolBarStyle"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            app:contentInsetStart="0dp">
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="24dp"
+            android:text="@string/destinations"
+            android:textColor="@color/colorPrimary"
+            android:textSize="14dp"
+            android:textStyle="bold" />
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="?android:actionBarSize">
-
-                        <ImageView
-                            android:id="@+id/ivBack"
-                            android:layout_width="?android:actionBarSize"
-                            android:layout_height="match_parent"
-                            android:clickable="true"
-                            android:focusable="true"
-                            android:foreground="?android:selectableItemBackgroundBorderless"
-                            android:padding="15dp"
-                            android:src="@drawable/baseline_arrow_back_white_24dp" />
-
-                        <TextView
-                            android:id="@+id/tvClose"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_alignParentEnd="true"
-                            android:clickable="true"
-                            android:focusable="true"
-                            android:foreground="?android:selectableItemBackground"
-                            android:gravity="center"
-                            android:paddingStart="15dp"
-                            android:paddingEnd="15dp"
-                            android:text="@string/close"
-                            android:textColor="@color/white"
-                            android:textSize="16dp"
-                            android:textStyle="bold" />
-
-                </RelativeLayout>
-
-        </androidx.appcompat.widget.Toolbar>
-        <fragment
-            android:id="@+id/nav_host_fragment"
-            android:name="androidx.navigation.fragment.NavHostFragment"
+        <TextView
+            android:id="@+id/tvFrom"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:defaultNavHost="true"
-            app:navGraph="@navigation/add_post_nav_graph" />
+            android:layout_height="50dp"
+            android:clickable="true"
+            android:drawablePadding="12dp"
+            android:focusable="true"
+            android:foreground="?android:selectableItemBackground"
+            android:gravity="center_vertical"
+            android:hint="@string/from"
+            android:maxLines="1"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            app:drawableStartCompat="@drawable/ic_round_my_location_24"
+            app:drawableTint="@color/transparentGrey" />
 
-</LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height=".5dp"
+            android:background="@color/line_textColorGrey" />
+
+        <TextView
+            android:id="@+id/tvTo"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:clickable="true"
+            android:drawablePadding="12dp"
+            android:focusable="true"
+            android:foreground="?android:selectableItemBackground"
+            android:gravity="center_vertical"
+            android:hint="@string/to"
+            android:maxLines="1"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            app:drawableStartCompat="@drawable/ic_round_location_on_24"
+            app:drawableTint="@color/colorAccent" />
+
+        <!--    <View-->
+        <!--        android:layout_width="match_parent"-->
+        <!--        android:layout_height=".5dp"-->
+        <!--        android:background="@color/line_textColorGrey" />-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="24dp"
+            android:text="@string/date"
+            android:textColor="@color/colorPrimary"
+            android:textSize="14dp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:clickable="true"
+            android:drawablePadding="12dp"
+            android:focusable="true"
+            android:foreground="?android:selectableItemBackground"
+            android:gravity="center_vertical"
+            android:hint="@string/date"
+            android:maxLines="1"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            app:drawableStartCompat="@drawable/ic_round_today_24"
+            app:drawableTint="@color/transparentGrey" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="24dp"
+            android:text="@string/time"
+            android:textColor="@color/colorPrimary"
+            android:textSize="14dp"
+            android:textStyle="bold" />
+
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:rowCount="2">
+
+
+            <CheckBox
+                android:id="@+id/checkFirstPartDay"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_marginStart="15dp"
+                android:checked="true"
+                android:text="@string/first_part_of_day"
+                android:textSize="12dp"
+                app:layout_constraintEnd_toStartOf="@id/checkFourthPartDay"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/checkSecondPartDay" />
+
+
+            <CheckBox
+                android:id="@+id/checkSecondPartDay"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_marginEnd="15dp"
+                android:checked="true"
+                android:text="@string/second_part_of_day"
+                android:textSize="12dp"
+                app:layout_constraintEnd_toStartOf="@id/checkThirdPartDay"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <CheckBox
+                android:id="@+id/checkThirdPartDay"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_marginStart="15dp"
+                android:checked="true"
+                android:text="@string/third_part_of_day"
+                android:textAlignment="gravity"
+                android:textSize="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toEndOf="@id/checkSecondPartDay"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <CheckBox
+                android:id="@+id/checkFourthPartDay"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_marginEnd="15dp"
+                android:checked="true"
+                android:text="@string/fourth_part_of_day"
+                android:textAlignment="gravity"
+                android:textSize="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toEndOf="@id/checkFirstPartDay"
+                app:layout_constraintTop_toBottomOf="@id/checkThirdPartDay" />
+
+        </GridLayout>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="24dp"
+            android:text="@string/seats"
+            android:textColor="@color/colorPrimary"
+            android:textSize="14dp"
+            android:textStyle="bold" />
+
+        <com.novatec.epitak.util.HorizontalNumberPicker
+            android:id="@+id/number_picker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            app:min_passengers="1"
+            app:max_passengers="8"
+            android:layout_marginEnd="12dp"/>
+        <!--        custom:max_passengers="8"-->
+        <!--        custom:min_passengers="0"-->
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="24dp"
+            android:text="@string/your_car_for_this_ride"
+            android:textColor="@color/colorPrimary"
+            android:textSize="14dp"
+            android:textStyle="bold" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/carsList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@id/labelCar"
+            tools:listitem="@layout/item_car_selection" />
+
+        <CheckBox
+            android:id="@+id/cbTakeParcel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:checked="true"
+            android:text="@string/can_take_package" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/priceInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="12dp"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            app:layout_constraintBottom_toTopOf="@id/labelSeats"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/priceInput"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/price_for_one_passenger"
+                android:imeOptions="actionDone"
+                android:inputType="number"
+                android:maxLength="7"
+                android:maxLines="1" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/noteInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/noteInput"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:gravity="start|top"
+                android:hint="@string/please_add_notes_if_needed"
+                android:imeOptions="actionDone"
+                android:inputType="text"
+                android:maxLength="120"
+                android:maxLines="6"
+                android:textColor="@color/dark_grey" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
+            android:id="@+id/postCreate"
+            android:layout_width="match_parent"
+            android:layout_height="?android:actionBarSize"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:enabled="false"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/selector_primary"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:selectableItemBackground"
+            android:gravity="center"
+            android:text="@string/create"
+            android:textAllCaps="false"
+            android:textColor="#fff"
+            android:textSize="20dp"
+            app:finalCornerAngle="50dp"
+            app:initialCornerAngle="8dp"
+            app:spinning_bar_color="#fff" />
+
+
+    </LinearLayout>
+
+</ScrollView>

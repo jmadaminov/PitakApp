@@ -106,9 +106,11 @@ class ActivePostItem(var post: DriverPost, val onClick: () -> Unit) : Item() {
                 }
             }
 
-            status.text =
-                    /*  post.passengerCount.toString() + "/" + post.seat.toString() + "   " +*/
-                currentStatusStr
+            ivPkg.isVisible = post.pkg ?: false
+            tvPkgOffersCount.isVisible = post.pkg ?: false
+            tvPkgOffersCount.text = post.parcelCount.toString()
+
+            status.text = currentStatusStr
 
             if (findViewById<View>(R.id.progress) != null) {
                 cl_parent.removeView(findViewById(R.id.progress))

@@ -11,13 +11,14 @@
         android:layout_marginStart="12dp"
         android:layout_marginEnd="12dp"
         android:layout_weight="1"
-        android:background="@drawable/selector_neutral_border"
-        android:gravity="center"
+        android:background="@drawable/selector_primary"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?android:selectableItemBackgroundBorderless"
+        android:gravity="center"
         android:text="-"
-        android:textSize="30dp" />
+        android:textColor="@color/white"
+        android:textSize="25dp" />
 
     <TextView
         android:id="@+id/et_number"
@@ -37,11 +38,13 @@
         android:layout_width="0sp"
         android:layout_height="match_parent"
         android:layout_marginStart="12dp"
-        android:foreground="?android:selectableItemBackgroundBorderless"
-        android:background="@drawable/selector_neutral_border"
-        android:gravity="center"
         android:layout_marginEnd="12dp"
         android:layout_weight="1"
+        android:background="@drawable/selector_primary"
+        android:clickable="true"
+        android:foreground="?android:selectableItemBackgroundBorderless"
+        android:gravity="center"
         android:text="+"
-        android:textSize="30dp" />
+        android:textColor="@color/white"
+        android:textSize="25dp" />
 </LinearLayout>

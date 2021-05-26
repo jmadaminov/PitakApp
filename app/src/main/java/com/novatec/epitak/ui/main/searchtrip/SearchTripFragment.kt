@@ -1,26 +1,22 @@
 package com.novatec.epitak.ui.main.searchtrip
 
-import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.View
 import android.widget.CalendarView
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.paging.LoadState
-import com.novatec.core.ErrorWrapper
-import com.novatec.core.ResultWrapper
-import com.novatec.core.exhaustive
 import com.novatec.epitak.R
+import com.novatec.epitak.ui.bsd_destination.ARG_IS_FROM
+import com.novatec.epitak.ui.bsd_destination.DestinationBSD
+import com.novatec.epitak.ui.bsd_destination.REQ_DESTINATION
+import com.novatec.epitak.ui.bsd_destination.RESULT_PLACE
 import com.novatec.epitak.ui.main.MainActivity
-import com.novatec.epitak.ui.viewgroups.PlaceFeedItemView
-import com.novatec.epitak.util.AutoCompleteManager
 import com.novatec.epitak.util.DateUtils.getFormattedDate
-import com.novatec.epitak.util.buildAutoCompleteManager
+import com.novatec.epitak.viewobjects.PlaceViewObj
 import com.skydoves.balloon.ArrowOrientation
 import com.skydoves.balloon.Balloon
 import com.skydoves.balloon.BalloonAnimation
@@ -36,7 +32,7 @@ class SearchTripFragment : Fragment(R.layout.fragment_search_trip) {
     private lateinit var balloon: Balloon
     private val viewModel: SearchTripViewModel by viewModels()
 
-    lateinit var autoCompleteManager: AutoCompleteManager
+    //    lateinit var autoCompleteManager: AutoCompleteManager
     var postsAdapter = PostFilterAdapter()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -85,22 +81,22 @@ class SearchTripFragment : Fragment(R.layout.fragment_search_trip) {
 
 
     private fun setupAutoCompleteViews() {
-        autoCompleteManager = buildAutoCompleteManager {
-            with { requireContext() }
-            fromEditText { fromInput }
-            toEditText { toInput }
-            onQueryAction { queryStr, isFrom ->
-                viewModel.getPlacesFeed(queryStr, isFrom)
-            }
-            updateBtnStateAction {
-            }
-
-            popUpClickAction { isFrom, item ->
-                if (isFrom) viewModel.placeFromSelected(item.place)
-                else viewModel.placeToSelected(item.place)
-
-            }
-        }
+//        autoCompleteManager = buildAutoCompleteManager {
+//            with { requireContext() }
+//            fromEditText { fromInput }
+//            toEditText { toInput }
+//            onQueryAction { queryStr, isFrom ->
+//                viewModel.getPlacesFeed(queryStr, isFrom)
+//            }
+//            updateBtnStateAction {
+//            }
+//
+//            popUpClickAction { isFrom, item ->
+//                if (isFrom) viewModel.placeFromSelected(item.place)
+//                else viewModel.placeToSelected(item.place)
+//
+//            }
+//        }
     }
 
     private fun attachListeners() {
@@ -108,12 +104,40 @@ class SearchTripFragment : Fragment(R.layout.fragment_search_trip) {
             fromInput.setText("")
             ivClearFrom.visibility = View.GONE
             fromInput.clearFocus()
+            viewModel.clearPlaceFromSelection()
         }
 
         ivClearTo.setOnClickListener {
             toInput.setText("")
             ivClearTo.visibility = View.GONE
             toInput.clearFocus()
+            viewModel.clearPlaceToSelection()
+        }
+
+        fromInput.setOnClickListener {
+            DestinationBSD().also {
+                it.arguments = Bundle().apply { putBoolean(ARG_IS_FROM, true) }
+                this.childFragmentManager.setFragmentResultListener(REQ_DESTINATION,
+                                                                    this) { key, bundle ->
+                    val place = bundle.getParcelable<PlaceViewObj>(RESULT_PLACE)!!
+                    fromInput.setText(place.name)
+                    viewModel.placeFromSelected(place.toPlace())
+                }
+            }.show(childFragmentManager, "")
+
+        }
+
+        toInput.setOnClickListener {
+            DestinationBSD().also {
+                it.arguments = Bundle().apply { putBoolean(ARG_IS_FROM, false) }
+                this.childFragmentManager.setFragmentResultListener(REQ_DESTINATION,
+                                                                    this) { key, bundle ->
+                    val place = bundle.getParcelable<PlaceViewObj>(RESULT_PLACE)!!
+                    toInput.setText(place.name)
+                    viewModel.placeFromSelected(place.toPlace())
+                }
+            }.show(childFragmentManager, "")
+
         }
 
         fromInput.doOnTextChanged { text, start, before, count ->
@@ -126,35 +150,35 @@ class SearchTripFragment : Fragment(R.layout.fragment_search_trip) {
 
         btn_retry.setOnClickListener { postsAdapter.refresh() }
 
-        fromInput.setOnFocusChangeListener { v, hasFocus ->
-            val drawable =
-                DrawableCompat.wrap(resources.getDrawable(R.drawable.ic_round_my_location_24))
-            if (hasFocus) {
-                DrawableCompat.setTint(drawable,
-                                       ContextCompat.getColor(requireContext(),
-                                                              R.color.colorAccent))
-            } else {
-                DrawableCompat.setTint(drawable,
-                                       ContextCompat.getColor(requireContext(), R.color.ic_grey))
-            }
-            DrawableCompat.setTintMode(drawable, PorterDuff.Mode.SRC_ATOP)
-            fromInput.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
-        }
-
-        toInput.setOnFocusChangeListener { v, hasFocus ->
-            val drawable =
-                DrawableCompat.wrap(resources.getDrawable(R.drawable.ic_round_location_on_24))
-            if (hasFocus) {
-                DrawableCompat.setTint(drawable,
-                                       ContextCompat.getColor(requireContext(),
-                                                              R.color.colorAccent))
-            } else {
-                DrawableCompat.setTint(drawable,
-                                       ContextCompat.getColor(requireContext(), R.color.ic_grey))
-            }
-            DrawableCompat.setTintMode(drawable, PorterDuff.Mode.SRC_ATOP)
-            toInput.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
-        }
+//        fromInput.setOnFocusChangeListener { v, hasFocus ->
+//            val drawable =
+//                DrawableCompat.wrap(resources.getDrawable(R.drawable.ic_round_my_location_24))
+//            if (hasFocus) {
+//                DrawableCompat.setTint(drawable,
+//                                       ContextCompat.getColor(requireContext(),
+//                                                              R.color.colorAccent))
+//            } else {
+//                DrawableCompat.setTint(drawable,
+//                                       ContextCompat.getColor(requireContext(), R.color.ic_grey))
+//            }
+//            DrawableCompat.setTintMode(drawable, PorterDuff.Mode.SRC_ATOP)
+//            fromInput.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
+//        }
+//
+//        toInput.setOnFocusChangeListener { v, hasFocus ->
+//            val drawable =
+//                DrawableCompat.wrap(resources.getDrawable(R.drawable.ic_round_location_on_24))
+//            if (hasFocus) {
+//                DrawableCompat.setTint(drawable,
+//                                       ContextCompat.getColor(requireContext(),
+//                                                              R.color.colorAccent))
+//            } else {
+//                DrawableCompat.setTint(drawable,
+//                                       ContextCompat.getColor(requireContext(), R.color.ic_grey))
+//            }
+//            DrawableCompat.setTintMode(drawable, PorterDuff.Mode.SRC_ATOP)
+//            toInput.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
+//        }
 
         filterBtn.setOnClickListener {
             slidingLayer.openLayer(true)
@@ -247,28 +271,28 @@ class SearchTripFragment : Fragment(R.layout.fragment_search_trip) {
         })
 
 
-        viewModel.fromPlacesResponse.observe(viewLifecycleOwner, Observer {
-            val response = it ?: return@Observer
-
-            when (response) {
-                is ErrorWrapper.RespError -> {
-                }
-                is ErrorWrapper.SystemError -> {
-                }
-                is ResultWrapper.Success -> {
-                    autoCompleteManager.fromPresenter.getAdr()?.let { adapter ->
-                        adapter.clear()
-                        response.value.forEach { place ->
-                            adapter.add(PlaceFeedItemView(place, autoCompleteManager.fromPresenter))
-                        }
-                        adapter.notifyDataSetChanged()
-                    }
-                }
-                ResultWrapper.InProgress -> {
-                }
-            }
-
-        })
+//        viewModel.fromPlacesResponse.observe(viewLifecycleOwner, Observer {
+//            val response = it ?: return@Observer
+//
+//            when (response) {
+//                is ErrorWrapper.RespError -> {
+//                }
+//                is ErrorWrapper.SystemError -> {
+//                }
+//                is ResultWrapper.Success -> {
+//                    autoCompleteManager.fromPresenter.getAdr()?.let { adapter ->
+//                        adapter.clear()
+//                        response.value.forEach { place ->
+//                            adapter.add(PlaceFeedItemView(place, autoCompleteManager.fromPresenter))
+//                        }
+//                        adapter.notifyDataSetChanged()
+//                    }
+//                }
+//                ResultWrapper.InProgress -> {
+//                }
+//            }
+//
+//        })
 
         viewModel.postOffers.observe(viewLifecycleOwner, {
             val value = it ?: return@observe
@@ -276,29 +300,29 @@ class SearchTripFragment : Fragment(R.layout.fragment_search_trip) {
 
         })
 
-        viewModel.toPlacesResponse.observe(viewLifecycleOwner, Observer {
-            val response = it ?: return@Observer
-
-            when (response) {
-                is ErrorWrapper.RespError -> {
-                }
-                is ErrorWrapper.SystemError -> {
-                }
-                is ResultWrapper.Success -> {
-                    autoCompleteManager.toPresenter.getAdr()?.let { adapter ->
-                        adapter.clear()
-                        response.value.forEach { place ->
-                            adapter.add(PlaceFeedItemView(place, autoCompleteManager.toPresenter))
-                        }
-                        adapter.notifyDataSetChanged()
-                    }
-
-                }
-                ResultWrapper.InProgress -> {
-                }
-            }.exhaustive
-
-        })
+//        viewModel.toPlacesResponse.observe(viewLifecycleOwner, Observer {
+//            val response = it ?: return@Observer
+//
+//            when (response) {
+//                is ErrorWrapper.RespError -> {
+//                }
+//                is ErrorWrapper.SystemError -> {
+//                }
+//                is ResultWrapper.Success -> {
+//                    autoCompleteManager.toPresenter.getAdr()?.let { adapter ->
+//                        adapter.clear()
+//                        response.value.forEach { place ->
+//                            adapter.add(PlaceFeedItemView(place, autoCompleteManager.toPresenter))
+//                        }
+//                        adapter.notifyDataSetChanged()
+//                    }
+//
+//                }
+//                ResultWrapper.InProgress -> {
+//                }
+//            }.exhaustive
+//
+//        })
 
     }
 
@@ -351,7 +375,7 @@ class SearchTripFragment : Fragment(R.layout.fragment_search_trip) {
     override fun onDestroyView() {
         super.onDestroyView()
         postsAdapter.removeLoadStateListener { }
-        autoCompleteManager.dispose()
+//        autoCompleteManager.dispose()
     }
 
 

@@ -64,7 +64,7 @@
 
 
     <style name="BottomSheet" parent="@style/Widget.Design.BottomSheet.Modal">
-        <item name="android:background">@drawable/selector_rounded_top_corners</item>
+        <item name="android:background">@drawable/shape_rounded_top_corners_white</item>
     </style>
 
     <style name="BaseBottomSheetDialog" parent="@style/Theme.Design.BottomSheetDialog">
@@ -73,6 +73,15 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="bottomSheetStyle">@style/BottomSheet</item>
+    </style>
+
+    <style name="BottomSheetExpanded" parent="Theme.MaterialComponents.DayNight.Dialog.Alert">
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowMinWidthMajor">100%</item>
+        <item name="android:windowMinWidthMinor">100%</item>
     </style>
 
 

@@ -24,7 +24,7 @@ class DateAndTimeFragment : Fragment(R.layout.fragment_date_and_time) {
 
     val args: DateAndTimeFragmentArgs by navArgs()
 
-    private var selectedDate: String? = null
+    private lateinit var selectedDate: String
     private var timeFirstPart = true
     private var timeSecondPart = true
     private var timeThirdPart = true

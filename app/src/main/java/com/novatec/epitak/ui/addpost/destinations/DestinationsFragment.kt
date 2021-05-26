@@ -77,15 +77,12 @@ class DestinationsFragment : Fragment(R.layout.fragment_destinations) {
     }
 
     private fun previewOrPlainCheck() {
-        if (args.ISFROMPOSTPREVIEW) {
-            viewModel.placeTo = activityViewModel.placeTo
-            viewModel.placeFrom = activityViewModel.placeFrom
-            fromInput.setText(viewModel.placeFrom!!.regionName)
-            toInput.setText(viewModel.placeTo!!.regionName)
-//            navBack.visibility = View.VISIBLE
-        } else {
-//            navBack.visibility = View.INVISIBLE
-        }
+//        if (args.ISFROMPOSTPREVIEW) {
+//            viewModel.placeTo = activityViewModel.placeTo
+//            viewModel.placeFrom = activityViewModel.placeFrom
+//            fromInput.setText(viewModel.placeFrom!!.regionName)
+//            toInput.setText(viewModel.placeTo!!.regionName)
+//        }
     }
 
     private fun setupListeners() {
@@ -98,7 +95,7 @@ class DestinationsFragment : Fragment(R.layout.fragment_destinations) {
             activityViewModel.placeFrom = viewModel.placeFrom
             activityViewModel.placeTo = viewModel.placeTo
 
-            navController.navigate(if (args.ISFROMPOSTPREVIEW) R.id.action_destinationsFragment_to_previewFragment else R.id.action_destinationsFragment_to_dateTimeFragment)
+//            navController.navigate(if (args.ISFROMPOSTPREVIEW) R.id.action_destinationsFragment_to_previewFragment else R.id.action_destinationsFragment_to_dateTimeFragment)
         }
 
         fromInput.onFocusChangeListener =
@@ -113,7 +110,7 @@ class DestinationsFragment : Fragment(R.layout.fragment_destinations) {
     }
 
     private fun setupObservers() {
-        viewModel.fromPlacesResponse.observe(viewLifecycleOwner, Observer {
+        viewModel.placesResponse.observe(viewLifecycleOwner, Observer {
             val response = it ?: return@Observer
 
             when (response) {
@@ -137,30 +134,30 @@ class DestinationsFragment : Fragment(R.layout.fragment_destinations) {
             }.exhaustive
 
         })
-        viewModel.toPlacesResponse.observe(viewLifecycleOwner, Observer {
-            val response = it ?: return@Observer
-
-            when (response) {
-                is ErrorWrapper.RespError -> {
-
-                }
-                is ErrorWrapper.SystemError -> {
-
-                }
-                is ResultWrapper.Success -> {
-                    autoCompleteManager.toPresenter.getAdr()?.let { adapter ->
-                        adapter.clear()
-                        response.value.forEach { place ->
-                            adapter.add(PlaceFeedItemView(place, autoCompleteManager.toPresenter))
-                        }
-                        adapter.notifyDataSetChanged()
-                    }
-                }
-                ResultWrapper.InProgress -> {
-                }
-            }.exhaustive
-
-        })
+//        viewModel.toPlacesResponse.observe(viewLifecycleOwner, Observer {
+//            val response = it ?: return@Observer
+//
+//            when (response) {
+//                is ErrorWrapper.RespError -> {
+//
+//                }
+//                is ErrorWrapper.SystemError -> {
+//
+//                }
+//                is ResultWrapper.Success -> {
+//                    autoCompleteManager.toPresenter.getAdr()?.let { adapter ->
+//                        adapter.clear()
+//                        response.value.forEach { place ->
+//                            adapter.add(PlaceFeedItemView(place, autoCompleteManager.toPresenter))
+//                        }
+//                        adapter.notifyDataSetChanged()
+//                    }
+//                }
+//                ResultWrapper.InProgress -> {
+//                }
+//            }.exhaustive
+//
+//        })
     }
 
 

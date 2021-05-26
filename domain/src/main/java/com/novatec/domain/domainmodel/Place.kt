@@ -6,4 +6,8 @@ data class Place(val districtId: Int? = null,
                  val lon: Double? = null,
                  val regionName: String? = null,
                  val districtName: String? = null,
-                 val name: String? = null)
+                 val name: String? = null){
+
+
+
+}

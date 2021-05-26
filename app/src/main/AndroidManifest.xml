@@ -69,10 +69,9 @@
         <activity
             android:name=".ui.addpost.AddPostActivity"
             android:label="@string/title_add_post"
-
+            android:windowSoftInputMode="adjustNothing"
             android:screenOrientation="portrait"
-            android:theme="@style/NoActionBar"
-            android:windowSoftInputMode="adjustPan" />
+            android:theme="@style/AppTheme" />
 
         <!--        <activity android:name=".SmsConfirmationActivity" />-->
 

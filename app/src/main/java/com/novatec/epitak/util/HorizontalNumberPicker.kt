@@ -8,11 +8,32 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.novatec.epitak.R
 
-class HorizontalNumberPicker(context: Context?, attrs: AttributeSet?) :
+class HorizontalNumberPicker(context: Context, attrs: AttributeSet) :
     LinearLayout(context, attrs) {
     private val et_number: TextView?
     var min = 0
     var max = 8
+
+    init {
+        context.theme.obtainStyledAttributes(attrs, R.styleable.PersonCounter, 0, 0).apply {
+            try {
+                min = getInt(R.styleable.PersonCounter_min_passengers, 0)
+                max = getInt(R.styleable.PersonCounter_max_passengers, 8)
+            } finally {
+                recycle()
+            }
+        }
+
+        inflate(context, R.layout.number_picker_horizontal, this)
+        et_number = findViewById(R.id.et_number)
+        et_number.text = if (min == 0) context.getString(R.string.any) else "1"
+        val btn_less = findViewById<TextView>(R.id.btn_less)
+        btn_less.setOnClickListener(AddHandler(-1))
+        val btn_more = findViewById<TextView>(R.id.btn_more)
+        btn_more.setOnClickListener(AddHandler(1))
+
+    }
+
 
     private var onCountChangeListener: ((count: Int?) -> Unit)? = null
 
@@ -26,7 +47,7 @@ class HorizontalNumberPicker(context: Context?, attrs: AttributeSet?) :
     }
 
     fun resetText() {
-        et_number?.text = context.getString(R.string.any)
+        et_number?.text = if (min == 0) context.getString(R.string.any) else "1"
     }
 
     /***
@@ -42,7 +63,8 @@ class HorizontalNumberPicker(context: Context?, attrs: AttributeSet?) :
             } else {
                 if (onCountChangeListener != null) onCountChangeListener!!(if (newValue == 0) null else newValue)
             }
-            et_number!!.text = if (newValue == 0) context.getString(R.string.any) else newValue.toString()
+            et_number!!.text =
+                if (newValue == 0) context.getString(R.string.any) else newValue.toString()
         }
     }
 
@@ -67,12 +89,5 @@ class HorizontalNumberPicker(context: Context?, attrs: AttributeSet?) :
             }
         }
 
-    init {
-        inflate(context, R.layout.number_picker_horizontal, this)
-        et_number = findViewById(R.id.et_number)
-        val btn_less = findViewById<TextView>(R.id.btn_less)
-        btn_less.setOnClickListener(AddHandler(-1))
-        val btn_more = findViewById<TextView>(R.id.btn_more)
-        btn_more.setOnClickListener(AddHandler(1))
-    }
+
 }

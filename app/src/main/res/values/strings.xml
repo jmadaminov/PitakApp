@@ -154,5 +154,9 @@
     <string name="add_post_btn_description">Click this button in order to make a post about your planned trip!</string>
     <string name="got_it">Got it</string>
     <string name="no_notifications_yet">No notifications yet...</string>
+    <string name="date">Date</string>
+    <string name="can_take_package">Can take package</string>
+    <string name="no_destination_found">Yo\'nalish topilmadi...</string>
+    <string name="enter_search_location">Manzilni kiriting...</string>
 
 </resources>
