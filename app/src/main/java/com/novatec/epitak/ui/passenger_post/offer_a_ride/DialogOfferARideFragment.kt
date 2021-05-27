@@ -10,9 +10,9 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import com.google.android.material.snackbar.Snackbar
+import com.novatec.core.EPostType
 import com.novatec.core.ErrorWrapper
 import com.novatec.core.ResultWrapper
-import com.novatec.core.exhaustive
 import com.novatec.domain.domainmodel.DriverPost
 import com.novatec.epitak.R
 import com.novatec.epitak.ui.passenger_post.PassengerPostActivity
@@ -102,12 +102,14 @@ class DialogOfferARideFragment : DialogFragment() {
                 }
                 is ResultWrapper.Success -> {
                     loadData(response.value.filter { myPost ->
-                        myPost.departureDate == passengerPost.departureDate && myPost.postStatus.isOfferable()
+                        myPost.departureDate == passengerPost.departureDate
+                                && (myPost.postType == EPostType.PASSENGER_SM && myPost.postStatus.canTakePassenger()
+                                || myPost.postType == EPostType.PARCEL_SM && myPost.postStatus.canTakeParcel())
                     })
                 }
                 ResultWrapper.InProgress -> {
                 }
-            }.exhaustive
+            }
         })
 
     }
@@ -125,7 +127,7 @@ class DialogOfferARideFragment : DialogFragment() {
                                  passengerPost)
         }
         ivClearSelected.setOnClickListener {
-            viewModel.setOfferingPost(null)
+            viewModel.clearOfferingPost()
             lblSelectPost.visibility = View.VISIBLE
             tvSelectedPost.visibility = View.GONE
             ivClearSelected.visibility = View.GONE
@@ -142,6 +144,8 @@ class DialogOfferARideFragment : DialogFragment() {
             lblSelectPost.text = getString(R.string.select_your_trip_if_you_have_one)
             rvContainer.visibility = View.VISIBLE
         }
+
+
 
         orders.forEach { post ->
             adapter.add(ActivePostItem(post) {

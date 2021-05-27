@@ -1,21 +1,17 @@
 package com.novatec.epitak.ui.main.searchtrip
 
-import javax.inject.Inject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.novatec.core.ResultWrapper
-import com.novatec.data.UserRepositoryImpl
 import com.novatec.domain.domainmodel.Filter
 import com.novatec.domain.domainmodel.Filter.Companion.MAX_PRICE
 import com.novatec.domain.domainmodel.Filter.Companion.MIN_PRICE
 import com.novatec.domain.domainmodel.Place
 import com.novatec.domain.usecases.GetPlacesFeed
 import com.novatec.epitak.ui.BaseViewModel
-import com.novatec.epitak.util.SingleLiveEvent
-import com.novatec.epitak.util.valueNN
 import com.novatec.remote.model.PassengerPostModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -23,10 +19,11 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import splitties.experimental.ExperimentalSplittiesApi
+import javax.inject.Inject
 
 @HiltViewModel
 class SearchTripViewModel @Inject constructor(val postFilterRepository: PostFilterRepository,
-                                                       private val getPlacesFeed: GetPlacesFeed) :
+                                              private val getPlacesFeed: GetPlacesFeed) :
     BaseViewModel() {
 
     private val _filter = MutableLiveData(Filter())
@@ -84,36 +81,37 @@ class SearchTripViewModel @Inject constructor(val postFilterRepository: PostFilt
     }
 
     fun filterAC(isACChecked: Boolean) {
-        if (isACChecked) _filter.valueNN.airConditioner = true
-        else _filter.valueNN.airConditioner = null
+        if (isACChecked) _filter.value!!.airConditioner = true
+        else _filter.value!!.airConditioner = null
     }
 
     fun setFilterPrices(minPrice: Int?, maxPrice: Int?) {
-        _filter.valueNN.minPrice = minPrice
-        _filter.valueNN.maxPrice = maxPrice
+        _filter.value!!.minPrice = minPrice
+        _filter.value!!.maxPrice = maxPrice
     }
 
     fun placeFromSelected(place: Place) {
-        _filter.valueNN.fromRegionId = place.regionId
-        _filter.valueNN.fromDistrictId = place.districtId
+        _filter.value!!.fromRegionId = place.regionId
+        _filter.value!!.fromDistrictId = place.districtId
         applyFilter()
     }
 
     fun clearPlaceFromSelection() {
-        _filter.valueNN.fromRegionId = null
-        _filter.valueNN.fromDistrictId = null
+        _filter.value!!.fromRegionId = null
+        _filter.value!!.fromDistrictId = null
         applyFilter()
     }
+
     fun clearPlaceToSelection() {
-        _filter.valueNN.toRegionId = null
-        _filter.valueNN.toDistrictId = null
+        _filter.value!!.toRegionId = null
+        _filter.value!!.toDistrictId = null
         applyFilter()
     }
 
 
     fun placeToSelected(place: Place) {
-        _filter.valueNN.toRegionId = place.regionId
-        _filter.valueNN.toDistrictId = place.districtId
+        _filter.value!!.toRegionId = place.regionId
+        _filter.value!!.toDistrictId = place.districtId
         applyFilter()
     }
 
@@ -121,7 +119,7 @@ class SearchTripViewModel @Inject constructor(val postFilterRepository: PostFilt
         val properMonthIndex = month + 1
         val monthString =
             if (properMonthIndex.toString().length == 1) "0$properMonthIndex" else properMonthIndex.toString()
-        _filter.valueNN.departureDate = "$dayOfMonth.$monthString.$year"
+        _filter.value!!.departureDate = "$dayOfMonth.$monthString.$year"
         applyFilter()
     }
 
@@ -130,25 +128,25 @@ class SearchTripViewModel @Inject constructor(val postFilterRepository: PostFilt
                             timeThirdPart: Boolean,
                             timeFourthPart: Boolean) {
 
-        _filter.valueNN.timeFirstPart = timeFirstPart
-        _filter.valueNN.timeSecondPart = timeSecondPart
-        _filter.valueNN.timeThirdPart = timeThirdPart
-        _filter.valueNN.timeFourthPart = timeFourthPart
+        _filter.value!!.timeFirstPart = timeFirstPart
+        _filter.value!!.timeSecondPart = timeSecondPart
+        _filter.value!!.timeThirdPart = timeThirdPart
+        _filter.value!!.timeFourthPart = timeFourthPart
     }
 
     fun seatCountChanged(count: Int?) {
-        _filter.valueNN.seat = count
+        _filter.value!!.seat = count
     }
 
 
     private fun checkAppliedFiltersCount() {
         var appliedFilterCount = 0
-        if (_filter.valueNN.minPrice != null && _filter.valueNN.maxPrice != null && (_filter.valueNN.minPrice != MIN_PRICE || _filter.valueNN.maxPrice != MAX_PRICE)) {
+        if (_filter.value!!.minPrice != null && _filter.value!!.maxPrice != null && (_filter.value!!.minPrice != MIN_PRICE || _filter.value!!.maxPrice != MAX_PRICE)) {
             appliedFilterCount++
         }
-        if (_filter.valueNN.airConditioner == true) appliedFilterCount++
-        if (_filter.valueNN.seat != null ) appliedFilterCount++
-        if (_filter.valueNN.timeFirstPart == true || _filter.valueNN.timeSecondPart == true || _filter.valueNN.timeThirdPart == true || _filter.valueNN.timeFourthPart == true) appliedFilterCount++
+        if (_filter.value!!.airConditioner == true) appliedFilterCount++
+        if (_filter.value!!.seat != null) appliedFilterCount++
+        if (_filter.value!!.timeFirstPart == true || _filter.value!!.timeSecondPart == true || _filter.value!!.timeThirdPart == true || _filter.value!!.timeFourthPart == true) appliedFilterCount++
         _count.value = appliedFilterCount
     }
 

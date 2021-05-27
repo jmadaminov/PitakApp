@@ -10,6 +10,7 @@ import android.widget.LinearLayout
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.lifecycle.observe
+import com.novatec.core.EPostType
 import com.novatec.epitak.R
 import com.novatec.epitak.ui.BaseActivity
 import com.novatec.epitak.ui.dialogs.DialogAddCarFirst
@@ -20,13 +21,6 @@ import com.novatec.epitak.util.PostUtils
 import com.novatec.epitak.util.loadRound
 import com.novatec.epitak.viewobjects.PassengerPostViewObj
 import kotlinx.android.synthetic.main.activity_passenger_post.*
-import kotlinx.android.synthetic.main.activity_passenger_post.date
-import kotlinx.android.synthetic.main.activity_passenger_post.from
-import kotlinx.android.synthetic.main.activity_passenger_post.fromDistrict
-import kotlinx.android.synthetic.main.activity_passenger_post.note
-import kotlinx.android.synthetic.main.activity_passenger_post.swipeRefreshLayout
-import kotlinx.android.synthetic.main.activity_passenger_post.to
-import kotlinx.android.synthetic.main.activity_passenger_post.toDistrict
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 
@@ -88,15 +82,32 @@ class PassengerPostActivity : BaseActivity() {
 
 
     private fun showPostData(post: PassengerPostViewObj) {
-        llSeatsContainer.removeAllViews()
-        for (i in 0 until post.seat) {
-            val seat = ImageView(this)
-            seat.layoutParams =
-                LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-                                          ViewGroup.LayoutParams.WRAP_CONTENT)
-            seat.setImageResource(R.drawable.ic_round_emoji_people_24)
-            llSeatsContainer.addView(seat)
+
+        if (post.postType == EPostType.PARCEL_SM) {
+            lblPricePerPassenger.text = getString(R.string.price)
+            llSeatsContainer.isVisible = false
+            cbTakeParcel.isVisible = true
+            imageContainer.isVisible = true
+            lblPassengersCount.isVisible = false
+//            parcelImage.loadRounded(post.imageList)
+        } else {
+            lblPassengersCount.isVisible = true
+            lblPricePerPassenger.text = getString(R.string.price_for_one)
+            llSeatsContainer.isVisible = true
+            cbTakeParcel.isVisible = false
+            imageContainer.isVisible = false
+            llSeatsContainer.removeAllViews()
+            for (i in 0 until post.seat) {
+                val seat = ImageView(this)
+                seat.layoutParams =
+                    LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                                              ViewGroup.LayoutParams.WRAP_CONTENT)
+                seat.setImageResource(R.drawable.ic_round_emoji_people_24)
+                llSeatsContainer.addView(seat)
+            }
+
         }
+
         time.text = PostUtils.timeFromDayParts(post.timeFirstPart,
                                                post.timeSecondPart,
                                                post.timeThirdPart,

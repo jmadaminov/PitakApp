@@ -3,7 +3,6 @@ package com.novatec.remote.mapper
 import com.novatec.data.mapper.Mapper
 import com.novatec.data.model.*
 import com.novatec.remote.model.*
-import javax.inject.Inject
 
 
 /**
@@ -68,6 +67,25 @@ open class DriverPostMapper : Mapper<DriverPostEntity, DriverPostModel> {
                                              it.submitDate,
                                              offerEntity))
         }
+        val parcelList = arrayListOf<ParcelModel>()
+        type.parcelList?.forEach {
+
+//            val offerEntity =
+//                ArrangedOfferDTO(it.offer?.message,
+//                                 it.offer?.priceInt,
+//                                 it.offer?.seat,
+//                                 it.offer?.history)
+//
+//            parcelList.add(PassengerModel(it.id,
+//                                             ProfileDTO(it.profile!!.phoneNum,
+//                                                        it.profile!!.name,
+//                                                        it.profile!!.surname,
+//                                                        it.profile!!.id,
+//                                                        Image(it.profile!!.image?.id,
+//                                                              it.profile!!.image?.link)),
+//                                             it.submitDate,
+//                                             offerEntity))
+        }
 
         return DriverPostModel(type.id,
                                placeFrom,
@@ -88,7 +106,9 @@ open class DriverPostMapper : Mapper<DriverPostEntity, DriverPostModel> {
                                type.availableSeats,
                                type.postStatus,
                                type.pkg,
+                               type.parcelCount,
                                passengerList,
+                               parcelList,
                                type.postType)
     }
 
@@ -144,6 +164,26 @@ open class DriverPostMapper : Mapper<DriverPostEntity, DriverPostModel> {
                                               it.submitDate, offer))
         }
 
+        val parcelList = arrayListOf<ParcelEntity>()
+        type.parcelList?.forEach {
+
+//            val offerEntity =
+//                ArrangedOfferDTO(it.offer?.message,
+//                                 it.offer?.priceInt,
+//                                 it.offer?.seat,
+//                                 it.offer?.history)
+//
+//            parcelList.add(PassengerModel(it.id,
+//                                             ProfileDTO(it.profile!!.phoneNum,
+//                                                        it.profile!!.name,
+//                                                        it.profile!!.surname,
+//                                                        it.profile!!.id,
+//                                                        Image(it.profile!!.image?.id,
+//                                                              it.profile!!.image?.link)),
+//                                             it.submitDate,
+//                                             offerEntity))
+        }
+
         return DriverPostEntity(type.id,
                                 placeFrom,
                                 placeTo,
@@ -165,6 +205,7 @@ open class DriverPostMapper : Mapper<DriverPostEntity, DriverPostModel> {
                                 type.pkg,
                                 type.parcelCount,
                                 passengerList,
+                                parcelList,
                                 type.postType)
     }
 

@@ -103,7 +103,7 @@
     <string name="do_you_want_to_cancel_this_offer">Shu taklifni bekor qilmoqchimisiz?</string>
     <string name="jump_in">Sayohatga qo\'shilish</string>
     <string name="offer_a_ride">Sayohatga taklif</string>
-    <string name="send_offer">taklif yuborish</string>
+    <string name="send_offer">Taklif yuborish</string>
     <string name="message">Xabar</string>
     <string name="my_price">Mening narxim</string>
     <string name="search">Qidirish</string>
@@ -117,11 +117,11 @@
     <string name="there_are_no_posts_yet_come_back_later">Hozircha sayohatlar yo\'q, keyinroq tekshiring!</string>
     <string name="sum">Sum</string>
     <string name="select_your_trip_if_you_have_one">Mavjud sayohatingizni tanlang, aks holda biz siz uchun yangi sayohat yaratamiz!</string>
-    <string name="offering_post_id">"Sayohat taklif ID: %1$d"</string>
+    <string name="offering_post_id">Tanlangan e\'lon (ID): %1$d</string>
     <string name="we_will_create_an_order_for_you">Siz uchun yo\'lovchi postining yo\'nalishlari bilan sayohat yaratamiz!</string>
     <string name="no_passengers_yet">Sizda bu sayohat uchun hali yo\'lovchilar yo\'q.</string>
     <string name="your_passengers">Sizning yo\'lovchilaringiz</string>
-    <string name="offers">takliflar</string>
+    <string name="offers">Takliflar</string>
     <string name="settings">Sozlamalar</string>
     <string name="cancel">Bekor qilish</string>
     <string name="ok">Ok</string>
@@ -142,7 +142,7 @@
     <string name="my_last_offer">Mening oxirgi taklifim</string>
     <string name="attached_post_id">Biriktirilgan sayohat ID</string>
     <string name="price">Narx</string>
-    <string name="update_offer">taklifni Yangilash</string>
+    <string name="update_offer">Taklifni yangilash</string>
     <string name="you_have_no_offers_yet_come_back_later">Sizda hali takliflar yo\'q, iltimos keyinroq qayta kiring!</string>
     <string name="close">Yopmoq</string>
     <string name="passengers">Yo\'lovchilar</string>
@@ -159,5 +159,6 @@
     <string name="can_take_package">Po\'chta olaman</string>
     <string name="no_destination_found">Yo\'nalish topilmadi...</string>
     <string name="enter_search_location">Manzilni kiriting...</string>
+    <string name="parcel">Po\'chta</string>
 
 </resources>

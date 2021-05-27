@@ -67,6 +67,7 @@ open class DriverPostMapper @Inject constructor() : Mapper<DriverPostEntity, Dri
                                         offerEntity))
         }
 
+        val parcelList = arrayListOf<Parcel>()
         return DriverPost(type.id,
                           placeFrom,
                           placeTo,
@@ -88,6 +89,7 @@ open class DriverPostMapper @Inject constructor() : Mapper<DriverPostEntity, Dri
                           type.pkg,
                           type.parcelCount,
                           passengerList,
+                          parcelList,
                           type.postType)
     }
 
@@ -148,6 +150,12 @@ open class DriverPostMapper @Inject constructor() : Mapper<DriverPostEntity, Dri
         }
 
 
+        val parcelList = arrayListOf<ParcelEntity>()
+
+        type.parcelList?.forEach {
+            parcelList.add(ParcelEntity(it.id))
+        }
+
         return DriverPostEntity(type.id,
                                 placeFrom,
                                 placeTo,
@@ -169,6 +177,7 @@ open class DriverPostMapper @Inject constructor() : Mapper<DriverPostEntity, Dri
                                 type.pkg,
                                 type.parcelCount,
                                 passengerList,
+                                parcelList,
                                 type.postType)
     }
 

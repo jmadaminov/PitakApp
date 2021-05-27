@@ -199,7 +199,7 @@ class AddPostActivity : BaseActivity() {
         }
 
         postCreate.setOnClickListener {
-            viewModel.createDriverPost(DriverPost(viewModel.id,
+            viewModel.createDriverPost(DriverPost(viewModel.id ?: 0,
                                                   viewModel.placeFrom!!,
                                                   viewModel.placeTo!!,
                                                   viewModel.price!!,
@@ -218,8 +218,10 @@ class AddPostActivity : BaseActivity() {
                                                   viewModel.seat,
                                                   EPostStatus.CREATED,
                                                   viewModel.isPackage,
+                                                  0,
                                                   null,
-                                                  Constants.DRIVER_POST_SIMPLE))
+                                                  null,
+                                                  EPostType.DRIVER_SM))
 
         }
 

@@ -156,7 +156,7 @@
             android:paddingEnd="7dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/llSeatsContainer"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/circleTo">
 
             <TextView
@@ -200,16 +200,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
-            android:layout_marginBottom="7dp"
             android:layout_marginTop="7dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="7dp"
             android:columnCount="4"
             android:orientation="horizontal"
             android:rowCount="1"
-            app:layout_constraintTop_toBottomOf="@id/circleTo"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/llPriceSeatsDate"
-            app:layout_constraintStart_toStartOf="parent"
-            />
+            app:layout_constraintBottom_toTopOf="@id/llPriceSeatsDate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/price" />
+
+        <ImageView
+            android:id="@+id/ivParcel"
+            android:layout_width="?android:actionBarSize"
+            android:layout_height="?android:actionBarSize"
+            android:layout_marginEnd="14dp"
+            android:src="@drawable/ic_package"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/llPriceSeatsDate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/price"
+            tools:visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

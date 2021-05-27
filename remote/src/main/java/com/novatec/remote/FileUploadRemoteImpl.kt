@@ -28,7 +28,7 @@ class FileUploadRemoteImpl @Inject constructor(private val apiService: ApiServic
             val body = MultipartBody.Part.createFormData("file", "", requestFile)
             val response = apiService.uploadPhoto(body)
             if (response.code == 1) ResultWrapper.Success(photoMapper.mapToEntity(response.data!!))
-            else ErrorWrapper.RespError(response.code, response.message)
+            else ErrorWrapper.RespError(response.code, response.message?:"")
         } catch (e: Exception) {
             ErrorWrapper.SystemError(e)
         }

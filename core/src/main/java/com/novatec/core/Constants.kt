@@ -10,7 +10,6 @@ object Constants {
 //    const val BASE_URL = "http://codeuz.uz:9091/"
 
     const val ROLE_DRIVER = "DRIVER"
-    const val DRIVER_POST_SIMPLE = "DRIVER_SM"
     const val errPhoneFormat = -99
     const val TXT_CAR = "CAR"
     const val TXT_DRIVER_POST = "DRIVER_POST"

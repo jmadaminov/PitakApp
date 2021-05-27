@@ -42,7 +42,7 @@ class UserRemoteImpl @Inject constructor(private val apiService: ApiService,
         return try {
             val response = apiService.userRegister(userMapper.mapFromEntity(user))
             if (response.code == 1) ResultWrapper.Success("")
-            else ErrorWrapper.RespError(response.code, response.message)
+            else ErrorWrapper.RespError(response.code, response.message?:"")
         } catch (e: Exception) {
             ErrorWrapper.SystemError(e)
         }
@@ -55,7 +55,7 @@ class UserRemoteImpl @Inject constructor(private val apiService: ApiService,
         return try {
             val response = apiService.smsConfirm(userCredMapper.mapFromEntity(user))
             if (response.code == 1) ResultWrapper.Success(authMapper.mapToEntity(response.data!!))
-            else ErrorWrapper.RespError(response.code, response.message)
+            else ErrorWrapper.RespError(response.code, response.message?:"")
         } catch (e: Exception) {
             ErrorWrapper.SystemError(e)
         }

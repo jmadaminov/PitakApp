@@ -2,8 +2,8 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:id="@+id/scrollView"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
@@ -38,7 +38,7 @@
             android:textSize="18dp"
             android:textStyle="bold"
             app:drawableStartCompat="@drawable/ic_round_my_location_24"
-            app:drawableTint="@color/transparentGrey" />
+            app:drawableTint="@color/dark_grey" />
 
         <View
             android:layout_width="match_parent"
@@ -60,8 +60,7 @@
             android:paddingEnd="24dp"
             android:textSize="18dp"
             android:textStyle="bold"
-            app:drawableStartCompat="@drawable/ic_round_location_on_24"
-            app:drawableTint="@color/colorAccent" />
+            app:drawableStartCompat="@drawable/ic_p" />
 
         <!--    <View-->
         <!--        android:layout_width="match_parent"-->
@@ -196,9 +195,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginTop="12dp"
-            app:min_passengers="1"
+            android:layout_marginEnd="12dp"
             app:max_passengers="8"
-            android:layout_marginEnd="12dp"/>
+            app:min_passengers="1" />
         <!--        custom:max_passengers="8"-->
         <!--        custom:min_passengers="0"-->
 
@@ -230,11 +229,13 @@
 
         <CheckBox
             android:id="@+id/cbTakeParcel"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
             android:checked="true"
+            android:drawableEnd="@drawable/ic_package"
+            android:drawablePadding="7dp"
             android:text="@string/can_take_package" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -276,7 +277,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/noteInput"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="100dp"
                 android:gravity="start|top"
                 android:hint="@string/please_add_notes_if_needed"
                 android:imeOptions="actionDone"
@@ -296,10 +297,10 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="24dp"
-            android:enabled="false"
             android:layout_marginBottom="24dp"
             android:background="@drawable/selector_primary"
             android:clickable="true"
+            android:enabled="false"
             android:focusable="true"
             android:foreground="?android:selectableItemBackground"
             android:gravity="center"

@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.novatec.domain.domainmodel.Filter
-import com.novatec.epitak.util.valueNN
 import com.novatec.remote.ApiService
 import com.novatec.remote.AuthorizedApiService
 import com.novatec.remote.mapper.FilterMapper
@@ -20,7 +19,7 @@ class PostFilterPagingSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, PassengerPostModel> {
         val position = params.key ?: POST_OFFER_STARTING_PAGE_INDEX
         val fltr = FilterMapper().mapFromEntity(com.novatec.data.mapper.FilterMapper()
-                                                    .mapToEntity(filter.valueNN))
+                                                    .mapToEntity(filter.value!!))
 
         return try {
             val response =

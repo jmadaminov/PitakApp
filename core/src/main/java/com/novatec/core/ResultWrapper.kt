@@ -6,7 +6,7 @@ sealed class ResultWrapper<out V> {
 }
 
 sealed class ErrorWrapper : ResultWrapper<Nothing>() {
-    data class RespError(val code: Int? = null, val message: String? = null) : ErrorWrapper()
+    data class RespError(val code: Int? = null, val message: String) : ErrorWrapper()
     data class SystemError(val err: Throwable) : ErrorWrapper()
 }
 

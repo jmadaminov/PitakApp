@@ -235,7 +235,7 @@
 
     <string name="select_your_trip_if_you_have_one">Выберите уже существующую поездку, иначе мы создадим для вас новую поездку!</string>
 
-    <string name="offering_post_id">"ID поездки предложения: %1$d"</string>
+    <string name="offering_post_id">Выбранная поездка (ID): %1$d</string>
 
     <string name="we_will_create_an_order_for_you">Создадим для вас поездку с указанием направлений пассажирского поста!</string>
 
@@ -298,6 +298,7 @@
     <string name="can_take_package">Могу взять посылку</string>
     <string name="no_destination_found">Маршрут не найден...</string>
     <string name="enter_search_location">Введите адрес...</string>
+    <string name="parcel">Посылка</string>
 
 
 </resources>

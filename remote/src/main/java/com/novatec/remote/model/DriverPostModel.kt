@@ -1,13 +1,13 @@
 package com.novatec.remote.model
 
 import com.google.gson.annotations.SerializedName
-import com.novatec.core.Constants
 import com.novatec.core.EPostStatus
+import com.novatec.core.EPostType
 
 /**
  * Representation for a [DriverPostModel] fetched from the API
  */
-data class DriverPostModel(@SerializedName("id") val id: Long? = null,
+data class DriverPostModel(@SerializedName("id") val id: Long,
                            @SerializedName("from") val from: PlaceModel,
                            @SerializedName("to") val to: PlaceModel,
                            @SerializedName("price") val price: Int,
@@ -28,5 +28,6 @@ data class DriverPostModel(@SerializedName("id") val id: Long? = null,
                            @SerializedName("pkg") val pkg: Boolean? = null,
                            @SerializedName("parcelCount") val parcelCount: Int = 0,
                            @SerializedName("passengerList") val passengerList: List<PassengerModel>? = null,
-                           @SerializedName("postType") val postType: String = Constants.DRIVER_POST_SIMPLE) {
+                           @SerializedName("parcelList") val parcelList: List<ParcelModel>? = null,
+                           @SerializedName("postType") val postType: EPostType) {
 }

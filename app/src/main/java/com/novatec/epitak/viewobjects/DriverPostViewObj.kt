@@ -1,7 +1,7 @@
 package com.novatec.epitak.viewobjects
 
 import android.os.Parcelable
-import com.novatec.core.Constants
+import com.novatec.core.EPostType
 import com.novatec.domain.domainmodel.DriverPost
 import com.novatec.domain.domainmodel.Place
 import kotlinx.android.parcel.Parcelize
@@ -21,7 +21,7 @@ data class DriverPostViewObj(val id: Long? = null,
                              val seat: Int,
                              val pkg: Boolean? = null,
                              val parcelCount: Int,
-                             val postType: String = Constants.DRIVER_POST_SIMPLE) : Parcelable {
+                             val postType: EPostType) : Parcelable {
     companion object {
         fun fromDriverPost(post: DriverPost): DriverPostViewObj {
             val car = CarViewObj(post.car!!.id,

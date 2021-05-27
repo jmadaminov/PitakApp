@@ -117,7 +117,7 @@
     <string name="there_are_no_posts_yet_come_back_later">There are no posts yet, come back later!</string>
     <string name="sum">Sum</string>
     <string name="select_your_trip_if_you_have_one">Select your existing trip, otherwise we will create a new trip for you!</string>
-    <string name="offering_post_id">"Offering post ID: %1$d"</string>
+    <string name="offering_post_id">Offering trip (ID): %1$d</string>
     <string name="we_will_create_an_order_for_you">We will create an order for you with the destinations of the passenger post!</string>
     <string name="no_passengers_yet">You have no passengers for this trip yet.</string>
     <string name="your_passengers">Your passengers</string>
@@ -158,5 +158,6 @@
     <string name="can_take_package">Can take parcel</string>
     <string name="no_destination_found">No location found...</string>
     <string name="enter_search_location">Enter location name...</string>
+    <string name="parcel">Parcel</string>
 
 </resources>

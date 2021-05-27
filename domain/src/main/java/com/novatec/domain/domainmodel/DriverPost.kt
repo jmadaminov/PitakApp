@@ -2,8 +2,9 @@ package com.novatec.domain.domainmodel
 
 import com.novatec.core.Constants
 import com.novatec.core.EPostStatus
+import com.novatec.core.EPostType
 
-data class DriverPost(val id: Long? = null,
+data class DriverPost(val id: Long,
                       val from: Place,
                       val to: Place,
                       val price: Int,
@@ -24,6 +25,7 @@ data class DriverPost(val id: Long? = null,
                       val pkg: Boolean? = null,
                       val parcelCount: Int = 0,
                       val passengerList: List<Passenger>? = null,
-                      val postType: String = Constants.DRIVER_POST_SIMPLE) {
+                      val parcelList: List<Parcel>? = null,
+                      val postType: EPostType) {
 }
 

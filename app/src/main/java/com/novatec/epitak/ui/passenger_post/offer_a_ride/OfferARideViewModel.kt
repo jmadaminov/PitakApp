@@ -1,6 +1,5 @@
 package com.novatec.epitak.ui.passenger_post.offer_a_ride
 
-import javax.inject.Inject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.novatec.core.*
@@ -12,26 +11,24 @@ import com.novatec.domain.usecases.CreateDriverPost
 import com.novatec.domain.usecases.GetActiveDriverPost
 import com.novatec.epitak.ui.BaseViewModel
 import com.novatec.epitak.util.SingleLiveEvent
-import com.novatec.epitak.util.valueNN
 import com.novatec.epitak.viewobjects.PassengerPostViewObj
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import splitties.experimental.ExperimentalSplittiesApi
+import javax.inject.Inject
 
 @HiltViewModel
 class OfferARideViewModel @Inject constructor(private val repository: PassengerPostRepository,
-                                                       private val createDriverPost: CreateDriverPost,
-                                                       private val getActiveDriverPost: GetActiveDriverPost) :
+                                              private val createDriverPost: CreateDriverPost,
+                                              private val getActiveDriverPost: GetActiveDriverPost) :
     BaseViewModel() {
 
     val isOffering = MutableLiveData<Boolean>()
     val hasFinished = MutableLiveData<Boolean>()
     val errorMessage = MutableLiveData<String>()
-
-    val offeringPostId = MutableLiveData<Long>()
-
+    val offeringPostId = MutableLiveData<Long?>()
 
     fun offerARide(postId: Long, myPrice: Int?, message: String, passPost: PassengerPostViewObj) {
         isOffering.value = true
@@ -60,20 +57,27 @@ class OfferARideViewModel @Inject constructor(private val repository: PassengerP
             passPost.to.regionName,
             passPost.to.name,
         )
-        val driverPost = DriverPost(null, placeFrom, placeTo, passPost.price,
-                                    passPost.departureDate,
-                                    passPost.finishedDate,
-                                    passPost.timeFirstPart,
-                                    passPost.timeSecondPart,
-                                    passPost.timeThirdPart,
-                                    passPost.timeFourthPart,
-                                    null,
-                                    null,
-                                    null,
-                                    passPost.seat,
-                                    0,
-                                    postStatus = EPostStatus.CREATED,
-                                    availableSeats = passPost.seat
+        val driverPost = DriverPost(
+            0, placeFrom, placeTo, passPost.price,
+            passPost.departureDate,
+            passPost.finishedDate,
+            passPost.timeFirstPart,
+            passPost.timeSecondPart,
+            passPost.timeThirdPart,
+            passPost.timeFourthPart,
+            null,
+            null,
+            null,
+            passPost.seat,
+            0,
+            0,
+            passPost.seat,
+            EPostStatus.CREATED,
+            null, 0,
+            null,
+            null,
+            if (passPost.postType == EPostType.PARCEL_SM) EPostType.PARCEL_SM else EPostType.DRIVER_SM
+
         )
         when (val response = createDriverPost.execute(driverPost)) {
             is ErrorWrapper.RespError -> {
@@ -109,7 +113,7 @@ class OfferARideViewModel @Inject constructor(private val repository: PassengerP
                 repository.offerARide(DriverOffer(postId,
                                                   myPrice,
                                                   message,
-                                                  offeringPostId.valueNN))
+                                                  offeringPostId.value!!))
             withContext(Dispatchers.Main) {
                 when (responseOfferCreate) {
                     is ResponseError -> {
@@ -140,7 +144,11 @@ class OfferARideViewModel @Inject constructor(private val repository: PassengerP
         }
     }
 
-    fun setOfferingPost(id: Long?) {
+    fun setOfferingPost(id: Long) {
         offeringPostId.value = id
+    }
+
+    fun clearOfferingPost() {
+        offeringPostId.value = null
     }
 }

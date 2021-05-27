@@ -12,7 +12,7 @@ object ResponseFormatter {
             val resp = action()
             when {
                 resp.code == 1 && resp.data != null -> ResponseSuccess(resp.data)
-                else -> ResponseError(resp.message, resp.code)
+                else -> ResponseError(resp.message?:"", resp.code)
             }
         } catch (e: Exception) {
             ResponseError(message = e.localizedMessage)
@@ -26,7 +26,7 @@ object ResponseFormatter {
             when {
                 resp.code == 1 && resp.data != null -> ResponseSuccess(resp.data)
                 resp.code == 1 && resp.data == null -> ResponseSuccess(resp.data)
-                else -> ResponseError(resp.message, resp.code)
+                else -> ResponseError(resp.message?:"", resp.code)
             }
         } catch (e: Exception) {
             ResponseError(message = e.localizedMessage)
