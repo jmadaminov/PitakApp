@@ -19,7 +19,7 @@ import javax.inject.Inject
  * [BufferooRemote] from the Data layer as it is that layers responsibility for defining the
  * operations in which data store implementation layers can carry out.
  */
-class CarRemoteImpl @Inject constructor(private val authorizedApiService: AuthorizedApiService,
+class CarRemoteImpl @Inject constructor(private val authApi: AuthApi,
                                         private val carModelMapper: CarModelMapper,
                                         private val carColorMapper: CarColorMapper,
                                         private val carMapper: CarMapper,
@@ -29,7 +29,7 @@ class CarRemoteImpl @Inject constructor(private val authorizedApiService: Author
     override suspend fun getCars(): ResultWrapper<List<CarDetailsEntity>> {
 
         return try {
-            val response = authorizedApiService.getCars()
+            val response = authApi.getCars()
             if (response.code == 1) {
                 val newCars = ArrayList<CarDetailsEntity>()
                 response.data?.forEach {
@@ -44,7 +44,7 @@ class CarRemoteImpl @Inject constructor(private val authorizedApiService: Author
 
     override suspend fun getCarModels(): ResultWrapper<List<CarModelEntity>> {
         return try {
-            val response = authorizedApiService.getCarModels()
+            val response = authApi.getCarModels()
             if (response.code == 1) {
                 val newCarModels = ArrayList<CarModelEntity>()
                 response.data!!.forEach {
@@ -59,7 +59,7 @@ class CarRemoteImpl @Inject constructor(private val authorizedApiService: Author
 
     override suspend fun getCarColors(): ResultWrapper<List<CarColorEntity>> {
         return try {
-            val response = authorizedApiService.getCarColors()
+            val response = authApi.getCarColors()
             if (response.code == 1) {
                 val newCarColors = ArrayList<CarColorEntity>()
                 response.data!!.forEach {
@@ -74,7 +74,7 @@ class CarRemoteImpl @Inject constructor(private val authorizedApiService: Author
 
     override suspend fun createCar(car: CarEntity): ResultWrapper<CarEntity> {
         return try {
-            val response = authorizedApiService.createCar(carMapper.mapFromEntity(car))
+            val response = authApi.createCar(carMapper.mapFromEntity(car))
             if (response.code == 1) {
                 ResultWrapper.Success(carMapper.mapToEntity(response.data!!))
             } else ErrorWrapper.RespError(response.code, response.message ?: "")
@@ -85,7 +85,7 @@ class CarRemoteImpl @Inject constructor(private val authorizedApiService: Author
 
     override suspend fun deleteCar(id: Long): ResultWrapper<List<CarDetailsEntity>> {
         return try {
-            val response = authorizedApiService.deleteCar(id)
+            val response = authApi.deleteCar(id)
             if (response.code == 1) {
                 val cars = arrayListOf<CarDetailsEntity>()
                 response.data?.forEach { cars.add(carDetailsMapper.mapToEntity(it)) }
@@ -98,7 +98,7 @@ class CarRemoteImpl @Inject constructor(private val authorizedApiService: Author
 
     override suspend fun updateCar(car: CarEntity): ResultWrapper<CarEntity> {
         return try {
-            val response = authorizedApiService.updateCar(car.id!!, carMapper.mapFromEntity(car))
+            val response = authApi.updateCar(car.id!!, carMapper.mapFromEntity(car))
             if (response.code == 1) {
                 ResultWrapper.Success(carMapper.mapToEntity(response.data!!))
             } else ErrorWrapper.RespError(response.code, response.message ?: "")
@@ -110,7 +110,7 @@ class CarRemoteImpl @Inject constructor(private val authorizedApiService: Author
 
     override suspend fun setDefaultCar(id: Long): ResultWrapper<String> {
         return try {
-            val response = authorizedApiService.setDefaultCar(id)
+            val response = authApi.setDefaultCar(id)
             if (response.code == 1) {
                 ResultWrapper.Success("SUCCESS")
             } else ErrorWrapper.RespError(response.code, response.message ?: "" )

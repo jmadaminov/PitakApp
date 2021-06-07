@@ -106,7 +106,7 @@
             android:layout_marginBottom="6dp"
             android:background="@drawable/shape_rounded_corners_white"
             android:clickable="true"
-            android:drawablePadding="10dp"
+            android:drawablePadding="12dp"
             android:focusable="false"
             android:foreground="?android:selectableItemBackground"
             android:gravity="center_vertical"

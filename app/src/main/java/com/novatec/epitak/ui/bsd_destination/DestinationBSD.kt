@@ -41,7 +41,7 @@ private const val MIN_QUERY_CHARS: Int = 3
 @AndroidEntryPoint
 class DestinationBSD : BSDExpanded() {
 
-    override fun getTheme() = R.style.BottomSheetExpanded
+//    override fun getTheme() = R.style.BottomSheetExpanded
 
     private var isFrom: Boolean = true
     private val viewModel: DestinationsViewModel by viewModels()

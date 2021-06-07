@@ -66,6 +66,10 @@ android {
     hilt {
         enableExperimentalClasspathAggregation = true
     }
+    dataBinding {
+        enabled = true
+    }
+
 }
 
 android.applicationVariants.all { variant ->
@@ -106,6 +110,8 @@ dependencies {
 
 //    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.lifecycleVersion"
+//    implementation "android.arch.lifecycle:extensions:$rootProject.lifecycleVersion"
+
 //    kapt 'android.arch.lifecycle:compiler:' + rootProject.lifecycleVersion
     //For Coroutine ViewModelScope
 //    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$rootProject.lifecycleVersion"

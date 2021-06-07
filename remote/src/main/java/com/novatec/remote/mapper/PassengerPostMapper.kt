@@ -3,7 +3,6 @@ package com.novatec.remote.mapper
 import com.novatec.data.mapper.Mapper
 import com.novatec.data.model.*
 import com.novatec.remote.model.*
-import javax.inject.Inject
 
 
 /**
@@ -51,11 +50,15 @@ open class PassengerPostMapper :
                                                                      type.myLastOffer!!.submitDate,
                                                                      type.myLastOffer!!.priceInt,
                                                                      type.myLastOffer!!.seat) else null
-        var agreedOffer : AgreedOfferDTO? = null
-        type.agreedOffer?.let{
-            agreedOffer = AgreedOfferDTO(it.message, it.priceInt, it.seat )
+        var agreedOffer: AgreedOfferDTO? = null
+        type.agreedOffer?.let {
+            agreedOffer = AgreedOfferDTO(it.message, it.priceInt, it.seat)
         }
 
+
+        var imageList = type.imageList.map {
+            Image(it.id, it.link)
+        }
 
         return PassengerPostModel(type.id,
                                   placeFrom,
@@ -76,6 +79,7 @@ open class PassengerPostMapper :
                                   type.seat,
                                   myLastOffer,
                                   agreedOffer,
+                                  imageList,
                                   type.postType)
     }
 
@@ -110,20 +114,22 @@ open class PassengerPostMapper :
 
 
         val myLastOffer = if (type.myLastOffer != null) UserOfferEntity(type.myLastOffer.id,
-                                                                             type.myLastOffer.id,
-                                                                             type.myLastOffer.repliedPostId,
-                                                                             type.myLastOffer.status,
-                                                                             type.myLastOffer.message,
-                                                                             type.myLastOffer.submitDate,
-                                                                             type.myLastOffer.priceInt,
-                                                                             type.myLastOffer.seat) else null
+                                                                        type.myLastOffer.id,
+                                                                        type.myLastOffer.repliedPostId,
+                                                                        type.myLastOffer.status,
+                                                                        type.myLastOffer.message,
+                                                                        type.myLastOffer.submitDate,
+                                                                        type.myLastOffer.priceInt,
+                                                                        type.myLastOffer.seat) else null
 
-        var agreedOffer : AgreedOfferEntity? = null
-        type.agreedOffer?.let{
-            agreedOffer = AgreedOfferEntity( it.message, it.priceInt,it.seat )
+        var agreedOffer: AgreedOfferEntity? = null
+        type.agreedOffer?.let {
+            agreedOffer = AgreedOfferEntity(it.message, it.priceInt, it.seat)
         }
 
-
+        val imageList = type.imageList.map {
+            ImageEntity(it.id, it.link)
+        }
         return PassengerPostEntity(type.id,
                                    placeFrom,
                                    placeTo,
@@ -142,6 +148,7 @@ open class PassengerPostMapper :
                                    type.postStatus,
                                    myLastOffer,
                                    agreedOffer,
+                                   imageList,
                                    type.seat,
                                    type.postType)
     }

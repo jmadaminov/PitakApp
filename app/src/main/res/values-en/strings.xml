@@ -159,5 +159,8 @@
     <string name="no_destination_found">No location found...</string>
     <string name="enter_search_location">Enter location name...</string>
     <string name="parcel">Parcel</string>
+    <string name="only_package">Only parcel</string>
+    <string name="minimal_price">Minimal price</string>
+    <string name="accept">Qabul qilish</string>
 
 </resources>

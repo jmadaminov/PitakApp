@@ -18,43 +18,47 @@ open class PassengerPostMapper @Inject constructor() :
     override fun mapFromEntity(type: PassengerPostEntity): PassengerPost {
 
         val placeFrom = Place(type.from.districtId,
-                                   type.from.regionId,
-                                   type.from.lat,
-                                   type.from.lon,
-                                   type.from.regionName,
-                                   type.from.name)
+                              type.from.regionId,
+                              type.from.lat,
+                              type.from.lon,
+                              type.from.regionName,
+                              type.from.name)
 
         val placeTo = Place(type.to.districtId,
-                                 type.to.regionId,
-                                 type.to.lat,
-                                 type.to.lon,
-                                 type.to.regionName,
-                                 type.to.name)
+                            type.to.regionId,
+                            type.to.lat,
+                            type.to.lon,
+                            type.to.regionName,
+                            type.to.name)
 
         val profileImage = type.profile.image?.let {
             Image(it.id, it.link)
         }
 
         val profile = Profile(type.profile.phoneNum,
-                                          type.profile.name,
-                                          type.profile.surname,
-                                          type.profile.id,
-                                          profileImage)
+                              type.profile.name,
+                              type.profile.surname,
+                              type.profile.id,
+                              profileImage)
 
 
         val myLastOffer = if (type.myLastOffer != null) UserOffer(type.myLastOffer.id,
-                                                                        type.myLastOffer.id,
-                                                                        type.myLastOffer.repliedPostId,
-                                                                        type.myLastOffer.status,
-                                                                        type.myLastOffer.message,
-                                                                        type.myLastOffer.submitDate,
-                                                                        type.myLastOffer.priceInt,
-                                                                        type.myLastOffer.seat) else null
+                                                                  type.myLastOffer.id,
+                                                                  type.myLastOffer.repliedPostId,
+                                                                  type.myLastOffer.status,
+                                                                  type.myLastOffer.message,
+                                                                  type.myLastOffer.submitDate,
+                                                                  type.myLastOffer.priceInt,
+                                                                  type.myLastOffer.seat) else null
 
 
-        var agreedOffer : AgreedOffer? = null
-        type.agreedOffer?.let{
-            agreedOffer = AgreedOffer( it.message, it.priceInt,it.seat )
+        var agreedOffer: AgreedOffer? = null
+        type.agreedOffer?.let {
+            agreedOffer = AgreedOffer(it.message, it.priceInt, it.seat)
+        }
+
+        var imageList = type.imageList.map {
+            Image(it.id, it.link)
         }
 
 
@@ -77,6 +81,7 @@ open class PassengerPostMapper @Inject constructor() :
                              myLastOffer,
                              type.seat,
                              agreedOffer,
+                             imageList,
                              type.postType)
     }
 
@@ -104,10 +109,10 @@ open class PassengerPostMapper @Inject constructor() :
         }
 
         val profileEntity = ProfileEntity(type.profile.phoneNum,
-                                       type.profile.name,
-                                       type.profile.surname,
-                                       type.profile.id,
-                                       profileImage)
+                                          type.profile.name,
+                                          type.profile.surname,
+                                          type.profile.id,
+                                          profileImage)
 
         val myLastOffer = if (type.myLastOffer != null) UserOfferEntity(type.myLastOffer!!.id,
                                                                         type.myLastOffer!!.id,
@@ -117,11 +122,15 @@ open class PassengerPostMapper @Inject constructor() :
                                                                         type.myLastOffer!!.submitDate,
                                                                         type.myLastOffer!!.priceInt,
                                                                         type.myLastOffer!!.seat) else null
-        var agreedOffer : AgreedOfferEntity? = null
-        type.agreedOffer?.let{
-            agreedOffer = AgreedOfferEntity( it.message, it.priceInt,it.seat )
+        var agreedOffer: AgreedOfferEntity? = null
+        type.agreedOffer?.let {
+            agreedOffer = AgreedOfferEntity(it.message, it.priceInt, it.seat)
         }
 
+
+        var imageList = type.imageList.map {
+            ImageEntity(it.id, it.link)
+        }
 
         return PassengerPostEntity(type.id,
                                    placeFrom,
@@ -141,6 +150,7 @@ open class PassengerPostMapper @Inject constructor() :
                                    type.postStatus,
                                    myLastOffer,
                                    agreedOffer,
+                                   imageList,
                                    type.seat,
                                    type.postType)
     }

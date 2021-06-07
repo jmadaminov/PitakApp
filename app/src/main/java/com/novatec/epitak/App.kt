@@ -44,7 +44,7 @@ class App : Application() {
         // OneSignal Initialization
         OneSignal.initWithContext(this)
         OneSignal.setAppId(ONESIGNAL_APP_ID)
-        OneSignal.unsubscribeWhenNotificationsAreDisabled(true)
+//        OneSignal.unsubscribeWhenNotificationsAreDisabled(true)
         OneSignal.setNotificationOpenedHandler { result ->
 //            val actionId = result.action.actionId
 //            val type: String = result.action.type // "ActionTaken" | "Opened"

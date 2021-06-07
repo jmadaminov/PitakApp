@@ -73,10 +73,11 @@ class OfferARideViewModel @Inject constructor(private val repository: PassengerP
             0,
             passPost.seat,
             EPostStatus.CREATED,
-            null, 0,
+            true,
+            0,
             null,
             null,
-            if (passPost.postType == EPostType.PARCEL_SM) EPostType.PARCEL_SM else EPostType.DRIVER_SM
+            if (passPost.postType == EPostType.PASSENGER_PARCEL) EPostType.DRIVER_PARCEL else EPostType.DRIVER_SM
 
         )
         when (val response = createDriverPost.execute(driverPost)) {

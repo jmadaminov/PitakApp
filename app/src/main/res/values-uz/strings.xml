@@ -20,7 +20,7 @@
     <string name="register">Ro\'yxatdan o\'tish</string>
     <string name="name">Ism</string>
     <string name="surname">Familiya</string>
-    <string name="code">K\'od</string>
+    <string name="code">Ko\'d</string>
     <string name="sms_containing_code_has_been_sent">Hozir sizga kod yubordik. Iltimos shu kodni kiriting.</string>
     <string name="passenger">Yo\'lovchi</string>
     <string name="driver">Haydovchi</string>
@@ -95,8 +95,8 @@
     <string name="feedback">Fikr-mulohaza</string>
     <string name="send">Yuborish</string>
     <string name="do_you_want_to_accept_this_offer">Taklifni qabul qilasizmi?</string>
-    <string name="no">Ha</string>
-    <string name="yes">Yoq</string>
+    <string name="no">Yoq</string>
+    <string name="yes">Ha</string>
     <string name="sure_to_delete_post">Shu Sayohatni ochirmoqchimisiz?</string>
     <string name="have_you_completed_the_ride">Sayohatingiz tugadimi?</string>
     <string name="post">Sayohat: %1$d</string>
@@ -160,5 +160,8 @@
     <string name="no_destination_found">Yo\'nalish topilmadi...</string>
     <string name="enter_search_location">Manzilni kiriting...</string>
     <string name="parcel">Po\'chta</string>
+    <string name="only_package">Faqat pochta</string>
+    <string name="minimal_price">Minimal narxi</string>
+    <string name="accept">Qabul qilish</string>
 
 </resources>

@@ -4,11 +4,10 @@ import android.util.Log
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.liveData
-import com.novatec.remote.AuthorizedApiService
+import com.novatec.remote.AuthApi
 import javax.inject.Inject
-import javax.inject.Singleton
 
-class HistoryPostRepository @Inject constructor(private val authorizedApiService: AuthorizedApiService) {
+class HistoryPostRepository @Inject constructor(private val authApi: AuthApi) {
 
     fun getHistoryPosts() =
         Pager(config = PagingConfig(
@@ -18,6 +17,6 @@ class HistoryPostRepository @Inject constructor(private val authorizedApiService
         ),
               pagingSourceFactory = {
                   Log.d("", "")
-                  HistoryPostPagingSource(authorizedApiService)
+                  HistoryPostPagingSource(authApi)
               }).liveData
 }

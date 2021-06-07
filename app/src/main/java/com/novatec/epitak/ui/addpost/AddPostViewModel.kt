@@ -1,14 +1,16 @@
 package com.novatec.epitak.ui.addpost
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.novatec.core.EPostType
 import com.novatec.core.ResultWrapper
 import com.novatec.domain.domainmodel.CarDetails
 import com.novatec.domain.domainmodel.DriverPost
-import com.novatec.domain.domainmodel.Place
 import com.novatec.domain.usecases.CreateDriverPost
 import com.novatec.domain.usecases.GetCars
 import com.novatec.epitak.ui.BaseViewModel
 import com.novatec.epitak.util.SingleLiveEvent
+import com.novatec.epitak.viewobjects.DriverPostViewObj
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -33,23 +35,21 @@ class AddPostViewModel @Inject constructor(private val createDriverPost: CreateD
         calendar[Calendar.YEAR] = year
         calendar[Calendar.MONTH] = month
         calendar[Calendar.DAY_OF_MONTH] = dayOfMonth
-        departureDate = dateFormat.format(calendar.time)
+        postToBeAdded.value?.departureDate = dateFormat.format(calendar.time)
     }
 
-    var isPackage: Boolean = true
-    var isEditing: Boolean = false
-    var id: Long? = null
-    var placeFrom: Place? = null
-    var placeTo: Place? = null
-    var departureDate: String = dateFormat.format(calendar.time)
-    var timeFirstPart = true
-    var timeSecondPart = true
-    var timeThirdPart = true
-    var timeFourthPart = true
-    var car: CarDetails? = null
-    var price: Int? = null
-    var seat: Int = 1
-//    var note: String? = null
+    var postToBeAdded = MutableLiveData(DriverPostViewObj(
+        0,
+        timeFirstPart = true,
+        timeSecondPart = true,
+        timeThirdPart = true,
+        timeFourthPart = true,
+        departureDate = dateFormat.format(calendar.time),
+        seat = 1,
+        pkg = true,
+        postType = EPostType.DRIVER_SM
+    ))
+
 
     val createResponse = SingleLiveEvent<ResultWrapper<DriverPost?>>()
 
@@ -59,7 +59,6 @@ class AddPostViewModel @Inject constructor(private val createDriverPost: CreateD
         createResponse.value = ResultWrapper.InProgress
         viewModelScope.launch(Dispatchers.IO) {
             val response = createDriverPost.execute(driverPost)
-
             withContext(Dispatchers.Main) {
                 createResponse.value = response
             }
@@ -79,6 +78,36 @@ class AddPostViewModel @Inject constructor(private val createDriverPost: CreateD
                 carsResponse.value = response
             }
         }
+    }
+
+    fun canTakeParcel(checked: Boolean) {
+        postToBeAdded.value.apply {
+            if (!checked && this?.seat == 0) {
+                seat = 1
+                this.postType = EPostType.DRIVER_SM
+            }
+            this?.pkg = checked
+        }
+    }
+
+    fun setSeatCound(count: Int) {
+        postToBeAdded.value.apply {
+            if (count == 0) {
+                this?.postType = EPostType.DRIVER_PARCEL
+                this?.pkg = true
+            } else {
+                this?.postType = EPostType.DRIVER_SM
+            }
+            this?.seat = count
+        }
+    }
+
+    fun setEditingPost(driverPostViewObj: DriverPostViewObj) {
+        postToBeAdded.value = driverPostViewObj
+    }
+
+    fun setPrice(price: Int) {
+        postToBeAdded.value!!.price = price
     }
 
 

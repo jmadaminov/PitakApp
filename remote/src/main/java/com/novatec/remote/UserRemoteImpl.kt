@@ -22,7 +22,7 @@ import javax.inject.Inject
  * operations in which data store implementation layers can carry out.
  */
 class UserRemoteImpl @Inject constructor(private val apiService: ApiService,
-                                         private val authApiService: AuthorizedApiService,
+                                         private val authApi: AuthApi,
                                          private val userCredMapper: UserCredentialsMapper,
                                          private val userMapper: UserMapper,
                                          private val authMapper: AuthMapper) : UserRemote {
@@ -49,7 +49,7 @@ class UserRemoteImpl @Inject constructor(private val apiService: ApiService,
     }
 
     override suspend fun sendFeedback(feedback: String) =
-        getFormattedResponseNullable { authApiService.sendFeedback(FeedbackBody(feedback)) }
+        getFormattedResponseNullable { authApi.sendFeedback(FeedbackBody(feedback)) }
 
     override suspend fun confirmUser(user: UserCredentialsEntity): ResultWrapper<AuthEntity> {
         return try {
@@ -63,9 +63,9 @@ class UserRemoteImpl @Inject constructor(private val apiService: ApiService,
 
     override suspend fun updateUserInfo(name: String, surName: String, uploadedAvatarId: Long?) =
         getFormattedResponseNullable {
-            authApiService.updateUserInfo(ReqUpdateProfileInfo(name,
-                                                               surName,
-                                                               uploadedAvatarId?.let {
+            authApi.updateUserInfo(ReqUpdateProfileInfo(name,
+                                                        surName,
+                                                        uploadedAvatarId?.let {
                                                                    IdNameBody(uploadedAvatarId)
                                                                }))
         }

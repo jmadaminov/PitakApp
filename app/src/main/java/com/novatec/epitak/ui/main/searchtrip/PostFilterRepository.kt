@@ -6,12 +6,11 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.liveData
 import com.novatec.domain.domainmodel.Filter
-import com.novatec.remote.AuthorizedApiService
+import com.novatec.remote.AuthApi
 import javax.inject.Inject
-import javax.inject.Singleton
 
 
-class PostFilterRepository @Inject constructor(private val authorizedApiService: AuthorizedApiService) {
+class PostFilterRepository @Inject constructor(private val authApi: AuthApi) {
 
     fun getFilteredPosts(filter: LiveData<Filter>) =
         Pager(config = PagingConfig(
@@ -21,6 +20,6 @@ class PostFilterRepository @Inject constructor(private val authorizedApiService:
         ),
               pagingSourceFactory = {
                   Log.d("","")
-                  PostFilterPagingSource(authorizedApiService, filter)
+                  PostFilterPagingSource(authApi, filter)
               }).liveData
 }

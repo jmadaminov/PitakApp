@@ -4,15 +4,14 @@ import androidx.lifecycle.LiveData
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.novatec.domain.domainmodel.Filter
-import com.novatec.remote.ApiService
-import com.novatec.remote.AuthorizedApiService
+import com.novatec.remote.AuthApi
 import com.novatec.remote.mapper.FilterMapper
 import com.novatec.remote.model.PassengerPostModel
 
 private const val POST_OFFER_STARTING_PAGE_INDEX = 0
 
 class PostFilterPagingSource(
-    private val authorizedApiService: AuthorizedApiService,
+    private val authApi: AuthApi,
     private val filter: LiveData<Filter>
 ) : PagingSource<Int, PassengerPostModel>() {
 
@@ -23,7 +22,7 @@ class PostFilterPagingSource(
 
         return try {
             val response =
-                authorizedApiService.filterPassengerPost(fltr, position, params.loadSize)
+                authApi.filterPassengerPost(fltr, position, params.loadSize)
             val posts = response.data?.data
             LoadResult.Page(
                 data = posts!!,

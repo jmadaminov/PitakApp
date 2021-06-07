@@ -42,7 +42,7 @@ open class DriverPostMapper : Mapper<DriverPostEntity, DriverPostModel> {
                                                                  type.car!!.fuelType,
                                                                  CarColorModel(type.car!!.color!!.id,
                                                                                type.car!!.color!!.hex,
-                                                                               type.car!!.color!!.name!!),
+                                                                               type.car!!.color!!.name),
                                                                  type.car!!.carNumber,
                                                                  type.car!!.carYear,
                                                                  type.car!!.airConditioner,

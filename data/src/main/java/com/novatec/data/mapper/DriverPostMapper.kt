@@ -121,16 +121,14 @@ open class DriverPostMapper @Inject constructor() : Mapper<DriverPostEntity, Dri
                                                                                  type.car!!.carModel!!.name),
                                                                   type.car!!.fuelType,
                                                                   CarColorEntity(type.car!!.color!!.id!!,
-                                                                                 type.car!!.color!!.hex!!,
-                                                                                 type.car!!.color!!.name!!),
+                                                                                 type.car!!.color!!.hex,
+                                                                                 type.car!!.color!!.name),
                                                                   type.car!!.carNumber,
                                                                   type.car!!.carYear,
                                                                   type.car!!.airConditioner,
                                                                   type.car!!.def)
 
-        val passengerList = arrayListOf<PassengerEntity>()
-        type.passengerList?.forEach {
-
+        val passengerList = type.passengerList?.map {
 
             val offer = ArrangedOfferEntity(it.offer?.message,
                                             it.offer?.priceInt,
@@ -143,18 +141,11 @@ open class DriverPostMapper @Inject constructor() : Mapper<DriverPostEntity, Dri
                                         it.profile!!.id,
                                         ImageEntity(it.profile!!.image?.id,
                                                     it.profile!!.image?.link))
-            passengerList.add(PassengerEntity(it.id,
-                                              profile,
-                                              it.submitDate,
-                                              offer))
+            PassengerEntity(it.id, profile, it.submitDate, offer)
         }
 
 
-        val parcelList = arrayListOf<ParcelEntity>()
-
-        type.parcelList?.forEach {
-            parcelList.add(ParcelEntity(it.id))
-        }
+        val parcelList = type.parcelList?.map { ParcelEntity(it.id) }
 
         return DriverPostEntity(type.id,
                                 placeFrom,

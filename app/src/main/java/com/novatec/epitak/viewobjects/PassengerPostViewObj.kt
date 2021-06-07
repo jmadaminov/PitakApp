@@ -4,7 +4,6 @@ import android.os.Parcelable
 import com.novatec.core.EPostStatus
 import com.novatec.core.EPostType
 import com.novatec.domain.domainmodel.PassengerPost
-import com.novatec.remote.model.OfferDTO
 import com.novatec.remote.model.PassengerPostModel
 import kotlinx.android.parcel.Parcelize
 
@@ -28,6 +27,7 @@ data class PassengerPostViewObj(val id: Long,
                                 val seat: Int,
                                 val myLastOffer: UserOfferViewObj? = null,
                                 val offer: AgreedOfferViewObj? = null,
+                                val imageList: List<ImageViewObj> = listOf(),
                                 val postType: EPostType) : Parcelable {
 
 
@@ -54,11 +54,14 @@ data class PassengerPostViewObj(val id: Long,
                                                                 model.myLastOffer!!.submitDate,
                                                                 model.myLastOffer!!.priceInt,
                                                                 model.myLastOffer!!.seat) else null
-            var agreedOffer : AgreedOfferViewObj? = null
-            model.agreedOffer?.let{
-                agreedOffer = AgreedOfferViewObj( it.message, it.priceInt,it.seat )
+            var agreedOffer: AgreedOfferViewObj? = null
+            model.agreedOffer?.let {
+                agreedOffer = AgreedOfferViewObj(it.message, it.priceInt, it.seat)
             }
 
+            val imageList = model.imageList.map {
+                ImageViewObj(it.id, it.link)
+            }
             return PassengerPostViewObj(
                 model.id,
                 PlaceViewObj(model.from.districtId,
@@ -89,6 +92,7 @@ data class PassengerPostViewObj(val id: Long,
                 model.seat,
                 myLastOffer,
                 agreedOffer,
+                imageList,
                 model.postType,
             )
         }
@@ -115,10 +119,14 @@ data class PassengerPostViewObj(val id: Long,
                                                                 model.myLastOffer!!.submitDate,
                                                                 model.myLastOffer!!.priceInt,
                                                                 model.myLastOffer!!.seat) else null
-            var agreedOffer : AgreedOfferViewObj? = null
-           model.agreedOffer?.let{
-               agreedOffer = AgreedOfferViewObj( it.message, it.priceInt,it.seat )
-           }
+            var agreedOffer: AgreedOfferViewObj? = null
+            model.agreedOffer?.let {
+                agreedOffer = AgreedOfferViewObj(it.message, it.priceInt, it.seat)
+            }
+
+            val imageList = model.imageList.map {
+                ImageViewObj(it.id, it.link)
+            }
 
             return PassengerPostViewObj(
                 model.id,
@@ -150,6 +158,7 @@ data class PassengerPostViewObj(val id: Long,
                 model.seat,
                 myLastOffer,
                 agreedOffer,
+                imageList,
                 model.postType,
             )
         }

@@ -10,7 +10,6 @@ import com.novatec.remote.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.android.components.ViewModelComponent
 
 @Module
@@ -72,8 +71,8 @@ object ActivityModule {
                           userCredMapper: com.novatec.remote.mapper.UserCredentialsMapper,
                           userMapper: com.novatec.remote.mapper.UserMapper,
                           authMapper: com.novatec.remote.mapper.AuthMapper,
-                          authApiService: AuthorizedApiService): UserRemote {
-        return UserRemoteImpl(apiService, authApiService, userCredMapper, userMapper, authMapper)
+                          authApi: AuthApi): UserRemote {
+        return UserRemoteImpl(apiService, authApi, userCredMapper, userMapper, authMapper)
     }
 
 
@@ -182,12 +181,12 @@ object ActivityModule {
 
 
     @Provides
-    fun provideCarRemote(apiService: AuthorizedApiService,
+    fun provideCarRemote(api: AuthApi,
                          carModelMapper: com.novatec.remote.mapper.CarModelMapper,
                          carColorMapper: com.novatec.remote.mapper.CarColorMapper,
                          carMapper: com.novatec.remote.mapper.CarMapper,
                          carDetailsMapper: com.novatec.remote.mapper.CarDetailsMapper): CarRemote {
-        return CarRemoteImpl(apiService,
+        return CarRemoteImpl(api,
                              carModelMapper,
                              carColorMapper,
                              carMapper,
@@ -312,11 +311,11 @@ object ActivityModule {
     @Provides
 
 
-    fun providePassengerPostRemote(apiService: AuthorizedApiService,
+    fun providePassengerPostRemote(api: AuthApi,
                                    postMapper: com.novatec.remote.mapper.PassengerPostMapper,
                                    filterMapper: com.novatec.remote.mapper.FilterMapper,
                                    driverOfferMapper: com.novatec.remote.mapper.DriverOfferMapper): PassengerPostRemote {
-        return PassengerPostRemoteImpl(apiService, postMapper, filterMapper, driverOfferMapper)
+        return PassengerPostRemoteImpl(api, postMapper, filterMapper, driverOfferMapper)
     }
 
 
@@ -408,16 +407,16 @@ object ActivityModule {
 
 
     @Provides
-    fun providePlaceRemote(apiService: AuthorizedApiService,
+    fun providePlaceRemote(api: AuthApi,
                            placeMapper: com.novatec.remote.mapper.PlaceMapper): PlaceRemote {
-        return PlaceRemoteImpl(apiService, placeMapper)
+        return PlaceRemoteImpl(api, placeMapper)
     }
 
 
     @Provides
-    fun provideDriverPostRemote(apiService: AuthorizedApiService,
+    fun provideDriverPostRemote(api: AuthApi,
                                 driverPostMapper: com.novatec.remote.mapper.DriverPostMapper): DriverPostRemote {
-        return DriverPostRemoteImpl(apiService, driverPostMapper)
+        return DriverPostRemoteImpl(api, driverPostMapper)
     }
 
 

@@ -67,14 +67,14 @@ class ActivePostItem(var post: DriverPost, val onClick: () -> Unit) : Item() {
             price.text =
                 DecimalFormat("#,###").format(post.price) + " " + context.getString(R.string.sum)
 
-            if (post.offerCount > 0) {
+            if (post.offerCount != null && post.offerCount!! > 0) {
                 tvOffersCount.visibility = View.VISIBLE
                 tvOffersCount.text = post.offerCount.toString()
             } else {
                 tvOffersCount.visibility = View.GONE
             }
 
-            val currentStatusStr = when (post.postStatus) {
+            val currentStatusStr = when (post.postStatus!!) {
                 EPostStatus.WAITING_FOR_START -> {
                     llStatus.backgroundTintList =
                         ContextCompat.getColorStateList(context, R.color.colorNavIdle)
@@ -106,8 +106,9 @@ class ActivePostItem(var post: DriverPost, val onClick: () -> Unit) : Item() {
                 }
             }
 
+
             ivPkg.isVisible = post.pkg ?: false
-            tvPkgOffersCount.isVisible = post.pkg ?: false
+            tvPkgOffersCount.isVisible = post.parcelCount ?: 0 > 0
             tvPkgOffersCount.text = post.parcelCount.toString()
 
             status.text = currentStatusStr

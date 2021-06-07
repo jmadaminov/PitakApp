@@ -103,8 +103,8 @@ class DialogOfferARideFragment : DialogFragment() {
                 is ResultWrapper.Success -> {
                     loadData(response.value.filter { myPost ->
                         myPost.departureDate == passengerPost.departureDate
-                                && (myPost.postType == EPostType.PASSENGER_SM && myPost.postStatus.canTakePassenger()
-                                || myPost.postType == EPostType.PARCEL_SM && myPost.postStatus.canTakeParcel())
+                                && (myPost.postType == EPostType.PASSENGER_SM && myPost.postStatus!!.canTakePassenger()
+                                || myPost.postType == EPostType.PASSENGER_PARCEL && myPost.postStatus!!.canTakeParcel())
                     })
                 }
                 ResultWrapper.InProgress -> {

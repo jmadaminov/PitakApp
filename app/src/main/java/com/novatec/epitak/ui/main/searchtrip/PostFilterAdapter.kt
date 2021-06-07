@@ -43,7 +43,7 @@ class PostFilterAdapter :
         fun bind(post: PassengerPostModel) {
             itemView.apply {
 
-                if (post.postType == EPostType.PARCEL_SM) {
+                if (post.postType == EPostType.PASSENGER_PARCEL) {
                     ivParcel.isVisible = true
                     llSeatsContainer.isVisible = false
                 } else {

@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:clickable="true"
-            android:drawablePadding="12dp"
+            android:drawablePadding="10dp"
             android:focusable="true"
             android:foreground="?android:selectableItemBackground"
             android:gravity="center_vertical"
@@ -50,7 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:clickable="true"
-            android:drawablePadding="12dp"
+            android:drawablePadding="13dp"
             android:focusable="true"
             android:foreground="?android:selectableItemBackground"
             android:gravity="center_vertical"
@@ -179,6 +179,7 @@
 
 
         <TextView
+            android:id="@+id/lblSeatsCount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -189,7 +190,7 @@
             android:textSize="14dp"
             android:textStyle="bold" />
 
-        <com.novatec.epitak.util.HorizontalNumberPicker
+        <com.novatec.epitak.util.PassengerNumberPickerZero
             android:id="@+id/number_picker"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -197,7 +198,7 @@
             android:layout_marginTop="12dp"
             android:layout_marginEnd="12dp"
             app:max_passengers="8"
-            app:min_passengers="1" />
+            app:min_passengers="0" />
         <!--        custom:max_passengers="8"-->
         <!--        custom:min_passengers="0"-->
 
@@ -227,16 +228,33 @@
             app:layout_constraintTop_toBottomOf="@id/labelCar"
             tools:listitem="@layout/item_car_selection" />
 
+
+        <!--        <RadioGroup-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:orientation="horizontal">-->
+
         <CheckBox
             android:id="@+id/cbTakeParcel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
             android:checked="true"
-            android:drawableEnd="@drawable/ic_package"
             android:drawablePadding="7dp"
             android:text="@string/can_take_package" />
+
+        <!--            <RadioButton-->
+        <!--                android:id="@+id/cbOnlyPackage"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_gravity="end"-->
+        <!--                android:layout_marginStart="12dp"-->
+        <!--                android:checked="true"-->
+        <!--                android:drawablePadding="7dp"-->
+        <!--                android:text="@string/only_package" />-->
+
+        <!--        </RadioGroup>-->
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/priceInputLayout"

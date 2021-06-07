@@ -13,17 +13,17 @@ import javax.inject.Inject
  * [BufferooRemote] from the Data layer as it is that layers responsibility for defining the
  * operations in which data store implementation layers can carry out.
  */
-class DriverPostRemoteImpl @Inject constructor(private val authorizedApiService: AuthorizedApiService,
+class DriverPostRemoteImpl @Inject constructor(private val authApi: AuthApi,
                                                private val postMapper: DriverPostMapper) :
     DriverPostRemote {
 
     override suspend fun createDriverPost(post: DriverPostEntity): ResultWrapper<DriverPostEntity?> {
         val response =
-            if (post.id != null) getFormattedResponseNullable {
-                authorizedApiService.editPost(post.id!!, postMapper.mapFromEntity(post))
+            if (post.id != 0L) getFormattedResponseNullable {
+                authApi.editPost(post.id, postMapper.mapFromEntity(post))
             }
             else getFormattedResponse {
-                authorizedApiService.createPost(postMapper.mapFromEntity(post))
+                authApi.createPost(postMapper.mapFromEntity(post))
             }
 
         (return when (response) {
@@ -40,10 +40,10 @@ class DriverPostRemoteImpl @Inject constructor(private val authorizedApiService:
     override suspend fun deleteDriverPost(
         identifier: String): ResultWrapper<String> {
         return try {
-            val response = authorizedApiService.deletePost(identifier)
+            val response = authApi.deletePost(identifier)
             if (response.code == 1) {
                 ResultWrapper.Success("SUCCESS")
-            } else ErrorWrapper.RespError(response.code, response.message?:"")
+            } else ErrorWrapper.RespError(response.code, response.message ?: "")
         } catch (e: Exception) {
             ErrorWrapper.SystemError(e)
         }
@@ -52,10 +52,10 @@ class DriverPostRemoteImpl @Inject constructor(private val authorizedApiService:
     override suspend fun finishDriverPost(
         identifier: String): ResultWrapper<String> {
         return try {
-            val response = authorizedApiService.finishPost(identifier)
+            val response = authApi.finishPost(identifier)
             if (response.code == 1) {
                 ResultWrapper.Success("SUCCESS")
-            } else ErrorWrapper.RespError(response.code, response.message?:"")
+            } else ErrorWrapper.RespError(response.code, response.message ?: "")
         } catch (e: Exception) {
             ErrorWrapper.SystemError(e)
         }
@@ -65,12 +65,12 @@ class DriverPostRemoteImpl @Inject constructor(private val authorizedApiService:
     ): ResultWrapper<List<DriverPostEntity>> {
 
         return try {
-            val response = authorizedApiService.getActivePosts()
+            val response = authApi.getActivePosts()
             if (response.code == 1) {
                 val posts = arrayListOf<DriverPostEntity>()
                 response.data?.forEach { posts.add(postMapper.mapToEntity(it)) }
                 ResultWrapper.Success(posts)
-            } else ErrorWrapper.RespError(response.code, response.message?:"")
+            } else ErrorWrapper.RespError(response.code, response.message ?: "")
         } catch (e: Exception) {
             ErrorWrapper.SystemError(e)
         }
@@ -79,41 +79,41 @@ class DriverPostRemoteImpl @Inject constructor(private val authorizedApiService:
     override suspend fun getHistoryDriverPosts(page: Int): ResultWrapper<List<DriverPostEntity>> {
 
         return try {
-            val response = authorizedApiService.getHistoryPosts(page)
+            val response = authApi.getHistoryPosts(page)
             if (response.code == 1) {
                 val posts = arrayListOf<DriverPostEntity>()
                 response.data?.data?.forEach { posts.add(postMapper.mapToEntity(it)) }
                 ResultWrapper.Success(posts)
-            } else ErrorWrapper.RespError(response.code, response.message?:"")
+            } else ErrorWrapper.RespError(response.code, response.message ?: "")
         } catch (e: Exception) {
             ErrorWrapper.SystemError(e)
         }
     }
 
     override suspend fun getDriverPostById(id: Long): ResponseWrapper<DriverPostEntity> {
-        val response = getFormattedResponse { authorizedApiService.getDriverPostById(id) }
+        val response = getFormattedResponse { authApi.getDriverPostById(id) }
         return if (response is ResponseSuccess)
             ResponseSuccess(postMapper.mapToEntity(response.value))
         else response as ResponseError
     }
 
     override suspend fun startTrip(id: Long) =
-        getFormattedResponseNullable { authorizedApiService.startTrip(id) }
+        getFormattedResponseNullable { authApi.startTrip(id) }
 
     override suspend fun acceptOffer(id: Long) =
-        getFormattedResponse { authorizedApiService.acceptOffer(id) }
+        getFormattedResponse { authApi.acceptOffer(id) }
 
     override suspend fun rejectOffer(id: Long) =
-        getFormattedResponse { authorizedApiService.rejectOffer(id) }
+        getFormattedResponse { authApi.rejectOffer(id) }
 
     override suspend fun cancelMyOffer(id: Long) =
-        getFormattedResponse { authorizedApiService.cancelMyOffer(id) }
+        getFormattedResponse { authApi.cancelMyOffer(id) }
 
     override suspend fun removePassengerFromPost(postId: Long,
                                                  passengerId: Long): ResponseWrapper<DriverPostEntity?> {
         val response = getFormattedResponseNullable {
-            authorizedApiService.removePassengerFromPost(postId,
-                                                         passengerId)
+            authApi.removePassengerFromPost(postId,
+                                            passengerId)
         }
         return when (response) {
             is ResponseError -> {

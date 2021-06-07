@@ -19,6 +19,7 @@ import com.novatec.epitak.ui.passenger_post.offer_a_ride.DialogOfferARideFragmen
 import com.novatec.epitak.util.AppPrefs
 import com.novatec.epitak.util.PostUtils
 import com.novatec.epitak.util.loadRound
+import com.novatec.epitak.util.loadRounded
 import com.novatec.epitak.viewobjects.PassengerPostViewObj
 import kotlinx.android.synthetic.main.activity_passenger_post.*
 import java.text.DecimalFormat
@@ -83,13 +84,17 @@ class PassengerPostActivity : BaseActivity() {
 
     private fun showPostData(post: PassengerPostViewObj) {
 
-        if (post.postType == EPostType.PARCEL_SM) {
+        if (post.postType == EPostType.PASSENGER_PARCEL) {
             lblPricePerPassenger.text = getString(R.string.price)
             llSeatsContainer.isVisible = false
             cbTakeParcel.isVisible = true
             imageContainer.isVisible = true
             lblPassengersCount.isVisible = false
-//            parcelImage.loadRounded(post.imageList)
+            post.imageList.forEach {
+                it.link?.let { imageUrl ->
+                    parcelImage.loadRounded(imageUrl)
+                }
+            }
         } else {
             lblPassengersCount.isVisible = true
             lblPricePerPassenger.text = getString(R.string.price_for_one)

@@ -16,7 +16,7 @@ import javax.inject.Inject
  * operations in which data store implementation layers can carry out.
  */
 class PassengerPostRemoteImpl @Inject constructor(
-    private val authorizedApiService: AuthorizedApiService,
+    private val authApi: AuthApi,
     private val postMapper: PassengerPostMapper,
     private val filterMapper: FilterMapper,
     private val offerMapper: DriverOfferMapper) :
@@ -25,7 +25,7 @@ class PassengerPostRemoteImpl @Inject constructor(
     override suspend fun filterPassengerPost(filter: FilterEntity): ResultWrapper<List<PassengerPostEntity>> {
         return try {
             val response =
-                authorizedApiService.filterPassengerPost(filterMapper.mapFromEntity(filter))
+                authApi.filterPassengerPost(filterMapper.mapFromEntity(filter))
             if (response.code == 1) {
                 val posts = arrayListOf<PassengerPostEntity>()
                 response.data?.data?.forEach { posts.add(postMapper.mapToEntity(it)) }
@@ -38,12 +38,12 @@ class PassengerPostRemoteImpl @Inject constructor(
 
     override suspend fun offerARide(myOffer: DriverOfferEntity) =
         ResponseFormatter.getFormattedResponse {
-            authorizedApiService.offerARide(offerMapper.mapFromEntity(myOffer))
+            authApi.offerARide(offerMapper.mapFromEntity(myOffer))
         }
 
     override suspend fun getPassengerPostById(id: Long): ResponseWrapper<PassengerPostEntity> {
         val response =
-            ResponseFormatter.getFormattedResponse { authorizedApiService.getPassengerPostById(id) }
+            ResponseFormatter.getFormattedResponse { authApi.getPassengerPostById(id) }
 
         return when (response) {
             is ResponseError -> response

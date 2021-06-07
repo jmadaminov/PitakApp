@@ -26,7 +26,7 @@ object ApiServiceFactory {
 
     fun makeAuthorizedApiService(isDebug: Boolean,
                                  token: String,
-                                 lang: String): AuthorizedApiService {
+                                 lang: String): AuthApi {
         val okHttpClient = OkHttpClient.Builder()
             .addInterceptor(makeLoggingInterceptor(isDebug))
             .addInterceptor(AuthInterceptor(token))
@@ -40,7 +40,7 @@ object ApiServiceFactory {
             .baseUrl(Constants.BASE_URL)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create(makeGson()))
-            .build().create(AuthorizedApiService::class.java)
+            .build().create(AuthApi::class.java)
     }
 
 

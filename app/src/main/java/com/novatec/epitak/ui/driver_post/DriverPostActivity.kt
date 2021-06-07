@@ -195,6 +195,17 @@ class DriverPostActivity : BaseActivity(), IOnPassengerDelete {
     }
 
     private fun showPostData() {
+
+        if (post.postType == EPostType.DRIVER_PARCEL) {
+            lblSeatsCount.isVisible = false
+            llSeatsContainer.isVisible = false
+            lblPricePerPassenger.text = getString(R.string.price)
+        } else {
+            lblSeatsCount.isVisible = true
+            llSeatsContainer.isVisible = true
+            lblPricePerPassenger.text = getString(R.string.willing_price_for_one)
+        }
+
         edit.isVisible =
             post.postStatus == EPostStatus.CREATED && post.passengerList.isNullOrEmpty()
         done.isVisible = post.postStatus == EPostStatus.START
@@ -226,7 +237,7 @@ class DriverPostActivity : BaseActivity(), IOnPassengerDelete {
         }
 
         llSeatsContainer.removeAllViews()
-        var availableSeats = post.seat - post.availableSeats
+        var availableSeats = post.seat - post.passengerList!!.size
         for (i in 0 until post.seat) {
             val seat = ImageView(this)
             seat.layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
