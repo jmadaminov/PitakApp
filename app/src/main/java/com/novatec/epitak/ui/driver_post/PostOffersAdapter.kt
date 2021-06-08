@@ -46,13 +46,14 @@ class PostOffersAdapter(val onOfferActionListener: IOnOfferActionListener) :
                         context.getString(R.string.my_price)
                 }
 
-                tvName.text = offer.profile.name + " " + offer.profile.surname
+                tvName.text = offer.profile!!
+                    .name + " " + offer.profile!!.surname
                 tvSeats.text = offer.seat.toString()
-                offer.profile.image?.let {
+                offer.profile!!.image?.let {
                     it.link?.let { link ->
                         ivAvatar.loadRound(link)
                     }
-                } ?: run{
+                } ?: run {
                     ivAvatar.setImageResource(R.drawable.ic_baseline_account_circle_24)
                 }
 

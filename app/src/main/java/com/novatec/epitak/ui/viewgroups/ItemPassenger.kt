@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.item_passenger.view.*
 import java.text.DecimalFormat
 
 
-class PassengerItem(val obj: Passenger,
+class ItemPassenger(val obj: Passenger,
                     val isHistoryPost: Boolean = false,
                     val onDeleteClick: (obj: Passenger) -> Unit) : Item() {
 
@@ -20,12 +20,13 @@ class PassengerItem(val obj: Passenger,
         viewHolder.itemView.apply {
             tvName.text = obj.profile?.name + " " + obj.profile?.surname
             obj.offer?.priceInt?.let {
-                tvAgreedPrice.text = context.getString(R.string.agreed_price,    DecimalFormat("#,###").format(obj.offer?.priceInt))
+                tvAgreedPrice.text = context.getString(R.string.agreed_price,
+                                                       DecimalFormat("#,###").format(obj.offer?.priceInt))
             }
             tvPersonCount.text = obj.offer?.seat?.toString()
             obj.profile?.image?.link?.let {
                 ivAvatar.loadRound(it)
-            } ?: run{
+            } ?: run {
                 ivAvatar.setImageResource(R.drawable.ic_baseline_account_circle_24)
             }
 

@@ -365,8 +365,11 @@ object ActivityModule {
 
     @Provides
     fun provideDriverPostRepository(factory: DriverPostDataStoreFactory,
-                                    driverPostMapper: DriverPostMapper): DriverPostRepository {
-        return DriverPostRepositoryImpl(factory, driverPostMapper)
+                                    driverPostMapper: DriverPostMapper,
+                                    offerMapper: OfferMapper): DriverPostRepository {
+        return DriverPostRepositoryImpl(factory,
+                                        driverPostMapper,
+                                        offerMapper)
     }
 
     @Provides
@@ -414,9 +417,12 @@ object ActivityModule {
 
 
     @Provides
-    fun provideDriverPostRemote(api: AuthApi,
-                                driverPostMapper: com.novatec.remote.mapper.DriverPostMapper): DriverPostRemote {
-        return DriverPostRemoteImpl(api, driverPostMapper)
+    fun provideDriverPostRemote(
+        api: AuthApi,
+        driverPostMapper: com.novatec.remote.mapper.DriverPostMapper,
+        offerMapper: com.novatec.remote.mapper.OfferMapper,
+    ): DriverPostRemote {
+        return DriverPostRemoteImpl(api, driverPostMapper, offerMapper)
     }
 
 

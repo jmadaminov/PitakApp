@@ -12,7 +12,7 @@ import com.novatec.domain.domainmodel.DriverPost
 import com.novatec.epitak.R
 import com.novatec.epitak.ui.driver_post.DriverPostActivity
 import com.novatec.epitak.ui.driver_post.EXTRA_POST_ID
-import com.novatec.epitak.ui.viewgroups.ActivePostItem
+import com.novatec.epitak.ui.viewgroups.ItemActivePost
 import com.novatec.epitak.viewobjects.*
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
@@ -101,7 +101,7 @@ class ActiveTripsFragment : Fragment(R.layout.fragment_active_trips) {
         } else noActiveOrdersTxt.visibility = View.GONE
 
         orders.forEach { post ->
-            adapter.add(ActivePostItem(post) {
+            adapter.add(ItemActivePost(post) {
                 start<DriverPostActivity> { putExtra(EXTRA_POST_ID, post.id) }
             })
         }

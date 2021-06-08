@@ -62,8 +62,8 @@ open class DriverPostMapper : Mapper<DriverPostEntity, DriverPostModel> {
                                                         it.profile!!.name,
                                                         it.profile!!.surname,
                                                         it.profile!!.id,
-                                                        Image(it.profile!!.image?.id,
-                                                              it.profile!!.image?.link)),
+                                                        ImageDTO(it.profile!!.image?.id,
+                                                                 it.profile!!.image?.link)),
                                              it.submitDate,
                                              offerEntity))
         }

@@ -42,14 +42,14 @@ open class PassengerPostMapper @Inject constructor() :
                               profileImage)
 
 
-        val myLastOffer = if (type.myLastOffer != null) UserOffer(type.myLastOffer.id,
-                                                                  type.myLastOffer.id,
-                                                                  type.myLastOffer.repliedPostId,
-                                                                  type.myLastOffer.status,
-                                                                  type.myLastOffer.message,
-                                                                  type.myLastOffer.submitDate,
-                                                                  type.myLastOffer.priceInt,
-                                                                  type.myLastOffer.seat) else null
+        val myLastOffer = if (type.myLastOffer != null) MyOffer(type.myLastOffer.id,
+                                                                type.myLastOffer.id,
+                                                                type.myLastOffer.repliedPostId,
+                                                                type.myLastOffer.status,
+                                                                type.myLastOffer.message,
+                                                                type.myLastOffer.submitDate,
+                                                                type.myLastOffer.priceInt,
+                                                                type.myLastOffer.seat) else null
 
 
         var agreedOffer: AgreedOffer? = null
@@ -114,14 +114,14 @@ open class PassengerPostMapper @Inject constructor() :
                                           type.profile.id,
                                           profileImage)
 
-        val myLastOffer = if (type.myLastOffer != null) UserOfferEntity(type.myLastOffer!!.id,
-                                                                        type.myLastOffer!!.id,
-                                                                        type.myLastOffer!!.repliedPostId,
-                                                                        type.myLastOffer!!.status,
-                                                                        type.myLastOffer!!.message,
-                                                                        type.myLastOffer!!.submitDate,
-                                                                        type.myLastOffer!!.priceInt,
-                                                                        type.myLastOffer!!.seat) else null
+        val myLastOffer = if (type.myLastOffer != null) MyOfferEntity(type.myLastOffer!!.id,
+                                                                      type.myLastOffer!!.id,
+                                                                      type.myLastOffer!!.repliedPostId,
+                                                                      type.myLastOffer!!.status,
+                                                                      type.myLastOffer!!.message,
+                                                                      type.myLastOffer!!.submitDate,
+                                                                      type.myLastOffer!!.priceInt,
+                                                                      type.myLastOffer!!.seat) else null
         var agreedOffer: AgreedOfferEntity? = null
         type.agreedOffer?.let {
             agreedOffer = AgreedOfferEntity(it.message, it.priceInt, it.seat)

@@ -2,10 +2,12 @@ package com.novatec.remote
 
 import com.novatec.core.*
 import com.novatec.data.model.DriverPostEntity
+import com.novatec.data.model.OfferEntity
 import com.novatec.data.repository.DriverPostRemote
 import com.novatec.remote.ResponseFormatter.getFormattedResponse
 import com.novatec.remote.ResponseFormatter.getFormattedResponseNullable
 import com.novatec.remote.mapper.DriverPostMapper
+import com.novatec.remote.mapper.OfferMapper
 import javax.inject.Inject
 
 /**
@@ -13,8 +15,11 @@ import javax.inject.Inject
  * [BufferooRemote] from the Data layer as it is that layers responsibility for defining the
  * operations in which data store implementation layers can carry out.
  */
-class DriverPostRemoteImpl @Inject constructor(private val authApi: AuthApi,
-                                               private val postMapper: DriverPostMapper) :
+class DriverPostRemoteImpl @Inject constructor(
+    private val authApi: AuthApi,
+    private val postMapper: DriverPostMapper,
+    private val offerMapper: OfferMapper,
+) :
     DriverPostRemote {
 
     override suspend fun createDriverPost(post: DriverPostEntity): ResultWrapper<DriverPostEntity?> {
@@ -124,6 +129,28 @@ class DriverPostRemoteImpl @Inject constructor(private val authApi: AuthApi,
             }
         }
 
+    }
+
+    override suspend fun getPassengerOffers(postId: Long): ResultWrapper<List<OfferEntity>> {
+        return try {
+            val response = authApi.getOffersForPost(postId)
+            if (response.code == 1) {
+                ResultWrapper.Success(response.data!!.map { offerMapper.mapToEntity(it) })
+            } else ErrorWrapper.RespError(response.code, response.message ?: "")
+        } catch (e: Exception) {
+            ErrorWrapper.SystemError(e)
+        }
+    }
+
+    override suspend fun getParcelOffers(postId: Long): ResultWrapper<List<OfferEntity>> {
+        return try {
+            val response = authApi.getParcelOffersForPost(postId)
+            if (response.code == 1) {
+                ResultWrapper.Success(response.data!!.map { offerMapper.mapToEntity(it) })
+            } else ErrorWrapper.RespError(response.code, response.message ?: "")
+        } catch (e: Exception) {
+            ErrorWrapper.SystemError(e)
+        }
     }
 
 

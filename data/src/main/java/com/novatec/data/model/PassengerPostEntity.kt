@@ -22,20 +22,20 @@ data class PassengerPostEntity(val id: Long,
                                val profile: ProfileEntity,
                                val remark: String? = null,
                                val postStatus: EPostStatus,
-                               val myLastOffer: UserOfferEntity? = null,
+                               val myLastOffer: MyOfferEntity? = null,
                                val agreedOffer: AgreedOfferEntity? = null,
                                val imageList: List<ImageEntity> = listOf(),
                                val seat: Int,
                                val postType: EPostType = EPostType.PASSENGER_SM)
 
-data class UserOfferEntity(val id: Long,
-                           val postId: Long,
-                           val repliedPostId: Long,
-                           val status: String,
-                           val message: String,
-                           val submitDate: String,
-                           val priceInt: Int,
-                           val seat: Int)
+data class MyOfferEntity(val id: Long,
+                         val postId: Long,
+                         val repliedPostId: Long,
+                         val status: String,
+                         val message: String,
+                         val submitDate: String,
+                         val priceInt: Int,
+                         val seat: Int)
 
 
 data class AgreedOfferEntity(val message: String,

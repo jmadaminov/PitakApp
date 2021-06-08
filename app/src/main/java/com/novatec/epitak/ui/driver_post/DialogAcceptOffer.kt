@@ -8,8 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.novatec.epitak.R
 import com.novatec.epitak.viewobjects.OfferViewObj
-import com.novatec.epitak.viewobjects.OfferViewObj.Companion.offerToDTO
-import com.novatec.remote.model.OfferDTO
 import kotlinx.android.synthetic.main.dialog_accept_offer.*
 
 const val ARG_OFFER = "OFFER"
@@ -39,7 +37,7 @@ class DialogAcceptOffer : DialogFragment() {
         }
 
         btnYes.setOnClickListener {
-            (requireActivity() as DriverPostActivity).acceptOffer(offerToDTO( offer))
+            (requireActivity() as DriverPostActivity).acceptOffer(offer.id)
             dismiss()
         }
 

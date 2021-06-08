@@ -24,21 +24,21 @@ data class PassengerPostModel(@SerializedName("id") val id: Long,
                               @SerializedName("remark") val remark: String? = null,
                               @SerializedName("postStatus") val postStatus: EPostStatus,
                               @SerializedName("seat") val seat: Int,
-                              @SerializedName("myOffer") val myLastOffer: UserOfferDTO? = null,
+                              @SerializedName("myOffer") val myLastOffer: MyOfferDTO? = null,
                               @SerializedName("offer") val agreedOffer: AgreedOfferDTO? = null,
-                              @SerializedName("imageList") val imageList: List<Image> = listOf(),
+                              @SerializedName("imageList") val imageList: List<ImageDTO> = listOf(),
                               @SerializedName("postType") val postType: EPostType = EPostType.PASSENGER_SM) {
 }
 
 
-data class UserOfferDTO(@SerializedName("id") val id: Long,
-                        @SerializedName("postId") val postId: Long,
-                        @SerializedName("repliedPostId") val repliedPostId: Long,
-                        @SerializedName("status") val status: String,
-                        @SerializedName("message") val message: String,
-                        @SerializedName("submitDate") val submitDate: String,
-                        @SerializedName("priceInt") val priceInt: Int,
-                        @SerializedName("seat") val seat: Int)
+data class MyOfferDTO(@SerializedName("id") val id: Long,
+                      @SerializedName("postId") val postId: Long,
+                      @SerializedName("repliedPostId") val repliedPostId: Long,
+                      @SerializedName("status") val status: String,
+                      @SerializedName("message") val message: String,
+                      @SerializedName("submitDate") val submitDate: String,
+                      @SerializedName("priceInt") val priceInt: Int,
+                      @SerializedName("seat") val seat: Int)
 
 
 data class AgreedOfferDTO(@SerializedName("message") val message: String,

@@ -3,9 +3,9 @@ package com.novatec.epitak.viewobjects
 import android.os.Parcelable
 import com.novatec.core.EOfferStatus
 import com.novatec.core.EPostType
-import com.novatec.remote.model.Image
-import com.novatec.remote.model.OfferDTO
-import com.novatec.remote.model.ProfileDTO
+import com.novatec.domain.domainmodel.Image
+import com.novatec.domain.domainmodel.Offer
+import com.novatec.domain.domainmodel.Profile
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
@@ -15,48 +15,45 @@ data class OfferViewObj(val id: Long,
                         val profileId: Long,
                         val profileViewObj: ProfileViewObj,
                         val status: EOfferStatus,
-                        val visible: Boolean,
                         val submitDate: String,
-                        val message: String?=null) : Parcelable {
+                        val message: String? = null) : Parcelable {
     companion object {
 
-        fun offerToViewObj(offerDTO: OfferDTO): OfferViewObj {
+        fun offerToViewObj(offerDTO: Offer): OfferViewObj {
             val profileViewObj =
-                ProfileViewObj(offerDTO.profile.phoneNum,
-                               offerDTO.profile.name,
-                               offerDTO.profile.surname,
-                               offerDTO.profile.id,
-                               ImageViewObj(offerDTO.profile.image?.id,
-                                            offerDTO.profile.image?.link))
-            return OfferViewObj(offerDTO.id,
-                                offerDTO.postId,
-                                offerDTO.offerType,
-                                offerDTO.profileId,
+                ProfileViewObj(offerDTO.profile!!.phoneNum,
+                               offerDTO.profile!!.name,
+                               offerDTO.profile!!.surname,
+                               offerDTO.profile!!.id,
+                               ImageViewObj(offerDTO.profile!!.image?.id,
+                                            offerDTO.profile!!.image?.link))
+            return OfferViewObj(offerDTO.id!!,
+                                offerDTO.postId!!,
+                                offerDTO.offerType!!,
+                                offerDTO.profileId!!,
                                 profileViewObj,
-                                offerDTO.status,
-                                offerDTO.visible,
-                                offerDTO.submitDate,
-                                offerDTO.message)
+                                offerDTO.status!!,
+                                offerDTO.submitDate!!,
+                                offerDTO.message!!)
         }
 
-        fun offerToDTO(offerViewObj: OfferViewObj): OfferDTO {
+        fun offerToDTO(offerViewObj: OfferViewObj): Offer {
             val profileDto =
-                ProfileDTO(offerViewObj.profileViewObj.phoneNum,
-                               offerViewObj.profileViewObj.name,
-                               offerViewObj.profileViewObj.surname,
-                               offerViewObj.profileViewObj.id,
-                               Image(offerViewObj.profileViewObj.image?.id,
-                                            offerViewObj.profileViewObj.image?.link))
+                Profile(offerViewObj.profileViewObj.phoneNum,
+                        offerViewObj.profileViewObj.name,
+                        offerViewObj.profileViewObj.surname,
+                        offerViewObj.profileViewObj.id,
+                        Image(offerViewObj.profileViewObj.image?.id,
+                              offerViewObj.profileViewObj.image?.link))
 
-            return OfferDTO(offerViewObj.id,
-                            offerViewObj.postId,
-                            offerViewObj.offerType,
-                            offerViewObj.profileId,
-                            profileDto,
-                            offerViewObj.status,
-                            offerViewObj.visible,
-                            offerViewObj.submitDate,
-                            offerViewObj.message)
+            return Offer(offerViewObj.id,
+                         offerViewObj.postId,
+                         offerViewObj.offerType,
+                         offerViewObj.profileId,
+                         profileDto,
+                         offerViewObj.status,
+                         offerViewObj.submitDate,
+                         offerViewObj.message)
         }
     }
 }

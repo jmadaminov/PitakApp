@@ -3,7 +3,7 @@ package com.novatec.data.repository
 import com.novatec.core.ResponseWrapper
 import com.novatec.core.ResultWrapper
 import com.novatec.data.model.DriverPostEntity
-import com.novatec.domain.domainmodel.DriverPost
+import com.novatec.data.model.OfferEntity
 
 
 interface DriverPostDataStore {
@@ -18,5 +18,9 @@ interface DriverPostDataStore {
     suspend fun acceptOffer(id: Long): ResponseWrapper<String?>
     suspend fun rejectOffer(id: Long): ResponseWrapper<String?>
     suspend fun cancelMyOffer(id: Long): ResponseWrapper<String?>
-    suspend fun removePassengerFromPost(postId: Long, passengerId: Long): ResponseWrapper<DriverPostEntity?>
+    suspend fun removePassengerFromPost(postId: Long,
+                                        passengerId: Long): ResponseWrapper<DriverPostEntity?>
+
+    suspend fun getPassengerOffers(postId: Long): ResultWrapper<List<OfferEntity>>
+    suspend fun getParcelOffers(postId: Long): ResultWrapper<List<OfferEntity>>
 }

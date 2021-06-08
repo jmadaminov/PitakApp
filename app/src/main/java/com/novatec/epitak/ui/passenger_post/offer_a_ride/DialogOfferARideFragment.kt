@@ -16,9 +16,9 @@ import com.novatec.core.ResultWrapper
 import com.novatec.domain.domainmodel.DriverPost
 import com.novatec.epitak.R
 import com.novatec.epitak.ui.passenger_post.PassengerPostActivity
-import com.novatec.epitak.ui.viewgroups.ActivePostItem
+import com.novatec.epitak.ui.viewgroups.ItemActivePost
 import com.novatec.epitak.viewobjects.PassengerPostViewObj
-import com.novatec.epitak.viewobjects.UserOfferViewObj
+import com.novatec.epitak.viewobjects.MyOfferViewObj
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import dagger.hilt.android.AndroidEntryPoint
@@ -62,7 +62,7 @@ class DialogOfferARideFragment : DialogFragment() {
 
     }
 
-    private fun showOfferSent(myLastOffer: UserOfferViewObj) {
+    private fun showOfferSent(myLastOffer: MyOfferViewObj) {
         viewModel.offeringPostId.value = myLastOffer.repliedPostId
         rvContainer.isVisible = false
         lblSelectPost.isVisible = false
@@ -148,7 +148,7 @@ class DialogOfferARideFragment : DialogFragment() {
 
 
         orders.forEach { post ->
-            adapter.add(ActivePostItem(post) {
+            adapter.add(ItemActivePost(post) {
                 lblSelectPost.visibility = View.GONE
                 tvSelectedPost.visibility = View.VISIBLE
                 ivClearSelected.visibility = View.VISIBLE

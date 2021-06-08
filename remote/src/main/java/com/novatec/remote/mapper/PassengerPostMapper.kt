@@ -32,7 +32,7 @@ open class PassengerPostMapper :
                                  type.to.name)
 
         val profileImage = type.profile.image?.let {
-            Image(it.id, it.link)
+            ImageDTO(it.id, it.link)
         }
 
         val profile = ProfileDTO(type.profile.phoneNum,
@@ -42,14 +42,14 @@ open class PassengerPostMapper :
                                  profileImage)
 
 
-        val myLastOffer = if (type.myLastOffer != null) UserOfferDTO(type.myLastOffer!!.id,
-                                                                     type.myLastOffer!!.id,
-                                                                     type.myLastOffer!!.repliedPostId,
-                                                                     type.myLastOffer!!.status,
-                                                                     type.myLastOffer!!.message,
-                                                                     type.myLastOffer!!.submitDate,
-                                                                     type.myLastOffer!!.priceInt,
-                                                                     type.myLastOffer!!.seat) else null
+        val myLastOffer = if (type.myLastOffer != null) MyOfferDTO(type.myLastOffer!!.id,
+                                                                   type.myLastOffer!!.id,
+                                                                   type.myLastOffer!!.repliedPostId,
+                                                                   type.myLastOffer!!.status,
+                                                                   type.myLastOffer!!.message,
+                                                                   type.myLastOffer!!.submitDate,
+                                                                   type.myLastOffer!!.priceInt,
+                                                                   type.myLastOffer!!.seat) else null
         var agreedOffer: AgreedOfferDTO? = null
         type.agreedOffer?.let {
             agreedOffer = AgreedOfferDTO(it.message, it.priceInt, it.seat)
@@ -57,7 +57,7 @@ open class PassengerPostMapper :
 
 
         var imageList = type.imageList.map {
-            Image(it.id, it.link)
+            ImageDTO(it.id, it.link)
         }
 
         return PassengerPostModel(type.id,
@@ -113,14 +113,14 @@ open class PassengerPostMapper :
                                     profileImage)
 
 
-        val myLastOffer = if (type.myLastOffer != null) UserOfferEntity(type.myLastOffer.id,
-                                                                        type.myLastOffer.id,
-                                                                        type.myLastOffer.repliedPostId,
-                                                                        type.myLastOffer.status,
-                                                                        type.myLastOffer.message,
-                                                                        type.myLastOffer.submitDate,
-                                                                        type.myLastOffer.priceInt,
-                                                                        type.myLastOffer.seat) else null
+        val myLastOffer = if (type.myLastOffer != null) MyOfferEntity(type.myLastOffer.id,
+                                                                      type.myLastOffer.id,
+                                                                      type.myLastOffer.repliedPostId,
+                                                                      type.myLastOffer.status,
+                                                                      type.myLastOffer.message,
+                                                                      type.myLastOffer.submitDate,
+                                                                      type.myLastOffer.priceInt,
+                                                                      type.myLastOffer.seat) else null
 
         var agreedOffer: AgreedOfferEntity? = null
         type.agreedOffer?.let {

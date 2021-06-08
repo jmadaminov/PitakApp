@@ -2,10 +2,8 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="300dp"
     android:layout_height="wrap_content"
-    android:layout_marginStart="10dp"
-    android:layout_marginEnd="10dp"
     app:cardCornerRadius="10dp"
     app:cardUseCompatPadding="true"
     app:contentPadding="10dp">
@@ -42,11 +40,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
             android:gravity="start"
             app:layout_constraintBottom_toTopOf="@id/tvOfferingPrice"
             app:layout_constraintEnd_toStartOf="@id/tvSeats"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toEndOf="@id/ivAvatar"
+            app:layout_constraintTop_toBottomOf="@id/tvName"
             tools:text="Description text that is sent from offer creator..." />
 
 
@@ -73,7 +73,7 @@
             android:id="@+id/tvOfferingPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="5dp"
             android:drawablePadding="10dp"
             android:gravity="center"
             android:padding="7dp"
@@ -83,7 +83,7 @@
             app:layout_constraintBottom_toTopOf="@id/llActions"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvSeats"
+            app:layout_constraintTop_toBottomOf="@id/tvMessage"
             tools:text="150,000 sum"
             tools:visibility="visible" />
 
@@ -103,7 +103,6 @@
                 android:layout_marginEnd="7dp"
                 android:backgroundTint="@color/error_red_darker"
                 android:clickable="true"
-                android:drawableEnd="@drawable/baseline_delete_outline_black_24dp"
                 android:focusable="true"
                 android:foreground="?android:selectableItemBackground"
                 android:text="@string/cancel"
@@ -118,7 +117,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="7dp"
                 android:clickable="true"
-                android:drawableEnd="@drawable/baseline_done_outline_black_24dp"
                 android:focusable="true"
                 android:foreground="?android:selectableItemBackground"
                 android:text="@string/accept"

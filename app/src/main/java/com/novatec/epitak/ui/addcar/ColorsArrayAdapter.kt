@@ -13,8 +13,7 @@ import kotlinx.android.synthetic.main.item_car_color.view.*
 
 
 class ColorsArrayAdapter(val context: Context,
-                         val colors: List<CarColorBody>/*,
-                         val clickListener: MyItemClickListener*/) : BaseAdapter() {
+                         val colors: List<CarColorBody>) : BaseAdapter() {
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view: View
@@ -23,9 +22,6 @@ class ColorsArrayAdapter(val context: Context,
             view.textColor.text = colors[position].name
             view.imgColor.backgroundTintList =
                 ColorStateList.valueOf(Color.parseColor(colors[position].hex))
-            /*   view.itemParentView.setOnClickListener {
-                   clickListener.onClick(position)
-               }*/
         } else {
             view = convertView
         }

@@ -162,5 +162,7 @@
     <string name="only_package">Only parcel</string>
     <string name="minimal_price">Minimal price</string>
     <string name="accept">Qabul qilish</string>
+    <string name="parcel_offers">Parcel offers</string>
+    <string name="you_have_no_parcel_offers_yet_come_back_later">No parcel offers yet...</string>
 
 </resources>

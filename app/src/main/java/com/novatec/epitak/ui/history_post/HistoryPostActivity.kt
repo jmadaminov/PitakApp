@@ -10,7 +10,7 @@ import com.novatec.domain.domainmodel.DriverPost
 import com.novatec.epitak.R
 import com.novatec.epitak.ui.BaseActivity
 import com.novatec.epitak.ui.driver_post.EXTRA_POST_ID
-import com.novatec.epitak.ui.viewgroups.PassengerItem
+import com.novatec.epitak.ui.viewgroups.ItemPassenger
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import kotlinx.android.synthetic.main.activity_driver_post.*
@@ -123,7 +123,7 @@ class HistoryPostActivity : BaseActivity() {
         }
 
         post.passengerList?.forEach {
-            passengersAdapter.add(PassengerItem(it,  true) {
+            passengersAdapter.add(ItemPassenger(it, true) {
 
             })
         }

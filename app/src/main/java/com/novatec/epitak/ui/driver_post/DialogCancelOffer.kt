@@ -36,7 +36,7 @@ class DialogCancelOffer : DialogFragment() {
         }
 
         btnYes.setOnClickListener {
-            (requireActivity() as DriverPostActivity).cancelOffer(OfferViewObj.offerToDTO(offer))
+            (requireActivity() as DriverPostActivity).cancelOffer(offer.id)
             dismiss()
         }
 

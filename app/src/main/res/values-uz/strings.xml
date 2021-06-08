@@ -143,7 +143,7 @@
     <string name="attached_post_id">Biriktirilgan sayohat ID</string>
     <string name="price">Narx</string>
     <string name="update_offer">Taklifni yangilash</string>
-    <string name="you_have_no_offers_yet_come_back_later">Sizda hali takliflar yo\'q, iltimos keyinroq qayta kiring!</string>
+    <string name="you_have_no_offers_yet_come_back_later">Yo\'lovchi takliflari mavjud emas, keyinroq qayta tekshirib ko\'ring...</string>
     <string name="close">Yopmoq</string>
     <string name="passengers">Yo\'lovchilar</string>
     <string name="price_for_one">Bir kishiga narx</string>
@@ -163,5 +163,7 @@
     <string name="only_package">Faqat pochta</string>
     <string name="minimal_price">Minimal narxi</string>
     <string name="accept">Qabul qilish</string>
+    <string name="parcel_offers">Po\'chta takliflar</string>
+    <string name="you_have_no_parcel_offers_yet_come_back_later">Po\'chtaga takliflar mavjud emas...</string>
 
 </resources>

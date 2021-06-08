@@ -13,12 +13,9 @@ import com.novatec.epitak.util.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import splitties.experimental.ExperimentalSplittiesApi
-import java.io.File
 import javax.inject.Inject
 
 /**
@@ -36,14 +33,6 @@ class AddCarViewModel @Inject constructor(private val uploadPhoto: UploadPhoto,
     val carAvatarResponse = SingleLiveEvent<ResultWrapper<PhotoBody>>()
     val carImgResponse = SingleLiveEvent<ResultWrapper<PhotoBody>>()
 
-//    fun getCarSaveReponse(): SingleLiveEvent<ResultWrapper<String>> = carSaveReponse
-//    fun getColorsAndModels(): SingleLiveEvent<ResultWrapper<ColorsAndModels>> = colorsAndModels
-//    fun getCarAvatarResponse(): SingleLiveEvent<ResultWrapper<PhotoBody>> = carAvatarResponse
-//    fun getCarImgResponse(): SingleLiveEvent<ResultWrapper<PhotoBody>> = carImgResponse
-
-
-    @ExperimentalSplittiesApi
-    @InternalCoroutinesApi
     fun getCarColorsAndModels() {
         viewModelScope.launch(IO) {
             withContext(Main) {
@@ -102,10 +91,4 @@ class AddCarViewModel @Inject constructor(private val uploadPhoto: UploadPhoto,
         }
     }
 
-
-//    @ExperimentalCoroutinesApi
-//    override fun onCleared() {
-//        super.onCleared()
-//        (appCtx as App).releaseAddCarComponent()
-//    }
 }

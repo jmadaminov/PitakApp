@@ -103,9 +103,16 @@ interface AuthApi {
 
     @Headers("Content-Type:application/json", "Accept: application/json")
     @GET("offer/driver/post/{id}")
-    suspend fun getOffersForPost(@Path(value = "id", encoded = true) id: Long,
+    suspend fun getOffersForPost(@Path(value = "id", encoded = true) id: Long/*,
                                  @Query("page") page: Int = 0,
-                                 @Query("size") size: Int = 10
+                                 @Query("size") size: Int = 10*/
+    ): RespFormatter<List<OfferDTO>>
+
+    @Headers("Content-Type:application/json", "Accept: application/json")
+    @GET("offer/driver/post/{id}/parcel")
+    suspend fun getParcelOffersForPost(@Path(value = "id", encoded = true) id: Long/*,
+                                 @Query("page") page: Int = 0,
+                                 @Query("size") size: Int = 10*/
     ): RespFormatter<List<OfferDTO>>
 
 

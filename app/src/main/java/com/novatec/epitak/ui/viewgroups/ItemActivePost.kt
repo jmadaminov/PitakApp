@@ -18,7 +18,7 @@ import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 
 
-class ActivePostItem(var post: DriverPost, val onClick: () -> Unit) : Item() {
+class ItemActivePost(var post: DriverPost, val onClick: () -> Unit) : Item() {
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         viewHolder.itemView.apply {

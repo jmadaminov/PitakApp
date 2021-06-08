@@ -301,7 +301,9 @@
     <string name="parcel">Посылка</string>
     <string name="only_package">Только посылка</string>
     <string name="minimal_price">Минимальная цена</string>
-    <string name="accept">Qabul qilish</string>
+    <string name="accept">Принимать</string>
+    <string name="parcel_offers">Предложения по посылкам</string>
+    <string name="you_have_no_parcel_offers_yet_come_back_later">Предложений посылок пока нет...</string>
 
 
 </resources>

@@ -40,4 +40,9 @@ open class DriverPostRemoteDataStore @Inject constructor(private val driverPostR
                                                  passengerId: Long) =
         driverPostRemote.removePassengerFromPost(postId, passengerId)
 
+    override suspend fun getPassengerOffers(postId: Long) =
+        driverPostRemote.getPassengerOffers(postId)
+
+    override suspend fun getParcelOffers(postId: Long) = driverPostRemote.getParcelOffers(postId)
+
 }

@@ -43,7 +43,6 @@ import com.xwray.groupie.Item
 import com.xwray.groupie.OnItemClickListener
 import kotlinx.android.synthetic.main.activity_add_car.*
 import kotlinx.android.synthetic.main.activity_auth.*
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.InternalCoroutinesApi
 import splitties.experimental.ExperimentalSplittiesApi
 import splitties.preferences.edit
@@ -54,17 +53,13 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
     BSImagePicker.ImageLoaderDelegate,
     OnItemClickListener {
 
-
-    private var carModelsAdapter: ModelsArrayAdapter? = null
-    private var carColorsAdapter: ColorsArrayAdapter? = null
+    private var modelsAdr: ModelsArrayAdapter? = null
+    private var colorsAdr: ColorsArrayAdapter? = null
     private lateinit var car: CarViewObj
     val adapter = GroupAdapter<GroupieViewHolder>()
 
     private val viewmodel: AddCarViewModel by viewModels()
 
-    @InternalCoroutinesApi
-    @ExperimentalCoroutinesApi
-    @ExperimentalSplittiesApi
     override fun onCreate(savedInstanceState: Bundle?) {
         car = if (intent.extras == null) CarViewObj(fuelType = Constants.FUEL_TYPE_PETROL)
         else intent.getParcelableExtra(Constants.TXT_CAR)!!
@@ -87,8 +82,6 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
 
     }
 
-    @InternalCoroutinesApi
-    @ExperimentalSplittiesApi
     private fun setupListeners() {
         carImage.setOnClickListener {
             val singleSelectionPicker: BSImagePicker =
@@ -125,7 +118,7 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
                                         view: View?,
                                         position: Int,
                                         id: Long) {
-                car.carModel = IdNameViewObj(carModelsAdapter!!.models[position].id)
+                car.carModel = IdNameViewObj(modelsAdr!!.models[position].id)
                 updateSaveButtonState()
             }
         }
@@ -137,7 +130,7 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
                                         view: View?,
                                         position: Int,
                                         id: Long) {
-                car.carColor = CarColorViewObj(carColorsAdapter!!.colors[position].id)
+                car.carColor = CarColorViewObj(colorsAdr!!.colors[position].id)
                 updateSaveButtonState()
             }
         }
@@ -165,7 +158,7 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
             when (response) {
                 is ErrorWrapper.RespError -> {
                     saveCar.revertAnimation()
-                    Snackbar.make(parentLayout, response.message.toString(), Snackbar.LENGTH_SHORT)
+                    Snackbar.make(parentLayout, response.message, Snackbar.LENGTH_SHORT)
                         .show()
                 }
                 is ErrorWrapper.SystemError -> {
@@ -281,10 +274,10 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
             car.carModel = IdNameViewObj(value.models[0].id)
         }
 
-        carColorsAdapter = ColorsArrayAdapter(this, value.colors)
-        carModelsAdapter = ModelsArrayAdapter(this, value.models)
-        carModelSpinner.adapter = carModelsAdapter
-        carColorSpinner.adapter = carColorsAdapter
+        colorsAdr = ColorsArrayAdapter(this, value.colors)
+        modelsAdr = ModelsArrayAdapter(this, value.models)
+        carModelSpinner.adapter = modelsAdr
+        carColorSpinner.adapter = colorsAdr
         setupCarValues(value)
     }
 

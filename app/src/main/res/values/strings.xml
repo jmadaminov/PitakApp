@@ -123,7 +123,7 @@
     <string name="your_passengers">Your passengers</string>
     <string name="offers">Offers</string>
     <string name="settings">Settings</string>
-    <string name="cancel">Cancel</string>
+    <string name="cancel">Bekor qilish</string>
     <string name="ok">Ok</string>
     <string name="please_add_your_car_first">Please describe your car first.</string>
     <string name="start">Start</string>
@@ -162,5 +162,7 @@
     <string name="only_package">Faqat pochta</string>
     <string name="minimal_price">Minimal xizmat narxi</string>
     <string name="accept">Qabul qilish</string>
+    <string name="parcel_offers">Po\'chta takliflar</string>
+    <string name="you_have_no_parcel_offers_yet_come_back_later">Po\'chtaga takliflar mavjud emas...</string>
 
 </resources>

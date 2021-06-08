@@ -25,7 +25,7 @@ data class PassengerPostViewObj(val id: Long,
                                 val remark: String? = null,
                                 val postStatus: EPostStatus,
                                 val seat: Int,
-                                val myLastOffer: UserOfferViewObj? = null,
+                                val myLastOffer: MyOfferViewObj? = null,
                                 val offer: AgreedOfferViewObj? = null,
                                 val imageList: List<ImageViewObj> = listOf(),
                                 val postType: EPostType) : Parcelable {
@@ -46,14 +46,14 @@ data class PassengerPostViewObj(val id: Long,
 
 
             val myLastOffer =
-                if (model.myLastOffer != null) UserOfferViewObj(model.myLastOffer!!.id,
-                                                                model.myLastOffer!!.id,
-                                                                model.myLastOffer!!.repliedPostId,
-                                                                model.myLastOffer!!.status,
-                                                                model.myLastOffer!!.message,
-                                                                model.myLastOffer!!.submitDate,
-                                                                model.myLastOffer!!.priceInt,
-                                                                model.myLastOffer!!.seat) else null
+                if (model.myLastOffer != null) MyOfferViewObj(model.myLastOffer!!.id,
+                                                              model.myLastOffer!!.id,
+                                                              model.myLastOffer!!.repliedPostId,
+                                                              model.myLastOffer!!.status,
+                                                              model.myLastOffer!!.message,
+                                                              model.myLastOffer!!.submitDate,
+                                                              model.myLastOffer!!.priceInt,
+                                                              model.myLastOffer!!.seat) else null
             var agreedOffer: AgreedOfferViewObj? = null
             model.agreedOffer?.let {
                 agreedOffer = AgreedOfferViewObj(it.message, it.priceInt, it.seat)
@@ -111,14 +111,14 @@ data class PassengerPostViewObj(val id: Long,
 
 
             val myLastOffer =
-                if (model.myLastOffer != null) UserOfferViewObj(model.myLastOffer!!.id,
-                                                                model.myLastOffer!!.id,
-                                                                model.myLastOffer!!.repliedPostId,
-                                                                model.myLastOffer!!.status,
-                                                                model.myLastOffer!!.message,
-                                                                model.myLastOffer!!.submitDate,
-                                                                model.myLastOffer!!.priceInt,
-                                                                model.myLastOffer!!.seat) else null
+                if (model.myLastOffer != null) MyOfferViewObj(model.myLastOffer!!.id,
+                                                              model.myLastOffer!!.id,
+                                                              model.myLastOffer!!.repliedPostId,
+                                                              model.myLastOffer!!.status,
+                                                              model.myLastOffer!!.message,
+                                                              model.myLastOffer!!.submitDate,
+                                                              model.myLastOffer!!.priceInt,
+                                                              model.myLastOffer!!.seat) else null
             var agreedOffer: AgreedOfferViewObj? = null
             model.agreedOffer?.let {
                 agreedOffer = AgreedOfferViewObj(it.message, it.priceInt, it.seat)
@@ -167,14 +167,14 @@ data class PassengerPostViewObj(val id: Long,
 }
 
 @Parcelize
-data class UserOfferViewObj(val id: Long,
-                            val postId: Long,
-                            val repliedPostId: Long,
-                            val status: String,
-                            val message: String,
-                            val submitDate: String,
-                            val priceInt: Int,
-                            val seat: Int) : Parcelable
+data class MyOfferViewObj(val id: Long,
+                          val postId: Long,
+                          val repliedPostId: Long,
+                          val status: String,
+                          val message: String,
+                          val submitDate: String,
+                          val priceInt: Int,
+                          val seat: Int) : Parcelable
 
 @Parcelize
 data class AgreedOfferViewObj(val message: String,
