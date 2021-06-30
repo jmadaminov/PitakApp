@@ -14,6 +14,8 @@ import com.novatec.core.EPostType
 import com.novatec.epitak.R
 import com.novatec.epitak.ui.BaseActivity
 import com.novatec.epitak.ui.dialogs.DialogAddCarFirst
+import com.novatec.epitak.ui.main.dialogs.ARG_IMG
+import com.novatec.epitak.ui.main.dialogs.ImagePreviewDialog
 import com.novatec.epitak.ui.passenger_post.offer_a_ride.ARG_PASSENGER_POST
 import com.novatec.epitak.ui.passenger_post.offer_a_ride.DialogOfferARideFragment
 import com.novatec.epitak.util.AppPrefs
@@ -93,6 +95,11 @@ class PassengerPostActivity : BaseActivity() {
             post.imageList.forEach {
                 it.link?.let { imageUrl ->
                     parcelImage.loadRounded(imageUrl)
+                    imageContainer.setOnClickListener {
+                        ImagePreviewDialog().apply {
+                            arguments = Bundle().apply { putString(ARG_IMG, imageUrl) }
+                        }.show(supportFragmentManager, "")
+                    }
                 }
             }
         } else {

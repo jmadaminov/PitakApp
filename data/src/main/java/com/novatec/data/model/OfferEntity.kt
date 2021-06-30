@@ -11,5 +11,6 @@ data class OfferEntity(val id: Long? = null,
                        val status: EOfferStatus? = null,
                        val submitDate: String? = null,
                        val message: String? = null,
+                       val image: ImageEntity? = null,
                        val price: Int? = null,
                        val seat: Int? = null)

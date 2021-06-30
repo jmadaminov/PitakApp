@@ -127,9 +127,9 @@ open class PassengerPostMapper :
             agreedOffer = AgreedOfferEntity(it.message, it.priceInt, it.seat)
         }
 
-        val imageList = type.imageList.map {
+        val imageList = if (!type.imageList.isNullOrEmpty()) type.imageList.map {
             ImageEntity(it.id, it.link)
-        }
+        } else listOf()
         return PassengerPostEntity(type.id,
                                    placeFrom,
                                    placeTo,

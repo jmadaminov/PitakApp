@@ -165,5 +165,7 @@
     <string name="accept">Qabul qilish</string>
     <string name="parcel_offers">Po\'chta takliflar</string>
     <string name="you_have_no_parcel_offers_yet_come_back_later">Po\'chtaga takliflar mavjud emas...</string>
+    <string name="no_parcels_yet">Sizda hali qabul qilingan posilkalar yo\'q.</string>
+    <string name="your_parcels">Sizning posilkalaringiz</string>
 
 </resources>

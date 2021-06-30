@@ -26,7 +26,7 @@ data class PassengerPostModel(@SerializedName("id") val id: Long,
                               @SerializedName("seat") val seat: Int,
                               @SerializedName("myOffer") val myLastOffer: MyOfferDTO? = null,
                               @SerializedName("offer") val agreedOffer: AgreedOfferDTO? = null,
-                              @SerializedName("imageList") val imageList: List<ImageDTO> = listOf(),
+                              @SerializedName("imageList") var imageList: List<ImageDTO> = listOf(),
                               @SerializedName("postType") val postType: EPostType = EPostType.PASSENGER_SM) {
 }
 

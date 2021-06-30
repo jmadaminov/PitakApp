@@ -10,6 +10,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/>
 
     <application
         android:name=".App"
@@ -70,7 +71,7 @@
             android:label="@string/title_add_post"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="adjustNothing" />
+            android:windowSoftInputMode="adjustResize" />
 
         <!--        <activity android:name=".SmsConfirmationActivity" />-->
 
@@ -132,6 +133,9 @@
         <!--                <action android:name="com.google.android.gms.auth.api.phone.SMS_RETRIEVED" />-->
         <!--            </intent-filter>-->
         <!--        </receiver>-->
+
+        <meta-data android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
 
     </application>
 

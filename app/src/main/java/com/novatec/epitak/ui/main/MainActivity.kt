@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.Color.argb
 import android.os.Bundle
 import android.util.DisplayMetrics
+import android.util.Log
 import android.view.View
 import android.view.animation.DecelerateInterpolator
 import android.widget.CheckedTextView
@@ -13,6 +14,7 @@ import androidx.core.view.doOnPreDraw
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.FragmentNavigator
+import com.novatec.epitak.App
 import com.novatec.epitak.R
 import com.novatec.epitak.ui.BaseActivity
 import com.novatec.epitak.ui.addpost.AddPostActivity
@@ -27,6 +29,8 @@ import com.novatec.epitak.ui.main.profile.ProfileFragment
 import com.novatec.epitak.ui.main.searchtrip.SearchTripFragment
 import com.novatec.epitak.util.AppPrefs
 import com.novatec.epitak.util.ContextUtils.setLocale
+import com.onesignal.OSSubscriptionObserver
+import com.onesignal.OSSubscriptionStateChanges
 import com.takusemba.spotlight.OnSpotlightListener
 import com.takusemba.spotlight.OnTargetListener
 import com.takusemba.spotlight.Spotlight
@@ -39,7 +43,7 @@ import splitties.experimental.ExperimentalSplittiesApi
 import splitties.preferences.edit
 
 
-class MainActivity : BaseActivity() {
+class MainActivity : BaseActivity()/*, OSSubscriptionObserver*/ {
 
     companion object {
         private val REQ_CODE_ADD_POST = 98
@@ -268,6 +272,17 @@ class MainActivity : BaseActivity() {
     fun hideTabLayout() {
         tab_layout?.visibility = View.GONE
     }
+
+//    override fun onOSSubscriptionChanged(stateChanges: OSSubscriptionStateChanges?) {
+//        if (!stateChanges!!.from.isSubscribed &&
+//            stateChanges.to.isSubscribed) {
+//
+//            // get player ID
+//            App.uuid = stateChanges.to.userId
+//        }
+//
+//        Log.i("Debug", "onOSPermissionChanged: $stateChanges")
+//    }
 
 
 }

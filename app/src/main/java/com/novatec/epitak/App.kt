@@ -24,7 +24,7 @@ class App : Application() {
 
 
     companion object {
-        lateinit var uuid: String
+        var uuid: String? = null
         lateinit var INSTANCE: App
         lateinit var versionName: String
 
@@ -78,11 +78,23 @@ class App : Application() {
 //            .setNotificationOpenedHandler(NotificationOpenHandler())
 //            .init()
 
+//        uuid = OneSignal.getDeviceState()!!.userId
 
-        OneSignal.getDeviceState()?.let {
-            Log.i("USERRR IDD ONE SIGNAL", "            ${it.userId}")
-            uuid = it.userId ?: ""
+        OneSignal.addSubscriptionObserver { stateChanges ->
+            if (!stateChanges!!.from.isSubscribed &&
+                stateChanges.to.isSubscribed) {
+
+                // get player ID
+                uuid = stateChanges.to.userId
+            }
+
+            Log.i("Debug", "onOSPermissionChanged: $stateChanges")
         }
+
+//        OneSignal.getDeviceState()?.let {
+//            Log.i("USERRR IDD ONE SIGNAL", "            ${it.userId}")
+//            uuid = it.userId ?: ""
+//        }
 
         val info = packageManager.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES)
         versionName = info.versionName

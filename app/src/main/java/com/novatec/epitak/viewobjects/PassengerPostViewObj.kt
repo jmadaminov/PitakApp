@@ -59,9 +59,9 @@ data class PassengerPostViewObj(val id: Long,
                 agreedOffer = AgreedOfferViewObj(it.message, it.priceInt, it.seat)
             }
 
-            val imageList = model.imageList.map {
+            val imageList = if (!model.imageList.isNullOrEmpty()) model.imageList.map {
                 ImageViewObj(it.id, it.link)
-            }
+            } else listOf()
             return PassengerPostViewObj(
                 model.id,
                 PlaceViewObj(model.from.districtId,
@@ -124,9 +124,9 @@ data class PassengerPostViewObj(val id: Long,
                 agreedOffer = AgreedOfferViewObj(it.message, it.priceInt, it.seat)
             }
 
-            val imageList = model.imageList.map {
+            val imageList = if (!model.imageList.isNullOrEmpty()) model.imageList.map {
                 ImageViewObj(it.id, it.link)
-            }
+            } else listOf()
 
             return PassengerPostViewObj(
                 model.id,

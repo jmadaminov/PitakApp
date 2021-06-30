@@ -304,6 +304,8 @@
     <string name="accept">Принимать</string>
     <string name="parcel_offers">Предложения по посылкам</string>
     <string name="you_have_no_parcel_offers_yet_come_back_later">Предложений посылок пока нет...</string>
+    <string name="no_parcels_yet">У вас еще нет принятых посылок.</string>
+    <string name="your_parcels">Ваши принятые посылки</string>
 
 
 </resources>

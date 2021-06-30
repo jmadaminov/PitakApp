@@ -67,7 +67,27 @@ open class DriverPostMapper @Inject constructor() : Mapper<DriverPostEntity, Dri
                                         offerEntity))
         }
 
-        val parcelList = arrayListOf<Parcel>()
+        val parcelList = type.parcelList?.map {
+            val image = Image(it.profile.image?.id, it.profile.image?.link)
+            val profile = Profile(it.profile.phoneNum,
+                                  it.profile.name,
+                                  it.profile.surname,
+                                  it.profile.id,
+                                  image)
+            val parcelImage = Image(it.offer.image?.id, it.offer.image?.link)
+            val offer = Offer(it.offer.id,
+                              it.offer.postId,
+                              it.offer.offerType,
+                              it.offer.profileId,
+                              profile,
+                              it.offer.status,
+                              it.offer.submitDate,
+                              it.offer.message,
+                              parcelImage,
+                              it.offer.price,
+                              null)
+            Parcel(it.id, profile, it.submitDate, offer, it.status)
+        }
         return DriverPost(type.id,
                           placeFrom,
                           placeTo,
@@ -82,12 +102,12 @@ open class DriverPostMapper @Inject constructor() : Mapper<DriverPostEntity, Dri
                           car,
                           type.remark,
                           type.seat,
-                          type.offerCount,
+                          type.passengerOfferCount,
                           type.passengerCount,
                           type.availableSeats,
                           type.postStatus,
                           type.pkg,
-                          type.parcelCount,
+                          type.parcelOfferCount,
                           passengerList,
                           parcelList,
                           type.postType)
@@ -145,8 +165,27 @@ open class DriverPostMapper @Inject constructor() : Mapper<DriverPostEntity, Dri
         }
 
 
-        val parcelList = type.parcelList?.map { ParcelEntity(it.id) }
-
+        val parcelList = type.parcelList?.map {
+            val image = ImageEntity(it.profile.image?.id, it.profile.image?.link)
+            val profile = ProfileEntity(it.profile.phoneNum,
+                                        it.profile.name,
+                                        it.profile.surname,
+                                        it.profile.id,
+                                        image)
+            val parcelImage = ImageEntity(it.offer.image?.id, it.offer.image?.link)
+            val offer = OfferEntity(it.offer.id,
+                                    it.offer.postId,
+                                    it.offer.offerType,
+                                    it.offer.profileId,
+                                    profile,
+                                    it.offer.status,
+                                    it.offer.submitDate,
+                                    it.offer.message,
+                                    parcelImage,
+                                    it.offer.price,
+                                    null)
+            ParcelEntity(it.id, profile, it.submitDate, offer, it.status)
+        }
         return DriverPostEntity(type.id,
                                 placeFrom,
                                 placeTo,
@@ -161,12 +200,12 @@ open class DriverPostMapper @Inject constructor() : Mapper<DriverPostEntity, Dri
                                 car,
                                 type.remark,
                                 type.seat,
-                                type.offerCount,
+                                type.passengerOfferCount,
                                 type.passengerCount,
                                 type.availableSeats,
                                 type.postStatus,
                                 type.pkg,
-                                type.parcelCount,
+                                type.parcelOfferCount,
                                 passengerList,
                                 parcelList,
                                 type.postType)

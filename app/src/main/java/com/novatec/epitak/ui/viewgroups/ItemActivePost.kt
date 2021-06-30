@@ -67,9 +67,9 @@ class ItemActivePost(var post: DriverPost, val onClick: () -> Unit) : Item() {
             price.text =
                 DecimalFormat("#,###").format(post.price) + " " + context.getString(R.string.sum)
 
-            if (post.offerCount != null && post.offerCount!! > 0) {
+            if (post.passengerOfferCount != null && post.passengerOfferCount!! > 0) {
                 tvOffersCount.visibility = View.VISIBLE
-                tvOffersCount.text = post.offerCount.toString()
+                tvOffersCount.text = post.passengerOfferCount.toString()
             } else {
                 tvOffersCount.visibility = View.GONE
             }
@@ -108,8 +108,8 @@ class ItemActivePost(var post: DriverPost, val onClick: () -> Unit) : Item() {
 
 
             ivPkg.isVisible = post.pkg ?: false
-            tvPkgOffersCount.isVisible = post.parcelCount ?: 0 > 0
-            tvPkgOffersCount.text = post.parcelCount.toString()
+            tvPkgOffersCount.isVisible = post.parcelOfferCount ?: 0 > 0
+            tvPkgOffersCount.text = post.parcelOfferCount.toString()
 
             status.text = currentStatusStr
 

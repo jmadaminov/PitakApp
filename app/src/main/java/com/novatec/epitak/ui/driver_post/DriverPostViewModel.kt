@@ -48,12 +48,6 @@ class DriverPostViewModel @Inject constructor(val postRepository: DriverPostRepo
         }
     }
 
-
-//    lateinit var postOffers: LiveData<PagingData<OfferDTO>>
-//    fun getOffersForPost(id: Long) {
-//        postOffers = postOffersRepository.getOffersForPost(id).cachedIn(viewModelScope)
-//    }
-
     val deletePostReponse = MutableLiveData<ResultWrapper<String>>()
     val passengerOffers = MutableLiveData<ResultWrapper<List<Offer>>>()
     val parcelOffers = MutableLiveData<ResultWrapper<List<Offer>>>()

@@ -20,10 +20,9 @@ import com.novatec.epitak.R
 import com.novatec.epitak.ui.BaseActivity
 import com.novatec.epitak.ui.addpost.AddPostActivity
 import com.novatec.epitak.ui.interfaces.IOnPassengerDelete
-import com.novatec.epitak.ui.viewgroups.ErrorTextItem
-import com.novatec.epitak.ui.viewgroups.ItemParcelOffer
-import com.novatec.epitak.ui.viewgroups.ItemPassenger
-import com.novatec.epitak.ui.viewgroups.ItemPassengerOffer
+import com.novatec.epitak.ui.main.dialogs.ARG_IMG
+import com.novatec.epitak.ui.main.dialogs.ImagePreviewDialog
+import com.novatec.epitak.ui.viewgroups.*
 import com.novatec.epitak.util.PostUtils
 import com.novatec.epitak.viewobjects.DriverPostViewObj
 import com.novatec.epitak.viewobjects.OfferViewObj.Companion.offerToViewObj
@@ -48,10 +47,10 @@ class DriverPostActivity : BaseActivity(), IOnPassengerDelete {
     var postId: Long = 0
     private val viewModel: DriverPostViewModel by viewModels()
 
-    //    lateinit var offersAdapter: PostOffersAdapter
     val passengersAdapter = GroupAdapter<GroupieViewHolder>()
     val psngrOfferAdr = GroupAdapter<GroupieViewHolder>()
     val parcelOfferAdr = GroupAdapter<GroupieViewHolder>()
+    val parcelsAdr = GroupAdapter<GroupieViewHolder>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,49 +58,12 @@ class DriverPostActivity : BaseActivity(), IOnPassengerDelete {
         setContentView(R.layout.activity_driver_post)
         postId = intent.getLongExtra(EXTRA_POST_ID, 0)
         setupActionBar()
-//        offersAdapter = PostOffersAdapter(object : IOnOfferActionListener {
-//            override fun onCancelClick(offer: OfferDTO) {
-//                val dialog = DialogCancelOffer()
-//                dialog.arguments =
-//                    Bundle().apply { putParcelable(ARG_OFFER, offerToViewObj(offer)) }
-//                dialog.show(supportFragmentManager, "")
-//            }
-//
-//            override fun onAcceptClick(offer: OfferDTO) {
-//                val dialog = DialogAcceptOffer()
-//                dialog.arguments =
-//                    Bundle().apply { putParcelable(ARG_OFFER, offerToViewObj(offer)) }
-//                dialog.show(supportFragmentManager, "")
-//            }
-//
-//            override fun onPhoneCallClick(offer: OfferDTO) {
-//            }
-//
-//        })
-//
-//        offersAdapter.addLoadStateListener { loadState ->
-//            when (loadState.source.refresh) {
-//                is LoadState.NotLoading -> {
-//                    lblMyOffers.text =
-//                        if (offersAdapter.itemCount < 1) getString(R.string.you_have_no_offers_yet_come_back_later)
-//                        else getString(R.string.offers)
-//                }
-//                LoadState.Loading -> {
-//
-//                }
-//                is LoadState.Error -> {
-//
-//                }
-//            }
-//        }
 
-//        rvOffers.setHasFixedSize(true)
-//        rvOffers.adapter = offersAdapter
         rvPassengers.adapter = passengersAdapter
+        rvParcels.adapter = parcelsAdr
         rvParcelOffers.adapter = parcelOfferAdr
         rvOffers.adapter = psngrOfferAdr
         viewModel.getPostById(postId)
-//        viewModel.getOffersForPost(postId)
 
         attachListeners()
         subscribes()
@@ -272,11 +234,19 @@ class DriverPostActivity : BaseActivity(), IOnPassengerDelete {
                     dialog.arguments =
                         Bundle().apply { putParcelable(ARG_OFFER, offerToViewObj(offer)) }
                     dialog.show(supportFragmentManager, "")
-                }) { offer ->
-                    val dialog = DialogCancelOffer()
-                    dialog.arguments =
-                        Bundle().apply { putParcelable(ARG_OFFER, offerToViewObj(offer)) }
-                    dialog.show(supportFragmentManager, "")
+                }, { offer ->
+                                                       val dialog = DialogCancelOffer()
+                                                       dialog.arguments =
+                                                           Bundle().apply {
+                                                               putParcelable(ARG_OFFER,
+                                                                             offerToViewObj(
+                                                                                 offer))
+                                                           }
+                                                       dialog.show(supportFragmentManager, "")
+                                                   }) { imageUrl ->
+                    ImagePreviewDialog().apply {
+                        arguments = Bundle().apply { putString(ARG_IMG, imageUrl) }
+                    }.show(supportFragmentManager, "")
                 })
             }
         }
@@ -307,6 +277,27 @@ class DriverPostActivity : BaseActivity(), IOnPassengerDelete {
             lblPricePerPassenger.text = getString(R.string.willing_price_for_one)
         }
 
+        when (post.postStatus) {
+            EPostStatus.WAITING_FOR_START -> {
+                rvOffers.isVisible = false
+                lblMyOffers.isVisible = false
+            }
+            EPostStatus.START -> {
+                rvOffers.isVisible = false
+                rvParcelOffers.isVisible = false
+                lblMyOffers.isVisible = false
+                lblParcelOffers.isVisible = false
+                lblMyParcels.isVisible = false
+            }
+            else -> {
+                rvOffers.isVisible = true
+                rvParcelOffers.isVisible = true
+                lblMyOffers.isVisible = true
+                lblParcelOffers.isVisible = true
+            }
+        }
+
+
         edit.isVisible =
             post.postStatus == EPostStatus.CREATED && post.passengerList.isNullOrEmpty()
         done.isVisible = post.postStatus == EPostStatus.START
@@ -314,7 +305,7 @@ class DriverPostActivity : BaseActivity(), IOnPassengerDelete {
             post.postStatus == EPostStatus.CREATED || post.postStatus == EPostStatus.WAITING_FOR_START
 
         btnStart.isVisible =
-            post.postStatus == EPostStatus.WAITING_FOR_START || !post.passengerList.isNullOrEmpty() && post.postStatus == EPostStatus.CREATED
+            post.postStatus == EPostStatus.WAITING_FOR_START || !post.passengerList.isNullOrEmpty() || !post.parcelList.isNullOrEmpty() && post.postStatus == EPostStatus.CREATED
 
 
         cbTakeParcel.isVisible = post.pkg ?: false
@@ -338,7 +329,7 @@ class DriverPostActivity : BaseActivity(), IOnPassengerDelete {
         }
 
         llSeatsContainer.removeAllViews()
-        var availableSeats = post.seat - post.passengerList!!.size
+        var availableSeats = post.availableSeats!!
         for (i in 0 until post.seat) {
             val seat = ImageView(this)
             seat.layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
@@ -374,6 +365,7 @@ class DriverPostActivity : BaseActivity(), IOnPassengerDelete {
         }
 
         passengersAdapter.clear()
+        parcelsAdr.clear()
 
         if (post.passengerList != null && post.passengerList!!.isNotEmpty()) {
             lblMyPassengers.text = getString(R.string.your_passengers)
@@ -381,10 +373,26 @@ class DriverPostActivity : BaseActivity(), IOnPassengerDelete {
             lblMyPassengers.text = getString(R.string.no_passengers_yet)
         }
 
+        if (post.parcelList != null && post.parcelList!!.isNotEmpty()) {
+            lblMyParcels.text = getString(R.string.your_parcels)
+        } else {
+            lblMyParcels.text = getString(R.string.no_parcels_yet)
+        }
+
         post.passengerList?.forEach {
             price.paintFlags = price.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
 
             passengersAdapter.add(ItemPassenger(it) { passenger ->
+                val dialog = DialogDeletePassenger().apply {
+                    val args = Bundle()
+                    args.putLong(ARG_PASSENGER_ID, passenger.profile!!.id.toLong())
+                    arguments = args
+                }
+                dialog.show(supportFragmentManager, "")
+            })
+        }
+        post.parcelList?.forEach {
+            parcelsAdr.add(ItemParcel(it) { passenger ->
                 val dialog = DialogDeletePassenger().apply {
                     val args = Bundle()
                     args.putLong(ARG_PASSENGER_ID, passenger.profile!!.id.toLong())

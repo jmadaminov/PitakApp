@@ -93,6 +93,11 @@ class AddPostActivity : BaseActivity() {
             viewModel.setPrice(text.toString().toInt())
             checkFields()
         }
+        noteInput.doOnTextChanged { text, start, before, count ->
+            if (text.isNullOrBlank()) return@doOnTextChanged
+            viewModel.setPostRemark(text.toString())
+            checkFields()
+        }
 
         priceInput.setOnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {

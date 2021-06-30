@@ -92,7 +92,7 @@ class PhoneConfirmFragment : Fragment(R.layout.fragment_phone_confirm) {
         confirm.setOnClickListener {
             viewModel.confirm(UserCredentials(args.phone.numericOnly(),
                                               edtCode.text.toString(),
-                                              App.uuid))
+                                              App.uuid!!))
         }
         tvRequestCodeAgain.setOnClickListener {
             viewModel.requestCodeAgain(args.phone)

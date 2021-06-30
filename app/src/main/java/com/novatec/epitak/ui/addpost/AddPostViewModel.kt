@@ -110,5 +110,10 @@ class AddPostViewModel @Inject constructor(private val createDriverPost: CreateD
         postToBeAdded.value!!.price = price
     }
 
+    fun setPostRemark(remark: String) {
+        postToBeAdded.value?.remark = remark
+
+    }
+
 
 }

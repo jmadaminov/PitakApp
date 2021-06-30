@@ -287,6 +287,25 @@
                         tools:listitem="@layout/item_passenger" />
 
                     <TextView
+                        android:id="@+id/lblMyParcels"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="15dp"
+                        android:gravity="center"
+                        android:textColor="@color/dark_grey"
+                        android:textStyle="bold"
+                        tools:text="@string/no_parcels_yet" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvParcels"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clipChildren="false"
+                        android:clipToPadding="false"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:listitem="@layout/item_passenger" />
+
+                    <TextView
                         android:id="@+id/lblMyOffers"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

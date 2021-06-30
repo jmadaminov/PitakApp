@@ -67,24 +67,26 @@ open class DriverPostMapper : Mapper<DriverPostEntity, DriverPostModel> {
                                              it.submitDate,
                                              offerEntity))
         }
-        val parcelList = arrayListOf<ParcelModel>()
-        type.parcelList?.forEach {
-
-//            val offerEntity =
-//                ArrangedOfferDTO(it.offer?.message,
-//                                 it.offer?.priceInt,
-//                                 it.offer?.seat,
-//                                 it.offer?.history)
-//
-//            parcelList.add(PassengerModel(it.id,
-//                                             ProfileDTO(it.profile!!.phoneNum,
-//                                                        it.profile!!.name,
-//                                                        it.profile!!.surname,
-//                                                        it.profile!!.id,
-//                                                        Image(it.profile!!.image?.id,
-//                                                              it.profile!!.image?.link)),
-//                                             it.submitDate,
-//                                             offerEntity))
+        val parcelList = type.parcelList?.map {
+            val image = ImageDTO(it.profile.image?.id, it.profile.image?.link)
+            val profile = ProfileDTO(it.profile.phoneNum,
+                                     it.profile.name,
+                                     it.profile.surname,
+                                     it.profile.id,
+                                     image)
+            val parcelImage = ImageDTO(it.offer.image?.id, it.offer.image?.link)
+            val offer = OfferDTO(it.offer.id,
+                                 it.offer.postId,
+                                 it.offer.offerType,
+                                 it.offer.profileId,
+                                 profile,
+                                 it.offer.status,
+                                 it.offer.submitDate,
+                                 it.offer.message,
+                                 parcelImage,
+                                 it.offer.price,
+                                 null)
+            ParcelDTO(it.id, profile, it.submitDate, offer, it.status)
         }
 
         return DriverPostModel(type.id,
@@ -101,12 +103,12 @@ open class DriverPostMapper : Mapper<DriverPostEntity, DriverPostModel> {
                                car,
                                type.remark,
                                type.seat,
-                               type.offerCount,
+                               type.passengerOfferCount,
                                type.passengerCount,
                                type.availableSeats,
                                type.postStatus,
                                type.pkg,
-                               type.parcelCount,
+                               type.parcelOfferCount,
                                passengerList,
                                parcelList,
                                type.postType)
@@ -164,24 +166,26 @@ open class DriverPostMapper : Mapper<DriverPostEntity, DriverPostModel> {
                                               it.submitDate, offer))
         }
 
-        val parcelList = arrayListOf<ParcelEntity>()
-        type.parcelList?.forEach {
-
-//            val offerEntity =
-//                ArrangedOfferDTO(it.offer?.message,
-//                                 it.offer?.priceInt,
-//                                 it.offer?.seat,
-//                                 it.offer?.history)
-//
-//            parcelList.add(PassengerModel(it.id,
-//                                             ProfileDTO(it.profile!!.phoneNum,
-//                                                        it.profile!!.name,
-//                                                        it.profile!!.surname,
-//                                                        it.profile!!.id,
-//                                                        Image(it.profile!!.image?.id,
-//                                                              it.profile!!.image?.link)),
-//                                             it.submitDate,
-//                                             offerEntity))
+        val parcelList = type.parcelList?.map {
+            val image = ImageEntity(it.profile.image?.id, it.profile.image?.link)
+            val profile = ProfileEntity(it.profile.phoneNum,
+                                        it.profile.name,
+                                        it.profile.surname,
+                                        it.profile.id,
+                                        image)
+            val parcelImage = ImageEntity(it.offer.image?.id, it.offer.image?.link)
+            val offer = OfferEntity(it.offer.id,
+                                    it.offer.postId,
+                                    it.offer.offerType,
+                                    it.offer.profileId,
+                                    profile,
+                                    it.offer.status,
+                                    it.offer.submitDate,
+                                    it.offer.message,
+                                    parcelImage,
+                                    it.offer.price,
+                                    null)
+            ParcelEntity(it.id, profile, it.submitDate, offer, it.status)
         }
 
         return DriverPostEntity(type.id,
@@ -198,12 +202,12 @@ open class DriverPostMapper : Mapper<DriverPostEntity, DriverPostModel> {
                                 car,
                                 type.remark,
                                 type.seat,
-                                type.offerCount,
+                                type.passengerOfferCount,
                                 type.passengerCount,
                                 type.availableSeats,
                                 type.postStatus,
                                 type.pkg,
-                                type.parcelCount,
+                                type.parcelOfferCount,
                                 passengerList,
                                 parcelList,
                                 type.postType)

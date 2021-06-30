@@ -12,12 +12,13 @@ import javax.inject.Inject
 open class OfferMapper @Inject constructor() : Mapper<OfferEntity, OfferDTO> {
 
     override fun mapFromEntity(type: OfferEntity): OfferDTO {
-        val image = ImageDTO(type.profile!!.image?.id, type.profile!!.image?.link)
+        val profileImg = ImageDTO(type.profile!!.image?.id, type.profile!!.image?.link)
+        val offerImg = ImageDTO(type.image?.id, type.image?.link)
         val profile = ProfileDTO(type.profile!!.id,
                                  type.profile!!.name,
                                  type.profile!!.surname,
                                  type.profile!!.id,
-                                 image)
+                                 profileImg)
         return OfferDTO(type.id,
                         type.postId,
                         type.offerType,
@@ -26,17 +27,19 @@ open class OfferMapper @Inject constructor() : Mapper<OfferEntity, OfferDTO> {
                         type.status,
                         type.submitDate,
                         type.message,
+                        offerImg,
                         type.price,
                         type.seat
         )
     }
 
     override fun mapToEntity(type: OfferDTO): OfferEntity {
-        val image = ImageEntity(type.profile!!.image?.id, type.profile!!.image?.link)
-        val profile = ProfileEntity(type.profile!!.id,
-                                    type.profile!!.name,
-                                    type.profile!!.surname,
-                                    type.profile!!.id,
+        val image = ImageEntity(type.profile!!.image?.id, type.profile.image?.link)
+        val offerImg = ImageEntity(type.image?.id, type.image?.link)
+        val profile = ProfileEntity(type.profile.id,
+                                    type.profile.name,
+                                    type.profile.surname,
+                                    type.profile.id,
                                     image)
         return OfferEntity(type.id,
                            type.postId,
@@ -46,6 +49,7 @@ open class OfferMapper @Inject constructor() : Mapper<OfferEntity, OfferDTO> {
                            type.status,
                            type.submitDate,
                            type.message,
+                           offerImg,
                            type.price,
                            type.seat
         )

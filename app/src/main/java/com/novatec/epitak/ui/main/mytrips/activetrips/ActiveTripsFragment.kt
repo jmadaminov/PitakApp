@@ -26,7 +26,6 @@ import splitties.fragments.start
 @AndroidEntryPoint
 class ActiveTripsFragment : Fragment(R.layout.fragment_active_trips) {
 
-
     private val adapter = GroupAdapter<GroupieViewHolder>()
     val viewModel: ActiveTripsViewModel by viewModels()
 
@@ -42,7 +41,6 @@ class ActiveTripsFragment : Fragment(R.layout.fragment_active_trips) {
     override fun onResume() {
         super.onResume()
         viewModel.getActivePosts()
-
     }
 
 

@@ -7,11 +7,7 @@ apply plugin: 'androidx.navigation.safeargs.kotlin'
 apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
-apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
 
-//repositories {
-//    maven { url 'https://maven.google.com' }
-//}
 
 android {
     compileSdkVersion rootProject.compileSdkVersion
@@ -23,12 +19,6 @@ android {
         versionName rootProject.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
-//        manifestPlaceholders = [
-//                onesignal_app_id               : '2a435933-109c-4a7c-822d-44a67e231c70',
-//                // Project number pulled from dashboard, local value is ignored.
-//                onesignal_google_project_number: 'REMOTE'
-//        ]
-
         consumerProguardFiles 'proguard-rules.pro'
     }
 
@@ -182,7 +172,8 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:28.0.1')
     implementation 'com.google.firebase:firebase-analytics-ktx:19.0.0'
     implementation 'com.google.firebase:firebase-crashlytics-ktx:18.0.0'
-    implementation 'com.onesignal:OneSignal:4.3.4'
+
+    implementation 'com.onesignal:OneSignal:[4.0.0, 4.99.99]'
 
 //HILT
     implementation "com.google.dagger:hilt-android:$hilt_version"
@@ -199,8 +190,6 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth:19.0.0'
     implementation 'com.google.android.gms:play-services-auth-api-phone:17.5.0'
 
+    implementation "com.google.firebase:firebase-iid"
 
 }
-
-sourceCompatibility = "1.8"
-targetCompatibility = "1.8"
