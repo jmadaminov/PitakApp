@@ -144,5 +144,20 @@ class DriverPostRepositoryImpl @Inject constructor(private val factoryDriver: Dr
 
     }
 
+    override suspend fun removeParcelFromPost(postId: Long,
+                                              parcelId: Long): ResponseWrapper<DriverPost?> {
 
+        val resp =
+            factoryDriver.retrieveDataStore(false).removeParcelFromPost(postId, parcelId)
+
+        return when (resp) {
+            is ResponseError -> {
+                resp
+            }
+            is ResponseSuccess -> {
+                ResponseSuccess(if (resp.value != null) driverPostMapper.mapFromEntity(resp.value!!) else null)
+            }
+        }
+
+    }
 }

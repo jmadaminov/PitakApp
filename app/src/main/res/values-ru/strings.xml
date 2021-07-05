@@ -306,6 +306,7 @@
     <string name="you_have_no_parcel_offers_yet_come_back_later">Предложений посылок пока нет...</string>
     <string name="no_parcels_yet">У вас еще нет принятых посылок.</string>
     <string name="your_parcels">Ваши принятые посылки</string>
+    <string name="sure_to_delete_this_parcel">Вы уверены, что хотите удалить эту посылку?</string>
 
 
 </resources>

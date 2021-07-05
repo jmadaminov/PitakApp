@@ -21,6 +21,9 @@ interface DriverPostDataStore {
     suspend fun removePassengerFromPost(postId: Long,
                                         passengerId: Long): ResponseWrapper<DriverPostEntity?>
 
+    suspend fun removeParcelFromPost(postId: Long,
+                                     parcelId: Long): ResponseWrapper<DriverPostEntity?>
+
     suspend fun getPassengerOffers(postId: Long): ResultWrapper<List<OfferEntity>>
     suspend fun getParcelOffers(postId: Long): ResultWrapper<List<OfferEntity>>
 }

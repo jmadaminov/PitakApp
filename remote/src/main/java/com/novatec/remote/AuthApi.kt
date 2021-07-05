@@ -154,9 +154,16 @@ interface AuthApi {
 
 
     @Headers("Content-Type:application/json", "Accept: application/json")
-    @DELETE("driver_post/action/{postId}/passenger/{passengerId}")
+    @DELETE("driver_post/action/{postId}/commuter/{commuterId}")
     suspend fun removePassengerFromPost(@Path(value = "postId", encoded = true) postId: Long,
-                                        @Path(value = "passengerId",
+                                        @Path(value = "commuterId",
+                                              encoded = true) passengerId: Long): RespFormatter<DriverPostModel>
+
+
+    @Headers("Content-Type:application/json", "Accept: application/json")
+    @DELETE("driver_post/action/{postId}/parcel/{parcelId}")
+    suspend fun removeParcelFromPost(@Path(value = "postId", encoded = true) postId: Long,
+                                        @Path(value = "parcelId",
                                               encoded = true) passengerId: Long): RespFormatter<DriverPostModel>
 
 

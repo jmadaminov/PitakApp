@@ -39,10 +39,10 @@ data class PassengerOfferViewObj(val id: Long,
 
         fun offerToDTO(offerViewObj: PassengerOfferViewObj): OfferDTO {
             val profileDto =
-                ProfileDTO(offerViewObj.profileViewObj.phoneNum,
+                ProfileDTO(offerViewObj.profileViewObj.id,
+                           offerViewObj.profileViewObj.phoneNum,
                            offerViewObj.profileViewObj.name,
                            offerViewObj.profileViewObj.surname,
-                           offerViewObj.profileViewObj.id,
                            ImageDTO(offerViewObj.profileViewObj.image?.id,
                                     offerViewObj.profileViewObj.image?.link))
 

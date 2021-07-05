@@ -15,9 +15,9 @@ open class OfferMapper @Inject constructor() : Mapper<OfferEntity, OfferDTO> {
         val profileImg = ImageDTO(type.profile!!.image?.id, type.profile!!.image?.link)
         val offerImg = ImageDTO(type.image?.id, type.image?.link)
         val profile = ProfileDTO(type.profile!!.id,
+                                 type.profile!!.phoneNum,
                                  type.profile!!.name,
                                  type.profile!!.surname,
-                                 type.profile!!.id,
                                  profileImg)
         return OfferDTO(type.id,
                         type.postId,
@@ -36,7 +36,7 @@ open class OfferMapper @Inject constructor() : Mapper<OfferEntity, OfferDTO> {
     override fun mapToEntity(type: OfferDTO): OfferEntity {
         val image = ImageEntity(type.profile!!.image?.id, type.profile.image?.link)
         val offerImg = ImageEntity(type.image?.id, type.image?.link)
-        val profile = ProfileEntity(type.profile.id,
+        val profile = ProfileEntity(type.profile.phoneNum,
                                     type.profile.name,
                                     type.profile.surname,
                                     type.profile.id,

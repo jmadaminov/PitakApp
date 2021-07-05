@@ -13,7 +13,7 @@ open class OfferMapper @Inject constructor() : Mapper<OfferEntity, Offer> {
     override fun mapFromEntity(type: OfferEntity): Offer {
         val profileImg = Image(type.profile!!.image?.id, type.profile.image?.link)
         val offerImg = Image(type.image?.id, type.image?.link)
-        val profile = Profile(type.profile.id,
+        val profile = Profile(type.profile.phoneNum,
                               type.profile.name,
                               type.profile.surname,
                               type.profile.id,
@@ -35,7 +35,7 @@ open class OfferMapper @Inject constructor() : Mapper<OfferEntity, Offer> {
     override fun mapToEntity(type: Offer): OfferEntity {
         val image = ImageEntity(type.profile!!.image?.id, type.profile!!.image?.link)
         val offerImg = ImageEntity(type.image?.id, type.image?.link)
-        val profile = ProfileEntity(type.profile!!.id,
+        val profile = ProfileEntity(type.profile!!.phoneNum,
                                     type.profile!!.name,
                                     type.profile!!.surname,
                                     type.profile!!.id,

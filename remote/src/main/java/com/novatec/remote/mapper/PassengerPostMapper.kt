@@ -35,10 +35,11 @@ open class PassengerPostMapper :
             ImageDTO(it.id, it.link)
         }
 
-        val profile = ProfileDTO(type.profile.phoneNum,
+        val profile = ProfileDTO(type.profile.id,
+                                 type.profile.phoneNum,
                                  type.profile.name,
                                  type.profile.surname,
-                                 type.profile.id,
+
                                  profileImage)
 
 

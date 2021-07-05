@@ -19,6 +19,7 @@ import com.novatec.domain.domainmodel.Offer
 import com.novatec.epitak.R
 import com.novatec.epitak.ui.BaseActivity
 import com.novatec.epitak.ui.addpost.AddPostActivity
+import com.novatec.epitak.ui.interfaces.IOnParcelDelete
 import com.novatec.epitak.ui.interfaces.IOnPassengerDelete
 import com.novatec.epitak.ui.main.dialogs.ARG_IMG
 import com.novatec.epitak.ui.main.dialogs.ImagePreviewDialog
@@ -37,7 +38,7 @@ import java.text.SimpleDateFormat
 const val EXTRA_POST_ID = "POST_ID"
 
 @ExperimentalSplittiesApi
-class DriverPostActivity : BaseActivity(), IOnPassengerDelete {
+class DriverPostActivity : BaseActivity(), IOnPassengerDelete, IOnParcelDelete {
 
     companion object {
         const val REQ_POST_MANIPULATED: Int = 89
@@ -385,17 +386,17 @@ class DriverPostActivity : BaseActivity(), IOnPassengerDelete {
             passengersAdapter.add(ItemPassenger(it) { passenger ->
                 val dialog = DialogDeletePassenger().apply {
                     val args = Bundle()
-                    args.putLong(ARG_PASSENGER_ID, passenger.profile!!.id.toLong())
+                    args.putLong(ARG_PASSENGER_ID, passenger.profile!!.id)
                     arguments = args
                 }
                 dialog.show(supportFragmentManager, "")
             })
         }
         post.parcelList?.forEach {
-            parcelsAdr.add(ItemParcel(it) { passenger ->
-                val dialog = DialogDeletePassenger().apply {
+            parcelsAdr.add(ItemParcel(it) { parcel ->
+                val dialog = DialogDeleteParcel().apply {
                     val args = Bundle()
-                    args.putLong(ARG_PASSENGER_ID, passenger.profile!!.id.toLong())
+                    args.putLong(ARG_PARCEL_ID, parcel.id)
                     arguments = args
                 }
                 dialog.show(supportFragmentManager, "")
@@ -461,11 +462,14 @@ class DriverPostActivity : BaseActivity(), IOnPassengerDelete {
         viewModel.deletePassenger(passengerId, postId)
     }
 
-
+    override fun onParcelDelete(parcelId: Long) {
+        viewModel.deleteParcel(parcelId, postId)
+    }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == RESULT_OK && requestCode == REQ_POST_MANIPULATED) {
             refreshAll()
         }
     }
+
 }

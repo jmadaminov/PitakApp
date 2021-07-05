@@ -8,5 +8,5 @@ import kotlinx.android.parcel.Parcelize
 data class ProfileViewObj(val phoneNum: String,
                           val name: String,
                           val surname: String,
-                          val id: String,
+                          val id: Long,
                           val image: ImageViewObj? = null) : Parcelable

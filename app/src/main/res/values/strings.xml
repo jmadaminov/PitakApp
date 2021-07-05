@@ -166,5 +166,6 @@
     <string name="you_have_no_parcel_offers_yet_come_back_later">Po\'chtaga takliflar mavjud emas...</string>
     <string name="no_parcels_yet">You have no accepted parcels yet.</string>
     <string name="your_parcels">Sizning pochtalaringiz</string>
+    <string name="sure_to_delete_this_parcel">Вы уверены, что хотите удалить эту посылку?</string>
 
 </resources>

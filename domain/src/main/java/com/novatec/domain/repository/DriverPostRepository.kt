@@ -25,4 +25,6 @@ interface DriverPostRepository {
     suspend fun cancelMyOffer(id: Long): ResponseWrapper<String?>
     suspend fun removePassengerFromPost(postId: Long,
                                         passengerId: Long): ResponseWrapper<DriverPost?>
+    suspend fun removeParcelFromPost(postId: Long,
+                                        parcelId: Long): ResponseWrapper<DriverPost?>
 }

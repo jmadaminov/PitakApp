@@ -58,10 +58,10 @@ open class DriverPostMapper : Mapper<DriverPostEntity, DriverPostModel> {
                                  it.offer?.history)
 
             passengerList.add(PassengerModel(it.id,
-                                             ProfileDTO(it.profile!!.phoneNum,
+                                             ProfileDTO(it.profile!!.id,
+                                                        it.profile!!.phoneNum,
                                                         it.profile!!.name,
                                                         it.profile!!.surname,
-                                                        it.profile!!.id,
                                                         ImageDTO(it.profile!!.image?.id,
                                                                  it.profile!!.image?.link)),
                                              it.submitDate,
@@ -69,10 +69,10 @@ open class DriverPostMapper : Mapper<DriverPostEntity, DriverPostModel> {
         }
         val parcelList = type.parcelList?.map {
             val image = ImageDTO(it.profile.image?.id, it.profile.image?.link)
-            val profile = ProfileDTO(it.profile.phoneNum,
+            val profile = ProfileDTO(it.profile.id,
+                                     it.profile.phoneNum,
                                      it.profile.name,
                                      it.profile.surname,
-                                     it.profile.id,
                                      image)
             val parcelImage = ImageDTO(it.offer.image?.id, it.offer.image?.link)
             val offer = OfferDTO(it.offer.id,

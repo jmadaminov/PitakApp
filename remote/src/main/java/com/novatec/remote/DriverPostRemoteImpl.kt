@@ -131,6 +131,23 @@ class DriverPostRemoteImpl @Inject constructor(
 
     }
 
+    override suspend fun removeParcelFromPost(postId: Long,
+                                              parcelId: Long): ResponseWrapper<DriverPostEntity?> {
+        val response = getFormattedResponseNullable {
+            authApi.removeParcelFromPost(postId,
+                                         parcelId)
+        }
+        return when (response) {
+            is ResponseError -> {
+                response
+            }
+            is ResponseSuccess -> {
+                ResponseSuccess(if (response.value != null) postMapper.mapToEntity(response.value!!) else null)
+            }
+        }
+
+    }
+
     override suspend fun getPassengerOffers(postId: Long): ResultWrapper<List<OfferEntity>> {
         return try {
             val response = authApi.getOffersForPost(postId)

@@ -92,6 +92,29 @@ class DriverPostViewModel @Inject constructor(val postRepository: DriverPostRepo
     }
 
     @ExperimentalSplittiesApi
+    fun deleteParcel(parcelId: Long, postId: Long) {
+        isLoading.value = true
+        viewModelScope.launch(IO) {
+            val response = postRepository.removeParcelFromPost(postId, parcelId)
+            withContext(Dispatchers.Main) {
+                isLoading.value = false
+                when (response) {
+                    is ResponseError -> {
+                        errorMessage.value = response.message
+                    }
+                    is ResponseSuccess -> {
+                        if (response.value != null) postData.value =
+                            response.value else getPostById(postId)
+//                        getOffersForPost(postId)
+                        getParcelOffersByPostId(postId)
+                        getPassengerOffersByPostId(postId)
+                    }
+                }
+            }
+        }
+    }
+
+    @ExperimentalSplittiesApi
     fun finishPost(identifier: String) {
         isLoading.value = true
         finishPostResponse.value = ResultWrapper.InProgress
