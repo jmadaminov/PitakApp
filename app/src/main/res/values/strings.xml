@@ -167,5 +167,7 @@
     <string name="no_parcels_yet">You have no accepted parcels yet.</string>
     <string name="your_parcels">Sizning pochtalaringiz</string>
     <string name="sure_to_delete_this_parcel">Вы уверены, что хотите удалить эту посылку?</string>
+    <string name="decline">Decline</string>
+    <string name="call">Call</string>
 
 </resources>

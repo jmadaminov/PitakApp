@@ -31,7 +31,7 @@ import com.novatec.epitak.R
 import com.novatec.epitak.ui.BaseActivity
 import com.novatec.epitak.ui.viewgroups.ItemAddPhoto
 import com.novatec.epitak.ui.viewgroups.ItemCarPhoto
-import com.novatec.epitak.util.AppPrefs
+import com.novatec.epitak.util.UserPrefs
 import com.novatec.epitak.util.load
 import com.novatec.epitak.viewobjects.CarColorViewObj
 import com.novatec.epitak.viewobjects.CarViewObj
@@ -43,8 +43,6 @@ import com.xwray.groupie.Item
 import com.xwray.groupie.OnItemClickListener
 import kotlinx.android.synthetic.main.activity_add_car.*
 import kotlinx.android.synthetic.main.activity_auth.*
-import kotlinx.coroutines.InternalCoroutinesApi
-import splitties.experimental.ExperimentalSplittiesApi
 import splitties.preferences.edit
 import java.io.ByteArrayOutputStream
 
@@ -137,7 +135,7 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
 
         fuelTypeRadioGroup.setOnCheckedChangeListener { group, checkedId ->
             car.fuelType =
-                if (radioPetrol.isChecked) Constants.FUEL_TYPE_PETROL else if (radioMethane.isChecked) Constants.FUEL_TYPE_PETROL else Constants.FUEL_TYPE_PETROL
+                if (radioPetrol.isChecked) Constants.FUEL_TYPE_PETROL else if (radioMethane.isChecked) Constants.FUEL_TYPE_METHANE else Constants.FUEL_TYPE_PROPANE
         }
 
         checkboxAC.setOnCheckedChangeListener { buttonView, isChecked ->
@@ -173,7 +171,7 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
                     saveCar.stopAnimation()
                     setResult(Activity.RESULT_OK)
                     if (response.value.def) {
-                        AppPrefs.edit {
+                        UserPrefs.edit {
                             defaultCarId = response.value.id!!.toString()
                         }
                     }
@@ -191,7 +189,7 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
             when (response) {
                 is ErrorWrapper.RespError -> {
                     stopLoadingAvatar()
-                    Snackbar.make(parentLayout, response.message.toString(), Snackbar.LENGTH_SHORT)
+                    Snackbar.make(parentLayout, response.message, Snackbar.LENGTH_SHORT)
                         .show()
                 }
                 is ErrorWrapper.SystemError -> {
@@ -216,7 +214,7 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
             val response = it ?: return@Observer
             when (response) {
                 is ErrorWrapper.RespError -> {
-                    showCarImageUploadError(response.message.toString())
+                    showCarImageUploadError(response.message)
                 }
                 is ErrorWrapper.SystemError -> {
                     showCarImageUploadError(response.err.toString())

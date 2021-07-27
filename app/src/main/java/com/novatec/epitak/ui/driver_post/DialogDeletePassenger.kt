@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.novatec.epitak.R
 import com.novatec.epitak.ui.interfaces.IOnPassengerDelete
-import com.novatec.epitak.ui.interfaces.IOnSignOut
 import kotlinx.android.synthetic.main.dialog_delete_passenger.*
 
 
@@ -16,14 +15,14 @@ const val ARG_PASSENGER_ID = "PASSENGER_ID"
 
 class DialogDeletePassenger : DialogFragment() {
 
-    private var passengerId = -1L
+    private var commuterId = -1L
     private lateinit var listener: IOnPassengerDelete
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         if (requireActivity() is IOnPassengerDelete) {
             listener = requireActivity() as IOnPassengerDelete
-            passengerId = requireArguments().getLong(ARG_PASSENGER_ID, -1)
+            commuterId = requireArguments().getLong(ARG_PASSENGER_ID, -1)
         } else throw ClassCastException("$context must implement IOnPassengerDelete")
     }
 
@@ -38,7 +37,7 @@ class DialogDeletePassenger : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         btnYes.setOnClickListener {
-            listener.onPassengerDelete(passengerId)
+            listener.onPassengerDelete(commuterId)
             dismiss()
         }
 

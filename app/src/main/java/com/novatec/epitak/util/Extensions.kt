@@ -10,8 +10,6 @@ import android.provider.OpenableColumns
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
-import androidx.lifecycle.LiveData
-import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
@@ -66,6 +64,11 @@ fun ImageView.loadRound(url: String) {
     Glide.with(this.context).load(url).apply(RequestOptions().circleCrop()).into(this)
 }
 
+fun ImageView.loadRound(url: String, placeHolder: Int) {
+    Glide.with(this.context).load(url).apply(RequestOptions().circleCrop()).placeholder(placeHolder)
+        .into(this)
+}
+
 fun ImageView.loadRounded(url: String, radius: Int = 10) {
     Glide.with(this.context).load(url)
         .transform(CenterCrop(), RoundedCorners(dpToPx(this.context, radius).toInt())).into(this)
@@ -74,6 +77,7 @@ fun ImageView.loadRounded(url: String, radius: Int = 10) {
 fun ImageView.load(bitmap: Bitmap) {
     Glide.with(this.context).load(bitmap).into(this)
 }
+
 fun ImageView.loadRound(bitmap: Bitmap) {
     Glide.with(this.context).load(bitmap).apply(RequestOptions().circleCrop()).into(this)
 }

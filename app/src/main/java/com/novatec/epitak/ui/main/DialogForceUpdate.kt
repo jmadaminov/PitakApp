@@ -14,9 +14,12 @@ import kotlinx.android.synthetic.main.dialog_force_update.*
 class DialogForceUpdate : DialogFragment() {
 
 
+
+
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+
         return inflater.inflate(R.layout.dialog_force_update, container, false)
     }
 

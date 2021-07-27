@@ -22,14 +22,10 @@ import com.novatec.core.ResultWrapper
 import com.novatec.core.exhaustive
 import com.novatec.epitak.R
 import com.novatec.epitak.ui.BaseActivity
-import com.novatec.epitak.util.AppPrefs
-import com.novatec.epitak.util.getRealPathFromURI
-import com.novatec.epitak.util.load
-import com.novatec.epitak.util.loadRound
+import com.novatec.epitak.util.*
 import kotlinx.android.synthetic.main.activity_edit_profile.*
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
-import java.io.File
 
 class EditProfileActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListener,
     BSImagePicker.ImageLoaderDelegate {
@@ -132,9 +128,10 @@ class EditProfileActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedL
         supportActionBar?.setHomeButtonEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        edtSurname.setText(AppPrefs.surname)
-        edtName.setText(AppPrefs.name)
-        if (AppPrefs.avatar.isNotBlank()) ivAvatar.loadRound(AppPrefs.avatar)
+        edtSurname.setText(UserPrefs.surname)
+        edtName.setText(UserPrefs.name)
+        if (UserPrefs.avatar.isNotBlank()) ivAvatar.loadRound(UserPrefs.avatar,
+                                                              R.drawable.ic_baseline_account_circle_24)
     }
 
     override fun onSingleImageSelected(uri: Uri, tag: String?) {

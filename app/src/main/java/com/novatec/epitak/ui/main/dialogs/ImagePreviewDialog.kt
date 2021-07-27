@@ -13,6 +13,8 @@ const val ARG_IMG = "IMG"
 
 class ImagePreviewDialog : DialogFragment(R.layout.dialog_image_preview) {
 
+    override fun getTheme() = R.style.Theme_Dialog
+
     private lateinit var imageUrl: String
 
     override fun onAttach(context: Context) {

@@ -29,8 +29,7 @@ import com.novatec.epitak.ui.settings.SettingsActivity
 import com.novatec.epitak.ui.viewgroups.CarItemView
 import com.novatec.epitak.ui.viewgroups.ItemAddCar
 import com.novatec.epitak.ui.viewgroups.LoadingItem
-import com.novatec.epitak.util.AppPrefs
-import com.novatec.epitak.util.load
+import com.novatec.epitak.util.UserPrefs
 import com.novatec.epitak.util.loadRound
 import com.novatec.epitak.viewobjects.CarViewObj
 import com.xwray.groupie.GroupAdapter
@@ -68,12 +67,11 @@ class ProfileFragment : Fragment(R.layout.fragment_profile), IOnSignOut {
     @ExperimentalSplittiesApi
     private fun setupViews() {
         (activity as MainActivity).hideTabLayout()
-//        cardProfile.setBackgroundResource(R.drawable.stroke_rounded_bottom_corners)
-        nameSurname.text = "${AppPrefs.name} ${AppPrefs.surname}"
-        phone.text = "+${AppPrefs.phone}"
-        if (AppPrefs.rating > 0) {
+        nameSurname.text = "${UserPrefs.name} ${UserPrefs.surname}"
+        phone.text = "+${UserPrefs.phone}"
+        if (UserPrefs.rating > 0) {
             ratingBarDriver.isVisible = true
-            ratingBarDriver.text = AppPrefs.rating.toString()
+            ratingBarDriver.text = UserPrefs.rating.toString()
         }
 
     }
@@ -89,7 +87,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile), IOnSignOut {
                 is ErrorWrapper.RespError -> {
                     adapter.clear()
                     adapter.notifyDataSetChanged()
-                    Snackbar.make(clParent, response.message.toString(), Snackbar.LENGTH_SHORT)
+                    Snackbar.make(clParent, response.message, Snackbar.LENGTH_SHORT)
                         .show()
                 }
                 is ErrorWrapper.SystemError -> {
@@ -116,7 +114,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile), IOnSignOut {
             val response = it ?: return@Observer
             when (response) {
                 is ErrorWrapper.RespError -> {
-                    Snackbar.make(clParent, response.message.toString(), Snackbar.LENGTH_SHORT)
+                    Snackbar.make(clParent, response.message, Snackbar.LENGTH_SHORT)
                         .show()
                 }
                 is ErrorWrapper.SystemError -> {
@@ -147,7 +145,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile), IOnSignOut {
                 }
                 is ResultWrapper.Success -> {
                     val editingCarItem = (adapter.getItem(response.value) as CarItemView)
-                    AppPrefs.edit {
+                    UserPrefs.edit {
                         defaultCarId = editingCarItem.car.id.toString()
                     }
                     editingCarItem.car.def = true
@@ -164,11 +162,10 @@ class ProfileFragment : Fragment(R.layout.fragment_profile), IOnSignOut {
     @ExperimentalSplittiesApi
     private fun showCars(value: List<CarDetails>) {
         adapter.clear()
+        UserPrefs.edit { defaultCarId = null }
         value.forEach { carDetails ->
             if (carDetails.def) {
-                AppPrefs.edit {
-                    defaultCarId = carDetails.id.toString()
-                }
+                UserPrefs.edit { defaultCarId = carDetails.id.toString() }
             }
 
             adapter.add(CarItemView(carDetails, object : MyItemClickListener {
@@ -248,14 +245,14 @@ class ProfileFragment : Fragment(R.layout.fragment_profile), IOnSignOut {
 
     override fun onSignOut() {
         requireActivity().finish()
-        AppPrefs.prefs.edit().clear().apply()
+        UserPrefs.prefs.edit().clear().apply()
         start<AuthActivity> {}
     }
 
     override fun onResume() {
         super.onResume()
-        if (AppPrefs.avatar.isNotBlank()) profilePhoto.loadRound(AppPrefs.avatar)
-        nameSurname.text = "${AppPrefs.name} ${AppPrefs.surname}"
+        if (UserPrefs.avatar.isNotBlank()) profilePhoto.loadRound(UserPrefs.avatar)
+        nameSurname.text = "${UserPrefs.name} ${UserPrefs.surname}"
     }
 }
 

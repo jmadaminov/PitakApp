@@ -72,29 +72,20 @@ class App : Application() {
             }
 
         }
-//        OneSignal.startInit(this)
-//            .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
-//            .unsubscribeWhenNotificationsAreDisabled(true)
-//            .setNotificationOpenedHandler(NotificationOpenHandler())
-//            .init()
 
-//        uuid = OneSignal.getDeviceState()!!.userId
-
-        OneSignal.addSubscriptionObserver { stateChanges ->
-            if (!stateChanges!!.from.isSubscribed &&
-                stateChanges.to.isSubscribed) {
-
-                // get player ID
-                uuid = stateChanges.to.userId
+        OneSignal.getDeviceState()?.userId?.let {
+            uuid = it
+        } ?: run {
+            OneSignal.addSubscriptionObserver { stateChanges ->
+                if (!stateChanges!!.from.isSubscribed &&
+                    stateChanges.to.isSubscribed
+                ) {
+                    // get player ID
+                    uuid = stateChanges.to.userId
+                }
+                Log.i("Debug", "onOSPermissionChanged: $stateChanges")
             }
-
-            Log.i("Debug", "onOSPermissionChanged: $stateChanges")
         }
-
-//        OneSignal.getDeviceState()?.let {
-//            Log.i("USERRR IDD ONE SIGNAL", "            ${it.userId}")
-//            uuid = it.userId ?: ""
-//        }
 
         val info = packageManager.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES)
         versionName = info.versionName

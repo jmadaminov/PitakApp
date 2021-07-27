@@ -69,10 +69,10 @@ class DriverPostViewModel @Inject constructor(val postRepository: DriverPostRepo
 
 
     @ExperimentalSplittiesApi
-    fun deletePassenger(passengerId: Long, postId: Long) {
+    fun deletePassenger(commuterId: Long, postId: Long) {
         isLoading.value = true
         viewModelScope.launch(IO) {
-            val response = postRepository.removePassengerFromPost(postId, passengerId)
+            val response = postRepository.removePassengerFromPost(postId, commuterId)
             withContext(Dispatchers.Main) {
                 isLoading.value = false
                 when (response) {

@@ -2,6 +2,7 @@ package com.novatec.epitak.hilt
 
 import com.novatec.epitak.BuildConfig
 import com.novatec.epitak.util.AppPrefs
+import com.novatec.epitak.util.UserPrefs
 import com.novatec.remote.ApiService
 import com.novatec.remote.ApiServiceFactory
 import com.novatec.remote.AuthApi
@@ -23,7 +24,7 @@ object NetworkModule {
     @Provides
     fun provideAuthorizedApiService(): AuthApi {
         return ApiServiceFactory.makeAuthorizedApiService(BuildConfig.DEBUG,
-                                                          AppPrefs.token,
+                                                          UserPrefs.token,
                                                           AppPrefs.language)
     }
 

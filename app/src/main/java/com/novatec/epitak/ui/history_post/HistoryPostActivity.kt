@@ -5,29 +5,16 @@ import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
-import androidx.lifecycle.observe
 import com.novatec.domain.domainmodel.DriverPost
 import com.novatec.epitak.R
 import com.novatec.epitak.ui.BaseActivity
 import com.novatec.epitak.ui.driver_post.EXTRA_POST_ID
 import com.novatec.epitak.ui.viewgroups.ItemPassenger
+import com.novatec.epitak.util.PostUtils
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
-import kotlinx.android.synthetic.main.activity_driver_post.*
 import kotlinx.android.synthetic.main.activity_history_post.*
-import kotlinx.android.synthetic.main.activity_history_post.date
-import kotlinx.android.synthetic.main.activity_history_post.from
-import kotlinx.android.synthetic.main.activity_history_post.fromDistrict
-import kotlinx.android.synthetic.main.activity_history_post.lblMyPassengers
-import kotlinx.android.synthetic.main.activity_history_post.llOffersContainer
-import kotlinx.android.synthetic.main.activity_history_post.note
-import kotlinx.android.synthetic.main.activity_history_post.price
-import kotlinx.android.synthetic.main.activity_history_post.rvPassengers
-import kotlinx.android.synthetic.main.activity_history_post.seats
-import kotlinx.android.synthetic.main.activity_history_post.to
-import kotlinx.android.synthetic.main.activity_history_post.toDistrict
-import kotlinx.android.synthetic.main.activity_history_post.tvMessage
-import java.text.DecimalFormat
+import kotlinx.android.synthetic.main.view_directions.*
 
 class HistoryPostActivity : BaseActivity() {
 
@@ -44,9 +31,7 @@ class HistoryPostActivity : BaseActivity() {
 
         rvPassengers.adapter = passengersAdapter
 
-
         viewModel.getPostById(postId)
-
 
         attachListeners()
         subscribes()
@@ -65,8 +50,7 @@ class HistoryPostActivity : BaseActivity() {
 
         viewModel.isLoading.observe(this) {
             val value = it ?: return@observe
-            progress.isVisible = value
-
+            swipeRefreshLayout.isRefreshing = value
         }
 
         viewModel.errorMessage.observe(this) {
@@ -85,8 +69,6 @@ class HistoryPostActivity : BaseActivity() {
     val passengersAdapter = GroupAdapter<GroupieViewHolder>()
 
     private fun showPostData() {
-
-
         date.text = post.departureDate
         if (post.from.name == null && post.from.districtName == null) {
             fromDistrict.isVisible = false
@@ -106,8 +88,10 @@ class HistoryPostActivity : BaseActivity() {
             to.text = post.to.districtName
         }
 
-        seats.text = "${post.passengerList!!.size!!}/${post.seat}"
-        price.text = DecimalFormat("#,###").format(post.price) + " " + getString(R.string.sum)
+        time.text = PostUtils.timeFromDayParts(post.timeFirstPart,
+                                               post.timeSecondPart,
+                                               post.timeThirdPart,
+                                               post.timeFourthPart)
 
         post.remark?.also {
             note.visibility = View.VISIBLE

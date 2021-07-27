@@ -168,5 +168,7 @@
     <string name="no_parcels_yet">Sizda hali qabul qilingan posilkalar yo\'q.</string>
     <string name="your_parcels">Sizning posilkalaringiz</string>
     <string name="sure_to_delete_this_parcel">Ushbu posilkani olib tashlamoqchimisiz?</string>
+    <string name="decline">Decline</string>
+    <string name="call">Call</string>
 
 </resources>

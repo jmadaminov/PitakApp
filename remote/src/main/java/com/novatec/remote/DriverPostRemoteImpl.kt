@@ -115,10 +115,10 @@ class DriverPostRemoteImpl @Inject constructor(
         getFormattedResponse { authApi.cancelMyOffer(id) }
 
     override suspend fun removePassengerFromPost(postId: Long,
-                                                 passengerId: Long): ResponseWrapper<DriverPostEntity?> {
+                                                 commuterId: Long): ResponseWrapper<DriverPostEntity?> {
         val response = getFormattedResponseNullable {
             authApi.removePassengerFromPost(postId,
-                                            passengerId)
+                                            commuterId)
         }
         return when (response) {
             is ResponseError -> {

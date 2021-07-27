@@ -17,8 +17,8 @@ import com.novatec.domain.domainmodel.DriverPost
 import com.novatec.epitak.R
 import com.novatec.epitak.ui.passenger_post.PassengerPostActivity
 import com.novatec.epitak.ui.viewgroups.ItemActivePost
-import com.novatec.epitak.viewobjects.PassengerPostViewObj
 import com.novatec.epitak.viewobjects.MyOfferViewObj
+import com.novatec.epitak.viewobjects.PassengerPostViewObj
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import dagger.hilt.android.AndroidEntryPoint
@@ -103,8 +103,8 @@ class DialogOfferARideFragment : DialogFragment() {
                 is ResultWrapper.Success -> {
                     loadData(response.value.filter { myPost ->
                         myPost.departureDate == passengerPost.departureDate
-                                && (myPost.postType == EPostType.PASSENGER_SM && myPost.postStatus!!.canTakePassenger()
-                                || myPost.postType == EPostType.PASSENGER_PARCEL && myPost.postStatus!!.canTakeParcel())
+                                && (myPost.postType == EPostType.DRIVER_SM && myPost.postStatus!!.canTakePassenger()
+                                || myPost.postType == EPostType.DRIVER_PARCEL && myPost.postStatus!!.canTakeParcel())
                     })
                 }
                 ResultWrapper.InProgress -> {

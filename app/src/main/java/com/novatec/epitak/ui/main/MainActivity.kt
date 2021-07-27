@@ -4,7 +4,6 @@ import android.content.Intent
 import android.graphics.Color.argb
 import android.os.Bundle
 import android.util.DisplayMetrics
-import android.util.Log
 import android.view.View
 import android.view.animation.DecelerateInterpolator
 import android.widget.CheckedTextView
@@ -14,7 +13,6 @@ import androidx.core.view.doOnPreDraw
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.FragmentNavigator
-import com.novatec.epitak.App
 import com.novatec.epitak.R
 import com.novatec.epitak.ui.BaseActivity
 import com.novatec.epitak.ui.addpost.AddPostActivity
@@ -29,8 +27,7 @@ import com.novatec.epitak.ui.main.profile.ProfileFragment
 import com.novatec.epitak.ui.main.searchtrip.SearchTripFragment
 import com.novatec.epitak.util.AppPrefs
 import com.novatec.epitak.util.ContextUtils.setLocale
-import com.onesignal.OSSubscriptionObserver
-import com.onesignal.OSSubscriptionStateChanges
+import com.novatec.epitak.util.UserPrefs
 import com.takusemba.spotlight.OnSpotlightListener
 import com.takusemba.spotlight.OnTargetListener
 import com.takusemba.spotlight.Spotlight
@@ -90,7 +87,7 @@ class MainActivity : BaseActivity()/*, OSSubscriptionObserver*/ {
 
         viewModel.getActiveAppVersions()
 
-        if (AppPrefs.token.isNotBlank() && !AppPrefs.hasSeenTutorial) {
+        if (UserPrefs.token.isNotBlank() && !AppPrefs.hasSeenTutorial) {
             showAddBtnTutorial()
             AppPrefs.edit {
                 hasSeenTutorial = true
@@ -179,7 +176,7 @@ class MainActivity : BaseActivity()/*, OSSubscriptionObserver*/ {
 
 
         addPost.setOnClickListener {
-            if (!AppPrefs.defaultCarId.isNullOrBlank() && AppPrefs.defaultCarId != "0") {
+            if (!UserPrefs.defaultCarId.isNullOrBlank() && UserPrefs.defaultCarId != "0") {
                 startActivityForResult(Intent(this, AddPostActivity::class.java), REQ_CODE_ADD_POST)
             } else {
                 DialogAddCarFirst().show(supportFragmentManager, "")
@@ -239,7 +236,7 @@ class MainActivity : BaseActivity()/*, OSSubscriptionObserver*/ {
 
     @ExperimentalSplittiesApi
     private fun checkUserLogin() {
-        if (AppPrefs.token.isBlank()) {
+        if (UserPrefs.token.isBlank()) {
             start<AuthActivity> { }
             finish()
         }

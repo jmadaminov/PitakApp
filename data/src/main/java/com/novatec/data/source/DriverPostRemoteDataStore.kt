@@ -37,8 +37,8 @@ open class DriverPostRemoteDataStore @Inject constructor(private val driverPostR
 
     override suspend fun cancelMyOffer(id: Long) = driverPostRemote.cancelMyOffer(id)
     override suspend fun removePassengerFromPost(postId: Long,
-                                                 passengerId: Long) =
-        driverPostRemote.removePassengerFromPost(postId, passengerId)
+                                                 commuterId: Long) =
+        driverPostRemote.removePassengerFromPost(postId, commuterId)
 
     override suspend fun removeParcelFromPost(postId: Long,
                                               parcelId: Long) =

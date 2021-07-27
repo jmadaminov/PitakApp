@@ -22,6 +22,7 @@ import com.novatec.epitak.App
 import com.novatec.epitak.R
 import com.novatec.epitak.ui.main.MainActivity
 import com.novatec.epitak.util.AppPrefs
+import com.novatec.epitak.util.UserPrefs
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_phone_confirm.*
 import splitties.activities.start
@@ -169,7 +170,7 @@ class PhoneConfirmFragment : Fragment(R.layout.fragment_phone_confirm) {
 
     @ExperimentalSplittiesApi
     private fun saveCredentials(response: ResultWrapper.Success<AuthBody>) {
-        AppPrefs.edit {
+        UserPrefs.edit {
             token = response.value.jwt!!
             userId = response.value.id!!
             name = response.value.name!!

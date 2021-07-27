@@ -9,7 +9,6 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
-import androidx.lifecycle.observe
 import com.novatec.core.EPostType
 import com.novatec.epitak.R
 import com.novatec.epitak.ui.BaseActivity
@@ -18,12 +17,10 @@ import com.novatec.epitak.ui.main.dialogs.ARG_IMG
 import com.novatec.epitak.ui.main.dialogs.ImagePreviewDialog
 import com.novatec.epitak.ui.passenger_post.offer_a_ride.ARG_PASSENGER_POST
 import com.novatec.epitak.ui.passenger_post.offer_a_ride.DialogOfferARideFragment
-import com.novatec.epitak.util.AppPrefs
-import com.novatec.epitak.util.PostUtils
-import com.novatec.epitak.util.loadRound
-import com.novatec.epitak.util.loadRounded
+import com.novatec.epitak.util.*
 import com.novatec.epitak.viewobjects.PassengerPostViewObj
 import kotlinx.android.synthetic.main.activity_passenger_post.*
+import kotlinx.android.synthetic.main.view_directions.*
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 
@@ -42,7 +39,6 @@ class PassengerPostActivity : BaseActivity() {
 
         attachListeners()
         subscribeObservers()
-//        showPostData(passengerPost)
     }
 
     private fun subscribeObservers() {
@@ -67,8 +63,7 @@ class PassengerPostActivity : BaseActivity() {
         }
 
         btnOfferARide.setOnClickListener {
-
-            if (AppPrefs.defaultCarId.isNullOrBlank()) {
+            if (UserPrefs.defaultCarId.isNullOrBlank()) {
                 DialogAddCarFirst().show(supportFragmentManager, "")
             } else {
                 val dialog = DialogOfferARideFragment()
@@ -76,8 +71,6 @@ class PassengerPostActivity : BaseActivity() {
                     Bundle().apply { putParcelable(ARG_PASSENGER_POST, passengerPost) }
                 dialog.show(supportFragmentManager, "")
             }
-
-
         }
 
 
@@ -87,10 +80,8 @@ class PassengerPostActivity : BaseActivity() {
     private fun showPostData(post: PassengerPostViewObj) {
 
         if (post.postType == EPostType.PASSENGER_PARCEL) {
-            lblPricePerPassenger.text = getString(R.string.price)
-            llSeatsContainer.isVisible = false
-            cbTakeParcel.isVisible = true
-            imageContainer.isVisible = true
+            lblPrice.text = getString(R.string.price)
+            llParcel.isVisible = true
             lblPassengersCount.isVisible = false
             post.imageList.forEach {
                 it.link?.let { imageUrl ->
@@ -104,10 +95,8 @@ class PassengerPostActivity : BaseActivity() {
             }
         } else {
             lblPassengersCount.isVisible = true
-            lblPricePerPassenger.text = getString(R.string.price_for_one)
-            llSeatsContainer.isVisible = true
-            cbTakeParcel.isVisible = false
-            imageContainer.isVisible = false
+            lblPrice.text = getString(R.string.price_for_one)
+            llParcel.isVisible = false
             llSeatsContainer.removeAllViews()
             for (i in 0 until post.seat) {
                 val seat = ImageView(this)

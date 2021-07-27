@@ -35,7 +35,6 @@ class ItemParcelOffer(val offer: Offer,
                 ivAvatar.setImageResource(R.drawable.ic_baseline_account_circle_24)
             }
 
-
             ivParcelImage.loadRounded(offer.image!!.link!!, 10)
             ivParcelImage.setOnClickListener {
                 onParcelImgClick(offer.image!!.link!!)

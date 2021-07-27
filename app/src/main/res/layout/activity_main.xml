@@ -9,8 +9,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/car_pattern_bg" />
+        android:scaleType="centerCrop" />
 
 
     <LinearLayout
@@ -25,13 +24,6 @@
             android:layout_height="wrap_content"
             android:animateLayoutChanges="true">
 
-            <!--                    <androidx.appcompat.widget.Toolbar-->
-            <!--                        android:id="@+id/tool_bar"-->
-            <!--                        android:layout_width="match_parent"-->
-            <!--                        android:layout_height="?attr/actionBarSize"-->
-            <!--                        android:theme="@style/ToolBarStyle"-->
-            <!--                        app:layout_scrollFlags="scroll|enterAlways" />-->
-
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tab_layout"
                 style="@style/Widget.MaterialComponents.TabLayout.Colored"
@@ -40,13 +32,6 @@
                 android:visibility="gone" />
 
         </com.google.android.material.appbar.AppBarLayout>
-
-
-        <!--        <androidx.constraintlayout.widget.ConstraintLayout-->
-        <!--            android:id="@+id/container"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginTop="?android:actionBarSize">-->
 
 
         <fragment
@@ -206,8 +191,6 @@
         app:layout_constraintBottom_toTopOf="@id/bottomAppBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:tint="#fff" />
-
-
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

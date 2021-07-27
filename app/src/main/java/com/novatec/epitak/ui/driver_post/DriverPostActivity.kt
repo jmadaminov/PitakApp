@@ -31,6 +31,7 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import kotlinx.android.synthetic.main.activity_driver_post.*
 import kotlinx.android.synthetic.main.item_add_car.*
+import kotlinx.android.synthetic.main.view_directions.*
 import splitties.experimental.ExperimentalSplittiesApi
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
@@ -73,7 +74,6 @@ class DriverPostActivity : BaseActivity(), IOnPassengerDelete, IOnParcelDelete {
     private fun subscribes() {
 
         viewModel.passengerOffers.observe(this) {
-//            offersAdapter.submitData(lifecycle, value)
             when (it) {
                 is ErrorWrapper.RespError -> {
                     progressOfferAction.isVisible = false
@@ -93,8 +93,6 @@ class DriverPostActivity : BaseActivity(), IOnPassengerDelete, IOnParcelDelete {
         }
 
         viewModel.parcelOffers.observe(this) {
-//            val value = it
-//            offersAdapter.submitData(lifecycle, value)
             when (it) {
                 is ErrorWrapper.RespError -> {
                     progressParcelOfferAction.isVisible = false
@@ -257,8 +255,8 @@ class DriverPostActivity : BaseActivity(), IOnPassengerDelete, IOnParcelDelete {
     private fun showPostData() {
 
         if (post.postType == EPostType.DRIVER_PARCEL) {
-            lblSeatsCount.isVisible = false
-            llSeatsContainer.isVisible = false
+            lblPassengersCount.isVisible = false
+            llParcel.isVisible = true
             lblPricePerPassenger.text = getString(R.string.price)
             viewModel.getParcelOffersByPostId(postId)
             rvOffers.isVisible = false
@@ -267,14 +265,13 @@ class DriverPostActivity : BaseActivity(), IOnPassengerDelete, IOnParcelDelete {
         } else {
             viewModel.getPassengerOffersByPostId(postId)
             if (post.pkg == true) {
+                llParcel.isVisible = true
                 rvParcelOffers.isVisible = true
                 lblParcelOffers.isVisible = true
                 progressParcelOfferAction.isVisible = true
                 viewModel.getParcelOffersByPostId(postId)
             }
-
-            lblSeatsCount.isVisible = true
-            llSeatsContainer.isVisible = true
+            lblPassengersCount.isVisible = true
             lblPricePerPassenger.text = getString(R.string.willing_price_for_one)
         }
 
@@ -386,7 +383,7 @@ class DriverPostActivity : BaseActivity(), IOnPassengerDelete, IOnParcelDelete {
             passengersAdapter.add(ItemPassenger(it) { passenger ->
                 val dialog = DialogDeletePassenger().apply {
                     val args = Bundle()
-                    args.putLong(ARG_PASSENGER_ID, passenger.profile!!.id)
+                    args.putLong(ARG_PASSENGER_ID, passenger.id!!)
                     arguments = args
                 }
                 dialog.show(supportFragmentManager, "")
@@ -407,7 +404,7 @@ class DriverPostActivity : BaseActivity(), IOnPassengerDelete, IOnParcelDelete {
     private fun attachListeners() {
 
         btnStart.setOnClickListener {
-            viewModel.startTrip(post.id!!)
+            viewModel.startTrip(post.id)
         }
 
 
@@ -458,13 +455,14 @@ class DriverPostActivity : BaseActivity(), IOnPassengerDelete, IOnParcelDelete {
     fun acceptOffer(offerId: Long) = viewModel.acceptOffer(offerId)
     fun cancelOffer(offerId: Long) = viewModel.cancelOffer(offerId)
 
-    override fun onPassengerDelete(passengerId: Long) {
-        viewModel.deletePassenger(passengerId, postId)
+    override fun onPassengerDelete(commuterId: Long) {
+        viewModel.deletePassenger(commuterId, postId)
     }
 
     override fun onParcelDelete(parcelId: Long) {
         viewModel.deleteParcel(parcelId, postId)
     }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == RESULT_OK && requestCode == REQ_POST_MANIPULATED) {

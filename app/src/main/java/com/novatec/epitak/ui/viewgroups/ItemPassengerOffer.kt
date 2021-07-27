@@ -12,9 +12,9 @@ import java.text.DecimalFormat
 class ItemPassengerOffer(val offer: Offer,
                          val onAccept: (offer: Offer) -> Unit,
                          val onCancel: (offer: Offer) -> Unit) : Item() {
+
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         viewHolder.itemView.apply {
-
             if (offer.message.isNullOrBlank()) {
                 tvMessage.visibility = View.GONE
             } else {
@@ -25,10 +25,7 @@ class ItemPassengerOffer(val offer: Offer,
             offer.price?.also {
                 tvOfferingPrice.text =
                     DecimalFormat("#,###").format(it) + " " + context.getString(R.string.sum)
-            } ?: run {
-                tvOfferingPrice.text =
-                    context.getString(R.string.my_price)
-            }
+            } ?: run { tvOfferingPrice.text = context.getString(R.string.my_price) }
 
             tvName.text = offer.profile?.name + " " + offer.profile?.surname
             tvSeats.text = offer.seat.toString()
@@ -40,14 +37,8 @@ class ItemPassengerOffer(val offer: Offer,
                 ivAvatar.setImageResource(R.drawable.ic_baseline_account_circle_24)
             }
 
-            ivDeny.setOnClickListener {
-                onCancel(offer)
-//                onOfferActionListener.onCancelClick(offer)
-            }
-            ivAccept.setOnClickListener {
-                onAccept(offer)
-//                onOfferActionListener.onAcceptClick(offer)
-            }
+            ivDeny.setOnClickListener { onCancel(offer) }
+            ivAccept.setOnClickListener { onAccept(offer) }
 
         }
     }

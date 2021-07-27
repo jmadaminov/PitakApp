@@ -2,6 +2,6 @@ package com.novatec.epitak.ui.interfaces
 
 interface IOnPassengerDelete {
 
-    fun onPassengerDelete(passengerId: Long)
+    fun onPassengerDelete(commuterId: Long)
 
 }

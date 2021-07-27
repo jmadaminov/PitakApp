@@ -128,10 +128,10 @@ class DriverPostRepositoryImpl @Inject constructor(private val factoryDriver: Dr
         factoryDriver.retrieveDataStore(false).cancelMyOffer(id)
 
     override suspend fun removePassengerFromPost(postId: Long,
-                                                 passengerId: Long): ResponseWrapper<DriverPost?> {
+                                                 commuterId: Long): ResponseWrapper<DriverPost?> {
 
         val resp =
-            factoryDriver.retrieveDataStore(false).removePassengerFromPost(postId, passengerId)
+            factoryDriver.retrieveDataStore(false).removePassengerFromPost(postId, commuterId)
 
         return when (resp) {
             is ResponseError -> {

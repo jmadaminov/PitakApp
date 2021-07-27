@@ -19,7 +19,7 @@ interface DriverPostDataStore {
     suspend fun rejectOffer(id: Long): ResponseWrapper<String?>
     suspend fun cancelMyOffer(id: Long): ResponseWrapper<String?>
     suspend fun removePassengerFromPost(postId: Long,
-                                        passengerId: Long): ResponseWrapper<DriverPostEntity?>
+                                        commuterId: Long): ResponseWrapper<DriverPostEntity?>
 
     suspend fun removeParcelFromPost(postId: Long,
                                      parcelId: Long): ResponseWrapper<DriverPostEntity?>
