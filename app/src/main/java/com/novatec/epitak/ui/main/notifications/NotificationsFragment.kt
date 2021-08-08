@@ -5,6 +5,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.novatec.epitak.R
+import com.novatec.epitak.ui.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import splitties.experimental.ExperimentalSplittiesApi
 import javax.inject.Inject
@@ -28,6 +29,7 @@ class NotificationsFragment : Fragment(R.layout.fragment_notifications) {
 
     @ExperimentalSplittiesApi
     private fun setupViews() {
+        (activity as MainActivity).hideTabLayout()
 
     }
 

@@ -187,6 +187,22 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="50,000 sum" />
 
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="5dp"
+            android:gravity="center_vertical|end"
+            android:paddingStart="5dp"
+            android:paddingEnd="7dp"
+            android:paddingBottom="5dp"
+            android:textColor="@color/dark_grey"
+            android:textSize="14dp"
+            app:drawableEndCompat="@drawable/ic_round_access_time_24"
+            app:layout_constraintBottom_toTopOf="@id/llPriceSeatsDate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            tools:text="18:00 - 24:00" />
 
         <LinearLayout
             android:id="@+id/llPriceSeatsDate"
@@ -202,28 +218,12 @@
             app:layout_constraintStart_toEndOf="@id/llSeatsContainer"
             app:layout_constraintTop_toBottomOf="@id/circleTo">
 
-            <TextView
-                android:id="@+id/time"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:drawablePadding="5dp"
-                android:gravity="center_vertical|end"
-                android:paddingStart="5dp"
-                android:paddingEnd="5dp"
-                android:textColor="@color/dark_grey"
-                android:textSize="14dp"
-                app:drawableEndCompat="@drawable/ic_round_access_time_24"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_weight="1"
-                app:layout_constraintStart_toEndOf="@id/from"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="18:00 - 24:00" />
 
             <TextView
                 android:id="@+id/date"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:drawablePadding="7dp"
                 android:gravity="center_vertical|end"
                 android:paddingStart="5dp"

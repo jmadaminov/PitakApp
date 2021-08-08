@@ -56,7 +56,6 @@ class MainActivity : BaseActivity()/*, OSSubscriptionObserver*/ {
 
     @ExperimentalSplittiesApi
     override fun onCreate(savedInstanceState: Bundle?) {
-        display?.getMetrics(displayMetrics)
         setLocale(AppPrefs.language, this)
         setTheme(R.style.NoActionBar)
         if (AppPrefs.isFirstTime) {

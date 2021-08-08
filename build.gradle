@@ -3,8 +3,8 @@
 buildscript {
 
     ext {
-        versionCode = 2
-        versionName = "1.0.1"
+        versionCode = 3
+        versionName = "1.0.2"
 
         compileSdkVersion = 30
         minSdkVersion = 21
@@ -42,7 +42,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.google.gms:google-services:4.3.8'
+        classpath 'com.google.gms:google-services:4.3.9'
         classpath 'com.android.tools.build:gradle:4.2.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigationVersion"
@@ -50,8 +50,8 @@ buildscript {
         // in the individual module build.gradle files
 //        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.5'
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
-        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.6.1'
-        classpath 'gradle.plugin.com.onesignal:onesignal-gradle-plugin:[0.12.10, 0.99.99]'
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.7.1'
+        classpath 'gradle.plugin.com.onesignal:onesignal-gradle-plugin:0.13.4'
     }
 }
 

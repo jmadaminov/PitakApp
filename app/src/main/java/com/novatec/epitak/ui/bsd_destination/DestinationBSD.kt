@@ -1,15 +1,12 @@
 package com.novatec.epitak.ui.bsd_destination
 
 import android.content.Context
-import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView.OnEditorActionListener
-import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.setFragmentResult
@@ -69,6 +66,7 @@ class DestinationBSD : BSDExpanded() {
     }
 
     private fun setup() {
+        edtSearch.requestFocus()
         lblDestination.text = getString(if (isFrom) R.string.from else R.string.to)
         rvDestinations.adapter = adapter
     }

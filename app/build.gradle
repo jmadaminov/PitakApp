@@ -171,9 +171,9 @@ dependencies {
 
     implementation platform('com.google.firebase:firebase-bom:28.0.1')
     implementation 'com.google.firebase:firebase-analytics-ktx:19.0.0'
-    implementation 'com.google.firebase:firebase-crashlytics-ktx:18.0.0'
+    implementation 'com.google.firebase:firebase-crashlytics-ktx:18.2.0'
 
-    implementation 'com.onesignal:OneSignal:[4.0.0, 4.99.99]'
+    implementation 'com.onesignal:OneSignal:4.4.2'
 
 //HILT
     implementation "com.google.dagger:hilt-android:$hilt_version"
@@ -187,8 +187,8 @@ dependencies {
 //    kapt "androidx.hilt:hilt-compiler:$hilt_viewmodels"
 //
 
-    implementation 'com.google.android.gms:play-services-auth:19.0.0'
-    implementation 'com.google.android.gms:play-services-auth-api-phone:17.5.0'
+    implementation 'com.google.android.gms:play-services-auth:19.2.0'
+    implementation 'com.google.android.gms:play-services-auth-api-phone:17.5.1'
 
     implementation "com.google.firebase:firebase-iid"
 

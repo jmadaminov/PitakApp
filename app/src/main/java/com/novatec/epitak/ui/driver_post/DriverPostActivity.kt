@@ -148,8 +148,6 @@ class DriverPostActivity : BaseActivity(), IOnPassengerDelete, IOnParcelDelete {
             refreshAll()
         }
 
-
-
         viewModel.deletePostReponse.observe(this) {
             val response = it ?: return@observe
             when (response) {
@@ -234,6 +232,7 @@ class DriverPostActivity : BaseActivity(), IOnPassengerDelete, IOnParcelDelete {
                         Bundle().apply { putParcelable(ARG_OFFER, offerToViewObj(offer)) }
                     dialog.show(supportFragmentManager, "")
                 }, { offer ->
+
                                                        val dialog = DialogCancelOffer()
                                                        dialog.arguments =
                                                            Bundle().apply {
@@ -264,6 +263,7 @@ class DriverPostActivity : BaseActivity(), IOnPassengerDelete, IOnParcelDelete {
             progressOfferAction.isVisible = false
         } else {
             viewModel.getPassengerOffersByPostId(postId)
+            lblMyOffers.isVisible = true
             if (post.pkg == true) {
                 llParcel.isVisible = true
                 rvParcelOffers.isVisible = true
@@ -292,6 +292,7 @@ class DriverPostActivity : BaseActivity(), IOnPassengerDelete, IOnParcelDelete {
                 rvParcelOffers.isVisible = true
                 lblMyOffers.isVisible = true
                 lblParcelOffers.isVisible = true
+                lblMyParcels.isVisible = true
             }
         }
 
@@ -369,12 +370,14 @@ class DriverPostActivity : BaseActivity(), IOnPassengerDelete, IOnParcelDelete {
             lblMyPassengers.text = getString(R.string.your_passengers)
         } else {
             lblMyPassengers.text = getString(R.string.no_passengers_yet)
+            lblMyPassengers.isVisible = false
         }
 
         if (post.parcelList != null && post.parcelList!!.isNotEmpty()) {
             lblMyParcels.text = getString(R.string.your_parcels)
         } else {
             lblMyParcels.text = getString(R.string.no_parcels_yet)
+            lblMyParcels.isVisible = false
         }
 
         post.passengerList?.forEach {
@@ -406,7 +409,6 @@ class DriverPostActivity : BaseActivity(), IOnPassengerDelete, IOnParcelDelete {
         btnStart.setOnClickListener {
             viewModel.startTrip(post.id)
         }
-
 
         swipeRefreshLayout.setOnRefreshListener {
             refreshAll()

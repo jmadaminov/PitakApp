@@ -16,6 +16,7 @@ import com.xwray.groupie.kotlinandroidextensions.Item
 import kotlinx.android.synthetic.main.item_active_post.view.*
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
+import kotlin.to
 
 
 class ItemActivePost(var post: DriverPost, val onClick: () -> Unit) : Item() {

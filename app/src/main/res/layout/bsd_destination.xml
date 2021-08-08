@@ -42,7 +42,10 @@
                 android:drawableStart="@drawable/baseline_search_white_24dp"
                 android:drawablePadding="12dp"
                 android:imeOptions="actionGo"
+                android:focusedByDefault="true"
                 android:inputType="text"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:paddingStart="5dp"
                 app:drawableTint="@color/line_textColorGrey" />
 

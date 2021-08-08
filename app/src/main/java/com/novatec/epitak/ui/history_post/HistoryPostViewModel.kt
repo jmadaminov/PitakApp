@@ -22,7 +22,7 @@ class HistoryPostViewModel @Inject constructor(val postRepository: DriverPostRep
 
     val postData = MutableLiveData<DriverPost>()
 
-    val errorMessage = SingleLiveEvent<String>()
+    val errorMessage = SingleLiveEvent<String?>()
     val isLoading = SingleLiveEvent<Boolean>()
 
 
@@ -35,8 +35,7 @@ class HistoryPostViewModel @Inject constructor(val postRepository: DriverPostRep
                 when (response) {
                     is ResponseError -> errorMessage.value = response.message
                     is ResponseSuccess -> {
-                        errorMessage.value = null
-                        postData.value = response.value
+                        postData.value = response.value!!
                     }
                 }.exhaustive
             }

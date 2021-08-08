@@ -33,8 +33,8 @@ class PassengerPostViewModel @Inject constructor(private val repository: Passeng
                 when (response) {
                     is ResponseError -> errorMessage.value = response.message
                     is ResponseSuccess -> {
-                        errorMessage.value = null
-                        postData.value = response.value
+//                        errorMessage.value = null
+                        postData.value = response.value!!
                     }
                 }.exhaustive
             }
