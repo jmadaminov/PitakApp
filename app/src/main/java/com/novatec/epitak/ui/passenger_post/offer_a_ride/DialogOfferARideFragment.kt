@@ -17,6 +17,7 @@ import com.novatec.domain.domainmodel.DriverPost
 import com.novatec.epitak.R
 import com.novatec.epitak.ui.passenger_post.PassengerPostActivity
 import com.novatec.epitak.ui.viewgroups.ItemActivePost
+import com.novatec.epitak.util.BSDExpanded
 import com.novatec.epitak.viewobjects.MyOfferViewObj
 import com.novatec.epitak.viewobjects.PassengerPostViewObj
 import com.xwray.groupie.GroupAdapter
@@ -28,13 +29,13 @@ import splitties.experimental.ExperimentalSplittiesApi
 const val ARG_PASSENGER_POST = "PASSENGER_POST"
 
 @AndroidEntryPoint
-class DialogOfferARideFragment : DialogFragment() {
+class DialogOfferARideFragment : BSDExpanded() {
     private val adapter = GroupAdapter<GroupieViewHolder>()
 
     private lateinit var passengerPost: PassengerPostViewObj
     val viewModel: OfferARideViewModel by viewModels()
 
-    override fun getTheme() = R.style.Theme_Dialog
+//    override fun getTheme() = R.style.Theme_Dialog
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

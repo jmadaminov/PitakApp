@@ -251,9 +251,13 @@
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="25dp"
             android:gravity="center"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
             android:text="@string/send_offer"
             android:textAllCaps="false"
             android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
             app:backgroundTint="@color/colorAccent" />
 
 
