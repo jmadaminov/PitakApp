@@ -6,6 +6,7 @@ import com.novatec.epitak.util.UserPrefs
 import com.novatec.remote.ApiService
 import com.novatec.remote.ApiServiceFactory
 import com.novatec.remote.AuthApi
+import com.novatec.remote.MapApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,6 +19,11 @@ object NetworkModule {
     @Provides
     fun provideApiService(): ApiService {
         return ApiServiceFactory.makeApiService(BuildConfig.DEBUG, AppPrefs.language)
+    }
+
+    @Provides
+    fun provideMapApiService(): MapApiService {
+        return ApiServiceFactory.makeMapApiService(BuildConfig.DEBUG, AppPrefs.language)
     }
 
 

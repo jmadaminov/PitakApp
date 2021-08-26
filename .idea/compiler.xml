@@ -4,6 +4,8 @@
     <bytecodeTargetLevel target="1.8">
       <module name="Pitak.app" target="11" />
       <module name="Pitak.data" target="11" />
+      <module name="Pitak.domain" target="11" />
+      <module name="Pitak.remote" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>

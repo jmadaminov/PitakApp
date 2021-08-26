@@ -19,7 +19,6 @@ android {
         versionName rootProject.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
-        consumerProguardFiles 'proguard-rules.pro'
     }
 
     buildTypes {
@@ -36,11 +35,11 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8
+        jvmTarget = JavaVersion.VERSION_11
     }
     // Always show the result of every unit test, even if it passes.
     testOptions.unitTests.all {
@@ -178,18 +177,30 @@ dependencies {
 //HILT
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
-//
-//    implementation "com.google.dagger:hilt-android:$hilt_version"
-//    kapt "com.google.dagger:hilt-compiler:$hilt_version"
-//
-//    def hilt_viewmodels = '1.0.0'
-//    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_viewmodels"
-//    kapt "androidx.hilt:hilt-compiler:$hilt_viewmodels"
-//
 
     implementation 'com.google.android.gms:play-services-auth:19.2.0'
     implementation 'com.google.android.gms:play-services-auth-api-phone:17.5.1'
 
     implementation "com.google.firebase:firebase-iid"
+
+//    implementation(group: 'com.graphhopper', name: 'graphhopper-core', version: '0.10.0') {
+//        exclude group: 'com.google.protobuf', module: 'protobuf-java'
+//        exclude group: 'org.openstreetmap.osmosis', module: 'osmosis-osm-binary'
+//        exclude group: 'org.apache.xmlgraphics', module: 'xmlgraphics-commons'
+//    }
+//
+//    implementation 'org.mapsforge:vtm:0.8.0'
+//    implementation 'org.mapsforge:vtm-android:0.8.0'
+//    implementation 'org.mapsforge:vtm-themes:0.8.0'
+//    implementation 'org.mapsforge:vtm-android:0.8.0:natives-armeabi'
+//    implementation 'org.mapsforge:vtm-android:0.8.0:natives-armeabi-v7a'
+//    implementation 'org.mapsforge:vtm-android:0.8.0:natives-x86'
+//    implementation 'org.mapsforge:mapsforge-core:0.8.0'
+//    implementation('org.mapsforge:vtm-jts:0.8.0') {
+//        exclude group: 'com.vividsolutions', module: 'jts'
+//    }
+//    implementation 'org.mapsforge:mapsforge-poi-android:0.8.0'
+
+
 
 }

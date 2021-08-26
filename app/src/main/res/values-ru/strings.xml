@@ -43,7 +43,7 @@
 
     <string name="code">Код</string>
 
-    <string name="sms_containing_code_has_been_sent">Мы только что отправили вам SMS с кодом подтверждения. Пожалуйста, введите его для подтверждения.</string>
+    <string name="sms_containing_code_has_been_sent">Мы только что отправили вам SMS с кодом подтверждения.</string>
 
     <string name="passenger">Пассажир</string>
 
@@ -296,19 +296,19 @@
     <string name="no_notifications_yet">Уведомлений пока нет…</string>
     <string name="date">Дата</string>
     <string name="can_take_package">Могу взять посылку</string>
-    <string name="no_destination_found">Маршрут не найден...</string>
-    <string name="enter_search_location">Введите адрес...</string>
+    <string name="no_destination_found">Маршрут не найден…</string>
+    <string name="enter_search_location">Введите адрес…</string>
     <string name="parcel">Посылка</string>
     <string name="only_package">Только посылка</string>
     <string name="minimal_price">Минимальная цена</string>
     <string name="accept">Принимать</string>
     <string name="parcel_offers">Предложения по посылкам</string>
-    <string name="you_have_no_parcel_offers_yet_come_back_later">Предложений посылок пока нет...</string>
+    <string name="you_have_no_parcel_offers_yet_come_back_later">Предложений посылок пока нет…</string>
     <string name="no_parcels_yet">У вас еще нет принятых посылок.</string>
     <string name="your_parcels">Ваши принятые посылки</string>
     <string name="sure_to_delete_this_parcel">Вы уверены, что хотите удалить эту посылку?</string>
-    <string name="decline">Decline</string>
-    <string name="call">Call</string>
+    <string name="decline">Отклонить</string>
+    <string name="call">Позвонить</string>
 
 
 </resources>

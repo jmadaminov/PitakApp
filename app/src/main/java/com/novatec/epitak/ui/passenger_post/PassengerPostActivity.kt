@@ -64,16 +64,19 @@ class PassengerPostActivity : BaseActivity() {
 
         btnOfferARide.setOnClickListener {
             if (UserPrefs.defaultCarId.isNullOrBlank()) {
-                DialogAddCarFirst().show(supportFragmentManager, "")
-            } else {
-                val dialog = DialogOfferARideFragment()
-                dialog.arguments =
-                    Bundle().apply { putParcelable(ARG_PASSENGER_POST, passengerPost) }
+                val dialog = DialogAddCarFirst()
                 dialog.show(supportFragmentManager, "")
+            } else {
+                showOfferDialog()
             }
         }
+    }
 
-
+    fun showOfferDialog() {
+        val dialog = DialogOfferARideFragment()
+        dialog.arguments =
+            Bundle().apply { putParcelable(ARG_PASSENGER_POST, passengerPost) }
+        dialog.show(supportFragmentManager, "")
     }
 
 

@@ -8,6 +8,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+import javax.inject.Named
 
 /**
  * Provide "make" methods to create instances of [ApiService]
@@ -21,6 +22,16 @@ object ApiServiceFactory {
             .client(makeOkHttpClient(makeLoggingInterceptor(isDebug), lang))
             .addConverterFactory(GsonConverterFactory.create(makeGson()))
             .build().create(ApiService::class.java)
+    }
+
+
+    @Named("mapApi")
+    fun makeMapApiService(isDebug: Boolean, lang: String): MapApiService {
+        return Retrofit.Builder()
+            .baseUrl(Constants.MAP_FILE_BASE_URL)
+            .client(makeOkHttpClient(makeLoggingInterceptor(isDebug), lang))
+            .addConverterFactory(GsonConverterFactory.create(makeGson()))
+            .build().create(MapApiService::class.java)
     }
 
 

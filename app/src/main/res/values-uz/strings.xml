@@ -20,8 +20,8 @@
     <string name="register">Ro\'yxatdan o\'tish</string>
     <string name="name">Ism</string>
     <string name="surname">Familiya</string>
-    <string name="code">Ko\'d</string>
-    <string name="sms_containing_code_has_been_sent">Hozir sizga kod yubordik. Iltimos shu kodni kiriting.</string>
+    <string name="code">Kod</string>
+    <string name="sms_containing_code_has_been_sent">Hozirgina sizga SMS orqali tasdiqlash kodi yuborildi.</string>
     <string name="passenger">Yo\'lovchi</string>
     <string name="driver">Haydovchi</string>
     <string name="title_profile">Profil</string>
@@ -143,7 +143,7 @@
     <string name="attached_post_id">Biriktirilgan sayohat ID</string>
     <string name="price">Narx</string>
     <string name="update_offer">Taklifni yangilash</string>
-    <string name="you_have_no_offers_yet_come_back_later">Yo\'lovchi takliflari mavjud emas, keyinroq qayta tekshirib ko\'ring...</string>
+    <string name="you_have_no_offers_yet_come_back_later">Yo\'lovchi takliflari mavjud emas, keyinroq qayta tekshirib ko\'ring…</string>
     <string name="close">Yopmoq</string>
     <string name="passengers">Yo\'lovchilar</string>
     <string name="price_for_one">Bir kishiga narx</string>
@@ -157,18 +157,18 @@
     <string name="no_notifications_yet">Xabarlar mavjud emas…</string>
     <string name="date">Sana</string>
     <string name="can_take_package">Po\'chta olaman</string>
-    <string name="no_destination_found">Yo\'nalish topilmadi...</string>
-    <string name="enter_search_location">Manzilni kiriting...</string>
+    <string name="no_destination_found">Yo\'nalish topilmadi…</string>
+    <string name="enter_search_location">Manzilni kiriting…</string>
     <string name="parcel">Po\'chta</string>
     <string name="only_package">Faqat pochta</string>
     <string name="minimal_price">Minimal narxi</string>
     <string name="accept">Qabul qilish</string>
     <string name="parcel_offers">Po\'chta takliflar</string>
-    <string name="you_have_no_parcel_offers_yet_come_back_later">Po\'chtaga takliflar mavjud emas...</string>
-    <string name="no_parcels_yet">Sizda hali qabul qilingan posilkalar yo\'q.</string>
-    <string name="your_parcels">Sizning posilkalaringiz</string>
-    <string name="sure_to_delete_this_parcel">Ushbu posilkani olib tashlamoqchimisiz?</string>
-    <string name="decline">Decline</string>
-    <string name="call">Call</string>
+    <string name="you_have_no_parcel_offers_yet_come_back_later">Po\'chtaga takliflar mavjud emas…</string>
+    <string name="no_parcels_yet">Sizda hali qabul qilingan po\'chtani yo\'q.</string>
+    <string name="your_parcels">Sizning pochtalaringiz</string>
+    <string name="sure_to_delete_this_parcel">Ushbu po\'chtani olib tashlamoqchimisiz?</string>
+    <string name="decline">Bekor qilish</string>
+    <string name="call">Qo\'ng\'iroq qilish</string>
 
 </resources>

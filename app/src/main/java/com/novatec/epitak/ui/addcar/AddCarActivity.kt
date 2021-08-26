@@ -20,10 +20,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.asksira.bsimagepicker.BSImagePicker
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
-import com.novatec.core.Constants
-import com.novatec.core.ErrorWrapper
-import com.novatec.core.ResultWrapper
-import com.novatec.core.exhaustive
+import com.novatec.core.*
 import com.novatec.domain.domainmodel.Car
 import com.novatec.domain.domainmodel.ColorsAndModels
 import com.novatec.domain.domainmodel.PhotoBody
@@ -59,7 +56,7 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
     private val viewmodel: AddCarViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        car = if (intent.extras == null) CarViewObj(fuelType = Constants.FUEL_TYPE_PETROL)
+        car = if (intent.extras == null) CarViewObj(fuelType = EFuelType.PETROL.name)
         else intent.getParcelableExtra(Constants.TXT_CAR)!!
 
         super.onCreate(savedInstanceState)
@@ -135,7 +132,7 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
 
         fuelTypeRadioGroup.setOnCheckedChangeListener { group, checkedId ->
             car.fuelType =
-                if (radioPetrol.isChecked) Constants.FUEL_TYPE_PETROL else if (radioMethane.isChecked) Constants.FUEL_TYPE_METHANE else Constants.FUEL_TYPE_PROPANE
+                if (radioPetrol.isChecked) EFuelType.PETROL.name else if (radioMethane.isChecked) EFuelType.METHANE.name else EFuelType.PROPANE.name
         }
 
         checkboxAC.setOnCheckedChangeListener { buttonView, isChecked ->
@@ -169,12 +166,12 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
                 }
                 is ResultWrapper.Success -> {
                     saveCar.stopAnimation()
-                    setResult(Activity.RESULT_OK)
-                    if (response.value.def) {
+                    if (response.value.def || UserPrefs.defaultCarId.isNullOrBlank()) {
                         UserPrefs.edit {
                             defaultCarId = response.value.id!!.toString()
                         }
                     }
+                    setResult(Activity.RESULT_OK)
                     finish()
                 }
                 ResultWrapper.InProgress -> {
@@ -396,7 +393,7 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
 
     private fun setupCarValues(value: ColorsAndModels) {
         if (car.fuelType == null) {
-            car.fuelType = Constants.FUEL_TYPE_PETROL
+            car.fuelType = EFuelType.PETROL.name
         }
 
         car.image?.link?.let {
@@ -416,8 +413,8 @@ class AddCarActivity : BaseActivity(), BSImagePicker.OnSingleImageSelectedListen
         }
         if (car.fuelType != null) {
             when (car.fuelType) {
-                Constants.FUEL_TYPE_PETROL -> radioPetrol.isChecked = true
-                Constants.FUEL_TYPE_METHANE -> radioMethane.isChecked = true
+                EFuelType.PETROL.name -> radioPetrol.isChecked = true
+                EFuelType.METHANE.name -> radioMethane.isChecked = true
                 else -> radioPropane.isChecked = true
             }
         }

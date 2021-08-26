@@ -5,10 +5,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
 import com.novatec.epitak.R
 import com.novatec.epitak.ui.addcar.AddCarActivity
+import com.novatec.epitak.ui.passenger_post.PassengerPostActivity
 import kotlinx.android.synthetic.main.dialog_add_car_first.*
+
+const val KEY_ADD_CAR = "ADD_CAR"
 
 class DialogAddCarFirst : DialogFragment() {
 
@@ -21,8 +26,13 @@ class DialogAddCarFirst : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         btnOk.setOnClickListener {
-            startActivity(Intent(requireActivity(), AddCarActivity::class.java))
-            dismiss()
+            requireActivity().activityResultRegistry.register("KEY",
+                                                              ActivityResultContracts.StartActivityForResult()) {
+                if (it.resultCode == AppCompatActivity.RESULT_OK) {
+                    (requireActivity() as? PassengerPostActivity)?.showOfferDialog()
+                }
+                dismiss()
+            }.launch(Intent(requireActivity(), AddCarActivity::class.java))
         }
         btnCancel.setOnClickListener {
             dismiss()

@@ -11,6 +11,18 @@
         android:layout_gravity="bottom"
         android:background="@drawable/shape_rounded_top_corners_white">
 
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:text="@string/offer_a_ride"
+            android:textColor="@color/primary_text"
+            android:textSize="18dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/priceLayout"
             android:layout_width="wrap_content"
@@ -21,7 +33,7 @@
             app:layout_constraintBottom_toTopOf="@id/messageLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@id/tvTitle">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edtPrice"

@@ -16,7 +16,6 @@ import com.xwray.groupie.kotlinandroidextensions.Item
 import kotlinx.android.synthetic.main.item_active_post.view.*
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
-import kotlin.to
 
 
 class ItemActivePost(var post: DriverPost, val onClick: () -> Unit) : Item() {
@@ -24,15 +23,23 @@ class ItemActivePost(var post: DriverPost, val onClick: () -> Unit) : Item() {
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         viewHolder.itemView.apply {
             llSeatsContainer.removeAllViews()
-            var availableSeats = post.seat - post.passengerList!!.size
+//            val passengersCount = post.passengerList.run {
+//                var count = 0
+//                repeat(this!!.size) {
+//                    count += get(it).offer!!.seat!!
+//                }
+//                count
+//            }
+//
+            var availableSeatsCount = post.availableSeats!!
             for (i in 0 until post.seat) {
                 val seat = ImageView(context)
                 seat.layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                                                               ViewGroup.LayoutParams.WRAP_CONTENT)
                 seat.setImageResource(R.drawable.ic_round_event_seat_24)
-                if (availableSeats > 0) {
+                if (availableSeatsCount > 0) {
                     seat.setColorFilter(ContextCompat.getColor(context, R.color.colorPrimary))
-                    availableSeats--
+                    availableSeatsCount--
                 } else {
                     seat.setColorFilter(ContextCompat.getColor(context, R.color.green))
                 }

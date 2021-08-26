@@ -438,6 +438,16 @@ object ActivityModule {
     }
 
 
+    @Provides
+    fun provideMapRepo(mapRemote: MapRemote): MapRepository {
+        return MapRepositoryImpl(mapRemote)
+    }
+
+    @Provides
+    fun provideMapRemote(api: MapApiService): MapRemote {
+        return MapRemoteImpl(api)
+    }
+
 }
 
 
