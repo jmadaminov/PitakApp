@@ -32,7 +32,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-
             <EditText
                 android:id="@+id/edtSearch"
                 android:layout_width="match_parent"
@@ -42,12 +41,12 @@
                 android:drawableStart="@drawable/baseline_search_white_24dp"
                 android:drawablePadding="12dp"
                 android:imeOptions="actionGo"
-                android:focusedByDefault="true"
                 android:inputType="text"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
                 android:paddingStart="5dp"
-                app:drawableTint="@color/line_textColorGrey" />
+                app:drawableTint="@color/line_textColorGrey">
+
+                <requestFocus />
+            </EditText>
 
 
             <ImageView
@@ -84,8 +83,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_margin="24dp"
-                android:text="@string/enter_search_location"
                 android:gravity="center"
+                android:text="@string/enter_search_location"
+                android:textSize="16dp"
                 tools:visibility="visible" />
 
 

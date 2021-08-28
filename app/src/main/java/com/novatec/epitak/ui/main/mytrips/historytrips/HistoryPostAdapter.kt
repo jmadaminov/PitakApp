@@ -17,7 +17,6 @@ import com.novatec.epitak.util.PostUtils.timeFromDayParts
 import com.novatec.remote.model.DriverPostModel
 import kotlinx.android.synthetic.main.item_history_post.view.*
 import splitties.activities.start
-import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 
 class HistoryPostAdapter :
@@ -72,9 +71,9 @@ class HistoryPostAdapter :
                     toDistrict.text = post.to.regionName ?: post.to.name
                     to.text = post.to.districtName
                 }
-                price.text =
-                    DecimalFormat("#,###").format(post.price * post.seat) + " " + itemView.context.getString(
-                        R.string.sum)
+//                price.text =
+//                    DecimalFormat("#,###").format(post.price * post.seat) + " " + itemView.context.getString(
+//                        R.string.sum)
                 cardHistoryItem.setOnClickListener {
                     context.start<HistoryPostActivity> {
                         putExtra(EXTRA_POST_ID, post.id)

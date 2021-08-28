@@ -28,6 +28,8 @@ open class BSDExpanded : BottomSheetDialogFragment() {
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
             bottomSheetBehavior.peekHeight = MainActivity.displayMetrics.heightPixels
             bottomSheetBehavior.isFitToContents = true
+            bottomSheetBehavior.skipCollapsed = true
+            bottomSheetBehavior.isHideable = true
 //            bottomSheetBehavior.peekHeight = 0
             coordinatorLayout.parent.requestLayout()
         }

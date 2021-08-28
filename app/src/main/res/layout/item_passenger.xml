@@ -29,8 +29,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:gravity="start"
+            android:maxLines="2"
+            android:textSize="14dp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@id/tvPersonCount"
+            app:layout_constraintBottom_toBottomOf="@id/ivAvatar"
+            app:layout_constraintEnd_toStartOf="@id/tvAgreedPrice"
             app:layout_constraintStart_toEndOf="@id/ivAvatar"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Name Surname" />
@@ -48,9 +51,9 @@
             android:padding="7dp"
             android:textSize="18dp"
             app:drawableRightCompat="@drawable/baseline_person_outline_white_24dp"
-            app:layout_constraintBottom_toBottomOf="@id/tvAgreedPrice"
-            app:layout_constraintEnd_toStartOf="@id/tvAgreedPrice"
-            app:layout_constraintTop_toTopOf="@id/tvAgreedPrice"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivAvatar"
             tools:text="2"
             tools:visibility="visible" />
 

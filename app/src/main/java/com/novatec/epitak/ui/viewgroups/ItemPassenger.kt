@@ -21,7 +21,8 @@ class ItemPassenger(val obj: Passenger,
             tvName.text = obj.profile?.name + " " + obj.profile?.surname
             obj.offer?.priceInt?.let {
                 tvAgreedPrice.text =
-                    DecimalFormat("#,###").format(obj.offer?.priceInt) + " " + context.getString(R.string.sum)
+                    DecimalFormat("#,###").format(obj.offer?.priceInt!! * obj.offer!!.seat!!) + " " + context.getString(
+                        R.string.sum)
             }
             tvPersonCount.text = obj.offer?.seat?.toString()
             obj.profile?.image?.link?.let {

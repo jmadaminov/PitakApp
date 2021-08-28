@@ -175,7 +175,7 @@ class MainActivity : BaseActivity()/*, OSSubscriptionObserver*/ {
 
 
         addPost.setOnClickListener {
-            if (!UserPrefs.defaultCarId.isNullOrBlank() && UserPrefs.defaultCarId != "0") {
+            if (!UserPrefs.defaultCarId.isNullOrBlank()) {
                 startActivityForResult(Intent(this, AddPostActivity::class.java), REQ_CODE_ADD_POST)
             } else {
                 DialogAddCarFirst().show(supportFragmentManager, "")
